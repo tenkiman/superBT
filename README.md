@@ -1,10 +1,4 @@
-# superBT
-superBT = a super Tropical Cyclone Best Track data set
-
-
-				  /-------\
-				  |superBT|
-				  \-------/
+# superBT = a super Tropical Cyclone Best Track data set
 
        A super Best Track for Tropical Cyclone (TC) Forecasting and Research
        
