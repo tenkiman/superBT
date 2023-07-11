@@ -61,7 +61,7 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
-            'yearOpt':          ['Y:','2007-2022','a','yearOpt'],
+            'yearOpt':          ['Y:',None,'a','yearOpt'],
             'stmopt':           ['S:',None,'a',' stmid target'],
             'sumonly':          ['s',0,1,'list stmids only'],
             'dofilt9x':         ['9',0,1,'only do 9X'],
@@ -91,19 +91,21 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-tt=yearOpt.split('.')
+oyearOpt=yearOpt
+if(yearOpt != None):
+    tt=yearOpt.split('.')
 
-if(len(tt) == 2):
-    byear=tt[0]
-    eyear=tt[1]
-    years=mf.yyyyrange(byear, eyear)
-    oyearOpt="%s-%s"%(byear,eyear)
-
-elif(len(tt) == 1):
-    years=[yearOpt]
-    oyearOpt=yearOpt
-else:
-    print 'EEE -- invalid yearopt: ',yearopt
+    if(len(tt) == 2):
+        byear=tt[0]
+        eyear=tt[1]
+        years=mf.yyyyrange(byear, eyear)
+        oyearOpt="%s-%s"%(byear,eyear)
+    
+    elif(len(tt) == 1):
+        years=[yearOpt]
+        oyearOpt=yearOpt
+    else:
+        print 'EEE -- invalid yearopt: ',yearopt
 
 if(filtopt == None):
     print 'EEE you must set filtopt in FF.TT.NN format'

@@ -244,22 +244,10 @@ else:
     oyearOpt=yearOpt
 
 
-prcBdir='/ptmp'
-pylibdir="%s/lib/python"%(prcBdir)
-md3pyp='md3.pyp'
-md3pyppath="%s/%s"%(pylibdir,md3pyp)
-
 
 MF.sTimer('ALL')
-usePyp=0
-doPyp=0
 MF.sTimer('md3-load')
-if(usePyp):
-    md3=getPyp(md3pyppath)
-else:
-    md3=Mdeck3(oyearOpt=oyearOpt,verb=verb)
-    if(doPyp): putPyp(md3, md3pyppath)
-    
+md3=Mdeck3(oyearOpt=oyearOpt,verb=verb)
 MF.dTimer('md3-load')
 
 dtgs=None

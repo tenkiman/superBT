@@ -32,13 +32,33 @@ import filecmp
 
 # -- VVVVVVVV -- hard-wire dirs
 #
+from sbtLocal import *
 
 version='v03'
-sbtbdir='/dat3/dat/sbt-%s'%(version)
-era5bdir='/data/w22/dat/nwp2/w2flds/dat/era5'
-DatBdirW2='/data/w22/dat'
-GeogDatDirW2="%s/geog"%(DatBdirW2)
 
+# -- VVVVVVVV - sBT dirs & vars
+#
+
+bm3year=2007
+em3year=2023
+ 
+sbtMeta='h-meta-sbt-%s-vars-csv.txt'%(version)
+md3SumMeta='h-meta-md3-sum-csv.txt'
+md3VarsMeta='h-meta-md3-vars-csv.txt'
+
+sbtDatDir="%s/dat"%(sbtRoot)
+sbtProdDir='%s/products/tcdiag'%(sbtRoot)
+sbtSrcDir="%s/src"%(sbtRoot)
+sbtVerDir="%s/%s"%(sbtRoot,version)
+sbtVerDirDat="%s/%s/dat"%(sbtRoot,version)
+
+geogDatDir="%s/geog"%(sbtVerDirDat)
+
+tsbdbdir="%s/tcdiag"%(sbtDatDir)
+adeckSdir="%s/adeck-dtg"%(sbtDatDir)
+tmtrkbdir="%s/tmtrkN"%(sbtDatDir)
+abdirStm='%s/adeck-stm'%(sbtDatDir)
+abdirDtg='%s/adeck-dtg'%(sbtDatDir)
 
 
 # -- VVVVVVVV -- basic constants and settings
@@ -459,36 +479,13 @@ maxNNnum=49
 #
 
 
-# -- VVVVVVVV - sBT
-#
-
-bm2year=1999
-em2year=2022
-
-bm3year=2007
-em3year=2023
- 
-sbtMeta='h-meta-sbt-%s-vars-csv.txt'%(version)
-md3SumMeta='h-meta-md3-sum-csv.txt'
-md3VarsMeta='h-meta-md3-vars-csv.txt'
-
-sbtDatDir="%s/dat"%(sbtbdir)
-sbtProdDir='%s/products/tcdiag'%(sbtbdir)
-sbtSrcDir="%s/src"%(sbtbdir)
-sbtVerDir="%s/%s"%(sbtbdir,version)
-
-tsbdbdir="%s/tcdiag"%(sbtDatDir)
-adeckSdir="%s/adeck-dtg"%(sbtDatDir)
-tmtrkbdir="%s/tmtrkN"%(sbtDatDir)
-abdirStm='%s/adeck-stm'%(sbtDatDir)
-abdirDtg='%s/adeck-dtg'%(sbtDatDir)
-
 tcVcenterid='M3TC'
 global undef,taus,oPrsizMin,\
        radInfPrKm,radInfPrNM,\
        radInfPrKM,radkms,oPrpre
 
 undef=-999.0
+undefVar=1e20
 
 taus=[0,12,24,48,72]
 taus=[0,6,12,18,24]
@@ -2378,7 +2375,7 @@ def IsOffTime(dtg):
 def SetLandFrac(lfres='1deg',ni=720,nj=361):
 
     lf=array.array('f')
-    gdir=GeogDatDirW2
+    gdir=geogDatDir
     lfres='1deg'
     lfpath="%s/lf.%s.dat"%(gdir,lfres)
     LF=open(lfpath,'rb')
@@ -3418,10 +3415,24 @@ def getBasin4b1id(b1id):
         
     return(basin)
         
-def mkFloat(var):
+def mkFloat(var,convU2Uvar=0):
     ovar=undef
-    if(var != 'NaN' and var != ''): ovar=float(var)
+    if(var != 'NaN' and var != ''): 
+        ovar=float(var)
+    if(convU2Uvar and ovar == undef):
+        ovar=undefVar
+        
     return(ovar)
+
+def mkFloatU(var,convU2Uvar=1):
+    ovar=undef
+    if(var != 'NaN' and var != ''): 
+        ovar=float(var)
+    if(convU2Uvar and ovar == undef):
+        ovar=undefVar
+        
+    return(ovar)
+
 
 def setMd3track(m3trk,stmid,verb=0):
     
@@ -7834,6 +7845,7 @@ class Mdeck3(MFutils):
         if(tbdir == None):
             tbdir=sbtSrcDir
             tbdir=sbtVerDir
+            tbdir=sbtVerDirDat
 
         self.tbdir=tbdir
         
@@ -8008,7 +8020,6 @@ class Mdeck3(MFutils):
                     for n in range(n1,n2+1):
                         sss="%02d%1s"%(n,bid)
                         sid="%s.%s"%(sss,year)
-                        print 'yyyy',year,sid
                         sid=getstmids(sss,year,dos3id=1)
                         sids.append(sid[0])
                         
@@ -13252,40 +13263,17 @@ class prTCMean(MFbase):
         
 class superBT(Mdeck3):
     
-    sbtTSmeta={
-        13:'prc5',
-        14:'prg5',
-        15:'pri5',
-        16:'prc8',
-        17:'prg8',
-        18:'pri8',
-    }
-    
-    sMdesc={
-        'land':'distance to coast [km]',
-        'mvmax':'ERA5 Vmax from lsdiag',
-        'shr':'850-200 hPa 500-km vertical wind shear',
-        'sst':'ERA5 SST',
-        'ssta':'ERA5 SST anomaly from OISST climo ',
-        'tpw':'precipitable H2O [mm]',
-        'cpsb':'CPS B - baroclinicity',
-        'cpslo':'CPS low - 850-600 thickness',
-        'cpshi':'CPS high - 600-200 hPa thickness',
-        'rh700':'RH 700 hPa 500-km [%]',
-        'prc3':'CMORPH 300-km precip [mm/d]',
-        'prg3':'GSMaP  300-km precip [mm/d]',
-        'pri3':'IMERG  300-km precip [mm/d]',
-        'prc5':'CMORPH 500-km precip [mm/d]',
-        'prg5':'GSMaP  500-km precip [mm/d]',
-        'pri5':'IMERG  500-km precip [mm/d]',
-        'prc8':'CMORPH 800-km precip [mm/d]',
-        'prg8':'GSMaP  800-km precip [mm/d]',
-        'pri8':'IMERG  800-km precip [mm/d]',
-    }
+    sbtTSmeta={}
+    sMdesc={}
     
     btime=-240
+    btime=-144
     etime=0
     dtime=6
+    
+    # -- max # of times for an individual storm
+    #
+    maxTimes=100
     
     def __init__(self,
                  version,
@@ -13303,7 +13291,7 @@ class superBT(Mdeck3):
 
         # -- meta
         #
-        smcards=open('%s/%s'%(sbtVerDir,sbtMeta)).readlines()
+        smcards=open('%s/%s'%(sbtVerDirDat,sbtMeta)).readlines()
 
         for n in range(0,len(smcards)):
             tt=smcards[n].split(',')
@@ -13324,18 +13312,18 @@ class superBT(Mdeck3):
                 print 'sMv ',k,self.sMv[k]
         
 
-        self.tbdir=sbtVerDir
-        self.gadatDir="%s/../dat/gadat"%(self.tbdir)
+        self.tbdir="%s/dat"%(sbtVerDir)
+        self.gadatDir="%s/gadat"%(sbtVerDir)
         MF.ChkDir(self.gadatDir,'mk')
         
         if(oyearOpt == None):
-            oyearOpt='2007-2022'
+            oyearOpt='%s-%s'%(bm3year,em3year)
         
         oyearOpt="%s"%(oyearOpt)
         self.oyearOpt=oyearOpt
         
-        sbtCvsPath="%s/sbt-%s-%s-MRG.csv"%(sbtVerDir,version,oyearOpt)
-        sumCvsPath="%s/sum-md3-%s-MRG.csv"%(sbtVerDir,oyearOpt)
+        sbtCvsPath="%s/sbt-%s-%s-MRG.csv"%(sbtVerDirDat,version,oyearOpt)
+        sumCvsPath="%s/sum-md3-%s-MRG.csv"%(sbtVerDirDat,oyearOpt)
 
         # -- 111 -- get the storm meta data
         #
@@ -13841,76 +13829,76 @@ class superBT(Mdeck3):
         
         n=3
         dtg=sbt[n] ; n=n+1
-        blat=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=blat ; n=n+1
-        blon=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=blon ; n=n+1
-        bvmax=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=bvmax ; n=n+1
-        bpmin=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=bpmin ; n=n+1
-        bdir=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=bdir ; n=n+1
-        bspd=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=bspd ; n=n+1
+        blat=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=blat ; n=n+1
+        blon=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=blon ; n=n+1
+        bvmax=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=bvmax ; n=n+1
+        bpmin=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=bpmin ; n=n+1
+        bdir=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=bdir ; n=n+1
+        bspd=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=bspd ; n=n+1
         btccode=sbt[n] ; sbtDict[self.sMv[n]]=btccode ; n=n+1
-        br34m=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=br34m ; n=n+1
-        land=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=land ; n=n+1
-        mvmax=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=mvmax ; n=n+1
-        mr34m=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=mr34m ; n=n+1
-        shrspd=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=shrspd ; n=n+1
-        shrdir=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=shrdir ; n=n+1
-        stmspd=mkFloat(sbt[n]) 
+        br34m=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=br34m ; n=n+1
+        land=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=land ; n=n+1
+        mvmax=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=mvmax ; n=n+1
+        mr34m=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=mr34m ; n=n+1
+        shrspd=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=shrspd ; n=n+1
+        shrdir=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=shrdir ; n=n+1
+        stmspd=mkFloatU(sbt[n]) 
         # -- bug in lsdiag for best track at end ... undefined to 100, use bspd
         if(stmspd > 90.0): 
             stmspd=bspd
         sbtDict[self.sMv[n]]=stmspd ; n=n+1
-        stmdir=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=stmdir ; n=n+1
-        sst=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=sst ; n=n+1
-        ssta=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=ssta ; n=n+1
-        vrt850=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=vrt850 ; n=n+1
-        div200=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=div200 ; n=n+1
-        cpsb=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=cpsb ; n=n+1
-        cpslo=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=cpslo ; n=n+1
-        cpshi=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=cpshi ; n=n+1
-        tpw=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=tpw ; n=n+1
-        rh500=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=rh500 ; n=n+1
-        rh700=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=rh700 ; n=n+1
-        rh850=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=rh850 ; n=n+1
-        u500=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=u500 ; n=n+1
-        u700=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=u700 ; n=n+1
-        u850=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=u850 ; n=n+1
-        v500=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=v500 ; n=n+1
-        v700=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=v700 ; n=n+1
-        v850=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=v850 ; n=n+1
-        roci1=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=roci1 ; n=n+1
-        poci1=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=poci1 ; n=n+1
-        roci0=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=roci0 ; n=n+1
-        poci0=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=poci0 ; n=n+1 
+        stmdir=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=stmdir ; n=n+1
+        sst=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=sst ; n=n+1
+        ssta=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=ssta ; n=n+1
+        vrt850=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=vrt850 ; n=n+1
+        div200=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=div200 ; n=n+1
+        cpsb=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=cpsb ; n=n+1
+        cpslo=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=cpslo ; n=n+1
+        cpshi=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=cpshi ; n=n+1
+        tpw=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=tpw ; n=n+1
+        rh500=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=rh500 ; n=n+1
+        rh700=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=rh700 ; n=n+1
+        rh850=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=rh850 ; n=n+1
+        u500=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=u500 ; n=n+1
+        u700=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=u700 ; n=n+1
+        u850=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=u850 ; n=n+1
+        v500=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=v500 ; n=n+1
+        v700=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=v700 ; n=n+1
+        v850=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=v850 ; n=n+1
+        roci1=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=roci1 ; n=n+1
+        poci1=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=poci1 ; n=n+1
+        roci0=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=roci0 ; n=n+1
+        poci0=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=poci0 ; n=n+1 
 
         if(len(sbt) > 41):
             n=41
-            oprc3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=oprc3 ; n=n+1
-            oprg3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=oprg3 ; n=n+1
-            opri3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=opri3 ; n=n+2 
-            oprc5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=oprc5 ; n=n+1
-            oprg5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=oprg5 ; n=n+1 
-            opri5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=opri5 ; n=n+2
-            oprc8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=oprc8 ; n=n+1
-            oprg8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=oprg8 ; n=n+1
-            opri8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=opri8 ; n=n+2
+            oprc3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=oprc3 ; n=n+1
+            oprg3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=oprg3 ; n=n+1
+            opri3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=opri3 ; n=n+2 
+            oprc5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=oprc5 ; n=n+1
+            oprg5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=oprg5 ; n=n+1 
+            opri5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=opri5 ; n=n+2
+            oprc8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=oprc8 ; n=n+1
+            oprg8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=oprg8 ; n=n+1
+            opri8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=opri8 ; n=n+2
             
-            eprc3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprc3 ; n=n+1
-            eprg3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprg3 ; n=n+1
-            epri3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=epri3 ; n=n+2
-            epre3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=epre3 ; n=n+1
-            eprr3=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprr3 ; n=n+2
+            eprc3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprc3 ; n=n+1
+            eprg3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprg3 ; n=n+1
+            epri3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=epri3 ; n=n+2
+            epre3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=epre3 ; n=n+1
+            eprr3=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprr3 ; n=n+2
             
-            eprc5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprc5 ; n=n+1
-            eprg5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprg5 ; n=n+1
-            epri5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=epri5 ; n=n+2
-            epre5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=epre5 ; n=n+1
-            eprr5=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprr5 ; n=n+2
+            eprc5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprc5 ; n=n+1
+            eprg5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprg5 ; n=n+1
+            epri5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=epri5 ; n=n+2
+            epre5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=epre5 ; n=n+1
+            eprr5=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprr5 ; n=n+2
 
-            eprc8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprc8 ; n=n+1
-            eprg8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprg8 ; n=n+1
-            epri8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=epri8 ; n=n+2
-            epre8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=epre8 ; n=n+1
-            eprr8=mkFloat(sbt[n]) ; sbtDict[self.sMv[n]]=eprr8 
+            eprc8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprc8 ; n=n+1
+            eprg8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprg8 ; n=n+1
+            epri8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=epri8 ; n=n+2
+            epre8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=epre8 ; n=n+1
+            eprr8=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=eprr8 
             
         else:
             oprc8=oprg8=opri8=undef
@@ -14036,6 +14024,18 @@ method to pull variables from sbt to compare dev v non-dev storms
             xtime=xtimes[n]*1.0
             taxis.append(xtime)
             xvals[xtime]=undef
+            
+        self.taxis=taxis
+        self.xvalsU=xvals
+        
+    def makeSbtVarTaxis(self):
+        
+        taxis=[]
+        xvals={}
+        for n in range(0,self.maxTimes):
+            xtime=n
+            taxis.append(xtime)
+            xvals[xtime]=undefVar
             
         self.taxis=taxis
         self.xvalsU=xvals
@@ -14193,7 +14193,7 @@ vars %d
         for ovar in ovars:
             
             for nk in nkk:
-                print 'NNNNNNNN--DDD ovar: ',nk,ovar
+                if(verb): print 'NNNNNNNN--DDD ovar: ',nk,ovar
                 nvvals=sbtTS[nk]
                 #print 'nk:',len(nvvals),nvvals.keys()
                 tvals=self.makeSbtTSDict(nvvals,ovar,verb=verb)
@@ -14213,5 +14213,278 @@ vars %d
         B.close()
         
         rc=self.makeGaNonDevCtlDict(nx,ny,ovars)
+
+    def setsbtVar(self,stmid,sbtType,doDict=1,warn=0,verb=1):
+    
+        #smeta=self.stmSum[stmid]
+
+        if(sbtType == 'NONdev'):
+            sbts=self.sbtNonDev[stmid]
+            sdtgs=self.sbtNonDevdtgs[stmid]
+
+        elif(sbtType == 'DEV'):
+            sbts=self.sbtDev[stmid]
+            sdtgs=self.sbtDevdtgs[stmid]
+
+        elif(sbtType == 'NN'):
+            sbts=self.sbtNN[stmid]
+            sdtgs=self.sbtNNdtgs[stmid]
+
+        # -- dict by dtg with (dict form of sBT by varname)
+        #
+        
+        sbtVar={}
+
+        # -- set x axis with values to undefVar
+        #
+        sdtgs.sort()
+        edtg=sdtgs[-1]
+        bdtg=sdtgs[0]
+        tdtgs=dtgrange(bdtg,edtg,6)
+        for n in range(0,len(tdtgs)):
+            sbtVar[n]=undefVar
+
+        for n in range(0,len(sbts)):
+            
+            sbt=sbts[n]
+            #print 'nnnnnn',n,sbt,len(sbt)
+
+            if(doDict):
+                (pdtg,psbt)=self.parseSbtDict(sbt)
+                sbtVar[n]=psbt
+            else:
+                psbt=self.parseSbt(sbt)
+                pdtg=psbt[0]
+                sbtVar[n]=psbt[1:]
+            
+            if(doDict and verb == 2):
+                kk=psbt.keys()
+                kk.sort()
+                for k in kk:
+                    print 'kkk',k,psbt[k]
+            
+        if(verb == 2):
+            sns=sbtVar.keys()
+            sns.sort()
+            for sn in sns:
+                
+                if(doDict):
+                    print 'ooo-ddd',sdtg,sbtTS[sn].values()
+                else:
+                    print 'ooo',sdtg,sbtTS[sn],len(sbtTS[sn])
+            
+        return(sbtVar)
+        
+
+    def getSbtVar(self,stmid,verb=0):
+        
+        """
+method to pull variables from sbt to compare dev v non-dev storms
+"""
+        if(stmid in self.stmsDev):
+            sbtType='DEV'
+            sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
+            
+        elif(stmid in self.stmsNon):
+            sbtType='NONdev'
+            sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
+            
+        elif(stmid in self.stmsNN):
+            sbtType='NN'
+            sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
+        else:
+            sbtTS=None
+            sbtType='XXX'
+            
+        return(sbtType,sbtVar)
+    
+
+    def makeGaVarAllDict(self,sbtvarAll,ovars,verb=0):
+
+        gadir=self.gadatDir
+        gadatPath="%s/all-bystm-%s.dat"%(gadir,self.stmopt)
+        gactlPath="%s/all-bystm-%s.ctl"%(gadir,self.stmopt)
+        gadatPathAll="%s/all-all-%s.dat"%(gadir,self.stmopt)
+        gactlPathAll="%s/all-all-%s.ctl"%(gadir,self.stmopt)
+        (gdir,gfile)=os.path.split(gadatPath)
+        (gdir,gfileAll)=os.path.split(gadatPathAll)
+        
+        self.gadatPath=gadatPath
+        self.gactlPath=gactlPath
+        self.gadatFile=gfile
+
+        self.gadatPathAll=gadatPathAll
+        self.gactlPathAll=gactlPathAll
+        self.gadatFileAll=gfileAll
+
+        B=open(gadatPath,'wb')
+        A=open(gadatPathAll,'wb')
+
+        nkk=sbtvarAll.keys()
+        nkk.sort()
+        tsVar={}
+        tsVarAll={}
+        
+        for ovar in ovars:
+            
+            for nk in nkk:
+                if(verb): print 'NNNNNNNN--DDD ovar: ',nk,ovar
+                nvvals=sbtvarAll[nk]
+                #print 'nk:',len(nvvals),nvvals.keys()
+                tvals=self.makeSbtVarDict(nvvals,ovar,verb=verb)
+                #print 'kkkk',nk,len(tvals)
+                MF.appendDictList(tsVar,ovar,tvals)
+                
+            tt=tsVar[ovar]
+            ny=len(tt)
+            #print 'varall ny',ny
+            nx=len(self.xvalsU)
+    
+            for t in tt:
+                for x in t:
+                    b=struct.pack('1f',x)
+                    B.write(b)
+        
+        B.close()
+        
+        # -- make the .ctl
+        #
+        rc=self.makeGaVarAllCtlDict(nx,ny,ovars)
+        
+        
+        # -- all only varies in x
+        #
+
+        oNx={}
+        for ovar in ovars:
+            
+            for nk in nkk:
+                if(verb): print 'NNNNNNNN--DDD ovar: ',nk,ovar
+                nvvals=sbtvarAll[nk]
+                #print 'nk:',len(nvvals),nvvals.keys()
+                avals=self.makeSbtVarDictAll(nvvals,ovar,verb=verb)
+                #print 'kkkk',nk,len(avals)
+                MF.appendDictList(tsVarAll,ovar,avals)
+                
+            tt=tsVarAll[ovar]
+            if(verb == 0): print 'varall nx',nx,tt
+    
+            ox=[]
+            
+            for t in tt:
+                for x in t:
+                    ox.append(x)
+                    b=struct.pack('1f',x)
+                    A.write(b)
+                
+            oNx[ovar]=len(ox)    
+                    
+        A.close()
+        
+        nx=oNx[ovars[0]]
+        for ovar in ovars[1:]:
+            nx1=oNx[ovar]
+            print 'qqq',nx,nx1
+            if(nx1 != nx):
+                print 'oooooooooooooopppppppppppppppppsssssssssssssssssss'
+                
+                
+        # -- make the .ctl for all file with vars in x only
+        #
+        rc=self.makeGaVarAllCtlDictAll(nx,ovars)
+
+    def makeSbtVarDict(self,vvals,ovar,warn=0,verb=0):
+        
+        ovals=copy.deepcopy(self.xvalsU)
+        kk=vvals.keys()
+        kk.sort()
+        for k in kk:
+            dovar="'%s'"%(ovar)
+            try:
+                ovals[k]=vvals[k][dovar]
+                if(verb): print 'kkkk----',k,vvals[k][dovar]
+            except:
+                None
+            
+        oo=ovals.keys()
+        oo.sort()
+        tline=[]
+        for o in oo:
+            if(verb == 2): print 'ooo',o,ovals[o]
+            tline.append(ovals[o])
+            
+        rc=tline
+        return(rc)
+
+    def makeSbtVarDictAll(self,vvals,ovar,warn=0,verb=0):
+        
+        ovals={}
+        kk=vvals.keys()
+        kk.sort()
+        for k in kk:
+            dovar="'%s'"%(ovar)
+            #print 'kkkk----',k,dovar
+            try:
+                ovals[k]=vvals[k][dovar]
+                #lovals=len(ovars[k])
+                #print 'gggg',k,ovals[k]
+                #print 'kkkk----',k,lovals,ovals[k]
+            except:
+                #print 'ffff',k
+                None
+            
+        oo=ovals.keys()
+        oo.sort()
+        tline=[]
+        for o in oo:
+            #print 'ooo',o,ovals[o]
+            tline.append(ovals[o])
+            
+        rc=tline
+        #print 'tttt',tline
+        return(rc)
+
+    
+    def makeGaVarAllCtlDict(self,nx,ny,ovars,verb=0):
+            
+        ctl="""dset ^%s
+title sbt var by stm for stmopt: %s
+undef %5.1f
+xdef %d linear 0 1
+ydef %d linear 1 1
+zdef 1 levels 1013
+tdef 1 linear 12z7sep1953 6hr
+vars %d
+"""%(self.gadatFile,self.stmopt,undefVar,
+            nx,ny,
+            len(ovars))
+        for ovar in ovars:
+            mvar="'%s'"%(ovar)
+            gvar=ovar
+            ctl=ctl+"%s 0 0 %s\n"%(gvar,self.sMdesc[mvar])
+            
+        ctl=ctl+"endvars"
+        MF.WriteCtl(ctl, self.gactlPath,verb=verb)
+
+    def makeGaVarAllCtlDictAll(self,nx,ovars,verb=0):
+        
+        ctlAll="""dset ^%s
+title sbt var by stm for stmopt: %s
+undef %5.1f
+xdef %d linear 0 1
+ydef 1 linear 1 1
+zdef 1 levels 1013
+tdef 1 linear 12z7sep1953 6hr
+vars %d
+"""%(self.gadatFileAll,self.stmopt,undefVar,
+            nx,
+            len(ovars))
+        for ovar in ovars:
+            mvar="'%s'"%(ovar)
+            gvar=ovar
+            ctlAll=ctlAll+"%s 0 0 %s\n"%(gvar,self.sMdesc[mvar])
+            
+        ctlAll=ctlAll+"endvars"
+        MF.WriteCtl(ctlAll, self.gactlPathAll,verb=verb)
         
 MF=MFutils()

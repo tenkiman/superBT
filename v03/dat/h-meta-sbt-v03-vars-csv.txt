@@ -55,7 +55,7 @@
 'eprg3','GSMaP  300-km precip at ERA5 position [mm/d]'
 'epri3','IMERG  300-km precip at ERA5 position [mm/d]'
 'te3','title'
-'epre3','ERA5 500-km precip [mm/d]'
+'epre3','ERA5 300-km precip [mm/d]'
 'eprr3','ERA5 ratio Convective/Total 300-km precip [%]'
 'toe5','title'
 'eprc5','CMORPH 500-km precip at ERA5 position [mm/d]'
