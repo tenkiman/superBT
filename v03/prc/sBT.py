@@ -14293,9 +14293,12 @@ method to pull variables from sbt to compare dev v non-dev storms
             sbtType='NN'
             sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
         else:
-            sbtTS=None
+            sbtVar=None
             sbtType='XXX'
             
+        if(sbtVar == None):
+            print 'EEEEEEEEEEE: ',stmid
+            sys.exit()
         return(sbtType,sbtVar)
     
 
@@ -14363,11 +14366,11 @@ method to pull variables from sbt to compare dev v non-dev storms
                 nvvals=sbtvarAll[nk]
                 #print 'nk:',len(nvvals),nvvals.keys()
                 avals=self.makeSbtVarDictAll(nvvals,ovar,verb=verb)
-                #print 'kkkk',nk,len(avals)
+                print 'aaa',nk,ovar,len(avals),avals[-10:]
                 MF.appendDictList(tsVarAll,ovar,avals)
                 
             tt=tsVarAll[ovar]
-            if(verb == 0): print 'varall nx',nx,tt
+            #if(verb == 0): print 'varall nk',nk,tt[-10:]
     
             ox=[]
             
@@ -14384,9 +14387,8 @@ method to pull variables from sbt to compare dev v non-dev storms
         nx=oNx[ovars[0]]
         for ovar in ovars[1:]:
             nx1=oNx[ovar]
-            print 'qqq',nx,nx1
             if(nx1 != nx):
-                print 'oooooooooooooopppppppppppppppppsssssssssssssssssss'
+                print 'oooooooooooooopppppppppppppppppsssssssssssssssssss',ovar,nx,nx1
                 
                 
         # -- make the .ctl for all file with vars in x only

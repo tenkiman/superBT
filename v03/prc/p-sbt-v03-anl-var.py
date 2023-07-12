@@ -81,17 +81,40 @@ if(stmopt != None):
     nNN=0
     sbt.stmopt=stmopt
 
-    #ovars=['bvmax','bspd','br34m','stmspd',
-           #'mvmax',
-           #'shrspd',
-           #'tpw','rh700',
-           #'oprc3','oprg3','opri3',
-           #'eprc3','eprg3','epri3',
-           #'epre3','eprr3',
-           #'ssta']
+    ovars=['bvmax','bspd','br34m',
+           'mvmax',
+           'shrspd',
+           'tpw','rh700',
+           'oprc3','oprg3','opri3',
+           'eprc3','eprg3','epri3',
+           'epre3','eprr3',
+           'ssta']
 
     #ovars=['mvmax','bvmax','stmspd']
-    ovars=['bvmax','br34m']
+    #ovars=['bvmax','br34m']
+    ovars=['oprc3','oprg3','opri3',
+           'eprc3','eprg3','epri3',
+           'epre3','eprr3',
+           ]
+
+    ovars=['bvmax','bspd','br34m',
+           'mvmax',
+           ]
+    ovars=[
+           'shrspd',
+           'tpw','rh700',
+           'ssta']
+
+    ovars=['bvmax','bspd','br34m',
+           'mvmax',
+           'shrspd',
+           'tpw','rh700',
+           'oprc3','oprg3','opri3',
+           'eprc3','eprg3','epri3',
+           'epre3','eprr3',
+           'ssta']
+
+    #ovars=['opri3','epre3','eprr3']
     
     tovars=[]
     for ovar in ovars:
