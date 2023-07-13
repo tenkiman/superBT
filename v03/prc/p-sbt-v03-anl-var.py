@@ -32,6 +32,7 @@ class TmtrkCmdLine(CmdLine):
             'stmopt':           ['S:',None,'a',' stmid target'],
             'dofilt9x':         ['9',0,1,'only do 9X'],
             'dtgopt':           ['d:',None,'a',' dtgopt'],
+            'doLs':             ['l:',None,'a',' only list a var'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
         }
 
@@ -39,7 +40,7 @@ class TmtrkCmdLine(CmdLine):
 reconstruct stm-sum cards using mdeck3.trk data in src directories in dat/tc/sbt by year and basin"""
 
         self.examples='''
-%s 2019'''
+%s -S 01w.07 -l epre6'''
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
@@ -106,15 +107,34 @@ if(stmopt != None):
            'ssta']
 
     ovars=['bvmax','bspd','br34m',
-           'mvmax',
+           'mvmax','btccode',
            'shrspd',
            'tpw','rh700',
+           'roci1','roci0',
            'oprc3','oprg3','opri3',
-           'eprc3','eprg3','epri3',
-           'epre3','eprr3',
+           'eprc3','eprg3','epri3','epre3','eprr3',
+           'oprc5','oprg5','opri5',
+           'eprc5','eprg5','epri5','epre5','eprr5',
            'ssta']
 
     #ovars=['opri3','epre3','eprr3']
+    
+
+    # -- get the sBt for the stmids
+    #
+    sbtvarAll={}
+    overb=verb
+    for stmid in stmids:
+        (sbtType,sbtVar)=sbt.getSbtVar(stmid,doDtgKey=1,verb=overb)
+        sbtvarAll[stmid]=sbtVar
+    
+    # -- ls only
+    
+    if(doLs != None):
+        ovars=[doLs]
+        rc=sbt.lsGaVarAllDict(sbtvarAll,ovars)
+        sys.exit()
+        
     
     tovars=[]
     for ovar in ovars:
@@ -122,13 +142,8 @@ if(stmopt != None):
         
     ovars=tovars
 
-    sbtvarAll={}
-    overb=verb
-
-    for stmid in stmids:
-        (sbtType,sbtVar)=sbt.getSbtVar(stmid,verb=overb)
-        sbtvarAll[stmid]=sbtVar
-
+    # -- make the grads .dat .ctl
+    #
     rc=sbt.makeGaVarAllDict(sbtvarAll,ovars,verb=overb)
     print sbt.gactlPath
 

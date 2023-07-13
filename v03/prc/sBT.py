@@ -14214,7 +14214,7 @@ vars %d
         
         rc=self.makeGaNonDevCtlDict(nx,ny,ovars)
 
-    def setsbtVar(self,stmid,sbtType,doDict=1,warn=0,verb=1):
+    def setsbtVar(self,stmid,sbtType,doDict=1,doDtgKey=0,warn=0,verb=0):
     
         #smeta=self.stmSum[stmid]
 
@@ -14242,20 +14242,27 @@ vars %d
         bdtg=sdtgs[0]
         tdtgs=dtgrange(bdtg,edtg,6)
         for n in range(0,len(tdtgs)):
-            sbtVar[n]=undefVar
+            skey=n
+            if(doDtgKey):
+                skey=tdtgs[n]
+            sbtVar[skey]=undefVar
 
         for n in range(0,len(sbts)):
-            
+         
+            skey=n
+            if(doDtgKey):
+                skey=tdtgs[n]
+                
             sbt=sbts[n]
             #print 'nnnnnn',n,sbt,len(sbt)
 
             if(doDict):
                 (pdtg,psbt)=self.parseSbtDict(sbt)
-                sbtVar[n]=psbt
+                sbtVar[skey]=psbt
             else:
                 psbt=self.parseSbt(sbt)
                 pdtg=psbt[0]
-                sbtVar[n]=psbt[1:]
+                sbtVar[skey]=psbt[1:]
             
             if(doDict and verb == 2):
                 kk=psbt.keys()
@@ -14276,22 +14283,26 @@ vars %d
         return(sbtVar)
         
 
-    def getSbtVar(self,stmid,verb=0):
+    def getSbtVar(self,stmid,doDict=1,doDtgKey=0,warn=0,verb=0):
         
         """
 method to pull variables from sbt to compare dev v non-dev storms
 """
         if(stmid in self.stmsDev):
             sbtType='DEV'
-            sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
+            sbtVar=self.setsbtVar(stmid,sbtType,
+                                  doDict=doDict,doDtgKey=doDtgKey,warn=warn,verb=verb)
             
         elif(stmid in self.stmsNon):
             sbtType='NONdev'
-            sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
+            sbtVar=self.setsbtVar(stmid,sbtType,
+                                  doDict=doDict,doDtgKey=doDtgKey,warn=warn,verb=verb)
             
         elif(stmid in self.stmsNN):
             sbtType='NN'
-            sbtVar=self.setsbtVar(stmid,sbtType,verb=verb)
+            sbtVar=self.setsbtVar(stmid,sbtType,
+                                  doDict=doDict,doDtgKey=doDtgKey,warn=warn,verb=verb)
+
         else:
             sbtVar=None
             sbtType='XXX'
@@ -14366,7 +14377,7 @@ method to pull variables from sbt to compare dev v non-dev storms
                 nvvals=sbtvarAll[nk]
                 #print 'nk:',len(nvvals),nvvals.keys()
                 avals=self.makeSbtVarDictAll(nvvals,ovar,verb=verb)
-                print 'aaa',nk,ovar,len(avals),avals[-10:]
+                if(verb): print 'aaa',nk,ovar,len(avals),avals[-10:]
                 MF.appendDictList(tsVarAll,ovar,avals)
                 
             tt=tsVarAll[ovar]
@@ -14404,7 +14415,9 @@ method to pull variables from sbt to compare dev v non-dev storms
             dovar="'%s'"%(ovar)
             try:
                 ovals[k]=vvals[k][dovar]
-                if(verb): print 'kkkk----',k,vvals[k][dovar]
+                if(ovar == 'btccode'):
+                    ovals[k]=float(IsTc(ovals[k]))
+                if(verb == 2): print 'kkkk----',k,vvals[k][dovar]
             except:
                 None
             
@@ -14425,9 +14438,11 @@ method to pull variables from sbt to compare dev v non-dev storms
         kk.sort()
         for k in kk:
             dovar="'%s'"%(ovar)
-            #print 'kkkk----',k,dovar
+            #print 'kkkk----',k,dovar,vvals[k][dovar]
             try:
                 ovals[k]=vvals[k][dovar]
+                if(ovar == 'btccode'):
+                    ovals[k]=float(IsTc(ovals[k]))
                 #lovals=len(ovars[k])
                 #print 'gggg',k,ovals[k]
                 #print 'kkkk----',k,lovals,ovals[k]
@@ -14488,5 +14503,41 @@ vars %d
             
         ctlAll=ctlAll+"endvars"
         MF.WriteCtl(ctlAll, self.gactlPathAll,verb=verb)
+
+    def lsGaVarAllDict(self,sbtvarAll,ovars,verb=0):
+        # -- all only varies in x
+        #
+        oNx={}
+        nkk=sbtvarAll.keys()
+        nkk.sort()
+        
+        for ovar in ovars:
+            
+            for nk in nkk:
+                if(verb): print 'NNNNNNNN--DDD ovar: ',nk,ovar
+                vvals=sbtvarAll[nk]
+                kk=vvals.keys()
+                kk.sort()
+                
+                print 'ls of: %s for stmid: %s'%(ovar,nk)
+                for k in kk:
+                    dovar="'%s'"%(ovar)
+                    pval=vvals[k][dovar]
+                    if(ovar == 'btccode'):
+                        print pval
+                        pval=IsTc(pval)
+                    print "%s %6.1f"%(k,pval)
+                    try:
+                        ovals[k]=vvals[k][dovar]
+                        #lovals=len(ovars[k])
+                        #print 'gggg',k,ovals[k]
+                        #print 'kkkk----',k,lovals,ovals[k]
+                    except:
+                        #print 'ffff',k
+                        None
+                    
+                
+        return         
+        
         
 MF=MFutils()
