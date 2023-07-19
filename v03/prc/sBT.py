@@ -2428,6 +2428,16 @@ def add2000(y):
 
 # -- MMMMMMMMMM -- tcVM methods
 #
+
+def get9XstmidFromNewForm(stmid9x):
+    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid9x)
+    if(snum[0:2].upper() == 'XX'):
+        stmid9x='XXX'+'.XXXX'
+        stmid9x='___.____'
+    elif(snum[0].isalpha()):
+        stmid9x='9'+snum[1:]+b1id+'.'+year
+    return(stmid9x)
+
 def getStmParams(stmid,convert9x=0):
 
     istmid=stmid
@@ -2478,7 +2488,10 @@ def getStmParams(stmid,convert9x=0):
 
     return(snum,b1id,year,b2id,stm2id,stm1id)
 
-
+def get9Xnum(stmid):
+    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid,convert9x=1)
+    print 'sss',snum
+    
 
 def Is9X(stmid):
     rc=0
@@ -4723,7 +4736,49 @@ def isShemBasinStm(stmid):
             return(0)
 
 
+def appendDictList(kdict,key,value):
+    
+    try:
+        kdict[key].append(value)
+    except:
+        kdict[key]=[]
+        kdict[key].append(value)
+
+def dtg2gtime(dtg):
+    try:
+        (y,m,d,h)=dtg2ymdh(dtg)
+    except:
+        return(none)
+    mo=mname3[m]
+    gtime="%sZ%s%s%s"%(h,d,mo,y)
+    return(gtime)
+
+
 # -- CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+def lsSbtVars(verb=0):
+
+    # -- meta
+    #
+    smcards=open('%s/%s'%(sbtVerDirDat,sbtMeta)).readlines()
+    sMdesc={}
+
+    for n in range(0,len(smcards)):
+        tt=smcards[n].split(',')
+        tt0=tt[0].replace("\n",'')
+        tt1=tt[1].replace("\n",'')
+        tt0=tt0.replace("""'""",'')
+        if(not(find(tt1,'title'))):
+            sMdesc[tt0]=tt1
+        
+    if(verb):
+        kk=sMdesc.keys()
+        kk.sort()
+        for k in kk:
+            print 'sMv ',k,sMdesc[k]
+            
+    return(sMdesc)
+ 
 
 class MFbase():
 
@@ -8265,8 +8320,8 @@ class Mdeck3(MFutils):
         if(dofilt9x):
             nstmids=[]
             for stmid in stmids:
-                num=int(stmid[0:2])
-                if(num < 80):
+                (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid,convert9x=1)
+                if(snum >= 90):
                     nstmids.append(stmid)
         
             stmids=nstmids
@@ -13603,10 +13658,10 @@ class superBT(Mdeck3):
         v500=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=v500 ; n=n+1
         v700=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=v700 ; n=n+1
         v850=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=v850 ; n=n+1
-        roci1=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=roci1 ; n=n+1
         poci1=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=poci1 ; n=n+1
-        roci0=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=roci0 ; n=n+1
+        roci1=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=roci1 ; n=n+1
         poci0=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=poci0 ; n=n+1 
+        roci0=mkFloat(sbt[n])  ; sbtDict[self.sMv[n]]=roci0 ; n=n+1
 
         if(len(sbt) > 41):
             n=41
@@ -13865,10 +13920,10 @@ class superBT(Mdeck3):
         v500=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=v500 ; n=n+1
         v700=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=v700 ; n=n+1
         v850=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=v850 ; n=n+1
-        roci1=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=roci1 ; n=n+1
-        poci1=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=poci1 ; n=n+1
-        roci0=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=roci0 ; n=n+1
+        poci1=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=poci1 ; n=n+1
+        roci1=mkFloatU(sbt[n]) ; sbtDict[self.sMv[n]]=roci1 ; n=n+1
         poci0=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=poci0 ; n=n+1 
+        roci0=mkFloatU(sbt[n])  ; sbtDict[self.sMv[n]]=roci0 ; n=n+1
 
         if(len(sbt) > 41):
             n=41
@@ -14504,38 +14559,187 @@ vars %d
         ctlAll=ctlAll+"endvars"
         MF.WriteCtl(ctlAll, self.gactlPathAll,verb=verb)
 
-    def lsGaVarAllDict(self,sbtvarAll,ovars,verb=0):
+
+    def makeGaStnVar(self,odtgs,ovals,ovars,sMdesc):
+
+        stndatPath='/tmp/s.sdat'
+        B=open(stndatPath,'wb')
+        bdtg=odtgs[0]
+        edtg=odtgs[-1]
+        
+        (sdir,sfile)=os.path.split(stndatPath)
+        (sbase,sext)=os.path.splitext(sfile)
+        smapfile="%s.smap"%(sbase)
+        ctl="""dset ^%s
+        
+"""%(sfile)
+        
+        nodtgs=len(odtgs)
+        bgtime=dtg2gtime(bdtg)
+        tdefCard="tdef %d linear %s 6hr"%(nodtgs,bgtime)
+        
+        varsCard="vars %d"%(len(ovars[2:]))
+        for ovar in ovars:
+            varcard="%s 0 0 %s"%(ovar,sMdesc[ovar].replace("""'""",''))
+            print 'vvv',varcard
+            
+        print varsCard
+            
+        return
+
+        for odtg in odtgs:
+
+            stnid='99W00'
+            rlat=0.0
+            rlon=0.0
+            stndt=0
+            stnfoot = struct.pack('8sfffii',stnid,rlat,rlon,stndt,0,0)
+            cardfoot="%s %f %f"%(stnid,rlat,rlon)
+            svals=ovals[odtg]
+            
+            print 'sssssssssss',odtg,len(svals)
+            print
+            if(len(svals) > 0):
+                
+                sdict={}
+                for sval in svals:
+
+                    stnid=sval[0]
+                    stndt=0.0
+                    n=len(sval)
+                    stnhead=struct.pack('8sfffii',stnid,sval[1],sval[2],stndt,1,1)
+                    cardhead="%s %f %f"%(stnid,sval[1],sval[2])
+                    stndat=struct.pack('1f',sval[3])
+                    carddat="%f"%(sval[3])
+                    for i in range(4,n):
+                        stndat=stndat+struct.pack('f',sval[i])
+                        carddat="%s %f"%(carddat,sval[i])
+                    B.write(stnhead)
+                    B.write(stndat)
+                    print 'hhh',odtg,cardhead
+                    print 'ddd',odtg,carddat,len(sval[3:])
+                    
+                print 'fff',odtg,cardfoot
+                B.write(stnfoot)
+            else:
+                print 'fff',odtg,cardfoot
+                B.write(stnfoot)
+
+        B.close()
+        return
+
+
+    def lsGaVarAllDict(self,sbtvarAll,ovars,sMdesc,verb=0):
+        
         # -- all only varies in x
         #
         oNx={}
-        nkk=sbtvarAll.keys()
-        nkk.sort()
+        stmids=sbtvarAll.keys()
+        stmids.sort()
+
+        dtgs=[]
+        for stmid in stmids:
+            sdtgs=sbtvarAll[stmid].keys()
+            dtgs=dtgs+sdtgs
+
+        dtgs.sort()
+        bdtg=dtgs[0]
+        edtg=dtgs[-1]
         
+        odtgs=dtgrange(bdtg,edtg,inc=6)
+        ovals={}
+        
+        for odtg in odtgs:
+            ovals[odtg]=[]
+
+        print 'ls of:'
         for ovar in ovars:
-            
-            for nk in nkk:
-                if(verb): print 'NNNNNNNN--DDD ovar: ',nk,ovar
-                vvals=sbtvarAll[nk]
-                kk=vvals.keys()
-                kk.sort()
+            try:
+                desc=sMdesc[ovar]
+            except:
+                desc=None
                 
-                print 'ls of: %s for stmid: %s'%(ovar,nk)
-                for k in kk:
+            if(desc == None):
+                print 'EEE ovar: ',ovar,' NOT in sBT...sayounara...'
+                sys.exit()
+                
+            print ovar,desc
+        
+        print
+        
+        for stmid in stmids:
+            #stnhead = struct.pack('8sfffii',stnid,rlat,rlon,stndt,1,0)
+            (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+            stnid="%2s%1s%2s"%(snum,b1id,year[2:4])
+            rlat=0.0
+            rlon=0.0
+            stndt=0
+            stnfoot = struct.pack('8sfffii',stnid,rlat,rlon,stndt,0,0)
+            
+            if(verb): print 'NNNNNNNN--DDD ovar: ',stmid,ovar
+            vvals=sbtvarAll[stmid]
+            dtgs=vvals.keys()
+            dtgs.sort()
+            
+            hcard='stmid: %s  N: %d'%(stmid,len(dtgs))
+            hcard1='dtg        '
+            for ovar in ovars:
+                hcard1='%s %6s'%(hcard1,ovar[0:6])
+                
+            print hcard
+            print hcard1
+            stndatPath='/tmp/s.sdat'
+            B=open(stndatPath,'wb')
+
+            for dtg in dtgs:
+
+                ocard="%s "%(dtg)
+                stndat={}
+                olist=[]
+                olist.append(stnid)
+                for ovar in ovars:
+
                     dovar="'%s'"%(ovar)
-                    pval=vvals[k][dovar]
+                    pval=vvals[dtg][dovar]
+                    opval=pval
+                    if(pval == undefVar): opval=-999.
                     if(ovar == 'btccode'):
-                        print pval
-                        pval=IsTc(pval)
-                    print "%s %6.1f"%(k,pval)
-                    try:
-                        ovals[k]=vvals[k][dovar]
-                        #lovals=len(ovars[k])
-                        #print 'gggg',k,ovals[k]
-                        #print 'kkkk----',k,lovals,ovals[k]
-                    except:
-                        #print 'ffff',k
-                        None
-                    
+                        pval1=pval
+                        pval=IsTc(pval1)
+                        ocard="%s %3s %1s "%(ocard,pval1,pval)
+                    else:
+                        ocard="%s %6.1f"%(ocard,opval)
+                        
+                    olist.append(pval)
+                    stndat[ovar]=pval
+                appendDictList(ovals,dtg,olist)
+                
+                
+                
+                continue
+                print ocard
+                #print stndat
+                rlat=stndat['blat']
+                rlon=stndat['blon']
+                bvmax=stndat['bvmax']
+                btcode=stndat['btccode']*1.0
+                opr3=stndat['opri3']
+                epr3=stndat['epre3']
+                roci0=stndat['roci0']
+                br34m=stndat['br34m']
+                stndt=0.0
+                stnhead = struct.pack('8sfffii',stnid,rlat,rlon,stndt,1,1)
+                #print 'shed',stnid,rlat,rlon
+                #print 'sdat',bvmax,btcode,opr3,epr3
+                stndat=struct.pack('6f',bvmax,btcode,opr3,epr3,roci0,br34m)
+                B.write(stnhead)
+                B.write(stndat)
+                B.write(stnfoot)
+                
+        rc=self.makeGaStnVar(odtgs, ovals, ovars,sMdesc)
+        return
+
+        B.close()
                 
         return         
         

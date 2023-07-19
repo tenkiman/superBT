@@ -2,6 +2,13 @@
 
 from sBT import *
 
+# -- get dict with sBt vars and descriptions
+#
+sMdesc=lsSbtVars()
+
+#print sbtvars
+#sys.exit()
+
 #import pandas as pd
 #import numpy as np
 
@@ -30,17 +37,19 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a',' stmid target'],
-            'dofilt9x':         ['9',0,1,'only do 9X'],
-            'dtgopt':           ['d:',None,'a',' dtgopt'],
+            'mmddopt':          ['m:',None,'a',' mmdd opt'],
             'doLs':             ['l:',None,'a',' only list a var'],
-            'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
+            'dobt':             ['b',0,1,'do bt or NN only'],
+            'doDev':            ['d',0,1,'do Dev 9X only'],
+            'doNon':            ['n',0,1,'do NonDev 9X only'],
         }
 
         self.purpose="""
 reconstruct stm-sum cards using mdeck3.trk data in src directories in dat/tc/sbt by year and basin"""
 
         self.examples='''
-%s -S 01w.07 -l epre6'''
+%s -S 01w.07 -l epre3
+%s -S w.07-09 -m 0701.0901 -d # get Dev 9X for july/aug '''
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
@@ -50,7 +59,6 @@ CL=TmtrkCmdLine(argv=argv)
 CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
-
 
 MF.sTimer('ALL')
 
@@ -69,6 +77,11 @@ rc=sbt.makeSbtVarTaxis()
 #
 overb=0
 
+dofilt9x=0
+if(doDev or doNon):
+    dobt=0
+    dofilt9x=1
+    
 stmids=None
 if(stmopt != None):
     
@@ -131,8 +144,9 @@ if(stmopt != None):
     # -- ls only
     
     if(doLs != None):
-        ovars=[doLs]
-        rc=sbt.lsGaVarAllDict(sbtvarAll,ovars)
+        ovars=doLs.split(',')
+        rc=sbt.lsGaVarAllDict(sbtvarAll,ovars,sMdesc)
+        MF.dTimer('ALL')
         sys.exit()
         
     
