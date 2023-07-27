@@ -1,0 +1,18 @@
+
+tcnames={
+    # basin - S : SIO
+# basin - P : SPWAC
+# basin - Q : SLANT
+# basin - A : ASEA
+# basin - B : BAYB
+# basin - I : NIO
+# basin - W : WESTPAC
+# basin - C : CENTPAC
+# basin - E : EASTPAC
+# basin - L : LANT
+        ('1930','01L'): 'UNNAMED',
+        ('1930','02L'): 'UNNAMED',
+        ('1930','03L'): 'UNNAMED',
+
+}
+    

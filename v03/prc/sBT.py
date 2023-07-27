@@ -52,7 +52,7 @@ sbtSrcDir="%s/src"%(sbtRoot)
 sbtVerDir="%s/%s"%(sbtRoot,version)
 sbtVerDirDat="%s/%s/dat"%(sbtRoot,version)
 
-geogDatDir="%s/geog"%(sbtVerDirDat)
+sbtGeogDatDir="%s/geog"%(sbtVerDirDat)
 
 tsbdbdir="%s/tcdiag"%(sbtDatDir)
 adeckSdir="%s/adeck-dtg"%(sbtDatDir)
@@ -60,6 +60,9 @@ tmtrkbdir="%s/tmtrkN"%(sbtDatDir)
 abdirStm='%s/adeck-stm'%(sbtDatDir)
 abdirDtg='%s/adeck-dtg'%(sbtDatDir)
 
+TcNamesDatDir="%s/tc/names"%(sbtVerDirDat)
+
+sbtGslibDir="%s/gslib"%(sbtVerDir)
 
 # -- VVVVVVVV -- basic constants and settings
 #
@@ -105,7 +108,7 @@ MandatoryPressureLevels=[1000,925,850,700,500,400,300,250,200,150,100,70,50,30,2
 #
 units='english'
 
-# -- 20030828 -- set calendar; can change by mf.calendar='365day'
+# -- 20030828 -- set calendar; can change by calendar='365day'
 #
 calendar='gregorian'
 
@@ -458,6 +461,18 @@ TcGenBasin2B1ids={
     'nio':['a','b'],
 }
 
+b1id2tcgenBasin={
+    'w':'wpac',
+    'e':'epac',
+    'c':'epac',
+    'l':'lant',
+    's':'shem',
+    'p':'shem',
+    'a':'nio',
+    'b':'nio',
+    't':'lant',
+    }
+
 
 tdmin=25.0
 tsmin=35.0
@@ -570,6 +585,19 @@ adayleap=(1,32,61,92,122,153,183,214,245,275,306,336)
 
 
 sec2hr=1/3600.0
+
+sbtB1id2Basin={
+    'e':'epac',
+    'c':'cpac',
+    'w':'wpac',
+    'i':'io',
+    'a':'io',
+    'b':'io',
+    's':'shem',
+    'p':'shem',
+    'h':'shem',
+    'l':'lant',
+}
 
 
 # -- MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -2353,29 +2381,10 @@ def min2minsec(min):
 # -- MMMMMMMMMM -- w2methods
 #
 
-def is0012Z(dtg):
-    rc=0
-    if(dtg[8:10] == '00' or dtg[8:10] == '12'): rc=1
-    return(rc)
-
-
-def is0618Z(dtg):
-    rc=0
-    if(dtg[8:10] == '06' or dtg[8:10] == '18'): rc=1
-    return(rc)
-
-def IsOffTime(dtg):
-    dtghh=int(dtg[8:10])
-    if(dtghh == 6 or dtghh == 18):
-        return(1)
-    else:
-        return(0)
-
-
 def SetLandFrac(lfres='1deg',ni=720,nj=361):
 
     lf=array.array('f')
-    gdir=geogDatDir
+    gdir=sbtGeogDatDir
     lfres='1deg'
     lfpath="%s/lf.%s.dat"%(gdir,lfres)
     LF=open(lfpath,'rb')
@@ -2412,6 +2421,282 @@ def GetLandFrac(lf,tlat,tlon,ni=720,nj=361,blat=-90.0,blon=0.0,dlat=0.5,dlon=0.5
 
 
 
+def setGA(gaclass='gacore',Opts='',Bin='grads',Quiet=1,Window=0,verb=0,doLogger=0):
+
+    if(gaclass == 'gacore'):
+
+        MF.sTimer(tag='load grads gacore')
+        from grads import GaCore,GrADSError
+        MF.dTimer(tag='load grads gacore')
+        
+
+        class W2GaCore(GaCore,W2GaBase,GrADSError):
+
+            Quiet=1
+
+            def __init__ (self, 
+                          Bin=Bin, Echo=True, Opts=Opts, Port=False, 
+                          Strict=False, Quiet=0, RcCheck=None, Verb=0, Window=None,
+                          doLogger=doLogger):
+
+                # --- standard gacore init
+                #
+                self.Bin=Bin
+                self.Echo=Echo
+                self.Opts=Opts
+                self.Port=Port
+                self.Strict=False
+                self.Quiet=Quiet
+                self.RcCheck=RcCheck
+                self.Verb=Verb
+                self.Window=Window
+                self.doLogger=doLogger
+
+                self.initGaCore()
+
+                self.GrADSError=GrADSError
+
+                self._cmd=self.__call__
+                self.rl=self.rline
+                self.rw=self.rword
+
+                # -- instantiate a GradsEnv object, ge
+                #
+                self.ge=GradsEnv()
+                self.ge._cmd=self.__call__
+                self.ge.cmdQ=self.cmdQ
+
+                self.ge._ga=self
+                self.ge.rl=self.rline
+                self.ge.rw=self.rword
+
+                self.gp=GradsPlot(self,self.ge)
+        
+
+        ga=W2GaCore(Opts=Opts,Bin=Bin,Quiet=Quiet,Window=Window,doLogger=doLogger)
+
+
+
+    if(gaclass == 'galats'):
+
+        MF.sTimer(tag='load grads gacore - galats')
+        from grads import GaCore,GrADSError
+        MF.dTimer(tag='load grads gacore - galats')
+        
+
+        class W2GaLats(GaCore,GaLatsQ,GrADSError,MFbase):
+
+            Quiet=1
+
+            def __init__ (self, 
+                          Bin='grads', Echo=True, Opts='', Port=False, 
+                          Strict=False, Quiet=0, RcCheck=None, Verb=0, Window=None,
+                          doLogger=doLogger):
+
+                # --- standard gacore init
+                #
+                self.Bin=Bin
+                self.Echo=Echo
+                self.Opts=Opts
+                self.Port=Port
+                self.Strict=False
+                self.Quiet=Quiet
+                self.RcCheck=RcCheck
+                self.Verb=Verb
+                self.Window=Window
+                self.doLogger=doLogger
+
+                self.initGaCore()
+
+                self.GrADSError=GrADSError
+
+                self._cmd=self.__call__
+                self.rl=self.rline
+                self.rw=self.rword
+
+                # -- instantiate a GradsEnv object, ge
+                #
+                self.ge=GradsEnv()
+                self.ge._cmd=self.__call__
+                self.ge.cmdQ=self.cmdQ
+
+                self.ge._ga=self
+                self.ge.rl=self.rline
+                self.ge.rw=self.rword
+
+                self.gp=GradsPlot(self,self.ge)
+
+                # -- lats vars
+                #
+                
+                self.dtg=dtg
+                self.model=model
+                self._cmd=self.cmd2
+
+                self.frequency=frequency
+
+                self.regrid=regrid
+                self.remethod=remethod
+                self.smth2d=smth2d
+                self.doyflip=doyflip
+                self.reargs=reargs
+
+                self.area='global'
+
+                self.btau=btau
+                self.etau=etau
+                self.dtau=dtau
+
+                if(taus == None):
+                    self.taus=range(btau,etau+1,dtau)
+                else:
+                    self.taus=taus
+
+
+                self("set_lats parmtab %s"%(ptable))
+                self("set_lats convention %s"%(outconv))
+                self("set_lats calendar %s"%(calendar))
+                self("set_lats model %s"%(model))
+                self("set_lats center %s"%(center))
+                self("set_lats comment %s"%(comment))
+                self("set_lats timeoption %s"%(timeoption))
+                self("set_lats frequency %s"%(frequency))
+
+                if(self.frequency == 'forecast_hourly'):
+                    self("set_lats deltat %d"%(dtau))
+                elif(self.frequency == 'forecast_minutes'):
+                    self("set_lats deltat %d"%(dtau*60))
+
+                self("set_lats gridtype %s"%(gridtype))
+
+                if(hasattr(ga,'fh')):
+                    self.fh=ga.fh
+                else:
+                    print 'EEE GaLats(Q) needs a fh object (file handle) in the grads.ga object'
+                    sys.exit()
+
+                ge.getFileMeta(self)
+
+
+        ga=W2GaLats(Opts=Opts,Bin=Bin,Quiet=Quiet,Window=Window,doLogger=doLogger)
+
+
+
+    elif(gaclass == 'ganum'):
+
+        MF.sTimer(tag='load grads gacore-ganum')
+        from grads import GaNum,GrADSError
+        MF.dTimer(tag='load grads gacore-ganum')
+
+
+        class W2GaNum(GaNum,W2GaBase,GrADSError):
+
+            Quiet=1
+
+            def __init__ (self, 
+                          Bin='grads', Echo=True, Opts='', Port=False, 
+                          Strict=False, Quiet=0, RcCheck=None, Verb=0, Window=None,
+                          doLogger=doLogger):
+
+                # --- standard gacore init
+                #
+                self.Bin=Bin
+                self.Echo=Echo
+                self.Opts=Opts
+                self.Port=Port
+                self.Strict=False
+                self.Quiet=Quiet
+                self.RcCheck=RcCheck
+                self.Verb=Verb
+                self.Window=Window
+                self.doLogger=doLogger
+
+                self.initGaCore()
+
+                self.GrADSError=GrADSError
+
+                self._cmd=self.__call__
+                self.rl=self.rline
+                self.rw=self.rword
+
+                # -- instantiate a GradsEnv object, ge
+                #
+                self.ge=GradsEnv()
+                self.ge._cmd=self.__call__
+                self.ge.cmdQ=self.cmdQ
+
+                self.ge._ga=self
+                self.ge.rl=self.rline
+                self.ge.rw=self.rword
+
+                self.gp=GradsPlot(self,self.ge)
+
+
+
+        ga=W2GaNum(Opts=Opts,Bin=Bin,Quiet=Quiet,Window=Window,doLogger=doLogger)
+        
+
+    # -- decorate with verb
+    ga.verb=verb
+    ga.ge.verb=verb
+
+    ga.gxout=gxout(ga)
+    ga.set=gxset(ga)
+    ga.dvar=gxdefvar(ga)
+    ga.get=gxget(ga)
+        
+    return(ga)
+
+
+def setXgrads(useStandard=0,useX11=1,returnBoth=0):
+    
+    if(useStandard):
+        xgrads='grads'
+        rc=xgrads
+        if(returnBoth): rc=(xgrads,xgrads)
+        return(rc)
+    
+    bdirApp=os.getenv('W2_BDIRAPP')
+    gradsVersion='opengrads-2.2.1.oga.1'
+
+    xgradsX='%s/%s/Contents/gradsX11'%(bdirApp,gradsVersion)
+    xgrads='%s/%s/Contents/grads'%(bdirApp,gradsVersion)
+
+    if(xgrads == None):
+        print 'EEEE----XXXGGGRRRAAADDDSSS - xgrads not set!!!'
+        sys.exit()
+    
+    if(useX11):     rc=xgradsX
+    else:           rc=xgrads
+    if(returnBoth): rc=(xgradsX,xgrads)
+    return(rc)
+
+def setPngquant():
+    
+    xpngquant='/usr/bin/pngquant'
+    if(onTenki):
+        xpngquant='/usr/bin/pngquant'
+        
+    return(xpngquant)
+
+
+def is0012Z(dtg):
+    rc=0
+    if(dtg[8:10] == '00' or dtg[8:10] == '12'): rc=1
+    return(rc)
+
+
+def is0618Z(dtg):
+    rc=0
+    if(dtg[8:10] == '06' or dtg[8:10] == '18'): rc=1
+    return(rc)
+
+def IsOffTime(dtg):
+    dtghh=int(dtg[8:10])
+    if(dtghh == 6 or dtghh == 18):
+        return(1)
+    else:
+        return(0)
 
 def add2000(y):
     if(len(y) == 1):
@@ -2428,6 +2713,259 @@ def add2000(y):
 
 # -- MMMMMMMMMM -- tcVM methods
 #
+
+
+
+
+
+def LatLonOpsPlotBounds(alats,alons,
+                        latbuffPoleward=10.0,
+                        latbuffEq=7.5,
+                        lonbuff=10.0,
+                        latinc=5.0,
+                        loninc=5.0,
+                        aspectmin=0.75,
+                        dlonplotmax=80.0,
+                        verb=0,
+                        ):
+
+    #
+    # no lat/lons
+    #
+    if(len(alats) == 0):
+        latplotmin=None
+        latplotmax=None
+        lonplotmin=None
+        lonplotmax=None
+
+
+    latmin=min(alats)
+    latmax=max(alats)
+    lonmin=min(alons)
+    lonmax=max(alons)
+
+    if(latmax < 0.0):
+        latbuffS=latbuffPoleward
+        latbuffN=latbuffEq
+    else:
+        latbuffN=latbuffPoleward
+        latbuffS=latbuffEq
+
+    latbar=(latmin+latmax)*0.5
+    lonbar=(lonmin+lonmax)*0.5
+
+    if(latmin < 0):
+        nj1=int( (latmin/latinc)-0.5 )
+        nj2=int( (latmax/latinc)-0.5 )
+    else:
+        nj1=int( (latmin/latinc)+0.5 )
+        nj2=int( (latmax/latinc)+0.5 )
+
+    nj3=int( (lonmin/loninc)+0.5 )
+    nj4=int( (lonmax/loninc)+0.5 )
+
+    j1=nj1*latinc
+    j2=nj2*latinc
+    j3=nj3*loninc
+    j4=nj4*loninc
+
+    latplotmin=j1-latbuffS
+    latplotmax=j2+latbuffN
+    lonplotmin=j3-lonbuff
+    lonplotmax=j4+lonbuff
+
+    dlonplot=lonplotmax-lonplotmin
+    dlatplot=latplotmax-latplotmin
+
+    aspect=dlatplot/dlonplot
+
+    if(verb):
+        print 'BBB (iter000) reftrk min,max: ',latmin,latmax,lonmin,lonmax
+        print 'BBB (iter000) dlatplot,dlonplot: ',dlatplot,dlonplot,' aspect: ',aspect
+
+    if(dlonplot > dlonplotmax):
+        dlonplot=dlonplotmax
+        print 'WWW (bounds): dlonplot > dlonplotmax: ',dlonplotmax,' set to dloplotmax'
+
+    #
+    # make initial adjustment
+    #
+
+    if(aspect < aspectmin):
+        #dlatplot=dlonplot*aspectmin
+        dlonplot=dlatplot/aspectmin
+        dlatplot=int((dlatplot/latinc)+0.5)*latinc
+        aspect=dlatplot/dlonplot
+        if(verb):
+            print 'BBB (iter---) 0000: dlatplot,dlonplot: ',dlatplot,dlonplot,' aspect: ',aspect
+
+    elif(aspect > aspectmin):
+
+        #dlatplot=dlonplot*aspectmin
+        dlonplot=dlatplot/aspectmin
+        dlatplot=int((dlatplot/latinc)+0.5)*latinc
+        aspect=dlatplot/dlonplot
+        if(verb):
+            print 'BBB (iter+++) 0000: dlatplot,dlonplot: ',dlatplot,dlonplot,' aspect: ',aspect,aspectmin
+
+
+    #
+    # iterate
+    #
+
+    if(aspect > aspectmin):
+
+        while(aspect > aspectmin):
+            dlonplot=dlonplot+loninc*0.5
+            aspect=dlatplot/dlonplot
+            if(verb):
+                print 'BBB (iter+++) 1111: dlatplot,dlonplot: ',dlatplot,dlonplot,' aspect: ',aspect
+
+        if(latmax < 0.0):
+            latplotmin=latplotmax-dlatplot
+        else:
+            latplotmax=latplotmin+dlatplot
+
+    elif(aspect < aspectmin):
+
+        while(aspect < aspectmin):
+            dlatplot=dlatplot-latinc*0.5
+            aspect=dlatplot/dlonplot
+            if(verb):
+                print 'BBB (iter---) 1111: dlatplot,dlonplot: ',dlatplot,dlonplot,' aspect: ',aspect
+
+        if(latmax < 0.0):
+            latplotmin=latplotmax-dlatplot
+        else:
+            latplotmax=latplotmin+dlatplot
+
+
+
+    #
+    # recenter in longitude
+    #
+    lonplotmin=j3-dlonplot*0.5
+    lonplotmax=j4+dlonplot*0.5
+
+    if(verb):
+        print 'BBB (bounds): ','  latplotmin,latplotmax: ',latplotmin,latplotmax,'  lonplotmin,lonplotmax: ',lonplotmin,lonplotmax
+        print 'BBB (bounds): ','           dlat/lonplot: ',dlatplot,dlonplot,'            aspect: ',aspect
+
+
+    return(latplotmin,latplotmax,lonplotmin,lonplotmax)
+
+
+
+def getStmName3id(stmid):
+
+    stm3id=stmid.split('.')[0].upper()
+    stmyear=stmid.split('.')[1]
+
+    tcnames=GetTCnamesHash(stmyear)
+
+    kk=tcnames.keys()
+
+    stmname='unknown'
+    stmname=stmname.upper()
+
+    for k in kk:
+        stm3=k[1]
+        if(stm3 == stm3id): stmname=tcnames[k]
+
+    return(stm3id,stmname)
+
+def GetTCnamesHash(yyyy,source=''):
+
+    ndir=TcNamesDatDir
+    sys.path.append(ndir)
+    if(source == 'neumann'):
+        impcmd="from TCnamesNeumann%s import tcnames"%(yyyy)
+    else:
+        impcmd="from TCnames%s import tcnames"%(yyyy)
+        exec(impcmd)
+    return(tcnames)
+
+
+def getSubbasinStmid(stmid):
+
+    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+    stm3id=stm1id.split('.')[0].upper()
+    stmyear=stm1id.split('.')[1]
+    
+    tcnames=GetTCnamesHash(stmyear)
+
+    kk=tcnames.keys()
+
+    stmname='unknown'
+    stmname=stmname.upper()
+
+    stmFullid=stmid
+    if(isIoShemSubbasinStm1id(stmid)):
+        stmFullid=stmid
+        return(stmFullid)
+
+
+    # -- only look for IO/SHEM subbasins in the tcnames.keys() if not a specific io/shem subbasin, i.e., 'i' or 's' or 'h'
+    #
+    for k in kk:
+        stm3=k[1]
+        if(isIoShemSubbasin(stmid,stm3)):
+            stmFullid="%s.%s"%(stm3,stmyear)
+            return(stmFullid)
+
+    return(stmFullid)
+
+
+
+
+
+def isIoShemSubbasin(stm1id,stm2id,convertAlpha=0):
+
+    # -- if [A-Z][0-9] 9x comes in, convert
+    #
+    chkstm1id=stm1id
+
+    # -- really want to do this?
+    #
+    if(stm1id[0].isalpha() and convertAlpha):
+        chkstm1id='9'+stm1id[1:]
+        chkstm1id=chkstm1id.upper()
+
+    rc=0
+    bnum=(chkstm1id[0:2] == stm2id[0:2])
+    b1id=(
+        (chkstm1id[2] == 'S' and (stm2id[2] == 'S' or stm2id[2] == 'P')) or
+        (chkstm1id[2] == 'I' and (stm2id[2] == 'A' or stm2id[2] == 'B'))
+    )
+
+    if(bnum and b1id): rc=1
+
+    return(rc)
+
+def isIoShemSubbasinStm1id(stm1id):
+    """ only look for uniq b1id
+"""
+    rc=0
+    b1id=stm1id[2].upper()
+    btest=( (b1id == 'A' or b1id == 'B' or b1id == 'P') )
+    if(btest): rc=1
+
+    return(rc)
+
+def getBasinOptFromStmids(tstmids):
+
+    if(not(type(tstmids) is ListType)):
+        tstmids=[tstmids]
+    basins=[]
+    for stmid in tstmids:
+        b1id=stmid[2].lower()
+        basin=b1id2tcgenBasin[b1id]
+        basins.append(basin)
+
+    basins=MF.uniq(basins)
+
+    return(basins)
+    
 
 def get9XstmidFromNewForm(stmid9x):
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid9x)
@@ -2487,6 +3025,38 @@ def getStmParams(stmid,convert9x=0):
     stm1id=snum+b1id+'.'+year
 
     return(snum,b1id,year,b2id,stm2id,stm1id)
+
+
+def scaledTC(vmax):
+
+
+    stc=0.0
+    if(vmax >= tdmin and vmax < tsmin):
+        stc=0.25
+
+    elif(vmax >= tsmin and vmax < tymin):
+        dvmax=(vmax-tsmin)/(tymin-tsmin)
+        stc=0.5+dvmax*0.5
+
+    elif(vmax >= tymin and vmax < stymin):
+        dvmax=(vmax-tymin)/(stymin-tymin)
+        stc=1.0+dvmax*1.0
+
+    elif(vmax >= stymin):
+        stc=2.0
+
+    return(stc)
+
+
+
+def aceTC(vmax):
+    if(vmax >= tsmin):
+        ace=vmax*vmax
+    else:
+        ace=0.0
+    return(ace)
+
+
 
 def get9Xnum(stmid):
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid,convert9x=1)
@@ -4555,6 +5125,7 @@ def parseDssTrkMD3(dtg,dds,stm1id,stm9xid,basin,rcsum=None,sname=None,verb=0,war
     opart4="%s %s %s"%(ocodes,orocipoci,omisc)
     ocard="%s %s %s %s"%(opart1,opart2,opart3,opart4)                                                        
     return(ocard)
+
     
 def getStmids4SumPath(sumPath):
     (sdir,sfile)=os.path.split(sumPath)
@@ -4586,7 +5157,7 @@ def getStmids4SumPath(sumPath):
             
         stm1id=stm1id.lower()
         
-    return(stype,stm1id,sname,stm9xid,basin)         
+    return(stype,stm1id,sname,stm9xid,basin,sdir)         
     
 def getCtlpathTaus(model,dtg,maxtau=168,verb=0,doSfc=0):
     
@@ -4756,6 +5327,7 @@ def dtg2gtime(dtg):
 
 # -- CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
+
 def lsSbtVars(verb=0):
 
     # -- meta
@@ -4768,6 +5340,7 @@ def lsSbtVars(verb=0):
         tt0=tt[0].replace("\n",'')
         tt1=tt[1].replace("\n",'')
         tt0=tt0.replace("""'""",'')
+        tt1=tt1.replace("""'""",'')
         if(not(find(tt1,'title'))):
             sMdesc[tt0]=tt1
         
@@ -14560,72 +15133,311 @@ vars %d
         MF.WriteCtl(ctlAll, self.gactlPathAll,verb=verb)
 
 
-    def makeGaStnVar(self,odtgs,ovals,ovars,sMdesc):
+    def makeGaStnVar(self,sbtvarAll,ovars,sMdesc,verb=0):
 
-        stndatPath='/tmp/s.sdat'
-        B=open(stndatPath,'wb')
+        stmids=sbtvarAll.keys()
+        stmids.sort()
+        ovar='nstm'
+        ovars.append(ovar)
+        sMdesc[ovar]='storm number 1,2,...,nstm'
+
+        dtgs=[]
+        nstms=len(stmids)
+        
+        for n in range(0,nstms):
+            nstm=n+1
+            stmid=stmids[n]
+            sdtgs=sbtvarAll[stmid].keys()
+            sdtgs.sort()
+            dtgs=dtgs+sdtgs
+
+        # -- get the dtgs and set ovals with sbt data
+        #
+        dtgs.sort()
+        bdtg=dtgs[0]
+        edtg=dtgs[-1]
+        odtgs=dtgrange(bdtg,edtg,inc=6)
+
+        # -- data dict with dtg key
+        #
+        ovals={}
+        
+        for odtg in odtgs:
+            ovals[odtg]=[]
+
         bdtg=odtgs[0]
         edtg=odtgs[-1]
-        
-        (sdir,sfile)=os.path.split(stndatPath)
-        (sbase,sext)=os.path.splitext(sfile)
-        smapfile="%s.smap"%(sbase)
-        ctl="""dset ^%s
-        
-"""%(sfile)
-        
-        nodtgs=len(odtgs)
-        bgtime=dtg2gtime(bdtg)
-        tdefCard="tdef %d linear %s 6hr"%(nodtgs,bgtime)
-        
-        varsCard="vars %d"%(len(ovars[2:]))
-        for ovar in ovars:
-            varcard="%s 0 0 %s"%(ovar,sMdesc[ovar].replace("""'""",''))
-            print 'vvv',varcard
-            
-        print varsCard
-            
-        return
 
+        # -- set the paths using stmopt & dtg range
+        #
+        gadir=self.gadatDir
+        gabase="stn-bystm-%s-b%s-e%s"%(self.stmopt,bdtg,edtg)
+        gaSdatPath="%s/%s.sdat"%(gadir,gabase)
+        gaSmapPath="%s/%s.smap"%(gadir,gabase)
+        gaSctlPath="%s/%s.ctl"%(gadir,gabase)
+        gaSgsPath="%s/%s.gs"%(gadir,gabase)
+        
+        (gdir,gfileD)=os.path.split(gaSdatPath)
+        (gdir,gfileS)=os.path.split(gaSmapPath)
+        (gdir,gfileC)=os.path.split(gaSctlPath)
+        
+        B=open(gaSdatPath,'wb')
+        
+        # -- cycle by storms & dtgs
+        #
+        nstm=0.0
+        
+        gsStmIds=[]
+        for stmid in stmids:
+            
+            nstm=nstm+1
+            
+            (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+            stnid="%2s%1s%2s"%(snum,b1id,year[2:4])
+            
+            # -- get data by storm and storm dtgs
+            #
+            vvals=sbtvarAll[stmid]
+            dtgs=vvals.keys()
+            dtgs.sort()
+
+            gsStmIds.append('_snum.%d = %s'%(nstm,stmid))
+            stime=dtg2gtime(dtgs[0])
+            gsStmIds.append('_stime.%d = %s'%(nstm,stime))
+
+
+            nstm=nstm*1.0
+
+            for dtg in dtgs:
+
+                olist=[]
+                olist.append(stnid)
+                
+                no=len(ovars)
+                for n in range(0,no):
+                    ovar=ovars[n]
+                    if(ovar != 'nstm'):
+                        dovar="'%s'"%(ovar)
+                        pval=vvals[dtg][dovar]
+                        if(ovar == 'btccode'):  pval=IsTc(pval)
+                        olist.append(pval)
+                    
+                # -- stick stmnum at end
+                #
+                
+                olist.append(nstm)
+
+                appendDictList(ovals,dtg,olist)
+        
+
+        # -- output in grads station data format
+        # -- make the end-time record
+        #
+        stnid='99W00'
+        rlat=0.0
+        rlon=0.0
+        stndt=0
+        stnfoot = struct.pack('8sfffii',stnid,rlat,rlon,stndt,0,0)
+        cardfoot="%s %f %f"%(stnid,rlat,rlon)
+        
+        # -- cycle by dtgs
+        #
+        rlatmin=99999.
+        rlatmax=-99999.
+        rlonmin=99999.
+        rlonmax=-99999.
+        
         for odtg in odtgs:
 
-            stnid='99W00'
-            rlat=0.0
-            rlon=0.0
-            stndt=0
-            stnfoot = struct.pack('8sfffii',stnid,rlat,rlon,stndt,0,0)
-            cardfoot="%s %f %f"%(stnid,rlat,rlon)
             svals=ovals[odtg]
             
-            print 'sssssssssss',odtg,len(svals)
-            print
+            if(verb):
+                print 'sssssssssss',odtg,'#storms: ',len(svals)
+                print
+            
             if(len(svals) > 0):
                 
-                sdict={}
+                # --cycle by data for each storm in the dtg
+                #
                 for sval in svals:
 
-                    stnid=sval[0]
+                    if(verb): print 'sval: ',sval
+                    
+                    n=0
+                    stnid=sval[n] ; n=n+1; np1=n+1 ; np2=n+2 ; np3=n+3 ;np4=n+4
                     stndt=0.0
-                    n=len(sval)
-                    stnhead=struct.pack('8sfffii',stnid,sval[1],sval[2],stndt,1,1)
-                    cardhead="%s %f %f"%(stnid,sval[1],sval[2])
-                    stndat=struct.pack('1f',sval[3])
-                    carddat="%f"%(sval[3])
-                    for i in range(4,n):
+                    ns=len(sval)
+                    rlat=sval[n]
+                    rlon=sval[np1]
+                    if(rlat < rlatmin): rlatmin=rlat
+                    if(rlat > rlatmax): rlatmax=rlat
+                    if(rlon < rlonmin): rlonmin=rlon
+                    if(rlon > rlonmax): rlonmax=rlon
+                    
+                    stnhead=struct.pack('8sfffii',stnid,sval[n],sval[np1],stndt,1,1)
+                    cardhead="%s %f %f"%(stnid,sval[n],sval[np1])
+                    stndat=struct.pack('1f',sval[np2])
+                    carddat="%f"%(sval[np2])
+                    for i in range(np3,ns):
                         stndat=stndat+struct.pack('f',sval[i])
                         carddat="%s %f"%(carddat,sval[i])
                     B.write(stnhead)
                     B.write(stndat)
-                    print 'hhh',odtg,cardhead
-                    print 'ddd',odtg,carddat,len(sval[3:])
+                    if(verb):
+                        print 'hhh',odtg,cardhead
+                        print 'ddd',odtg,carddat,len(sval[np3:])
                     
-                print 'fff',odtg,cardfoot
+                if(verb):  print 'fff',odtg,cardfoot
                 B.write(stnfoot)
             else:
-                print 'fff',odtg,cardfoot
+                if(verb): print 'fff',odtg,cardfoot
                 B.write(stnfoot)
 
         B.close()
+
+        # -- make the .ctl file
+        #
+        
+        
+        nodtgs=len(odtgs)
+        bgtime=dtg2gtime(bdtg)
+        tdefCard="tdef %d linear %s 6hr"%(nodtgs,bgtime)
+
+        nvars=len(ovars[2:])
+
+        gvar='bvmax'
+        
+        ctl="""dset ^%s
+stnmap ^%s
+dtype station
+undef %s
+title sbt station data
+tdef %d linear %s 6hr
+vars %d"""%(gfileD,gfileS,str(undefVar),nodtgs,bgtime,nvars)
+        
+        for ovar in ovars[2:]:
+            ctl=ctl+"""
+%-7s 0 0 %s"""%(ovar,sMdesc[ovar])
+            
+        ctl=ctl+"""
+endvars"""
+            
+        if(verb): print ctl
+        
+        # -- make basic .gs to open and display
+        #
+        
+        dlat=5.0
+        dlon=10.0
+        
+        rlatmn=(int(rlatmin)/int(dlat))*dlat - dlat
+        rlatmx=(int(rlatmax)/int(dlat))*dlat + dlat
+        
+        rlonmn=(int(rlonmin)/int(dlon))*dlon - dlon
+        rlonmx=(int(rlonmax)/int(dlon))*dlon + dlon
+        
+        print 'lllaaa',rlatmin,rlatmn,rlatmax,rlatmx
+        print 'lllaaa',rlonmin,rlonmn,rlonmax,rlonmx
+        
+        
+        bgtime=dtg2gtime(odtgs[0])
+        egtime=dtg2gtime(odtgs[-1])
+      
+        rlatPmn=0.0
+        rlatPmx=45.0
+        rlonPmn=90.0
+        rlonPmx=180.0
+        clevs=' 35 65 130'
+        clevs=' 15 20  25 30'
+        ccols='5  4  3  6    2'
+        
+        gshead="""
+function main(args)
+
+rc=gsfallow('on')
+rc=const()
+
+sf=ofile('%s')
+
+'set xsize 1200 800'
+
+'set lat %3.1f %3.1f'
+'set lon %4.1f %4.1f'
+'set t 1'
+
+_sizid=0.10
+_sizpos=0.15
+_gvar=%s
+
+"""%(gaSctlPath,
+     rlatPmn,rlatPmx,
+     rlonPmn,rlonPmx,
+     gvar,
+     )
+        gsvars="""
+# -- var with storm ids
+#"""
+        for n in range(0,len(gsStmIds)):
+            stmvar=gsStmIds[n]
+
+            gsvars="""%s
+%s"""%(gsvars,stmvar)
+
+        gsexpr="""
+
+# -- plot by stms
+#
+nvar=nstm
+gvar=_gvar
+
+texp='(time=%s,time=%s)'
+gexp=gvar%%texp
+nexp=nvar%%texp
+ostm=1
+while(ostm <= %d)
+  'set gxout stnmark'
+'set time '_stime.ostm
+#print 'ssss 'ostm' '_stime.ostm' '_snum.ostm
+'set stid on'
+'set digsiz '_sizid
+'set cmark 3'
+'set ccolor 1'
+  'd maskout(maskout('gvar','ostm'-'nexp'),'nexp'-'ostm')'
+'set stid off'
+'set digsiz '_sizpos
+'set cmark 9'
+
+'set clevs %s'
+'set ccols %s'
+  'd maskout(maskout('gexp','ostm'-'nexp'),'nexp'-'ostm')'
+  ostm=ostm+1
+  'q pos'
+  
+endwhile
+
+'draw map'
+'cbarn'
+
+return
+        
+"""%(
+     bgtime,egtime,int(nstms),
+     clevs,ccols,
+   )
+       
+        
+        rc=WriteCtl(ctl,gaSctlPath)
+
+        cmd='stnmap -v -i %s'%(gaSctlPath)
+        runcmd(cmd)
+        
+        gs=gshead+gsvars+gsexpr 
+        print gs
+        rc=WriteCtl(gs,gaSgsPath)
+        
+        cmd="""grads -lc '%s'"""%(gaSgsPath)
+        runcmd(cmd)
+        
         return
 
 
@@ -14668,13 +15480,6 @@ vars %d
         print
         
         for stmid in stmids:
-            #stnhead = struct.pack('8sfffii',stnid,rlat,rlon,stndt,1,0)
-            (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
-            stnid="%2s%1s%2s"%(snum,b1id,year[2:4])
-            rlat=0.0
-            rlon=0.0
-            stndt=0
-            stnfoot = struct.pack('8sfffii',stnid,rlat,rlon,stndt,0,0)
             
             if(verb): print 'NNNNNNNN--DDD ovar: ',stmid,ovar
             vvals=sbtvarAll[stmid]
@@ -14688,15 +15493,12 @@ vars %d
                 
             print hcard
             print hcard1
-            stndatPath='/tmp/s.sdat'
-            B=open(stndatPath,'wb')
 
             for dtg in dtgs:
 
                 ocard="%s "%(dtg)
                 stndat={}
                 olist=[]
-                olist.append(stnid)
                 for ovar in ovars:
 
                     dovar="'%s'"%(ovar)
@@ -14710,38 +15512,3154 @@ vars %d
                     else:
                         ocard="%s %6.1f"%(ocard,opval)
                         
-                    olist.append(pval)
-                    stndat[ovar]=pval
-                appendDictList(ovals,dtg,olist)
-                
-                
-                
-                continue
                 print ocard
-                #print stndat
-                rlat=stndat['blat']
-                rlon=stndat['blon']
-                bvmax=stndat['bvmax']
-                btcode=stndat['btccode']*1.0
-                opr3=stndat['opri3']
-                epr3=stndat['epre3']
-                roci0=stndat['roci0']
-                br34m=stndat['br34m']
-                stndt=0.0
-                stnhead = struct.pack('8sfffii',stnid,rlat,rlon,stndt,1,1)
-                #print 'shed',stnid,rlat,rlon
-                #print 'sdat',bvmax,btcode,opr3,epr3
-                stndat=struct.pack('6f',bvmax,btcode,opr3,epr3,roci0,br34m)
-                B.write(stnhead)
-                B.write(stndat)
-                B.write(stnfoot)
-                
-        rc=self.makeGaStnVar(odtgs, ovals, ovars,sMdesc)
-        return
-
-        B.close()
+                        
                 
         return         
+
+    def chkSpdDirGaVarAllDict(self,sbtvarType,sbtvarAll,stmidNNDev,
+                              bspdmax=30.0,
+                              bspdmaxNN=40.0,
+                              latMaxNN=35.0,
+                              verb=0):
+        
+        # -- all only varies in x
+        #
+
+        stmids=sbtvarAll.keys()
+        stmids.sort()
+
+        oCards={}
+        lsCards={}
+        for stmid in stmids:
+            
+            vvals=sbtvarAll[stmid]
+            dtgs=vvals.keys()
+            dtgs.sort()
+            
+            sbttype=sbtvarType[stmid]
+            stmidNN='        '
+            if(sbttype == 'DEV'):
+                stmidNN=stmidNNDev[stmid]
+            
+            ndtgs=len(dtgs)
+
+            for n in range(0,ndtgs):
+
+                odtg=dtgs[n]
+                if(ndtgs == 1):
+                    dtgm1=dtgs[0]
+                    dtg=dtgs[0]
+                elif(n == 0 and ndtgs > 1):
+                    dtgm1=dtgs[0]
+                    dtg=dtgs[n+1]
+                else:
+                    dtgm1=dtgs[n-1]
+                    dtg=dtgs[n]
+                    
+                dovar="'%s'"%('blat')
+                blat=vvals[dtg][dovar]
+                blatm1=vvals[dtgm1][dovar]
+
+                dovar="'%s'"%('blon')
+                blon=vvals[dtg][dovar]
+                blonm1=vvals[dtgm1][dovar]
+                (bdir,bspd,bu,bv)=rumhdsp(blatm1, blonm1,blat,blon,6)
+
+                obspd=bspd
+                if(ndtgs == 1):
+                    bspd=999.
+                    obspd=-999.
+                    stmidNN='sngleton'
+                card="%s %4.0f %-6s NN: %s"%(stmid,obspd,sbttype,stmidNN)
+                card="%s Posit: %s"%(card,odtg)
+                card="%s N-1: %5.1f %6.1f N:  %5.1f %6.1f "%(card,blatm1,blonm1,blat,blon)
+                card="%s SPD: %5.0f  dir: %5.0f"%(card,obspd,bdir)
+                appendDictList(lsCards, stmid, card)
+                
+                stest9X=(bspd > bspdmax)
+                stestNN=(bspd > bspdmaxNN)
+                ltest=(abs(blat) < latMaxNN)
+                ntest=(sbttype == 'NN')
+                
+                dtest=(stest9X and not(ntest))
+                btest=(stestNN and ltest and ntest)
+                if(dtest or btest):
+                    try:
+                        oCards[stmid]=card
+                    except:
+                        None
+                
+        
+        return(oCards,lsCards)
+                
+class TcBtTrkPlot(DataSet):
+    
+    def __init__(self,stmid,
+                 btrk,
+                 pltdir='/tmp',
+                 model='bt',
+                 stmopt=None,
+                 aidtrk=None,
+                 aidtaus=None,
+                 zoomfact=None,
+                 dtgopt=None,
+                 otau=48,
+                 dobt=1,
+                 Quiet=1,
+                 Window=0,
+                 Bin='grads',
+                 doLogger=0,
+                 background='black',
+                 xsize=1200,
+                 #xsize=1600,
+                 docp2Dropbox=1,
+                 pngmethod='printim',
+                 dopbasin=0,
+                 verb=0,override=0):
+
+            
+        btstmid=stmid
+        
+        self.btrk=btrk
+
+        self.stmid=stmid
+        (self.stm3id,self.stmname)=getStmName3id(self.stmid)        
+        
+        stmid=getSubbasinStmid(stmid)
+        basin=getBasinOptFromStmids(stmid)[0]
+        (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+        if(b1id.lower() == 'c'): basin='cepac'
+        #latlons=getBasinLatLonsPrecise(basin)
+        
+        if(dopbasin):
+            pbasin=TcGenBasin2PrwArea[basin]
+        else:
+            pbasin=None
+            
+        self.model=model
+        self.pltdir=pltdir
+        MF.ChkDir(pltdir,'mk')
+
+        self.aidtrk=aidtrk
+        self.aidtaus=aidtaus
+        self.zoomfact=zoomfact
+        self.otau=otau
+        self.Bin=Bin
+        
+        self.xsize=xsize
+        self.ysize=xsize*(3.0/4.0)
+        self.verb=verb
+        self.docp2Dropbox=docp2Dropbox
+        
+        self.pngmethod=pngmethod
+        if(find(background,'w') or find(background,'W')): background='white'
+        if(find(background,'b') or find(background,'B')): background='black'
+        
+        if(background != 'white' and background != 'black'):
+            print "EEE background in TcBtTrkPlot must be white or black"
+            sys.exit()
+            
+        self.background=background
+        
+        self.bgcol=0
+        if(background == 'white'): self.bgcol=1
+        
+        self.override=override
+        self.Window=Window
+        self.doLogger=doLogger
+
+        self.centerdtg=None
+        if(dtgopt != None): self.centerdtg=dtg_command_prc(dtgopt)
+
+        self.setLatLonBox(pbasin=pbasin,reduceLon1=0.0,reduceLon=10.0,reduceLat=5.0)
+        
+        (clat1,clon1)=Rlatlon2Clatlon(self.lat1,self.lon1,dozero=1,dotens=0)
+        (clat2,clon2)=Rlatlon2Clatlon(self.lat2,self.lon2,dozero=1,dotens=0)
+        trkstmname=self.stmid
+        if(stmopt != None):
+            trkstmname=stmopt
+        self.pltfile="trkplt.%s.%s.%s-%s.%s-%s.png"%(trkstmname,self.model,clat1,clat2,clon1,clon2)
+        self.pltpath="%s/%s"%(self.pltdir,self.pltfile)
+        self.trkplotpath=self.pltpath
+
+        self.alreadyDone=0
+        if(not(override) and MF.ChkPath(self.trkplotpath)):
+            print 'III trkplotpath: ',self.trkplotpath,' already there and override=0...'
+            self.alreadyDone=1
+            return
+
+        ga=setGA(Quiet=Quiet,Window=Window,doLogger=doLogger,Bin=Bin)
+
+        dumctl="%s/dum.ctl"%(sbtGslibDir)
+        ga.fh=ga.open(dumctl)
+
+        self.ga=ga
+        self.ge=ga.ge
+        
+        self.ge.pareaxl=0.50
+        self.ge.pareaxr=9.75
+        self.ge.pareayb=0.25
+        self.ge.pareayt=8.00  # decreased from 8.25
+        self.ge.setParea()
+
+        self.curgxout=self.ga.getGxout()
+        self.setInitialGA()
+        
+
+    def setLatLonBox(self,pbasin=None,timelab=None,reduceLon1=None,reduceLon=None,reduceLat=None,verb=0):
+        
+        if(pbasin != None):
+            if(reduceLon == None): reduceLon=0.0
+            if(reduceLat == None): reduceLat=0.0
+            if(reduceLon1 == None): reduceLon1=reduceLon
+            
+            aW2=getW2Area(pbasin)
+            self.aW2=aW2
+            lon1=aW2.lonW
+            lon2=aW2.lonE
+            lat1=aW2.latS
+            lat2=aW2.latN
+            
+            print 'LLL',lon1,lon2,lat1,lat2
+            if(lat1 < 0): lat1=lat1+reduceLat
+            else: lat1=lat1-reduceLat
+
+            if(lat2 < 0): lat2=lat2+reduceLat
+            else: lat2=lat2-reduceLat
+            
+            lon1=lon1+reduceLon1
+            lon2=lon2-reduceLon
+
+            print 'LLL----',lon1,lon2,lat1,lat2
+             
+            self.lon1=lon1
+            self.lon2=lon2
+            self.lat1=lat1
+            self.lat2=lat2
+            self.xlint=aW2.xlint
+            self.ylint=aW2.ylint
+            self.pbasin=pbasin
+            
+            return
+
+
+        alats=[]
+        alons=[]
+        avmaxs=[]
+        apmins=[]
+        
+        dtgs=self.btrk.keys()
+        dtgs.sort()
+
+        for dtg in dtgs:
+            bt=self.btrk[dtg].gettrk()
+            self.btrk[dtg]=bt
+            alats.append(bt[0])
+            alons.append(bt[1])
+            avmaxs.append(bt[2])
+            apmins.append(bt[3])
+            
+        self.alats=alats
+        self.alons=alons
+        self.avmaxs=avmaxs
+        self.apmins=apmins
+        
+        (lat1,lat2,lon1,lon2)=LatLonOpsPlotBounds(alats,alons,verb=verb)
+
+        if(self.centerdtg != None and (self.centerdtg in dtgs) ):
+
+            bt=self.btrk[self.centerdtg]
+            rlat=bt[0]
+            rlon=bt[1]
+
+        else:
+            rlat=(lat1+lat2)*0.5
+            rlon=(lon1+lon2)*0.5
+
+            from numpy import mean
+            rlat=mean(alats)
+            rlon=mean(alons)
+
+
+        if(self.zoomfact != None):
+
+            zoom=float(self.zoomfact)
+
+            dlon=(lon2-lon1)/zoom
+            dlat=(lat2-lat1)/zoom
+            dint=2.5
+
+            if(self.centerdtg == None and zoom < 1.25):
+                latOff=0.65
+                if(IsNhemBasin(self.stmid)): latOff=0.35
+            else:
+                latOff=0.50
+                
+            lonOff=0.50
+            
+            lat1=rlat-dlat*latOff
+            lat1=int(lat1/dint+0.5)*dint
+            lat2=lat1+dlat
+
+            lon1=rlon-dlon*lonOff
+            lon1=int(lon1/dint+0.5)*dint
+            lon2=lon1+dlon
+
+
+        self.lat1=lat1
+        self.lat2=lat2
+        self.lon1=lon1
+        self.lon2=lon2
+        
+        
+    def setInitialGA(self):
+
+        ga=self.ga
+        ge=self.ge
+
+        ge.lat1=self.lat1           
+        ge.lat2=self.lat2   
+        ge.lon1=self.lon1   
+        ge.lon2=self.lon2   
+        
+        if(hasattr(self,'xlint')): ge.xlint=self.xlint
+        if(hasattr(self,'ylint')): ge.ylint=self.ylint
+        # -- clear
+        #
+        ge.clear()
+        ge.mapdset='mres'
+        ge.mapdset='hires'
+        ge.mapthick=4
+        ge.mapcol=self.bgcol
+        ge.mapcol=45
+        ge.setMap()
+        ge.grid='off'
+        ge.setGrid()
+        ge.setLatLon()
+        ge.setXylint()
+        ge.setParea()
+        ge.setPlotScale()
+        ge.setXsize(xsize=self.xsize,ysize=self.ysize)
+        ge.setColorTable()
+        # -- force this?
+        ge.timelab='on'
+
+
+        
+
+    def PlotTrk(self,
+                doft=0,dtg0=None,nhbak=None,nhfor=None,
+                ddtg=6,dtg0012=1,maxbt=55,
+                doalltaus=1,otau=48,etau=120,dtau=12):
+
+
+        if(self.alreadyDone): return
+        
+        ga=self.ga
+        ge=self.ge
+
+        if(doft):
+            self.etau=etau
+            self.dtau=dtau
+            self.otau=otau
+
+            mktaus=[0,24,48,72,120]
+            mkcols={0:1,24:1,48:1,72:2,120:2}
+            
+            ftlcol=modelTrkPlotProps[self.model][0]
+            modeltitle=modelOname[self.model]
+
+            (btau,etau,dtau)=(0,etau,dtau)
+            itaus=range(btau,etau+1,dtau)
+
+            taus=[]
+            for itau in itaus:
+                for ttau in self.aidtaus:
+                    if(itau == ttau):
+                        taus.append(itau)
+
+
+        pbt=ga.gp.plotTcBt
+        pbt.set(self.btrk,dtg0=dtg0,nhbak=nhbak,nhfor=None,ddtg=ddtg,dtg0012=dtg0012,maxbt=maxbt)
+        
+        bm=ga.gp.basemap2
+        #bm.set(landcol='sienna',oceancol='steelblue')
+        # -- try atcf colors
+        bm.set(landcol='atcfland',oceancol='atcfocean')
+        bm.draw()
+        ge.setPlotScale()
+
+        #pbt.dline(times=pbt.otimesbak,lcol=7,lthk=10)
+        pbt.dline(times=pbt.otimesbak)
+        pbt.dwxsym(times=pbt.otimesbak)
+        pbt.legend(ge,times=pbt.otimesbak,ystart=7.9)
+
+        if(doft):
+
+            pft=ga.gp.plotTcFt
+            pft.set(self.aidtrk,lcol=ftlcol,doland=1)
+
+            if(ftlcol == -2):
+                pft.dline(lcol=15)
+                try:     vmcol=pft.lineprop[otau][0]
+                except:  None
+
+                if(vmcol != 75):
+                    pft.dmark(times=[otau],mkcol=vmcol,mksiz=0.20)
+                    pft.dmark(times=[otau],mksiz=0.05)
+                else:
+                    pft.dmark(times=[otau])
+            else:
+                pft.dline(times=taus,lsty=3)
+                pft.dmark(times=taus,mksiz=0.050)
+                for mktau in mktaus:
+                    if(mktau in taus):
+                        pft.dmark(times=[mktau],mksiz=0.100)
+                        pft.dmark(times=[mktau],mkcol=0,mksiz=0.070)
+                        pft.dmark(times=[mktau],mkcol=mkcols[mktau],mksiz=0.040)
+
+
+    
+
+        ttl=ga.gp.title
+        ttl.set(scale=0.85)
+        
+        if(hasattr(self,'pbasin')):
+            t1='pTCs for basin: ',self.pbasin.upper()
+            t2='md2 BT'
+        else:
+            btvmax=max(self.avmaxs)
+            t1='TC: %s [%s]  V`bmax`n: %3dkt'%(self.stmid,self.stmname,btvmax)
+            t2='mdeck2 best track'
+        ttl.top(t1,t2)
+
+        if(self.Window): ga('q pos')
+
+        #ge.pngmethod='gxyat'
+        ge.makePng(self.pltpath,background=self.background,verb=1)
+
+
+
+    def PlotTrkAll(self,stmids,dobt=0,
+                dtg0=None,nhbak=None,nhfor=None,
+                ddtg=6,dtg0012=1,maxbt=55,
+                doalltaus=1,otau=48,etau=120,dtau=12):
+
+
+        ga=self.ga
+        ge=self.ge
+
+        pbt=ga.gp.plotTcBt
+        cb=ga.gp.cbarn
+        
+        nTot=0
+        nDev=0
+        nNonDev=0
+        
+        pcolsN=[72,73,74,75,77,79]
+        pcolsNReverse=[79,77,75,74,73,72]
+        pcolsD=[22,23,35,37,39,29]
+ 
+        devstmids=[]
+        
+        for stmid in stmids:
+            
+            BT=self.tD.makeBestTrk2(stmid,dobt=dobt)
+            (ocard,ocards)=self.tD.lsDSsStm(stmid,dobt=dobt,sumonly=1,doprintSum=0)
+            (ocardBT,ocardsBT)=self.tD.lsDSsStm(stmid,dobt=1,sumonly=1,doprintSum=0)
+            tt=ocard.split(':')
+            
+            totTime=float(ocard.split(':')[2].split(';')[0])
+            totTimeBT=float(ocardBT.split(':')[2].split(';')[0])
+
+            totTime9X=float(ocard.split(':')[2].split(';')[1])
+            totTime9XBT=float(ocardBT.split(':')[2].split(';')[1])
+            
+            #print 'TTTTTTTT',stmid,ocard.split(':')[2].split(';'),ocardBT.split(':')[2].split(';')
+            print 'TTTTTTTT',stmid,totTime,totTimeBT,totTime9X,totTime9XBT
+            
+            pbt.set(BT.btrk,dtg0=dtg0,nhbak=nhbak,nhfor=None,ddtg=ddtg,dtg0012=dtg0012,maxbt=maxbt)
+            
+            nTot=nTot+1
+            if(IsNN(stmid)):
+                dev=1
+                devstmids.append(stmid)
+                nDev=nDev+1
+            else:    
+                nNonDev=nNonDev+1
+                dev=0
+                
+            if(stmid == stmids[0]):
+                bm=ga.gp.basemap2
+                bm.set(landcol='atcfland',oceancol='atcfocean')
+                bm.draw()
+                
+            ge.setPlotScale()
+    
+            lcol=15
+            lthk=5
+            mkcol=0
+            mkcolB=1
+            mkcolE=0
+            mksizB=0.040
+            mksizE=0.050
+            if(dev): 
+                lcol=2
+                lthk=6
+                mksiz=0.035
+                mkcol=9
+                mkcolB=1
+                mkcolE=9
+                mksizE=0.075
+            
+            if(Is9X(stmid)): totTime=totTime9X
+            
+            print 'stmid: ',stmid,'totTime: ',totTime,'DevFlag: ',dev
+            
+            if(totTime <= 1.0):
+                lcolD=pcolsD[0]
+                lcolN=pcolsN[0]
+            elif(totTime > 1.0 and totTime <= 2.5):
+                lcolD=pcolsD[1]
+                lcolN=pcolsN[1]
+            elif(totTime > 2.5 and totTime <= 4.0):
+                lcolD=pcolsD[2]
+                lcolN=pcolsN[2]
+            elif(totTime > 4.0 and totTime <= 5.5):
+                lcolD=pcolsD[3]
+                lcolN=pcolsN[3]
+            elif(totTime > 5.5 and totTime <= 7.0):
+                lcolD=pcolsD[4]
+                lcolN=pcolsN[4]
+            elif(totTime > 7.0):
+                lcolD=pcolsD[5]
+                lcolN=pcolsN[5]
+                
+            if(dev): 
+                lcol=lcolD
+            else:
+                lcol=lcolN
+                lthk=4
+            
+            pbt.dline(times=pbt.otimes,lcol=lcol,lsty=1,lthk=lthk)
+            if(dev):
+                pbt.dmark(times=pbt.otimes[0:1],mksym=3,mksiz=mksizB,mkcol=mkcolB)
+                pbt.dmark(times=pbt.otimes[-1:],mksym=3,mksiz=mksizE,mkcol=mkcolE)
+            else:
+                pbt.dmark(times=pbt.otimes[0:1],mksym=3,mksiz=mksizB,mkcol=mkcolB)
+                pbt.dmark(times=pbt.otimes[-1:],mksym=3,mksiz=mksizE,mkcol=mkcolE)
+                
+        ttl=ga.gp.title
+        ttl.set(scale=0.85)
+        
+        pDev=(float(nDev)/float(nTot))*100.0
+        
+        devstmids.sort()
+        
+        print 'SSS: ',nTot,nDev,nNonDev,pDev
+        if(hasattr(self,'pbasin')):
+            t1='Dev v NonDev pTCs for basin: %s nTot: %d nDev: %d  %% Dev: %3.0f'%(self.pbasin.upper(),nTot,nDev,pDev)
+            t2='%s -> %s'%(devstmids[0],devstmids[-1])
+        else:
+            btvmax=max(self.avmaxs)
+            t1='TC: %s [%s]  V`bmax`n: %3dkt'%(self.stmid,self.stmname,btvmax)
+            t2='mdeck2 best track'
+        ttl.top(t1,t2)
+
+        if(self.Window): ga('q pos')
+        
+        pcols=[79,   77,  75,   74,  73,   72, 22, 23,  24,  35, 47,   29]
+        pcols=pcolsNReverse + pcolsD
+        pcuts=[ -7.0, -5.5, -4.0, -2.5, -1.0, 0.0, 1.0, 2.5, 4.0, 5.5, 7.0]
+        
+        cb.draw(sf=0.75, vert=1, side=None, xmid=None, ymid=None, sfstr=1.0, 
+               pcuts=pcuts, pcols=pcols, quiet=0)
+        
+        #ge.pngmethod='gxyat'
+        ge.makePng(self.pltpath,background=self.background,verb=1)
+        
+
+
+    def xvPlot(self,ropt='',zfact=1.25):
+        cmd="xv  -geometry %ix%i-50+50 %s"%(self.xsize*zfact,self.ysize*zfact,self.pltpath)
+        #cmd="xv %s"%(self.pltpath)
+        MF.runcmd(cmd,ropt)
+
+    def cp2Dropbox(self,ropt='',Dropdir='~/Dropbox/TC'):
+        cmd="cp %s %s/."%(self.pltpath,Dropdir)
+        MF.runcmd(cmd,ropt)
+
+#cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+# w2gabase
+
+class W2GaBase(MFbase):
+    
+    def c(self):
+        self._cmd('clear')
+        
+    def d(self,var):
+        rc=self._cmd('d %s'%(var))
+        return(rc)
+        
+    def q(self,var):
+        rc=self.query(var)
+        return(rc)
+        
+        
+    def getGxout(self):
+
+        self('q gxout')
+        g1s=self.rword(2,6)
+        g1v=self.rword(3,6)
+        g2s=self.rword(4,6)
+        g2v=self.rword(5,6)
+        stn=self.rword(6,4)
+        gxout=gxGxout(g1s,g1v,g2s,g2v,stn)
+        return(gxout)
+
+
+    def getExprStats(self,expr):
+
+        # get the current graphics and rank of display grid
+        rank=len(self.coords().shape)
+        cgxout=self.getGxout()
+
+        # set gxout to stats; display expression
+        self('set gxout stat')
+        self('d %s'%(expr))
+        cards=self.Lines
+
+        # reset the original gxout
+        if(rank == 1): self('set gxout %s'%(cgxout.g1s))
+        if(rank == 2): self('set gxout %s'%(cgxout.g2s))
+        exprstats=gxStats(cards)
+        return(exprstats)
+
+
+    def resetCurgxout(self,cgxout):
+
+        rank=len(self.coords().shape)
+        #reset the original gxout
+        if(rank == 1): self('set gxout %s'%(cgxout.g1s))
+        if(rank == 2): self('set gxout %s'%(cgxout.g2s))
+
+
+    def LogPinterp(self,var,lev,texpr=None,mfact=None,verb=0):
+
+        ge=self.ge
+        
+        from math import log
+        for k in range(0,ge.nz-1):
+            
+            lev1=ge.levs[k]
+            lev2=ge.levs[k+1]
+            
+            if(lev <= lev1 and lev >= lev2):
+                lp1=log(lev1)
+                lp2=log(lev2)
+                lp=log(lev)
+                dlp=lp1-lp2
+                f2=(lp1-lp)/dlp
+                f1=(lp-lp2)/dlp
+                if(mfact != None):
+                    f2=f2*mfact
+                    f1=f1*mfact
+                
+                if(verb):
+                    lf2=(lev1-lev)/(lev1-lev2)
+                    lf1=(lev-lev2)/(lev1-lev2)
+                    print 'HHHHHHHHHHHH ',lev1,lev,lev2,f1,f2,(f1+f2),lf1,lf2
+
+                if(texpr == None):
+                    expr="(%s(lev=%-6.1f)*%f + %s(lev=%-6.1f)*%f)"%(var,lev1,f1,var,lev2,f2)
+                    if(f1 == 0.0 and f2 != 0.0):
+                        expr="(%s(lev=%-6.1f)*%f)"%(var,lev2,f2)
+                    if(f2 == 0.0 and f1 != 0.0):
+                        expr="(%s(lev=%-6.1f)*%f)"%(var,lev1,f1)
+                        
+                else:
+                    expr="(%s(%s,lev=%-6.1f)*%f + %s(%s,lev=%-6.1f)*%f)"%(var,texpr,lev1,f1,var,texpr,lev2,f2)
+                    if(f1 == 0.0 and f2 != 0.0):
+                        expr="(%s(%s,lev=%-6.1f)*%f)"%(var,texpr,lev2,f2)
+                    if(f2 == 0.0 and f1 != 0.0):
+                        expr="(%s(%s,lev=%-6.1f)*%f)"%(var,texpr,lev1,f1)
+                    
+                expr=expr.replace(' ','')
+
+                return(expr)
+
+        print 'EEE unable to interpolate to pressure level: ',lev
+        print 'EEE time for plan B...in LogPinterp'
+            
+        return(expr)
+
+
+
+    def LogPinterpTinterp(self,var,lev,tm1=1,tp1=1,tfm1=0.5,tfp1=0.5,verb=0):
+
+        ge=self.ge
+        
+        from math import log
+        for k in range(0,ge.nz-1):
+            
+            lev1=ge.levs[k]
+            lev2=ge.levs[k+1]
+            
+            if(lev <= lev1 and lev >= lev2):
+                lp1=log(lev1)
+                lp2=log(lev2)
+                lp=log(lev)
+                dlp=lp1-lp2
+                f2=(lp1-lp)/dlp
+                f1=(lp-lp2)/dlp
+                
+                if(verb):
+                    lf2=(lev1-lev)/(lev1-lev2)
+                    lf1=(lev-lev2)/(lev1-lev2)
+                    print 'HHHHHHHHHHHH ',lev1,lev,lev2,f1,f2,(f1+f2),lf1,lf2
+                    
+                exprm1="( (%s(t-%d,lev=%-6.1f)*%f + %s(t-%d,lev=%-6.1f)*%f)*%f )"%(var,tm1,lev1,f1,var,tm1,lev2,f2,tfm1)
+                exprp1="( (%s(t+%d,lev=%-6.1f)*%f + %s(t+%d,lev=%-6.1f)*%f)*%f )"%(var,tp1,lev1,f1,var,tp1,lev2,f2,tfp1)
+                expr="(%s + %s)"%(exprm1,exprp1)
+                
+                expr=expr.replace(' ','')
+                return(expr)
+
+        print 'EEE unable to interpolate to pressure level: ',lev
+        print 'EEE time for plan B...in LogPinterp'
+            
+        return(expr)
+
+
+class GradsEnv(MFbase):
+
+    def __init__(self,
+                 lat1=-90.0,
+                 lat2=90.0,
+                 lon1=0.0,
+                 lon2=360.0,
+                 pareaxl=0.5,
+                 pareaxr=10.0,
+                 pareayb=0.5,
+                 pareayt=8.0,
+                 orientation='landscape',
+                 xlint=10.0,
+                 ylint=5.0,
+                 lintscale=1.0,
+                 mapdset='hires',
+                 mapcol=15,
+                 mapstyle=0,
+                 mapthick=6,
+                 backgroundColor=0,
+                 grid='on',
+                 gridcol=1,
+                 gridstyle=3,
+                 pngmethod='printim',
+                 gradslab='off',
+                 timelab='off',
+                 quiet=0,
+                 verb=0,
+                 xsize=1024,
+                 ysize=768,
+                 ):
+
+
+        self.lat1=lat1
+        self.lat2=lat2
+        self.lon1=lon1
+        self.lon2=lon2
+        self.pareaxl=pareaxl
+        self.pareaxr=pareaxr
+        self.pareayb=pareayb
+        self.pareayt=pareayt
+        self.xlint=xlint
+        self.ylint=ylint
+        self.lintscale=lintscale
+
+        self.mapdset=mapdset
+        self.mapcol=mapcol
+        self.mapstyle=mapstyle
+        self.mapthick=mapthick
+
+        self.backgroundColor=backgroundColor
+        
+        self.grid=grid
+        self.gridcol=gridcol
+        self.gridstyle=gridstyle
+
+        self.pngmethod=pngmethod
+
+        self.timelab=timelab
+        self.gradslab=gradslab
+
+        self.verb=verb
+
+        self.xsize=xsize
+        self.ysize=ysize
+        
+
+
+
+    def makePng(self,
+                opath,
+                bmpath=None,
+                bmcol=0,
+                xsize=None,
+                ysize=None,
+                background='black',
+                ropt='',
+                verb=1,
+                ):
+
+        # -- this the xsize on the _ge object = self; from the set method in gXbasemap2
+        #
+        if(xsize == None and hasattr(self,'xsize')): xsize=self.xsize
+        if(ysize == None and hasattr(self,'ysize')): ysize=self.ysize
+        
+        if(self.pngmethod == 'printim'):
+            bkopt=''
+            if(background == 'black'):
+                bkopt='black'
+            if(bmpath == None):
+                cmd="%s %s %s x%d y%d"%(self.pngmethod,opath,bkopt,xsize,ysize)
+            else:
+                cmd="%s %s %s -b %s -t %d x%d y%d"%(self.pngmethod,opath,bkopt,bmpath,bmcol,xsize,ysize)
+
+        elif(self.pngmethod == 'gxyat'):
+            bkopt=''
+            if(background == 'black'):
+                bkopt='-r'
+            cmd="%s -x %d -y %d %s %s"%(self.pngmethod,xsize,ysize,bkopt,opath)
+
+        if(verb):
+            print "makePng: %s cmd: %s"%(opath,cmd)
+
+        self._cmd(cmd)
+
+        
+    def makePngTransparent(self,opath,ropt=''):
+        
+        cmd="convert -transparent black %s %s"%(opath,opath)
+        runcmd(cmd)
+        
+        cmd="convert -transparent white %s %s"%(opath,opath)
+        runcmd(cmd)
+        
+    def makePngDissolve(self,pathfeature,pathbase,pathall,
+                       disolvfrc=25,
+                       ropt=''):
+
+        cmd="composite -dissolve %f %s %s %s"%(disolvfrc,pathfeature,pathbase,pathall)
+        runcmd(cmd)
+        
+        
+    def setMap(self):
+
+        self._cmd('set mpdset %s'%(self.mapdset))
+        self._cmd('set map %d %d %d'%(self.mapcol,self.mapstyle,self.mapthick))
+                  
+
+    def setFwrite(self,name,type='-sq'):
+
+        cmd="""set fwrite %s %s"""%(type,name)
+        self._cmd(cmd)
+
+
+
+    def drawMap(self):
+        self._cmd('draw map')
+
+    def clear(self):
+        self._cmd('c')
+        
+
+    def getLevs(self,obj=None,verb=0):
+
+        if(obj != None and hasattr(obj,'fh') ):
+            fh=obj.fh
+
+        elif(hasattr(self,'fh')):
+            fh=self.fh
+        else:
+            print """WWW in GradsLevs...need a 'fh' var to get filemeta data..."""
+            sys.exit()
+
+        if(obj == None): obj=self
+        nz=fh.nz
+        self.dimLevs=obj.dimLevs=list(self._ga.coords().lev)
+        self.dimNlevs=obj.dimNlevs=len(self.dimLevs)
+        self._cmd("set z 1 %d"%(nz))
+        self.Levs=obj.Levs=list(self._ga.coords().lev)
+        if(verb): print 'getLevs: nz: ',nz,'levs: ',self.Levs
+        self._cmd("set z 1")
+            
+
+    def getFileMeta(self,obj=None):
+
+        if(obj != None and hasattr(obj,'fh') ):
+            fh=obj.fh
+
+        elif(hasattr(self,'fh')):
+            fh=self.fh
+        else:
+            print """WWW in GradsEnv...need a 'fh' var to get filemeta data..."""
+            sys.exit()
+            
+        if(obj == None): obj=self
+
+        self.nx=obj.nx=fh.nx
+        self.ny=obj.ny=fh.ny
+        self.nz=obj.nz=fh.nz
+        self.nt=obj.nt=fh.nt
+        self.undef=obj.undef=fh.undef
+
+        self.dimlevs=obj.dimlevs=list(self._ga.coords().lev)
+        self.dimNlevs=obj.dimNlevs=len(obj.dimlevs)
+        self._cmd("set z 1 %d"%(self.nz))
+
+        self.lats=obj.lats=list(self._ga.coords().lat)
+        self.lons=obj.lons=list(self._ga.coords().lon)
+        if(len(self.lons) > 1):
+            self.dlon=obj.dlon=self.lons[1]-self.lons[0]
+        else:
+            self.dlon=0.0
+        
+        self.levs=obj.levs=list(self._ga.coords().lev)
+        self._cmd("set lev %d"%(self.dimlevs[0]))
+
+        self.vars=obj.vars=list(fh.vars)
+
+
+
+    def getGxinfo(self):
+
+        self._cmd('q gxinfo')
+        
+        #n  1 Last Graphic = Contour
+        #n  2 Page Size = 11 by 8.5
+        #n  3 X Limits = 0.5 to 10.5
+        #n  4 Y Limits = 1.25 to 7.25
+        #n  5 Xaxis = Lon  Yaxis = Lat
+        #n  6 Mproj = 2
+
+        self.lastgraphic=self.rw(1,4)
+        self.pagex=float(self.rw(2,4))
+        self.pagey=float(self.rw(2,6))
+        self.plotxl=float(self.rw(3,4))
+        self.plotxr=float(self.rw(3,6))
+        self.plotyb=float(self.rw(4,4))
+        self.plotyt=float(self.rw(4,6))
+        self.xaxis=self.rw(5,3)
+        self.yaxis=self.rw(5,6)
+
+    def getGxout(self):
+
+        self._cmd('q gxout')
+        self.gxoutg1s=self.rw(2,6)
+        self.gxoug1v=self.rw(3,6)
+        self.gxoug2s=self.rw(4,6)
+        self.gxoug2v=self.rw(5,6)
+        self.gxoustn=self.rw(6,4)
+
+    def getShades(self,verb=0):
+
+        self._cmd('q shades')
+        nl=self._ga.nLines
+        
+        self.nshades=int(self.rw(1,5))
+
+        self.colbar=[]
+        for n in range(2,nl+1):
+            col=int(self.rw(n,1))
+            minval=self.rw(n,2)
+            maxval=self.rw(n,3)
+            # -- new outout from q shades in 2.0.0.oga1
+            #
+            if(minval == '<' or minval == '<='):
+                minval=-1e20
+                maxval=float(maxval)
+            elif(maxval == '>' or maxval == '>='):
+                minval=float(minval)
+                maxval=1e20
+            else:
+                minval=float(minval)
+                maxval=float(maxval)
+
+            self.colbar.append([col,minval,maxval])
+            if(verb): print "III(GradsEnv.getShades):",n,col,minval,maxval,self.colbar
+
+    def setShades(self,pcuts,pcols):
+
+        nl=len(pcols)
+        self.nshades=nl
+
+        self.colbar=[]
+
+        for n in range(0,nl):
+            col=pcols[n]
+
+            if(n == 0):
+                minval=-1e20
+                maxval=pcuts[n]
+            elif(n == nl-1):
+                minval=pcuts[n-1]
+                maxval=1e20
+            else:
+                minval=pcuts[n-1]
+                maxval=pcuts[n]
+
+            minval=float(minval)
+            maxval=float(maxval)
+            
+            self.colbar.append([col,minval,maxval])
+
+        
+
+    def getShadeCol(self,val):
+
+        if(not(hasattr(self,'colbar'))):
+            print 'WWW need to run getShades() before using getShadeCol()'
+            return
+        
+        rval=float(val)
+        for colb in self.colbar:
+            (col,minval,maxval)=colb
+            if(rval > minval and rval <= maxval):
+                return(col)
+
+        
+        
+
+    def setParea(self):
+
+        self._cmd("set parea %6.3f %6.3f %6.3f %6.3f"%(self.pareaxl,
+                                                       self.pareaxr,
+                                                       self.pareayb,
+                                                       self.pareayt))
+
+
+    def setGrid(self):
+        self._cmd('set grid %s %d %d'%(self.grid,self.gridcol,self.gridstyle))
+        
+        
+    def setXylint(self,scale=None):
+
+        if(scale == None):  lscale=self.lintscale
+        else: lscale=scale
+        xlint=self.xlint*lscale
+        ylint=self.ylint*lscale
+        self._cmd("set xlint %6.3f"%(xlint))
+        self._cmd("set ylint %6.3f"%(ylint))
+
+    def setXsize(self,xsize=1024,ysize=768):
+
+        if(hasattr(self,'xsize')): xsize=self.xsize
+        if(hasattr(self,'ysize')): ysize=self.ysize
+        
+        self._cmd("set xsize %d %d"%(xsize,ysize))
+
+    def setPlotScale(self):
+        self._cmd('set grads %s'%(self.gradslab))
+        self._cmd('set timelab %s'%(self.timelab))
+        self._cmd('set cmax -1e20')
+        self._cmd('set grid on 3 15')
+        
+        # -- the lat var is displayed differently than a real data var -- use only if one not available
+        # -- not really this is a red herring -- conflict with how display is calc with grids that are not 1.0 0.5 deg...
+        # -- must be something in the xfrm in grads?  when setting lat/lon to NOT be a multiple of the grid res? pretty weird
+        #
+        dumvar='lat'
+        if(hasattr(self,'vars')): dumvar=self.vars[0]
+        
+        # -- case of dum.ctl -- use 'lat'
+        #
+        if(dumvar == 'dum' or dumvar == 't'): dumvar='lat'
+
+        # -- this doesn't work when dumvar in self.vars[0] is undef
+        #exprdum="const(%s,1,-a)"%(dumvar)
+        #
+        # -- 20190224 -- force use of 'lat' with 2.2.1
+        #
+        dumvar='lat'
+        exprdum=dumvar
+        
+        self._cmd('q dims')
+        self._cmd('q ctlinfo')
+        self._cmd('d abs(%s)'%(exprdum))
+
+
+    def setLatLon(self):
+        self._cmd("set lat %f %f"%(self.lat1,self.lat2))
+        self._cmd("set lon %f %f"%(self.lon1,self.lon2))
+
+    def setLevs(self):
+
+        if(not(hasattr(self,'lev2'))):
+            self.lev2=self.lev1
+        self._cmd("set lev %f %f"%(self.lev1,self.lev2))
+
+    def setBackgroundColor(self):
+        self._cmd("set background %d"%(self.backgroundColor))
+        
+    def setColorTable(self,table='jaecolw2.gsf'):
+        self._cmd("run %s"%(table))
+
+    def setTimebyDtg(self,dtg,verb=0):
+        gtime=dtg2gtime(dtg)
+        self.gtime=gtime
+        if(verb): print "set time to: %s  from: %s"%(gtime,dtg)
+        self.cmdQ("set time %s"%(gtime))
+
+    def setTimebyDtgTau(self,dtg,tau,verb=0):
+        vdtg=dtginc(dtg,tau)
+        gtime=dtg2gtime(vdtg)
+        self.gtime=gtime
+        if(self.verb or verb): print "set time to: %s  from dtg: %s tau: %d"%(gtime,dtg,tau)
+        self.cmdQ("set time %s"%(gtime))
+
+    def reinit(self):
+        self._cmd("reinit")
+        
+class GradsPlot(MFbase):
+
+
+    def __init__(self,ga,ge):
+
+        self.basemap=gXbasemap(ga,ge)
+        self.basemap2=gXbasemap2(ga,ge)
+        
+        self.title=gXtitle(ga,ge)
+        self.plotTcBt=gXplotTcBt(ga,ge)
+        self.plotTcFt=gXplotTcFt(ga,ge)
+        self.plotTcFtVmax=gXplotTcFtVmax(ga,ge)
+        self.polyCircle=gXpolyCircle(ga,ge,ga)
+        self.arrow=gXarrow(ga,ge,ga)
+        self.cbarn=gXcbarn(ga,ge)
+
+class gXbasemap2(MFbase):
+
+
+    from mfbase import ptmpBaseDir
+    
+    def __init__(self,ga,ge):
+
+        self._cmd=ga
+        self._ge=ge
+        self.set()
+        
+        
+
+    def set(self,
+            lcol=90,
+            ocol=91,
+            lcolrgb='set rgb 90 100 50 25',
+            ocolrgb='set rgb 91 10 20 85',
+            bmname='basemap2',
+            bmdir=ptmpBaseDir,
+            xsize=None,
+            ysize=None,
+            quiet=0,
+            landcol=None,
+            oceancol=None,
+            ):
+
+        if(xsize == None and hasattr(self._ge,'xsize')): xsize=self._ge.xsize
+        if(ysize == None and hasattr(self._ge,'ysize')): ysize=self._ge.ysize
+
+        wC=w2Colors()
+
+        if(landcol != None):
+            hex=wC.W2Colors[landcol]
+            (r,g,b)=wC.hex2rgb(hex)
+            lcolrgb='set rgb %d %d %d %d'%(lcol,r,g,b)
+            
+        if(oceancol != None):
+            hex=wC.W2Colors[oceancol]
+            (r,g,b)=wC.hex2rgb(hex)
+            ocolrgb='set rgb %d %d %d %d'%(ocol,r,g,b)
+
+        self.lcol=lcol
+        self.lcolrgb=lcolrgb
+        self.ocol=ocol
+        self.ocolrgb=ocolrgb
+
+        self.gsdir=sbtGslibDir
+
+        self.bmname=bmname
+        self.bmdir=bmdir
+        
+        # -- for grads -- must be lower case...
+        #
+        obmdir=self.bmdir
+        obmdirl=obmdir.lower()
+        if(obmdir != obmdirl): obmdirl='/tmp'
+        
+        self.pngpath="%s/bm.%s.png"%(obmdirl,self.bmname)
+        self.pngpath=self.pngpath.lower()
+
+        self.xsize=xsize
+        self.ysize=ysize
+        
+
+    def draw(self):
+
+        if(self.ocolrgb != None):
+            self._cmd(self.ocolrgb)
+            
+        if(self.lcolrgb != None):
+            self._cmd(self.lcolrgb)
+            
+        self._cmd('%s/basemap.2 L %d 1 %s'%(self.gsdir,self.lcol,self.gsdir))
+        self._cmd('%s/basemap.2 O %d 1 %s'%(self.gsdir,self.ocol,self.gsdir))
+        self._cmd('draw map')
+
+
+    def putPng(self):
+
+        self._ge.makePng(self.pngpath,xsize=self.xsize,ysize=self.ysize)
+        
+        obmdir=self.bmdir
+        obmdirl=obmdir.lower()
+        if(obmdir != obmdirl):
+            npngpath=self.pngpath.replace('/tmp',self.bmdir)
+            opngpath=self.pngpath
+            self.pngpath=npngpath
+            cmd="mv -f -v %s %s"%(opngpath,self.pngpath)
+            runcmd(cmd)
+
+
+            
+    
+
+class gXbasemap(gXbasemap2):
+
+
+    def __init__(self,ga,ge):
+
+        self._cmd=ga
+        self._ge=ge
+        self.set()
+
+
+    def set(self,
+            lcol=90,
+            ocol=91,
+            lcolrgb='set rgb 90 100 50 25',
+            ocolrgb='set rgb 91 10 20 85',
+            quiet=0,
+            ):
+        
+        
+        self.lcol=lcol
+        self.lcolrgb=lcolrgb
+        self.ocol=ocol
+        self.ocolrgb=ocolrgb
+
+        self.gsdir=sbtGslibDir
+
+
+    def draw(self):
+
+        if(self.ocolrgb != None):
+            self._cmd(self.ocolrgb)
+            
+        if(self.lcolrgb != None):
+            self._cmd(self.lcolrgb)
+            
+        self._cmd('%s/basemap L %d M'%(self.gsdir,self.lcol))
+        self._cmd('%s/basemap O %d M'%(self.gsdir,self.ocol))
+        self._cmd('draw map')
+    
+class w2Colors(MFbase):
+
+    def __init__(self,verb=0):
+        import webcolors
+        #Color2Hex={}
+        #Color2Hex['black']='#000000'
+        #Color2Hex['white']='#FFFFFF'
+
+        #Color2Hex['navy']='#000080'
+        #Color2Hex['blue']='#0000FF'
+        #Color2Hex['royalblue']='#4169E1'
+        #Color2Hex['steelblue']='#4682B4'
+        #Color2Hex['usafblue']='#CCCCFF'
+        #Color2Hex['mediumslateblue']='#7B68EE'
+        #Color2Hex['mediumblue']='#0000CD'
+        #Color2Hex['powderblue']='#B0E0E6'
+        #Color2Hex['skyblue']='#87CEEB'
+        #Color2Hex['lightblue']='#ADD8E6'
+        #Color2Hex['deepskyblue']='#00BFFF'
+        #Color2Hex['dodgerblue']='#1E90FF'
+
+        #Color2Hex['yellow']='#FFFF00'
+        #Color2Hex['gold']='#FFD700'
+        #Color2Hex['yellowgreen']='#9ACD32'
+        #Color2Hex['khaki']='#F0E68C'
+        #Color2Hex['goldenrod']='#DAA520'
+        #Color2Hex['lightgoldenrodyellow']='#FAFAD2'
+        #Color2Hex['tan']='#D2B48C'
+        #Color2Hex['peru']='#CD853F'
+        #Color2Hex['sienna']='#A0522D'
+        #Color2Hex['chocolate']='#D2691E'
+
+
+        #Color2Hex['wheat']='#F5DEB3'
+        #Color2Hex['usafgrey']='#51588E'
+        #Color2Hex['grey']='#808080'
+
+        #Color2Hex['garnet']='#990000'
+        #Color2Hex['magenta']='#FF00FF'
+        #Color2Hex['maroon']='#800000'
+
+        #Color2Hex['lightgreen']='#90EE00'
+        #Color2Hex['green']='#008000'
+        #Color2Hex['greenyellow']='#ADFF2F'
+        #Color2Hex['olive']='#808000'
+        #Color2Hex['olivedrab']='#6B8E23'
+        #Color2Hex['mediumturquoise']='#48D1CC'
+        
+        #Color2Hex['mediumseagreen']='#3CB371'
+        #Color2Hex['darkgreen']='#006400'
+
+        #Color2Hex['red']='#FF0000'
+        #Color2Hex['tomato']='#FF4637'
+        #Color2Hex['indianred']='#CD5C5C'
+        #Color2Hex['darkred']='#8B0000'
+        #Color2Hex['lightcoral']='#F08080'
+        #Color2Hex['orange']='#FFA500'
+
+        #Color2Hex['orchid']='#DA70D6'
+        #Color2Hex['violet']='#EE82EE'
+        #Color2Hex['fuchsia']='#FF00FF'
+
+        #Color2Hex['purple']='#800080'
+        #Color2Hex['indigo']='#4B0082'
+        #Color2Hex['plum']='#DDA0DD'
+        #Color2Hex['violetred']='#D02090'
+        #Color2Hex['teal']='#008080'
+        #Color2Hex['atcfland']='#FEDE85'
+        #Color2Hex['atcfocean']='#B4FEFE'        
+
+        colors=webcolors.CSS3_NAMES_TO_HEX.keys()
+        Color2Hex=webcolors.CSS3_NAMES_TO_HEX
+        Color2Hex['grey1']='#CCCCCC'
+        Color2Hex['grey2']='#999999'
+        Color2Hex['grey3']='#666666'
+        Color2Hex['grey4']='#333333'
+        Color2Hex['atcfland']='#FEDE85'
+        Color2Hex['atcfocean']='#B4FEFE'        
+        Color2Hex['violetred']='#D02090'
+        
+        if(verb):
+            colors.sort()
+            for color in colors:
+                print color,Color2Hex[color]
+        
+        
+        GaColorRgb={}
+
+        GaColorRgb[0] =[0,0,0]
+        GaColorRgb[1] =[255,255,255]
+        GaColorRgb[2] =[250,60,60]
+        GaColorRgb[3] =[0,220,0]
+        GaColorRgb[4] =[30,60,255]
+        GaColorRgb[5] =[0,200,200]
+        GaColorRgb[6] =[240,0,130]
+        GaColorRgb[7] =[230,220,50]
+        GaColorRgb[8] =[240,130,40]
+        GaColorRgb[9] =[160,0,200]
+        GaColorRgb[10]=[160,230,50]
+        GaColorRgb[11]=[0,160,255]
+        GaColorRgb[12]=[230,175,45]
+        GaColorRgb[13]=[0,210,140]
+        GaColorRgb[14]=[130,0,220]
+        GaColorRgb[15]=[170,170,170]
+
+        GaColorName2Rgb={}
+        GaColorName2Rgb['black']=GaColorRgb[0] 
+        GaColorName2Rgb['white']=GaColorRgb[1] 
+        GaColorName2Rgb['red']=GaColorRgb[2] 
+        GaColorName2Rgb['green']=GaColorRgb[3] 
+        GaColorName2Rgb['blue']=GaColorRgb[4] 
+        GaColorName2Rgb['lightblue']=GaColorRgb[5] 
+        GaColorName2Rgb['magenta']=GaColorRgb[6] 
+        GaColorName2Rgb['yellow']=GaColorRgb[7] 
+        GaColorName2Rgb['orange']=GaColorRgb[8] 
+        GaColorName2Rgb['purple']=GaColorRgb[9] 
+        GaColorName2Rgb['yellowgreen']=GaColorRgb[10]
+        GaColorName2Rgb['mediumblue']=GaColorRgb[11]
+        GaColorName2Rgb['darkyellow']=GaColorRgb[12]
+        GaColorName2Rgb['aqua']=GaColorRgb[13]
+        GaColorName2Rgb['darkpurple']=GaColorRgb[14]
+        GaColorName2Rgb['gray']=GaColorRgb[15]
+
+        #  0   background       0   0   0 (black by default)
+        #  1   foreground     255 255 255 (white by default)
+        #  2   red            250  60  60 
+        #  3   green            0 220   0 
+        #  4   dark blue       30  60 255 
+        #  5   light blue       0 200 200 
+        #  6   magenta        240   0 130 
+        #  7   yellow         230 220  50 
+        #  8   orange         240 130  40 
+        #  9   purple         160   0 200 
+        # 10   yellow/green   160 230  50 
+        # 11   medium blue      0 160 255 
+        # 12   dark yellow    230 175  45 
+        # 13   aqua             0 210 140 
+        # 14   dark purple    130   0 220 
+        # 15   gray           170 170 170
+
+        self.chex=Color2Hex
+        self.W2Colors=Color2Hex
+        self.cga=GaColorName2Rgb
+
+        JaeCols={
+            #light yellow to dark red
+            21:'#FFFAAA',  # 255 250 170
+            22:'#FFE878',  # 255 232 120
+            23:'#FFC03C',  # 255 192 060
+            24:'#FFA000',  # 255 160 000
+            25:'#FF6000',  # 255 096 000
+            26:'#FF3200',  # 255 050 000
+            27:'#E11400',  # 225 020 000
+            28:'#C00000',  # 192 000 000
+            29:'#A50000',  # 165 000 000
+
+
+            #light green to dark green
+            31:'#E6FFE1',  # 230 255 225
+            32:'#C8FFBE',  # 200 255 190
+            33:'#B4FAAA',  # 180 250 170
+            34:'#96F58C',  # 150 245 140
+            35:'#78F573',  # 120 245 115
+            36:'#50F050',  # 080 240 080
+            37:'#37D23C',  # 055 210 060
+            38:'#1EB41E',  # 030 180 030
+            39:'#0FA00F',  # 015 160 015
+
+            #light blue to dark blue
+            41:'#C8FFFF',  # 200 255 255
+            42:'#AFF0FF',  # 175 240 255
+            43:'#82D2FF',  # 130 210 255
+            44:'#5FBEFA',  # 095 190 250
+            45:'#4BB4F0',  # 075 180 240
+            46:'#3CAAE6',  # 060 170 230
+            47:'#2896D2',  # 040 150 210
+            48:'#1E8CC8',  # 030 140 200
+            49:'#1482BE',  # 020 130 190
+
+            #light purple to dark purple
+            51:'#DCDCFF',  # 220 220 255
+            52:'#C0B4FF',  # 192 180 255
+            53:'#A08CFF',  # 160 140 255
+            54:'#8070EB',  # 128 112 235
+            55:'#7060DC',  # 112 096 220
+            56:'#483CC8',  # 072 060 200
+            57:'#3C28B4',  # 060 040 180
+            58:'#2D1EA5',  # 045 030 165
+            59:'#2800A0',  # 040 000 160
+
+            #light pink to dark rose  
+            61:'#FFE6E6',  # 255 230 230
+            62:'#FFC8C8',  # 255 200 200
+            63:'#F8A0A0',  # 248 160 160
+            64:'#E68C8C',  # 230 140 140
+            65:'#E67070',  # 230 112 112
+            66:'#E65050',  # 230 080 080
+            67:'#C83C3C',  # 200 060 060
+            68:'#B42828',  # 180 040 040
+            69:'#A42020',  # 164 032 032
+
+
+            #light grey to dark grey
+            71:'#FAFAFA',  # 250 250 250
+            72:'#C8C8C8',  # 200 200 200
+            73:'#A0A0A0',  # 160 160 160
+            74:'#8C8C8C',  # 140 140 140
+            75:'#707070',  # 112 112 112
+            76:'#505050',  # 080 080 080
+            77:'#3C3C3C',  # 060 060 060
+            78:'#282828',  # 040 040 040
+            79:'#202020',  # 032 032 032
+        }
+
+        self.JaeCols=JaeCols
+
+
+    def hex2dec(self,s):
+        return int(s, 16)
+
+    def dec2hex(self,n):
+        """return the hexadecimal string representation of integer n"""
+        return "%X" % n
+
+    def hex2rgb(self,scolor):
+
+        r=self.hex2dec(scolor[1:3])
+        g=self.hex2dec(scolor[3:5])
+        b=self.hex2dec(scolor[5:7])
+        return(r,g,b)
+
+
+class gXplotTcBt(MFbase):
+
+    btsizmx=0.275
+    btsizmn=0.175
+    btsizmx=0.150
+    btsizmn=0.125
+    btcols=[2,1,3,4]*20
+    
+    def __init__(self,ga,ge):
+
+        self._cmd=ga
+        self._ge=ge
+        
+
+    def set(self,
+            bts,dtg0,
+            nhbak=72,
+            nhfor=0,
+            lcol=1,
+            lsty=1,
+            lthk=5,
+            msym=-1,
+            mcol=-3,
+            msiz=0.0125,
+            mthk=5,
+            bdtg=None,
+            edtg=None,
+            ddtg=6,
+            ddtgbak=12,
+            ddtgfor=12,
+            quiet=1,
+            dtg0012=0,
+            maxbt=50,
+            mcolTD=15,
+            dttimeDefault=6,
+            doland=1,
+            maxlandFrac=0.80,
+            btMinLand=35.0,
+            ):
+        
+        from tcbase import IsTc
+                    
+        self.initLF()
+        
+        ge=self._ge
+        self.dtg0=dtg0
+        self.nhbak=nhbak
+        self.nhfor=nhfor
+
+        self.doland=doland
+        self.maxlandFrac=maxlandFrac
+
+        # always clip the plots
+        #
+        ge.getGxinfo()
+        self.clipplot="set clip %f %f %f %f"%(ge.plotxl,ge.plotxr,ge.plotyb,ge.plotyt)
+
+        dtgs=bts.keys()
+        dtgs.sort()
+
+        self.dtgs=dtgs
+
+        self.bdtg=bdtg
+        self.edtg=edtg
+        self.ddtg=ddtg
+
+        if(self.bdtg != None):
+            pdtgs=dtgrange(bdtg,edtg,ddtg)
+            
+            if(len(pdtgs) > maxbt):
+                ddtg=12
+                self.ddtg=ddtg
+                if(dtg0012):
+                    bdtg=dtgShift0012(bdtg,round=1)
+                    edtg=dtgShift0012(edtg,round=0)
+                pdtgs=dtgrange(bdtg,edtg,ddtg)
+
+
+        else:
+            # -- handle ddtg = 12 and dtg0 != None
+            #
+            if(nhfor == None):
+                dtgfor=dtgs[-1]
+                if(dtg0 != None and ddtg == 12):
+                    if(w2.is0012Z(dtg0) and not(w2.is0012Z(dtgfor))):
+                        dtgfor=dtgs[-2]
+                    elif(w2.is0618Z(dtg0) and not(w2.is0618Z(dtgfor))):
+                        dtgfor=dtgs[-2]
+            else:
+                if(dtg0 != None): dtgfor=dtginc(dtg0,nhfor)
+
+            if(dtg0012): dtgfor=dtgShift0012(dtgfor,round=0)
+                
+            # -- handle ddtg = 12 and dtg0 != None
+            #
+            if(nhbak == None):
+                dtgbak=dtgs[0]
+                if(dtg0 != None and ddtg == 12):
+                    if(w2.is0012Z(dtg0) and not(w2.is0012Z(dtgbak))):
+                        dtgbak=dtgs[1]
+                    elif(w2.is0618Z(dtg0) and not(w2.is0618Z(dtgbak))):
+                        dtgbak=dtgs[1]
+                
+            else:
+                if(dtg0 != None): dtgbak=dtginc(dtg0,-nhbak)
+
+            if(dtg0012): dtgbak=dtgShift0012(dtgbak,round=1)
+                
+
+            if(dtg0 != None):
+                pdtgsbak=dtgrange(dtgbak,dtg0,ddtgbak)
+                pdtgsfor=dtgrange(dtg0,dtgfor,ddtgfor)
+            else:
+                pdtgsbak=[]
+                pdtgsfor=[]
+                
+            pdtgs=dtgrange(dtgbak,dtgfor,ddtg)
+
+            if(len(pdtgs) > maxbt):
+                ddtg=12
+                self.ddtg=ddtg
+                if(dtg0012):
+                    dtgbak=dtgShift0012(dtgbak,round=1)
+                    dtgfor=dtgShift0012(dtgfor,round=0)
+                pdtgs=dtgrange(dtgbak,dtgfor,ddtg)
+
+
+        self.platlons={}
+        self.pvmax={}
+        self.pvmaxflg={}
+
+        self.xys={}
+        self.lineprop={}
+        self.markprop={}
+
+        odtgs=[]
+        odtgsbak=[]
+        odtgsfor=[]
+        
+        pdt=pdtgs.sort()
+        n=0
+        for dtg in dtgs:
+            
+            if(not(dtg in pdtgs)):  continue
+            
+            # -- get lat/lon and check if overland
+            #
+            plat=bts[dtg][0]
+            plon=bts[dtg][1]
+            btvmax=bts[dtg][2]
+            
+            landfrac=self.getLF(plat,plon)
+            
+            #print 'BBBB ',dtg,plat,plon,landfrac,btvmax
+            # -- chuck point if overland and btvmax <= 35 kt (strong tcs overland)
+            #
+            if(self.doland == 0 and landfrac > self.maxlandFrac and btvmax <= btMinLand): continue            
+
+            odtgs.append(dtg)
+            if(dtg in pdtgsbak): odtgsbak.append(dtg)
+            if(dtg in pdtgsfor): odtgsfor.append(dtg)
+            
+            if(len(bts[dtg]) == 8):
+                tccode=bts[dtg][-2].lower()
+                wncode=bts[dtg][-1].lower()
+                
+            # -- md3 from -SUM.txt
+            #
+            elif(len(bts[dtg]) == 22):
+                tccode=bts[dtg][6].lower()
+                wncode=bts[dtg][7].lower()
+            else:
+                tccode='xx'
+                wncode='xx'
+
+            self.platlons[dtg]=(plat,plon)
+            self.pvmax[dtg]=btvmax
+
+            self._cmd('q w2xy %f %f'%(plon,plat))
+            
+            x=float(self._cmd.rw(1,3))
+            y=float(self._cmd.rw(1,6))
+            self.xys[dtg]=([x,y])
+
+            # -- colorize line seg
+            #
+            lthk=9
+            lcol=0
+            lsty=2
+            if(btvmax >= 100 and IsTc(tccode) == 1):                   lcol=9  ; lsty=2 ; lthk=10
+            if(btvmax >= 65  and btvmax < 100 and IsTc(tccode) == 1):  lcol=2  ; lsty=1
+            if(btvmax >= 35  and btvmax < 65  and IsTc(tccode) == 1):  lcol=7  ; lsty=1
+            if(btvmax <  35  and IsTc(tccode) == 1):                   lcol=3  ; lsty=1
+            if(btvmax >= 35  and IsTc(tccode) == 2):                   lcol=8  ; lsty=1
+            if(btvmax <  35  and IsTc(tccode) == 2):                   lcol=4  ; lsty=1
+            if(IsTc(tccode) == 0):                                     lcol=10 ; lsty=3
+            if(tccode == 'ex' or tccode == 'pt'):                      lcol=1  ; lsty=3
+            
+            self.lineprop[dtg]=(lcol,lsty,lthk)
+
+
+            if(msym < 0):
+                btsiz=self.btsizmx*(btvmax/135)
+                if(btsiz<self.btsizmn): btsiz=self.btsizmn
+                
+                if(mcol < 0):
+                    mcolTS=mcol*(-1)
+                    mcolTY=2
+                else:
+                    mcolTS=mcol
+                    mcolTY=mcol
+                    
+                btsym=41
+                btthk=mthk
+                
+                btcol=mcolTY
+                if(btvmax < 65):  btsym=40 ; btcol=mcolTS
+                if(btvmax < 25):  btsym=1 ; btcol=mcolTD
+
+                if(tccode != None):
+                    if(not(IsTc(tccode))):      btsym=1  ; btcol=mcolTD
+                    if(tccode.lower() == 'ex'): btsym=24 ; btcol=mcolTD
+                    
+
+                if(mcol < 0):
+                    btcol=self.btcols[n]
+
+            else:
+                btsiz=msiz
+                btsym=msym
+                btcol=mcol
+                btthk=mthk
+
+            self.markprop[dtg]=(btsym,btsiz,btcol,btthk)
+            n=n+1
+
+        self.odtgs=odtgs
+
+        if(dtg0 == None):
+            self.otimesbak=odtgs
+            self.otimesfor=odtgs
+        else:
+            self.otimesbak=odtgsbak
+            self.otimesfor=odtgsfor
+
+        self.otimes=odtgs
+        # -- make sure there are at least two times...
+        #
+        if(len(self.otimes) > 1):
+            self.dttime=dtgdiff(self.otimes[-2],self.otimes[-1])     
+        else:
+            self.dttime=dttimeDefault
+
+    def initLF(self):
+         
+        #from w2 import SetLandFrac
+        #from w2 import GetLandFrac
+        
+        self.lf=SetLandFrac()
+        self.GetLandFrac=GetLandFrac
+        
+
+    def getLF(self,lat,lon):
+        landfrac=self.GetLandFrac(self.lf,lat,lon)
+        return(landfrac)
+
+
+    def setGradsData(self,tdtg,
+                     tname='btvmax',
+                     tdir='/tmp',
+                     ):
+    
+        cpath="%s/%s.%s.ctl"%(tdir,tname,tdtg)
+        opath="%s/%s.%s.dat"%(tdir,tname,tdtg)
+        
+        # -- make the beginning time the 1st track
+        #
+        bdtg=self.otimes[0]
+        bgtime=dtg2gtime(bdtg)
+        
+        if(not(hasattr(self,'dttime'))): 
+            dttime=dtgdiff(self.otimes[-2],self.otimes[-1])
+            self.ddtime=dttime
+        else:
+            dttime=self.dttime
+            
+        tottime=dtgdiff(self.otimes[0],self.otimes[-1])
+        
+        nt=int(tottime/dttime)+1
+        
+        (rlat,rlon)=self.platlons[self.otimes[0]]
+        self.platlons0=(rlat,rlon)
+        
+        ctl="""dset %s
+title %s
+undef 1e20
+xdef 1  levels %6.1f
+ydef 1  levels %5.1f
+zdef 1  levels 1013
+tdef %d linear %s %dhr
+vars 1
+bvm 0 0 %s
+endvars"""%(opath,tname,rlon,rlat,
+            nt,bgtime,dttime,
+            tname)
+        
+        MF.WriteString2Path(ctl,cpath)
+
+        stnid='btvmax01'
+        stndt=0.0
+        
+        oB=open(opath,'wb')
+        
+        # - not station data..
+        #stnhead = struct.pack('8sfffii',stnid,rlat,rlon,stndt,1,0)
+        #stnfoot = struct.pack('8sfffii',stnid,rlat,rlon,stndt,0,0)
+
+        for otime in self.otimes:
+            #oB.write(stnhead)
+            try:
+                stnrec = struct.pack('1f',self.pvmax[otime])
+            except:
+                continue
+            oB.write(stnrec)
+            #oB.write(stnfoot)
+        
+        oB.close()
+        
+
+
+
+    def dline(self,times=None,
+              lcol=None,
+              lsty=None,
+              lthk=None,
+              ):
+
+        if(times == None): times=self.otimes
+        
+        self._cmd(self.clipplot)
+
+        if(len(times) < 2): return
+        
+        for n in range(1,len(times)):
+
+            try:
+                (x0,y0)=self.xys[times[n-1]]
+            except:
+                continue
+
+            try:
+                (x1,y1)=self.xys[times[n]]
+            except:
+                continue
+            
+            if(x0 == None or x1 == None): continue 
+
+            (olcol,olsty,olthk)=self.lineprop[times[n]]
+
+            # overrides
+            #
+            if(lcol != None): olcol=lcol
+            if(lsty != None): olsty=lsty
+            if(lthk != None): olthk=lthk
+            
+            self._cmd("set line %d %d %d"%(olcol,olsty,olthk))
+            self._cmd("draw line %6.3f %6.3f %6.3f %6.3f"%(x0,y0,x1,y1))
+
+        
+    def dwxsym(self,times=None,
+               wxsym=None,
+               wxsiz=None,
+               wxcol=None,
+               wxthk=None,
+               ):
+
+        if(times == None): times=self.otimes
+
+        self._cmd(self.clipplot)
+        for n in range(0,len(times)):
+
+            try:
+                (x0,y0)=self.xys[times[n]]
+                if(x0 == None): continue
+            except:
+                continue
+
+            (owxsym,owxsiz,owxcol,owxthk)=self.markprop[times[n]]
+            
+            if(wxsym != None): owxsym=wxsym
+            if(wxsiz != None): owxsiz=wxsiz
+            if(wxcol != None): owxcol=wxcol
+            if(wxthk != None): owxthk=wxthk
+
+            cmd="draw wxsym %d %6.3f %6.3f %6.3f %d %d"%(owxsym,x0,y0,owxsiz,owxcol,owxthk)
+            self._cmd(cmd)
+
+            self.wxcol=wxcol
+
+    def dmark(self,times=None,
+              mksym=None,
+              mksiz=None,
+              mkcol=None,
+              mkthk=None,
+              ):
+
+        if(times == None): times=self.otimes
+
+        self._cmd(self.clipplot)
+        for n in range(0,len(times)):
+
+            try:
+                (x0,y0)=self.xys[times[n]]
+                if(x0 == None):  continue
+            except:
+                continue
+            
+            (omksym,omksiz,omkcol,omkthk)=self.markprop[times[n]]
+            
+            # overrides
+            if(mksym != None): omksym=mksym
+            if(mksiz != None): omksiz=mksiz
+            if(mkcol != None): omkcol=mkcol
+            if(mkthk != None): omkthk=mkthk
+            
+            cmd="set line %d 1 %d"%(omkcol,omkthk)
+            self._cmd(cmd)
+            cmd="draw mark %d %6.3f %6.3f %6.3f %d %d"%(omksym,x0,y0,omksiz,omkcol,omkthk)
+            self._cmd(cmd)
+
+            self.mksiz=omksiz
+            self.mkcol=omkcol
+            self.mkthk=omkthk
+
+        
+    def dlabel(self,times=None,
+               lbsiz=0.10,
+               lbcol=1,
+               lbthk=5,
+               #yoffset=0.10,
+               yoffset=0.075,
+               xoffset=0.05,
+               location='c',
+               dlab=None,
+               rotate=-30,
+               #rotate=30,
+               ):
+
+        if(times == None): times=self.otimes
+
+        self._cmd(self.clipplot)
+        for n in range(0,len(times)):
+
+            try:
+                (x0,y0)=self.xys[times[n]]
+                y0=y0-lbsiz*0.5-yoffset
+                x0=x0-xoffset
+                if(dlab == None):
+                    label="%3d"%(self.pvmax[times[n]])
+                else:
+                    label=dlab
+                if(x0 == None):  continue
+            except:
+                continue
+
+            self._cmd('set string %d %s %d %d'%(lbcol,location,lbthk,rotate))
+            self._cmd("set strsiz %f"%(lbsiz))
+            self._cmd("draw string %f %f %s"%(x0,y0,label))
+
+
+    def legend(self,ge,
+               times=None,
+               btcol=None,
+               bttitle=None,
+               btlgdcol=None,
+               resetfinaly=0,
+               hiTime=None,
+               ystart=7.9,
+               ):
+
+        if(times == None): times=self.otimes
+
+        ge=self._ge
+        ge.getGxinfo()
+        self._cmd("set clip 0 %6.3f 0 %6.3f"%(ge.pagex,ge.pagey))
+
+        ssiz=0.60
+        lscl=0.85
+        xoffset=0.1
+        x=ge.plotxr+(0.10)*(1.5/lscl)+xoffset
+        xs=x+(0.15)*lscl
+
+        if((not(hasattr(self,'finaly')) and ystart != None) or resetfinaly):
+            y=ystart
+        else:
+            y=self.finaly
+            
+        dy=0.165*lscl
+        yss=dy*ssiz*lscl
+        sthk=6
+
+        if(btlgdcol == None): btlgdcol=1
+
+        for n in range(0,len(times)):
+            if(n == 0 and bttitle != None):
+                self._cmd('set string %s l %d'%(btlgdcol,sthk))
+                self._cmd("set strsiz %f"%(yss))
+                self._cmd("draw string %f %f %s"%(xs,y,bttitle))
+                y=y-dy
+                
+                
+            time=times[n]
+            try:
+                (obtsym,obtsiz,obtcol,obtthk)=self.markprop[time]
+            except:
+                continue
+            
+            if(btcol != None): obtcol=btcol
+            cmd="draw wxsym %d %6.3f %6.3f %6.3f %d %d"%(obtsym,x,y,obtsiz,obtcol,obtthk)
+            self._cmd(cmd)
+            
+            # -- hilite a dtg
+            #
+            if(hiTime != None and time == hiTime):
+                self._cmd('set string 7 l %d'%(sthk+2))
+                self._cmd("set strsiz %f"%(yss+0.001))
+            else:
+                self._cmd('set string 1 l %d'%(sthk))
+                self._cmd("set strsiz %f"%(yss))
+                
+            lgd="- %s %3d"%(time[4:10],self.pvmax[time])
+            lgd="%s %3d"%(time[4:10],self.pvmax[time])
+            self._cmd("draw string %f %f %s"%(xs,y,lgd))
+            y=y-dy
+
+        self.finaly=y
+        self.dy=dy
+            
+
+
+class gXplotTcFt(gXplotTcBt):
+    
+
+    def set(self,
+            fts,lcol=-1,lsty=1,lthk=7,
+            msym=3,mcol=3,msiz=0.05,mthk=5,
+            dovmaxflg=1,
+            doland=0,
+            maxlandFrac=0.80,
+            verb=0,
+            quiet=0,
+            ):
+
+        self.dovmaxflg=dovmaxflg
+        self.doland=doland
+        self.maxlandFrac=maxlandFrac
+
+        self.initLF()
+        self.initVars(lcol,lsty,lthk,msym,mcol,msiz,mthk,verb)
+        self.setPcutcols()
+        self.initProps(fts)
+        self.setLineProps()
+        self.setMarkProps()
+
+
+    # init and set methods
+    #
+    def initVars(self,lcol,lsty,lthk,msym,mcol,msiz,mthk,verb):
+        self.lcol=lcol
+        self.lsty=lsty
+        self.lthk=lthk
+        self.msym=msym
+        self.mcol=mcol
+        self.msiz=msiz
+        self.mthk=mthk
+        self.verb=verb
+
+        
+    def initProps(self,fts):
+
+        ge=self._ge
+        # always clip the plots
+        #
+        ge.getGxinfo()
+        self.clipplot="set clip %f %f %f %f"%(ge.plotxl,ge.plotxr,ge.plotyb,ge.plotyt)
+
+        taus=fts.keys()
+        taus.sort()
+
+        self.taus=taus
+
+        self.platlons={}
+        self.pvmax={}
+        self.ppmin={}
+        self.pdvmax={}
+        self.pvmaxflg={}
+
+        self.xys={}
+        self.lineprop={}
+        self.markprop={}
+
+        otaus=[]
+        
+        n=0
+        for tau in taus:
+
+            try:
+                plat=fts[tau][0]
+                plon=fts[tau][1]
+            except:
+                print 'EEE gXplotTcFt plat exception: ',tau
+                continue
+
+            if(plon == None): continue
+
+            landfrac=self.getLF(plat,plon)
+            if(self.doland == 0 and landfrac > self.maxlandFrac): continue
+
+            otaus.append(tau)
+            
+            try:    vmax=fts[tau][2]
+            except: vmax=None
+            
+            try:    pmin=fts[tau][3]
+            except: pmin=None
+            
+            try:    dvmax=fts[tau][4]
+            except: dvmax=None
+            
+            try:     vmaxflg=fts[tau][5]
+            except:  vmaxflg=0
+
+            if(not(self.dovmaxflg)): vmaxflg=0
+
+            if(self.verb): print 'eeeeeeeeeeeeeeeeeee',tau,plat,plon,vmax,pmin,dvmax,vmaxflg
+            
+            self.platlons[tau]=(plat,plon)
+            self.pvmax[tau]=vmax
+            self.ppmin[tau]=pmin
+            self.pdvmax[tau]=dvmax
+            self.pvmaxflg[tau]=vmaxflg
+
+            self._cmd('q w2xy %f %f'%(plon,plat))
+            self.xys[tau]=([float(self._cmd.rw(1,3)),float(self._cmd.rw(1,6))])
+
+            n=n+1
+
+        self.taus=otaus
+        self.otimes=otaus
+
+
+    def setLineProps(self):
+
+        for tau in self.taus:
+            try:
+                dvmax=self.pdvmax[tau]
+                vmaxflg=self.pvmaxflg[tau]
+                self.setSegCol(tau,dvmax,vmaxflg)
+            except:
+                continue
+
+
+    def setMarkProps(self):
+        
+        for tau in self.taus:
+            ftsiz=self.msiz
+            ftsym=self.msym
+            ftcol=self.mcol
+            ftthk=self.mthk
+
+            self.markprop[tau]=(ftsym,ftsiz,ftcol,ftthk)
+
+
+        
+    def setPcutcols(self):
+        
+        pcuts=[-25,-20,-15,-10,-5,0,5,  10,  15,   20, 25]
+        pcols=[41,43, 45, 47, 49,15,15, 29,  27,  25,  23,  21]
+        pcols=[49,47, 45, 43, 41,15,15, 21,  23,  25,  27,  29]
+
+        pcutsvmax=[  25,  35,  50,  65,  75,  85,  95,  105,  120]
+        pcolsvmax=[15,  21,  22,  23,  24,  25,  26,  27,   28,  29]
+
+        self.pcuts=pcuts
+        self.pcols=pcols
+        self._ge.setShades(pcuts,pcols)
+
+    
+    def setSegCol(self,tau,dvmax,vmaxflg):
+
+        if(self.lcol == -1 or self.lcol == -2):
+            olcoldef=75
+            olthkdef=4
+            olsty=self.lsty
+            if(dvmax != None):
+                if(vmaxflg == 1): olcol=self._ge.getShadeCol(dvmax) ; olthk=6
+                elif(vmaxflg == 0): olcol=olcoldef ; olthk=olthkdef
+                elif(vmaxflg == -1): olcol=self._ge.getShadeCol(dvmax) ; olthk=5
+            else:
+                olcol=olcoldef
+                olthk=olthkdef
+        else:
+            olcol=self.lcol
+            olsty=self.lsty
+            olthk=self.lthk
+
+        self.lineprop[tau]=(olcol,olsty,olthk)
+
+
+    def cbarn(self,sf=1.0,vert=1,side=None):
+
+        self._cmd("set clip 0 %6.3f 0 %6.3f"%(self._ge.pagex,self._ge.pagey))
+        cb=cbarn(self._ga,self._ge,vert=vert,side=side,sf=sf)
+
+ 
+    def setGradsData(self,tdtg,
+                     dttime=None,
+                     tname='fcvmax',
+                     platlons=None,
+                     tdir='/tmp',
+                     undef=1e20,
+                     maxtau=None,
+                     ):
+    
+        cpath="%s/%s.%s.ctl"%(tdir,tname,tdtg)
+        opath="%s/%s.%s.dat"%(tdir,tname,tdtg)
+        
+        bgtime=dtg2gtime(tdtg)
+        if(maxtau != None):
+            tottime=maxtau
+        else:
+            tottime=self.otimes[-1]-self.otimes[0]
+
+        if(len(self.otimes) > 1 and dttime == None):
+            dttime=self.otimes[1]-self.otimes[0]
+            
+        nt=int(tottime/dttime)+1
+        
+        if(platlons == None):
+            (rlat,rlon)=self.platlons[self.otimes[0]]
+        else:
+            (rlat,rlon)=platlons
+        
+        ctl="""dset %s
+title %s
+undef %10.0e
+xdef 1  levels %6.1f
+ydef 1  levels %5.1f
+zdef 1  levels 1013
+tdef %d linear %s %dhr
+vars 1
+fvm 0 0 %s
+endvars"""%(opath,tname,undef,rlon,rlat,
+            nt,bgtime,dttime,
+            tname)
+        
+        MF.WriteString2Path(ctl,cpath)
+
+        stnid='btvmax01'
+        stndt=0.0
+        
+        oB=open(opath,'wb')
+        
+        for n in range(0,int(tottime/dttime)+1):
+            otime=n*dttime
+            if(otime in self.otimes): ovmax=self.pvmax[otime]
+            else:                     ovmax=undef
+            
+            # -- 20180520 - case with aid not having Vmax
+            #
+            if(ovmax < 0.0): ovmax=undef
+            stnrec = struct.pack('1f',ovmax)
+            oB.write(stnrec)
+        
+        oB.close()
+        
+
+
+
+    
+class gXplotTcFtVmax(gXplotTcFt):
+
+
+    def set(self,
+            fts,lcol=-1,lsty=1,lthk=7,
+            msym=3,mcol=3,msiz=0.05,mthk=5,
+            dovmaxflg=1,
+            doland=0,
+            verb=0,
+            quiet=0,
+            ):
+        
+        self.dovmaxflg=dovmaxflg
+        self.doland=doland
+
+        self.initLF()
+        self.initVars(lcol,lsty,lthk,msym,mcol,msiz,mthk,verb)
+        self.setPcutcols()
+        self.initProps(fts)
+        self.setLineProps()
+        self.setMarkProps()
+
+
+    def setLineProps(self):
+
+        for tau in self.taus:
+            vmax=self.pvmax[tau]
+            self.setSegCol(tau,vmax)
+
+    def setPcutcols(self):
+        
+        pcuts=[  25,  35,  50,  65,  90,  120]
+        pcols=[15,   7,   4,  3,    2,   14,   2]
+
+        self.pcuts=pcuts
+        self.pcols=pcols
+        self._ge.setShades(pcuts,pcols)
+
+    
+    def setSegCol(self,tau,vmax):
+
+        if(vmax != None and self.lcol == -1):
+            if(vmax >= 65.0): olcol=self._ge.getShadeCol(vmax) ; olthk=6
+            else: olcol=self._ge.getShadeCol(vmax) ; olthk=5
+            olsty=self.lsty
+        else:
+            olcol=self.lcol
+            olsty=self.lsty
+            olthk=self.lthk
+            
+        self.lineprop[tau]=(olcol,olsty,olthk)
+
+    
+class gXpolyCircle(MFbase):
+
+    def __init__(self,ga,ge,cmd):
+
+        self._ga=ga
+        self._cmd=cmd
+        self._ge=ge
+
+
+    def set(self,clat,clon,radii,
+            dtheta=10,
+            dodisplay=0,
+            hemiDir=None,
+            ):
+        
+        from tcbase import rumltlg
+
+        self.clat=clat
+        self.clon=clon
+
+        self.platlons=[]
+        dtau=12.0
+        spdc=radii/dtau
+        
+
+        for theta in range(0,360+1,dtheta):
+            (plat,plon)=rumltlg(theta,spdc,dtau,clat,clon)
+            self.platlons.append([plat,plon])
+
+        if(dodisplay):
+            self._cmd('set cmax -1000')
+            self._cmd('d lat')
+
+        self.xys=[]
+        for (plat,plon) in self.platlons:
+            if(plat == None): continue
+            self._cmd('q w2xy %f %f'%(plon,plat))
+            self.xys.append([float(self._ga.rword(1,3)),float(self._ga.rword(1,6))])
+
+        if(hemiDir != None):
+            self.xysh=[]
+            for theta in [hemiDir,hemiDir+180]:
+                (plat,plon)=rumltlg(theta,spdc,dtau,clat,clon)
+                if(plat == None): continue
+                self._cmd('q w2xy %f %f'%(plon,plat))
+                self.xysh.append([float(self._ga.rword(1,3)),float(self._ga.rword(1,6))])
+
+
+
+    def fill(self,lcol=1):
+
+        self._cmd("set line %d"%(lcol))
+        pcmd='draw polyf '
+
+        for (x,y) in self.xys:
+            pcmd=pcmd+"%6.3f %6.3f"%(x,y)
+
+        print pcmd
+        self._cmd(pcmd)
+
+        
+    def border(self,lcol=1,lsty=1,lthk=5):
+
+        self._cmd("set line %d %d %d"%(lcol,lsty,lthk))
+        
+        for n in range(1,len(self.xys)):
+            (x0,y0)=self.xys[n-1]
+            (x1,y1)=self.xys[n]
+            
+            cmd="draw line %6.3f %6.3f %6.3f %6.3f"%(x0,y0,x1,y1)
+            self._cmd(cmd)
+
+    def hemiline(self,hemidir,lcol=1,lsty=1,lthk=5):
+
+        self._cmd("set line %d %d %d"%(lcol,lsty,lthk))
+
+        for n in range(1,len(self.xysh)):
+            (x0,y0)=self.xysh[n-1]
+            (x1,y1)=self.xysh[n]
+            
+            cmd="draw line %6.3f %6.3f %6.3f %6.3f"%(x0,y0,x1,y1)
+            self._cmd(cmd)
+
+class gXarrow(MFbase):
+
+    def __init__(self,ga,ge,cmd):
+
+        self._ga=ga
+        self._cmd=cmd
+        self._ge=ge
+
+
+    def set(self,latc,lonc,len,dir,
+            arrang=30.0,
+            arrscl=0.20,
+            lab=None,labopt=None,
+            dodisplay=0,
+            verb=0,
+            ):
+        
+        from tcbase import rumltlg
+
+        self.len=len
+        self.dir=dir
+
+        self.lab=lab
+        self.labopt=labopt
+
+        self._cmd('q w2xy %f %f'%(lonc,latc))
+
+        x=float(self._ga.rword(1,3))
+        y=float(self._ga.rword(1,6))
+
+        dd=deg2rad*dir
+        arrlen=len*arrscl
+
+        xl=sin(dd)*len
+        yl=cos(dd)*len
+
+        da1=(dir+arrang)*deg2rad
+        da2=(dir-arrang)*deg2rad
+        
+        xa1=sin(da1)*arrlen
+        ya1=cos(da1)*arrlen
+        
+        xa2=sin(da2)*arrlen
+        ya2=cos(da2)*arrlen
+        
+        xa1=x+xl-xa1
+        ya1=y+yl-ya1
+        
+        xa2=x+xl-xa2
+        ya2=y+yl-ya2
+        
+        x1=x+xl
+        y1=y+yl
+
+        if(verb):
+            print 'arrow: '
+            print '            x,y: ',x,y
+            print '          x1,y1: ',x1,y1
+            print 'xa1,ya1,xa2,ya2: ',xa1,ya1,xa2,ya2
+            
+        self.x=x
+        self.y=y
+        self.x1=x1
+        self.y1=y1
+        self.xa1=xa1
+        self.ya1=ya1
+        self.xa2=xa2
+        self.ya2=ya2
+
+        return
+
+
+    def draw(self,lcol=1,lsty=1,lthk=5,doblackout=0,doblackin=0):
+
+        # -- set outside black
+        #
+        if(doblackout):
+            self._cmd("set line %d %d %d"%(0,lsty,20))
+            pcmd="draw line %f %f %f %f"%(self.x1,self.y1,self.xa1,self.ya1) ; self._cmd(pcmd)
+            pcmd="draw line %f %f %f %f"%(self.x1,self.y1,self.xa2,self.ya2) ; self._cmd(pcmd)
+            pcmd="draw line %f %f %f %f"%(self.x,self.y,self.x1,self.y1)     ; self._cmd(pcmd)
+
+        # -- draw the arrow
+        #
+        self._cmd("set line %d %d %d"%(lcol,lsty,lthk))
+        pcmd="draw line %f %f %f %f"%(self.x1,self.y1,self.xa1,self.ya1) ; self._cmd(pcmd)
+        pcmd="draw line %f %f %f %f"%(self.x1,self.y1,self.xa2,self.ya2) ; self._cmd(pcmd)
+        pcmd="draw line %f %f %f %f"%(self.x,self.y,self.x1,self.y1)     ; self._cmd(pcmd)
+
+        # -- set inside black
+        #
+        if(doblackin):
+            self._cmd("set line %d %d %d"%(0,lsty,3))
+            pcmd="draw line %f %f %f %f"%(self.x1,self.y1,self.xa1,self.ya1) ; self._cmd(pcmd)
+            pcmd="draw line %f %f %f %f"%(self.x1,self.y1,self.xa2,self.ya2) ; self._cmd(pcmd)
+            pcmd="draw line %f %f %f %f"%(self.x,self.y,self.x1,self.y1)     ; self._cmd(pcmd)
+
+
+
+class gXcbarn(MFbase):
+
+
+    def __init__(self,ga,ge):
+
+        self._cmd=ga
+        self._ge=ge
+
+
+    def draw(self,
+                 sf=1.0,
+                 vert=-1,
+                 side=None,
+                 xmid=None,
+                 ymid=None,
+                 sfstr=1.0,
+                 pcuts=None,
+                 pcols=None,
+                 quiet=0,
+                 ):
+
+        ge=self._ge
+        
+        ge.getGxinfo()
+
+        if(pcuts != None and pcols != None):
+            ge.setShades(pcuts,pcols)
+
+        # -- check if ge has colbar -- 20130816 -- not sure why I did this
+        # -- 20150311 -- because ge.setShades adds colbar var to ge.
+        #
+        elif(hasattr(ge,'colbar')):
+            print 'III(ga2.gXcbarn.ge.setShades: ',ge.colbar
+            None    
+        else:
+            # -- get shades if not set above adds ge.colbar
+            ge.getShades()
+
+
+        xsiz= ge.pagex
+        ysiz= ge.pagey
+        ylo=  ge.plotyb
+        yhi=  ge.plotyt
+        xhi=  ge.plotxr
+        xlo=  ge.plotxl
+        xd= xsiz-xhi
+
+        ylolim=0.6*sf
+        xdlim1=1.0*sf
+        xdlim2=1.5*sf  
+        barsf=0.8*sf
+        yoffset=0.3*sf
+        stroff=0.05*sf
+        strxsiz=0.12*sf*sfstr
+        strysiz=0.13*sf*sfstr
+
+        if(ylo < ylolim and xd < xdlim1):
+            print "Not enough room in plot for a colorbar"
+            return
+        
+        #
+        #  Decide if horizontal or vertical color bar
+        #  and set up constants.
+        #
+        cnum=ge.nshades
+        #
+        #	logic for setting the bar orientation with user overides
+        #
+        if(ylo<ylolim or xd>xdlim1):
+            vchk=1
+        else:
+            vchk=0
+
+        if(vert >= 0): vchk=vert
+
+        if(vchk == 1):
+            
+            #
+            #	vertical bar
+            #
+            if(xmid == None): xmid=xhi+xd/2
+            if(side == 'left'):
+                xmid=0.0+xlo*0.35
+            
+            xwid=0.2*sf
+            ywid=0.5*sf
+            xl=xmid-xwid/2
+            xr=xl+xwid
+
+            if(ywid*cnum > ysiz*barsf): 
+                ywid=ysiz*barsf/cnum
+                
+            if(ymid == None): ymid=ysiz/2
+            yb=ymid-ywid*cnum/2
+            self._cmd('set string 1 l 5 0')
+            vert=1
+            
+        else:
+            
+            #
+            #	horizontal bar
+            #
+            
+            ywid=0.2*sf
+            xwid=0.6*sf
+
+            if(ymid == None): ymid=ylo/2-ywid/2
+            yt=ymid+yoffset
+            yb=ymid
+            if(xmid == None): xmid=xsiz/2
+            if(xwid*cnum > xsiz*barsf):
+                xwid=xsiz*barsf/cnum
+            xl=xmid-xwid*cnum/2
+            self._cmd('set string 1 tc 5 0')
+            vert=0
+
+        #
+        #  Plot colorbar
+        #
+
+
+        self._cmd("set strsiz %f %f"%(strxsiz,strysiz))
+
+        num=0
+        while (num<cnum):
+
+            (col,minval,maxval)=ge.colbar[num]
+            hi="%g"%(maxval)
+
+            if(vert): 
+                yt=yb+ywid
+            else :
+                xr=xl+xwid
+                yt=yb+ywid
+
+            if(num != 0 and  num != cnum-1):
+                self._cmd('set line %d'%(col))
+                self._cmd('draw recf %f %f %f %f'%(xl,yb,xr,yt))
+
+                self._cmd('set line 1 1 5')
+                self._cmd('draw rec %f %f %f %f'%(xl,yb,xr,yt))
+                
+            if(num < cnum-1):
+                if(vert): 
+                    xp=xr+stroff
+                    self._cmd('draw string %f %f %s'%(xp,yt,hi))
+                else:
+                    yp=yb-stroff
+                    self._cmd('draw string %f %f %s'%(xr,yp,hi))
+
+
+            if(num == 0):
+
+                if(vert):
+                    xm=(xl+xr)*0.5
+
+                    self._cmd('set line %d'%(col))
+                    self._cmd('draw polyf %f %f %f %f %f %f %f %f'%(xl,yt,xm,yb,xr,yt,xl,yt))
+                    
+                    self._cmd('set line 1 1 5')
+                    self._cmd('draw line %f %f %f %f'%(xl,yt,xm,yb))
+                    self._cmd('draw line %f %f %f %f'%(xm,yb,xr,yt))
+                    self._cmd('draw line %f %f %f %f'%(xr,yt,xl,yt))
+
+                else:
+
+                    ym=(yb+yt)*0.5
+                    self._cmd('set line %d'%(col))
+                    self._cmd('draw polyf %f %f %f %f %f %f %f %f'%(xl,ym,xr,yb,xr,yt,xl,ym))
+                    
+                    self._cmd('set line 1 1 5')
+                    self._cmd('draw line %f %f %f %f'%(xl,ym,xr,yb))
+                    self._cmd('draw line %f %f %f %f'%(xr,yb,xr,yt))
+                    self._cmd('draw line %f %f %f %f'%(xr,yt,xl,ym))
+
+            if(num < cnum-1):
+                if(vert):
+                    xp=xr+stroff 
+                    self._cmd('draw string %f %f %s'%(xp,yt,hi))
+                else:
+                    yp=yb-stroff
+                    self._cmd('draw string %f %f %s'%(xr,yp,hi))
+
+            if(num == cnum-1 ):
+
+                if( vert):
+
+                    self._cmd('set line %d'%(col))
+                    self._cmd('draw polyf %f %f %f %f %f %f %f %f'%(xl,yb,xm,yt,xr,yb,xl,yb))
+
+                    self._cmd('set line 1 1 5')
+                    self._cmd('draw line %f %f %f %f'%(xl,yb,xm,yt))
+                    self._cmd('draw line %f %f %f %f'%(xm,yt,xr,yb))
+                    self._cmd('draw line %f %f %f %f'%(xr,yb,xl,yb))
+
+                else:
+
+                    self._cmd('set line %d'%(col))
+                    self._cmd('draw polyf %f %f %f %f %f %f %f %f'%(xr,ym,xl,yb,xl,yt,xr,ym))
+                    
+                    self._cmd('set line 1 1 5')
+                    self._cmd('draw line %f %f %f %f'%(xr,ym,xl,yb))
+                    self._cmd('draw line %f %f %f %f'%(xl,yb,xl,yt))
+                    self._cmd('draw line %f %f %f %f'%(xl,yt,xr,ym))
+
+            
+            if(num<cnum-1):
+                if(vert): 
+                    xp=xr+stroff
+                    self._cmd('draw string %f %f %s'%(xp,yt,hi))
+                else:
+                    yp=yb-stroff
+                    self._cmd('draw string %f %f %s'%(xr,yp,hi))
+
+            num=num+1
+            if(vert):
+                yb=yt
+            else:
+                xl=xr
+
+
+
+
+class gXtitle(MFbase):
+
+
+    def __init__(self,ga,ge):
+
+        self._cmd=ga
+        self._ge=ge
+        self.set()
+
+
+    def set(self,
+            scale=1.0,
+            t1col=1,
+            t2col=1,
+            t3col=1,
+            t2scale=0.80,
+            t3scale=0.70,
+            t1thk=5,
+            t2thk=5,
+            t3thk=5,
+            ):
+        
+        self.scale=scale
+        self.t1col=t1col
+        self.t2col=t2col
+        self.t3col=t3col
+        self.t2scale=t2scale
+        self.t3scale=t3scale
+        self.t1thk=t1thk
+        self.t2thk=t2thk
+        self.t3thk=t3thk
+        
+    def clip(self):
+
+        self._ge.getGxinfo()
+        self._cmd("set clip 0 %6.3f 0 %6.3f"%(self._ge.pagex,self._ge.pagey))
+        
+
+    def top(self,t1,t2=None,t3=None,doclip=1):
+
+        if(doclip): self.clip()
+        #
+        # if scale < 0.0 then make size of t2 = t1
+        #
+        if(self.scale < 0.0):
+            scale=scale*-1.0
+            t2scale=1.05
+            t3scale=1.05
+        else:
+            t2scale=self.t2scale
+            t3scale=self.t3scale
+            
+        xr=self._ge.pagex
+        xl=0
+        y1=self._ge.pagey-0.15
+        xs=(xr-xl)*0.5
+        tsiz=0.15
+        
+        tsiz=tsiz*self.scale
+        t2siz=tsiz*t2scale
+        y2=self._ge.pagey-0.15-tsiz*1.5
+
+        t3siz=tsiz*t3scale
+        y3=y2-tsiz*1.5
+
+        self._cmd('set strsiz %f'%(tsiz))
+        self._cmd('set string %d c %d 0'%(self.t1col,self.t1thk))
+        self._cmd('draw string %f %f %s'%(xs,y1,t1))
+
+        if(t2 != None):
+            self._cmd('set string %d c %d 0'%(self.t2col,self.t2thk))
+            self._cmd('set strsiz %f'%(t2siz))
+            self._cmd('draw string %f %f `0%s`0'%(xs,y2,t2))
+
+        if(t3 != None):
+            self._cmd('set string %d c %d 0'%(self.t3col,self.t3thk))
+            self._cmd('set strsiz %f'%(t3siz))
+            self._cmd('draw string %f %f `0%s`0'%(xs,y3,t3))
+
+        
+
+
+    def bottom(self,t1,t2=None,sopt=None,doclip=1):
+
+        if(doclip): self.clip()
+        
+        #
+        # if scale < 0.0 then make size of t2 = t1
+        #
+        if(self.scale < 0.0):
+            scale=scale*-1.0
+            t2scale=1.05
+        else:
+            t2scale=0.80
+            
+        xr=self._ge.pagex
+        xl=0
+        y1=0.22
+        y2=0.08
+        
+        if(sopt == 'left'):
+            xs=0.2
+        elif(sopt == 'right'):
+            xs=0.2
+            xs=xr-xs
+        else:
+            xs=xl+(xr-xl)*0.5
+
+        tsiz=0.09
+        
+        tsiz=tsiz*self.scale
+        t2siz=tsiz*t2scale
+
+        self._cmd('set strsiz %f'%(tsiz))
+        if(sopt == 'left'):
+            self._cmd('set string %d l 6 0'%(self.t1col))
+        elif(sopt == 'right'):
+            self._cmd('set string %d r 6 0'%(self.t1col))
+        else:
+            self._cmd('set string %d c 6 0'%(self.t1col))
+        self._cmd('draw string %f %f %s'%(xs,y1,t1))
+
+        if(t2 != None):
+            self._cmd('set strsiz %f'%(t2siz))
+            if(sopt == 'left'):
+                self._cmd('set string %d l 8 0'%(self.t2col))
+            elif(sopt == 'right'):
+                self._cmd('set string %d r 8 0'%(self.t2col))
+            else:
+                self._cmd('set string %d c 8 0'%(self.t2col))
+
+            self._cmd('draw string %f %f `0%s`0'%(xs,y2,t2))
+
+
+    def plot(self,t1,t2=None,sopt=None,doclip=1):
+
+        if(doclip): self.clip()
+        
+        #
+        # if scale < 0.0 then make size of t2 = t1
+        #
+        if(self.scale < 0.0):
+            scale=scale*-1.0
+            t2scale=1.05
+        else:
+            scale=self.scale
+            t2scale=0.80
+
+        dxs=self._ge.plotxl
+        dyt=self._ge.pagey-self._ge.plotyt
+
+        tsiz=0.09
+        xoff=0.75
+
+        tsiz=tsiz*scale
+        t2siz=tsiz*t2scale
+
+        yoffscale=1.3
+        yoff=tsiz*yoffscale
+
+        xs=self._ge.plotxl-xoff-tsiz
+        xm=(self._ge.plotxl+self._ge.plotxr)*0.5
+        ys=(self._ge.plotyb+self._ge.plotyb)*0.5
+
+        angle=90
+        tt=tsiz+yoff
+
+        if(tt < dyt):
+            xs=xm
+            ys=self._ge.plotyt+yoff+tsiz/2 
+            angle=0
+
+        y2=ys
+        y1=ys
+        if(t2 != None):
+            y1=ys+yoff
+            y2=y1-yoff*yoffscale
+            
+        #self._cmd('set line 0')
+        self._cmd('set strsiz %f'%(tsiz))
+        if(sopt == 'left'):
+            self._cmd('set string %d l 6 0'%(self.t1col))
+        elif(sopt == 'right'):
+            self._cmd('set string %d r 6 0'%(self.t1col))
+        else:
+            self._cmd('set string %d c 6 0'%(self.t1col))
+        self._cmd('draw string %f %f %s'%(xs,y1,t1))
+
+        if(t2 != None):
+            self._cmd('set strsiz %f'%(t2siz))
+            if(sopt == 'left'):
+                self._cmd('set string %d l 8 0'%(self.t2col))
+            elif(sopt == 'right'):
+                self._cmd('set string %d r 8 0'%(self.t2col))
+            else:
+                self._cmd('set string %d c 8 0'%(self.t2col))
+
+            self._cmd('draw string %f %f `0%s`0'%(xs,y2,t2))
+
+
+class gxout(MFbase):
+
+    def __init__(self,ga):
+        self._cmd=ga.cmd
+        
+    def shaded(self):
+        self._cmd('set gxout shaded')
+
+    def contour(self):
+        self._cmd('set gxout contour')
+
+class gxset(MFbase):
+
+    def __init__(self,ga):
+        self._cmd=ga.cmd
+        self._rl=ga.rline
+        self._nL=ga.nLines
+        
+
+    def latlon(self,lat1=-90,lat2=90,lon1=0,lon2=360):
+        self._cmd("set lat %f %f"%(lat1,lat2))
+        self._cmd("set lon %f %f"%(lon1,lon2))
+        
+    def latlonA(self,area):
+        self._cmd("set lat %f %f"%(area.lat1,area.lat2))
+        self._cmd("set lon %f %f"%(area.lon1,area.lon2))        
+        
+    def lev(self,lev1=500,lev2=None):
+        if(lev2 == None): lev2=lev1
+        self._cmd("set lev %f %f"%(lev1,lev2))
+
+
+    def time(self,time=None):
+
+        if(time == None):
+            self._cmd('q time')
+            card=self._rl(self._nL)
+
+        self._cmd("set time %s"%(time))
+
+
+    def dtg(self,dtg=None):
+
+        name="%s.%s"%(self.__module__,'gxset.dtg')
+        if(dtg == None):
+            print 'WWW dtg must be set in: ',name
+        else:
+            gtime=dtg2gtime(dtg)
+            if(gtime != None):
+                self._cmd("set time %s"%(gtime))
+            else:
+                print 'EEE invalid dtg in: ',name
+
+class gxGxout(MFbase):
+
+    def __init__(self,g1s,g1v,g2s,g2v,stn):
+        self.g1s=g1s
+        self.g1v=g1v
+        self.g2s=g2s
+        self.g2v=g2v
+        self.stn=stn
+        
+            
+
+
+class gxget(MFbase):
+
+
+    def __init__(self,ga,verb=0):
+        self._cmd=ga.cmd
+        self.ga=ga
+        self.verb=verb
+        
+
+    def scorr(self,var1,var2,area):
+
+        expr="scorr(%s,%s,lon=%s,lon=%s,lat=%s,lat=%s)"%(var1,var2,
+                                                         area.lon1,area.lon2,
+                                                         area.lat1,area.lat2)
+
+        self.ga('d %s'%(expr))
+        scorr=float(self.ga.rword(1,4))
+        if(self.verb): print 'scorr: ',scorr
+
+        return(scorr)
+
+    def asum(self,var1,area):
+
+        expr="asum(%s,lon=%s,lon=%s,lat=%s,lat=%s)"%(var1,
+                                                     area.lon1,area.lon2,
+                                                     area.lat1,area.lat2)
+        self.ga('d %s'%(expr))
+        asum=float(self.ga.rword(1,4))
+        if(self.verb): print 'asum:    ',asum 
+        return(asum)
+
+    def aave(self,var1,area):
+
+        expr="aave(%s,lon=%s,lon=%s,lat=%s,lat=%s)"%(var1,
+                                                     area.lon1,area.lon2,
+                                                     area.lat1,area.lat2)
+        self.ga('d %s'%(expr))
+        aave=float(self.ga.rword(1,4))
+        if(self.verb): print 'aave:    ',aave
+        return(aave)
+
+
+    def asumg(self,var1,area):
+
+        expr="asumg(%s,lon=%s,lon=%s,lat=%s,lat=%s)"%(var1,
+                                                     area.lon1,area.lon2,
+                                                     area.lat1,area.lat2)
+
+        self.ga('d %s'%(expr))
+        asumg=float(self.ga.rword(1,4))
+        if(self.verb): print 'asumg:   ',asumg
+
+        return(asumg)
+
+
+    def stat(self,expr):
+
+        # get the current graphics and rank of display grid
+        rank=len(self.ga.coords().shape)
+        cgxout=self.gxout()
+
+        # set gxout to stats; display expression
+        self.ga.cmdQ('set gxout stat')
+        self.ga.cmdQ('d %s'%(expr))
+        cards=self.ga.Lines
+        stats=gxStats(cards)
+
+        # reset the original gxout
+        if(rank == 1): self.ga.cmdQ('set gxout %s'%(cgxout.g1s))
+        if(rank == 2): self.ga.cmdQ('set gxout %s'%(cgxout.g2s))
+
+        return(stats)
+
+
+    def gxout(self):
+        
+        self.ga.cmdQ('q gxout')
+        g1s=self.ga.rword(2,6)
+        g1v=self.ga.rword(3,6)
+        g2s=self.ga.rword(4,6)
+        g2v=self.ga.rword(5,6)
+        stn=self.ga.rword(6,4)
+        gxout=gxGxout(g1s,g1v,g2s,g2v,stn)
+        return(gxout)
+        
+        
+
+class gxdefvar(MFbase):
+
+    def __init__(self,ga):
+        self._cmd=ga.cmd
+        self._rl=ga.rline
+        self._nL=ga.nLines
+
+    def var(self,var,expr):
+
+        cmd="""%s=%s"""%(var,expr)
+        self._cmd(cmd)
+        return(cmd)
+        
+    def re2(self,var,expr,dx=2.5,dy=2.5,method='ba'):
+
+        cmd="""%s=re2(%s,%f,%f,%s)"""%(var,expr,dx,dy,method)
+        self._cmd(cmd)
+        return(cmd)
+        
+    def regrid(self,var,expr,reargs):
+
+        cmd="""%s=re(%s,%s)"""%(var,expr,reargs)
+        self._cmd(cmd)
+        return(cmd)
+
+
+    def dregrid(self,var,expr,reargs):
+
+        cmd="""d re(%s,%s)"""%(expr,reargs)
+        self._cmd(cmd)
+        return(cmd)
+
+    def dregrid0(self,var,expr,reargs,undef=0):
+
+        cmd="""d const(re(%s,%s),%s,-u)"""%(expr,reargs,str(undef))
+        self._cmd(cmd)
+        return(cmd)
+
+    def dundef0(self,expr,undef=0):
+
+        cmd="""d const(%s,%s,-u)"""%(expr,str(undef))
+        self._cmd(cmd)
+        return(cmd)
+
+        
+    def writef77(self,var):
+        
+        cmd="""set gxout fwrite
+d %s"""%(var)
+        self._cmd(cmd)
+
+        # set gxout to standard
+        self._cmd('set gxout contour')
+        
+        
+    def sh_filt(self,var,expr,nwaves=20):
+
+        cmd="""%s=sh_filt(%s,%d)"""%(var,expr,nwaves)
+        self._cmd(cmd)
+        
+        
+        
+
+
+
+
+
         
         
 MF=MFutils()

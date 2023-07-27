@@ -135,17 +135,54 @@ if(stmopt != None):
 
     # -- get the sBt for the stmids
     #
-    sbtvarAll={}
+    sbtvarNN={}
+    sbtvarDev={}
+    sbtvarNonDev={}
+     
     overb=verb
     for stmid in stmids:
         (sbtType,sbtVar)=sbt.getSbtVar(stmid,doDtgKey=1,verb=overb)
-        sbtvarAll[stmid]=sbtVar
+        #print 'sss',stmid,sbtType
+        if(sbtType == 'NONdev'):
+            sbtvarNonDev[stmid]=sbtVar
+        elif(sbtType == 'DEV'):
+            sbtvarDev[stmid]=sbtVar
+        else:
+            sbtvarNN[stmid]=sbtVar
+            nNN=nNN+1
     
+    nonStmids=sbtvarNonDev.keys()
+    nonStmids.sort()
+        
+    devStmids=sbtvarDev.keys()
+    devStmids.sort()
+    
+    NNStmids=sbtvarNN.keys()
+    NNStmids.sort()
+        
+    nDev=len(devStmids)
+    nNon=len(nonStmids)
+    nNN=len(NNStmids)
+    
+    # -- stats
+    #
+    if(nNon != 0 and nNN != 0 and nDev != 0):
+        rDev=nDev*1.0/float(nNon+nDev)
+        rDev=rDev*100.0
+        rDevN=nNN*1.0/float(nNon+nNN)
+        rDevN=rDevN*100.0
+        pMissN=rDevN-rDev
+        print 'NNN for stmopt: ',stmopt,'nNN: ',nNN,'nDev',nDev,'nNon',nNon
+        print 'DDD rFormDev: %3.0f%%  NNM rFormN: %3.0f%%  nMiss: %4.1f%%'%(rDev,rDevN,pMissN)
+        
+        
     # -- ls only
     
     if(doLs != None):
         ovars=doLs.split(',')
-        rc=sbt.lsGaVarAllDict(sbtvarAll,ovars,sMdesc)
+        #rc=sbt.lsGaVarAllDict(sbtvarDev,ovars,sMdesc)
+        #rc=sbt.makeGaStnVar(sbtvarNN, ovars, sMdesc,verb=verb)
+        rc=sbt.makeGaStnVar(sbtvarDev, ovars, sMdesc,verb=verb)
         MF.dTimer('ALL')
         sys.exit()
         
