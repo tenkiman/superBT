@@ -20,11 +20,21 @@ def getSrcSumTxt(stmid,verb=0):
     
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
     basin=sbtB1id2Basin[b1id]
+    if(basin == 'cpac'): basin='epac'
     stmid3=stm1id.split('.')[0].upper()
     tdir="%s/%s/%s"%(sbtSrcDir,year,basin)
+    
+    # -- avoid looking for 9x in one basin that goes into another...
+    #
+    tdir="%s/%s/*"%(sbtSrcDir,year)
     mmask="%s/%s*/*-sum.txt"%(tdir,stmid3)
     mmaskBT="%s/%s*/*-sum-BT.txt"%(tdir,stmid3)
     mmaskMBT="%s/%s*/*-sum-MBT.txt"%(tdir,stmid3)
+
+    if(verb):
+        print 'tdir:  ',tdir,basin,basinNN
+        print 'mmask: ',mmask
+
     mpaths=glob.glob(mmask)
     mpathBTs=glob.glob(mmaskBT)
     mpathMBTs=glob.glob(mmaskMBT)
@@ -109,7 +119,7 @@ def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,verb=0):
         stmspd=float(stmspd)
         stmidNN=tt[4]
 
-        (sumPath,mpathBT)=getSrcSumTxt(stmid)
+        (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=verb)
         
         if(sumPath != None):
             
@@ -160,6 +170,8 @@ def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,verb=0):
             
         else:
             print 'EEEEE---whoa---no -SUM.txt for stmid: ',stmid,'WTF?'
+            (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=1)
+            
             sys.exit()
             
          

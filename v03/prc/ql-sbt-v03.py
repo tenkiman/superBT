@@ -15,14 +15,14 @@ sMdesc=lsSbtVars()
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 # command line setup
 #
-def lsQcSpd(ocdev,lcdev):
+def lsQcSpd(ocdev,lcdev,doprint=1):
     
     ocardsDev=ocdev.values()
     ocardsDev.sort()
     
     for ocard in ocardsDev:
         if(verb): print
-        print ocard
+        if(doprint): print ocard
         tt=ocard.split()
         stmid=tt[0]
         stmspd=tt[1]
@@ -34,7 +34,7 @@ def lsQcSpd(ocdev,lcdev):
             for card in lcdev[stmid]:
                 print card
         
-    return
+    return(ocardsDev)
 
 def getSrcSumTxt(stmid,verb=0):
     
@@ -88,7 +88,8 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a',' stmid target'],
-            'bspdmax':          ['M:',30.0,'f',' stmid target'],
+            'bspdmax':          ['m:',30.0,'f',' stmid target'],
+            'doqcPlot':         ['Q',0,1,'run qp-sbt-v03.py'],
             'doX':              ['X',0,1,'run md2a -X'],
         }
 
@@ -127,6 +128,7 @@ ocardsAll=[]
 
 if(stmopt != None):
     
+    invPath="../inv/qcspd-%i-%s.txt"%(int(bspdmax),stmopt)
     stmids=[]
     stmopts=getStmopts(stmopt)
     for stmopt in stmopts:
@@ -178,9 +180,6 @@ if(stmopt != None):
         rDevN=nNN*1.0/float(nNon+nNN)
         rDevN=rDevN*100.0
         pMissN=rDevN-rDev
-        print 'NNN for stmopt: ',stmopt,'nNN: ',nNN,'nDev',nDev,'nNon',nNon
-        print 'DDD rFormDev: %3.0f%%  NNM rFormN: %3.0f%%  nMiss: %4.1f%%'%(rDev,rDevN,pMissN)
-        print 'SSS bspdmax: %4.0f'%(bspdmax)
         
     # -- ls only
     
@@ -188,9 +187,62 @@ if(stmopt != None):
     (ocnon,lcnon)=sbt.chkSpdDirGaVarAllDict(sbtvarType,sbtvarNonDev,stmidNNDev,bspdmax=bspdmax)
     (ocNN,lcNN)=sbt.chkSpdDirGaVarAllDict(sbtvarType,sbtvarNN,stmidNNDev,bspdmax=bspdmax)
     
-    rc=lsQcSpd(ocdev,lcdev)
-    rc=lsQcSpd(ocnon,lcnon)
-    rc=lsQcSpd(ocNN,lcNN)
+    nqDev=len(ocdev)
+    nqNon=len(ocnon)
+    nqNN=len(ocNN)
+    
+    nqAll=nqDev+nqNon+nqNN
+    nAll=nNN+nNon+nDev
+    pnq=(float(nqAll)/float(nAll))*100.0
+    
+    # -- stats
+    #
+    if(nNon != 0 and nNN != 0 and nDev != 0):
+
+        rDev=nDev*1.0/float(nNon+nDev)
+        rDev=rDev*100.0
+
+        rDevN=nNN*1.0/float(nNon+nNN)
+        rDevN=rDevN*100.0
+
+        pMissN=rDevN-rDev
+
+        nqDev=len(ocdev)
+        nqNon=len(ocnon)
+        nqNN=len(ocNN)
+        
+        nqAll=nqDev+nqNon+nqNN
+        nAll=nNN+nNon+nDev
+
+        pnq=(float(nqAll)/float(nAll))*100.0
+
+        ncard='NNN   stmopt: %s'%(stmopt)
+        ocardsAll.append(ncard)
+        ncard='NNN      nNN: %4i   nDev: %4i   nNon: %4i'%(nNN,nDev,nNon)
+        ocardsAll.append(ncard)
+        ncard='NNN     nAll: %4i  nqAll: %4i    %%nq: %4.1f%%'%(nAll,nqAll,pnq)
+        ocardsAll.append(ncard)
+        ncard='NNN    nqDev: %4i  nqNon: %4i   nqNN: %4i'%(nqDev,nqNon,nqNN)
+        ocardsAll.append(ncard)
+        dcard='DDD rFormDev: %3.0f%% rFormN: %3.0f%%  nMiss: %4.1f%%'%(rDev,rDevN,pMissN)
+        ocardsAll.append(dcard)
+        
+    scard='SSS  bspdmax: %4.0f'%(bspdmax)
+    ocardsAll.append(scard)
+
+    ocardsAll=ocardsAll+lsQcSpd(ocdev,lcdev,doprint=0)
+    ocardsAll=ocardsAll+lsQcSpd(ocnon,lcnon,doprint=0)
+    ocardsAll=ocardsAll+lsQcSpd(ocNN,lcNN,doprint=0)
+
+    invPath=invPath.replace(',','-')
+    print 'invPath: ',invPath
+    rc=WriteList(ocardsAll,invPath)
+    for ocard in ocardsAll:
+        print ocard
+
+    if(doqcPlot):
+        cmd="qp-sbt-v03.py -S %s"%(stmopt)
+        runcmd(cmd,ropt)
 
     MF.dTimer('ALL')
 

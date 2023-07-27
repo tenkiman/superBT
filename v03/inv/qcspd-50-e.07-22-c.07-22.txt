@@ -1,0 +1,37 @@
+NNN   stmopt: e.07-22,c.07-22
+NNN      nNN:  325   nDev:  325   nNon:  216
+NNN     nAll:  866  nqAll:   31    %nq:  3.6%
+NNN    nqDev:   12  nqNon:   19   nqNN:    0
+DDD rFormDev:  60% rFormN:  60%  nMiss:  0.0%
+SSS  bspdmax:   50
+a0e.2010   52 DEV    NN: 01e.2010 Posit: 2010052512 N-1:  10.9  271.7 N:   13.0  266.8  SPD:    52  dir:   294
+a3c.2015   60 DEV    NN: 03c.2015 Posit: 2015081806 N-1:   7.5  216.8 N:    7.7  210.7  SPD:    60  dir:   272
+a3e.2018   65 DEV    NN: 04e.2018 Posit: 2018061212 N-1:  15.9  261.0 N:   10.2  264.2  SPD:    65  dir:   151
+a4e.2007   52 DEV    NN: 04e.2007 Posit: 2007070700 N-1:   9.2  255.6 N:   11.7  251.0  SPD:    52  dir:   299
+a9e.2019   58 DEV    NN: 06e.2019 Posit: 2019072518 N-1:  12.0  250.0 N:   10.0  244.5  SPD:    58  dir:   250
+b1e.2018  108 DEV    NN: 08e.2018 Posit: 2018072500 N-1:  10.0  260.0 N:   11.6  249.1  SPD:   108  dir:   278
+b2e.2013   57 DEV    NN: 03c.2013 Posit: 2013080906 N-1:  10.6  249.6 N:   11.0  243.8  SPD:    57  dir:   274
+b9e.2019   65 DEV    NN: 12e.2019 Posit: 2019090318 N-1:  15.0  230.0 N:   14.3  223.3  SPD:    65  dir:   264
+c2e.2008 -999 DEV    NN: sngleton Posit: 2008100100 N-1:  15.7  245.3 N:   15.7  245.3  SPD:  -999  dir:   360
+c3e.2014   66 DEV    NN: 14e.2014 Posit: 2014090112 N-1:  13.7  257.0 N:   14.0  250.2  SPD:    66  dir:   273
+c4e.2009   61 DEV    NN: 03c.2009 Posit: 2009101800 N-1:  10.4  214.6 N:    9.2  208.5  SPD:    61  dir:   259
+c7e.2012  103 DEV    NN: 16e.2012 Posit: 2012101106 N-1:  12.0  268.8 N:   11.6  258.3  SPD:   103  dir:   268
+a0c.2007   61 NONdev NN:          Posit: 2007070718 N-1:   9.5  233.3 N:    8.0  227.3  SPD:    61  dir:   256
+a0c.2014 -999 NONdev NN: sngleton Posit: 2014050812 N-1:  16.3  256.0 N:   16.3  256.0  SPD:  -999  dir:   360
+a1c.2014   52 NONdev NN:          Posit: 2014080318 N-1:  14.6  189.4 N:   14.0  184.1  SPD:    52  dir:   263
+a1e.2009   56 NONdev NN:          Posit: 2009060812 N-1:  10.6  244.5 N:    9.1  239.0  SPD:    56  dir:   255
+a3c.2014 -999 NONdev NN: sngleton Posit: 2014062818 N-1:  14.2  254.8 N:   14.2  254.8  SPD:  -999  dir:   360
+a4c.2014 -999 NONdev NN: sngleton Posit: 2014071612 N-1:  11.3  219.9 N:   11.3  219.9  SPD:  -999  dir:   360
+a5c.2018   51 NONdev NN:          Posit: 2018082406 N-1:  14.0  210.0 N:   18.6  207.8  SPD:    51  dir:   335
+a6c.2008   67 NONdev NN:          Posit: 2008092506 N-1:   7.6  198.0 N:    9.6  204.5  SPD:    67  dir:    73
+a6c.2009   61 NONdev NN:          Posit: 2009101800 N-1:  10.4  214.6 N:    9.2  208.5  SPD:    61  dir:   259
+a6e.2007 -999 NONdev NN: sngleton Posit: 2007071018 N-1:  11.7  248.7 N:   11.7  248.7  SPD:  -999  dir:   360
+a6e.2017 -999 NONdev NN: sngleton Posit: 2017070800 N-1:  12.0  258.8 N:   12.0  258.8  SPD:  -999  dir:   360
+b1e.2017 -999 NONdev NN: sngleton Posit: 2017072900 N-1:   9.2  270.7 N:    9.2  270.7  SPD:  -999  dir:   360
+b3e.2015   56 NONdev NN:          Posit: 2015080700 N-1:  10.1  236.9 N:   12.0  242.3  SPD:    56  dir:    70
+b4e.2016   54 NONdev NN:          Posit: 2016081112 N-1:  14.5  239.9 N:   12.0  235.0  SPD:    54  dir:   242
+c1e.2018 -999 NONdev NN: sngleton Posit: 2018082712 N-1:  11.2  254.4 N:   11.2  254.4  SPD:  -999  dir:   360
+c3e.2020 -999 NONdev NN: sngleton Posit: 2020081512 N-1:  22.2  245.9 N:   22.2  245.9  SPD:  -999  dir:   360
+c5e.2019   59 NONdev NN:          Posit: 2019100106 N-1:  16.0  234.5 N:   14.0  240.3  SPD:    59  dir:   110
+c6e.2019   60 NONdev NN:          Posit: 2019101018 N-1:  15.0  252.0 N:   13.5  246.0  SPD:    60  dir:   256
+c8e.2014 -999 NONdev NN: sngleton Posit: 2014091518 N-1:  11.3  223.0 N:   11.3  223.0  SPD:  -999  dir:   360
