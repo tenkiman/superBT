@@ -36,36 +36,6 @@ def lsQcSpd(ocdev,lcdev,doprint=1):
         
     return(ocardsDev)
 
-def getSrcSumTxt(stmid,verb=0):
-    
-    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
-    basin=sbtB1id2Basin[b1id]
-    stmid3=stm1id.split('.')[0].upper()
-    tdir="%s/%s/%s"%(sbtSrcDir,year,basin)
-    mmask="%s/%s*/*-sum.txt"%(tdir,stmid3)
-    mmaskBT="%s/%s*/*-sum-BT.txt"%(tdir,stmid3)
-    mmaskMBT="%s/%s*/*-sum-MBT.txt"%(tdir,stmid3)
-    mpaths=glob.glob(mmask)
-    mpathBTs=glob.glob(mmaskBT)
-    mpathMBTs=glob.glob(mmaskMBT)
-    
-    if(len(mpaths) == 1): mpath=mpaths[0]
-    else: mpath=None
-
-    if(len(mpathMBTs) == 1): 
-        mpathBT=mpathMBTs[0]
-        print 'III -- using bd2 for mpathBT: ',mpathBT
-    elif(len(mpathBTs) == 1): 
-        mpathBT=mpathBTs[0]
-    else: 
-        mpathBT=None
-    
-    if(verb):
-        print mpath
-        print mpathBT
-    
-    return(mpath,mpathBT)
-    
 
 class TmtrkCmdLine(CmdLine):
 
@@ -128,7 +98,7 @@ ocardsAll=[]
 
 if(stmopt != None):
     
-    invPath="../inv/qcspd-%i-%s.txt"%(int(bspdmax),stmopt)
+    invPath="../qcinv/qcspd-%i-%s.txt"%(int(bspdmax),stmopt)
     stmids=[]
     stmopts=getStmopts(stmopt)
     for stmopt in stmopts:
@@ -237,11 +207,12 @@ if(stmopt != None):
     invPath=invPath.replace(',','-')
     print 'invPath: ',invPath
     rc=WriteList(ocardsAll,invPath)
+    
     for ocard in ocardsAll:
         print ocard
 
     if(doqcPlot):
-        cmd="qp-sbt-v03.py -S %s"%(stmopt)
+        cmd="qp-sbt-v03.py -S %s -m %4.0f"%(stmopt,bspdmax)
         runcmd(cmd,ropt)
 
     MF.dTimer('ALL')

@@ -8,6 +8,7 @@
 #MF=MFutils()
 
 #from M2 import setModel2
+import mf
 
 from subprocess import Popen, PIPE, STDOUT,check_output
 import os,sys,glob,time,getopt,copy,getpass,struct,errno
@@ -2714,7 +2715,65 @@ def add2000(y):
 # -- MMMMMMMMMM -- tcVM methods
 #
 
+def scaledTC(vmax):
 
+
+    stc=0.0
+    if(vmax >= tdmin and vmax < tsmin):
+        stc=0.25
+
+    elif(vmax >= tsmin and vmax < tymin):
+        dvmax=(vmax-tsmin)/(tymin-tsmin)
+        stc=0.5+dvmax*0.5
+
+    elif(vmax >= tymin and vmax < stymin):
+        dvmax=(vmax-tymin)/(stymin-tymin)
+        stc=1.0+dvmax*1.0
+
+    elif(vmax >= stymin):
+        stc=2.0
+
+    return(stc)
+
+
+
+def aceTC(vmax):
+    if(vmax >= tsmin):
+        ace=vmax*vmax
+    else:
+        ace=0.0
+    return(ace)
+
+
+def TCType(vmax):
+
+    if(vmax <= 34): tctype='TD'
+    if(vmax >= 35 and vmax <= 63): tctype='TS'
+    if(vmax >= 64 and vmax <= 129): tctype='TY'
+    if(vmax >= 130): tctype='STY'
+    return(tctype)
+
+
+def getSaffirSimpsonCat(vmax):
+
+    if(vmax < 35.0): cat='TD'
+    if(vmax >= 35.0 and vmax < 65.0): cat='TS'
+    if(vmax >= 64.0 and vmax <= 82.0): cat='HU1'
+    if(vmax >= 83.0 and vmax <= 95.0): cat='HU2'
+    if(vmax >= 96.0 and vmax <= 113.0): cat='HU3'
+    if(vmax >= 114.0 and vmax <= 135.0): cat='HU4'
+    if(vmax > 135.0): cat='HU5'
+    return(cat)
+
+
+def getTyphoonCat(vmax):
+
+    if(vmax < 35.0): cat='td'
+    if(vmax >= 35.0 and vmax < 65.0): cat='ts'
+    if(vmax >= 64.0 and vmax < 100.0): cat='ty'
+    if(vmax >= 100.0 and vmax < 135.0): cat='Mty'
+    if(vmax >= 135.0): cat='STY'
+    return(cat)
 
 
 
@@ -3060,7 +3119,6 @@ def aceTC(vmax):
 
 def get9Xnum(stmid):
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid,convert9x=1)
-    print 'sss',snum
     
 
 def Is9X(stmid):
@@ -3736,19 +3794,24 @@ def getStmopts(stmopt):
     
     ss=stmopt.split('.')
     bb=ss[0].split(',')
+    yy=ss[1]
+
+    if(len(yy) == 2): yy='20%s'%(yy)
 
     stmopts=[]
     
     if(ss[0] == 'all'):
         for b1 in ['w','e','c','l','i','h']:
-            stm="%s.%s"%(b1,ss[1])
+            stm="%s.%s"%(b1,yy)
             stmopts.append(stm)
 
     elif(len(bb) > 1):
         for b1 in bb:
-            stm="%s.%s"%(b1,ss[1])
+            stm="%s.%s"%(b1,yy)
             stmopts.append(stm)
     else:
+        bb=ss[0]
+        stmopt="%s.%s"%(bb,yy)
         stmopts.append(stmopt)
         
     return(stmopts)
@@ -5325,9 +5388,224 @@ def dtg2gtime(dtg):
     return(gtime)
 
 
-# -- CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+def getSrcSumTxt(stmid,verb=0):
+    
+    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+    basin=sbtB1id2Basin[b1id]
+    if(basin == 'cpac'): basin='epac'
+    stmid3=stm1id.split('.')[0].upper()
+    tdir="%s/%s/%s"%(sbtSrcDir,year,basin)
+    
+    # -- avoid looking for 9x in one basin that goes into another...
+    #
+    tdir="%s/%s/*"%(sbtSrcDir,year)
+    mmask="%s/%s*/*-sum.txt"%(tdir,stmid3)
+    mmaskBT="%s/%s*/*-sum-BT.txt"%(tdir,stmid3)
+    mmaskMBT="%s/%s*/*-sum-MBT.txt"%(tdir,stmid3)
 
+    if(verb):
+        print 'tdir:     ',tdir,basin
+        print 'mmask:    ',mmask
+        print 'mmaskBT:  ',mmaskBT
+        print 'mmaskMBT: ',mmaskMBT
 
+    mpaths=glob.glob(mmask)
+    mpathBTs=glob.glob(mmaskBT)
+    mpathMBTs=glob.glob(mmaskMBT)
+    
+    if(len(mpaths) == 1): mpath=mpaths[0]
+    else: mpath=None
+
+    if(len(mpathMBTs) == 1): 
+        mpathBT=mpathMBTs[0]
+        print 'III -- using bd2 for mpathBT: ',mpathBT
+    elif(len(mpathBTs) == 1): 
+        mpathBT=mpathBTs[0]
+    else: 
+        mpathBT=None
+    
+    if(verb):
+        print mpath
+        print mpathBT
+    
+    return(mpath,mpathBT)
+    
+def addQCspd2sum(sumPath,spdCards,verb=0):
+
+    qcSpd={}
+    for card in spdCards:
+        ndtg=6
+        if(find(card,'NONdev')): ndtg=5
+        tt=card.split()
+        spd=tt[1].strip()
+        dtg=tt[ndtg].strip()
+        if(verb): print 'qcSpd ',dtg,spd
+        qcSpd[dtg]=int(spd)
+    # -- read the cards
+    #
+    icards=open(sumPath).readlines()
+    
+    # -- convert to hash
+    #
+    iDict=cards2dict(icards)
+    
+    # -- add qc speed
+    #
+    qcards=[]
+    
+    dtgs=iDict.keys()
+    dtgs.sort()
+    
+    for dtg in dtgs:
+        try:
+            qs=qcSpd[dtg]
+        except:
+            qs=-999
+
+        qcard="%4i %s"%(qs,iDict[dtg])
+        qcard=qcard[0:-10]
+        qcards.append(qcard)
+        
+    return(icards,qcards)
+
+def cards2dict(icards):
+    
+    oDict={}
+    for icard in icards:
+        tt=icard.split(',')
+        dtg=tt[0].strip()
+        oDict[dtg]=icard
+        
+    return(oDict)
+
+def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,override=0,verb=0):    
+
+    xgrads='grads'
+    xgrads=setXgrads(useX11=0,useStandard=0)
+    zoomfact=None
+    background='black'
+    dtgopt=None
+    ddtg=6
+    dtg0012=0
+
+    ocardsDev=ocdev.values()
+    ocardsDev.sort()
+
+    for ocard in ocardsDev:
+        if(verb): print
+        print ocard
+        tt=ocard.split()
+        stmid=tt[0]
+        stmspd=tt[1]
+        stmspd=float(stmspd)
+        stmidNN=tt[4]
+
+        (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=verb)
+
+        if(sumPath != None):
+            
+            qcSumPath=sumPath.replace('.txt','.txt-QC%i'%(int(bspdmax)))
+            savSumPath=sumPath.replace('.txt','.txt-SAV')
+            rc=getStmids4SumPath(sumPath)
+            (stmDev,ostm1id,sname,ostm9xid,basin,sdir)=rc
+            stm1id=ostm1id.lower()
+            stm9xid=ostm9xid.lower()
+            if(stmDev == 'nonDev'): 
+                stm1id=ostm9xid.lower()
+                stm9xid=ostm9xid.lower()
+            elif(stmDev == 'DEV'):
+                stm1id=ostm9xid.lower()
+                stm9xid=ostm1id.lower()
+
+            spdCards=lcdev[stmid]
+            (icards,qcards)=addQCspd2sum(sumPath,spdCards,verb=verb)
+            
+            rc=WriteList(qcards,qcSumPath,verb=verb)
+            if(verb):
+                print 'long ls for: ',stmid
+                for card in lcdev[stmid]:
+                    print card
+                
+            dom3=0
+            md3=MD3trk(icards,stm1id,stm9xid,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+            dtgs=md3.dtgs
+            btrk=md3.trk
+            basin=md3.basin
+            
+            # -- make the plot
+            MF.sTimer('trkplot')
+            tP=TcBtTrkPlot(stm1id,btrk,dobt=0,
+                           Window=0,Bin=xgrads,
+                           zoomfact=zoomfact,override=override,
+                           background=background,dopbasin=0,
+                           dtgopt=dtgopt,pltdir=sdir)
+        
+            tP.PlotTrk(dtg0012=dtg0012,ddtg=ddtg)
+            MF.dTimer('trkplot')
+            if(doX): tP.xvPlot(zfact=0.75)
+            
+            if(doMeld):
+                cmd="meld %s %s"%(sumPath,qcSumPath)
+                runcmd(cmd)
+                
+            
+        else:
+            print 'EEEEE---whoa---no -SUM.txt for stmid: ',stmid,'WTF?'
+            (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=1)
+            
+            sys.exit()
+            
+         
+        if(verb):
+            print 'long ls for: ',stmid
+            for card in lcdev[stmid]:
+                print card
+                
+    return
+        
+def mergeMd3Cvs(mpath,mpathBT,opath,verb=0):
+
+    mcards={}
+    mcardsbt={}
+    btcards=[]
+
+    ocards=[]
+    
+    cards=open(mpath).readlines()
+    if(mpathBT != None):
+        btcards=open(mpathBT).readlines()
+        
+    for card in cards:
+        tt=card.split(",")
+        dtg=tt[0]
+        stmid=tt[1]
+        mcards[dtg]=card
+        
+    for btcard in btcards:
+        tt=btcard.split(',')
+        dtg=tt[0]
+        stmid=tt[1]
+        mcards[dtg]=btcard
+        mcardsbt[dtg]=btcard
+        
+        
+    dtgs=mcards.keys()
+    dtgs.sort()
+
+    for dtg in dtgs:
+        mcard=mcards[dtg]
+        ocards.append(mcard)
+        try:
+            mcardb=mcardsbt[dtg]
+        except:
+            None
+            mcardb='nnnooobbbttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'
+            
+        if(verb):
+            print 'dtg: ',dtg,'  M:',mcard[0:50],'  B:',mcardb[0:50]
+        
+    return(ocards)
+        
 def lsSbtVars(verb=0):
 
     # -- meta
@@ -5352,6 +5630,11 @@ def lsSbtVars(verb=0):
             
     return(sMdesc)
  
+
+
+# -- CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+
 
 class MFbase():
 
@@ -15523,6 +15806,70 @@ return
                               latMaxNN=35.0,
                               verb=0):
         
+        def getSpdSbt(stmid):
+            
+            (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=verb)
+            stmidNN=stmid
+            scards=open(sumPath).readlines()
+            posits={}
+            for scard in scards:
+                tt=scard.split(',')
+                dtg=tt[0].strip()
+                blat=float(tt[3].strip())
+                blon=float(tt[4].strip())
+                posits[dtg]=(blat,blon)
+
+            dtgs=posits.keys()
+            dtgs.sort()
+            
+            ndtgs=len(dtgs)
+
+            for n in range(0,ndtgs):
+
+                odtg=dtgs[n]
+                if(ndtgs == 1):
+                    dtgm1=dtgs[0]
+                    dtg=dtgs[0]
+                elif(n == 0 and ndtgs > 1):
+                    dtgm1=dtgs[0]
+                    dtg=dtgs[n+1]
+                else:
+                    dtgm1=dtgs[n-1]
+                    dtg=dtgs[n]
+
+                blat=posits[dtg][0]
+                blatm1=posits[dtgm1][0]
+
+                blon=posits[dtg][1]
+                blonm1=posits[dtgm1][1]
+
+                (bdir,bspd,bu,bv)=rumhdsp(blatm1, blonm1,blat,blon,6)
+
+                obspd=bspd
+                if(ndtgs == 1):
+                    bspd=999.
+                    obspd=-999.
+                    stmidNN='sngleton'
+                card="%s %4.0f %-6s NN: %s"%(stmid,obspd,sbttype,stmidNN)
+                card="%s Posit: %s"%(card,odtg)
+                card="%s N-1: %5.1f %6.1f N:  %5.1f %6.1f "%(card,blatm1,blonm1,blat,blon)
+                card="%s SPD: %5.0f  dir: %5.0f"%(card,obspd,bdir)
+                appendDictList(lsCards, stmid, card)
+                
+                stest9X=(bspd > bspdmax)
+                stestNN=(bspd > bspdmaxNN)
+                ltest=(abs(blat) < latMaxNN)
+                ntest=(sbttype == 'NN')
+                
+                dtest=(stest9X and not(ntest))
+                btest=(stestNN and ltest and ntest)
+                if(dtest or btest):
+                    try:
+                        oCards[stmid]=card
+                    except:
+                        None
+            
+        
         # -- all only varies in x
         #
 
@@ -15556,7 +15903,7 @@ return
                 else:
                     dtgm1=dtgs[n-1]
                     dtg=dtgs[n]
-                    
+
                 dovar="'%s'"%('blat')
                 blat=vvals[dtg][dovar]
                 blatm1=vvals[dtgm1][dovar]
@@ -15583,13 +15930,20 @@ return
                 ntest=(sbttype == 'NN')
                 
                 dtest=(stest9X and not(ntest))
-                btest=(stestNN and ltest and ntest)
+                btest=(stest9X and stestNN and ltest and ntest)
+                spdTest=0
                 if(dtest or btest):
                     try:
                         oCards[stmid]=card
+                        spdTest=1
                     except:
                         None
-                
+                        
+                # -- update with sumPath if NN storm
+                #
+                if(spdTest and IsNN(stmid)):
+                    print 'NNNUUU -- update with sumPath',stmid
+                    rc=getSpdSbt(stmid)
         
         return(oCards,lsCards)
                 
@@ -15615,6 +15969,7 @@ class TcBtTrkPlot(DataSet):
                  #xsize=1600,
                  docp2Dropbox=1,
                  pngmethod='printim',
+                 plttag=None,
                  dopbasin=0,
                  verb=0,override=0):
 
@@ -15652,6 +16007,7 @@ class TcBtTrkPlot(DataSet):
         self.verb=verb
         self.docp2Dropbox=docp2Dropbox
         
+        self.plttag=plttag
         self.pngmethod=pngmethod
         if(find(background,'w') or find(background,'W')): background='white'
         if(find(background,'b') or find(background,'B')): background='black'
@@ -15676,10 +16032,15 @@ class TcBtTrkPlot(DataSet):
         
         (clat1,clon1)=Rlatlon2Clatlon(self.lat1,self.lon1,dozero=1,dotens=0)
         (clat2,clon2)=Rlatlon2Clatlon(self.lat2,self.lon2,dozero=1,dotens=0)
+        
         trkstmname=self.stmid
         if(stmopt != None):
             trkstmname=stmopt
-        self.pltfile="trkplt.%s.%s.%s-%s.%s-%s.png"%(trkstmname,self.model,clat1,clat2,clon1,clon2)
+        if(self.plttag != None):
+            self.pltfile="trkplt-%s.%s.%s.%s-%s.%s-%s.png"%(self.plttag,trkstmname,self.model,clat1,clat2,clon1,clon2)
+        else:
+            self.pltfile="trkplt.%s.%s.%s-%s.%s-%s.png"%(trkstmname,self.model,clat1,clat2,clon1,clon2)
+
         self.pltpath="%s/%s"%(self.pltdir,self.pltfile)
         self.trkplotpath=self.pltpath
 
@@ -15753,7 +16114,13 @@ class TcBtTrkPlot(DataSet):
         dtgs.sort()
 
         for dtg in dtgs:
-            bt=self.btrk[dtg].gettrk()
+            try:
+                # -- md2
+                bt=self.btrk[dtg].gettrk()
+            except:
+                # -- md3
+                bt=self.btrk[dtg]
+                
             self.btrk[dtg]=bt
             alats.append(bt[0])
             alons.append(bt[1])
@@ -16081,8 +16448,8 @@ class TcBtTrkPlot(DataSet):
         
 
 
-    def xvPlot(self,ropt='',zfact=1.25):
-        cmd="xv  -geometry %ix%i-50+50 %s"%(self.xsize*zfact,self.ysize*zfact,self.pltpath)
+    def xvPlot(self,ropt='',xb='-50',yb='+50',zfact=1.25):
+        cmd="xv  -geometry %ix%i%s%s %s"%(self.xsize*zfact,self.ysize*zfact,xb,yb,self.pltpath)
         #cmd="xv %s"%(self.pltpath)
         MF.runcmd(cmd,ropt)
 
@@ -17168,12 +17535,20 @@ class gXplotTcBt(MFbase):
             if(len(bts[dtg]) == 8):
                 tccode=bts[dtg][-2].lower()
                 wncode=bts[dtg][-1].lower()
+
+            # -- md3 btrk from cards
+            #
+
+            elif(len(bts[dtg]) == 20):
+                tccode=bts[dtg][8].lower()
+                wncode=bts[dtg][9].lower()
                 
             # -- md3 from -SUM.txt
             #
             elif(len(bts[dtg]) == 22):
                 tccode=bts[dtg][6].lower()
                 wncode=bts[dtg][7].lower()
+            
             else:
                 tccode='xx'
                 wncode='xx'

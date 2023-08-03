@@ -16,172 +16,6 @@ sMdesc=lsSbtVars()
 # command line setup
 #
 
-def getSrcSumTxt(stmid,verb=0):
-    
-    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
-    basin=sbtB1id2Basin[b1id]
-    if(basin == 'cpac'): basin='epac'
-    stmid3=stm1id.split('.')[0].upper()
-    tdir="%s/%s/%s"%(sbtSrcDir,year,basin)
-    
-    # -- avoid looking for 9x in one basin that goes into another...
-    #
-    tdir="%s/%s/*"%(sbtSrcDir,year)
-    mmask="%s/%s*/*-sum.txt"%(tdir,stmid3)
-    mmaskBT="%s/%s*/*-sum-BT.txt"%(tdir,stmid3)
-    mmaskMBT="%s/%s*/*-sum-MBT.txt"%(tdir,stmid3)
-
-    if(verb):
-        print 'tdir:  ',tdir,basin,basinNN
-        print 'mmask: ',mmask
-
-    mpaths=glob.glob(mmask)
-    mpathBTs=glob.glob(mmaskBT)
-    mpathMBTs=glob.glob(mmaskMBT)
-    
-    if(len(mpaths) == 1): mpath=mpaths[0]
-    else: mpath=None
-
-    if(len(mpathMBTs) == 1): 
-        mpathBT=mpathMBTs[0]
-        print 'III -- using bd2 for mpathBT: ',mpathBT
-    elif(len(mpathBTs) == 1): 
-        mpathBT=mpathBTs[0]
-    else: 
-        mpathBT=None
-    
-    if(verb):
-        print mpath
-        print mpathBT
-    
-    return(mpath,mpathBT)
-    
-def addQCspd2sum(sumPath,spdCards,verb=0):
-
-    qcSpd={}
-    for card in spdCards:
-        ndtg=6
-        if(find(card,'NONdev')): ndtg=5
-        tt=card.split()
-        spd=tt[1].strip()
-        dtg=tt[ndtg].strip()
-        if(verb): print 'sss',dtg,spd
-        qcSpd[dtg]=int(spd)
-        
-    # -- read the cards
-    #
-    icards=open(sumPath).readlines()
-    
-    # -- convert to hash
-    #
-    iDict=cards2dict(icards)
-    
-    # -- add qc speed
-    #
-    qcards=[]
-    
-    dtgs=iDict.keys()
-    dtgs.sort()
-    
-    for dtg in dtgs:
-        try:
-            qs=qcSpd[dtg]
-        except:
-            qs=-999
-
-        qcard="%4i %s"%(qs,iDict[dtg])
-        qcard=qcard[0:-10]
-        qcards.append(qcard)
-        
-    return(icards,qcards)
-
-def cards2dict(icards):
-    
-    oDict={}
-    for icard in icards:
-        tt=icard.split(',')
-        dtg=tt[0].strip()
-        oDict[dtg]=icard
-        
-    return(oDict)
-
-def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,verb=0):    
-
-    ocardsDev=ocdev.values()
-    ocardsDev.sort()
-
-    for ocard in ocardsDev:
-        if(verb): print
-        print ocard
-        tt=ocard.split()
-        stmid=tt[0]
-        stmspd=tt[1]
-        stmspd=float(stmspd)
-        stmidNN=tt[4]
-
-        (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=verb)
-        
-        if(sumPath != None):
-            
-            qcSumPath=sumPath.replace('.txt','.txt-QC%i'%(int(bspdmax)))
-            savSumPath=sumPath.replace('.txt','.txt-SAV')
-            rc=getStmids4SumPath(sumPath)
-            (stmDev,ostm1id,sname,ostm9xid,basin,sdir)=rc
-            stm1id=ostm1id.lower()
-            stm9xid=ostm9xid.lower()
-            if(stmDev == 'nonDev'): 
-                stm1id=ostm9xid.lower()
-                stm9xid=ostm9xid.lower()
-            elif(stmDev == 'DEV'):
-                stm1id=ostm9xid.lower()
-                stm9xid=ostm1id.lower()
-
-            spdCards=lcdev[stmid]
-            (icards,qcards)=addQCspd2sum(sumPath,spdCards,verb=verb)
-            
-            rc=WriteList(qcards,qcSumPath,verb=verb)
-            if(verb):
-                print 'long ls for: ',stmid
-                for card in lcdev[stmid]:
-                    print card
-                
-            dom3=0
-            md3=MD3trk(icards,stm1id,stm9xid,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
-            dtgs=md3.dtgs
-            btrk=md3.trk
-            basin=md3.basin
-            
-            # -- make the plot
-            MF.sTimer('trkplot')
-            tP=TcBtTrkPlot(stm1id,btrk,dobt=0,
-                           Window=0,Bin=xgrads,
-                           zoomfact=zoomfact,override=override,
-                           background=background,dopbasin=0,
-                           dtgopt=dtgopt,pltdir=sdir)
-        
-            tP.PlotTrk(dtg0012=dtg0012,ddtg=ddtg)
-            MF.dTimer('trkplot')
-            if(doX): tP.xvPlot(zfact=0.75)
-            
-            if(doMeld):
-                cmd="meld %s %s"%(sumPath,qcSumPath)
-                runcmd(cmd)
-                
-            
-        else:
-            print 'EEEEE---whoa---no -SUM.txt for stmid: ',stmid,'WTF?'
-            (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=1)
-            
-            sys.exit()
-            
-         
-        if(verb):
-            print 'long ls for: ',stmid
-            for card in lcdev[stmid]:
-                print card
-                
-    return
-        
 
 class TmtrkCmdLine(CmdLine):
 
@@ -242,13 +76,6 @@ dobt=0
 stmids=None
 ocardsAll=[]
 
-xgrads='grads'
-xgrads=setXgrads(useX11=0,useStandard=0)
-zoomfact=None
-background='black'
-dtgopt=None
-ddtg=6
-dtg0012=0
 
 if(stmopt != None):
     
@@ -317,9 +144,6 @@ if(stmopt != None):
     rc=qcSpd(ocdev,lcdev,bspdmax,doMeld=doMeld,doX=doX,verb=verb)
     rc=qcSpd(ocnon,lcnon,bspdmax,doMeld=doMeld,doX=doX,verb=verb)
     rc=qcSpd(ocNN,lcNN,bspdmax,doMeld=doMeld,doX=doX,verb=verb)
-
-    sys.exit()
-
 
     MF.dTimer('ALL')
 

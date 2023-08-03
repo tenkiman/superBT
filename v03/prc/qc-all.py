@@ -21,9 +21,13 @@ bmaxs=[
 ropt='norun'
 ropt=''
 
+MF.sTimer('qc-ALL')
+
 for bmax in bmaxs:
     for bopt in bopts:
-        cmd='ql-sbt-v03.py -S %s -m %i'%(bopt,bmax)
+        cmd='ql-sbt-v03.py -S %s -m %i -Q'%(bopt,bmax)
         runcmd(cmd,ropt)
+        
+MF.dTimer('qc-ALL')
 
 
