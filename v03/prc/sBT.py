@@ -5388,18 +5388,21 @@ def dtg2gtime(dtg):
     return(gtime)
 
 
-def getSrcSumTxt(stmid,verb=0):
-    
+def getSrcSumTxt(stmid,qc2paths=1,verb=0):
+
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
     basin=sbtB1id2Basin[b1id]
     if(basin == 'cpac'): basin='epac'
     stmid3=stm1id.split('.')[0].upper()
+        
     tdir="%s/%s/%s"%(sbtSrcDir,year,basin)
+     
     
     # -- avoid looking for 9x in one basin that goes into another...
     #
     tdir="%s/%s/*"%(sbtSrcDir,year)
     mmask="%s/%s*/*-sum.txt"%(tdir,stmid3)
+    mmaskM2B="%s/%s*/*-sum-M2B.txt"%(tdir,stmid3)
     mmaskBT="%s/%s*/*-sum-BT.txt"%(tdir,stmid3)
     mmaskMBT="%s/%s*/*-sum-MBT.txt"%(tdir,stmid3)
 
@@ -5414,6 +5417,27 @@ def getSrcSumTxt(stmid,verb=0):
     mpathMBTs=glob.glob(mmaskMBT)
     
     if(len(mpaths) == 1): mpath=mpaths[0]
+    
+    elif(len(mpaths) == 2): 
+        # -- cases where dev 9X in different basin
+        #
+        if(qc2paths):
+            rc=raw_input("""2 mpaths for stmid: %s
+0 %s
+1 %s
+which one do you want to use? 0 | 1?"""%(stmid,mpaths[0],mpaths[1]))
+            if(rc == '0'):
+                mpath=mpaths[0]
+                print 'using: %s'%(mpaths[0])
+            elif(rc == '1'):
+                mpath=mpaths[1]
+                print 'using: %s'%(mpaths[1])
+            else:
+                print 'invalid choice...'
+                sys.exit()
+        else:
+            mpath=mpaths[0]
+            
     else: mpath=None
 
     if(len(mpathMBTs) == 1): 
@@ -5423,11 +5447,54 @@ def getSrcSumTxt(stmid,verb=0):
         mpathBT=mpathBTs[0]
     else: 
         mpathBT=None
+        
+    mpath9X=None
+    stmid9X=None
+    
+    if(mpath != None):
+        
+        rc=getStmids4SumPath(mpath)
+        (stmDev,stm1id,sname,stm9xid,basin,sdir)=rc
+        
+        # -- if NN look for 9X
+        #
+        if(stmDev == 'NN'):
+            stmid3=stm9xid.upper()[0:3]
+            mmask9X="%s/%s*/*-sum.txt"%(tdir,stmid3)
+            mpaths9X=glob.glob(mmask9X)
+            if(len(mpaths9X) == 1):
+                mpath9X=mpaths9X[0]
+                
+        elif(stmDev == 'DEV'):
+            stmid3=stm1id.upper()[0:3]
+            mmaskBT="%s/%s*/*-sum.txt"%(tdir,stmid3)
+            mpathsBT=glob.glob(mmaskBT)
+            if(len(mpathsBT) == 1):
+                mpathBT=mpathsBT[0]
+            rc=getStmids4SumPath(mpath)
+            stmid9X=rc[3]
+            mpath9X=mpath
+        
+        elif(stmDev == 'NONdev'):
+            mpathBT=None
+        else:
+            print 'EEE invalid stmDev: ',stmDev,'for stmid: ',stmid
+            sys.exit()
+        
+    else:
+        print 'EEE no sum.txt for stmid: ',stmid,'sayounara'
+        sys.exit()
+    
     
     if(verb):
-        print mpath
-        print mpathBT
+        print 'mpath:   ',mpath
+        print 'mpathBT: ',mpathBT
+        if(mpath9X != None): 
+            print 'mpath9X: ',mpath9X
+            print 'stmid9X: ',stmid9X
     
+    # -- don't handle NN & 9X together
+    #
     return(mpath,mpathBT)
     
 def addQCspd2sum(sumPath,spdCards,verb=0):
@@ -5500,7 +5567,7 @@ def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,override=0,verb=0):
         stmspd=float(stmspd)
         stmidNN=tt[4]
 
-        (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=verb)
+        (sumPath,mpathBT,mpath9X,stmid9X)=getSrcSumTxt(stmid,verb=verb)
 
         if(sumPath != None):
             
@@ -5551,7 +5618,7 @@ def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,override=0,verb=0):
             
         else:
             print 'EEEEE---whoa---no -SUM.txt for stmid: ',stmid,'WTF?'
-            (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=1)
+            (sumPath,mpathBT,mpath9X,stmid9X)=getSrcSumTxt(stmid,verb=1)
             
             sys.exit()
             
@@ -5563,7 +5630,158 @@ def qcSpd(ocdev,lcdev,bspdmax,doMeld=0,doX=0,override=0,verb=0):
                 
     return
         
-def mergeMd3Cvs(mpath,mpathBT,opath,verb=0):
+def mergeMd3CvsBT(mpath,mpathBT,opath,verb=0):
+
+    mcards={}
+    mcardsbt={}
+
+    ocards=[]
+    
+    cards=open(mpath).readlines()
+    if(mpathBT != None):
+        btcards=open(mpathBT).readlines()
+        
+    for card in cards:
+        tt=card.split(",")
+        dtg=tt[0]
+        stmid=tt[1]
+        mcards[dtg]=card
+        
+    for btcard in btcards:
+        tt=btcard.split(',')
+        dtg=tt[0]
+        stmid=tt[1]
+        mcardsbt[dtg]=btcard
+        
+    dtgs=mcards.keys()
+    dtgs.sort()
+
+    for dtg in dtgs:
+        mcard=mcards[dtg]
+
+        try:
+            mcardb=mcardsbt[dtg]
+        except:
+            mcardb=None
+            
+        if(mcardb != None):
+            omcard=mcardb
+            #omcard=mergePosit(mcard, mcardb)
+        else:
+            omcard=mcards[dtg]
+
+        ocards.append(omcard)
+            
+        if(verb):
+            
+            if(mcardb == None): ocardb='None'
+            else:               omcardb=mcardb
+            print 'dtg: ',dtg,'  M:',omcard[0:50],'  B:',omcardb[0:50]
+        
+    return(ocards)
+
+def mergeMdCvsBT(mpath,mpathBT,opath,verb=0):
+
+    mcards={}
+    mcardsbt={}
+
+    ocards=[]
+    
+    cards=open(mpath).readlines()
+    if(mpathBT != None):
+        btcards=open(mpathBT).readlines()
+        
+    for card in cards:
+        tt=card.split(",")
+        dtg=tt[0].strip()
+        stmid=tt[1].strip()
+        mcards[dtg]=card
+        
+    for btcard in btcards:
+        tt=btcard.split(',')
+        dtg=tt[0].strip()
+        stmid=tt[1].strip()
+        mcardsbt[dtg]=btcard
+        
+    dtgs=mcards.keys()
+    btdtgs=mcardsbt.keys()
+    alldtgs=dtgs+btdtgs
+    alldtgs=mf.uniq(alldtgs)
+
+    for dtg in alldtgs:
+        
+        try:
+            mcard=mcards[dtg]
+        except:
+            mcard=None
+
+        try:
+            mcardb=mcardsbt[dtg]
+        except:
+            mcardb=None
+            
+        if(mcard == None and mcardb == None):
+            print 'EEEEEEEEEEEEEEEEEE problem with mcards for dtg: ',dtg,' mpath: ',mpath
+            sys.exit()
+            
+        if(mcardb != None):
+            omcard=mcardb
+        else:
+            omcard=mcard
+
+        ocards.append(omcard)
+            
+        if(verb):
+            
+            if(mcardb == None): ocardb='None'
+            else:               omcardb=mcardb
+            print 'dtg: ',dtg,'  M:',omcard[0:50],'  B:',omcardb[0:50]
+        
+    return(ocards)
+
+
+def mergePosit(mcard,mcardb,verb=0):
+    
+    mcard=mcard.replace('\n','')
+    mcardb=mcard.replace('\n','')
+    
+    m=mcard.split(',')
+    mo=mcard.split(',')
+    
+    mb=mcardb.split(',')
+    
+    nm=len(m)
+    nmb=len(mb)
+
+    if(nm != nmb):
+        print 'problem with mcard,mcardb'
+        print 'mcard  :',nm,mcard
+        print 'mcardb :',nmb,mcardb
+        sys.exit()
+        
+    mocard=''
+    for n in range(0,nm-1):
+        #print 'n',n,mo[n],mb[n]
+        posit=(n >= 5 and n <= 12)
+        td=(n >= 23 and n <= 32)
+        if(posit or td):
+            mo[n]=mb[n]
+            
+        if(n == 5 and verb):
+            print 'nn',n,m[n],mo[n],mb[n]
+
+        mocard="%s%s,"%(mocard,mo[n])
+            
+    mocard=mocard
+    if(verb):
+        print ' mcard: ',mcard
+        print 'mocard: ',mocard
+        print 'mcardb: ',mcardb
+
+    return(mocard)
+    
+
+def mergeMd3Cvs9X(mpath,mpathBT,opath,verb=0):
 
     mcards={}
     mcardsbt={}
@@ -5585,7 +5803,6 @@ def mergeMd3Cvs(mpath,mpathBT,opath,verb=0):
         tt=btcard.split(',')
         dtg=tt[0]
         stmid=tt[1]
-        mcards[dtg]=btcard
         mcardsbt[dtg]=btcard
         
         
@@ -5594,18 +5811,68 @@ def mergeMd3Cvs(mpath,mpathBT,opath,verb=0):
 
     for dtg in dtgs:
         mcard=mcards[dtg]
-        ocards.append(mcard)
         try:
             mcardb=mcardsbt[dtg]
         except:
-            None
-            mcardb='nnnooobbbttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'
+            mcardb=None
+        
+        if(mcardb != None):
+            mcard=mergePosit(mcard,mcardb)
             
+        ocards.append(mcard)
+        
         if(verb):
-            print 'dtg: ',dtg,'  M:',mcard[0:50],'  B:',mcardb[0:50]
+            print 'dtg: ',dtg,'  M:',mcard[0:50],'  B:',mcardsbt[dtg][0:50]
         
     return(ocards)
         
+def mergeMdCvs9X(mpath,mpathBT,opath,verb=0):
+
+    mcards={}
+    mcardsbt={}
+    btcards=[]
+
+    ocards=[]
+    
+    cards=open(mpath).readlines()
+    if(mpathBT != None):
+        btcards=open(mpathBT).readlines()
+        
+    for card in cards:
+        tt=card.split(",")
+        dtg=tt[0]
+        stmid=tt[1]
+        mcards[dtg]=card
+        
+    for btcard in btcards:
+        tt=btcard.split(',')
+        dtg=tt[0]
+        stmid=tt[1]
+        mcardsbt[dtg]=btcard
+        
+        
+    dtgs=mcards.keys()
+    dtgs.sort()
+
+    for dtg in dtgs:
+        mcard=mcards[dtg]
+        try:
+            mcardb=mcardsbt[dtg]
+        except:
+            mcardb=None
+        
+        if(mcardb != None):
+            mcard=mergePosit(mcard,mcardb)
+            
+        ocards.append(mcard)
+        
+        if(verb):
+            print 'dtg: ',dtg,'  M:',mcard[0:50],'  B:',mcardsbt[dtg][0:50]
+        
+    return(ocards)
+
+
+
 def lsSbtVars(verb=0):
 
     # -- meta
@@ -15808,7 +16075,7 @@ return
         
         def getSpdSbt(stmid):
             
-            (sumPath,mpathBT)=getSrcSumTxt(stmid,verb=verb)
+            (sumPath,mpathBT,mpath9X,stmid9X)=getSrcSumTxt(stmid,verb=verb)
             stmidNN=stmid
             scards=open(sumPath).readlines()
             posits={}

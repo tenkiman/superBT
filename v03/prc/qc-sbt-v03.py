@@ -199,7 +199,7 @@ if(stmopt != None):
     
     for stmid in stmids2qc:
         
-        (sumPath,sumPathBT)=getSrcSumTxt(stmid,verb=verb)
+        (sumPath,sumPathBT,mpath9X,stmid9X)=getSrcSumTxt(stmid,verb=verb)
         if(sumPath != None):
             savSumPath=sumPath.replace('.txt','.txt-SAV')
         else:

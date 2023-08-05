@@ -1,8 +1,8 @@
 #!/usr/bin/env pythonw
 
 from sBT import *
-#from sBT import *
-#from sbt import mf
+
+sMdesc=lsSbtVars()
     
 class MdeckCmdLine(CmdLine):
 
@@ -55,6 +55,28 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
+md3=Mdeck3(doBT=0,doSumOnly=1)
+
+
+if(stmopt != None):
+    
+    stmids=[]
+    stmopts=getStmopts(stmopt)
+    for stmopt in stmopts:
+        stmids=stmids+md3.getMd3Stmids(stmopt,dobt=dobt,verb=verb)
+
+    for stmid in stmids:
+        (mpath,mpathBT,mpath9X,stmid9X)=getSrcSumTxt(stmid,verb=verb)
+
+        if(verb == 0):
+            print 'mpath:   ',mpath
+            print 'mpathBT: ',mpathBT
+            if(mpath9X != None): print 'mpath9X: ',mpath9X
+        
+        
+
+    sys.exit()
+    
 isBT=0
 isMRG=0
 isDEV=0

@@ -90,27 +90,101 @@ for year in years:
         MF.sTimer('sum-md3-%s-%s'%(basin,year))
 
         stmNNs={}
-        stm9Xs={}
+        stm9XsDev={}
+        stm9XsNon={}
+
+        lall=len(spaths)
         
         for spath in spaths:
+
             ss=spath.split('/')
-            ssum=ss[-1]
-            ssum=ssum.split('-')
+
+            sdir=ss[-1]
+            ssum=sdir.split('-')
             stmid="%s.%s"%(ssum[0],ssum[1])
             if(IsNN(stmid)):
+                
+                if(len(ssum) != 4 and len(ssum) != 5):
+                    print 'EEE: bad NN dir:',spath
+                    sys.exit()
+                    
                 stmid9x="%s.%s"%(ssum[-1],ssum[1])
-                stmNNs[stmid]=stmid9x
-                if(verb): print 'NNN',ssum,stmid,stmid9x
+                stmNNs[stmid]=(stmid9x,sdir)
+            
             elif(Is9X(stmid)):
+                
                 stmid9x=stmid
-                if(find(ssum[-2],'DEV')):
-                    if(verb): print '999',stmid9x,ssum[-2],ssum[-1]
-                    stm9Xs[stmid9x]="%s.%s"%(ssum[-1],ssum[1])
+                if(mf.find(sdir,'DEV')):
+                    if(len(ssum) != 4):
+                        print 'EEE bad 9x DEV dir',spath
+                        sys.exit()
+                    
+                    stmidNN="%s.%s"%(ssum[-1],ssum[1])
+                    stm9XsDev[stmid9x]=(stmidNN,sdir)
+                    
+                elif(find(sdir,'NON')):
+                    stm9XsNon[stmid]=(stmid,sdir)
+                    
                     
         nns=stmNNs.keys()
         nns.sort()
-        n9s=stm9Xs.keys()
-        n9s.sort()
+        lnns=len(nns)
+        
+        n9ds=stm9XsDev.keys()
+        n9ds.sort()
+        ln9ds=len(n9ds)
+        
+        n9ns=stm9XsNon.keys()
+        n9ns.sort()
+        ln9ns=len(n9ns)
+        
+        lallNN=lnns+ln9ds+ln9ns
+        if(lallNN != lall):
+            print 'EEE total number of storms not adding up'
+            sys.exit
+
+        nnn=float(lnns)
+        n9x=float(ln9ds+ln9ns)
+        
+        rdev=-99.
+        if(n9x != 0.0):
+            rdev=(nnn/n9x)*100.0
+            if(rdev > 100.0): rdev=-99.
+        
+        ncard='%s #s NNs: %4d  n9Devs: %4d  n9Nons: %4d  nall: %4d = nallnns: %4d rdev: %3.0f'%(year,lnns,ln9ds,ln9ns,lall,lallNN,rdev)
+        
+        if(lnns != ln9ds):
+            
+            if(ln9ds < lnns):
+                ncard=ncard+' <--- WWW # dev 9X < # NN'
+            else:
+                badStmid=None
+                for n in n9ns:
+                    print n
+                    if(n != None and IsNN(n)): badStmid=n
+                
+                print 'EEE -- NN dev mislabelled... badStmid: ',badStmid
+                sys.exit()
+            
+        print ncard
+        if(verb):
+            odict={}
+            for nd in n9ds:
+                stmid=stm9XsDev[nd][0]
+                stmdir=stm9XsDev[nd][1]
+                odict[stmid]=nd
+                
+            kk=odict.keys()
+            kk.sort()
+            for k in kk:
+                if(not(k in nns)):
+                    print 'EEE NN-9X this NN storm not in 9XsDev: ',k
+                    sys.exit()
+                print 'NN-9X: ',k,odict[k]
+        
+        continue
+        
+        
         for nn in nns:
             
             stm9x=stmNNs[nn]
