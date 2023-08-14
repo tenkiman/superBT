@@ -1,0 +1,1 @@
+stmid,tctype,stmtype,sname,maxv,ndtc,ndstm,blat,blon,bdtg,edtg,minlat,maxlat,minlon,maxlon,stcd,ace,nri,ned,nrw,ricode,9x,9xid,t2gen,gendtg,wncode,

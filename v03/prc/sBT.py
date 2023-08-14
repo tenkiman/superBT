@@ -62,8 +62,15 @@ abdirStm='%s/adeck-stm'%(sbtDatDir)
 abdirDtg='%s/adeck-dtg'%(sbtDatDir)
 
 TcNamesDatDir="%s/tc/names"%(sbtVerDirDat)
+TcVitalsDatDir="%s/tc/tcvitals"%(sbtDatDir)
+era5bdir='/data/w22/dat/nwp2/w2flds/dat/era5'
 
 sbtGslibDir="%s/gslib"%(sbtVerDir)
+
+
+
+
+
 
 # -- VVVVVVVV -- basic constants and settings
 #
@@ -4310,8 +4317,9 @@ def parseMd3Card(mm,dobt=0,verb=0):
     r34=(r34ne,r34se,r34sw,r34nw)
     r50=(r50ne,r50se,r34sw,r50nw)
 
-    if(verb):
-        print 'rrrrr',dtg,rlat,rlon,vmax,pmin,tdir,tspd,r34m,r50m,tcstate,warn,roci,poci,ostmid
+    #if(verb):
+        #print 'rrrrr',dtg,rlat,rlon,vmax,pmin,tdir,tspd,r34m,r50m,tcstate,warn,roci,poci,ostmid
+        
     rc=(dtg,rlat,rlon,vmax,pmin,tdir,tspd,r34m,r50m,tcstate,warn,roci,poci,alf,depth,eyedia,tdo,ostmid,ostmname,r34,r50)
     return(rc)
 
@@ -5222,11 +5230,197 @@ def getStmids4SumPath(sumPath):
         
     return(stype,stm1id,sname,stm9xid,basin,sdir)         
     
+def getW2fldsRtfimCtlpath(model,dtg,maxtau=None,dtau=6,details=1,override=0,verb=0,doSfc=0):
+
+    from M2 import setModel2
+
+    def getNfields(wgribs,verb=1):
+
+        nfields={}
+
+        for wgrib in wgribs:
+            (dir,file)=os.path.split(wgrib)
+            tt=file.split('.')
+            tau=tt[len(tt)-3][1:]
+            nf=len(open(wgrib).readlines())
+            nfields[int(tau)]=nf
+
+        return(nfields)
+
+
+    def gettaus(gribs,verb=0):
+
+        datpaths={}
+        taus=[]
+        gribver=None
+        gribtype=None
+
+        for grib in gribs:
+            (dir,file)=os.path.split(grib)
+            tt=file.split('.')
+            tau=tt[len(tt)-2][1:]
+            gribtype=tt[len(tt)-1]
+            gribver=gribtype[-1:]
+            siz=MF.GetPathSiz(grib)
+
+            if(siz > 0):
+                tau=int(tau)
+                taus.append(tau)
+                datpaths[tau]=grib
+                if(verb): print file,tau,gribtype,gribver
+
+        taus=MF.uniq(taus)
+
+        return(taus,gribtype,gribver,datpaths)
+
+
+    # -- default is to get 'all' taus, called only if maxtau is set...in
+    #    getCtlpathTaus(self,model,dtg,maxtau=168)
+    #
+    def reducetaus(taus,maxtau='all',dtau=6):
+
+        taus.sort()
+        ftaus=[]
+        if(maxtau == 'all'): maxtau=taus[-1]
+        rtaus=range(0,maxtau+1,dtau)
+        for tau in taus:
+            if(not(tau in rtaus)): continue
+            ftaus.append(tau)
+
+        ftaus=MF.uniq(ftaus)
+
+        return(ftaus)
+
+    def dofail(details):
+        if(not(details)):
+            return(0,None,None)
+        else:
+            return(0,None,None,None,None,None,None,None)
+
+
+    dtype='w2flds'
+    imodel=model
+
+    m2=setModel2(imodel)  
+    m2.setDbase(dtg)
+
+    dataDtg=dtg
+    tauOffset=0
+    
+    if(is0618Z(dtg) and m2.modelDdtg == 12):
+        tauOffset=6
+        dataDtg=mf.dtginc(dtg, -6)
+
+    nfields={}
+
+    # -- check m2 for use obj bddir
+    #
+    useBddir=0
+    if(hasattr(m2,'useBddir')): useBddir=m2.useBddir
+    if(useBddir):
+        bdirs=[m2.bddir]
+        
+        
+    for bdir in bdirs:
+        
+        if(bdir == '/Volumes' and dtype == 'w2flds'):
+            rootdir="%s/%s/%s"%(bdir,dtype,imodel)
+        elif(useBddir):
+            rootdir=bdir
+        else:
+            rootdir="%s/%s/dat/%s"%(bdir,dtype,imodel)
+            
+        maskdir="%s/%s"%(rootdir,dataDtg)
+
+        mask="%s/*%s*.ctl"%(maskdir,imodel)
+
+        if(verb): print "W2.getW2fldsRtfimCtlpath: ",mask
+        ctlpaths=glob.glob(mask)
+        
+        # -- special case for era5 where we have ua and sfc .ctl
+        #
+        if(len(ctlpaths) == 2 and (imodel == 'era5' or imodel == 'ecm5') ):
+            for ctl in ctlpaths:
+                if(doSfc and mf.find(ctl,'sfc')): 
+                    ctlpaths=[ctl]
+                    
+                elif(not(doSfc) and mf.find(ctl,'ua')): 
+                    ctlpaths=[ctl]
+                
+        if(len(ctlpaths) == 1):
+            ctlpath=ctlpaths[0]
+            
+            # -- use M2 for w2flds -- cgd6 does not have a wgrib?.txt inventory...this makes it...
+            #
+            if(dtype == 'w2flds'):
+                fm=m2.DataPath(dataDtg,dtype=dtype,dowgribinv=1,override=override,doDATage=1) 
+                fd=fm.GetDataStatus(dataDtg)
+                
+            if(details):
+                
+                # -- handle situation where taus in w2flds != taus in nwp2 fields
+                # -- tossed tau78 in ngp2
+                #
+                gmask="%s/*%s*.grb?"%(maskdir,imodel)
+                if(dtype == 'w2flds'): gmask="%s/*%s*%s*.grb?"%(maskdir,imodel,dtype)
+                
+                # -- use fd object first...
+                #
+                if(hasattr(fd,'statuss')):
+                    
+                    try:
+                        fds=fd.statuss[dataDtg]
+                    except:
+                        dofail(details)
+                    
+                    taus=fds.keys()
+                    datpaths=fd.datpaths
+                    gribtype=fd.gribtype
+                    gribver=fd.gribver
+                    
+                    # get nfields hash
+                    #
+                    nfields={}
+                    for n in range(0,len(fds)):
+                        ntau=taus[n]
+                        nf=fds[ntau][-1]
+                        nfields[ntau]=nf
+                        
+                    taus.sort()
+
+                else:
+                    gribs=glob.glob(gmask)
+                    (taus,gribtype,gribver,datpaths)=gettaus(gribs)
+                
+                    wmask="%s/*%s*.f???.wgrib?.txt"%(maskdir,imodel)
+                    wgribs=glob.glob(wmask)
+                    nfields=getNfields(wgribs)
+                
+                # -- cull taus
+                if(maxtau != None): taus=reducetaus(taus,maxtau,dtau)
+
+            else:
+                taus=gribtype=gribver=datpaths=None
+
+            if(not(details)):
+                return(1,rootdir,ctlpath)
+            else:
+                return(1,ctlpath,taus,gribtype,gribver,datpaths,nfields,tauOffset)
+
+
+    if(len(ctlpaths) == 0 or len(ctlpaths) > 1):
+        if(verb): print 'WWW ctlpaths: ',ctlpaths
+
+    dofail(details)
+
+    
+    
+    
 def getCtlpathTaus(model,dtg,maxtau=168,verb=0,doSfc=0):
     
     taus=[]
     ctlpath=taus=nfields=tauOffset=None
-    rc=w2.getW2fldsRtfimCtlpath(model,dtg,maxtau=maxtau,verb=verb,doSfc=doSfc)
+    rc=getW2fldsRtfimCtlpath(model,dtg,maxtau=maxtau,verb=verb,doSfc=doSfc)
     if(rc == None):
         print 'EEEE---tcVM-getCtlpathTaus-w2base.getW2fldsRtfimCtlpath...sayounara...for model: ',model,' dtg: ',dtg
         sys.exit()
@@ -5897,10 +6091,650 @@ def lsSbtVars(verb=0):
             
     return(sMdesc)
  
+# -- md3
+
+def cleanMD3Opaths(sdir,ostm1id,verb=0):
+    
+    omask="%s/%s-*txt"%(sdir,ostm1id.upper())
+    opaths=glob.glob(omask)
+    if(verb): 
+        print 'oooooo',omask
+        for opath in opaths:
+            print opath
+            
+    cmd="rm %s"%(omask)
+    mf.runcmd(cmd)
+            
+     
+def getMD3Opaths(mpath,doM2=1,verb=0):
+    
+    isBT=0
+    if(mf.find(mpath, '-BT.txt')):  isBT=1
+
+    rc=getStmids4SumPath(mpath)
+    (stmDev,ostm1id,sname,ostm9xid,basin,sdir)=rc
+    stm1id=ostm1id.lower()
+    stm9xid=ostm9xid.lower()
+    if(stmDev == 'nonDev'): 
+        stm1id=ostm9xid.lower()
+        stm9xid=ostm9xid.lower()
+    elif(stmDev == 'DEV'):
+        stm1id=ostm9xid.lower()
+        stm9xid=ostm1id.lower()
+        
+    (sdir,sfile)=os.path.split(mpath)
+
+    if(verb):
+        print 'spath: ',mpath
+    ostm1id=stm1id.replace('.','-')
+
+    if(verb):
+        print 'stm1id:  ',stm1id
+        print 'stm9xid: ',stm9xid
+        print 'sdir:    ',sdir
+        print 'sfile:    ',sfile
+        
+    
+    ofile="%s-md3.txt"%(ostm1id.upper())
+    if(mf.find(sfile,'BT')):
+        ofile="%s-md3-BT.txt"%(ostm1id.upper())
+        
+
+    if(doM2):
+        ofile="%s-md3-MRG.txt"%(ostm1id.upper())
+        if(mf.find(sfile,'BT')):
+            ofile="%s-md3-BT.txt"%(ostm1id.upper())
+        ofileS=ofile.replace('md3','sum-md3')
+    else:
+        ofile="%s-md3.txt"%(ostm1id.upper())
+        if(mf.find(sfile,'BT')):
+            ofile="%s-md3-BT.txt"%(ostm1id.upper())
+        ofileS=ofile.replace('md3','sum-md3')
+
+    opathS="%s/%s"%(sdir,ofileS)
+    opath="%s/%s"%(sdir,ofile)
+
+    opathSThere=(MF.getPathNlines(opathS) > 0)
+    opathThere=(MF.getPathNlines(opath) > 0)
+    
+    rc=(opath,opathS,opathThere,opathSThere,ofile,ofileS,sdir,
+        isBT,sfile,stmDev,ostm1id,sname,stm1id,stm9xid,basin)
+
+    return(rc)
 
 
-# -- CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+def makeMD3(mpath,rcM3,doM2=1,verb=0):
 
+    #isBT=0
+    #if(mf.find(mpath, '-BT.txt')):  isBT=1
+
+    #rc=getStmids4SumPath(mpath)
+    #(stmDev,ostm1id,sname,ostm9xid,basin,sdir)=rc
+    #stm1id=ostm1id.lower()
+    #stm9xid=ostm9xid.lower()
+    #if(stmDev == 'nonDev'): 
+        #stm1id=ostm9xid.lower()
+        #stm9xid=ostm9xid.lower()
+    #elif(stmDev == 'DEV'):
+        #stm1id=ostm9xid.lower()
+        #stm9xid=ostm1id.lower()
+        
+    #try:
+        #icards=open(mpath).readlines()
+    #except:
+        #print """EEE can't read mpath: %s -- sayounara"""%(mpath)
+        #sys.exit()
+    
+    #(sdir,sfile)=os.path.split(mpath)
+
+    #if(verb):
+        #print 'spath: ',mpath
+    #ostm1id=stm1id.replace('.','-')
+
+    #if(verb):
+        #print 'stm1id:  ',stm1id
+        #print 'stm9xid: ',stm9xid
+        #print 'sdir:    ',sdir
+        #print 'sfile:    ',sfile
+        
+    
+        
+    #ofile="%s-md3.txt"%(ostm1id.upper())
+    #if(mf.find(sfile,'BT')):
+        #ofile="%s-md3-BT.txt"%(ostm1id.upper())
+        
+
+    #if(doM2):
+        #ofile="%s-md3-MRG.txt"%(ostm1id.upper())
+        #if(mf.find(sfile,'BT')):
+            #ofile="%s-md3-BT.txt"%(ostm1id.upper())
+        #ofileS=ofile.replace('md3','sum-md3')
+    #else:
+        #ofile="%s-md3.txt"%(ostm1id.upper())
+        #if(mf.find(sfile,'BT')):
+            #ofile="%s-md3-BT.txt"%(ostm1id.upper())
+        #ofileS=ofile.replace('md3','sum-md3')
+
+    #opathS="%s/%s"%(sdir,ofileS)
+    #opath="%s/%s"%(sdir,ofile)
+    
+    #opathSThere=(MF.getPathNlines(opathS) > 0)
+    #opathThere=(MF.getPathNlines(opath) > 0)
+
+    #rc=getMD3Opaths(mpath,doM2=doM2,verb=0)
+    #(opath,opathS,opathThere,opathSThere,sdir,ostm1id)=rc
+    #print rc
+    #sys.exit()
+    #if(not(override) and opathSThere and opathThere):
+        #print 'WWW md3 paths already there...and override=0...return opath'
+        #return(opath)
+    
+    (opath,opathS,opathThere,opathSThere,ofile,ofileS,sdir,
+     isBT,sfile,stmDev,ostm1id,sname,stm1id,stm9xid,basin)=rcM3
+    
+    try:
+        icards=open(mpath).readlines()
+    except:
+        print """EEE can't read mpath: %s -- sayounara"""%(mpath)
+        sys.exit()
+
+    opathSTmp="/tmp/%s"%(ofileS)
+    opathTmp="/tmp/%s"%(ofile)
+
+    print
+    print 'spath:  ',mpath
+    print 'opath:  ',opath
+    print 'opathS: ',opathS
+
+    if(verb):
+        print 'stm1id: ',stm1id	
+        print 'sname:  ',sname
+        print 'stmDev: ',stmDev
+        print 'sdir:   ',sdir
+        print 'sfile:  ',sfile
+        print 'ofile:  ',ofile
+        print 'ofileS: ',ofileS
+        
+        print 'opath:  ',opath
+        print 'opathS: ',opathS
+
+    if(verb):    
+        for icard in icards:
+            print 'iii',icard[0:-1]
+        
+    ocards=[]
+    dom3=0
+    md3=MD3trk(icards,stm1id,stm9xid,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    dtgs=md3.dtgs
+    trk=md3.trk
+    basin=md3.basin
+    
+    # -- analyze the stm to make summary card
+    #
+    (m3sum,rcsum)=md3.lsDSsStmSummary(doprint=0)
+    m3sum=m3sum.replace(' ','')
+    m3sum=m3sum+',\n'
+    rc=MF.WriteString2Path(m3sum, opathS)
+    if(isBT):
+        print '222-BBB',rcsum,m3sum[0:-1]
+    else:
+        print '222-999',rcsum,m3sum[0:-1]
+
+    # -- now do trk
+    #
+
+    ktrk=trk.keys()
+    ktrk.sort()
+    ocards=[]
+    
+    for kt in ktrk:
+        ocard=parseDssTrkMD3(kt,trk[kt],stm1id,stm9xid,basin,rcsum=rcsum,sname=sname)
+        ocard=ocard.replace(' ','')
+        if(verb): print 'ooo---iii',ocard,len(ocard.split(','))
+        ocards.append(ocard)
+
+    rc=MF.WriteList2Path(ocards, opathTmp,verb=verb)
+    (m3trk,m3info)=getMd3trackSpath(opathTmp,verb=verb)
+    m3trki=setMd3track(m3trk,stm1id,verb=verb)
+    dtgs=m3trki.keys()
+    dtgs.sort()
+    
+    m3cards=[]
+    for dtg in dtgs:
+        try:
+            m3i=m3info[dtg]
+            m2trk=trk[dtg]
+        except:
+            None
+        im3trk=m3trki[dtg]
+        m3card=makeMd3Card(dtg,im3trk, m3i,m2trk,verb=verb)
+        m3cards.append(m3card)
+
+    rc=MF.WriteList2Path(m3cards, opath,verb=verb)
+
+    md3=MD3trk(m3cards,stm1id,stm9xid,dom3=1,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    (m3sum,rcsum)=md3.lsDSsStmSummary(doprint=0)
+    m3sum=m3sum.replace(' ','')
+    m3sum=m3sum+',\n'
+    rc=MF.WriteString2Path(m3sum, opathS)
+    if(isBT):
+        print '333-NNN',rcsum,m3sum[0:-1]
+    else:
+        print '333-999',rcsum,m3sum[0:-1]
+        
+    return(opath)
+    
+
+def mergeMD3(mpath3,mpath3BT,doM2=0,verb=0):
+    
+    # -- write out mpath -> opath for 9X; mergeMd3Cvs handles no BT
+    #
+    rc=getStmids4SumPath(mpath3)
+    (stmDev,stm1id,sname,stm9xid,basin,sdir)=rc
+    isBT=0
+    if(stmDev == 'NN'):  isBT=1
+    
+
+    if(doM2):
+        # -- if do merge with md2 do merge here, just make the md3 and sum 
+        #
+        ocards=open(mpath3).readlines()
+        opath3=mpath3
+        opath3S=opath3.replace('md3','sum-md3')
+        
+    else:
+        opath3=None
+        (odir,ofile)=os.path.split(mpath3)
+        (obase,oext)=os.path.splitext(ofile)
+        opath3="%s/%s-MRG.txt"%(odir,obase)
+        opath3S=opath3.replace('md3','sum-md3')
+        # -- merge md3   
+        #
+        if(isBT):
+            ocards=mergeMd3CvsBT(mpath3,mpath3BT,opath3,verb=verb)
+        else:
+            ocards=mergeMd3Cvs9X(mpath3,mpath3BT,opath3,verb=verb)
+
+    MF.WriteList2Path(ocards, opath3,verb=verb)
+    md3=MD3trk(ocards,stm1id,stm9xid,dom3=1,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    (m3sum,rcsum)=md3.lsDSsStmSummary(doprint=0)
+    m3sum=m3sum.replace(' ','')
+    m3sum=m3sum+',\n'
+    rc=MF.WriteString2Path(m3sum, opath3S)
+    if(isBT):
+        print '333-NNN-MRG',rcsum,m3sum[0:-1]
+    else:
+        print '333-999-MRG',rcsum,m3sum[0:-1]
+    
+    return(opath3)
+    
+def mergeMD(mpath,mpathBT,verb=0):
+    
+    # -- write out mpath -> opath for 9X; mergeMd3Cvs handles no BT
+    #
+    rc=getStmids4SumPath(mpath)
+    (stmDev,stm1id,sname,stm9xid,basin,sdir)=rc
+    isBT=0
+    if(stmDev == 'NN'):  isBT=1
+    
+    opath=None
+    (odir,ofile)=os.path.split(mpath)
+    (obase,oext)=os.path.splitext(ofile)
+    opath="%s/%s-M2B.txt"%(odir,obase)
+
+    if(isBT):
+        ocards=mergeMdCvsBT(mpath,mpathBT,opath,verb=verb)
+    else:
+        ocards=mergeMdCvs9X(mpath,mpathBT,opath,verb=verb)
+
+    MF.WriteList2Path(ocards, opath,verb=verb)
+
+    return(opath)
+    
+    
+def getStmidsDirs(years,basins,doQC=0,bspdmax=30):
+    
+    ostmids=[]
+    osdirs={}
+    for year in years:
+        sbdir="%s/%s"%(sbtSrcDir,year)
+        if(not(MF.ChkDir(sbdir))):
+            print 'sbdir not there...'
+            sys.exit()
+        
+        for basin in basins:
+            bsdir="%s/%s"%(sbdir,basin)
+            if(not(MF.ChkDir(bsdir))):
+                print 'bsdir not there...'
+                sys.exit()
+            
+            if(doQC):
+                smask="%s/%s/*/*QC-%d"%(sbdir,basin,bspdmax)
+            else:
+                smask="%s/%s/*"%(sbdir,basin)
+                
+            sdirs=glob.glob(smask)
+            sdirs.sort()
+            for sdir in sdirs:
+                if(doQC):
+                    (qdir,qfile)=os.path.split(sdir)
+                    ss=qdir.split('/')
+                else:
+                    ss=sdir.split('/')
+                    
+                stm=ss[-1]
+                sss=stm.split('-')
+                stmid="%s.%s"%(sss[0].lower(),sss[1])
+                ostmids.append(stmid)
+                osdirs[stmid]=sdir
+                
+    return(ostmids,osdirs)
+
+
+def doTrkPlot(mpath,plttag=None,override=1,title2=None,doM3=0,doX=1,verb=0):
+
+    xgrads='grads'
+    xgrads=setXgrads(useX11=0,useStandard=0)
+    zoomfact=None
+    background='black'
+    dtgopt=None
+    ddtg=6
+    dtg0012=0
+    
+    rc=getStmids4SumPath(mpath)
+    (stmDev,ostm1id,sname,ostm9xid,basin,sdir)=rc
+    stm1id=ostm1id.lower()
+    stm9xid=ostm9xid.lower()
+    if(stmDev == 'nonDev'): 
+        stm1id=ostm9xid.lower()
+        stm9xid=ostm9xid.lower()
+    elif(stmDev == 'DEV'):
+        stm1id=ostm9xid.lower()
+        stm9xid=ostm1id.lower()
+
+    icards=open(mpath).readlines()
+
+    if(doM3):
+        md3=MD3trk(icards,stm1id,stm9xid,dom3=1,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    else:
+        md3=MD3trk(icards,stm1id,stm9xid,dom3=0,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+        
+    dtgs=md3.dtgs
+    btrk=md3.trk
+    basin=md3.basin
+    
+    # -- make the plot
+    MF.sTimer('trkplot')
+    tP=TcBtTrkPlot(stm1id,btrk,dobt=0,
+                   Window=0,Bin=xgrads,
+                   zoomfact=zoomfact,override=override,
+                   background=background,dopbasin=0,
+                   dtgopt=dtgopt,pltdir=sdir,
+                   plttag=plttag)
+
+    tP.PlotTrk(dtg0012=dtg0012,ddtg=ddtg,title2=title2)
+    MF.dTimer('trkplot')
+    if(doX): tP.xvPlot(zfact=0.75)
+    
+
+
+
+def chkSpdDirMd3Mrg(mpath3,mpath,
+                    mpathBT=None,
+                    doRedo=0,
+                    bspdmax=30.0,
+                    bspdmaxNN=40.0,
+                    latMaxNN=35.0,
+                    verb=0,
+                    killSngl=1,
+                    override=0,
+                    ):
+
+
+    exDtgs=[]
+    qcM3Cards={}
+    
+    qcpath="%s-QC-%02.0f"%(mpath,bspdmax)
+    iqcpath=qcpath
+    iqcThere=MF.getPathNlines(iqcpath)
+
+    pp=mpath.split('/')
+    ss=pp[-2][0:8].replace('-','.')
+    stmid=ss.lower()
+    
+    posits={}
+    spds={}
+        
+    m3cards=open(mpath3).readlines()
+    mcards=open(mpath).readlines()
+    if(mpathBT != None):
+        mcardsBT=open(mpathBT).readlines()
+    
+    nm3=len(m3cards)
+    nm=len(mcards)
+    
+    if(nm == 1):
+        (sdir,sfile)=os.path.split(mpath)
+        if(killSngl):
+            ropt=''
+            rc=raw_input("KILL-SSSIIInngggllleeetttooonnn? y|n  ")
+            if(rc.lower() == 'y'):
+                cmd="rm -r %s"%(sdir)
+                mf.runcmd(cmd,ropt)
+        else:
+            print 'EEE-SSSIIInngggllleeetttooonnn: ',mpath
+            
+        return(2,None)
+            
+        
+    if(nm3 != nm and verb):
+        print 'EEE??? -- nm3 ',nm3,' != nm ',nm,' for m3: ',mpath3,' m: ',mpath
+    
+    for m3card in m3cards:
+
+        mm=m3card.split(',')
+        
+        (dtg,rlat,rlon,vmax,pmin,
+         tdir,tspd,r34m,r50m,tcstate,warn,
+         roci,poci,alf,depth,eyedia,
+         tdo,ostmid,ostmname,r34,r50)=parseMd3Card(mm)
+        blat=rlat
+        blon=rlon
+        bvmax=vmax
+        posits[dtg]=(blat,blon,bvmax)
+        qcM3Cards[dtg]=m3card
+        
+    for mcard in mcards:
+        mm=mcard.split(',')
+        dtg=mm[0].strip()
+        #qcM3Cards[dtg]=mcard
+
+    dtgs=posits.keys()
+    dtgs.sort()
+    
+    ndtgs=len(dtgs)
+    
+    for n in range(0,ndtgs):
+        
+        odtg=dtgs[n]
+        if(ndtgs == 1):
+            dtgm1=dtgs[0]
+            dtg=dtgs[0]
+        elif(n == 0 and ndtgs > 1):
+            dtgm1=dtgs[0]
+            dtg=dtgs[n+1]
+        else:
+            dtgm1=dtgs[n-1]
+            dtg=dtgs[n]
+
+        blat=posits[dtg][0]
+        blatm1=posits[dtgm1][0]
+
+        blon=posits[dtg][1]
+        blonm1=posits[dtgm1][1]
+
+        (bdir,bspd,bu,bv)=rumhdsp(blatm1,blonm1,blat,blon,6)
+
+        obspd=bspd
+        spds[odtg]=bspd
+
+        stmidNN=stmid
+        
+            
+        stest9X=(bspd > bspdmax)
+        stestNN=(bspd > bspdmaxNN)
+        ltest=(abs(blat) < latMaxNN)
+        ntest=IsNN(stmid)
+        
+        dtest=(stest9X and not(ntest))
+        btest=(stestNN and ltest and ntest)
+        
+        # -- ignore last three dtgs -- typically ET below latMaxNN
+        #
+        lastdtgtest=(n <= ndtgs-3)
+        if((dtest or btest) and lastdtgtest):
+            exDtgs.append(dtg)
+            
+    
+    
+    # -- if have a problem...
+    #
+    oqcpath=None
+    if(len(exDtgs) > 0):
+        oqccards=[]
+        for dtg in dtgs:
+            try:
+                oqccard="%4.0f %s"%(spds[dtg],qcM3Cards[dtg])
+            except:
+                continue
+            oqccards.append(oqccard)
+
+        rc=MF.WriteList2Path(oqccards,qcpath,verb=0)
+        oqcpath=qcpath
+        
+    if(oqcpath == None):
+        if(iqcThere):
+            print '<<<<< QC PPPAAASSSSSS for stmid: ',stmid,'BUT qcpath: ',iqcpath
+            return(1,iqcpath)
+        else:
+            print '<<<<<<<<<<<<<<<<<<<<<QC PPPAAASSSSSS for stmid: ',stmid,' return qcpath=None'
+            return(1,None)
+        
+    else:
+        print '>>>>>>>>>>>>>>>>>>>>>QC FFAAIILL for stmid: ',stmid
+        return(0,oqcpath)
+    
+
+def doQCTrk(mpath3,mpath,mpathBT,qcpath,savPath,plttag=None,title2=None,ropt=''):
+    
+    rc=doTrkPlot(mpath3,doM3=1,plttag=plttag,title2=title2)
+    
+    print 'doing edit of mpath: ',mpath
+    if(mpathBT != None):
+        cmd='meld %s %s %s'%(qcpath,mpath,mpathBT)
+    else:
+        cmd='meld %s %s'%(qcpath,mpath)
+    mf.runcmd(cmd,ropt)
+    
+    cmd='diff %s %s'%(savPath,mpath)
+    rc=MF.runcmdLog(cmd)
+    lrc=len(rc)
+    
+    if(lrc == 1):
+        rcQC=1
+        print 'NNNNN No changes made...'
+        
+        #rc=raw_input("NNNNN No change made and still okay? ")
+        #if(rc.lower() == 'y'):
+            #mf.runcmd("rm -i %s"%(qcpath),ropt)
+    else:
+        rcQC=0
+        print "YYYYY You changed the sum.txt file..."
+        #rc=raw_input("YYYYY You changed the sum.txt file...y/n to del ")
+        #if(rc.lower() == 'y'):
+            #mf.runcmd("rm -i %s"%(qcpath),ropt)
+
+    #cmd='rm -i %s'%(qcpath)
+    #mf.runcmd(cmd,ropt)
+
+    return(rcQC)
+    
+def doMd2Md3Mrg(stmid,doM2=1,doRedo=0,qc2paths=1,override=0,ropt='',verb=0):
+    
+    (mpath,mpathBT)=getSrcSumTxt(stmid,verb=0)
+    
+    savPath="%s-SAV"%(mpath)
+    if(mpathBT != None):
+        savPathBT="%s-SAV"%(mpathBT)
+    else:
+        savPathBT=None
+        savThereBT=0
+    
+    savThere=(MF.getPathNlines(savPath) > 0)
+    if(not(savThere)):
+        cmd="cp %s %s"%(mpath,savPath)
+        mf.runcmd(cmd,ropt)
+        
+    # -- BT
+    if(mpathBT != None):
+        savThereBT=(MF.getPathNlines(savPathBT) > 0)
+        if(not(savThereBT)):
+            cmd="cp %s %s"%(mpathBT,savPathBT)
+            mf.runcmd(cmd,ropt)
+            
+    if(doRedo):
+        if(savThere):
+            cmd="cp -i %s %s"%(savPath,mpath)
+            mf.runcmd(cmd,ropt)
+        if(savThereBT):
+            cmd="cp -i %s %s"%(savPathBT,mpathBT)
+            mf.runcmd(cmd,ropt)
+                        
+    # -- first get paths and do clean
+    #
+    rcM3=getMD3Opaths(mpath,doM2=1,verb=verb)
+    (opath,opathS,opathThere,opathSThere,ofile,ofileS,sdir,
+     isBT,sfile,stmDev,ostm1id,sname,stm1id,stm9xid,basin)=rcM3
+    
+    if(not(override) and opathSThere and opathThere):
+        print 'WWW md3 paths already there...and override=0...return opath'
+        opath3=None
+        rc=(opath3,mpath,mpathBT,savPath,savPathBT)
+        return(rc)
+    elif(opathThere):
+        rc=cleanMD3Opaths(sdir,ostm1id)
+
+    # -- merge m2 first...
+    #
+    mpathm=mpath
+    if(doM2):
+        mpathm=mergeMD(mpath, mpathBT)
+
+    mpath3=makeMD3(mpathm,rcM3,doM2=doM2,verb=verb)
+    mpath3BT=None
+    if(mpathBT != None and IsNN(stmid)): 
+        rcM3=getMD3Opaths(mpathBT,doM2=doM2,verb=verb)
+        mpath3BT=makeMD3(mpathBT,rcM3,verb=verb)
+
+    if(verb):
+        print 'mpath:   ',mpath
+        print 'mpath3:  ',mpath3
+        print 'mpathBT: ',mpathBT
+        print 'mpath3BT: ',mpath3BT
+
+    opath3=opath39X=None
+    #if(mpathBT != None and IsNN(stmid)):
+    if(not(doM2)):
+        opath3=mergeMD3(mpath3, mpath3BT,doM2=doM2,verb=verb)
+    else:
+        opath3=mpath3
+    
+    rc=(opath3,mpath,mpathBT,savPath,savPathBT)
+    return(rc)
+     
+
+
+# -- CCCCCCCCCCCCCCCCCCCC -- wxmap2
 
 
 class MFbase():
@@ -9038,6 +9872,9 @@ class Mdeck3(MFutils):
         #
         rc=self.getCvsYearPaths(doBT=doBT)
         (allCvsPath,sumCvsPath)=rc
+        if(verb):
+            print 'allCvsPath: ',allCvsPath
+            print 'sumSvsPath: ',sumCvsPath
 
         # -- get hashes with storm summary and names
         #
@@ -9767,19 +10604,24 @@ that generates of -MRG.txt where the working is updated with BT
             smkey=len(smeta)
             stmid9x="%s.%s"%(smeta[-4],stmid.split('.')[-1])
             stmcards9x=self.stmMd3[stmid9x]
-            stmcards=stmcards+stmcards9x
+            stmcards=stmcards9x+stmcards
             
         for mm in stmcards:
 
             rc=parseMd3Card(mm,dobt=dobt,verb=verb)
+            if(verb):
+                if(rc != None):
+                    smm=str(mm)
+                    orc="%s %s %s %s"%(smm[2:12],str(mm[1]),str(mm[5:10]),str(mm[-10:-8]))
+                    print 'stmcard: ',orc
+            
             if(rc == None):continue
 
             (dtg,rlat,rlon,vmax,pmin,tdir,tspd,r34m,r50m,
              tcstate,warn,
              roci,poci,alf,
              depth,eyedia,tdo,ostmid,ostmname,r34,r50)=rc
-            if(verb):
-                print 'rrrrr',dtg,rlat,rlon,vmax,pmin,tdir,tspd,r34m,r50m,tcstate,warn,roci,poci
+
             m3trk[dtg]=(rlat,rlon,vmax,pmin,tdir,tspd,r34m,r50m,tcstate,warn,roci,poci,alf,depth,eyedia,tdo,ostmid,ostmname,r34,r50)
             
         def interpM3trk(m1,m2,f1,f2):
@@ -16485,7 +17327,8 @@ class TcBtTrkPlot(DataSet):
     def PlotTrk(self,
                 doft=0,dtg0=None,nhbak=None,nhfor=None,
                 ddtg=6,dtg0012=1,maxbt=55,
-                doalltaus=1,otau=48,etau=120,dtau=12):
+                doalltaus=1,otau=48,etau=120,dtau=12,
+                title2=None,):
 
 
         if(self.alreadyDone): return
@@ -16559,13 +17402,16 @@ class TcBtTrkPlot(DataSet):
         ttl=ga.gp.title
         ttl.set(scale=0.85)
         
+        t2='mdeck2 best track'
+        if(title2 != None):
+            t2=title2
         if(hasattr(self,'pbasin')):
             t1='pTCs for basin: ',self.pbasin.upper()
             t2='md2 BT'
         else:
             btvmax=max(self.avmaxs)
             t1='TC: %s [%s]  V`bmax`n: %3dkt'%(self.stmid,self.stmname,btvmax)
-            t2='mdeck2 best track'
+
         ttl.top(t1,t2)
 
         if(self.Window): ga('q pos')
@@ -19295,6 +20141,1094 @@ d %s"""%(var)
         cmd="""%s=sh_filt(%s,%d)"""%(var,expr,nwaves)
         self._cmd(cmd)
         
+# -- CCCCCCCCCCCCCCCCCCCC -- models
+
+
+class Model(MFbase):
+
+    def DoGribmap(self,gmpverb=0):
+
+        if(self.gribtype == 'grb1'): xgribmap='gribmap'
+        if(self.gribtype == 'grb2'): xgribmap='gribmap'
+        xgopt='-i'
+        if(gmpverb):
+            xgopt='-v -i'
+
+        cmd="%s %s %s"%(xgribmap,xgopt,self.ctlpath)
+        mf.runcmd(cmd)
+
+
+
+class Model2(Model):
+
+    #addir=w2.Nwp2DataMassStore
+    #models=w2.Nwp2ModelsAll
+    #allmodels=w2.Nwp2ModelsAll
+    #models=w2.Nwp2ModelsActive
+    #modelsW2=w2.Nwp2ModelsActiveW2flds
+
+    #geodir=w2.GeogDatDirW2
+    #bdir2=w2.Nwp2DataBdir
+    d2dir='/dat2/nwp2'
+    archdir='/dat5/dat/nwp2'
+    archdirDat6='/dat6/dat/nwp2'
+
+    d2dir='/data/global/dat/nwp2'
+    archdir='/data/global/dat/nwp2'
+    archdirDat6='/data/global/dat/nwp2'
+
+    modelrestitle=None
+    modelDdtg=None
+    modelgridres=None
+    modelprvar=None
+    modelpslvar=None
+    modeltitleAck1=None
+    modeltitleFullmod=None
+
+    dofimlsgrib=1
+
+    btau=0
+    etau=168
+    dtau=6
+
+    warn=0
+
+    myname="Dr. Mike Fiorino (michael.fiorino@noaa.gov) ESRL/GSD/AMB, Boulder, CO"
+    modeltitleAck2=myname
+    
+    def __init__(self,model='ecm2',center='ecmwf',useAll=0,gribver=1,chkm2=1,bdir2=None):
+
+        if(chkm2 and not(self.IsModel2(model))):
+            print 'M2 -- invalid m2 model: ',model
+            sys.exit()
+
+        #
+        # defaults
+        #
+
+        self.model=model
+        self.dmodel=model
+        self.dirmodel=model
+
+        self.initModelCenter(center)
+        self.initGribVer(gribver)
+
+        self.tautype=None
+        self.d2dir='/dat2/nwp2'
+        self.nfields=999
+        self.nfieldsW2flds=999
+        self.dmodelType=None        
+
+        self.gmask=None
+        self.grbpaths=[]
+
+        self.xwgrib='wgrib'
+        self.location='kishou'
+
+        self.rundtginc=6
+
+        name2tau=None  # force these three methods to be set
+        setxwgrib=None
+        setgmask=None
+        
+
+    def initModelCenter(self,center):
+        self.center=center
+        self.modelcenter="%s/%s"%(self.center,self.dirmodel)
+        self.bddir="%s/%s"%(self.bdir2,self.modelcenter)
+        self.bddirarch="%s/%s"%(self.archdir,self.modelcenter)
+        self.bddirarchDat6="%s/%s"%(self.archdirDat6,self.modelcenter)
+        self.w2fldsSrcDir="%s/w2flds/dat/%s"%(self.bdir2,self.model)
+        self.w2fldsArchDir="/dat4/nwp2/w2flds/dat/%s"%(self.model)
+        # -- temp location to free up the internal /dat4 drive
+        self.w2fldsArchDir="/FWV1/dat2/nwp2/w2flds/dat/%s"%(self.model)
+        self.w2fldsArchDir="/Volumes/FWV2/dat2/nwp2/w2flds/dat/%s"%(self.model)
+        self.w2fldsArchDir="/dat5/dat/nwp2/w2flds/dat/%s"%(self.model)
+        self.w2fldsArchDirDat6="/dat6/dat/nwp2/w2flds/dat/%s"%(self.model)
+
+        self.rtfimSrcDir="%s/rtfim/dat"%(self.bdir2)
+        self.rtfimArchDir="/Volumes/FWV2/dat2/nwp2/rtfim/dat"
+        self.rtfimArchDir="/dat4/nwp2/rtfim/dat"
+        self.rtfimArchDir2="/Volumes/FWV2/dat2/nwp2/rtfim/dat"
+        self.nwp2ArchDir=w2.Nwp2DataBdirArch3
+
+    def getRtfimModelsByDtg(self,dtg,sdir=None):
+
+        rtmodels=[]
+        if(sdir == None):   sdir=self.rtfimSrcDir
+
+        smask="%s/*/%s"%(sdir,dtg)
+        mm=glob.glob(smask)
+        for m in mm:
+            tt=m.split('/')
+            ltt=len(tt)
+            model=tt[ltt-2]
+            rtmodels.append(model)
+        return(rtmodels)
+
+
+    def initGribVer(self,gribver):
+        self.gribver=gribver
+        self.gribtype='grb%d'%(self.gribver)
+
+    def IsModel2(self,value):
+        rc=0
+        if(value in self.allmodels): rc=1
+        return(rc)
+
+    def IsModel1(self,value):
+        rc=0
+        if(value in self.models): rc=1
+        return(rc)
+
+    def getEtau(self,dtg=None):
+        if(dtg == None):
+            return(self.etau)
+        else:
+            return(self.etau)
+
+    def getDtau(self,dtg=None):
+        if(dtg == None):
+            return(self.dtau)
+        else:
+            return(self.dtau)
+
+
+
+    def Put2Arch(self,sbdir=None,tbdir=None,tdir=None,dtg=None,dtgs=None,rmsrc=0,ropt=''):
+
+        rc=0
+        if(tbdir == None): tbdir="%s"%(self.archdir)
+        if(sbdir == None): sbdir=self.bddir
+        if(dtg == None and dtgs == None): dtgs=self.ddtgs
+        if(dtg != None and dtgs == None): dtgs=[dtg]
+
+        for dtg in dtgs:
+            sdir="%s/%s"%(sbdir,dtg)
+            if(tdir == None):
+                tdir="%s/%s"%(tbdir,self.modelcenter)
+
+            mf.ChkDir(tdir,'mk')
+            cmd="rsync -av %s %s"%(sdir,tdir)
+            mf.runcmd(cmd,ropt)
+
+            if(rmsrc):
+                cmd="rm -r %s"%(sdir)
+                mf.runcmd(cmd,ropt)
+
+        print 'SSS(sbdir): ',sbdir
+        print ' TTT(tdir): ',tbdir
+        return(rc)
+
+
+    def setDbase(self,dtg,dtype=None,warn=0):
+        
+
+        if(self.IsModel2(self.model) or self.IsModel1(self.model)):
+            if(not(hasattr(self,'lmodel'))): self.lmodel=self.dmodel
+
+            if(dtype == 'w2flds'):
+                self.dmodel=self.model
+                self.lmodel=self.model
+
+            self.dbasedir="%s/%s"%(self.bddir,dtg)
+            self.dbasedirarch="%s/%s"%(self.bddirarch,dtg)
+            self.dbasedirarchDat6="%s/%s"%(self.bddirarchDat6,dtg)
+
+            self.dmodelType=dtype
+
+            self.bddirNWP2=self.bddir
+            
+            if(dtype != None):
+                self.dbase="%s/%s.%s.%s"%(self.dbasedir,self.lmodel,dtg,dtype)
+                if(dtype == 'w2flds'):
+                    self.bddir=self.w2fldsSrcDir
+                    self.dbasedir="%s/%s"%(self.bddir,dtg)
+                    self.dbase="%s/%s/%s.%s.%s"%(self.bddir,dtg,self.lmodel,dtype,dtg)
+
+            else:
+                self.dbase="%s/%s.%s"%(self.dbasedir,self.lmodel,dtg)
+                self.dmask="%s.%s.f???.%s"%(self.lmodel,dtg,self.gribtype)
+
+            self.dpath="%s.ctl"%(self.dbase)
+
+            self.dpathexists=os.path.exists(self.dpath)
+
+
+        elif(mf.find(self.model,'geo')):
+            self.dbasedir=self.geodir
+            if(self.model == 'geo05'):
+                self.dpath="%s/lf.gfs.05deg.ctl"%(self.geodir)
+            else:
+                self.dpath=None
+
+        elif(mf.find(self.model,'tctrk')):
+            self.dbasedir="%s/%s"%(self.bddir,dtg)
+            mask="%s/*.ctl"%(dbasedir)
+            self.dpaths=glob.glob(mask)
+            if(len(self.dpaths) > 0):
+                self.dpaths=dpaths
+            else:
+                self.dpaths=[]
+                self.ddtgs=[]
+
+        else:
+            print 'EEE could not set M2.setDbase.dbase  model: ',self.model,'dtg: ',dtg,' dtype: ',self.dtype,' or maybe because model not in w2localvars.py Nwp2ModelsAll...'
+            sys.exit()
+
+        self.tdatbase=self.dbase
+
+
+    # -- set prvar method to set dependence on tau
+    #
+    def setprvar(self,dtg=None,tau=None):
+        modelprvar=self.modelprvar
+        if(tau == 0):
+            modelprvar=modelprvar.replace('pr','pr(t+1)')
+        return(modelprvar)
+
+
+
+    def DataPath(self,dtgopt,dtype=None,getFromMss=0,dowgribinv=1,dofilecheck=1,override=0,ropt='',
+                 diag=0,
+                 useglob=0,
+                 doDATage=0,
+                 verb=1):
+
+
+        if(hasattr(self,'doDATage')): doDATage=self.doDATage
+        dpaths=[]
+        statuss={}
+
+        self.dtype=dtype
+
+        dtgs=mf.dtg_dtgopt_prc(dtgopt)
+
+        inV=None
+        if(hasattr(self,'iV')): inV=self.iV.hash
+        
+        dataDtgs=[]
+
+        for dtg in dtgs:
+            
+            # -- find tau offset
+            #
+            dataDtg=dtg
+            if(w2.is0618Z(dtg) and self.modelDdtg == 12):
+                self.tauOffset=6
+                dataDtg=mf.dtginc(dtg,-6)
+                
+            dataDtgs.append(dataDtg)
+            
+            status={}
+
+            self.setDbase(dataDtg,dtype=dtype)
+            
+            try:
+                dthere=os.path.exists(self.dpath)
+            except:
+                dthere=0
+
+            if(dthere):
+                siz=MF.GetPathSiz(self.dpath)
+                dpaths.append(self.dpath)
+
+            elif(getFromMss):
+                if(not(hasattr(self,'archmodelcenter'))): self.archmodelcenter=self.modelcenter
+                mssdpath="%s/%s/%s.%s.tar"%(self.addir,self.archmodelcenter,self.dmodel,dataDtg)
+                rc=os.popen('mssLs %s'%(mssdpath)).readlines()
+                print 'getFromMss rc: ',rc
+
+                if(len(rc) == 1):
+                    tarball=rc[0]
+                    mf.ChangeDir(self.bddir)
+                    mf.runcmd(cmd,ropt)
+
+                dthere=os.path.exists(self.dpath)
+                if(dthere):
+                    dpaths.append(self.dpath)
+
+            # check file status...doesn't work!!!
+            #
+            #if(dofilecheck == 0):
+            #    self.statuss=statuss
+            #    return(self)
+
+            if(dtype != None and not(hasattr(self,'dmodelType'))): self.dmodelType=dtype
+
+            self.setxwgrib(dataDtg)
+            if(hasattr(self,'setgmask')): self.setgmask(dtg)
+
+            # -- special case for navgem from ncep
+            #
+            if(hasattr(self,'dsetMaskOverride') and self.dsetMaskOverride):
+                
+                def name2tau(ffile,dtg):
+                    
+                    try:
+                        tau=ffile.split('.')[-2][-3:]
+                        tau=int(tau)
+                    except:
+                        tau=None
+                    return(tau)
+                
+                self.name2tau=name2tau
+                
+            
+            elif(hasattr(self,'dmodelType') and self.dmodelType == 'w2flds' and self.tautype != 'alltau'):
+                
+                self.dmask=self.dmask.replace(self.dmodel,'%s.w2flds'%(self.dmodel))
+                if(hasattr(self,'dsetmask')):
+                    self.dsetmask=self.dsetmask.replace(self.dmodel,'%s.w2flds'%(self.dmodel))
+                def name2tau(file,dtg):
+                    try:
+                        tau=file.split('.')[3][1:]
+                        tau=int(tau)
+                    except:
+                        tau=None
+                    return(tau)
+                self.name2tau=name2tau
+
+
+                
+            self.datmask="%s/%s"%(self.dbasedir,self.dmask)
+
+            self.datpaths=glob.glob(self.datmask)
+            self.datpaths.sort()
+            
+            self.grbmask="%s/%s"%(self.dbasedir,self.gmask)
+            self.grbpaths=glob.glob(self.grbmask)
+            self.grbpaths.sort()
+            
+            if( len(self.datpaths) == 0 and len(self.grbpaths) > 0):
+                print 'WWW(Model2.DataPath): len(self.datpaths): ',len(self.datpaths),' but grbpaths there'
+
+                for grbpath in self.grbpaths:
+                    grbsiz=MF.GetPathSiz(grbpath)
+                    if(grbsiz == 0):
+                        print 'WWW(Model2.DataPath): zero length source grb: ',grbpath,' delete'
+                        os.unlink(grbpath)
+                    else:
+                        if(hasattr(self,'gname2tau')):
+                            ctau="%03d"%(self.gname2tau(grbpath,dataDtg))
+                            if(hasattr(self,'doLn') and self.doLn):
+                                lmfile="%s.f%s.%s"%(self.tdatbase,ctau,self.gribtype)
+                                cmd="ln -s -f %s %s"%(grbpath,lmfile)
+                                mf.runcmd(cmd,ropt)
+
+                self.datpaths=glob.glob(self.datmask)
+
+
+            if ( len(self.datpaths) > 0):
+
+                for datpath in self.datpaths:
+
+                    (fdir,ffile)=os.path.split(datpath)
+                    (base,ext)=os.path.splitext(datpath)
+                    tau=self.name2tau(ffile,dtg)
+
+                    gotit=0
+                    if(inV != None and not(override)):
+                        try:
+                            (datpath,age,nf)=inV[self.model,dtg,tau]
+                            status[tau]=(age,nf)
+                            gotit=1
+                        except:
+                            None
+
+                    if(gotit): continue
+
+
+                    # -- bypass zero length files
+                    #
+                    if(MF.GetPathSiz(datpath) == 0):
+                        if(self.warn): print 'WWW MF.GetPathSiz(datpath) == 0',MF.GetPathSiz(datpath)
+                        continue
+
+
+                    # old forms of the wgribpaths...
+                    #
+                    if(self.tautype == 'alltau' and dtype != 'w2flds'):
+                        owgribpath="%s/%s.wgrib.txt"%(dir,base)
+                    else:
+                        owgribpath="%s/%s.%s.%03d.wgrib.txt"%(dir,self.model,dataDtg,tau)
+
+
+                    #if(self.tautype == 'alltau'):
+                    #    wgribpath="%s.wgrib%1d.txt"%(base,self.gribver)
+                    #else:
+                    (base,ext)=os.path.splitext(datpath)
+                    wgribpath="%s.wgrib%1d.txt"%(base,self.gribver)
+
+                    #if(os.path.exists(owgribpath)):
+                    #    cmd="mv %s %s"%(owgribpath,wgribpath)
+                    #    mf.runcmd(cmd,'')
+
+                    if(dowgribinv):
+                        try:
+                            datsize=os.path.getsize(datpath)
+                        except:
+                            datsize=-999
+
+                        if(not(os.path.exists(wgribpath)) or (os.path.getsize(wgribpath) == 0 and datsize > 0) or override):
+                            cmd="%s %s > %s"%(self.xwgrib,datpath,wgribpath)
+                            if(diag):  mf.runcmd(cmd)
+                            else:      mf.runcmd(cmd,'quiet')    
+                            
+                    if(os.path.exists(wgribpath)):
+                        if(doDATage):
+                            age=MF.PathCreateTimeDtgdiff(dataDtg,datpath)
+                        else:
+                            age=MF.PathCreateTimeDtgdiff(dataDtg,wgribpath)
+                            
+                        if(age >= 1000.0): age=999.9
+                        cards=open(wgribpath).readlines()
+                        nf=len(cards)
+                        status[tau]=(age,nf)
+
+                        if(inV != None):
+                            rc=(datpath,age,nf)
+                            if(verb): print 'PPP putting rc: ',self.model,dataDtg,tau,nf
+                            inV[self.model,dtg,tau]=rc
+
+
+            else:
+                status={}
+
+            statuss[dtg]=status
+
+        #
+        # outside  dtg loop -- single dtg
+        #
+
+        self.ctlpath="%s.ctl"%(self.tdatbase)
+
+        self.dpaths=dpaths
+        self.ddtgs=dataDtgs
+        self.statuss=statuss
+
+        if(self.dmodelType != None and self.dmodelType == 'w2flds'):
+            self.nfields=self.nfieldsW2flds
+        else:
+            self.nfields=self.nfields
+            
+        if(hasattr(self,'iV')): self.iV.put()
+
+
+        return(self)
+
+
+    def GetDataStatus(self,dtg,checkNF=0,mintauNF=5):
+
+        if(hasattr(self,'bddirNWP2')):
+            tdir="%s/%s"%(self.bddirNWP2,dtg)
+        else:
+            tdir="%s/%s"%(self.bddir,dtg)
+
+        NFmin=self.nfields
+        if(checkNF): NFmin=self.nfields-mintauNF
+
+        lastTau=None
+        latestTau=None
+        latestCompleteTau=None
+        earlyTau=None
+        gmplastdogribmap=-999
+        gmplatestTau=-999
+        gmplastTau=-999
+
+        mask="%s/gribmap.status.*.txt"%(tdir)
+        gmps=glob.glob(mask)
+        gmps.sort()
+
+        gmpAge=0.0
+        if(len(gmps) >= 1):
+            for gmpspath in gmps:
+                age=MF.PathCreateTimeDtgdiff(dtg,gmpspath)
+                if(age > gmpAge):
+                    gmpAge=age
+                    latestgmpPath=gmpspath
+
+            (dir,file)=os.path.split(latestgmpPath)
+            tt=file.split('.')
+
+            if(len(tt) >= 6):
+                gmplastdogribmap=int(tt[3])
+                gmplatestTau=int(tt[4])
+                gmplastTau=int(tt[5])
+
+
+        if(len(self.statuss) == 0):
+            return(self)
+
+        status=self.statuss[dtg]
+        itaus=status.keys()
+        itaus.sort()
+        
+        ages={}
+        for itau in itaus:
+            ages[itau]=status[itau][0]
+
+
+        oldest=-1e20
+        youngest=+1e20
+
+        for itau in itaus:
+            if(ages[itau] < youngest):
+                youngest=ages[itau]
+                earlyTau=itau
+
+            # -- >= because for taus having the same age
+            #
+            if(ages[itau] >= oldest):
+                oldest=ages[itau]
+                latestTau=itau
+
+        if(len(status) >= 1):
+            lastTau=itaus[-1]
+            latestCompleteTau=lastTau
+
+        if(hasattr(self,'dattaus')):
+            datataus=self.dattaus
+        else:
+            datataus=w2.Model2DataTaus(self.model,dtg)
+
+        # -- forward search thru target data taus
+        # 
+
+        ndt=len(datataus)
+
+        if(self.tautype == 'alltau'):
+            latestCompleteTau=datataus[-1]
+            
+        else:
+            for n in range(0,ndt):
+                datatau=datataus[n]
+                gotit=0
+                for itau in itaus:
+                    if(datatau == itau):
+                        (age,nf)=self.statuss[dtg][itau]
+                        if(checkNF and nf < NFmin):
+                            gotit=0
+                            continue
+                        else:
+                            gotit=1
+                            latestCompleteTau=datatau
+                        break
+    
+    
+                if(gotit == 0):  break
+
+
+        # -- backward search (default)
+        #
+
+        latestCompleteTauBackward=-999
+
+        if(self.tautype == 'alltau' and self.dmodelType == None):
+            None
+        else:
+            for n in range(ndt-1,0,-1):
+                datatau=datataus[n]
+                gotit=0
+                for itau in itaus[-1:0:-1]:
+                    if(datatau == itau):
+                        (age,nf)=self.statuss[dtg][itau]
+                        if(checkNF and nf < NFmin):
+                            gotit=0
+                            continue
+                        else:
+                            gotit=1
+                            latestCompleteTauBackward=datatau
+                        break
+        
+                if(gotit == 1):  break
+        
+        self.dstdir=tdir
+        self.dsitaus=itaus
+        self.dslastTau=lastTau
+        self.dsgmpAge=gmpAge
+        self.dsoldestTauAge=oldest
+        self.dslatestTau=latestTau
+        self.dsyoungest=youngest
+        self.dsearlyTau=earlyTau
+        self.dsgmplastdogribmap=gmplastdogribmap
+        self.dsgmplatestTau=gmplatestTau
+        self.dsgmplastTau=gmplastTau
+        self.dslatestCompleteTau=latestCompleteTau
+        self.dslatestCompleteTauBackward=latestCompleteTauBackward
+
+        return(self)
+
+
+    def makeCtl(self,dtg):
+
+        if(not(hasattr(self,'lmodel'))): self.lmodel=self.dmodel
+        if(not(hasattr(self,'dsetmask'))): self.dsetmask=self.dmask
+
+        gmppath="%s.gmp"%(self.tdatbase)
+        gmpfile="%s.%s.gmp"%(self.lmodel,dtg)
+
+        gtime=mf.dtg2gtime(dtg)
+        nt=(self.etau/self.dtau)+1
+
+        self.ctl='''dset ^%s
+index ^%s.%s.gmp
+tdef % 3d linear %s %shr
+%s
+'''%(self.dsetmask,self.lmodel,dtg,nt,gtime,self.dtau,self.ctlgridvar)
+
+
+    def doGrib(self,dtg,verb=0):
+
+        # -- first set up the gribtype, etc
+        self.setxwgrib(dtg)
+        self.setctlgridvar(dtg)
+        self.makeCtl(dtg)
+
+        self.WriteCtl()  # from Model in M
+        self.DoGribmap(gmpverb=verb) # from Model in M
+
+
+    def setInventory(self,dtype='w2flds',override=0,unlink=0):
+
+        dbname='nwp2Inv-%s'%(dtype)
+        #tbdir=w2.Nwp2DataBdir
+        #self.iV=InvHash(dbname,tbdir,override=override)
+
+        tbdir=w2.Nwp2DataDSsBdir
+        self.iV=InvHash(dbname,tbdir,override=override,unlink=unlink)
+
+
+    def Model2PlotMinTau(self,dtg):
+        mintauPlot=144
+        return(mintauPlot)
+
+
+class Era5(Model2):
+
+    modelrestitle='T`bl`n|N400 L91'
+    modelDdtg=12
+    modelgridres='0.5'
+    modelres=modelgridres.replace('.','')
+
+    modelZgVar='zg/%f'%(gravity)
+    modelpslvar='psl*0.01'
+    modeltitleAck1="ECMWF Data Courtesy of ERA project"
+    modeltitleFullmod="ECMWF(ERA5)"
+
+    model='era5'
+    center='ecmwf'
+
+    dmodel='era5'
+    pmodel='er5'
+
+    pltdir='plt_ecmwf_%s'%(pmodel)
+
+    modelPlotTaus=[0,6,12,18,24,30,36,42,48,60,72,84,96,108,120,132,144,156,168]
+    gmodname="%s%s"%(pmodel,modelres)
+    regridTracker=0.5
+
+
+    def __init__(self,bdir2=None,gribver=2):
+
+        self.dirmodel=self.dmodel
+
+        if(bdir2 != None): self.bdir2=bdir2
+        
+        self.initModelCenter(self.center)
+        self.initGribVer(gribver)
+
+        self.location='wxmap2'
+
+        self.tautype='alltau'
+        self.gribtype='grb2'
+
+        self.nfields=94
+        self.nfieldsW2flds=66
+
+        self.tbase=self.dmodel
+
+        self.etau=240
+        self.dtau=6
+
+        self.rundtginc=12
+
+        self.adecksource='ecmwf'
+        self.adeckaid='era5'
+        self.tryarch=0
+        
+    def name2tau(self,ffile,dtg):
+        tau=240
+        return(tau)
+
+    def setDbase(self,dtg,dtype='w2flds',warn=0):
+
+        if(self.IsModel2(self.model) or self.IsModel1(self.model)):
+            if(not(hasattr(self,'lmodel'))): self.lmodel=self.dmodel
+
+            if(dtype == 'w2flds'):
+                self.dmodel=self.model
+                self.lmodel=self.model
+                
+            self.dbasedir="%s/%s"%(self.bddir,dtg)
+            self.dbasedirarch="%s/%s"%(self.bddirarch,dtg)
+
+            byear=dtg[0:4]
+            self.bddir="%s/%s"%(self.w2fldsSrcDir,byear)
+            self.useBddir=1
+            self.dbasedir="%s/%s"%(self.bddir,dtg)
+            self.dbase="%s/%s/%s-%s-%s-ua"%(self.bddir,dtg,self.lmodel,dtype,dtg)
+            self.dmask="%s-%s-%s-ua.%s"%(self.lmodel,dtype,dtg,self.gribtype)
+
+            self.dpath="%s.ctl"%(self.dbase)
+
+            self.dpathexists=os.path.exists(self.dpath)
+
+            # -- try dat5
+            #
+            if(not(self.dpathexists) and self.tryarch):
+                if(warn): print 'IIIIIIIIIIIIIIIIIIIIIIIIIIIIII M2.Model2.setDbase tryarch=1 -- trying the archive on: ',self.dbasedirarch,self.dtype
+                self.dbasedir=self.dbasedirarch
+                if(self.dtype == 'w2flds'):
+                    self.bddir=self.w2fldsArchDir
+                    self.dbasedir="%s/%s"%(self.bddir,dtg)
+                    self.dbase="%s/%s.%s.%s"%(self.dbasedir,self.lmodel,dtype,dtg)
+                    self.dmask="%s.%s.%s.f???.%s"%(self.lmodel,dtype,dtg,self.gribtype)
+                    
+                    self.dpath="%s.ctl"%(self.dbase)
+                    self.dpathexists=os.path.exists(self.dpath)
+            
+        else:
+            print 'EEE-M2.Era5.setDbase could not set M2.setDbase.dbase  model: ',self.model,'dtg: ',dtg,' dtype: ',self.dtype,' or maybe because model not in w2localvars.py Nwp2ModelsAll...'
+            sys.exit()
+
+        self.tdatbase=self.dbase
+
+    def GetDataStatus(self,dtg,checkNF=0,mintauNF=5):
+
+        if(hasattr(self,'bddirNWP2')):
+            tdir="%s/%s"%(self.bddirNWP2,dtg)
+        else:
+            tdir="%s/%s"%(self.bddir,dtg)
+
+        NFmin=self.nfields
+        if(checkNF): NFmin=self.nfields-mintauNF
+
+        lastTau=None
+        latestTau=None
+        latestCompleteTau=None
+        earlyTau=None
+        gmpAge=None
+        gmplastdogribmap=-999
+        gmplatestTau=-999
+        gmplastTau=-999
+
+        datataus=w2.Model2DataTaus(self.model,dtg)
+        
+        # -- for single tau in era5/ecm5 ... get the age from the single data file
+        #
+        stat=self.statuss[dtg]
+        itaus=stat.keys()
+        
+        if(len(itaus) == 1):
+            itau=itaus[0]
+            (age,siz)=stat[itau]
+        else:
+            age=-999
+            siz=-999
+        
+        for tau in datataus:
+            nf=self.nfieldsW2flds
+            self.statuss[dtg][tau]=(age,nf)
+        
+        status=self.statuss[dtg]
+        itaus=status.keys()
+        itaus.sort()
+        
+        ages={}
+        for itau in itaus:
+            ages[itau]=status[itau][0]
+
+
+        oldest=-1e20
+        youngest=+1e20
+
+        for itau in itaus:
+            if(ages[itau] < youngest):
+                youngest=ages[itau]
+                earlyTau=itau
+
+            # -- >= because for taus having the same age
+            #
+            if(ages[itau] >= oldest):
+                oldest=ages[itau]
+                latestTau=itau
+
+        if(len(status) >= 1):
+            lastTau=itaus[-1]
+            latestCompleteTau=lastTau
+
+
+        # -- forward search thru target data taus
+        # 
+
+        ndt=len(datataus)
+
+        if(self.tautype == 'alltau'):
+            latestCompleteTau=datataus[-1]
+            
+        else:
+            for n in range(0,ndt):
+                datatau=datataus[n]
+                gotit=0
+                for itau in itaus:
+                    if(datatau == itau):
+                        (age,nf)=self.statuss[dtg][itau]
+                        if(checkNF and nf < NFmin):
+                            gotit=0
+                            continue
+                        else:
+                            gotit=1
+                            latestCompleteTau=datatau
+                        break
+    
+    
+                if(gotit == 0):  break
+
+
+        # -- backward search (default)
+        #
+
+        latestCompleteTauBackward=-999
+
+        if(self.tautype == 'alltau' and self.dmodelType == None):
+            None
+        else:
+            for n in range(ndt-1,0,-1):
+                datatau=datataus[n]
+                gotit=0
+                for itau in itaus[-1:0:-1]:
+                    if(datatau == itau):
+                        (age,nf)=self.statuss[dtg][itau]
+                        if(checkNF and nf < NFmin):
+                            gotit=0
+                            continue
+                        else:
+                            gotit=1
+                            latestCompleteTauBackward=datatau
+                        break
+        
+                if(gotit == 1):  break
+        
+        self.dstdir=tdir
+        self.dsitaus=itaus
+        self.dslastTau=lastTau
+        self.dsgmpAge=gmpAge
+        self.dsoldestTauAge=oldest
+        self.dslatestTau=latestTau
+        self.dsyoungest=youngest
+        self.dsearlyTau=earlyTau
+        self.dsgmplastdogribmap=gmplastdogribmap
+        self.dsgmplatestTau=gmplatestTau
+        self.dsgmplastTau=gmplastTau
+        self.dslatestCompleteTau=latestCompleteTau
+        self.dslatestCompleteTauBackward=latestCompleteTauBackward
+
+        return(self)
+
+    def getDataTaus(self,dtg):
+        taus=range(0,120+1,6)+range(132,240+1,12)
+        return(taus)
+
+
+    # -- set prvar method to set dependence on tau
+    #
+    def setprvar2(self,dtg=None,tau=None):
+        modelprvar=self.modelprvar
+        if(tau == 0):
+            modelprvar="""_prvar='(( const(pr(t+1),0,-u)-const(pr(t-0),0,-u) )*4)'"""
+        elif(tau >= 6 and tau <= 120):
+            modelprvar="""_prvar='(( const(pr(t-0),0,-u)-const(pr(t-1),0,-u) )*4)'"""
+        elif(tau > 120):
+            modelprvar="""_prvar='(( const(pr(t-0),0,-u)-const(pr(t-2),0,-u) )*2)'"""
+            
+        return(modelprvar)
+    
+    def setprvar(self,dtg=None,tau=None):
+        modelprvar=self.modelprvar
+        
+        #if(tau >= 0 and tau <= 120):
+        if(tau == 0):
+            prl='''(const(prl.2(t+1),0,-u)-const(prl.2(t-0),0,-u))'''
+            prc='''(const(prc.2(t+1),0,-u)-const(prc.2(t-0),0,-u))'''
+            modelprvar="""_prvar='(( %s + %s )*4*1000)'"""%(prl,prc)
+
+        elif(tau == 6):
+            prl='''(const(prl.2(t+0),0,-u))'''
+            prc='''(const(prc.2(t+0),0,-u))'''
+            prl='''(const(prl.2(t+0),0,-u)-const(prl.2(t-1),0,-u))'''
+            prc='''(const(prc.2(t+0),0,-u)-const(prc.2(t-1),0,-u))'''
+            modelprvar="""_prvar='(( %s + %s )*4*1000)'"""%(prl,prc)
+
+        elif(tau >= 12 and tau <= 120):
+            prl='''(const(prl.2(t+0),0,-u)-const(prl.2(t-1),0,-u))'''
+            prc='''(const(prc.2(t+0),0,-u)-const(prc.2(t-1),0,-u))'''
+            modelprvar="""_prvar='(( %s + %s )*4*1000)'"""%(prl,prc)
+
+        elif(tau > 120):
+            prl='''(const(prl.2(t+0),0,-u)-const(prl.2(t-2),0,-u))'''
+            prc='''(const(prc.2(t+0),0,-u)-const(prc.2(t-2),0,-u))'''
+            modelprvar="""_prvar='(( %s + %s )*2*1000)'"""%(prl,prc)
+            
+        return(modelprvar)
+
+    def setprvarc(self,dtg=None,tau=None):
+        
+        #if(tau >= 0 and tau <= 120):
+        if(tau == 0):
+            prc='''(const(prc.2(t+1),0,-u)-const(prc.2(t-0),0,-u))'''
+            modelprvar="""_prvar='(( %s )*4*1000)'"""%(prc)
+
+        elif(tau == 6):
+            prc='''(const(prc.2(t+0),0,-u))'''
+            prc='''(const(prc.2(t+0),0,-u)-const(prc.2(t-1),0,-u))'''
+            modelprvar="""_prvar='(( %s )*4*1000)'"""%(prc)
+
+        elif(tau >= 12 and tau <= 120):
+            prc='''(const(prc.2(t+0),0,-u)-const(prc.2(t-1),0,-u))'''
+            modelprvar="""_prvar='(( %s )*4*1000)'"""%(prc)
+
+        elif(tau > 120):
+            prc='''(const(prc.2(t+0),0,-u)-const(prc.2(t-2),0,-u))'''
+            modelprvar="""_prvar='(( %s )*2*1000)'"""%(prc)
+            
+        return(modelprvar)
+
+
+    def setMaxtau(self,dtg):
+        hh=dtg[8:10]
+        if(hh == '00' or hh == '12'):  self.maxtau=240
+        else:    self.maxtau=-999
+        return(self.maxtau)
+
+    def setgmask(self,dtg):
+        self.gmask="%s-w2flds-%s-ua*"%(self.dmodel,dtg)
+
+
+    def setxwgrib(self,dtg):
+
+        self.xwgrib='wgrib2'
+        self.dmask="%s-w2flds-%s-ua.%s"%(self.dmodel,dtg,self.gribtype)
+
+
+    def setctlgridvar(self,dtg):
+
+        latlongrid='''xdef 360 linear   0.0 1.0
+ydef 181 linear -90.0 1.0'''
+
+        if(self.gribtype == 'grb1'):
+            optiondtype='''options yrev template
+dtype grib
+zdef 14 levels 1000 925 850 700 500 400 300 250 200 150 100 50 20 10'''
+
+        elif(self.gribtype == 'grb2'):
+            optiondtype='''options yrev template pascals
+dtype grib2'''
+
+
+        self.ctlgridvar='''undef 9.999E+20
+title ecmo 1deg deterministic run
+*  produced by grib2ctl v0.9.12.5p16
+%s
+%s
+vars 19
+sic       0  31,1,0  ** Sea-ice cover [(0-1)]
+sst       0  34,1,0  ** Sea surface temperature [K]
+uas       0 165,1,0  ** 10 metre u wind component m s**-1
+vas       0 166,1,0  ** 10 metre v wind component m s**-1
+tads      0 168,1,0  ** 2 metre dewpoint temperature K
+tas       0 167,1,0  ** 2 metre temperature K
+zg       14 156,100,0 ** Height (geopotential) m
+psln      0 152,109,1  ** Log surface pressure -
+tmin      0 202,1,0  ** Min 2m temp since previous post-processing K
+psl       0 151,1,0  ** Mean sea level pressure Pa
+tmax      0 201,1,0  ** Max 2m temp since previous post-processing K
+hur      14 157,100,0 ** Relative humidity %%
+ta       14 130,100,0 ** Temperature K
+clt       0 164,1,0  ** Total cloud cover (0 - 1)
+pr        0 228,1,0  ** Total precipitation m
+prl       0 142,1,0  ** large-scale precipitation m
+prc       0 143,1,0  ** convective precipitation m
+ua       14 131,100,0 ** U-velocity m s**-1
+va       14 132,100,0 ** V-velocity m s**-1
+endvars'''%(optiondtype,latlongrid)
+
+
+        allvarsnew='''vars 30
+10FGsfc  0 49,1,0  ** Wind gust at 10 metres [m s**-1]
+10Usfc  0 165,1,0  ** 10 metre U wind component [m s**-1]
+10Vsfc  0 166,1,0  ** 10 metre V wind component [m s**-1]
+2Dsfc  0 168,1,0  ** 2 metre dewpoint temperature [K]
+2Tsfc  0 167,1,0  ** 2 metre temperature [K]
+BLHsfc  0 159,1,0  ** Boundary layer height [m]
+CAPEsfc  0 59,1,0  ** Convective available potential energy [J kg**-1]
+CIsfc  0 31,1,0  ** Sea-ice cover [(0-1)]
+CPsfc  0 143,1,0  ** Convective precipitation [m]
+GHprs 14 156,100,0 ** Height [m]
+LNSPhbl  0 152,109,1  ** Logarithm of surface pressure
+LSPsfc  0 142,1,0  ** Stratiform precipitation [m]
+MN2Tsfc  0 202,1,0  ** Minimum 2 metre temperature since previous post-processing [K]
+MSLsfc  0 151,1,0  ** Mean sea-level pressure [Pa]
+MX2Tsfc  0 201,1,0  ** Maximum 2 metre temperature since previous post-processing [K]
+Rprs 14 157,100,0 ** Relative humidity [%]
+SFsfc  0 144,1,0  ** Snowfall (convective + stratiform) [m of water equivalent]
+SPhbl  0 134,109,1  ** Surface pressure [Pa]
+SSTKsfc  0 34,1,0  ** Sea surface temperature [K]
+Tprs 14 130,100,0 ** Temperature [K]
+TCCsfc  0 164,1,0  ** Total cloud cover [(0 - 1)]
+TCWsfc  0 136,1,0  ** Total column water [kg m**-2]
+TPsfc  0 228,1,0  ** Total precipitation [m]
+TTRsfc  0 179,1,0  ** Top thermal radiation [W m**-2 s]
+Uprs 14 131,100,0 ** U velocity [m s**-1]
+Vprs 14 132,100,0 ** V velocity [m s**-1]
+Wprs  0 135,100,700  ** Vertical velocity [Pa s**-1]
+var121sfc  0 121,1,0  ** undefined
+var122sfc  0 122,1,0  ** undefined
+var123sfc  0 123,1,0  ** undefined'''
+
+        allvarsold='''vars 15
+10Usfc  0 165,1,0  ** 10 metre U wind component [m s**-1]
+10Vsfc  0 166,1,0  ** 10 metre V wind component [m s**-1]
+2Dsfc  0 168,1,0  ** 2 metre dewpoint temperature [K]
+2Tsfc  0 167,1,0  ** 2 metre temperature [K]
+GHprs 14 156,100,0 ** Height [m]
+LNSPhbl  0 152,109,1  ** Logarithm of surface pressure
+MN2Tsfc  0 202,1,0  ** Minimum 2 metre temperature since previous post-processing [K]
+MSLsfc  0 151,1,0  ** Mean sea-level pressure [Pa]
+MX2Tsfc  0 201,1,0  ** Maximum 2 metre temperature since previous post-processing [K]
+Rprs 14 157,100,0 ** Relative humidity [%]
+Tprs 14 130,100,0 ** Temperature [K]
+TCCsfc  0 164,1,0  ** Total cloud cover [(0 - 1)]
+TPsfc  0 228,1,0  ** Total precipitation [m]
+Uprs 14 131,100,0 ** U velocity [m s**-1]
+Vprs 14 132,100,0 ** V velocity [m s**-1]'''
+
+
+
+def setModel2(model,bdir2=None):
+
+    model=model.lower()
+    
+    if(model == 'era5'): return(Era5(bdir2=bdir2))
+
+    ####lif(model == 'fimx'): return(Fimx())
+    else:
+        print 'EEE(M2.setModel2) invalid model: ',model,' in setModel2...sayoonara'
+        sys.exit()
+        return(None)
+
+    return(fmodel)
+
         
         
 

@@ -1,0 +1,1 @@
+dtg,stmid,sname,tcvmax,tctype,rlat,rlon,vmax,pmin,dir,spd,trkdir,trkspd,r34m,r34ne,r34se,r34sw,r34nw,r50m,r50ne,r50se,r50sw,r50nw,tccode,wncode,dirtype,posttype,roci,poci,alf,depth,rmax,tdo,
