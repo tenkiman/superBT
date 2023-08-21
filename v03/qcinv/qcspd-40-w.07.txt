@@ -1,0 +1,23 @@
+NNN   stmopt: w.2007
+NNN      nNN:   27   nDev:   27   nNon:   70
+NNN     nAll:  124  nqAll:   17    %nq: 13.7%
+NNN    nqDev:    5  nqNon:   11   nqNN:    1
+DDD rFormDev:  28% rFormN:  28%  nMiss:  0.0%
+SSS  bspdmax:   40
+b2w.2007   57 DEV    NN: 01w.2007 Posit: 2007032800 N-1:   3.2  168.0 N:    3.4  162.3  SPD:    57  dir:   272
+c8w.2007   48 DEV    NN: 07w.2007 Posit: 2007080406 N-1:  13.3  137.7 N:   17.9  139.0  SPD:    48  dir:    15
+f7w.2007   41 DEV    NN: 11w.2007 Posit: 2007090400 N-1:  20.0  165.0 N:   24.1  165.0  SPD:    41  dir:   360
+i4w.2007   49 DEV    NN: 20w.2007 Posit: 2007102500 N-1:  15.2  137.0 N:   19.6  134.7  SPD:    49  dir:   333
+j4w.2007   57 DEV    NN: 25w.2007 Posit: 2007112300 N-1:   3.0  150.2 N:    8.6  151.5  SPD:    57  dir:    13
+a4w.2007 -999 NONdev NN: sngleton Posit: 2007012318 N-1:   6.0   91.0 N:    6.0   91.0  SPD:  -999  dir:   360
+a8w.2007   42 NONdev NN:          Posit: 2007022300 N-1:   2.2  164.4 N:    5.1  161.4  SPD:    42  dir:   314
+a9w.2007   43 NONdev NN:          Posit: 2007030200 N-1:   3.0  146.7 N:    6.3  144.0  SPD:    43  dir:   321
+b6w.2007   54 NONdev NN:          Posit: 2007042800 N-1:   5.4  108.4 N:    8.3  103.8  SPD:    54  dir:   302
+c0w.2007   62 NONdev NN:          Posit: 2007070900 N-1:  13.3  115.1 N:   18.5  118.7  SPD:    62  dir:    34
+c7w.2007 -999 NONdev NN: sngleton Posit: 2007061818 N-1:  15.2  131.5 N:   15.2  131.5  SPD:  -999  dir:   360
+e9w.2007   44 NONdev NN:          Posit: 2007081900 N-1:  16.0  136.7 N:   18.5  140.5  SPD:    44  dir:    55
+f8w.2007   53 NONdev NN:          Posit: 2007092700 N-1:  12.9  141.0 N:   14.1  135.7  SPD:    53  dir:   283
+h2w.2007   47 NONdev NN:          Posit: 2007100200 N-1:  11.4  143.5 N:   15.7  145.5  SPD:    47  dir:    24
+i5w.2007   44 NONdev NN:          Posit: 2007102900 N-1:  10.6  121.1 N:   12.1  116.9  SPD:    44  dir:   290
+i9w.2007   42 NONdev NN:          Posit: 2007110600 N-1:   2.2  153.7 N:    4.1  150.0  SPD:    42  dir:   297
+22w.2007   44 NN     NN: 22w.2007 Posit: 2007111006 N-1:  15.1  144.7 N:   18.6  142.0  SPD:    44  dir:   324

@@ -1,0 +1,1125 @@
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070100                                              :  1.136      at: 2023081812 04:48:07
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070106                                              :  0.100      at: 2023081812 04:48:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070112                                              :  0.451      at: 2023081812 04:48:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070118                                              :  0.100      at: 2023081812 04:48:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070200                                              :  0.506      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070206                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070212                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070218                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070300                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070306                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070312                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070318                                              :  0.100      at: 2023081812 04:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070400                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070406                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070412                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070418                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070500                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070506                                              :  0.101      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070512                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070518                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070600                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070606                                              :  0.100      at: 2023081812 04:48:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070612                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070618                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070700                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070706                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070712                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070718                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070800                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070806                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070812                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070818                                              :  0.100      at: 2023081812 04:48:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070900                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070906                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070912                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006070918                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071000                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071006                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071012                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071018                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071100                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071106                                              :  0.100      at: 2023081812 04:48:12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071112                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071118                                              :  0.101      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071200                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071206                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071212                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071218                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071300                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071306                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071312                                              :  0.100      at: 2023081812 04:48:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071318                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071400                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071406                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071412                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071418                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071500                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071506                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071512                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071518                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071600                                              :  0.100      at: 2023081812 04:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071606                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071612                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071618                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071700                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071706                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071712                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071718                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071800                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071806                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071812                                              :  0.100      at: 2023081812 04:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071818                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071900                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071906                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071912                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006071918                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072000                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072006                                              :  0.101      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072012                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072018                                              :  0.100      at: 2023081812 04:48:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072100                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072106                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072112                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072118                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072200                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072206                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072212                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072218                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072300                                              :  0.100      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072306                                              :  0.101      at: 2023081812 04:48:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072312                                              :  0.101      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072318                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072400                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072406                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072412                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072418                                              :  0.101      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072500                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072506                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072512                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072518                                              :  0.100      at: 2023081812 04:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072600                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072606                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072612                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072618                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072700                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072706                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072712                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072718                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072800                                              :  0.100      at: 2023081812 04:48:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072806                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072812                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072818                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072900                                              :  0.101      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072906                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072912                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006072918                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073000                                              :  0.101      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073006                                              :  0.101      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073012                                              :  0.100      at: 2023081812 04:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073018                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073100                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073106                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073112                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006073118                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080100                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080106                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080112                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080118                                              :  0.100      at: 2023081812 04:48:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080200                                              :  0.102      at: 2023081812 04:48:21
+A8P.2007 2006080206 vmax: 15   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080206.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080206                                              :  2.055      at: 2023081812 04:48:24
+A8P.2007 2006080212 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080212.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080212                                              :  0.116      at: 2023081812 04:48:24
+A8P.2007 2006080218 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080218.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080218                                              :  0.118      at: 2023081812 04:48:24
+A8P.2007 2006080300 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080300.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080300                                              :  0.211      at: 2023081812 04:48:24
+A8P.2007 2006080306 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080306.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080306                                              :  0.107      at: 2023081812 04:48:24
+A8P.2007 2006080312 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080312.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080312                                              :  0.281      at: 2023081812 04:48:24
+A8P.2007 2006080318 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080318.tera5.A8P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080318                                              :  0.101      at: 2023081812 04:48:24
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080400                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080406                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080412                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080418                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080500                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080506                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080512                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080518                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080600                                              :  0.100      at: 2023081812 04:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080606                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080612                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080618                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080700                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080706                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080712                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080718                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080800                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080806                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080812                                              :  0.100      at: 2023081812 04:48:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080818                                              :  0.100      at: 2023081812 04:48:27
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080900                                              :  0.100      at: 2023081812 04:48:27
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080906                                              :  0.100      at: 2023081812 04:48:27
+A9P.2007 2006080912 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080912.tera5.A9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080912                                              :  0.113      at: 2023081812 04:48:27
+A9P.2007 2006080918 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006080918.tera5.A9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006080918                                              :  0.242      at: 2023081812 04:48:27
+A9P.2007 2006081000 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006081000.tera5.A9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081000                                              :  0.301      at: 2023081812 04:48:27
+A9P.2007 2006081006 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006081006.tera5.A9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081006                                              :  0.703      at: 2023081812 04:48:28
+A9P.2007 2006081012 vmax: 15   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006081012.tera5.A9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081012                                              :  0.149      at: 2023081812 04:48:28
+A9P.2007 2006081018 vmax: 15   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006081018.tera5.A9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081018                                              :  0.151      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081100                                              :  0.106      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081106                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081112                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081118                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081200                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081206                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081212                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081218                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081300                                              :  0.100      at: 2023081812 04:48:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081306                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081312                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081318                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081400                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081406                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081412                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081418                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081500                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081506                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081512                                              :  0.100      at: 2023081812 04:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081518                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081600                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081606                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081612                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081618                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081700                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081706                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081712                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081718                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081800                                              :  0.100      at: 2023081812 04:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081806                                              :  0.101      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081812                                              :  0.101      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081818                                              :  0.100      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081900                                              :  0.101      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081906                                              :  0.100      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081912                                              :  0.100      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006081918                                              :  0.100      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082000                                              :  0.100      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082006                                              :  0.100      at: 2023081812 04:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082012                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082018                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082100                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082106                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082112                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082118                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082200                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082206                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082212                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082218                                              :  0.100      at: 2023081812 04:48:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082300                                              :  0.101      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082306                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082312                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082318                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082400                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082406                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082412                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082418                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082500                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082506                                              :  0.100      at: 2023081812 04:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082512                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082518                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082600                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082606                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082612                                              :  0.101      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082618                                              :  0.101      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082700                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082706                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082712                                              :  0.100      at: 2023081812 04:48:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082718                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082800                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082806                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082812                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082818                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082900                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082906                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082912                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006082918                                              :  0.101      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083000                                              :  0.100      at: 2023081812 04:48:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083006                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083012                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083018                                              :  0.101      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083100                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083106                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083112                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006083118                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090100                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090106                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090112                                              :  0.100      at: 2023081812 04:48:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090118                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090200                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090206                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090212                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090218                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090300                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090306                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090312                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090318                                              :  0.100      at: 2023081812 04:48:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090400                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090406                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090412                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090418                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090500                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090506                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090512                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090518                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090600                                              :  0.100      at: 2023081812 04:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090606                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090612                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090618                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090700                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090706                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090712                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090718                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090800                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090806                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090812                                              :  0.100      at: 2023081812 04:48:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090818                                              :  0.104      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090900                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090906                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090912                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006090918                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091000                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091006                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091012                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091018                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091100                                              :  0.100      at: 2023081812 04:48:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091106                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091112                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091118                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091200                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091206                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091212                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091218                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091300                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091306                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091312                                              :  0.100      at: 2023081812 04:48:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091318                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091400                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091406                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091412                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091418                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091500                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091506                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091512                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091518                                              :  0.100      at: 2023081812 04:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091600                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091606                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091612                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091618                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091700                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091706                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091712                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091718                                              :  0.100      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091800                                              :  0.109      at: 2023081812 04:48:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091806                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091812                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091818                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091900                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091906                                              :  0.101      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091912                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006091918                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092000                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092006                                              :  0.100      at: 2023081812 04:48:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092012                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092018                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092100                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092106                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092112                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092118                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092200                                              :  0.102      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092206                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092212                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092218                                              :  0.100      at: 2023081812 04:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092300                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092306                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092312                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092318                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092400                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092406                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092412                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092418                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092500                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092506                                              :  0.100      at: 2023081812 04:48:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092512                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092518                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092600                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092606                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092612                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092618                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092700                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092706                                              :  0.101      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092712                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092718                                              :  0.100      at: 2023081812 04:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092800                                              :  0.101      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092806                                              :  0.100      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092812                                              :  0.100      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092818                                              :  0.101      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092900                                              :  0.101      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092906                                              :  0.101      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092912                                              :  0.101      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006092918                                              :  0.100      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006093000                                              :  0.100      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006093006                                              :  0.100      at: 2023081812 04:48:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006093012                                              :  0.101      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006093018                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100100                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100106                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100112                                              :  0.101      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100118                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100200                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100206                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100212                                              :  0.100      at: 2023081812 04:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100218                                              :  0.100      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100300                                              :  0.100      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100306                                              :  0.100      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100312                                              :  0.101      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100318                                              :  0.101      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100400                                              :  0.101      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100406                                              :  0.100      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100412                                              :  0.100      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100418                                              :  0.101      at: 2023081812 04:48:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100500                                              :  0.101      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100506                                              :  0.101      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100512                                              :  0.100      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100518                                              :  0.100      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100600                                              :  0.100      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100606                                              :  0.100      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100612                                              :  0.100      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100618                                              :  0.100      at: 2023081812 04:48:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100700                                              :  0.100      at: 2023081812 04:48:52
+A0P.2007 2006100706 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006100706.tera5.A0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100706                                              :  0.114      at: 2023081812 04:48:52
+A0P.2007 2006100712 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006100712.tera5.A0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100712                                              :  0.116      at: 2023081812 04:48:53
+A0P.2007 2006100718 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006100718.tera5.A0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100718                                              :  0.108      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100800                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100806                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100812                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100818                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100900                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100906                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100912                                              :  0.100      at: 2023081812 04:48:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006100918                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101000                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101006                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101012                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101018                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101100                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101106                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101112                                              :  0.100      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101118                                              :  0.101      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101200                                              :  0.101      at: 2023081812 04:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101206                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101212                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101218                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101300                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101306                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101312                                              :  0.101      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101318                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101400                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101406                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101412                                              :  0.100      at: 2023081812 04:48:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101418                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101500                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101506                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101512                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101518                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101600                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101606                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101612                                              :  0.100      at: 2023081812 04:48:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101618                                              :  0.100      at: 2023081812 04:48:56
+A1S.2007 2006101700 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101700.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101700                                              :  0.373      at: 2023081812 04:48:57
+A1S.2007 2006101706 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101706.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101706                                              :  0.784      at: 2023081812 04:48:58
+A1S.2007 2006101712 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101712.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101712                                              :  0.109      at: 2023081812 04:48:58
+A1S.2007 2006101718 vmax: 20   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101718.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101718                                              :  0.374      at: 2023081812 04:48:58
+A1S.2007 2006101800 vmax: 25   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101800.tera5.A1S.2007
+A2P.2007 2006101800 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101800.tera5.A2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101800                                              :  0.754      at: 2023081812 04:48:59
+A1S.2007 2006101806 vmax: 25   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101806.tera5.A1S.2007
+A2P.2007 2006101806 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101806.tera5.A2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101806                                              :  0.609      at: 2023081812 04:48:59
+A1S.2007 2006101812 vmax: 25   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101812.tera5.A1S.2007
+A2P.2007 2006101812 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101812.tera5.A2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101812                                              :  1.430      at: 2023081812 04:49:01
+A1S.2007 2006101818 vmax: 30   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101818.tera5.A1S.2007
+A2P.2007 2006101818 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101818.tera5.A2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101818                                              :  0.722      at: 2023081812 04:49:02
+A1S.2007 2006101900 vmax: 30   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101900.tera5.A1S.2007
+A2P.2007 2006101900 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101900.tera5.A2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101900                                              :  0.240      at: 2023081812 04:49:02
+A1S.2007 2006101906 vmax: 30   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101906.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101906                                              :  0.246      at: 2023081812 04:49:02
+A1S.2007 2006101912 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101912.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101912                                              :  0.529      at: 2023081812 04:49:03
+A1S.2007 2006101918 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006101918.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006101918                                              :  0.624      at: 2023081812 04:49:03
+A1S.2007 2006102000 vmax: 30   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102000.tera5.A1S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102000                                              :  0.877      at: 2023081812 04:49:04
+A1S.2007 2006102006 vmax: 30   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102006.tera5.A1S.2007
+A3P.2007 2006102006 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102006.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102006                                              :  0.940      at: 2023081812 04:49:05
+A1S.2007 2006102012 vmax: 25   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102012.tera5.A1S.2007
+A3P.2007 2006102012 vmax: 20   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102012.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102012                                              :  1.102      at: 2023081812 04:49:06
+A1S.2007 2006102018 vmax: 25   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102018.tera5.A1S.2007
+A3P.2007 2006102018 vmax: 25   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102018.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102018                                              :  0.974      at: 2023081812 04:49:07
+A1S.2007 2006102100 vmax: 25   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102100.tera5.A1S.2007
+A3P.2007 2006102100 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102100.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102100                                              :  1.341      at: 2023081812 04:49:08
+A1S.2007 2006102106 vmax: 25   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102106.tera5.A1S.2007
+A3P.2007 2006102106 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102106.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102106                                              :  2.167      at: 2023081812 04:49:11
+A1S.2007 2006102112 vmax: 25   nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102112.tera5.A1S.2007
+A3P.2007 2006102112 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102112.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102112                                              :  1.583      at: 2023081812 04:49:12
+A1S.2007 2006102118 vmax: 25   nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102118.tera5.A1S.2007
+A3P.2007 2006102118 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102118.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102118                                              :  1.091      at: 2023081812 04:49:13
+01P.2007 2006102200 vmax: 45   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102200.tera5.01P.2007
+A1S.2007 2006102200 vmax: 25   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102200.tera5.A1S.2007
+A3P.2007 2006102200 vmax: 45   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102200.tera5.A3P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102200                                              :  1.049      at: 2023081812 04:49:14
+01P.2007 2006102206 vmax: 45   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102206.tera5.01P.2007
+A1S.2007 2006102206 vmax: 25   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102206.tera5.A1S.2007
+A4P.2007 2006102206 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102206.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102206                                              :  2.212      at: 2023081812 04:49:17
+01P.2007 2006102212 vmax: 55   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102212.tera5.01P.2007
+A1S.2007 2006102212 vmax: 25   nl:  15 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102212.tera5.A1S.2007
+A4P.2007 2006102212 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102212.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102212                                              :  1.214      at: 2023081812 04:49:18
+01P.2007 2006102218 vmax: 65   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102218.tera5.01P.2007
+A1S.2007 2006102218 vmax: 25   nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102218.tera5.A1S.2007
+A4P.2007 2006102218 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102218.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102218                                              :  1.029      at: 2023081812 04:49:19
+01P.2007 2006102300 vmax: 80   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102300.tera5.01P.2007
+A1S.2007 2006102300 vmax: 25   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102300.tera5.A1S.2007
+A4P.2007 2006102300 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102300.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102300                                              :  2.141      at: 2023081812 04:49:21
+01P.2007 2006102306 vmax: 80   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102306.tera5.01P.2007
+A1S.2007 2006102306 vmax: 25   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102306.tera5.A1S.2007
+A4P.2007 2006102306 vmax: 15   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102306.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102306                                              :  1.271      at: 2023081812 04:49:22
+01P.2007 2006102312 vmax: 85   nl:  15 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102312.tera5.01P.2007
+A1S.2007 2006102312 vmax: 25   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102312.tera5.A1S.2007
+A4P.2007 2006102312 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102312.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102312                                              :  4.920      at: 2023081812 04:49:27
+01P.2007 2006102318 vmax: 90   nl:  15 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102318.tera5.01P.2007
+A1S.2007 2006102318 vmax: 25   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102318.tera5.A1S.2007
+A4P.2007 2006102318 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102318.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102318                                              :  1.208      at: 2023081812 04:49:28
+01P.2007 2006102400 vmax: 115  nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102400.tera5.01P.2007
+A1S.2007 2006102400 vmax: 25   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102400.tera5.A1S.2007
+A4P.2007 2006102400 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102400.tera5.A4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102400                                              :  5.343      at: 2023081812 04:49:34
+01P.2007 2006102406 vmax: 115  nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102406.tera5.01P.2007
+A1S.2007 2006102406 vmax: 25   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102406.tera5.A1S.2007
+A4P.2007 2006102406 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102406.tera5.A4P.2007
+A5P.2007 2006102406 vmax: 15   nl:  15 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102406.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102406                                              : 26.920      at: 2023081812 04:50:01
+01P.2007 2006102412 vmax: 105  nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102412.tera5.01P.2007
+A1S.2007 2006102412 vmax: 25   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102412.tera5.A1S.2007
+A4P.2007 2006102412 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102412.tera5.A4P.2007
+A5P.2007 2006102412 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102412.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102412                                              :  0.972      at: 2023081812 04:50:02
+01P.2007 2006102418 vmax: 85   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102418.tera5.01P.2007
+A1S.2007 2006102418 vmax: 25   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102418.tera5.A1S.2007
+A4P.2007 2006102418 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102418.tera5.A4P.2007
+A5P.2007 2006102418 vmax: 15   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102418.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102418                                              :  0.404      at: 2023081812 04:50:02
+01P.2007 2006102500 vmax: 70   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102500.tera5.01P.2007
+A1S.2007 2006102500 vmax: 25   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102500.tera5.A1S.2007
+A4P.2007 2006102500 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102500.tera5.A4P.2007
+A5P.2007 2006102500 vmax: 20   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102500.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102500                                              :  0.352      at: 2023081812 04:50:03
+01P.2007 2006102506 vmax: 60   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102506.tera5.01P.2007
+A5P.2007 2006102506 vmax: 20   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102506.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102506                                              :  0.141      at: 2023081812 04:50:03
+01P.2007 2006102512 vmax: 45   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102512.tera5.01P.2007
+A5P.2007 2006102512 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102512.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102512                                              :  0.256      at: 2023081812 04:50:03
+01P.2007 2006102518 vmax: 40   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102518.tera5.01P.2007
+A5P.2007 2006102518 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102518.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102518                                              :  0.210      at: 2023081812 04:50:03
+01P.2007 2006102600 vmax: 30   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102600.tera5.01P.2007
+A5P.2007 2006102600 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102600.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102600                                              :  0.189      at: 2023081812 04:50:03
+01P.2007 2006102606 vmax: 25   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102606.tera5.01P.2007
+A5P.2007 2006102606 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102606.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102606                                              :  0.121      at: 2023081812 04:50:04
+A5P.2007 2006102612 vmax: 20   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102612.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102612                                              :  0.314      at: 2023081812 04:50:04
+A5P.2007 2006102618 vmax: 20   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102618.tera5.A5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102618                                              :  0.116      at: 2023081812 04:50:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102700                                              :  0.101      at: 2023081812 04:50:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102706                                              :  0.101      at: 2023081812 04:50:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102712                                              :  0.101      at: 2023081812 04:50:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102718                                              :  0.101      at: 2023081812 04:50:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102800                                              :  0.101      at: 2023081812 04:50:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102806                                              :  0.100      at: 2023081812 04:50:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102812                                              :  0.100      at: 2023081812 04:50:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102818                                              :  0.101      at: 2023081812 04:50:05
+A6P.2007 2006102900 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102900.tera5.A6P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102900                                              :  0.397      at: 2023081812 04:50:05
+A6P.2007 2006102906 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102906.tera5.A6P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102906                                              :  0.107      at: 2023081812 04:50:05
+A6P.2007 2006102912 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102912.tera5.A6P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102912                                              :  0.109      at: 2023081812 04:50:05
+A6P.2007 2006102918 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006102918.tera5.A6P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006102918                                              :  0.112      at: 2023081812 04:50:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103000                                              :  0.100      at: 2023081812 04:50:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103006                                              :  0.100      at: 2023081812 04:50:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103012                                              :  0.101      at: 2023081812 04:50:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103018                                              :  0.101      at: 2023081812 04:50:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103100                                              :  0.100      at: 2023081812 04:50:06
+A7P.2007 2006103106 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006103106.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103106                                              :  0.140      at: 2023081812 04:50:06
+A7P.2007 2006103112 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006103112.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103112                                              :  0.113      at: 2023081812 04:50:06
+A7P.2007 2006103118 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006103118.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006103118                                              :  0.130      at: 2023081812 04:50:06
+A7P.2007 2006110100 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110100.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110100                                              :  0.128      at: 2023081812 04:50:07
+A7P.2007 2006110106 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110106.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110106                                              :  0.114      at: 2023081812 04:50:07
+A7P.2007 2006110112 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110112.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110112                                              :  0.101      at: 2023081812 04:50:07
+A7P.2007 2006110118 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110118.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110118                                              :  0.223      at: 2023081812 04:50:07
+A7P.2007 2006110200 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110200.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110200                                              :  0.113      at: 2023081812 04:50:07
+A7P.2007 2006110206 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110206.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110206                                              :  0.101      at: 2023081812 04:50:07
+A7P.2007 2006110212 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110212.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110212                                              :  0.229      at: 2023081812 04:50:07
+A7P.2007 2006110218 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110218.tera5.A7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110218                                              :  0.117      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110300                                              :  0.100      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110306                                              :  0.100      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110312                                              :  0.101      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110318                                              :  0.100      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110400                                              :  0.101      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110406                                              :  0.100      at: 2023081812 04:50:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110412                                              :  0.101      at: 2023081812 04:50:08
+B9P.2007 2006110418 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110418.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110418                                              :  0.129      at: 2023081812 04:50:08
+B8S.2007 2006110500 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110500.tera5.B8S.2007
+B9P.2007 2006110500 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110500.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110500                                              :  0.665      at: 2023081812 04:50:09
+B8S.2007 2006110506 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110506.tera5.B8S.2007
+B9P.2007 2006110506 vmax: 15   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110506.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110506                                              :  0.133      at: 2023081812 04:50:09
+B8S.2007 2006110512 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110512.tera5.B8S.2007
+B9P.2007 2006110512 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110512.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110512                                              :  0.445      at: 2023081812 04:50:10
+B8S.2007 2006110518 vmax: 15   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110518.tera5.B8S.2007
+B9P.2007 2006110518 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110518.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110518                                              :  0.142      at: 2023081812 04:50:10
+B8S.2007 2006110600 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110600.tera5.B8S.2007
+B9P.2007 2006110600 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110600.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110600                                              :  0.384      at: 2023081812 04:50:10
+B8S.2007 2006110606 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110606.tera5.B8S.2007
+B9P.2007 2006110606 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110606.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110606                                              :  1.068      at: 2023081812 04:50:11
+B8S.2007 2006110612 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110612.tera5.B8S.2007
+B9P.2007 2006110612 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110612.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110612                                              :  0.135      at: 2023081812 04:50:11
+B8S.2007 2006110618 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110618.tera5.B8S.2007
+B9P.2007 2006110618 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110618.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110618                                              :  0.469      at: 2023081812 04:50:12
+B8S.2007 2006110700 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110700.tera5.B8S.2007
+B9P.2007 2006110700 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110700.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110700                                              :  0.325      at: 2023081812 04:50:12
+B8S.2007 2006110706 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110706.tera5.B8S.2007
+B9P.2007 2006110706 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110706.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110706                                              :  0.124      at: 2023081812 04:50:12
+B8S.2007 2006110712 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110712.tera5.B8S.2007
+B9P.2007 2006110712 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110712.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110712                                              :  0.234      at: 2023081812 04:50:13
+B9P.2007 2006110718 vmax: 15   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110718.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110718                                              :  0.599      at: 2023081812 04:50:13
+B9P.2007 2006110800 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110800.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110800                                              :  0.373      at: 2023081812 04:50:14
+B9P.2007 2006110806 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110806.tera5.B9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110806                                              :  0.108      at: 2023081812 04:50:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110812                                              :  0.100      at: 2023081812 04:50:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110818                                              :  0.101      at: 2023081812 04:50:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110900                                              :  0.100      at: 2023081812 04:50:14
+B0P.2007 2006110906 vmax: 15   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110906.tera5.B0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110906                                              :  0.208      at: 2023081812 04:50:14
+B0P.2007 2006110912 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110912.tera5.B0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110912                                              :  0.147      at: 2023081812 04:50:14
+B0P.2007 2006110918 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006110918.tera5.B0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006110918                                              :  0.117      at: 2023081812 04:50:14
+B0P.2007 2006111000 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111000.tera5.B0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111000                                              :  0.197      at: 2023081812 04:50:15
+B0P.2007 2006111006 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111006.tera5.B0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111006                                              :  0.108      at: 2023081812 04:50:15
+B0P.2007 2006111012 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111012.tera5.B0P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111012                                              :  0.107      at: 2023081812 04:50:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111018                                              :  0.101      at: 2023081812 04:50:15
+B1P.2007 2006111100 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111100.tera5.B1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111100                                              :  0.236      at: 2023081812 04:50:15
+B1P.2007 2006111106 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111106.tera5.B1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111106                                              :  0.102      at: 2023081812 04:50:15
+B1P.2007 2006111112 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111112.tera5.B1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111112                                              :  0.107      at: 2023081812 04:50:15
+B1P.2007 2006111118 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111118.tera5.B1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111118                                              :  0.216      at: 2023081812 04:50:16
+B1P.2007 2006111200 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111200.tera5.B1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111200                                              :  0.113      at: 2023081812 04:50:16
+B1P.2007 2006111206 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111206.tera5.B1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111206                                              :  0.204      at: 2023081812 04:50:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111212                                              :  0.101      at: 2023081812 04:50:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111218                                              :  0.100      at: 2023081812 04:50:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111300                                              :  0.101      at: 2023081812 04:50:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111306                                              :  0.100      at: 2023081812 04:50:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111312                                              :  0.100      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111318                                              :  0.101      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111400                                              :  0.101      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111406                                              :  0.100      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111412                                              :  0.100      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111418                                              :  0.100      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111500                                              :  0.101      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111506                                              :  0.101      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111512                                              :  0.101      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111518                                              :  0.101      at: 2023081812 04:50:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111600                                              :  0.100      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111606                                              :  0.100      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111612                                              :  0.101      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111618                                              :  0.101      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111700                                              :  0.101      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111706                                              :  0.101      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111712                                              :  0.101      at: 2023081812 04:50:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111718                                              :  0.101      at: 2023081812 04:50:18
+B2P.2007 2006111800 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111800.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111800                                              :  0.651      at: 2023081812 04:50:19
+B2P.2007 2006111806 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111806.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111806                                              :  0.110      at: 2023081812 04:50:19
+B2P.2007 2006111812 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111812.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111812                                              :  0.640      at: 2023081812 04:50:20
+B2P.2007 2006111818 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111818.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111818                                              :  0.405      at: 2023081812 04:50:20
+B2P.2007 2006111900 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111900.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111900                                              :  0.253      at: 2023081812 04:50:20
+B2P.2007 2006111906 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111906.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111906                                              :  0.309      at: 2023081812 04:50:21
+B2P.2007 2006111912 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111912.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111912                                              :  0.604      at: 2023081812 04:50:21
+B2P.2007 2006111918 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006111918.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006111918                                              :  0.108      at: 2023081812 04:50:21
+B2P.2007 2006112000 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112000.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112000                                              :  0.746      at: 2023081812 04:50:22
+B2P.2007 2006112006 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112006.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112006                                              :  0.951      at: 2023081812 04:50:23
+B2P.2007 2006112012 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112012.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112012                                              :  0.620      at: 2023081812 04:50:24
+B2P.2007 2006112018 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112018.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112018                                              :  0.847      at: 2023081812 04:50:25
+B2P.2007 2006112100 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112100.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112100                                              :  0.755      at: 2023081812 04:50:25
+B2P.2007 2006112106 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112106.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112106                                              :  0.690      at: 2023081812 04:50:26
+B2P.2007 2006112112 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112112.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112112                                              :  0.580      at: 2023081812 04:50:27
+B2P.2007 2006112118 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112118.tera5.B2P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112118                                              :  0.288      at: 2023081812 04:50:27
+02P.2007 2006112200 vmax: 45   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112200.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112200                                              :  0.852      at: 2023081812 04:50:28
+02P.2007 2006112206 vmax: 45   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112206.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112206                                              :  1.600      at: 2023081812 04:50:29
+02P.2007 2006112212 vmax: 45   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112212.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112212                                              :  0.457      at: 2023081812 04:50:30
+02P.2007 2006112218 vmax: 50   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112218.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112218                                              :  0.468      at: 2023081812 04:50:30
+02P.2007 2006112300 vmax: 55   nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112300.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112300                                              :  0.256      at: 2023081812 04:50:31
+02P.2007 2006112306 vmax: 55   nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112306.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112306                                              :  0.413      at: 2023081812 04:50:31
+02P.2007 2006112312 vmax: 65   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112312.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112312                                              :  0.286      at: 2023081812 04:50:31
+02P.2007 2006112318 vmax: 70   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112318.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112318                                              :  2.994      at: 2023081812 04:50:34
+02P.2007 2006112400 vmax: 60   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112400.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112400                                              :  1.634      at: 2023081812 04:50:36
+02P.2007 2006112406 vmax: 50   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112406.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112406                                              :  1.721      at: 2023081812 04:50:38
+02P.2007 2006112412 vmax: 30   nl:  18 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112412.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112412                                              :  4.336      at: 2023081812 04:50:42
+02P.2007 2006112418 vmax: 30   nl:  18 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112418.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112418                                              :  0.580      at: 2023081812 04:50:43
+02P.2007 2006112500 vmax: 25   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112500.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112500                                              :  0.383      at: 2023081812 04:50:43
+02P.2007 2006112506 vmax: 25   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112506.tera5.02P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112506                                              :  0.472      at: 2023081812 04:50:44
+02P.2007 2006112512 vmax: 25   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112512.tera5.02P.2007
+B3S.2007 2006112512 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112512.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112512                                              :  0.820      at: 2023081812 04:50:44
+02P.2007 2006112518 vmax: 25   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112518.tera5.02P.2007
+B3S.2007 2006112518 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112518.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112518                                              :  0.291      at: 2023081812 04:50:45
+02P.2007 2006112600 vmax: 25   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112600.tera5.02P.2007
+B3S.2007 2006112600 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112600.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112600                                              :  1.156      at: 2023081812 04:50:46
+02P.2007 2006112606 vmax: 25   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112606.tera5.02P.2007
+B3S.2007 2006112606 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112606.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112606                                              :  0.898      at: 2023081812 04:50:47
+02P.2007 2006112612 vmax: 25   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112612.tera5.02P.2007
+B3S.2007 2006112612 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112612.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112612                                              :  1.597      at: 2023081812 04:50:48
+02P.2007 2006112618 vmax: 25   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112618.tera5.02P.2007
+B3S.2007 2006112618 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112618.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112618                                              :  3.534      at: 2023081812 04:50:52
+02P.2007 2006112700 vmax: 20   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112700.tera5.02P.2007
+B3S.2007 2006112700 vmax: 15   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112700.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112700                                              :  1.346      at: 2023081812 04:50:53
+B3S.2007 2006112706 vmax: 20   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112706.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112706                                              :  0.829      at: 2023081812 04:50:54
+B3S.2007 2006112712 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112712.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112712                                              :  0.439      at: 2023081812 04:50:54
+B3S.2007 2006112718 vmax: 25   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112718.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112718                                              :  0.585      at: 2023081812 04:50:55
+B3S.2007 2006112800 vmax: 30   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112800.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112800                                              :  0.741      at: 2023081812 04:50:56
+B3S.2007 2006112806 vmax: 30   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112806.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112806                                              :  0.678      at: 2023081812 04:50:56
+B3S.2007 2006112812 vmax: 25   nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112812.tera5.B3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112812                                              :  0.180      at: 2023081812 04:50:57
+B3S.2007 2006112818 vmax: 25   nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112818.tera5.B3S.2007
+B4P.2007 2006112818 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112818.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112818                                              :  0.453      at: 2023081812 04:50:57
+B3S.2007 2006112900 vmax: 30   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112900.tera5.B3S.2007
+B4P.2007 2006112900 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112900.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112900                                              :  0.742      at: 2023081812 04:50:58
+B3S.2007 2006112906 vmax: 30   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112906.tera5.B3S.2007
+B4P.2007 2006112906 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112906.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112906                                              :  0.547      at: 2023081812 04:50:58
+03S.2007 2006112912 vmax: 35   nl:  18 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112912.tera5.03S.2007
+B4P.2007 2006112912 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112912.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112912                                              :  0.820      at: 2023081812 04:50:59
+03S.2007 2006112918 vmax: 40   nl:  18 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112918.tera5.03S.2007
+B4P.2007 2006112918 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006112918.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006112918                                              :  4.108      at: 2023081812 04:51:03
+03S.2007 2006113000 vmax: 40   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113000.tera5.03S.2007
+B4P.2007 2006113000 vmax: 20   nl:  20 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113000.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006113000                                              :  0.512      at: 2023081812 04:51:04
+03S.2007 2006113006 vmax: 45   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113006.tera5.03S.2007
+B4P.2007 2006113006 vmax: 20   nl:  20 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113006.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006113006                                              :  0.606      at: 2023081812 04:51:04
+03S.2007 2006113012 vmax: 45   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113012.tera5.03S.2007
+04P.2007 2006113012 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113012.tera5.04P.2007
+B4P.2007 2006113012 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113012.tera5.B4P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006113012                                              :  0.719      at: 2023081812 04:51:05
+03S.2007 2006113018 vmax: 45   nl:  16 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113018.tera5.03S.2007
+04P.2007 2006113018 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006113018.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006113018                                              :  0.896      at: 2023081812 04:51:06
+03S.2007 2006120100 vmax: 45   nl:  13 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120100.tera5.03S.2007
+04P.2007 2006120100 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120100.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120100                                              :  0.398      at: 2023081812 04:51:06
+03S.2007 2006120106 vmax: 45   nl:  13 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120106.tera5.03S.2007
+04P.2007 2006120106 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120106.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120106                                              :  0.588      at: 2023081812 04:51:07
+03S.2007 2006120112 vmax: 45   nl:  11 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120112.tera5.03S.2007
+04P.2007 2006120112 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120112.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120112                                              :  0.793      at: 2023081812 04:51:08
+03S.2007 2006120118 vmax: 40   nl:  11 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120118.tera5.03S.2007
+04P.2007 2006120118 vmax: 35   nl:  24 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120118.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120118                                              :  0.208      at: 2023081812 04:51:08
+03S.2007 2006120200 vmax: 30   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120200.tera5.03S.2007
+04P.2007 2006120200 vmax: 25   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120200.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120200                                              :  5.376      at: 2023081812 04:51:13
+03S.2007 2006120206 vmax: 30   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120206.tera5.03S.2007
+04P.2007 2006120206 vmax: 25   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120206.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120206                                              :  1.558      at: 2023081812 04:51:15
+03S.2007 2006120212 vmax: 30   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120212.tera5.03S.2007
+04P.2007 2006120212 vmax: 25   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120212.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120212                                              :  1.200      at: 2023081812 04:51:16
+03S.2007 2006120218 vmax: 25   nl:  6 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120218.tera5.03S.2007
+04P.2007 2006120218 vmax: 25   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120218.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120218                                              :  0.601      at: 2023081812 04:51:17
+03S.2007 2006120300 vmax: 25   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120300.tera5.03S.2007
+04P.2007 2006120300 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120300.tera5.04P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120300                                              :  0.529      at: 2023081812 04:51:17
+03S.2007 2006120306 vmax: 25   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120306.tera5.03S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120306                                              :  0.114      at: 2023081812 04:51:17
+03S.2007 2006120312 vmax: 25   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120312.tera5.03S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120312                                              :  0.223      at: 2023081812 04:51:18
+03S.2007 2006120318 vmax: 25   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120318.tera5.03S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120318                                              :  0.123      at: 2023081812 04:51:18
+03S.2007 2006120400 vmax: 25   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120400.tera5.03S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120400                                              :  0.262      at: 2023081812 04:51:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120406                                              :  0.100      at: 2023081812 04:51:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120412                                              :  0.100      at: 2023081812 04:51:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120418                                              :  0.165      at: 2023081812 04:51:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120500                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120506                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120512                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120518                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120600                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120606                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120612                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120618                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120700                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120706                                              :  0.100      at: 2023081812 04:51:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120712                                              :  0.101      at: 2023081812 04:51:20
+B5P.2007 2006120718 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120718.tera5.B5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120718                                              :  0.114      at: 2023081812 04:51:20
+B5P.2007 2006120800 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120800.tera5.B5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120800                                              :  0.263      at: 2023081812 04:51:20
+B5P.2007 2006120806 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006120806.tera5.B5P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120806                                              :  0.113      at: 2023081812 04:51:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120812                                              :  0.100      at: 2023081812 04:51:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120818                                              :  0.100      at: 2023081812 04:51:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120900                                              :  0.100      at: 2023081812 04:51:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120906                                              :  0.100      at: 2023081812 04:51:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120912                                              :  0.100      at: 2023081812 04:51:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006120918                                              :  0.100      at: 2023081812 04:51:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121000                                              :  0.100      at: 2023081812 04:51:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121006                                              :  0.100      at: 2023081812 04:51:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121012                                              :  0.100      at: 2023081812 04:51:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121018                                              :  0.100      at: 2023081812 04:51:21
+B6S.2007 2006121100 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121100.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121100                                              :  0.362      at: 2023081812 04:51:21
+B6S.2007 2006121106 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121106.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121106                                              :  0.114      at: 2023081812 04:51:22
+B6S.2007 2006121112 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121112.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121112                                              :  0.113      at: 2023081812 04:51:22
+B6S.2007 2006121118 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121118.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121118                                              :  0.312      at: 2023081812 04:51:22
+B6S.2007 2006121200 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121200.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121200                                              :  0.107      at: 2023081812 04:51:22
+B6S.2007 2006121206 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121206.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121206                                              :  0.584      at: 2023081812 04:51:23
+B6S.2007 2006121212 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121212.tera5.B6S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121212                                              :  0.113      at: 2023081812 04:51:23
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121218                                              :  0.100      at: 2023081812 04:51:23
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121300                                              :  0.100      at: 2023081812 04:51:23
+B7P.2007 2006121306 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121306.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121306                                              :  0.108      at: 2023081812 04:51:23
+B7P.2007 2006121312 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121312.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121312                                              :  0.116      at: 2023081812 04:51:23
+B7P.2007 2006121318 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121318.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121318                                              :  0.271      at: 2023081812 04:51:24
+B7P.2007 2006121400 vmax: 15   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121400.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121400                                              :  0.332      at: 2023081812 04:51:24
+B7P.2007 2006121406 vmax: 15   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121406.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121406                                              :  0.669      at: 2023081812 04:51:25
+B7P.2007 2006121412 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121412.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121412                                              :  0.820      at: 2023081812 04:51:25
+B7P.2007 2006121418 vmax: 15   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121418.tera5.B7P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121418                                              :  0.284      at: 2023081812 04:51:26
+B7P.2007 2006121500 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121500.tera5.B7P.2007
+C8S.2007 2006121500 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121500.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121500                                              :  0.160      at: 2023081812 04:51:26
+C8S.2007 2006121506 vmax: 15   nl:  4 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121506.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121506                                              :  0.159      at: 2023081812 04:51:26
+C8S.2007 2006121512 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121512.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121512                                              :  0.114      at: 2023081812 04:51:26
+C8S.2007 2006121518 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121518.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121518                                              :  0.326      at: 2023081812 04:51:26
+C8S.2007 2006121600 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121600.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121600                                              :  0.620      at: 2023081812 04:51:27
+C8S.2007 2006121606 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121606.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121606                                              :  0.280      at: 2023081812 04:51:27
+C8S.2007 2006121612 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121612.tera5.C8S.2007
+C9P.2007 2006121612 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121612.tera5.C9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121612                                              :  0.368      at: 2023081812 04:51:28
+C8S.2007 2006121618 vmax: 20   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121618.tera5.C8S.2007
+C9P.2007 2006121618 vmax: 15   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121618.tera5.C9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121618                                              :  0.119      at: 2023081812 04:51:28
+C8S.2007 2006121700 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121700.tera5.C8S.2007
+C9P.2007 2006121700 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121700.tera5.C9P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121700                                              :  0.293      at: 2023081812 04:51:28
+C8S.2007 2006121706 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121706.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121706                                              :  0.433      at: 2023081812 04:51:29
+C8S.2007 2006121712 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121712.tera5.C8S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121712                                              :  0.605      at: 2023081812 04:51:29
+05S.2007 2006121718 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121718.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121718                                              :  0.518      at: 2023081812 04:51:30
+05S.2007 2006121800 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121800.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121800                                              :  1.463      at: 2023081812 04:51:31
+05S.2007 2006121806 vmax: 40   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121806.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121806                                              :  0.787      at: 2023081812 04:51:32
+05S.2007 2006121812 vmax: 40   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121812.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121812                                              :  0.919      at: 2023081812 04:51:33
+05S.2007 2006121818 vmax: 55   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121818.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121818                                              :  1.563      at: 2023081812 04:51:34
+05S.2007 2006121900 vmax: 65   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121900.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121900                                              :  1.701      at: 2023081812 04:51:36
+05S.2007 2006121906 vmax: 90   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121906.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121906                                              :  0.894      at: 2023081812 04:51:37
+05S.2007 2006121912 vmax: 115  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121912.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121912                                              :  0.659      at: 2023081812 04:51:38
+05S.2007 2006121918 vmax: 135  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006121918.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006121918                                              :  0.256      at: 2023081812 04:51:38
+05S.2007 2006122000 vmax: 135  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122000.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122000                                              :  0.151      at: 2023081812 04:51:38
+05S.2007 2006122006 vmax: 130  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122006.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122006                                              :  6.601      at: 2023081812 04:51:45
+05S.2007 2006122012 vmax: 120  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122012.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122012                                              :  0.215      at: 2023081812 04:51:45
+05S.2007 2006122018 vmax: 115  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122018.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122018                                              :  0.228      at: 2023081812 04:51:45
+05S.2007 2006122100 vmax: 105  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122100.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122100                                              :  0.296      at: 2023081812 04:51:45
+05S.2007 2006122106 vmax: 115  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122106.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122106                                              :  0.498      at: 2023081812 04:51:46
+05S.2007 2006122112 vmax: 110  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122112.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122112                                              :  0.367      at: 2023081812 04:51:46
+05S.2007 2006122118 vmax: 105  nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122118.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122118                                              :  0.366      at: 2023081812 04:51:47
+05S.2007 2006122200 vmax: 90   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122200.tera5.05S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122200                                              :  0.541      at: 2023081812 04:51:47
+05S.2007 2006122206 vmax: 75   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122206.tera5.05S.2007
+C0S.2007 2006122206 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122206.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122206                                              :  2.409      at: 2023081812 04:51:50
+05S.2007 2006122212 vmax: 75   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122212.tera5.05S.2007
+C0S.2007 2006122212 vmax: 15   nl:  2 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122212.tera5.C0S.2007
+C1P.2007 2006122212 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122212.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122212                                              :  3.557      at: 2023081812 04:51:53
+05S.2007 2006122218 vmax: 75   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122218.tera5.05S.2007
+C0S.2007 2006122218 vmax: 15   nl:  7 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122218.tera5.C0S.2007
+C1P.2007 2006122218 vmax: 15   nl:  5 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122218.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122218                                              :  0.217      at: 2023081812 04:51:53
+05S.2007 2006122300 vmax: 75   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122300.tera5.05S.2007
+C0S.2007 2006122300 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122300.tera5.C0S.2007
+C1P.2007 2006122300 vmax: 15   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122300.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122300                                              :  0.390      at: 2023081812 04:51:54
+05S.2007 2006122306 vmax: 75   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122306.tera5.05S.2007
+C0S.2007 2006122306 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122306.tera5.C0S.2007
+C1P.2007 2006122306 vmax: 15   nl:  10 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122306.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122306                                              :  0.910      at: 2023081812 04:51:55
+05S.2007 2006122312 vmax: 90   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122312.tera5.05S.2007
+C0S.2007 2006122312 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122312.tera5.C0S.2007
+C1P.2007 2006122312 vmax: 15   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122312.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122312                                              :  0.638      at: 2023081812 04:51:55
+05S.2007 2006122318 vmax: 100  nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122318.tera5.05S.2007
+C0S.2007 2006122318 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122318.tera5.C0S.2007
+C1P.2007 2006122318 vmax: 15   nl:  9 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122318.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122318                                              :  0.268      at: 2023081812 04:51:56
+05S.2007 2006122400 vmax: 115  nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122400.tera5.05S.2007
+C0S.2007 2006122400 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122400.tera5.C0S.2007
+C1P.2007 2006122400 vmax: 15   nl:  8 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122400.tera5.C1P.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122400                                              :  2.408      at: 2023081812 04:51:58
+05S.2007 2006122406 vmax: 110  nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122406.tera5.05S.2007
+C0S.2007 2006122406 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122406.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122406                                              :  0.590      at: 2023081812 04:51:59
+05S.2007 2006122412 vmax: 110  nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122412.tera5.05S.2007
+C0S.2007 2006122412 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122412.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122412                                              :  0.790      at: 2023081812 04:51:59
+05S.2007 2006122418 vmax: 100  nl:  22 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122418.tera5.05S.2007
+C0S.2007 2006122418 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122418.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122418                                              :  1.057      at: 2023081812 04:52:01
+05S.2007 2006122500 vmax: 95   nl:  19 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122500.tera5.05S.2007
+C0S.2007 2006122500 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122500.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122500                                              :  0.476      at: 2023081812 04:52:01
+05S.2007 2006122506 vmax: 80   nl:  19 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122506.tera5.05S.2007
+C0S.2007 2006122506 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122506.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122506                                              :  0.915      at: 2023081812 04:52:02
+05S.2007 2006122512 vmax: 70   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122512.tera5.05S.2007
+C0S.2007 2006122512 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122512.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122512                                              :  3.515      at: 2023081812 04:52:05
+05S.2007 2006122518 vmax: 50   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122518.tera5.05S.2007
+C0S.2007 2006122518 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122518.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122518                                              :  1.507      at: 2023081812 04:52:07
+05S.2007 2006122600 vmax: 35   nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122600.tera5.05S.2007
+C0S.2007 2006122600 vmax: 20   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122600.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122600                                              :  7.256      at: 2023081812 04:52:14
+05S.2007 2006122606 vmax: 25   nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122606.tera5.05S.2007
+C0S.2007 2006122606 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122606.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122606                                              :  4.435      at: 2023081812 04:52:19
+05S.2007 2006122612 vmax: 25   nl:  13 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122612.tera5.05S.2007
+C0S.2007 2006122612 vmax: 25   nl:  26 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122612.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122612                                              :  6.115      at: 2023081812 04:52:25
+05S.2007 2006122618 vmax: 20   nl:  13 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122618.tera5.05S.2007
+C0S.2007 2006122618 vmax: 25   nl:  26 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122618.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122618                                              :  0.631      at: 2023081812 04:52:25
+C0S.2007 2006122700 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122700.tera5.C0S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122700                                              :  0.610      at: 2023081812 04:52:26
+C0S.2007 2006122706 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122706.tera5.C0S.2007
+C2S.2007 2006122706 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122706.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122706                                              :  0.643      at: 2023081812 04:52:27
+C0S.2007 2006122712 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122712.tera5.C0S.2007
+C2S.2007 2006122712 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122712.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122712                                              :  0.225      at: 2023081812 04:52:27
+C0S.2007 2006122718 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122718.tera5.C0S.2007
+C2S.2007 2006122718 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122718.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122718                                              :  0.350      at: 2023081812 04:52:27
+C0S.2007 2006122800 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122800.tera5.C0S.2007
+C2S.2007 2006122800 vmax: 15   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122800.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122800                                              :  0.529      at: 2023081812 04:52:28
+C0S.2007 2006122806 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122806.tera5.C0S.2007
+C2S.2007 2006122806 vmax: 15   nl:  23 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122806.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122806                                              :  0.471      at: 2023081812 04:52:28
+C0S.2007 2006122812 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122812.tera5.C0S.2007
+C2S.2007 2006122812 vmax: 15   nl:  20 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122812.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122812                                              :  1.353      at: 2023081812 04:52:30
+C0S.2007 2006122818 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122818.tera5.C0S.2007
+C2S.2007 2006122818 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122818.tera5.C2S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122818                                              :  0.557      at: 2023081812 04:52:30
+C0S.2007 2006122900 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122900.tera5.C0S.2007
+C3S.2007 2006122900 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122900.tera5.C3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122900                                              :  0.564      at: 2023081812 04:52:31
+C0S.2007 2006122906 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122906.tera5.C0S.2007
+C3S.2007 2006122906 vmax: 15   nl:  3 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122906.tera5.C3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122906                                              :  0.298      at: 2023081812 04:52:31
+C0S.2007 2006122912 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122912.tera5.C0S.2007
+C3S.2007 2006122912 vmax: 15   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122912.tera5.C3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122912                                              :  0.426      at: 2023081812 04:52:31
+C0S.2007 2006122918 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122918.tera5.C0S.2007
+C3S.2007 2006122918 vmax: 15   nl:  21 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006122918.tera5.C3S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006122918                                              :  0.724      at: 2023081812 04:52:32
+C0S.2007 2006123000 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123000.tera5.C0S.2007
+C3S.2007 2006123000 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123000.tera5.C3S.2007
+C4S.2007 2006123000 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123000.tera5.C4S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123000                                              :  0.806      at: 2023081812 04:52:33
+C0S.2007 2006123006 vmax: 25   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123006.tera5.C0S.2007
+C3S.2007 2006123006 vmax: 15   nl:  1 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123006.tera5.C3S.2007
+C4S.2007 2006123006 vmax: 15   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123006.tera5.C4S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123006                                              :  0.571      at: 2023081812 04:52:34
+C0S.2007 2006123012 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123012.tera5.C0S.2007
+C4S.2007 2006123012 vmax: 15   nl:  11 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123012.tera5.C4S.2007
+C5S.2007 2006123012 vmax: 15   nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123012.tera5.C5S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123012                                              :  1.133      at: 2023081812 04:52:35
+C0S.2007 2006123018 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123018.tera5.C0S.2007
+C4S.2007 2006123018 vmax: 15   nl:  11 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123018.tera5.C4S.2007
+C5S.2007 2006123018 vmax: 15   nl:  14 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123018.tera5.C5S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123018                                              :  0.910      at: 2023081812 04:52:36
+C0S.2007 2006123100 vmax: 30   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123100.tera5.C0S.2007
+C4S.2007 2006123100 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123100.tera5.C4S.2007
+C5S.2007 2006123100 vmax: 15   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123100.tera5.C5S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123100                                              :  1.014      at: 2023081812 04:52:37
+06S.2007 2006123106 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123106.tera5.06S.2007
+C0S.2007 2006123106 vmax: 35   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123106.tera5.C0S.2007
+C4S.2007 2006123106 vmax: 15   nl:  12 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123106.tera5.C4S.2007
+C5S.2007 2006123106 vmax: 15   nl:  17 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123106.tera5.C5S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123106                                              :  1.195      at: 2023081812 04:52:38
+06S.2007 2006123112 vmax: 40   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123112.tera5.06S.2007
+C4S.2007 2006123112 vmax: 15   nl:  -999 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123112.tera5.C4S.2007
+C5S.2007 2006123112 vmax: 20   nl:  11 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123112.tera5.C5S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123112                                              :  0.658      at: 2023081812 04:52:38
+06S.2007 2006123118 vmax: 55   nl:  25 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123118.tera5.06S.2007
+C5S.2007 2006123118 vmax: 20   nl:  11 path:  /data/w22/superBT/dat/adeck-stm/2007/tctrk.atcf.2006123118.tera5.C5S.2007
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: tmtrkN-inv-era5-2006123118                                              :  0.977      at: 2023081812 04:52:39

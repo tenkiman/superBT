@@ -151,7 +151,7 @@ for year in years:
             rdev=(nnn/n9x)*100.0
             if(rdev > 100.0): rdev=-99.
         
-        ncard='%s #s NNs: %4d  n9Devs: %4d  n9Nons: %4d  nall: %4d = nallnns: %4d rdev: %3.0f'%(year,lnns,ln9ds,ln9ns,lall,lallNN,rdev)
+        ncard='%s %-4s #s NNs: %4d  n9Devs: %4d  n9Nons: %4d  nall: %4d = nallnns: %4d rdev: %3.0f'%(year,basin,lnns,ln9ds,ln9ns,lall,lallNN,rdev)
         
         if(lnns != ln9ds):
             
@@ -184,16 +184,6 @@ for year in years:
         
         continue
         
-        
-        for nn in nns:
-            
-            stm9x=stmNNs[nn]
-            
-            if(not(stm9x in n9s)):
-                print 'EEEE ',nn,' NOT with an associated 9X: ',stm9x
-            if(verb): print 'nn',nn,stm9x,(stm9x in n9s)
-        
-            
         
 MF.dTimer('sum-md3-ALL')
                          

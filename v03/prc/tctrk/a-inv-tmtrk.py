@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from sbt import *
+from sBT import *
 
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 # command line setup

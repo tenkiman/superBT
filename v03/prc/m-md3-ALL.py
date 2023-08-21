@@ -31,10 +31,9 @@ class MdeckCmdLine(CmdLine):
             'basinOpt':       ['B:',None,'a','basin opt'],
             'yearOpt':        ['Y:',None,'a','yearOpt'],
             'dobt':           ['b',0,1,'dobt list bt only'],
-            'doMeld':         ['M',0,1,'do meld of md3.txt and md3-MRG.txt'],
-            'doQC':           ['Q',0,1,'do meld of big spd jumps in sum.txt'],
             'doRedo':         ['R',0,1,'start from -SAV file'],
             'bspdmax':        ['m:',30.0,'f',' max 6-h speed'],
+            'doGenChk':       ['G',1,0,'do NOT make sure genesis dtg aligns with end of dev 9X'],
             'passNumber':     ['P:',None,'a',' passNumber'],
             }
 
@@ -110,18 +109,11 @@ for stmid in stmids:
     
     qc2paths=0
     if(doRedo or override): qc2paths=1
-    rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,override=override,verb=verb)
+    rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,doGenChk=doGenChk,override=override,verb=verb)
     (opath3,mpath,mpathBT,savPath,savPathBT)=rc
     if(opath3 == None):
         print 'OOO-SSS override=0 for stmid: ',stmid,'press...'
         continue
-    
-    #plttag=None
-    #rc=doTrkPlot(opath3,plttag=plttag, override=1, doM3=1, doX=1)
-
-    #print 'opath3:    ',opath3
-    #print 'mpath:     ',mpath
-    #print 'mpathBT:   ',mpathBT
     
     # -- QC
     #

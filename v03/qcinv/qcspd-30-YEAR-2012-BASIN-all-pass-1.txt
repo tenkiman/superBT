@@ -1,0 +1,6 @@
+qc-fail: c4w.2012
+qc-fail: c6w.2012
+qc-fail: g7w.2012
+qc-fail: i2w.2012
+qc-fail: i3w.2012
+qc-fail: a7p.2012

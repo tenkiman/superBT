@@ -150,7 +150,7 @@ MF.sTimer('ALL')
 
 qcStms={}
 
-invmask="../qcinv/qcspd-%i-*.txt"%(int(bspdmax))
+invmask="qcinv/qcspd-%i-*.txt"%(int(bspdmax))
 
 invs=glob.glob(invmask)
 

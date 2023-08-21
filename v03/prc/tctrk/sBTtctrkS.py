@@ -1,9 +1,11 @@
-from WxMAP2 import *
-w2=W2()
+from sBT import *
+
+#from WxMAP2 import *
+#w2=W2()
 
 from ga2 import setGA,GaLatsQ
-from tcCL import TcData
-from tcVM import isIOBasinStm,isShemBasinStm
+#from tcCL import TcData
+#from tcVM import isIOBasinStm,isShemBasinStm
 
 # -- lllllocal vvvvvars
 #
@@ -13,8 +15,8 @@ tcgenBasins=['lant','epac','wpac','shem','nio']
 # -- lllllllllllllllllllllllllocal defs
 #
 
-SetLandFrac=w2.SetLandFrac
-GetLandFrac=w2.GetLandFrac
+#SetLandFrac=.SetLandFrac
+#GetLandFrac=w2.GetLandFrac
 
 lf=SetLandFrac()
 
@@ -343,7 +345,8 @@ class TmTrkSimple(MFbase):
             MF.ChkDir(self.tbdirAdeckStm,'mk')
 
         
-        self.prcdir="%s/tctrk"%(os.getenv("W2_PRC_DIR"))
+        #self.prcdir="%s/tctrk"%(os.getenv("W2_PRC_DIR"))
+        self.prcdir="%s/prc/tctrk"%(sbtVerDir)
 
 
         self.trkmode=trkmode
@@ -355,16 +358,21 @@ class TmTrkSimple(MFbase):
         self.md3=md3
         self.tcD=tcD
 
-        if(md3 != None):
+        if(md3 == None):
+            print 'EEE -- cannot use w2 in TmTrkSimple'
+            sys.exit(0)
             self.tcD=None
         
-        if(self.tcD == None and self.md3 == None):
-            tcD=TcData(dtgopt=self.dtg,verb=verb)
-            self.tcD=tcD
-            self.md3=None
+        #if(self.tcD == None and self.md3 == None):
+            #tcD=TcData(dtgopt=self.dtg,verb=verb)
+            #self.tcD=tcD
+            #self.md3=None
         
 
-    def get4stm3id(self,stm3id,stmids):
+    def get4stm3id(self,stm3id,stmids,doBasinChk=1):
+        """ for old problem with setting year from year in dtg based stmids
+for Mdeck3 need to turn off    
+"""
         ostmid=None
         gotit=0
         b1id=stm3id[2]
@@ -372,19 +380,26 @@ class TmTrkSimple(MFbase):
             tstm3id=stmid.split('.')[0]
             tstmyear=stmid.split('.')[1]
             tb1id=tstm3id[2]
-            if( (
-                (stm3id.upper() == tstm3id.upper()) or
-                (isIOBasinStm(stmid) and isIOBasinStm(stm3id)) or
-                (isShemBasinStm(stmid) and isShemBasinStm(stm3id))
-                )
-                and gotit == 0):
+            
+            # -- new logic to bypass old problem with setting the year 
+            # -- for shem stmids based  on year in dtg
+            #
+            basinchk=((stm3id.upper() == tstm3id.upper()))
+                      
+            if(doBasinChk):            
+                basinchk=((stm3id.upper() == tstm3id.upper()) or
+                          (isIOBasinStm(stmid) and isIOBasinStm(stm3id)) or
+                          (isShemBasinStm(stmid) and isShemBasinStm(stm3id)))
+            
+            
+            if( basinchk and gotit == 0):
                 gotit=1
                 ostmid="%s.%s"%(stm3id,tstmyear)
 
         return(ostmid)
 
 
-    def getStatPaths(self,dolsonly=0):
+    def getStatPaths(self,ofileSizMin=1000,dolsonly=0):
         
         # -- PPPPPAAAAATTTTTHHHHHSSSSS - target dirs/paths
         #
@@ -441,7 +456,7 @@ class TmTrkSimple(MFbase):
 
                 otcgenpathStat=MF.getPathSiz(otcgenpath)
                 otcgensinkpathStat=MF.getPathSiz(otcgensinkpath)
-                ofileStat=MF.getPathSiz(ofile)
+                ofileStat=(MF.getPathSiz(ofile) > ofileSizMin)
 
                 if(self.doTrk3):
                     otcgensnk2pathStat=MF.getPathSiz(otcgensnk2path)
@@ -507,6 +522,7 @@ class TmTrkSimple(MFbase):
                 if(len(nstmids) == 0):
                     print 'EEE could find dtgs for stmopt:',self.stmopt,' dtg: ',self.dtg,'sayounara...'
                     sys.exit()
+                    
             trks=self.md3.getMd3tracks(tstmids)
             self.tcVtrks=trks
             (cards,tcvpath)=self.md3.makeTCvCards(tstmids,self.dtg,trks)
@@ -545,7 +561,7 @@ class TmTrkSimple(MFbase):
                 if(len(tcvit) == 0): continue
                 
                 stm3id=tcvit.split()[1]
-                ostmid=self.get4stm3id(stm3id,self.tcVstmids)
+                ostmid=self.get4stm3id(stm3id,self.tcVstmids,doBasinChk=0)
                 if(ostmid != None):
                     ostmids.append(ostmid)
                     ostmyear=ostmid.split('.')[1]
@@ -553,6 +569,12 @@ class TmTrkSimple(MFbase):
                     tdirAdeckStm="%s/%s"%(self.tbdirAdeckStm,ostmyear)
                     if(not(dolsonly)):
                         MF.ChkDir(tdirAdeckStm,'mk')
+
+                # -- stdout check if it's been run...don't redo if tracker failed
+                #
+                ofile="%s/stdout.tctrk.%s.%s.%s.txt"%(self.tdir,self.dtg,omodel,stm3id.lower())
+                ofileSiz=MF.getPathSiz(ofile)
+                ofileStat=(ofileSiz > 0)
 
                 #otctrkpathSTM    ="tctrk.atcf.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.64 - standard
                 #otctrkgtcvpathSTM="tctrk.gtcv.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.67 - genesis tcvitals
@@ -562,7 +584,9 @@ class TmTrkSimple(MFbase):
                     otctrksinkpathSTM="%s/tctrk.sink.%s.%s.%s"%(tdirAdeckStm,self.dtg,omodel,ostmid.upper())
                     otctrkpathSTMStat=MF.getPathNlines(otctrkpathSTM)
                     otctrksinkpathSTMStat=MF.getPathNlines(otctrksinkpathSTM)
-                    statTCtrkS[ostmid]=otctrkpathSTMStat
+                    stattest=(otctrkpathSTMStat and ofileStat)
+                    statTCtrkS[ostmid]=-999
+                    if(stattest): statTCtrkS[ostmid]=1
                     
                     if(self.doTrk3):
                         otctrksnk2pathSTM="%s/tctrk.snk2.%s.%s.%s"%(tdirAdeckStm,self.dtg,omodel,ostmid.upper())
@@ -581,14 +605,13 @@ class TmTrkSimple(MFbase):
                     otctrksinkpathSTMStat=0
 
                     
-                ofile="%s/stdout.tctrk.%s.%s.%s.txt"%(self.tdir,self.dtg,omodel,stm3id.lower())
-                ofileStat=MF.getPathSiz(ofile)
 
                 if(self.verb):
                     print 'TTTCCCTTTRRRKKK  - ',ostmid
                     print 'otctrkpathSTM:     ',otctrkpathSTM,otctrkpathSTMStat
                     print 'otctrksinkpathSTM: ',otctrksinkpathSTM,otctrksinkpathSTMStat
                     print 'ofile:             ',ofile,ofileStat
+                    print 'statTCtrkS:        ',statTCtrkS[ostmid]
 
                     if(self.doTrk3):
                         print 'otctrksnk2pathSTM: ',otctrksnk2pathSTM,otctrksnk2pathSTMStat
@@ -616,9 +639,13 @@ class TmTrkSimple(MFbase):
                 elif(statTCtrkS[ostmid] > 0):
                     nthere=nthere+1
                     
-
             if(nthere == 0):
                 statusTCtrk=0
+            if(nzero > 0):
+                statusTCtrk=-1
+                
+            self.ostmids=ostmids
+            
         else:
             statusTCtrk=-1
  
@@ -651,7 +678,7 @@ class TmTrkSimple(MFbase):
 
         print
         print 'SSSSSSSSSSSSSSSSSSSSSS - tracking status for ',self.omodel,' dtg: ',self.dtg
-        print 'TCs  haveTcs: ',self.haveTcs
+        print 'TCs  haveTcs: ',self.haveTcs,' #TCs: ',len(self.ostmids)
         print 'GRIB   -- gen: ',self.genGribTest
         print 'GRIB   -- trk: ',self.detGribTest
         print 'DDDD  detTest: ',self.detTest
@@ -929,7 +956,7 @@ class TmTrkSimple(MFbase):
                     MF.runcmd(cmd,ropt,lsopt='q')
                     
                     
-                ostmid=self.get4stm3id(stm3id,self.tcVstmids)
+                ostmid=self.get4stm3id(stm3id,self.tcVstmids,doBasinChk=0)
 
                 if(self.doTrk3):
                     (otctrkpathSTM,

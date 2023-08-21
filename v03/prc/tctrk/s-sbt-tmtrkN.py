@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from tcbase import *
-from WxMAP2 import *
-w2=W2()
+#from tcbase import *
+#from WxMAP2 import *
+#w2=W2()
 
 from sBTtctrkS import TmTrkSimple
 from sBT import *
@@ -70,6 +70,9 @@ CL=TmtrkCmdLine(argv=argv)
 CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
+
+prcdir=sbtPrcDirTctrk
+MF.ChangeDir(prcdir,verb=1)
 
 if(not(doInv)):
     MF.ChkDir(tmtrkbdir,'mk')
@@ -167,6 +170,11 @@ for dtg in dtgs:
         TT.getStatPaths()
         MF.sTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
         TT.doTrk(ropt=ropt)
+        # -- should I do this here? -- yes, for case when not override, but redoing...
+        #
+        TT.getStatPaths(dolsonly=1)
+        TT.doCP()
         MF.dTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
+
     
         MF.dTimer("all-%s"%(dtg))

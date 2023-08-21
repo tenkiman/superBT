@@ -1,0 +1,10 @@
+qc-fail: a2w.2011
+qc-fail: d0w.2011
+qc-fail: i0w.2011
+qc-fail: b1l.2011
+qc-fail: b2l.2011
+qc-fail: b3l.2011
+qc-fail: b7l.2011
+qc-fail: c7l.2011
+qc-fail: a5s.2011
+qc-fail: c4p.2011

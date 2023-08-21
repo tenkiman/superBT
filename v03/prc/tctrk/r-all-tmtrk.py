@@ -67,7 +67,7 @@ if(override): oopt='-O'
 for dtg in dtgs:
     topt='-T'
     if(dtg[8:10] == '00'): topt=''
-    cmd="time s-sbt-tmtrkN.py %s %s %s"%(dtg,topt,oopt)
+    cmd="s-sbt-tmtrkN.py %s %s %s"%(dtg,topt,oopt)
     mf.runcmd(cmd,ropt)
     
 if(dtgopt != None): MF.dTimer('AAA-TCTRK-%s'%(dtgopt))

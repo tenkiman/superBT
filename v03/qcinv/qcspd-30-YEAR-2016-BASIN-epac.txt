@@ -1,0 +1,10 @@
+qc-fail: 13e.2016
+qc-fail: 14e.2016
+qc-fail: 18e.2016
+qc-fail: a1c.2016
+qc-fail: b4e.2016
+qc-fail: b8e.2016
+qc-fail: b9e.2016
+qc-fail: c4e.2016
+qc-fail: c8e.2016
+qc-fail: c9e.2016

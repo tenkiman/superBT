@@ -52,8 +52,11 @@ sbtProdDir='%s/products/tcdiag'%(sbtRoot)
 sbtSrcDir="%s/src"%(sbtRoot)
 sbtVerDir="%s/%s"%(sbtRoot,version)
 sbtVerDirDat="%s/%s/dat"%(sbtRoot,version)
+sbtPrcDirTcdiag="%s/prc/tcdiag"%(sbtVerDir)
+sbtPrcDirTctrk="%s/prc/tctrk"%(sbtVerDir)
 
 sbtGeogDatDir="%s/geog"%(sbtVerDirDat)
+sbtGslibDir="%s/gslib"%(sbtVerDir)
 
 tsbdbdir="%s/tcdiag"%(sbtDatDir)
 adeckSdir="%s/adeck-dtg"%(sbtDatDir)
@@ -63,13 +66,30 @@ abdirDtg='%s/adeck-dtg'%(sbtDatDir)
 
 TcNamesDatDir="%s/tc/names"%(sbtVerDirDat)
 TcVitalsDatDir="%s/tc/tcvitals"%(sbtDatDir)
-era5bdir='/data/w22/dat/nwp2/w2flds/dat/era5'
 
-sbtGslibDir="%s/gslib"%(sbtVerDir)
+W2BaseDirPrc="%s/prc/"%(sbtVerDir)
+
+# -- lsdiag
+#
+TcTcanalDatDir="%s/tcdiag"%(sbtDatDir)
+TcDiagDatDir=TcTcanalDatDir
+
+# -- wxmap2 dirs not part of repo
+#
+W2BaseDirDat='/data/w22/dat/'
+Nwp2DataBdir='%s/nwp2'%(W2BaseDirDat)
+era5bdir='%s/nwp2/w2flds/dat/era5'%(W2BaseDirDat)
+
+# -- source data for pr
+#
+PrGsmapV6GProducts='%s/pr/pr_gsmapV6-Grev'%(W2BaseDirDat)
+PrCmorphV10Products='%s/pr/pr_cmorph-v10'%(W2BaseDirDat)
+PrCmorphVX0Products='%s/pr/pr_cmorph'%(W2BaseDirDat)
+PrImergV06Products='%s/pr/pr_imerg'%(W2BaseDirDat)
 
 
-
-
+W2plotXsize=900
+W2plotAspect=3.0/4.0
 
 
 # -- VVVVVVVV -- basic constants and settings
@@ -607,10 +627,54 @@ sbtB1id2Basin={
     'l':'lant',
 }
 
+# -- VVVVVVVVVVVVVVVV -- w2localvars
+#
+Nwp2ModelsNwp=   ['gfs2','fim8','ecm2','ukm2','ngp2','cmc2',
+                  'ngpc','navg',
+                  'ohc','ocn','ww3','gfsc','ukmc','jmac','ngpj']
+
+Nwp2ModelsAll=   [
+		 'gfs2','fim8','ecm2','ukm2',
+         'cmc2','cgd2',
+         'ngp2','navg',
+		 'fv3e','fv3g','fv7e','fv7g',
+		 'hwrf','era5','ecm5',
+         'jgsm',
+		 'ohc','ocn','ww3','gfsc','ukmc','jmac','ngpj','goes','gfsr','gfr1','ecmn','ecmg','ecmt','ecm4']
+
+Nwp2ModelsActive=[
+	'gfs2','ecm2','ukm2','cmc2','navg',
+	'fv7e','fv7g',
+	'hwrf',
+    'era5',
+	'ohc','ocn','ww3','gfsc','ukmc','jmac','ngpj','goes','ecm4','ecm5'
+	] # -- 20180120 -- deprecate fim and nws ecmwf
+
+# -- on tenki7
+# -- 20211130 -- ecmt working now with vsmf2 .ecmwfapirc
+Nwp2ModelsActive=[
+	'gfs2','ecm5','navg','cgd2','jgsm','ecmt',
+	] 
+
+Nwp2ModelsActive0618=[
+	'gfs2','navg','jgsm',
+	] 
+
+Nwp2ModelsActiveAll=copy.deepcopy(Nwp2ModelsActive)
+try:
+    Nwp2ModelsActiveAll.remove('goes')
+except:
+    None
+	
+Nwp2ModelsActiveW2flds=Nwp2ModelsActiveAll
+Nwp2ModelsActW20012=Nwp2ModelsActiveAll
+Nwp2ModelsActW20618=Nwp2ModelsActive0618
+
+
 
 # -- MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
-# -- MMMMMMMMMM - py methods
+# -- MMMMMMMMMM -- py methods
 #
 
 def ndayyr(yyyy):
@@ -2388,6 +2452,101 @@ def min2minsec(min):
 
 # -- MMMMMMMMMM -- w2methods
 #
+def Model2DataTaus(model,dtg):
+
+    dtghh=int(dtg[8:10])
+    
+    #from M2 import setModel2
+    m=setModel2(model)
+
+    etau=None
+    dtau=None
+
+    # -- more agressive use of M2
+    #
+    if(m != None):
+        
+        # -- ukm2 and navg have a getDataTaus methods
+        #
+        if(hasattr(m,'getDataTaus')): 
+            taus=m.getDataTaus(dtg)
+            
+        elif(hasattr(m,'dattaus')): 
+            taus=m.dattaus
+        else:
+            etau=m.getEtau(dtg=dtg)
+            dtau=m.getDtau(dtg=dtg)
+            taus=range(0,etau+1,dtau)
+        return(taus)
+
+    taus=[]
+
+    if(model == 'gfs2' or model == 'fim8' or model == 'fimx' or 
+       model == 'gfsr' or model == 'gfr1' or model == 'gfsk' or
+       model == 'ecm2' or model == 'ecm4' or 
+       model == 'cmc2' or model == 'cgd6' or model == 'cgd2' or
+       model == 'ocn' or model == 'ohc' or model == 'ww3' or
+       model == 'ecmg' or
+       model == 'ngpc' or model == 'ngpj' or
+       model == 'navg' or
+       model == 'jgsm' or
+       model == 'gfsc' or model == 'goes' 
+       ):
+        if(etau == None):
+            etau=self.Model2EtauData(model,dtghh)
+            dtau=self.Model2DtauData(model,dtghh)
+
+        if(etau != None):
+            taus=range(0,etau+1,dtau)
+        else:
+            taus=[]
+
+    # -- special cases
+    #
+    elif(model == 'ukm2' or model == 'ngp2' ):
+        if(dtghh == 0 or dtghh == 12):
+            taus=range(0,72+1,6)+range(84,144+1,12)
+        elif(dtghh == 6 or dtghh == 18):
+            taus=range(0,60+1,6)
+
+    elif(model == 'ukmc'):
+        if(dtghh == 12):
+            taus=range(0,72+1,6)+range(84,120+1,12)
+        elif(dtghh == 0):
+            taus=range(0,72+1,6)+range(84,120+1,12)
+        else:
+            taus=[]
+
+
+    # -- nws ecmwf
+    #
+    elif(model == 'ecmn'):
+        taus=range(0,48+1,6)+range(48,240+1,12)
+
+    elif(model == 'jmac'):
+        if(dtghh == 12):
+            taus=range(0,72+1,6)+range(84,168+1,12)
+        elif(dtghh == 0):
+            taus=range(0,72+1,6)+range(84,84+1,12)
+        else:
+            taus=[]
+
+    elif(model == 'gfsn'):
+        etau=Model2EtauData(model,dtghh)
+        dtau=Model2DtauData(model,dtghh)
+        if(etau != None):
+            taus=range(0,etau+1,dtau)
+        else:
+            taus=[]
+
+
+
+    else:
+        print 'EEE invalid model Model2DataTaus: ',model
+        sys.exit()
+
+
+    return(taus)
 
 def SetLandFrac(lfres='1deg',ni=720,nj=361):
 
@@ -2721,6 +2880,390 @@ def add2000(y):
 
 # -- MMMMMMMMMM -- tcVM methods
 #
+def gc_dist(rlat0,rlon0,rlat1,rlon1,tcunits=tcunits):
+
+    # -- based on the spherical law of cosines 
+    #
+
+    dlat=abs(rlat0-rlat1)
+    dlon=abs(rlon0-rlon1)
+    if(dlon == 360.0): dlon=0.0
+    zerotest=(dlat<epsilon and dlon<epsilon)
+    if(zerotest): return(0.0)
+
+    f1=deg2rad*rlat0
+    f2=deg2rad*rlat1
+    rm=deg2rad*(rlon0-rlon1)
+    finv=cos(f1)*cos(f2)*cos(rm)+sin(f1)*sin(f2)
+    rr=rearth*acos(finv)
+    if(tcunits =='english'): rr=rr*km2nm 
+
+    return(rr)
+
+
+def mercat(rlat,rlon):
+
+    lat=rlat*deg2rad
+
+    if(rlon < 0.0):
+        lon=360.0+rlon
+    else:
+        lon=rlon
+
+    x=lon*deg2rad
+    y=log(tan(pi4+lat*0.5))
+
+    return(x,y)
+
+def basin2Chk(b2id):
+    """
+    convert local b2id to standard atcf b2id
+    """
+
+    if(b2id == 'SI' or b2id == 'SP' or b2id == 'SL'):
+        b2id='SH'
+
+    elif(b2id == 'AA' or b2id == 'BB' or b2id == 'NI' or b2id == 'NA'):
+        b2id='IO'
+
+    elif(b2id == 'AT'):
+        b2id='AL'
+
+    return(b2id)
+
+
+
+def Clatlon2Rlatlon(clat,clon):
+
+    if(len(clat) == 1):
+        return(0.0,0.0)
+
+    hemns=clat[len(clat)-1:]
+    hemew=clon[len(clon)-1:]
+    if(mf.find(clat,'.')):
+        rlat=float(clat[0:(len(clat)-1)])
+    else:
+        ilat=clat[0:(len(clat)-1)]
+        rlat=int(ilat)*0.1
+        
+    if(mf.find(clon,'.')):
+        rlon=float(clon[0:(len(clon)-1)])
+    else:
+        ilon=clon[0:(len(clon)-1)]
+        rlon=int(ilon)*0.1
+
+    if(hemns == 'S'):
+        rlat=-rlat
+
+    if(hemew == 'W'):
+        rlon=360.0-rlon
+
+    return(rlat,rlon)
+
+def Clatlon2RlatlonFull(clat,clon):
+
+    if(len(clat) == 1):
+        return(0.0,0.0,0,0,'X','X')
+
+    hemns=clat[len(clat)-1:]
+    hemew=clon[len(clon)-1:]
+    ilat=clat[0:(len(clat)-1)]
+    rlat=int(ilat)*0.1
+    ilon=clon[0:(len(clon)-1)]
+    rlon=int(ilon)*0.1
+
+    if(hemns == 'S'):
+        rlat=-rlat
+
+    if(hemew == 'W'):
+        rlon=360.0-rlon
+
+    return(rlat,rlon,ilat,ilon,hemns,hemew)
+
+
+
+def Rlatlon2ClatlonFull(rlat,rlon,dotens=1):
+
+    hemns='X'
+    hemew='X'
+    ilat=999
+    ilon=9999
+
+    if(rlat > -90.0 and rlat < 88.0):
+
+        if(dotens):
+            ilat=mf.nint(rlat*10)
+        else:
+            ilat=mf.nint(rlat)
+
+        hemns='N'
+        if(ilat<0):
+            ilat=abs(ilat)
+            hemns='S'
+
+        if(rlon > 180.0):
+            rlon=360.0-rlon
+            hemew='W'
+        else:
+            hemew='E'
+
+        if(rlon < 0.0):
+            rlon=abs(rlon)
+            hemew='W'
+
+        if(dotens):
+            ilon=mf.nint(rlon*10)
+        else:
+            ilon=mf.nint(rlon)
+
+    if(dotens):
+        clat="%03d%s"%(ilat,hemns)
+        clon="%04d%s"%(ilon,hemew)
+        clat="%3d%s"%(ilat,hemns)
+        clon="%4d%s"%(ilon,hemew)
+    else:
+        clat="%2d%s"%(ilat,hemns)
+        clon="%3d%s"%(ilon,hemew)
+
+    return(clat,clon,ilat,ilon,hemns,hemew)
+
+
+
+def Rlatlon2Clatlon(rlat,rlon,dotens=1,dodec=0,dozero=0):
+
+    hemns='X'
+    hemew='X'
+    ilat=999
+    ilon=9999
+
+    if(rlat > -90.0 and rlat < 88.0):
+
+        if(dotens):
+            ilat=mf.nint(rlat*10)
+        else:
+            ilat=mf.nint(rlat)
+
+        hemns='N'
+        if(ilat<0):
+            ilat=abs(ilat)
+            hemns='S'
+            rlat=abs(rlat)
+
+        if(rlon > 180.0):
+            rlon=360.0-rlon
+            hemew='W'
+        else:
+            hemew='E'
+
+        if(rlon < 0.0):
+            rlon=abs(rlon)
+            hemew='W'
+
+        if(dotens):
+            ilon=mf.nint(rlon*10)
+        else:
+            ilon=mf.nint(rlon)
+
+    if(dotens):
+        clat="%3d%s"%(ilat,hemns)
+        clon="%4d%s"%(ilon,hemew)
+        if(dozero):
+            clat="%03d%s"%(ilat,hemns)
+            clon="%04d%s"%(ilon,hemew)
+    else:
+        if(dozero):
+            clat="%02d%s"%(ilat,hemns)
+            clon="%03d%s"%(ilon,hemew)
+        else:
+            clat="%02d%s"%(ilat,hemns)
+            clon="%03d%s"%(ilon,hemew)
+
+    if(dodec):
+        clat="%5.1f%s"%(rlat,hemns)
+        clon="%5.1f%s"%(rlon,hemew)
+
+    return(clat,clon)
+
+
+
+def MakeAdeckCards(model,dtg,trk,stmid,ttaus=None,doString=0,verb=0):
+
+
+    taus=trk.keys()
+    taus.sort()
+
+    stmid=stmid.upper()
+    from ATCF import Aid
+    AA=Aid(model)
+
+    stmnum=stmid[0:2]
+    basin1=stmid[2:3]
+    basin2=Basin1toBasin2[basin1]
+    adeckname=AA.AdeckName
+    adecknum=AA.AdeckNum
+
+    # use model name for adeckname AA return generic model name
+    #
+    adeckname=model.upper()
+
+    acards=[]
+    acardsString=''
+
+    for tau in taus:
+
+        if(ttaus != None and not(tau in ttaus)): continue
+        
+        itau=int(tau)
+
+        vmax=-99
+        pmin=0
+        r34quad=None
+        r50quad=None
+        r64quad=None
+
+        extra=None
+        tt=trk[tau]
+        for i in range(0,len(tt)):
+            if(i == 0): lat=tt[i]
+            if(i == 1): lon=tt[i]
+            if(i == 2): vmax=tt[i]
+            if(i == 3): pmin=tt[i]
+            if(i == 4): r34quad=tt[i]
+            if(i == 5): r50quad=tt[i]
+            if(i == 6): r60quad=tt[i]
+            if(i == 7): extra=tt[i]
+
+
+        if(lat < -88.0 or lat > 88.0): continue
+
+        ivmax=int(vmax)
+        try:
+            ipmin=int(pmin)
+        except:
+            ipmin=0
+
+        if(ipmin < 0): ipmin=0
+
+        (clat,clon,ilat,ilon,hemns,hemew)=Rlatlon2ClatlonFull(lat,lon)
+
+        try:
+            (r34ne,r34se,r34sw,r34nw)=r34quad
+        except:
+            r34ne=r34se=r34sw=r34nw=0
+
+        try:
+            (r50ne,r50se,r50sw,r50nw)=r50quad
+            gotr50=1
+        except:
+            r50ne=r50se=r50sw=r50nw=0
+            gotr50=0
+
+        try:
+            (r64ne,r64se,r64sw,r64nw)=r64quad
+            gotr64=1
+        except:
+            r64ne=r64se=r64sw=r64nw=0
+            gotr64=0
+
+        acard1=''
+        acard2=''
+        acard3=''
+
+        acard0="%2s, %2s, %10s, %2s, %4s, %3d,"%(basin2,stmnum,dtg,adecknum,adeckname,itau)
+
+        if(extra == None):
+            oextra=''
+        else:
+            oextra=" PMBR, %4d,"%(int(extra))
+
+        # add \n at end of card to be consistent with real adecks
+        #
+        acard1=acard0+" %3d%1s, %4d%1s, %3d, %4d,   ,  34, NEQ, %4d, %4d, %4d, %4d,%s\n"%\
+            (ilat,hemns,ilon,hemew,ivmax,ipmin,r34ne,r34se,r34sw,r34nw,oextra)
+
+        if(verb): print acard1[0:-1]
+        acards.append(acard1)
+        
+        if(doString): acardsString=acardsString+acard1
+
+        if(gotr50):
+            acard2=acard0+" %3d%1s, %4d%1s, %3d, %4d,   ,  50, NEQ, %4d, %4d, %4d, %4d,\n"%\
+                (ilat,hemns,ilon,hemew,ivmax,ipmin,r50ne,r50se,r50sw,r50nw)
+            acards.append(acard2)
+            if(doString): acardsString=acardsString+acard2
+
+
+        if(gotr64):
+            acard3=acard0+" %3d%1s, %4d%1s, %3d, %4d,   ,  64, NEQ, %4d, %4d, %4d, %4d,\n"%\
+                (ilat,hemns,ilon,hemew,ivmax,ipmin,r64ne,r64se,r64sw,r64nw)
+            acards.append(acard3)
+            if(doString): acardsString=acardsString+acard3
+
+    if(doString): acards=acardsString
+
+    return(acards)
+
+
+
+def getHemis(stmids):
+
+    rc=None
+    hemis=[]
+    for stmid in stmids:
+        (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+        hemis.append(Basin1toHemi[b1id.upper()])
+
+    if('nhem' in hemis and 'shem' in hemis): rc='global'
+    if('nhem' in hemis and not('shem' in hemis)): rc='nhem'
+    if('shem' in hemis and not('nhem' in hemis)): rc='shem'
+
+    return(rc)
+
+def stm1idTostm2id(stm1id):
+
+    b1id=stm1id[2].upper()
+    snum=stm1id[0:2]
+    b2id=Basin1toBasin2[b1id]
+    stm2id=b2id + snum + '.'+stm1id.split('.')[1]
+    stm2id=stm2id.lower()
+    return(stm2id)
+
+
+def stm2idTostm1id(stm2id):
+
+    ss=stm2id.split('.')
+    sid=ss[0]
+    syear=ss[1]
+
+    b2id=sid[0:2].upper()
+    if(mf.find(sid,'cc')):
+        snum='CC'+sid[-3:]
+    else:
+        snum=sid[2:4]
+
+    b1id=Basin2toBasin1[b2id]
+    stm1id=snum + b1id + '.'+syear
+    return(stm1id)
+
+
+
+def getAdeckYearBasinFromPath(adeckpath):
+
+    """recover 2-char basin id and year from adeck path"""
+
+    adyear=None
+    adbasin=None
+    (dir,file)=os.path.split(adeckpath)
+    (base,ext)=os.path.splitext(file)
+    # -- check if standard adeck file name a??NNYYYY.dat
+    #
+    if( (ext.lower() == '.dat') and (len(base) == 9) ):
+        adyear=base[-4:]
+        adbasin=base[1:3]
+    return(adyear,adbasin)
+    
+    
+
 
 def scaledTC(vmax):
 
@@ -4583,7 +5126,6 @@ def parseStmSumCard(card):
 
 def getTcData(year,basin):
     
-    print 'qqqq',year,basin
     if(basin =='shem'):
         stmopt='h.%s'%(year)
         tD=TcData(stmopt=stmopt)
@@ -5334,7 +5876,7 @@ def getW2fldsRtfimCtlpath(model,dtg,maxtau=None,dtau=6,details=1,override=0,verb
 
         mask="%s/*%s*.ctl"%(maskdir,imodel)
 
-        if(verb): print "W2.getW2fldsRtfimCtlpath: ",mask
+        if(verb): print "getW2fldsRtfimCtlpath: ",mask
         ctlpaths=glob.glob(mask)
         
         # -- special case for era5 where we have ua and sfc .ctl
@@ -6163,72 +6705,8 @@ def getMD3Opaths(mpath,doM2=1,verb=0):
     return(rc)
 
 
-def makeMD3(mpath,rcM3,doM2=1,verb=0):
+def makeMD3(mpath,rcM3,gendtg=None,doM2=1,verb=0):
 
-    #isBT=0
-    #if(mf.find(mpath, '-BT.txt')):  isBT=1
-
-    #rc=getStmids4SumPath(mpath)
-    #(stmDev,ostm1id,sname,ostm9xid,basin,sdir)=rc
-    #stm1id=ostm1id.lower()
-    #stm9xid=ostm9xid.lower()
-    #if(stmDev == 'nonDev'): 
-        #stm1id=ostm9xid.lower()
-        #stm9xid=ostm9xid.lower()
-    #elif(stmDev == 'DEV'):
-        #stm1id=ostm9xid.lower()
-        #stm9xid=ostm1id.lower()
-        
-    #try:
-        #icards=open(mpath).readlines()
-    #except:
-        #print """EEE can't read mpath: %s -- sayounara"""%(mpath)
-        #sys.exit()
-    
-    #(sdir,sfile)=os.path.split(mpath)
-
-    #if(verb):
-        #print 'spath: ',mpath
-    #ostm1id=stm1id.replace('.','-')
-
-    #if(verb):
-        #print 'stm1id:  ',stm1id
-        #print 'stm9xid: ',stm9xid
-        #print 'sdir:    ',sdir
-        #print 'sfile:    ',sfile
-        
-    
-        
-    #ofile="%s-md3.txt"%(ostm1id.upper())
-    #if(mf.find(sfile,'BT')):
-        #ofile="%s-md3-BT.txt"%(ostm1id.upper())
-        
-
-    #if(doM2):
-        #ofile="%s-md3-MRG.txt"%(ostm1id.upper())
-        #if(mf.find(sfile,'BT')):
-            #ofile="%s-md3-BT.txt"%(ostm1id.upper())
-        #ofileS=ofile.replace('md3','sum-md3')
-    #else:
-        #ofile="%s-md3.txt"%(ostm1id.upper())
-        #if(mf.find(sfile,'BT')):
-            #ofile="%s-md3-BT.txt"%(ostm1id.upper())
-        #ofileS=ofile.replace('md3','sum-md3')
-
-    #opathS="%s/%s"%(sdir,ofileS)
-    #opath="%s/%s"%(sdir,ofile)
-    
-    #opathSThere=(MF.getPathNlines(opathS) > 0)
-    #opathThere=(MF.getPathNlines(opath) > 0)
-
-    #rc=getMD3Opaths(mpath,doM2=doM2,verb=0)
-    #(opath,opathS,opathThere,opathSThere,sdir,ostm1id)=rc
-    #print rc
-    #sys.exit()
-    #if(not(override) and opathSThere and opathThere):
-        #print 'WWW md3 paths already there...and override=0...return opath'
-        #return(opath)
-    
     (opath,opathS,opathThere,opathSThere,ofile,ofileS,sdir,
      isBT,sfile,stmDev,ostm1id,sname,stm1id,stm9xid,basin)=rcM3
     
@@ -6245,6 +6723,7 @@ def makeMD3(mpath,rcM3,doM2=1,verb=0):
     print 'spath:  ',mpath
     print 'opath:  ',opath
     print 'opathS: ',opathS
+    print 'gendtg: ',gendtg
 
     if(verb):
         print 'stm1id: ',stm1id	
@@ -6264,7 +6743,7 @@ def makeMD3(mpath,rcM3,doM2=1,verb=0):
         
     ocards=[]
     dom3=0
-    md3=MD3trk(icards,stm1id,stm9xid,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    md3=MD3trk(icards,stm1id,stm9xid,gendtg=gendtg,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
     dtgs=md3.dtgs
     trk=md3.trk
     basin=md3.basin
@@ -6312,7 +6791,7 @@ def makeMD3(mpath,rcM3,doM2=1,verb=0):
 
     rc=MF.WriteList2Path(m3cards, opath,verb=verb)
 
-    md3=MD3trk(m3cards,stm1id,stm9xid,dom3=1,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    md3=MD3trk(m3cards,stm1id,stm9xid,gendtg=gendtg,dom3=1,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
     (m3sum,rcsum)=md3.lsDSsStmSummary(doprint=0)
     m3sum=m3sum.replace(' ','')
     m3sum=m3sum+',\n'
@@ -6322,7 +6801,7 @@ def makeMD3(mpath,rcM3,doM2=1,verb=0):
     else:
         print '333-999',rcsum,m3sum[0:-1]
         
-    return(opath)
+    return(opath,m3sum,rcsum)
     
 
 def mergeMD3(mpath3,mpath3BT,doM2=0,verb=0):
@@ -6512,19 +6991,20 @@ def chkSpdDirMd3Mrg(mpath3,mpath,
     
     nm3=len(m3cards)
     nm=len(mcards)
-    
+
+    # -- change to warning vice kill...
+    #
     if(nm == 1):
         (sdir,sfile)=os.path.split(mpath)
-        if(killSngl):
-            ropt=''
-            rc=raw_input("KILL-SSSIIInngggllleeetttooonnn? y|n  ")
-            if(rc.lower() == 'y'):
-                cmd="rm -r %s"%(sdir)
-                mf.runcmd(cmd,ropt)
-        else:
-            print 'EEE-SSSIIInngggllleeetttooonnn: ',mpath
-            
-        return(2,None)
+        #if(killSngl):
+            #ropt=''
+            #rc=raw_input("KILL-SSSIIInngggllleeetttooonnn? y|n  ")
+            #if(rc.lower() == 'y'):
+                #cmd="rm -r %s"%(sdir)
+                #mf.runcmd(cmd,ropt)
+        #else:
+        print 'WWWWWWWWWWWWWWWWWW-SSSIIInngggllleeetttooonnn: ',mpath
+        #return(2,None)
             
         
     if(nm3 != nm and verb):
@@ -6659,7 +7139,7 @@ def doQCTrk(mpath3,mpath,mpathBT,qcpath,savPath,plttag=None,title2=None,ropt='')
 
     return(rcQC)
     
-def doMd2Md3Mrg(stmid,doM2=1,doRedo=0,qc2paths=1,override=0,ropt='',verb=0):
+def doMd2Md3Mrg(stmid,doM2=1,doRedo=0,qc2paths=1,doGenChk=0,override=0,ropt='',verb=0):
     
     (mpath,mpathBT)=getSrcSumTxt(stmid,verb=0)
     
@@ -6696,6 +7176,78 @@ def doMd2Md3Mrg(stmid,doM2=1,doRedo=0,qc2paths=1,override=0,ropt='',verb=0):
     (opath,opathS,opathThere,opathSThere,ofile,ofileS,sdir,
      isBT,sfile,stmDev,ostm1id,sname,stm1id,stm9xid,basin)=rcM3
     
+    # -- get the NN if dev
+    #
+    gendtg=None
+    if(stmDev == 'DEV' and doGenChk):
+        (mpath9X,mpathBT9x)=getSrcSumTxt(stm9xid,verb=0)
+        rcM39X=getMD3Opaths(mpath9X,verb=verb)
+        opathS39X=rcM39X[1]
+        opathS39XThere=rcM39X[3]
+        
+        gendtg=last9xdtg=None
+        if(opathS39XThere):
+            m3sum9x=open(opathS39X).readlines()
+            mm=m3sum9x[0].strip().split(',')
+            gendtg=mm[-3]
+            
+        if(opathSThere):
+            m3sum=open(opathS).readlines()
+            mm=m3sum[0].strip().split(',')
+            last9xdtg=mm[10]
+            
+        if(gendtg != None and last9xdtg != None):
+            gen9xdtg=dtginc(gendtg,-6)
+            
+            gen9xdiff=dtgdiff(gen9xdtg,last9xdtg)
+            
+            if(gen9xdiff != 0):
+                print 'gendtg:    ',gendtg
+                print 'last9xdtg: ',last9xdtg
+                print 'gen9xdtg:  ',gen9xdtg
+                print 'gen9xdiff:  %4.0f'%(gen9xdiff)
+                    
+                print 'RRREEEDDDOOO dev 9x: ',stmid,' NN: ',stm9xid,'gen9xdiff: %4.0f'%(gen9xdiff)
+                if(gen9xdiff < 0.0 and not(override)):
+                    print 'PPPPPPPPPPPPPPPPPPPPPPPPP with -sum.txt'
+                    print 'original  opath: ',opath
+                    print 'original opathS: ',opathS
+                    cmd="meld %s %s"%(mpath9X,mpath)
+                    runcmd(cmd)
+                    
+                    cmd="m-md3-All.py -S %s -O "%(stmid)
+                    mf.runcmd(cmd)
+
+                print 'original  opath: ',opath
+                print 'original opathS: ',opathS
+
+                # -- save original with too many dtgs...
+                #
+                cropt='norun'
+                cropt=''
+
+                cmd="cp %s %s-SAV"%(opath,opath)
+                mf.runcmd(cmd,cropt)
+            
+                cmd="cp %s %s-SAV"%(opathS,opathS)
+                mf.runcmd(cmd,cropt)
+                
+                (odir,ofile)=os.path.split(opath)
+                lmask="%s/*lsd*"%(odir)
+                lfiles=glob.glob(lmask)
+                if(len(lfiles) > 0):
+
+                    for lfile in lfiles:
+                        cmd="rm %s"%(lfile)
+                        mf.runcmd(cmd,cropt)
+                        
+                override=1
+            
+            
+            
+        
+        
+    
     if(not(override) and opathSThere and opathThere):
         print 'WWW md3 paths already there...and override=0...return opath'
         opath3=None
@@ -6710,17 +7262,17 @@ def doMd2Md3Mrg(stmid,doM2=1,doRedo=0,qc2paths=1,override=0,ropt='',verb=0):
     if(doM2):
         mpathm=mergeMD(mpath, mpathBT)
 
-    mpath3=makeMD3(mpathm,rcM3,doM2=doM2,verb=verb)
-    mpath3BT=None
+    (mpath3,m3sum,rcsum)=makeMD3(mpathm,rcM3,gendtg=gendtg,doM2=doM2,verb=verb)
+    mpath3BT=m3sumBT=rcsumBT=None
     if(mpathBT != None and IsNN(stmid)): 
         rcM3=getMD3Opaths(mpathBT,doM2=doM2,verb=verb)
-        mpath3BT=makeMD3(mpathBT,rcM3,verb=verb)
+        (mpath3BT,m3sumBT,rcsumBT)=makeMD3(mpathBT,rcM3,verb=verb)
 
     if(verb):
         print 'mpath:   ',mpath
-        print 'mpath3:  ',mpath3
+        print 'mpath3:  ',mpath3,m3sum,rcsum
         print 'mpathBT: ',mpathBT
-        print 'mpath3BT: ',mpath3BT
+        print 'mpath3BT: ',mpath3BT,m3sumBT,rcsumBT
 
     opath3=opath39X=None
     #if(mpathBT != None and IsNN(stmid)):
@@ -6732,6 +7284,20 @@ def doMd2Md3Mrg(stmid,doM2=1,doRedo=0,qc2paths=1,override=0,ropt='',verb=0):
     rc=(opath3,mpath,mpathBT,savPath,savPathBT)
     return(rc)
      
+def setModel2(model,bdir2=None):
+
+    model=model.lower()
+    
+    if(model == 'era5'): return(Era5(bdir2=bdir2))
+
+    ####lif(model == 'fimx'): return(Fimx())
+    else:
+        print 'EEE(M2.setModel2) invalid model: ',model,' in setModel2...sayoonara'
+        sys.exit()
+        return(None)
+
+    return(fmodel)
+
 
 
 # -- CCCCCCCCCCCCCCCCCCCC -- wxmap2
@@ -9096,6 +9662,548 @@ class DataSets(DataSet):
         kk.sort()
         return(kk)
 
+class W2GaBase(MFbase):
+    
+    def c(self):
+        self._cmd('clear')
+        
+    def d(self,var):
+        rc=self._cmd('d %s'%(var))
+        return(rc)
+        
+    def q(self,var):
+        rc=self.query(var)
+        return(rc)
+        
+        
+    def getGxout(self):
+
+        self('q gxout')
+        g1s=self.rword(2,6)
+        g1v=self.rword(3,6)
+        g2s=self.rword(4,6)
+        g2v=self.rword(5,6)
+        stn=self.rword(6,4)
+        gxout=gxGxout(g1s,g1v,g2s,g2v,stn)
+        return(gxout)
+
+
+    def getExprStats(self,expr):
+
+        # get the current graphics and rank of display grid
+        rank=len(self.coords().shape)
+        cgxout=self.getGxout()
+
+        # set gxout to stats; display expression
+        self('set gxout stat')
+        self('d %s'%(expr))
+        cards=self.Lines
+
+        # reset the original gxout
+        if(rank == 1): self('set gxout %s'%(cgxout.g1s))
+        if(rank == 2): self('set gxout %s'%(cgxout.g2s))
+        exprstats=gxStats(cards)
+        return(exprstats)
+
+
+    def resetCurgxout(self,cgxout):
+
+        rank=len(self.coords().shape)
+        #reset the original gxout
+        if(rank == 1): self('set gxout %s'%(cgxout.g1s))
+        if(rank == 2): self('set gxout %s'%(cgxout.g2s))
+
+
+    def LogPinterp(self,var,lev,texpr=None,mfact=None,verb=0):
+
+        ge=self.ge
+        
+        from math import log
+        for k in range(0,ge.nz-1):
+            
+            lev1=ge.levs[k]
+            lev2=ge.levs[k+1]
+            
+            if(lev <= lev1 and lev >= lev2):
+                lp1=log(lev1)
+                lp2=log(lev2)
+                lp=log(lev)
+                dlp=lp1-lp2
+                f2=(lp1-lp)/dlp
+                f1=(lp-lp2)/dlp
+                if(mfact != None):
+                    f2=f2*mfact
+                    f1=f1*mfact
+                
+                if(verb):
+                    lf2=(lev1-lev)/(lev1-lev2)
+                    lf1=(lev-lev2)/(lev1-lev2)
+                    print 'HHHHHHHHHHHH ',lev1,lev,lev2,f1,f2,(f1+f2),lf1,lf2
+
+                if(texpr == None):
+                    expr="(%s(lev=%-6.1f)*%f + %s(lev=%-6.1f)*%f)"%(var,lev1,f1,var,lev2,f2)
+                    if(f1 == 0.0 and f2 != 0.0):
+                        expr="(%s(lev=%-6.1f)*%f)"%(var,lev2,f2)
+                    if(f2 == 0.0 and f1 != 0.0):
+                        expr="(%s(lev=%-6.1f)*%f)"%(var,lev1,f1)
+                        
+                else:
+                    expr="(%s(%s,lev=%-6.1f)*%f + %s(%s,lev=%-6.1f)*%f)"%(var,texpr,lev1,f1,var,texpr,lev2,f2)
+                    if(f1 == 0.0 and f2 != 0.0):
+                        expr="(%s(%s,lev=%-6.1f)*%f)"%(var,texpr,lev2,f2)
+                    if(f2 == 0.0 and f1 != 0.0):
+                        expr="(%s(%s,lev=%-6.1f)*%f)"%(var,texpr,lev1,f1)
+                    
+                expr=expr.replace(' ','')
+
+                return(expr)
+
+        print 'EEE unable to interpolate to pressure level: ',lev
+        print 'EEE time for plan B...in LogPinterp'
+            
+        return(expr)
+
+
+
+    def LogPinterpTinterp(self,var,lev,tm1=1,tp1=1,tfm1=0.5,tfp1=0.5,verb=0):
+
+        ge=self.ge
+        
+        from math import log
+        for k in range(0,ge.nz-1):
+            
+            lev1=ge.levs[k]
+            lev2=ge.levs[k+1]
+            
+            if(lev <= lev1 and lev >= lev2):
+                lp1=log(lev1)
+                lp2=log(lev2)
+                lp=log(lev)
+                dlp=lp1-lp2
+                f2=(lp1-lp)/dlp
+                f1=(lp-lp2)/dlp
+                
+                if(verb):
+                    lf2=(lev1-lev)/(lev1-lev2)
+                    lf1=(lev-lev2)/(lev1-lev2)
+                    print 'HHHHHHHHHHHH ',lev1,lev,lev2,f1,f2,(f1+f2),lf1,lf2
+                    
+                exprm1="( (%s(t-%d,lev=%-6.1f)*%f + %s(t-%d,lev=%-6.1f)*%f)*%f )"%(var,tm1,lev1,f1,var,tm1,lev2,f2,tfm1)
+                exprp1="( (%s(t+%d,lev=%-6.1f)*%f + %s(t+%d,lev=%-6.1f)*%f)*%f )"%(var,tp1,lev1,f1,var,tp1,lev2,f2,tfp1)
+                expr="(%s + %s)"%(exprm1,exprp1)
+                
+                expr=expr.replace(' ','')
+                return(expr)
+
+        print 'EEE unable to interpolate to pressure level: ',lev
+        print 'EEE time for plan B...in LogPinterp'
+            
+        return(expr)
+
+
+class GaLats(W2GaBase):
+
+    prcdir=W2BaseDirPrc
+    
+    def cmd2(self,gacmd,RcCheck=0):
+        self._ga.cmd2(gacmd,Quiet=0,RcCheck=RcCheck)
+
+
+    def initGrads(self,ga,ge,quiet=1,RcCheck=1):
+
+        #self._cmd=ga.cmd(gacmd='',oRcCheck=RcCheck)
+        if(hasattr(ga,'quiet')): quiet=ga.quiet
+
+        if(quiet):
+            self._cmd=ga.cmdQ
+            ga.__call__=ga.cmdQ
+        else:
+            self._cmd=ga.cmd
+
+        self._ga=ga
+        self._ge=None
+        if(ge != None):self._ge=ge
+
+        self.rl=ga.rline
+        self.rw=ga.rword
+
+        self.ga=ga
+        self.ge=ge
+
+        
+
+    def __init__(self,ga,ge,dtg=None,
+                 model='rtfim',
+                 center='esrl',
+                 comment='grib1 output for tm tracker',
+#                 outconv='grads_grib',
+                 outconv='grib_only',
+                 calendar='standard',
+                 ptable=None,
+                 frequency='forecast_hourly',
+                 timeoption='dim_env',
+                 gridtype='linear',
+                 btau=0,
+                 etau=168,
+                 dtau=6,
+                 taus=None,
+                 regrid=0,
+                 remethod='re',
+                 smth2d=0,
+                 doyflip=0,
+                 quiet=0,
+                 reargs=None,
+                 ):
+
+        if(hasattr(ga,'quiet')): quiet=ga.quiet
+        self.initGrads(ga,ge,quiet=quiet)
+        self.dtg=dtg
+        self.model=model
+        self._cmd=self.cmd2
+        
+        self.frequency=frequency
+        
+        self.regrid=regrid
+        self.remethod=remethod
+        self.smth2d=smth2d
+        self.doyflip=doyflip
+        self.reargs=reargs
+                 
+        self.area='global'
+
+        self.btau=btau
+        self.etau=etau
+        self.dtau=dtau
+
+        if(taus == None):
+            self.taus=range(btau,etau+1,dtau)
+        else:
+            self.taus=taus
+            #dtau=self.taus[-1]-self.taus[-2]
+            # -- base on beginning vice end for models where e.g., dtau = 12 > tau48 (ukm2)
+            if(len(taus) > 1):
+                dtau=self.taus[1]-self.taus[0]
+            else:
+                if(dtau != None): dtau=dtau
+                else: print 'EEE GaLats dtau == None and len of taus = 1, set dtau in __init__'; sys.exit()
+        
+
+        if(ptable == None):
+            ptable="%s/hfip/lats.hfip.table.txt"%(self.prcdir),
+
+            
+        self("set_lats parmtab %s"%(ptable))
+        self("set_lats convention %s"%(outconv))
+        self("set_lats calendar %s"%(calendar))
+        self("set_lats model %s"%(model))
+        self("set_lats center %s"%(center))
+        self("set_lats comment %s"%(comment))
+        self("set_lats timeoption %s"%(timeoption))
+        self("set_lats frequency %s"%(frequency))
+
+        if(self.frequency == 'forecast_hourly'):
+            self("set_lats deltat %d"%(dtau))
+        elif(self.frequency == 'forecast_minutes'):
+            self("set_lats deltat %d"%(dtau*60))
+
+        self("set_lats gridtype %s"%(gridtype))
+
+        if(hasattr(ga,'fh')):
+            self.fh=ga.fh
+        else:
+            print 'EEE GaLats(Q) needs a fh object (file handle) in the grads.ga object'
+            sys.exit()
+        
+        ge.getFileMeta(self)
+        
+
+    def q(self):
+        self('query_lats')
+        for n in range(1,self._ga.nLines):
+            print self._ga.rline(n)
+
+    def create(self,opath):
+        self("set_lats create %s"%(opath))
+        self.id_file=int(self.rw(1,5))
+        
+
+    def basetime(self,dtg):
+        yyyy=int(dtg[0:4])
+        mm=int(dtg[4:6])
+        dd=int(dtg[6:8])
+        hh=int(dtg[8:10])
+        self("set_lats basetime %d %d %d %d %d 0 0"%(self.id_file,yyyy,mm,dd,hh))
+        self.dtg=dtg
+
+
+    def grid(self,areaObj=None):
+
+        if(self.regrid > 0):
+            if(self.remethod == 're2'):
+                if(hasattr(self,'reargs') and self.reargs != None):
+                    self("vargrid=re2(%s,%s)"%(self.vars[0],self.reargs))
+                else:
+                    self("vargrid=re2(%s,%5.3f)"%(self.vars[0],self.regrid))
+            else:
+                self.dlon=self.dlat=self.regrid
+                self.nxre=int((360.0-self.regrid)/self.regrid+0.5)+1
+                self.nyre=int(180.0/self.regrid+0.5)+1
+                
+                if(hasattr(self,'reargs') and self.reargs != None):
+                    varexpr="vargrid=re(%s,%s)"%(self.vars[0],self.reargs)
+                else:
+                    varexpr="vargrid=re(%s,%d,linear,0.0,%f,%d,linear,-90.0,%f)"%(self.vars[0],self.nxre,self.dlon,self.nyre,self.dlat)
+
+                self(varexpr)
+
+        else:
+            self("vargrid=%s"%(self.vars[0]))
+
+
+        latN=latS=lonW=lonE=dLat=dLon=dx=dy=None
+
+        if(areaObj != None):
+            latN=areaObj.latN
+            latS=areaObj.latS
+            lonW=areaObj.lonW
+            lonE=areaObj.lonE
+            dLat=areaObj.dLat
+            dLon=areaObj.dLon
+            dx=areaObj.dx
+            dy=areaObj.dy
+            
+        # -- old version of setting up grid
+        #
+
+        if(self.area == 'global' and latS == None):
+            self("set x 1 %d"%(self.nx))
+            self("set y 1 %d"%(self.ny))
+            if(self.regrid > 0):
+                elon=360.0-self.regrid
+                self("set lon 0 %f"%(elon))
+                self("set lat -90 90")
+                
+##         else:
+##             return
+
+
+        # -- new version using areaObj
+        #
+        if(latS != None and latN != None):
+            self("set lat %f %f"%(latS,latN))
+
+        if(lonW != None and lonE != None):
+
+            lon1=lonW
+            lon2=lonE
+            if(dLon == 360): lon2=lonE-dx
+            self("set lon %f %f"%(lon1,lon2))
+
+        if(self.doyflip): self("set yflip on")
+
+        self("lats_grid vargrid")
+        self.id_grid=int(self.rw(1,5))
+
+
+    def plevdim(self,uavars,verb=0):
+
+        plevs=[]
+        for uavar in uavars:
+            plevs=plevs+uavar[2]
+
+        plevs=mf.uniq(plevs)
+
+        lexpr="set_lats vertdim plev "
+        for plev in plevs:
+            lexpr="%s %f"%(lexpr,plev)
+
+        if(verb): print 'lllllllllllllll ',lexpr
+        self(lexpr)
+        self.id_vdim=int(self.rw(1,5))
+
+    def plevvars(self,uavars):
+
+        self.id_uvars={}
+        for uavar in uavars:
+            if(len(uavar) == 3):
+                (name,levtype,levs)=uavar
+            elif(len(uavar) == 4):
+                (name,levtype,levs,exprs)=uavar
+            elif(len(uavar) == 5):
+                (name,levtype,levs,mfact,afact)=uavar
+
+            latscmd="set_lats var %d %s %s %d %d"%(self.id_file,name,levtype,self.id_grid,self.id_vdim)
+            self(latscmd)
+            self.id_uvars[name]=int(self.rw(1,5))
+
+    def sfcvars(self,svars):
+
+        self.id_svars={}
+        for svar in svars:
+            
+            if(len(svar) == 2):
+                (name,sfctype)=svar
+            elif(len(svar) == 3):
+                (name,sfctype,expr)=svar
+                
+            self("set_lats var %d %s %s %d 0"%(self.id_file,name,sfctype,self.id_grid))
+            self.id_svars[name]=int(self.rw(1,5))
+
+
+    def outvars(self,svars,uavars,verb=0):
+
+        for tau in self.taus:
+            vdtg=mf.dtginc(self.dtg,tau)
+            gtime=mf.dtg2gtime(vdtg)
+            
+            self("set time %s"%(gtime))
+            if(self.frequency == 'forecast_hourly'):
+                self("set_lats fhour %f "%(tau))
+            elif(self.frequency == 'forecast_minutes'):
+                self("set_lats fminute %f "%(tau*60))
+
+            
+            for uavar in uavars:
+                
+                rc=uavar
+                doregular=0
+                doexpr=0
+                mfact=None
+                afact=None
+                dofact=0
+                
+                if(len(rc) == 3):
+                    (name,uatype,levs)=rc
+                    doregular=1
+                    
+                elif(len(rc) == 4):
+                    (name,uatype,levs,exprs)=rc
+                    if(not(type(exprs) is ListType)):
+                        print 'simple expression exprs: ',exprs
+                        doregular=1
+                        doexpr=1
+                        
+                elif(len(rc) == 5):
+                    (name,uatype,levs,mfact,afact)=rc
+                    doregular=1
+                    dofact=1
+                        
+                
+                if(doregular):
+                    
+                    id=self.id_uvars[name]
+    
+                    for lev in levs:
+                        self("set_lats write %d %d %f"%(self.id_file,self.id_uvars[name],lev))
+                        self("set lev %f"%(lev))
+                        if( (name == 'ta' or name == 'tmpp') and lev == 401):
+                            expr="(vint(const(%s,500,-a),%s,300)/vint(const(%s,500,-a),const(%s,1,-a),300))"%(name,name,name,name)
+                            if(verb): print 'vint expr: ',expr 
+                        else:
+                            if(lev in self.levs):
+                                if(doexpr):
+                                    expr=exprs
+                                else:
+                                    expr=name
+                                if(dofact and mfact != None):
+                                    expr="%s*%f"%(expr,mfact)
+                            else:
+                                if(verb): print 'IIII dooohhh!  ',lev,' not in: y',self.levs,' do ln(p) interp...for: ',name
+                                if(doexpr):
+                                    expr=self.LogPinterp(exprs,lev,mfact=mfact)
+                                else:
+                                    expr=self.LogPinterp(name,lev,mfact=mfact)
+                                if(verb): print 'IIII lev: ',lev,' expr: ',expr
+                                
+                        if(self.regrid > 0):
+                            
+                            if(self.remethod == 're2'):
+                                if(hasattr(self,'reargs') and self.reargs != None):
+                                    expr="re2(%s,%s)"%(expr,self.reargs)
+                                else:
+                                    expr="re2(%s,%5.3f)"%(expr,self.regrid)
+                            else:
+                                if(hasattr(self,'reargs') and self.reargs != None):
+                                    expr="re(%s,%s)"%(expr,self.reargs)
+                                else:
+                                    expr="re(%s,%d,linear,0.0,%f,%d,linear,-90.0,%f)"%(expr,self.nxre,self.dlon,self.nyre,self.dlat)
+    
+                        if(self.smth2d > 0):
+                            expr="smth2d(%s,%d)"%(expr,self.smth2d)
+    
+                        self("lats_data %s"%(expr))
+                        if(verb):
+                            for n in range(1,self._ga.nLines):
+                                print self._ga.rline(n)
+                else:
+                    
+                    id=self.id_uvars[name]
+                    
+                    for lev in levs:
+                        self("set_lats write %d %d %f"%(self.id_file,self.id_uvars[name],lev))
+                        expr=exprs[levs.index(lev)] 
+                        self("lats_data %s"%(expr))
+                        if(verb):
+                            for n in range(1,self._ga.nLines):
+                                print self._ga.rline(n)
+                    
+
+            for svar in svars:
+                
+                sfcexpr=None
+                if(len(svar) == 2):
+                    (name,sfctype)=svar
+                elif(len(svar) == 3):
+                    (name,sfctype,sfcexpr)=svar
+                    
+                id=self.id_svars[name]
+
+                self("set_lats write %d %d 0"%(self.id_file,self.id_svars[name]))
+                
+                expr=name
+                if(sfcexpr != None): expr=sfcexpr
+
+                if(self.regrid > 0):
+                        
+                    if(self.remethod == 're2'):
+                        if(hasattr(self,'reargs') and self.reargs != None):
+                            expr="re2(%s,%s)"%(expr,self.reargs)
+                        else:
+                            expr="re2(%s,%5.3f)"%(expr,self.regrid)
+                    else:
+                        if(hasattr(self,'reargs') and self.reargs != None):
+                            expr="re(%s,%s)"%(expr,self.reargs)
+                        else:
+                            expr="re(%s,%d,linear,0.0,%f,%d,linear,-90.0,%f)"%(expr,self.nxre,self.dlon,self.nyre,self.dlat)
+
+                if(self.smth2d > 0):
+                    expr="smth2d(%s,%d)"%(expr,self.smth2d)
+
+                self("lats_data %s"%(expr))
+                if(verb):
+                    for n in range(1,self._ga.nLines):
+                        print self._ga.rline(n)
+
+
+    def close(self):
+
+        self("set_lats close %d"%(self.id_file))
+
+                
+
+    
+    __call__=cmd2
+
+
+
+class GaLatsQ(GaLats):
+
+    def cmd2(self,gacmd,RcCheck=0):
+        self._ga.cmd2(gacmd,Quiet=1,RcCheck=RcCheck)
+
+    __call__=cmd2
+        
+
 
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 # runGrads
@@ -10523,7 +11631,7 @@ that generates of -MRG.txt where the working is updated with BT
             
         timeGen="tG:%3d"%(timeGen)
         ogendtg=sm[24].strip()
-        if(ogendtg == 'NaN'): ogendtg=''
+        if(ogendtg == 'NaN'): ogendtg=edtg
         
         stm=stm.upper()
         
@@ -10540,7 +11648,7 @@ that generates of -MRG.txt where the working is updated with BT
             nRI,nED,nRW,
             RIstatus,timeGen,stm9x,ogendtg)
         
-        ocard=ocard[0:-1]
+        #ocard=ocard[0:-1]
         if(doprint): 
             print ocard
             
@@ -10592,7 +11700,7 @@ that generates of -MRG.txt where the working is updated with BT
         try:
             smeta=self.stmMetaMd3[stmid]
         except:
-            #print 'EEE in getMd3track for: ',stmid
+            print 'EEE in getMd3track for: ',stmid
             return(0,m3trk)
             
             
@@ -13114,11 +14222,2384 @@ class AdeckFromCards(Adeck):
         self.adeckyears=[]
         self.adeckbasins=[]
 
+class GaProc(MFbase):
+    """ object to hang a 'ga' to pass between processing objects"""
+
+    def __init__(self,ga=None,
+                 verb=0,
+                 ctlpath=None,
+                 Quiet=1,
+                 Window=0,
+                 Opts='',
+                 doLogger=0,
+                 Bin='grads',
+                 ):
+
+        self.ga=ga
+        self.verb=verb
+        self.ctlpath=ctlpath
+        self.Quiet=Quiet
+        self.Window=Window
+        self.Opts=Opts
+        self.doLogger=doLogger
+        self.Bin=Bin
+
+    def initGA(self,ctlpath=None,doreinit=0):
+
+        # -- do grads: 1) open files; 2) get field data
+        # -- decorate the GaProc (gaP) object
+        #
+        if(self.ga == None):
+            print 'GaProc MMMMMM -- making self.ga'
+            from ga2 import setGA
+            ga=setGA(Opts=self.Opts,Quiet=self.Quiet,Window=self.Window,doLogger=self.doLogger,verb=self.verb,Bin=self.Bin)
+            self.ga=ga
+            self.ge=ga.ge
+            
+        else:
+            ga=self.ga
+            ge=self.ge
+
+        if(doreinit): ga('reinit')
+
+        if(self.ctlpath != None or ctlpath != None):
+            if(self.ctlpath != None):
+                print 'GaProc OOOOO -- open self.ctlpath: ',self.ctlpath
+                ga.fh=ga.open(self.ctlpath)
+            if(ctlpath != None):
+                print 'GaProc OOOOO -- open ctlpath: ',ctlpath
+                ga.fh=ga.open(ctlpath)
+
+            ge=ga.ge
+            ge.fh=ga.fh
+            ge.getFileMeta()
+            self.ga=ga
+            self.ge=ga.ge
+
+        self.gp=self.ga.gp
+
+class InvHash(MFbase):
+
+    def __init__(self,
+                 dbname,
+                 tbdir=None,
+                 dbkeyLocal='inventory',
+                 diag=0,
+                 verb=0,
+                 override=0,
+                 lsInv=0,
+                 unlink=0):
+
+        MF=MFutils()
+        self.dbname=dbname
+        self.tbdir=tbdir
+
+        self.dbname=dbname
+        self.dbfile="%s.pypdb"%(dbname)
+        if(tbdir == None):
+            tbdir='/tmp'
+            self.dsbdir="%s/DSs"%(tbdir)
+        else:
+            self.dsbdir=tbdir
+            
+        invPath="%s/%s"%(self.dsbdir,self.dbfile)
+        MF.ChkDir(self.dsbdir,'mk')
+
+        doDSsWrite=1
+        if(lsInv): doDSsWrite=0
+        
+        self.DSs=DataSets(bdir=self.dsbdir,name=self.dbfile,dtype=self.dbname,
+                          verb=verb,unlink=unlink,doDSsWrite=doDSsWrite)
+        self.dbkeyLocal=dbkeyLocal
+
+        if(diag): MF.sTimer('setDSs')
+        try:
+            self.dsL=self.DSs.getDataSet(key=self.dbkeyLocal,verb=verb)
+            self.hash=self.dsL.data
+        except:
+            self.dsL=DataSet(name=self.dbkeyLocal,dtype='hash')
+            self.hash={}
+
+        if(override): self.hash={}
+
+        if(diag): MF.dTimer('setDSs')
+
+    def put(self,verb=0):
+
+        self.dsL.data=self.hash
+        self.DSs.putDataSet(self.dsL,key=self.dbkeyLocal,verb=verb)
 
 
-#cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc -- Adeck
+    def lsInv(self,
+              models,
+              dtgs,
+              basins=None,
+              gentaus=None,
+              dogendtg=None,
+              ):
+
+        type='fcst'
+        if(dogendtg): type='veri'
+
+
+        kk=self.hash.keys()
+        for k in kk:
+            print 'key: ',k,'hash.val: ',self.hash[k]
+
+
+# -- CCCCCCCCCCCCC -- lsdiag
+
+class W2areas(MFbase):
+
+
+    mapres='mres'
+    pareaxl=0.4
+    pareaxr=10.8
+    pareayb=0.65
+    pareayt=8.25
+    lonW=-120.0
+    lonE=0.0
+    latS=-10.0
+    latN=60.0
+    mpval1='default'
+    mpval2='default'
+    mpval3='default'
+    mpval4='default'
+    xlint=20
+    ylint=10
+    xsize=W2plotXsize
+    ysize=int(xsize*W2plotAspect)
+    dx=1.0
+    dy=1.0
+
+    def __init__(self,
+                 lonW=None,
+                 lonE=None,
+                 latS=None,
+                 latN=None,
+                 dx=None,
+                 dy=None):
+
+        if(lonW != None and lonE != None):
+            self.setLons(lonW,lonE)
+
+        if(latS != None and latN != None):
+            self.setLats(latS,latN)
+
+        self.dx=dx
+        self.dy=dy
+        
+        if( (type(self.dx) is FloatType) and (type(self.dy) is FloatType) ):
+            self.setGrid(self.dx,self.dy)
+
+        
+        
+
+    def setLons(self,lonW,lonE):
+        
+        self.lonW=lonW
+        self.lonE=lonE
+        if(lonW < 0.0): self.lonW=lonW+360.0
+        if(lonE < 0.0): self.lonE=lonE+360.0
+        if(self.lonW > self.lonE): self.lonE=self.lonE+360.0
+
+        self.dLon=self.lonE-self.lonW
+        
+    def setLats(self,latS,latN):
+        
+        self.latS=latS
+        self.latN=latN
+        self.dLat=self.latN-self.latS
+        
+
+    def setGrid(self,dx,dy):
+
+
+        # -- E-W wrap check
+        #
+        wrapEW=0
+        dxoffset=1.01
+        if(self.lonE - self.lonW == 360.0):
+            wrapEW=1
+            dxoffset=0.01
+        ni=(self.lonE - self.lonW)/dx + dxoffset
+
+        dyoffset=1.01
+        nj=(self.latN - self.latS)/dy + dyoffset
+
+        self.wrapEW=wrapEW
+        self.dx=dx
+        self.dy=dy
+        
+        self.ni=int(ni)
+        self.nj=int(nj)
+        
+
+
+
+class W2areaGlobal(W2areas):
+
+
+    def __init__(self,
+                 lonW=0.0,
+                 lonE=360.0,
+                 latS=-90.0,
+                 latN=90.0,
+                 dx=1.0,
+                 dy=1.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        self.setGrid(dx,dy)
+
+
+
+class W2areaLant(W2areas):
+
+
+    def __init__(self,
+                 lonW=-120,
+                 lonE=0.0,
+                 latS=-10.0,
+                 latN=60.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        
+class W2areaEpac(W2areas):
+
+
+    def __init__(self,
+                 lonW=160.0,
+                 lonE=280.0,
+                 latS=-10.0,
+                 latN=60.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+
+class W2areaCpac(W2areas):
+
+
+    def __init__(self,
+                 lonW=120.0,
+                 lonE=240.0,
+                 latS=-10.0,
+                 latN=60.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+
+
+class W2areaWpac(W2areas):
+
+    def __init__(self,
+                 lonW=80,
+                 lonE=200.0,
+                 latS=-10.0,
+                 latN=60.0,
+                 ):
+
+        self.lonW=lonW
+        self.lonE=lonE
+        self.latS=latS
+        self.latN=latN
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+
+class W2areaSio(W2areas):
+
+    def __init__(self,
+                 lonW=10.0,
+                 lonE=130.0,
+                 latS=-60.0,
+                 latN=10.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        
+class W2areaNio(W2areas):
+
+
+    def __init__(self,
+                 lonW=20.0,
+                 lonE=120.0,
+                 latS=-10.0,
+                 latN=50.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        
+class W2areaIo(W2areas):
+
+
+    def __init__(self,
+                 lonW=20.0,
+                 lonE=160.0,
+                 latS=-50.0,
+                 latN=40.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        
+class W2areaSwpac(W2areas):
+
+    def __init__(self,
+                 lonW=120.0,
+                 lonE=280.0,
+                 latS=-60.0,
+                 latN=20.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        self.latS=latS
+        self.latN=latN
+
+class W2areaShem(W2areas):
+
+    def __init__(self,
+                 lonW=30.0,
+                 lonE=210.0,
+                 latS=-60.0,
+                 latN=10.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        
+class W2areaPrwLant(W2areas):
+
+    def __init__(self,
+                 lonW=-100.0,
+                 lonE=-10.0,
+                 latS=-10.0,
+                 latN=40.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+        
+class W2areaPrwWpac(W2areas):
+
+    def __init__(self,
+                 lonW=100.0,
+                 lonE=200.0,
+                 latS=-10.0,
+                 latN=45.0,
+                 ):
+
+        self.setLons(lonW,lonE)
+        self.setLats(latS,latN)
+
+class ctlProps(MFbase):
+
+
+    def __init__(self,ctlpath,verb=0):
+
+        siz=MF.GetPathSiz(ctlpath)
+        if(siz == None or siz == 0):
+            print 'EEE WxMAP2.ctlProps: ctlpath: ',ctlpath,' siz: ',siz
+            return
+
+        self.path=ctlpath
+        
+        cards=open(ctlpath).readlines()
+
+        
+        for n in range(0,len(cards)):
+            
+            card=cards[n].lower()
+            
+            if(verb): print 'cccCtlCard ',card[:-1]
+
+            if(mf.find(card,'xdef')):
+                tt=card.split()
+                self.nx=tt[1]
+                self.xtype=tt[2]
+                self.blon=float(tt[3])
+                self.dlon=float(tt[4])
+            
+            if(mf.find(card,'ydef')):
+                tt=card.split()
+                self.ny=tt[1]
+                self.ytype=tt[2]
+                if(self.ytype == 'linear'):
+                    self.blat=float(tt[3])
+                    self.dlat=float(tt[4])
+                else:
+                    self.lats=[]
+                    n1=3
+                    for nn in range(n+1,len(cards)):
+                        card1=cards[nn].lower()
+                        #print 'nnnnn ',nn,n1,card1[0:-1]
+                        if(mf.find(card1,'def')):
+                            break
+                        elif(n1 == 0):
+                            tt=card1.split()
+                            for i in range(n1,len(tt)):
+                                self.lats.append(float(tt[i]))
+                            n=n+1
+                            n1=0
+                        elif(n1 == len(tt)):
+                            n1=0
+                            n=n+1
+                            continue
+                        else:
+                            for i in range(n1,len(tt)):
+                                self.lats.append(float(tt[i]))
+                            n=n+1
+                            n1=0
+                                
+                    self.blat=self.lats[0]
+                    self.dlat=self.lats[-1]-self.lats[-2]
+                    continue
+            
+            if(mf.find(card,'zdef')):
+                self.levs=[]
+                tt=card.split()
+                self.nz=tt[1]
+                self.ztype=tt[2]
+                if(self.ztype == 'linear'):
+                    self.blev=float(tt[3])
+                    self.dlev=float(tt[4])
+
+                else:
+                    # -- assume all levels on one card
+                    for i in range(3,len(tt)):
+                        self.levs.append(float(tt[i]))
+
+            
+class TcBasin(MFbase):
+
+
+    def __init__(self,basin=None):
+
+        if(basin == None):
+            self.basin=None
+            self.parea=None
+        else:
+            self.getBasinPareaFromBasin(basin)
+
+    def getBasinPareaFromStm1id(self,stm1id):
+
+        (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stm1id)
+        basin=Basin1toFullBasin[b1id]
+        self.getBasinPareaFromBasin(basin)
+        return(self.parea)
+
+    def isMidSeason(self,basin,dtg):
+        
+        rc=0
+        mm=int(dtg[4:6])
+        
+        if(mf.find(basin,'wpac')):
+            if(mm >= 7 and mm <=10): rc=1
+
+        if(mf.find(basin,'epac')):
+            if(mm >= 8 and mm <=9): rc=1
+            
+        if(mf.find(basin,'lant')):
+            if(mm >= 7 and mm <=9): rc=1
+            
+        return(rc)
+    
+
+    def getBasinPareaFromBasin(self,basin):
+
+        if(mf.find(basin,'epac')):
+
+            self.basin='epac'
+            self.parea='tropepac'
+            self.tropicalLats=[-25,25]
+            self.tropicalLatsMidSeason=[-30,30]
+
+        elif(mf.find(basin,'cpac')):
+
+            self.basin='cpac'
+            self.parea='tropcpac'
+            self.tropicalLats=[-25,25]
+
+
+        elif(mf.find(basin,'wpac')):
+
+            self.basin='wpac'
+            self.parea='tropwpac'
+            self.tropicalLats=[-25,25]
+            self.tropicalLatsMidSeason=[-30,30]
+
+
+        elif(mf.find(basin,'lant')):
+
+            self.basin='lant'
+            self.parea='troplant'
+            self.tropicalLats=[-25,30]
+            self.tropicalLatsMidSeason=[-30,35]
+            
+
+        elif(mf.find(basin,'slant')):
+
+            self.basin='slant'
+            self.parea='tropslant'
+            self.tropicalLats=[-25,25]
+            
+
+        elif(mf.find(basin,'nio')):
+            self.basin='nio'
+            self.parea='tropnio'
+            self.tropicalLats=[-25,25]
+
+        elif(mf.find(basin,'sio')):
+            self.basin='sio'
+            self.parea='tropsio'
+            self.tropicalLats=[-25,25]
+
+        elif(mf.find(basin,'swpac')):
+            self.basin='swpac'
+            self.parea='tropswpac'
+            self.tropicalLats=[-25,25]
+
+        elif(mf.find(basin,'shem')):
+
+            self.basin='shem'
+            self.parea='tropshem'
+            self.tropicalLats=[-25,25]
+        
+
+    def getBasinFromLatLon(self,lat,lon):
+
+        self.isepac=( (lon >= 276 and lon <= 282 and lat <  9 ) or
+                    (lon >= 273 and lon <  276 and lat < 12 ) or
+                    (lon >= 267 and lon <  273 and lat < 15 ) or
+                    (lon >= 261 and lon <  267 and lat < 17 ) or
+                    (lon >= 180 and lon <  261 and lat >  0)
+                    )
+
+        self.isepacTC=( (lon >= 276 and lon <= 282 and lat <  9 ) or
+                    (lon >= 273 and lon <  276 and lat < 12 ) or
+                    (lon >= 267 and lon <  273 and lat < 15 ) or
+                    (lon >= 261 and lon <  267 and lat < 17 ) or
+                    (lon >= 160 and lon <  261 and lat >  0)
+                    )
+        
+        self.iscpac=( (lon >= 180 and lon <= 220) and lat >=  0 )
+        
+
+        self.islant=( (lon >= 276 and lon <= 282 and lat >=  9 ) or
+                    (lon >= 273 and lon <  276 and lat >= 12 ) or
+                    (lon >= 267 and lon <  273 and lat >= 15 ) or
+                    (lon >= 261 and lon <  267 and lat >= 17 ) or
+                    (lon >= 276 and lon <= 360 and lat >   0 ) 
+                    )
+        
+        self.iswpac=( (lon >= 100 and lon <= 180) and lat >=  0 )
+        
+        self.iswpacTC=( (lon >= 100 and lon <= 200) and lat >=  0 )
+        
+        self.isnio=( (lon >= 40 and lon <= 100) and lat >=  0 )
+        
+        self.isshem=( (lon >= 35 and lon <= (360-150)) and lat <  0 )
+
+
+        self.llbasin=None
+        
+        if(self.isepac):  self.llbasin='epac'
+        if(self.iscpac):  self.llbasin='cpac'
+        if(self.iswpac):  self.llbasin='wpac'
+        if(self.islant):  self.llbasin='lant'
+        if(self.isnio):   self.llbasin='nio'
+        if(self.isshem):  self.llbasin='shem'
+
+        if(self.basin == None):
+
+            if(self.llbasin == None):
+                print "EEE in tc2.TcBAsin.getBasinFromLatLon: problem lat/lon: ",lat,lon
+                sys.exit()
+
+            self.getBasinPareaFromBasin(self.llbasin)
+
+
+    def isLLin(self,lat,lon,doTC=0):
+
+        self.getBasinFromLatLon(lat,lon)
+        
+        if(self.basin == 'epac'):
+            if(doTC and hasattr(self,'isepacTC')): return(self.isepacTC)
+            return(self.isepac)
+
+        elif(self.basin == 'lant'):
+            return(self.islant)
+
+        elif(self.basin == 'wpac'):
+            if(doTC and hasattr(self,'iswpacTC')): return(self.iswpacTC)
+            return(self.iswpac)
+
+        elif(self.basin == 'nio'):
+            return(self.isnio)
+
+        elif(self.basin == 'shem'):
+            return(self.isshem)
+
+    def isLatTropical(self,lat,dtg=None,override=0):
+        
+        if(override):
+            rc=1
+            return(rc)
+        
+        rc=0
+        tlat0=self.tropicalLats[0]
+        tlat1=self.tropicalLats[1]
+        
+        if(dtg != None):
+            
+            if(self.isMidSeason(self.basin,dtg) and hasattr(self,'tropicalLatsMidSeason')):
+                tlat0=self.tropicalLatsMidSeason[0]
+                tlat1=self.tropicalLatsMidSeason[1]
+                
+
+        if(lat >= tlat0 and lat <= tlat1): rc=1
+        return(rc)
+
+
+class f77GridOutput(MFbase):
+
+    remethod='ba'
+    remethod='bl'
+    remethod='' # use re default for change in res  'ba' for fine->coarse and 'bl' for coarse->fine
+    
+    rexopt='linear'
+    reyopt='linear'
+
+    outDatType='f77'
+    pcntundefMax=10.0
+    diag=0  # -- diagnostic prints
+    
+    def __init__(self,model,dtg,
+                 area=None,
+                 taus=None,
+                 vars=None,
+                 doregrid=1,
+                 tdir='mftrk',
+                 doLogger=0,
+                 tauoffset=0,
+                 Quiet=1,
+                 doByTau=1,
+                 pcntundefMax=pcntundefMax,
+                 prcdir='/tmp',
+                 filename='Zy0x1W2',
+                 ):
+
+        self.model=model
+        self.dtg=dtg
+        self.area=area
+        self.taus=taus
+        self.tauoffset=tauoffset
+        self.vars=vars
+        self.doregrid=doregrid
+        self.GAdoLogger=doLogger
+        self.GAQuiet=Quiet
+        self.doByTau=doByTau
+        self.pcntundefMax=pcntundefMax
+        self.prcdir=prcdir
+        
+        self.initVars()
+        self.setCtl(tdir=tdir)
+        self.setOutput(filename=filename)
+
+
+    def initVars(self,undef=1e20):
+        
+        if(self.area == None): self.area=W2areaGlobal()
+
+        if(self.vars == None): self.vars=['uas.uas.0.-999.-999.uas [m/s]',
+                                          'vas.vas.0.-999.-999.vas [m/s]',
+                                          'vrt8.(hcurl(ua,va)*1e5).850.-999.-999.rel vort 850 [*1e5 /s]',
+                                          ]
+
+        self.dpaths={}
+
+        self.undef=undef
+        
+        if(self.taus == None):
+            self.btau=0
+            self.etau=120
+            self.dtau=6
+            self.tunits='hr'
+            self.taus=range(self.btau,self.etau+1,self.dtau)
+
+        else:
+
+            self.btau=taus[0]
+            self.etau=taus[-1]
+            self.dtau=6
+            if(len(taus) > 1): self.dtau=taus[-1]-taus[-2]
+            self.tunits='hr'
+
+
+        aa=self.area
+
+        if(self.remethod == ''):
+            self.reargs="%d,%s,%f,%f,%d,%s,%f,%f"%(aa.ni,self.rexopt,aa.lonW,aa.dx,aa.nj,self.reyopt,aa.latS,aa.dy)
+        else:
+            self.reargs="%d,%s,%f,%f,%d,%s,%f,%f,%s"%(aa.ni,self.rexopt,aa.lonW,aa.dx,aa.nj,self.reyopt,aa.latS,aa.dy,self.remethod)
+
+        if(not(self.doregrid)): self.reargs=None
+
+        
+
+    def setCtl(self,ctlpath=None,tbdir=None,tdir=None,dols=0):
+
+        self.status=1
+        if(ctlpath == None):
+            rc=self.getW2fldsRtfimCtlpath(self.model,self.dtg)
+            isthere=rc[0]
+            if(isthere):
+                ctlpath=rc[1]
+            else:
+                print 'EEE no w2flds for model: ',self.model,' dtg: ',self.dtg
+                self.status=0
+                return
+
+            (bdir,ctlfile)=os.path.split(ctlpath)
+            self.ctlpath=ctlpath
+
+        if(ctlpath != None):
+            self.ctlpath=ctlpath
+            
+        if(hasattr(self,'tdir')):
+            if(not(dols)): MF.ChkDir(self.tdir,'mk')
+            return
+            
+                          
+        if(tdir != None):
+            self.tdir=tdir
+            if(not(dols)): MF.ChkDir(self.tdir,'mk')
+
+        elif(tbdir != None):
+            bdir="%s/%s"%(tbdir,self.dtg)
+            self.tdir="%s/%s/%s"%(tbdir,self.dtg,self.model)
+            if(not(dols)): MF.ChkDir(self.tdir,'mk')
+            
+        return
+
+
+    def setOutput(self,filename,codename='f77Output.f',f77dir='/tmp'):
+
+        # -- output file name
+        #
+        self.filename=filename
+
+        # -- output code name
+        #
+        if(self.outDatType == 'f77'): self.ftype='-sq'
+
+        self.dpath="%s/%s.dat"%(self.tdir,filename)
+        self.cpath="%s/%s.ctl"%(self.tdir,filename)
+        self.mpath="%s/%s.meta.txt"%(self.tdir,filename)
+
+        if(hasattr(self,'f77dir')):
+            self.f77path="%s/%s"%(self.f77dir,codename)
+        else:
+            self.f77path="%s/%s"%(f77dir,codename)
+        
+        
+    def makeFldMeta(self,taus=None,verb=0):
+
+        aa=self.area
+
+        nk=0
+
+        if(taus == None):
+            otaus=self.taus
+        else:
+            otaus=taus
+          
+        nvarsUA=0
+        if(hasattr(self,'varSl')): 
+            nk=len(self.varSl)
+            levs=self.varSl
+            nvarsUA=len(self.varSuavar)
+
+
+        nvarsSfc=len(self.vars)
+        if(hasattr(self,'varSsfc')):
+            nvarsSfc=len(self.varSsfc)
+        
+##         meta="""filename: %-20s
+## grid  ni: %3d  nj: %3d
+## lonW: %6.2f  lonE: %6.2f
+## latS: %6.2f  latN: %6.2f
+## dlon: %6.3f  dlat: %6.3f
+## nk: %3d"""%\
+##         (self.filename,aa.ni,aa.nj,
+##          aa.lonW,aa.lonE,
+##          aa.latS,aa.latN,
+##          aa.dx,aa.dy,
+##          nk,
+##          )
+
+        # -- use q dims to get exact dims of the output grid, done in makeFldInput.setLatLonLocal()
+        # -- 20170717 -- ukm2 grid > 999 points, change from %3d to %4d
+        #
+        meta="""filename: %-20s
+grid  ni: %4d  nj: %4d
+lonW: %6.2f  lonE: %6.2f
+latS: %6.2f  latN: %6.2f
+dlon: %6.3f  dlat: %6.3f
+nk: %3d"""%\
+        (self.filename,self.Gnx,self.Gny,
+         self.GlonW,self.GlonE,
+         self.GlatS,self.GlatN,
+         self.Gdx,self.Gdy,
+         nk,
+         )
+
+
+        if(nk > 0):
+            for lev in levs:
+                meta="""%s
+%7.1f"""%(meta,lev)
+
+        if(self.doByTau):
+            ntaucard='ntf: %3d (N taus/file)'%(len(otaus))
+        else:
+            ntaucard='ntf: %3d (N taus/file)'%(1)
+            
+            meta="""%s
+%s"""%(meta,ntaucard)
+
+        taucard='nt: %3d (taus)'%(len(otaus))
+
+        meta="""%s
+%s"""%(meta,taucard)
+
+
+        # -- 20230324 -- modify tau in meta to tau-tauoffset to handle 06/18Z ERA5 dtgs
+        #
+        if(self.doByTau):
+            for tau in otaus:
+                dtau=tau-self.tauoffset
+                meta="""%s
+%3d %s"""%(meta,dtau,self.dpaths[tau][-1])
+
+        else:
+            for tau in otaus:
+                
+                meta="""%s
+%3d %s"""%(meta,tau,self.dpath)
+            
+
+        meta="""%s
+nvarsSfc: %3d  nvarsUA: %3d"""%\
+        (meta,
+         nvarsSfc,nvarsUA,
+         )
+
+
+        if(hasattr(self,'varSsfc')):
+
+            for var in self.varSsfc:
+                vp=varProps(var)
+                meta="""%s
+%-10s %-10s %-30s"""%(meta,vp.vvar,vp.vlev,vp.vdesc)
+
+        
+        if(hasattr(self,'varSu') and hasattr(self,'varSuavar')):
+
+            for var in self.varSuavar:
+                expr=self.varSu[var][0]
+                desc=self.varSu[var][1]
+                meta="""%s
+%-10s %-10s %-30s"""%(meta,var,'plevs',desc)
+        
+        else:
+
+            for var in self.vars:
+                vp=varProps(var)
+                meta="""%s
+%-10s %-10s %-30s"""%(meta,vp.vvar,vp.vlev,vp.vdesc)
+
+        MF.WriteString2File(meta,self.mpath,verb=verb)
+
+        return
+
+
+    def makef77Output(self,taus=None,verb=0):
+
+        f77='''cmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+c
+      module f77Output
+
+      use trkParams
+      use f77OutputMeta
+      use mfutils
+      
+      implicit none
+'''
+
+        if(hasattr(self,'varSsfc')):
+            
+            for var in self.varSsfc:
+                vp=varProps(var)
+
+        if(hasattr(self,'varSu') and hasattr(self,'varSuavar')):
+
+            for var in self.varSuavar:
+                expr=self.varSu[var][0]
+                desc=self.varSu[var][1]
+        
+        else:
+
+            for var in self.vars:
+                vp=varProps(var)
+                fldname=vp.vvar
+                if(hasattr(vp,'f77name')): fldname=vp.f77name
+                f77="""%s
+      real*4, allocatable, dimension(:,:) :: %s"""%(f77,fldname)
+
+
+
+        f77=f77+'''
+        
+      contains
+
+      subroutine initFlds
+
+      integer istat'''
+
+        if(hasattr(self,'varSsfc')):
+            for var in self.varSsfc:
+                vp=varProps(var)
+
+        if(hasattr(self,'varSu') and hasattr(self,'varSuavar')):
+            for var in self.varSuavar:
+                expr=self.varSu[var][0]
+        
+        else:
+
+            for var in self.vars:
+                vp=varProps(var)
+                fldname=vp.vvar
+                if(hasattr(vp,'f77name')): fldname=vp.f77name
+                f77="""%s
+
+      allocate(%s(ni,nj),stat=istat)
+      if(istat.gt.0) go to 814"""%(f77,fldname)
+
+        f77=f77+"""
+
+      return
+
+ 814  continue
+      print*,'error in allocate... '
+      stop 814
+      
+      return
+      end subroutine initFlds
+
+
+      subroutine readFlds(ntau)
+
+      integer ntau,iunittcf,ierr,ierrfld,itau,irecvv
+
+      real undef
+
+      character*24 qtitle
+
+c--  initialize variables
+c
+
+      undef=1e10
+      iunittcf=99
+
+      if(ntf == 1) then
+        open(iunittcf,file=trim(DataPaths(ntf)),
+     $       form='unformatted',
+     $       status='old',err=805)
+
+      else
+
+        open(iunittcf,file=trim(DataPaths(ntau)),
+     $       form='unformatted',
+     $       status='old',err=805)
+      endif"""
+
+        
+        if(hasattr(self,'varSsfc')):
+            for var in self.varSsfc:
+                vp=varProps(var)
+
+        if(hasattr(self,'varSu') and hasattr(self,'varSuavar')):
+            for var in self.varSuavar:
+                expr=self.varSu[var][0]
+        
+        else:
+
+            for var in self.vars:
+                vp=varProps(var)
+                fldname=vp.vvar
+                if(hasattr(vp,'f77name')): fldname=vp.f77name
+                f77="""%s
+
+c--       read %s
+c         
+      read(iunittcf,err=810,end=810) %s
+
+      call chkfld(%s,ni,nj,undef,%f,ierrfld)
+      if(ierrfld.eq.1) go to 820
+
+      if(verbFld) then
+        qtitle='%-6s input           '
+        call qprntn(%s,qtitle,1,1,ni,nj,15,6)
+      endif"""%(f77,fldname,fldname,fldname,self.pcntundefMax,fldname[0:6],fldname)
+
+        f77=f77+'''
+      return
+
+ 805  continue
+      ierr=1
+      print*,'EEEEE: error opening file in readFlds'
+
+ 810  continue
+      ierr=1
+      print*,'EEEEE: error reading field in readFlds'
+      return
+
+ 820  continue
+      ierr=1
+      print*,'UUUUU: field undefined ntau: ',ntau
+
+      return
+
+      end subroutine readFlds
+
+
+      subroutine chkfld(a,ni,nj,undef,pcntundefMax,ierr)
+
+      real undef
+      real*4 a,pcntundef,pcntundefMax
+      integer i,j,ierr,nundef,ntot,ni,nj
+
+      dimension a(ni,nj)
+
+      ntot=ni*nj
+      ierr=0
+      nundef=0
+      do i=1,ni
+        do j=1,nj
+          if(abs(a(i,j)).ge.undef) then
+            nundef=nundef+1
+          endif
+        end do
+      end do
+
+      pcntundef=float(nundef)/float(ntot)
+
+      
+      if(pcntundef >= pcntundefMax) ierr=1
+      
+      return
+      
+      end subroutine chkfld
+
+
+      end module f77Output'''
+
+                
+
+
+        MF.WriteString2File(f77,self.f77path,verb=verb)
+
+        return
+
+
+
+    def makeFldInputGA(self,Bin='grads'):
+
+        # -- do grads: 1) open files; 2) get file data
+        #
+        from ga2 import setGA
+
+        quiet=self.GAQuiet
+        ga=setGA(Bin=Bin,doLogger=self.GAdoLogger,Quiet=quiet)
+        ga.ge.fh=ga.open(self.ctlpath)
+        ga.ge.getFileMeta()
+        
+        self.ga=ga
+        self.ge=ga.ge
+
+    def isGlobal(self,dlat=2):
+
+        rc=0
+        if(hasattr(self,'ge')):
+            if(
+                (180.0-(abs(self.ge.lat1)+abs(self.ge.lat2)) <= dlat) and
+                (360.0-(abs(self.ge.lon1)+abs(self.ge.lon2)) <= dlat)
+                ): rc=1
+
+        return(rc)
+        
+        
+    def getDpaths(self,useAvailTaus=0,ttaus=None,verb=0,bail=1):
+
+        # -- meteo
+        #
+        nfields=len(self.vars)
+        aa=self.area
+        
+        self.meteoTausDone=[]
+        self.meteoTaus2Do=[]
+
+        if(self.doByTau == 0 and self.filename != None):
+            fullsiz=(nfields*len(self.taus))*aa.ni*aa.nj*4 + (nfields*len(self.taus))*8
+            siz=MF.GetPathSiz(dpath)
+            if(siz == fullsiz):
+                self.meteoTausDone.append('all')
+                self.meteoTaus2Do.append('all')
+            else:
+                self.meteoTausDone.append('all')
+                self.meteoTaus2Do.append('all')
+                
+
+            print 'III single file with all taus: ',self.dpath
+            return
+        
+
+        for tau in self.taus:
+
+            if(ttaus != None and not(tau in ttaus)): continue
+
+            self.dpaths[tau]=None
+
+            # -- 20230324 -- modify tau in meteoDone to tau-tauoffset to handle 06/18Z ERA5 dtgs
+            #
+            ftau=tau
+            ftau=tau-self.tauoffset
+            
+            if(self.filename != None):
+                (dir,file)=os.path.split(self.dpath)
+                file=file.replace('.dat','.f%03d.dat'%(ftau))
+                dpath="%s/%s"%(dir,file)
+                
+                # -- why? onKishou because of the space in big fs "PROMISE PEGAuS"
+                #
+                #if(not(onKishou)): dpath=os.path.realpath(dpath)
+                #dpath=os.path.realpath(dpath)
+                # -- check if already done
+                #
+
+                sizmpath=MF.GetPathSiz(self.mpath)
+                if(sizmpath == None): sizmpath=-999
+                if(hasattr(self,'Gxb')):
+                    Fni=self.Gnx
+                    Fnj=self.Gny
+                    fnij='Gxb'
+                    
+                elif(sizmpath > 0 ):
+                    # get from metafile
+                    #
+                    mlist=MF.ReadFile2List(self.mpath,verb=verb)
+                    for m in mlist:
+                        if(mf.find(m,'grid')):
+                            tt=m.split()
+                            Fni=int(tt[2])
+                            Fnj=int(tt[4])
+                    fnij=self.mpath
+
+                else:
+                    Fni=aa.ni
+                    Fnj=aa.nj
+                    fnij='area'
+                    
+
+                    
+                fullsiz=nfields*Fni*Fnj*4 + nfields*8
+                fullsiz=nfields*Fni*Fnj*4 + nfields*8
+                siz=MF.GetPathSiz(dpath)
+
+                if(verb): print 'WxMAP2.getDpaths() Fni,Fnj: ',Fni,Fnj,' from: ',fnij,' nfields: ',nfields,' fullsiz: ',fullsiz,' siz: ',siz
+
+                if(siz == fullsiz):
+                    self.dpaths[tau]=(1,dpath)
+                    self.meteoTausDone.append(ftau)
+                    if(verb): print 'III(WxMAP2.getDpaths()) already made dpath: ',dpath,' override=0'
+                else:
+                    if(verb): print 'EEE(WxMAP2.getDpaths()) -- did not make full set of fields for model: ',self.model,' dpath: ',dpath
+                    self.meteoTaus2Do.append(ftau)
+                    self.dpaths[tau]=(0,dpath)
+
+        self.meteoDone=0
+        if(len(self.meteoTausDone) > 0 and useAvailTaus): self.meteoDone=1
+        if(len(self.meteoTausDone) > 0 and len(self.meteoTaus2Do) == 0): self.meteoDone=1
+
+        # -- oisst
+        #
+        nfields=3
+        fullsiz=nfields*aa.ni*aa.nj*4 + nfields*8
+        siz=MF.GetPathSiz(self.sstdpath)
+        
+        self.sstDone=0
+        if(siz == fullsiz):
+            self.sstDone=1
+            
+        rc=0
+        if(self.meteoDone and self.sstDone):
+            rc=1
+            
+        return(rc)
+               
+
+    def getVarExpr(self,var,tau,dologz=1,
+                   tm1=1,tp1=1,tfm1=0.5,tfp1=0.5,verb=0):
+        """ special variable -> expression handling"""
+
+        ga=self.ga
+
+        zthk900_600="(%s-%s)"%(self.zCpsexpr[600],self.zCpsexpr[900])
+        zthk600_300="(%s-%s)"%(self.zCpsexpr[300],self.zCpsexpr[600])
+
+        zthk900_600Tinterp="(%s-%s)"%(self.zCpsexprTinterp[600],self.zCpsexprTinterp[900])
+        zthk600_300Tinterp="(%s-%s)"%(self.zCpsexprTinterp[300],self.zCpsexprTinterp[600])
+
+        vp=varProps(var)
+        expr=vp.vexpr
+        
+        try:
+            doTinterp=self.doTinterp[tau]
+        except:
+            doTinterp=0
+            
+        # -- set vtexpr for var t interp expr for case of doing log z interp below...
+        #
+        vtexpr=None
+        if(doTinterp):
+            if(hasattr(vp,'vexprTinterp')):
+                expr=vp.vexprTinterp
+                if(expr != None):
+                    expr=expr.replace('TM1',str(tm1))
+                    expr=expr.replace('TP1',str(tp1))
+                    expr=expr.replace('TFM1',str(tfm1))
+                    expr=expr.replace('TFP1',str(tfp1))
+                    vtexpr=expr
+                
+                    
+            else:
+                print 'EEE need to do Tinterp but vexprTinterp not in getVarExpr.varProps'
+                sys.exit()
+            
+        if(vp.vvar == 'zthklo'):
+            expr=zthk900_600
+            if(doTinterp): expr=zthk900_600Tinterp
+
+        elif(vp.vvar == 'zthkup'):
+            expr=zthk600_300
+            if(doTinterp): expr=zthk600_300Tinterp
+
+        elif(vp.vvar[0] == 'z' and vp.vexpr == 'getexpr'):
+            zlev=int(vp.vvar[1:])
+            expr=self.zCpsexpr[zlev]
+            if(doTinterp): expr=self.zCpsexprTinterp[zlev] 
+
+
+        elif((vp.vvar == 'vrt925' or vp.vvar == 'vrt850' or vp.vvar == 'vrt700') and dologz):
+
+            zlev=int(vp.vvar[-3:])
+            uaxpr=ga.LogPinterp('ua',zlev)
+            vaxpr=ga.LogPinterp('va',zlev)
+            
+            if(doTinterp):
+                uaxprm1=ga.LogPinterp('ua',zlev,texpr='t-%d'%(tm1))
+                vaxprm1=ga.LogPinterp('va',zlev,texpr='t-%d'%(tm1))
+                uaxprp1=ga.LogPinterp('ua',zlev,texpr='t+%d'%(tp1))
+                vaxprp1=ga.LogPinterp('va',zlev,texpr='t+%d'%(tp1))
+                expr='(hcurl((%s+%s)*%f,(%s+%s)*%f)*1e5)'%(uaxprm1,uaxprp1,tfm1,vaxprm1,vaxprp1,tfp1)
+            else:
+                expr='(hcurl(%s,%s)*1e5)'%(uaxpr,vaxpr)
+                
+
+        elif(vp.vvar == 'pr'):
+
+            prexpr=self.m2.setprvar(dtg=self.dtg,tau=tau)
+            prexpr=prexpr.split('=')[1]
+            expr="(%s)"%(prexpr.replace("""'""",''))
+            
+            # 20111102 -- bypass for ecmwf/ukm/cmc -- just use current tau -- problem is complicated expression for pr that include (t+0|1|2)
+            #
+            if(doTinterp
+               and not(self.model == 'ecm2')
+               and not(self.model == 'ecm4')
+               and not(self.model == 'ecm5')
+               and not(self.model == 'ukm2')
+               and not(self.model == 'cmc2')
+               and not(self.model == 'cgd2')
+               ):
+                expr=expr.replace('(t+0)','')
+                expr=expr.replace('pr','(pr(t-%d)*%f + pr(t+%d)*%f)'%(tm1,tfm1,tp1,tfp1))
+
+        elif(vp.vvar == 'prc'):
+
+            prexpr=self.m2.setprvarc(dtg=self.dtg,tau=tau)
+            prexpr=prexpr.split('=')[1]
+            expr="(%s)"%(prexpr.replace("""'""",''))
+            
+            # 20111102 -- bypass for ecmwf/ukm/cmc -- just use current tau -- problem is complicated expression for pr that include (t+0|1|2)
+            #
+            if(doTinterp
+               and not(self.model == 'ecm2')
+               and not(self.model == 'ecm4')
+               and not(self.model == 'ecm5')
+               and not(self.model == 'ukm2')
+               and not(self.model == 'cmc2')
+               and not(self.model == 'cgd2')
+               ):
+                expr=expr.replace('(t+0)','')
+                expr=expr.replace('pr','(pr(t-%d)*%f + pr(t+%d)*%f)'%(tm1,tfm1,tp1,tfp1))
+
+        elif(vp.vvar == 'prw' or vp.vvar == 'prwup'):
+
+            rhfact='0.01'
+            # -- ngp2 going to ncep is now navgem as of 20130312
+            #if(self.model == 'ngp2'): rhfact='1.0'
+            vaporP='(esmrf(ta)*hur*%s)'%(rhfact)
+            vaporP='(esmrf(const(ta,273.16,-u))*hur*%s)'%(rhfact)
+            
+            # -- special case of hi-res CMC
+            #
+            if(self.model == 'cgd2'):
+                mixingR='hus'
+            else:
+                mixingR="0.622*(%s/(lev-%s))"%(vaporP,vaporP)
+            prwexpr="vint(psl*0.01,%s,100)"%(mixingR)
+            if(vp.vvar == 'prwup'):
+                prwexpr="vint(const(psl,400,-a),%s,100)"%(mixingR)
+            if(doTinterp):
+                vaporP='(esmrf(const((ta(t-%d)*%f + ta(t+%d)*%f),273.16,-u))*((hur(t-%d)*%f + hur(t+%d)*%f)*%s))'%(tm1,tfm1,tp1,tfp1,
+                                                                                                                   tm1,tfm1,tp1,tfp1,
+                                                                                                                   rhfact)
+                mixingR="(0.622*(%s/(lev-%s)))"%(vaporP,vaporP)
+                prwexpr="vint( (psl(t-%d)*%f + psl(t+%d)*%f) * 0.01,%s,100)"%(tm1,tfm1,tp1,tfp1,mixingR)
+
+            # -- special case
+            #
+            if(self.model == 'gfs2'): prwexpr='prw'
+            if(self.model == 'ecmt'): prwexpr='prw'
+            if(self.model == 'ecm5'): prwexpr='prw'
+            if(self.model == 'era5'): prwexpr='prw'
+            
+            expr=prwexpr
+
+        # -- inf zinterp flag set from varProps
+        if(vp.zinterp):
+            if(vtexpr != None):
+                expr=ga.LogPinterp(vtexpr,vp.vlev)
+            else:
+                expr=ga.LogPinterp(vp.vexpr,vp.vlev)
+
+        if(verb): print 'vvvvvvvvvvvvvvv ',vtexpr,vp.vvar,expr
+
+        return(vp,expr)
+    
+
+    def getValidTaus(self,ratioMax=0.05,pThere=0.80,dofullChk=0,verb=0):
+        
+        """ find taus with undef """
+
+        self.doTinterp={}
+        self.stats={}
+        
+        ntaus=len(self.taus)
+        
+        for n in range(0,ntaus):
+
+            tau0=self.taus[n]
+            taum1=tau0
+            taup1=tau0
+
+            nm1=n
+            np1=n
+            
+            if(n > 0):
+                nm1=n-1
+            if(n < ntaus-1):
+                np1=n+1
+
+            taum1=self.taus[nm1]
+            taup1=self.taus[np1]
+
+            nvalidMin=1e20
+            nundefMax=-1e20
+
+            pcntThere=[]
+            
+            fdtg=mf.dtginc(self.mdtg,tau0)
+            for n in range(0,len(self.vars)):
+
+                self.ga.ge.setTimebyDtg(fdtg,verb=0)
+                if(hasattr(self,'getVarExpr') and dofullChk):
+                    (vp,expr)=self.getVarExpr(self.vars[n],tau0)
+                    varExpr=expr
+                else:
+                    vp=varProps(self.vars[n])
+                    varExpr=vp.vexpr
+                
+                if(vp.vlev > 0):
+                    self.ga('set lev %d'%(vp.vlev))
+                else:
+                    self.ga('set z 1')
+    
+                try:
+                    self.stats[tau0]=self.ga.get.stat(varExpr)
+                except:
+                    if(dofullChk):
+                        print 'WWWWWWWWWWWW bad stats',vp.vvar,varExpr,fdtg,' dofullChk'
+                    continue
+                
+                nvalid=self.stats[tau0].nvalid
+                nundef=self.stats[tau0].nundef
+
+                # -- ratio of undef / total
+                
+                ratioundef2total=1.0
+                if(nvalid > 0):
+                    ratioundef2total=float(nundef)/(float(nvalid)+float(nundef))
+
+                there=1
+                if(ratioundef2total > ratioMax and  tau0 != 0): there=0
+                pcntThere.append(there)
+
+                if(nvalid < nvalidMin): nvalidMin=nvalid
+                if(nundef > nundefMax): nundefMax=nundef
+                
+                if(verb):
+                    print 'VVVVVVVVVVVVVVVV ',n,tau0,vp.vlev,varExpr,tau0,nvalid,nundef
+                    print 'MMMMMMMMMMMMMMMM ',tau0,nvalidMin,nundefMax
+
+
+            # -- final check if we should do an interp in time
+            #
+            
+            self.doTinterp[tau0]=0
+
+            # -- percent complete
+            #
+            nthere=len(pcntThere)
+            there=0
+            for t in pcntThere:
+                there=there+t
+
+            pcntComplete=0.0
+            if(nthere > 0):
+                pcntComplete=float(there)/float(nthere)
+
+            if(pcntComplete < pThere):
+                self.doTinterp[tau0]=1
+                print 'PPP--doTinterp tau: ',tau0,pcntComplete,' pThere: ',pThere
+            
+
+            if(not(dofullChk)):
+                # -- max/min undef/valid
+                #
+                nvalid=nvalidMin
+                nundef=nundefMax
+                ratioundef2valid=1.0
+                if(nvalid > 0):
+                    ratioundef2valid=float(nundef)/float(nvalid)
+                if(ratioundef2valid > ratioMax and tau0 != 0):
+                    self.doTinterp[tau0]=1
+                    print 'SSS--doTinterp tau: ',tau0,self.stats[tau0].nundef
+                
+            ##self.stats[tau0].ls()
+
+
+    def makeFldInput(self,
+                     dogetValidTaus=1,
+                     doconst0=0,
+                     doglobal=0,
+                     override=0,
+                     verb=0,
+                     taus=None,
+                     ):
+
+
+        def setLatlonGlobal():
+
+            ge=self.ge
+            
+            cmd="""set lat %f %s
+set lon %f %f"""%(ge.lat1,ge.lat2,ge.lon1,ge.lon2)
+            ga(cmd)
+
+        def setLatlonLocal(expand=1,getIgridDims=0):
+
+            # -- expand data grid +/- 1point in x and y for vort calc
+            # -- dregrid() uses re() to dump exact grid
+            #
+            aa=self.area
+
+            dy=dx=0.0
+            if(expand):
+                dy=aa.dy
+                dx=aa.dx
+            
+            flatS=aa.latS-dy
+            flatN=aa.latN+dy
+
+            if(flatS < -90.0): flatS=-90.0
+            if(flatN >  90.0): flatN= 90.0
+
+            # -- set the output dimension env
+            #
+            cmd="""set lat %f %s
+set lon %f %f"""%(flatS,flatN,aa.lonW-dx,aa.lonE+dx)
+            ga(cmd)
+
+            # -- use grads dim env to get dims of input grid
+            #
+            if(getIgridDims):
+                gh=ga.query('dims',Quiet=1)
+
+                nx=gh.nx
+                ny=gh.ny
+                (xb,xe)=gh.xi
+                (yb,ye)=gh.yi
+
+                # -- assume cyclic continuity in x
+                #
+                if(xe > len(ge.lons)): xe=xe-len(ge.lons)
+
+                lonb=ge.lons[xb-1]
+                lone=ge.lons[xe-1]
+
+                latb=ge.lats[yb-1]
+                late=ge.lats[ye-1]
+
+                # -- assum constant grid increment
+                #
+                self.Adx=ge.lons[-1]-ge.lons[-2]
+                self.Ady=ge.lats[-1]-ge.lats[-2]
+
+                self.Axb=xb
+                self.Axe=xe
+
+                self.Ayb=yb
+                self.Aye=ye
+
+                self.Anx=nx
+                self.Any=ny
+
+                self.Alatb=latb
+                self.Alate=late
+
+                self.Alonb=lonb
+                self.Alone=lone
+
+            
+
+        self.varPs={}
+        self.ovars=[]
+
+        for var in self.vars:
+            vp=varProps(var)
+            self.ovars.append(vp.vvar)
+            self.varPs[vp.vvar]=[vp.vexpr,vp.vlev,vp.afact,vp.mfact,vp.vdesc]
+
+        self.getDpaths()
+
+        if(self.meteoDone and not(override)):
+            print """III self.meteoDone ... and not(override)...don't need to makeFldInput...return..."""
+            return
+
+
+        if(self.doByTau == 0):
+            self.getDpaths()
+            siz=MF.GetPathSiz(self.dpath)
+            if(override == 0 and  (siz != None and siz > 0) and self.meteoDone == 0):
+                print 'WWW doByTau=1 and self.dpath: ',self.dpath,' already exists...bail...'
+                sys.exit()
+            return
+            
+            
+        if(not(hasattr(self,'ga'))):
+            self.makeFldInputGA()
+            
+        ga=self.ga
+        ge=self.ge
+
+
+        # -- expressions for hart cps
+        #
+        zlevsCps=[900,850,800,750,700,650,600,550,500,450,400,350,300]
+
+        self.zCpsexpr={}
+        self.zCpsexprTinterp={}
+        
+        for zlev in zlevsCps:
+            self.zCpsexpr[zlev]=ga.LogPinterp('zg',zlev)
+            self.zCpsexprTinterp[zlev]=ga.LogPinterpTinterp('zg',zlev)
+
+
+        # -- set undef
+        #
+        ga('set undef %g'%(self.undef))
+
+        # -- get valid taus
+        #
+        if(dogetValidTaus):
+            MF.sTimer('getValidTaus')
+            self.getValidTaus(dofullChk=0,verb=0)
+            MF.dTimer('getValidTaus')
+
+        nfields=len(self.vars)
+        
+        ga.verb=verb
+
+        if(self.doByTau == 0):
+            ga.ge.setFwrite(name=self.dpath,type=self.ftype)
+            ga('set gxout fwrite')
+            alreadyDone=0
+
+        mtaus=self.taus
+
+        for tau in mtaus:
+            
+            otau=tau
+
+            timerlab='fldtau: %s : %4s : %s : %s'%(self.areaname,otau,self.dtg,self.model)
+            MF.sTimer(timerlab)
+
+            if(self.doByTau):
+
+                (rc,dpath)=self.dpaths[otau]
+                #print 'ooooooooooooooooo',otau,rc,dpath
+                if(rc == 0 or override):
+                    ga.ge.setFwrite(name=dpath,type=self.ftype)
+                    ga('set gxout fwrite')
+                    alreadyDone=0
+                else:
+                    alreadyDone=1
+                    continue
+
+            # -- since we're setting time by dtg -- will automatically account for the tauOffset!
+            #
+            fdtg=mf.dtginc(self.dtg,tau)
+            ga.ge.setTimebyDtg(fdtg)
+
+            dologz=1
+            for var in self.vars:
+                # -- get expression to output; includes special variable handling
+                #
+                (vp,expr)=self.getVarExpr(var,tau,dologz=dologz)
+
+                if(vp.testvar != None):
+                    tvar=vp.testvar
+                    if(not(tvar in ge.vars)):
+                        expr="const(lat,%f,-a)"%(ge.undef)
+                        if(self.diag): print 'III WxMAP2.varProps: setting: ',tvar,' to undef using expr: ',expr
+                    
+                # -- set the plev
+                #
+                if(vp.vlev > 0):
+                    ga('set lev %d'%(vp.vlev))
+                else:
+                    ga('set z 1')
+
+                # -- avoid conflict with grads var names and defined vars
+                #
+                varD=vp.vvar+'X'
+
+                # -- set the lat/lon dim env to global and do define
+                #
+                if(doglobal and self.isGlobal()):
+                    rc=setLatlonGlobal()
+                    ga.dvar.var(varD,expr)
+
+                    
+                # -- set the lat/lon dim to local
+                #
+                # -- expand one grid point in all directions for 
+                rc=setLatlonLocal(expand=1)
+                ga.dvar.var(varD,expr)
+                
+                # -- apply mfact
+                #
+                if(vp.mfact != None and vp.mfact != -999):
+                    mexpr='%s*%f'%(varD,vp.mfact)
+                    ga.dvar.var(varD,mexpr)
+                
+                getIgridDims=0
+                if(not(hasattr(self,'Gxb'))): getIgridDims=1
+                
+                rc=setLatlonLocal(expand=0,getIgridDims=getIgridDims)
+
+                # -- get the exact grid dims of the output grid
+                #
+                if(not(hasattr(self,'Gxb'))):
+
+                    if(self.doregrid == 0):
+                        
+                        self.Gxb=self.Axb
+                        self.Gxe=self.Axe
+                    
+                        self.Gyb=self.Ayb
+                        self.Gye=self.Aye
+                        
+                        self.Gdx=self.Adx
+                        self.Gdy=self.Ady
+                        
+                        
+                        self.Gnx=self.Anx
+                        self.Gny=self.Any
+                        
+                        self.GlatS=self.Alatb
+                        self.GlatN=self.Alate
+                        
+                        self.GlonW=self.Alonb
+                        self.GlonE=self.Alone
+
+                    else:
+
+                        aa=self.area
+                        
+                        self.Gxb=aa.lonW
+                        self.Gxe=aa.lonE
+                    
+                        self.Gyb=aa.latS
+                        self.Gye=aa.latN
+                        
+                        self.Gdx=aa.dx
+                        self.Gdy=aa.dy
+                        
+                        
+                        self.Gnx=aa.ni
+                        self.Gny=aa.nj
+                        
+                        self.GlatS=aa.latS
+                        self.GlatN=aa.latN
+                        
+                        self.GlonW=aa.lonW
+                        self.GlonE=aa.lonE
+                        
+                        
+                if(self.reargs != None):
+                    dore=1
+                    if(doconst0):
+                        #ga.dvar.dregrid0(vp.vvar,expr,self.reargs,undef=self.undef)
+                        print '000000000000000000',varD,self.reargs
+                        gacmd=ga.dvar.dregrid0(varD,varD,self.reargs,undef=self.undef)
+                    else:
+                        #ga.dvar.dregrid(vp.vvar,expr,self.reargs)
+                        gacmd=ga.dvar.dregrid(varD,varD,self.reargs)
+
+                else:
+                    dore=0
+                    if(doconst0):
+                        gacmd=ga.dvar.dundef0(varD)
+                    else:
+                        ga('d %s'%(varD))
+                        gacmd=varD
+
+                if(verb):
+                    print 'vvvvvv varD: %-20s'%(varD),' expr: ',gacmd
+                    
+                    
+            if(self.doByTau):   ga('disable fwrite')
+
+            
+            MF.dTimer(timerlab)
+
+        ga('disable fwrite')
+        
+
+        self.ga=ga
+        self.ge=ga.ge
+
+        if(override or alreadyDone == 0):
+            self.makeCtlfile()
+            self.makeFldMeta()
+            self.makef77Output()
+
+
+    def makeCtlfile(self):
+
+        aa=self.area
+        gtime=mf.dtg2gtime(self.dtg)
+
+        (ddir,dfile)=os.path.split(self.dpath)
+
+        if(self.doByTau):
+            dfile=dfile.replace('.dat','''.f%f3.dat''')
+
+        self.ctl="""dset ^%s
+title test
+undef %g
+options sequential template
+xdef %3d linear %7.2f %7.3f
+ydef %3d linear %7.2f %7.3f"""%(dfile,self.undef,
+            self.Gnx,self.GlonW,self.Gdx,
+            self.Gny,self.GlatS,self.Gdy)
+
+        #if(hasattr(self,'varSsfc')):
+
+        self.makeCtlZdef()
+
+        btau=self.taus[0]
+        etau=self.taus[-1]
+        if(self.dtau > 0):
+            ntimes=(etau-btau)/self.dtau +1
+        else:
+            print 'EEE dtau in WxMAP2.f77GridOutput.makeCtlfile() '
+            sys.exit()
+            
+        self.ctl=self.ctl+"""
+%s
+tdef %d linear %s %d%s"""%(
+            self.zdef,ntimes,gtime,self.dtau,self.tunits,
+            )
+        
+        self.makeCtlVars()
+
+        MF.WriteString2File(self.ctl,self.cpath,verb=1)
+
+
+    def makeCtlZdef(self):
+        
+        if(hasattr(self,'varSl')):
+            self.zdef='zdef  %d levels'%(len(self.varSl))
+            for lev in self.varSl:
+                self.zdef=self.zdef+' %d'%(lev)
+
+        else:
+            self.zdef='zdef  1 levels 1013'
+
+
+
+
+    def makeCtlVars(self):
+
+        if(hasattr(self,'varSuavar') and hasattr(self,'varSl') and hasattr(self,'varSsfc') ):
+
+            sfvars=self.varSsfc
+            uavars=self.varSuavar
+
+            self.ctl="""%s
+vars %d"""%(self.ctl,len(sfvars)+len(uavars))
+
+            for var in sfvars:
+                vp=varProps(var)
+                self.ovars.append(vp.vvar)
+                card="%-12s %3d 0 %s"%(vp.vvar,0,vp.vdesc)
+                self.ctl="""%s
+%s"""%(self.ctl,card)
+
+
+            for var in uavars:
+                (vexpr,vlev,afact,mfact,vdesc)=self.varPs[var]
+                #vexpr=self.varSu[var][0]
+                #vdesc=self.varSu[var][-1]
+                card="%-12s %3d 0 %s"%(var,len(self.varSl),vdesc)
+                self.ctl="""%s
+%s"""%(self.ctl,card)
+
+        else:
+            
+            self.ctl=self.ctl+"""
+vars %d"""%(
+                len(self.vars),
+                )
+
+            for var in self.ovars:
+                (vexpr,vlev,afact,mfact,vdesc)=self.varPs[var]
+                card="%-12s 0 0 %s"%(var,vdesc)
+                self.ctl="""%s
+%s"""%(self.ctl,card)
+
+        
+        self.ctl="""%s
+endvars"""%(self.ctl)
+
+
+
+    def clean(self):
+
+        try:
+            os.unlink(self.dpath)
+        except:
+            print 'EEE unable to rm: ',self.dpath
+
+        
+
+class varProps(MFbase):
+
+    def __init__(self,var=None,
+                 vvar=None,
+                 vexpr=None,
+                 vexprTinterp=None,
+                 vlev=None,
+                 afact=None,
+                 mfact=None,
+                 vdesc=None,
+                 f77name=None,
+                 testvar=None,
+                 ):
+
+        if(var != None):
+            
+            tt=var.split(':')
+
+            if(len(tt) == 6):
+                (vvar,vexpr,vlev,afact,mfact,vdesc)=tt
+            elif(len(tt) == 7):
+                (vvar,vexpr,vexprTinterp,vlev,afact,mfact,vdesc)=tt
+            elif(len(tt) == 8):
+                (vvar,vexpr,vexprTinterp,vlev,afact,mfact,vdesc,f77name)=tt
+            elif(len(tt) == 9):
+                (vvar,vexpr,vexprTinterp,vlev,afact,mfact,vdesc,f77name,testvar)=tt
+                
+            if(f77name == None): f77name=vvar
+
+            zinterp=0
+            if(vlev[0] == 'Z'):
+                vlev=str(vlev[1:])
+                zinterp=1
+                
+            vlev=float(vlev)
+            afact=float(afact)
+            mfact=float(mfact)
+
+        self.vvar=vvar
+        self.vexpr=vexpr
+        self.vexprTinterp=vexprTinterp
+        self.vlev=int(vlev)
+        self.zinterp=zinterp
+        self.afact=afact
+        self.mfact=mfact
+        self.vdesc=vdesc
+        self.f77name=f77name
+        self.testvar=testvar
+
+
+
+
+# -- CCCCCCCCCCCCCCCCCCC -- Adeck
 # main classes
 #
+#cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc -- AdeckSink
+#
+
+class AidTrk(MFbase):
+
+    def __init__(self,dtgs=None,trks=None):
+
+
+        if(dtgs == None):
+            self.dtgs=[]
+        else:
+            self.dtgs=dtgs
+
+        if(trks == None):
+            self.atrks=[]
+        else:
+            # -- convert trks to dict of lists v tuples
+            #
+            otrks={}
+            odtgs=[]
+            for dtg in trks.keys():
+                odtgs.append(dtg)
+
+                dd=trks[dtg]
+                odd={}
+                for d in dd.keys():
+                    odd[d]=list(dd[d])
+
+                otrks[dtg]=odd
+
+            odtgs=mf.uniq(odtgs)
+            self.dtgs=odtgs
+            self.atrks=otrks
+
+    def getLatLonVmaxPminFromAtrk(self,atrk,tau):
+        rc=atrk[tau]
+        lat1=rc[0]
+        lon1=rc[1]
+        vmax1=rc[2]
+        pmin1=rc[3]
+        
+        return(lat1,lon1,vmax1,pmin1)
+    
+    def qcMotion(self,latT=30.0,vmaxT=35.0,vmaxM=55.0,
+                 stmid=None,aid=None,
+                 forspdAdjfact=1.35,
+                 forspdMaxTau0=24,
+                 verb=0):
+
+
+        spdflgT={}
+        spdtauT={}
+        spdflgM={}
+        spdtauM={}
+
+        xspdlog=[]
+
+        for dtg in self.dtgs:
+
+            otaus=[]
+
+            taus=self.atrks[dtg].keys()
+            taus.sort()
+            nt=len(taus)
+            atrk=self.atrks[dtg]
+            otrk={}
+
+            err=-1
+
+            spdflgT[dtg]=0
+            spdtauT[dtg]=-999
+            spdflgM[dtg]=0
+            spdtauM[dtg]=-999
+
+            if(nt > 0): 
+                otaus.append(taus[0])
+
+            for n in range(0,nt):
+
+                course=270
+                speed=0.0
+                tau0=taus[0]
+                tau1=taus[0]
+
+                if(nt > 1):
+                    if(n == 0):
+                        n0=0
+                        n1=1
+                    elif(n == nt-1):
+                        n0=n-1
+                        n1=n
+                    else:
+                        n0=n
+                        n1=n+1
+
+                    tau0=taus[n0]
+                    tau1=taus[n1]
+                    dtau=tau1-tau0
+
+                    rc0=atrk[tau0]
+                    rc1=atrk[tau1]
+                    
+                    (lat0,lon0,vmax0,pmin0)=self.getLatLonVmaxPminFromAtrk(atrk,tau0)
+                    (lat1,lon1,vmax1,pmin1)=self.getLatLonVmaxPminFromAtrk(atrk,tau1)
+
+                    # -- bypass bad; single points
+                    #
+                    #if(dtau == 0 or (lat0 == lat1 and lon0 == lon1)): continue
+
+                    try:
+                        (course,speed,eiu,eiv)=rumhdsp(lat0,lon0,lat1,lon1,dtau)
+                    except:
+                        print 'EEEEEEEEEEEEEEEEEEEEEEEEEEE in qcSpeed.rumhdsp(lat0,lon0,lat1,lon1,dtau): ',tau0,tau1,lat0,lon0,lat1,lon1,dtau,\
+                              ' stmid: ',self.stmid,'aid: ',self.aid,' dtg: ',dtg,' setting speed to 200 to kill off...'
+                        speed=200.0
+
+                    # -- similar to tcnavytrk/mf.modues.f  and mf.trackem.f -- allow faster motion in early period
+                    #
+                    vmaxTcomp=vmaxT
+                    if(tau0 <= forspdMaxTau0):
+                        vmaxTcomp=vmaxT*forspdAdjfact
+
+                    if(abs(lat0) <= latT and speed >= vmaxTcomp):
+                        card="AidTrk(): EEExssive speed in tropics stmid: %s aid: %s dtg: %s tau0: %3d speed: %7.1f lat0: %5.1f  vmaxTcomp: %5.0f"%\
+                            (self.stmid,self.aid,dtg,tau0,speed,lat0,vmaxTcomp)
+                        print card
+                        xspdlog.append(card)
+
+                        err=n0
+                        spdflgT[dtg]=1
+                        spdtauT[dtg]=tau1
+
+
+                    if(abs(lat0) > latT and speed >= vmaxM):
+                        card="AidTrk(): EEExssive speed in MIDLATS stmid: %s aid: %s dtg: %s tau0: %3d speed: %7.1f lat0: %5.1f  vmaxTcomp: %5.0f"%\
+                            (self.stmid,self.aid,dtg,tau0,speed,lat0,vmaxTcomp)
+                        print card
+                        xspdlog.append(card)
+
+                        err=n0
+                        spdflgM[dtg]=1
+                        spdtauM[dtg]=tau1
+
+                    if(err >= 0):
+                        break
+
+                    else:
+                        if(n != n1):
+                            otaus.append(taus[n1])
+
+
+            nto=len(otaus)
+            nti=len(taus)
+            if(verb): print 'dddd ',dtg,' nto: ',nto,' nti: ',nti
+            if(nto < nti):
+                for tau in otaus:
+                    otrk[tau]=atrk[tau]
+
+                self.atrks[dtg]=otrk
+                if(verb): print 'dtg',dtg,tau0,course,speed,lat0,lon0,lat1,lon1,dtau,err
+
+        self.spdflgT=spdflgT
+        self.spdtauT=spdtauT
+        self.spdflgM=spdflgM
+        self.spdtauM=spdtauM
+
+        self.xspdlog=xspdlog
+
+    def lsAT(self,stmid,dtgopt=None):
+
+        dtgs=self.atrks.keys()
+        dtgs.sort()
+
+        tdtgs=None
+        if(dtgopt != None):
+            tdtgs=mf.dtg_dtgopt_prc(dtgopt)
+            
+        for dtg in dtgs:
+
+            if(tdtgs != None and not(dtg in tdtgs)): continue
+            atrk=self.atrks[dtg]
+            print
+            print stmid,dtg,'aid: ',self.aid
+            taus=atrk.keys()
+            taus.sort()
+
+            for tau in taus:
+                vdtg=mf.dtginc(dtg,tau)
+                aa=atrk[tau]
+                alat=aa[0]
+                alon=aa[1]
+                try:
+                    r34=aa[4]
+                except:
+                    r34=None
+
+                if(r34 == None):
+                    or34='[-99,-99,-99,-99]'
+                else:
+                    or34=str(r34)
+
+                (clat,clon)=Rlatlon2Clatlon(alat,alon)
+                if(aa[2] != None): ovmax="%3.0f"%(aa[2])
+                else: ovmax="---"
+                if(aa[3] != None): opmin="%4.0f"%(aa[3])
+                else: opmin="____"
+                print "%s(%03d) %s %s %s %s %s"%(vdtg,tau,clat,clon,ovmax,opmin,or34)
+
+
+class AidStruct(MFbase):
+
+    def __init__(self,dtgs=None,trks=None):
+
+        if(dtgs == None):
+            self.dtgs=[]
+        else:
+            self.dtgs=dtgs
+
+        if(trks == None):
+            self.atrks=[]
+        else:
+            self.atrks=trks
+
+
+
+class AdeckSink(Adeck):
+
+    """ adeck made from 'sink' version of atcf output from gettrk_gen.x
+    """
+    
+
+    def __init__(self,adeckpathmasks,mD=None,dtgopt=None,taids=None,verb=0,warn=1,
+                 skipcarq=1,
+                 dofilt9x=0,
+                 undef=-9999.,
+                 chkb2id=0,
+                 aliases=None):
+        
+        self.lf=SetLandFrac()
+        self.getlf=GetLandFrac
+
+        # -- dectect if mask is a list...
+        #
+        if(type(adeckpathmasks) is ListType):
+            adeckpaths=[]
+            for adeckpathmask in adeckpathmasks:
+                adeckpaths=adeckpaths+glob.glob(adeckpathmask)
+        else:
+            adeckpaths=glob.glob(adeckpathmasks)
+
+
+        if(dtgopt != None):
+            self.tdtgs=dtgs=mf.dtg_dtgopt_prc(dtgopt,ddtg=6)
+
+        if( (taids != None) and (type(taids) is not(ListType)) ):
+            taids=[taids]
+
+        self.mD=mD
+        self.adecks=adeckpaths
+        self.dtgopt=dtgopt
+        self.taids=taids
+        self.verb=verb
+        self.warn=warn
+        self.skipcarq=skipcarq
+        self.undef=undef
+        self.aliases=aliases
+        self.chkb2id=chkb2id
+        self.dofilt9x=dofilt9x
+
+        self.initVars()
+        self.initAdeckPaths(adeckpaths)
+        self.initAdeck(nlenmax=31)
+
+        del self.lf
+        del self.getlf
+
+    def setAidNCard(self,tt):
+        aid=tt[5].strip()
+        return(aid)
+
+    def setDtgNCard(self,tt):
+        dtg=tt[3].strip()
+        return(dtg)
+
+
+
+    def makeIposit(self,tt,card,ncards,ntt,aid=None):
+
+        tau=tt[6].strip()
+        itau=int(tau)
+
+        clat=tt[7].strip()
+        clon=tt[8].strip()
+
+        if(tt[9].strip() == "***" or tt[9].strip() == "****"):
+            vmax=-999
+        else:
+            vmax=float(tt[9])
+
+        # -- check if vmax==0
+        # 
+        if(vmax == 0.0): vmax=self.undef
+        try:
+            (alat,alon)=Clatlon2Rlatlon(clat,clon)[0:2]
+        except:
+            print 'WWW gooned up clat,clon: ',ncards,card[0:-1],ntt
+            return(None,None)
+
+        if(alat == 0.0 and alon == 0.0 and (vmax == 0.0 or vmax == self.undef) ):
+            if(self.verb): print 'NOLOAD: ',card[:-1]
+            return(None,None)
+
+        try:
+            pmin=float(tt[10])
+        except:
+            pmin=self.undef
+
+        if(pmin == 0.0): pmin=self.undef
+
+        if(tt[18].strip() == "****"):
+            poci=-999
+        else:
+            poci=float(tt[18].strip())
+
+        try:    roci=float(tt[19].strip())
+        except: roci=float(tt[19].strip())
+
+        try:    rmax=float(tt[20].strip())
+        except: rmax=float(tt[20].strip())
+
+        try:    dir=float(tt[21].strip())
+        except: dir=self.undef
+
+        try:    spd=float(tt[22].strip())
+        except: spd=self.undef
+
+        try:    cpsB=float(tt[23].strip())
+        except: cpsB=self.undef
+
+        try:    cpsVTl=float(tt[24].strip())
+        except: cpsVTl=self.undef
+
+        try:    cpsVTu=float(tt[25].strip())
+        except: cpsVTu=self.undef
+
+        try:    z8mean=float(tt[26].strip())
+        except: z8mean=self.undef
+
+        try:    z8max=float(tt[27].strip())
+        except: z8max=self.undef
+
+        try:    z7mean=float(tt[28].strip())
+        except: z7mean=self.undef
+
+        try:    z7max=float(tt[29].strip())
+        except: z7max=self.undef
+
+        name=tt[30].strip()
+
+        # -- put lf (landfrac) into the posit
+        #
+
+        alf=self.getlf(self.lf,alat,alon)
+        # -- bug in doc on marchok 'sink' format lower then upper for cpsV
+        # -- doc has upper/lower; code has it other way
+
+        iposit=(alat,alon,vmax,pmin,alf,poci,roci,rmax,dir,spd,cpsB,cpsVTl,cpsVTu,z8mean,z8max,z7mean,z7max)
+
+        return(itau,iposit)
+
+
+
+    def GetAidStruct(self,aid,stm2id=None,stm1id=None,verb=0):
+
+        if(stm2id == None and stm1id != None): stm2id=stm1idTostm2id(stm1id)
+        if(stm1id == None and stm2id != None): stm1id=stm2idTostm1id(stm2id)
+
+        try:
+            trks=self.aidtrks[aid,stm2id]
+        except:
+            trks={}
+
+
+        if(len(trks) == 0):
+            AT=AidStruct()
+            AT.aid=aid
+            AT.stmid=stm1id
+            return(AT)
+
+        dtgs=trks.keys()
+        dtgs.sort()
+
+        AT=AidStruct(dtgs,trks)
+        AT.aid=aid
+        AT.stmid=stm1id
+
+        return(AT)
+
 
 
 class MDdataset(MFbase):
@@ -14375,12 +17856,13 @@ class MD3trk(MDdataset):
 
     undef=-999.
     
-    def __init__(self,cards,stm1id,stm9xid,dom3=0,basin=None,sname=None,stmDev=None,
+    def __init__(self,cards,stm1id,stm9xid,gendtg=None,
+                 dom3=0,basin=None,sname=None,stmDev=None,
                  dobt=0,doPutDSs=0,verb=0):
 
         # -- input
         #
-        
+        self.gendtg=gendtg
         self.dom3=dom3
         self.verb=verb
         self.cards=cards
@@ -14616,12 +18098,25 @@ class MD3trk(MDdataset):
         
         ntrk=0
         ndtgs=0
+
+        tdtgs=[]
+        for idtg in self.idtgs:
+            gendiff=-999
+            cmpdtg=idtg
+            if(self.gendtg != None):
+                cmpdtg=dtginc(self.gendtg,-6)
+                
+            gendiff=dtgdiff(idtg,cmpdtg)
+            if(gendiff >= 0.0):
+                if(verb): print 'ddddddddddddddddddddddddddddddddddddd',idtg,cmpdtg,gendiff
+                tdtgs.append(idtg)
+        
+        self.idtgs=tdtgs
+        
         dtgs=self.idtgs
         for dtg in dtgs:
             if(verb): print 'ddd',dtg,len(self.itrk[dtg]),self.itrk[dtg]
-            
             self.getTrkData4Itrk(dtg,ntrk,ndtgs)
-            
             ntrk=ntrk+1
             ndtgs=ndtgs+1
             
@@ -14664,13 +18159,13 @@ class MD3trk(MDdataset):
                 
             dirspd[dtg]=(trkdir,trkspd)
 
-        self.ndtgs=ndtgs
-        self.dtgs=dtgs
-
+        
         # -- set the bt dir/spd and dirtype
         #
+        self.ndtgs=ndtgs
+        self.dtgs=dtgs
+        
         for dtg in dtgs:
-            
             self.trk[dtg].dirtype=self.trk[dtg].postype
             (trkdir,trkspd)=dirspd[dtg]
 
@@ -14684,6 +18179,7 @@ class MD3trk(MDdataset):
                 
             self.trk[dtg].trkdir=trkdir   
             self.trk[dtg].trkspd=trkspd    
+            
         
         
     def anlMDtrk(self,stmD=None,verb=0):
@@ -14875,8 +18371,7 @@ class MD3trk(MDdataset):
         
     def getgenesis(self,dtgm=-18,dtgp=+12,vmaxTD=25.0,vmaxMin=10.0,verb=0):
 
-        time2gen=-999.
-        gendtg=gendtgWN=gendtgBT=None
+        gendtg=gendtgWN=gendtgBT=gendtgBT1=gendtgBT2=None
         stdd=0.0
         
         gendtgs=[]
@@ -14892,19 +18387,38 @@ class MD3trk(MDdataset):
         # -- if gendtg = None; then no warnings!  use when became tc...
         #
         tcCodeWind=0
+        is9x=Is9X(self.stm1id)
         for dtg in self.dtgs:
             tt=self.trk[dtg]
             istc=IsTc(tt.tccode)
-            # -- no this
-            #if(tt.tccode == 'TW'): tcCodeWind=1
-            if(istc >= 1 and gendtgBT == None): 
+            if(istc == 1 and gendtgBT1 == None and not(is9x)): 
                 tcCodeWind=1
-                gendtgBT=dtg
+                gendtgBT1=dtg
+
+            if(istc > 1 and gendtgBT2 == None and not(is9x)): 
+                tcCodeWind=2
+                gendtgBT2=dtg
                 
 
         if(gendtgWN != None):
             if(tcCodeWind >= 0):  gendtg=gendtgWN
-            else:                 gendtg=gendtgBT
+            
+        else:                 
+            time2gen1=time2gen2=-999
+            if(gendtgBT1 != None and not(is9x)):
+                time2gen1=dtgdiff(self.dtgs[0],gendtgBT1)
+            if(gendtgBT2 != None and not(is9x)):
+                time2gen2=dtgdiff(self.dtgs[0],gendtgBT2)
+
+            # -- go first for TC
+            if(time2gen1 > 0.0):
+                gendtgBT=gendtgBT1
+            # --  else subTC
+            elif(time2gen2 > 0.0):
+                gendtgBT=gendtgBT2
+            else:
+                gendtg=None
+                time2gen=0.0
             
         if(gendtg == None and gendtgBT != None): gendtg=gendtgBT
         
@@ -18205,7 +21719,7 @@ class gXbasemap2(MFbase):
             npngpath=self.pngpath.replace('/tmp',self.bmdir)
             opngpath=self.pngpath
             self.pngpath=npngpath
-            cmd="mv -f -v %s %s"%(opngpath,self.pngpath)
+            cmd="mv -f %s %s"%(opngpath,self.pngpath)
             runcmd(cmd)
 
 
@@ -18567,9 +22081,9 @@ class gXplotTcBt(MFbase):
             if(nhfor == None):
                 dtgfor=dtgs[-1]
                 if(dtg0 != None and ddtg == 12):
-                    if(w2.is0012Z(dtg0) and not(w2.is0012Z(dtgfor))):
+                    if(MF.is0012Z(dtg0) and not(MF.is0012Z(dtgfor))):
                         dtgfor=dtgs[-2]
-                    elif(w2.is0618Z(dtg0) and not(w2.is0618Z(dtgfor))):
+                    elif(MF.is0618Z(dtg0) and not(MF.is0618Z(dtgfor))):
                         dtgfor=dtgs[-2]
             else:
                 if(dtg0 != None): dtgfor=dtginc(dtg0,nhfor)
@@ -18581,9 +22095,9 @@ class gXplotTcBt(MFbase):
             if(nhbak == None):
                 dtgbak=dtgs[0]
                 if(dtg0 != None and ddtg == 12):
-                    if(w2.is0012Z(dtg0) and not(w2.is0012Z(dtgbak))):
+                    if(MF.is0012Z(dtg0) and not(MF.is0012Z(dtgbak))):
                         dtgbak=dtgs[1]
-                    elif(w2.is0618Z(dtg0) and not(w2.is0618Z(dtgbak))):
+                    elif(MF.is0618Z(dtg0) and not(MF.is0618Z(dtgbak))):
                         dtgbak=dtgs[1]
                 
             else:
@@ -20162,13 +23676,13 @@ class Model(MFbase):
 class Model2(Model):
 
     #addir=w2.Nwp2DataMassStore
-    #models=w2.Nwp2ModelsAll
-    #allmodels=w2.Nwp2ModelsAll
-    #models=w2.Nwp2ModelsActive
-    #modelsW2=w2.Nwp2ModelsActiveW2flds
+    models=Nwp2ModelsAll
+    allmodels=Nwp2ModelsAll
+    models=Nwp2ModelsActive
+    modelsW2=Nwp2ModelsActiveW2flds
 
-    #geodir=w2.GeogDatDirW2
-    #bdir2=w2.Nwp2DataBdir
+    geodir=sbtGeogDatDir
+    bdir2=Nwp2DataBdir
     d2dir='/dat2/nwp2'
     archdir='/dat5/dat/nwp2'
     archdirDat6='/dat6/dat/nwp2'
@@ -20250,7 +23764,6 @@ class Model2(Model):
         self.rtfimArchDir="/Volumes/FWV2/dat2/nwp2/rtfim/dat"
         self.rtfimArchDir="/dat4/nwp2/rtfim/dat"
         self.rtfimArchDir2="/Volumes/FWV2/dat2/nwp2/rtfim/dat"
-        self.nwp2ArchDir=w2.Nwp2DataBdirArch3
 
     def getRtfimModelsByDtg(self,dtg,sdir=None):
 
@@ -20414,7 +23927,7 @@ class Model2(Model):
             # -- find tau offset
             #
             dataDtg=dtg
-            if(w2.is0618Z(dtg) and self.modelDdtg == 12):
+            if(MF.is0618Z(dtg) and self.modelDdtg == 12):
                 self.tauOffset=6
                 dataDtg=mf.dtginc(dtg,-6)
                 
@@ -20690,7 +24203,7 @@ class Model2(Model):
         if(hasattr(self,'dattaus')):
             datataus=self.dattaus
         else:
-            datataus=w2.Model2DataTaus(self.model,dtg)
+            datataus=Model2DataTaus(self.model,dtg)
 
         # -- forward search thru target data taus
         # 
@@ -20789,14 +24302,14 @@ tdef % 3d linear %s %shr
         self.DoGribmap(gmpverb=verb) # from Model in M
 
 
-    def setInventory(self,dtype='w2flds',override=0,unlink=0):
+    #def setInventory(self,dtype='w2flds',override=0,unlink=0):
 
-        dbname='nwp2Inv-%s'%(dtype)
-        #tbdir=w2.Nwp2DataBdir
-        #self.iV=InvHash(dbname,tbdir,override=override)
+        #dbname='nwp2Inv-%s'%(dtype)
+        ##tbdir=w2.Nwp2DataBdir
+        ##self.iV=InvHash(dbname,tbdir,override=override)
 
-        tbdir=w2.Nwp2DataDSsBdir
-        self.iV=InvHash(dbname,tbdir,override=override,unlink=unlink)
+        #tbdir=w2.Nwp2DataDSsBdir
+        #self.iV=InvHash(dbname,tbdir,override=override,unlink=unlink)
 
 
     def Model2PlotMinTau(self,dtg):
@@ -20923,7 +24436,7 @@ class Era5(Model2):
         gmplatestTau=-999
         gmplastTau=-999
 
-        datataus=w2.Model2DataTaus(self.model,dtg)
+        datataus=Model2DataTaus(self.model,dtg)
         
         # -- for single tau in era5/ecm5 ... get the age from the single data file
         #
@@ -21212,27 +24725,6 @@ TCCsfc  0 164,1,0  ** Total cloud cover [(0 - 1)]
 TPsfc  0 228,1,0  ** Total precipitation [m]
 Uprs 14 131,100,0 ** U velocity [m s**-1]
 Vprs 14 132,100,0 ** V velocity [m s**-1]'''
-
-
-
-def setModel2(model,bdir2=None):
-
-    model=model.lower()
-    
-    if(model == 'era5'): return(Era5(bdir2=bdir2))
-
-    ####lif(model == 'fimx'): return(Fimx())
-    else:
-        print 'EEE(M2.setModel2) invalid model: ',model,' in setModel2...sayoonara'
-        sys.exit()
-        return(None)
-
-    return(fmodel)
-
-        
-        
-
-
 
 
 

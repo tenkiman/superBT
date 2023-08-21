@@ -277,7 +277,7 @@ if(dtgopt != None):
             stmdtgs=md3.getMd3Stmids4dtg(dtg,dobt=dobt)
             #print 'DDD',dtg,stmdtgs
             for stmid in stmdtgs:
-                (rc,m3trk)=md3.getMd3track(stmid,dobt=dobt)
+                (rc,m3trk)=md3.getMd3track(stmid,dobt=dobt,verb=verb)
                 if(rc == 0):
                     print 'EEE m3trk for: ',stmid
                 else:
@@ -297,13 +297,21 @@ if(stmopt != None):
         if(sumonly):
             (rc,scard)=md3.getMd3StmMeta(stmid)
             print scard
+            (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+
+            if(IsNN(stmid)):
+                
+                b3id=rc[-2].split()[-1]
+                gendtg=rc[-1]
+
+                stmid9X='%s.%s'%(b3id.lower(),year)
+                (rc,scard9X)=md3.getMd3StmMeta(stmid9X)
+                last9xdtg=rc[-1]
+                gdtgdiff=mf.dtgdiff(gendtg,last9xdtg)
+                scard9X="%s genDiff: %3.0f"%(scard9X,gdtgdiff)
+                print scard9X
+             
             continue
-            # -- check for big life or errors in NNB-sum.txt file
-            #tclife=float(rc[7])
-            #if(tclife > 25.0):
-                #sname=rc[4]
-                #print 'big life for: ',stmid,sname,'tclife: ',tclife
-            #continue
         
         # -- get track
         #
@@ -333,6 +341,37 @@ if(stmopt != None):
                 card=printMd3Trk(m3trk[m3dtg],m3dtg)
                 print card
 
+            if(IsNN(stmid)):
+                (rc,scard)=md3.getMd3StmMeta(stmid)
+                print scard
+                (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+
+                b3id=rc[-2].split()[-1]
+                gendtg=rc[-1]
+                stmid9X='%s.%s'%(b3id.lower(),year)
+                (rc,scard9X)=md3.getMd3StmMeta(stmid9X)
+                last9xdtg=rc[-1]
+                gdtgdiff=mf.dtgdiff(gendtg,last9xdtg)
+                scard9X="%s genDiff: %3.0f"%(scard9X,gdtgdiff)
+                print scard9X
+
+            else:
+                (rc,scard)=md3.getMd3StmMeta(stmid)
+                print scard
+                (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+
+                if(mf.find(scard,'NN:')):
+                    b3id=rc[-2].split()[-1]
+                    last9xdtg=rc[-1]
+                    stmidNN="%s.%s"%(b3id.lower(),year)
+                    (rcNN,scardNN)=md3.getMd3StmMeta(stmidNN)
+                    gendtg=rcNN[-1]
+                    gdtgdiff=mf.dtgdiff(gendtg,last9xdtg)
+                    scardNN="%s genDiff: %3.0f"%(scardNN,gdtgdiff)
+                    print scardNN
+                    
+                    
+    
 
 
 

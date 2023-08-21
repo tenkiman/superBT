@@ -1,0 +1,9 @@
+qc-fail: 22w.2007
+qc-fail: c0w.2007
+qc-fail: d4w.2007
+qc-fail: e0w.2007
+qc-fail: e1w.2007
+qc-fail: f3w.2007
+qc-fail: f8w.2007
+qc-fail: h2w.2007
+qc-fail: i9w.2007

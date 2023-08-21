@@ -1,0 +1,9 @@
+qc-fail: a3w.2013
+qc-fail: a8w.2013
+qc-fail: a9w.2013
+qc-fail: h4w.2013
+qc-fail: z0w.2013
+qc-fail: z1w.2013
+qc-fail: b4l.2013
+qc-fail: d0l.2013
+qc-fail: f4s.2013

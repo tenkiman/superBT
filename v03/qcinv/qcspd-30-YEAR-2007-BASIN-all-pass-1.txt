@@ -1,0 +1,5 @@
+qc-fail: b2l.2007
+qc-fail: a0c.2007
+qc-fail: a8e.2007
+qc-fail: g6p.2007
+qc-fail: h7s.2007
