@@ -68,9 +68,8 @@ for rdtg in redoDtgs:
     rropt=''
     topt='-T'
     if(rdtg[8:10] == '00'): topt=''
-    print 'rrr',rdtg,topt,rdtg[8:10]
-    continue
-    cmd="../tctrk/s-sbt-tmtrkN.py %s %s"%(rdtg,topt)
+
+    #cmd="../tctrk/s-sbt-tmtrkN.py %s %s"%(rdtg,topt)
     mf.runcmd(cmd,rropt)
     
     dopt=''

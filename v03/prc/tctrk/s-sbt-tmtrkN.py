@@ -171,9 +171,9 @@ for dtg in dtgs:
         MF.sTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
         TT.doTrk(ropt=ropt)
         # -- should I do this here? -- yes, for case when not override, but redoing...
-        #
-        TT.getStatPaths(dolsonly=1)
-        TT.doCP()
+        # -- NNOO!! if not override
+        #TT.getStatPaths(dolsonly=1)
+        #TT.doCP()
         MF.dTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
 
     
