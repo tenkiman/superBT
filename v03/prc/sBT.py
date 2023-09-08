@@ -3690,6 +3690,64 @@ def IsNN(stmid):
         rc=1
     return(rc)
 
+def IsJtwcBasin(b1id):
+
+    bid=b1id.lower()
+    if(len(bid) == 1):
+        bid=b1id.lower()
+    elif(len(bid) >= 3):
+        # assume stmid if not 1char
+        tt=b1id.split('.')
+        bid=tt[0][2].lower()
+
+    rc=0
+    if(len(bid) == 1  and
+       bid == 'w' or bid == 'b' or bid == 'a' or  bid == 'i' or
+       bid == 's' or bid == 'p'
+       ):
+        rc=1
+
+    # overlap
+    #
+    elif(len(bid) == 1  and
+         bid == 'e' or bid == 'c'
+         ):
+        rc=2
+
+    elif(len(bid) == 2 and
+         bid == 'wp' or bid == 'io' or bid == 'sh'):
+        rc=1
+
+    # overlap
+    #
+    elif(len(bid) == 2 and
+         bid == 'ep' or bid == 'cp'):
+        rc=2
+
+    return(rc)
+
+def IsNhcBasin(b1id):
+
+    bid=b1id.lower()
+
+    if(len(bid) == 1):
+        bid=b1id.lower()
+    elif(len(bid) >= 3):
+        # assume stmid if not 1char
+        tt=b1id.split('.')
+        bid=tt[0][2].lower()
+
+    rc=0
+    if(len(bid) == 1 and
+       bid == 'l' or bid == 'e' or bid == 'c' or bid == 'q'
+       ):
+        rc=1
+    elif(len(bid) == 2 and
+         bid == 'al' or bid == 'ep' or bid == 'cp' or bid == 'sl'
+         ):
+        rc=1
+
+    return(rc)
 
 def IsTc(tcstate):
     #
@@ -5271,7 +5329,7 @@ def getTstmidsByYearBasin(years,basins,stbdir):
     return(tstmids)        
 
     
-def getPrStatus(tstmid,oPrsiz,verb=0):
+def getPrStatus(tstmid,oPrsiz,oPrpath,verb=0):
     
     def getstatus(siz):
         if(siz < 0):
@@ -5282,12 +5340,17 @@ def getPrStatus(tstmid,oPrsiz,verb=0):
             stat=1
         return(stat)
         
+    dPr=MF.PathCreateTime(oPrpath)
+    prdtg=dPr[1]
+    curdtg=dtg('dtgcurhr')
+    #print 'adsf',curdtg,prdtg
+    sPrdiff=mf.dtgdiff(prdtg,curdtg)
     sPr=getstatus(oPrsiz)
 
     if(verb):
         print 'tstmid: %s'%(tstmid),' sPr: ',sPr
         
-    card="%s sPr: %d "%(tstmid,sPr)
+    card="%s sPr: %d sPrdiff: %d"%(tstmid,sPr,int(sPrdiff))
     
     return(card)
         

@@ -329,8 +329,6 @@ for tstmid in tstmids:
             if(ropt == 'norun'): dobail=0
             MF.sTimer('tcdiag')
     
-    
-                
             tdmask="%s/tcdiag.*%s*"%(tdir,tstmid.lower())
             tdfiles=glob.glob(tdmask)
     
@@ -339,7 +337,7 @@ for tstmid in tstmids:
                 mcard='MMMissing: stm: %s  dtg: %s '%(tstmid,dtg)
                 mcards.append(mcard)
                 continue
-            
+        
             lsdiagpath=None
             if(len(tdfiles) == 1):
                 lsdiagpath=tdfiles[0]

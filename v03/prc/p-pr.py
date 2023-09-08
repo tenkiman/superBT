@@ -210,7 +210,7 @@ for tstmid in tstmids:
         # -- IIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNVVVVVVVVVVVVVVVVVVV
         #
         if(doInvOnly):
-            invcard=getPrStatus(tstmid,oPrsiz)
+            invcard=getPrStatus(tstmid,oPrsiz,oPrpath)
             invCards.append(invcard)
             continue
         
