@@ -86,6 +86,11 @@ if(stmopt != None):
     for stmopt in stmopts:
         stmids=stmids+md3.getMd3Stmids(stmopt,dobt=dobt,verb=verb)
         
+    if(len(stmids) == 0):
+        print 'stmopt: ',stmopt,' not in current md3 for years: %s-%s'%(bm3year,em3year)
+        print 'use -Y yyyy  -B bbbb option...'
+        sys.exit()
+        
 elif(len(years) > 0):
     
     (stmids,sdirs)=getStmidsDirs(years,basins)
@@ -102,7 +107,6 @@ elif(yearOpt != None):
     
 if(passNumber != None):
     invPath=invPath.replace('.txt','-pass-%s.txt'%(passNumber))
-    
     
 qccards=[]
 for stmid in stmids:
