@@ -1,0 +1,26 @@
+#MMMissing: stm: 06e.2011  dtg: 2011081412
+#MMMissing: stm: 06e.2011  dtg: 2011081418
+#MMMissing: stm: 06e.2011  dtg: 2011081500
+#MMMissing: stm: 06e.2011  dtg: 2011081506
+#MMMissing: stm: 06e.2011  dtg: 2011081512
+
+##MMMissing: stm: 08e.2011  dtg: 2011083100
+##MMMissing: stm: 08e.2011  dtg: 2011083106
+
+
+##MMMissing: stm: e0w.2014  dtg: 2014090200
+##MMMissing: stm: e0w.2014  dtg: 2014090206
+##MMMissing: stm: e1w.2014  dtg: 2014090200
+##MMMissing: stm: e1w.2014  dtg: 2014090206
+##MMMissing: stm: 13e.2014  dtg: 2014090200
+##MMMissing: stm: 13e.2014  dtg: 2014090206
+##MMMissing: stm: c3e.2014  dtg: 2014090200
+##MMMissing: stm: c3e.2014  dtg: 2014090206
+##MMMissing: stm: 05l.2014  dtg: 2014090200
+#3MMMissing: stm: 05l.2014  dtg: 2014090206
+
+#MMMissing: stm: 02w.2016  dtg: 2016070418
+#MMMissing: stm: 02e.2016  dtg: 2016070418
+#MMMissing: stm: 03e.2016  dtg: 2016070418
+#MMMissing: stm: a6e.2016  dtg: 2016070418
+
