@@ -1,4 +1,1 @@
-# -- full path with local installation directories
-#
-sbtRoot='/data/w22/superBT/v03'
-sbtRoot='/data/w22/superBT'
+/data/w22/superBT-V04/py2/sbtLocal.py

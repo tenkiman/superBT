@@ -79,6 +79,10 @@ if(not(doInv)):
     MF.ChkDir(abdirStm,'mk')
     MF.ChkDir(abdirDtg,'mk')
 
+print 'pppDDD',prcdir
+print 'tttBBB',tmtrkbdir
+print 'aaaSSS',abdirStm
+print 'aaaDDD',abdirDtg
     
 ptable=None
 
@@ -101,7 +105,11 @@ maxtau=168
 
 # -- get md3
 #
-md3=Mdeck3()
+yearOpt=None
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+if(doBdeck2): doBT=1
+
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 for dtg in dtgs:
 
@@ -114,12 +122,11 @@ for dtg in dtgs:
     mdtg=mf.dtginc(dtg,-tauOffset)
     rc=getEra5Grb(era5bdir,mdtg,model='era5')
     (ctlpath2,sizgrb,ctlpath2a,sizgrb2a)=rc
-    #print 'qqqq',sizgrb,ctlpath2
+    print 'qqqq',sizgrb,ctlpath2
     
     if(sizgrb <= 0):
         print 'WWW-unable to find data in: ',ctlpath
         continue
-
 
     MF.sTimer("all-%s"%(dtg))
 
@@ -139,6 +146,7 @@ for dtg in dtgs:
                    ctlpath,
                    taus,
                    md3=md3,
+                   prcdir=prcdir,
                    tcD=None,
                    tdirAdeck=tdirAdeck,
                    tbdirAdeckStm=abdirStm,
@@ -151,6 +159,7 @@ for dtg in dtgs:
                    override=override,
                    verb=verb,
                    doInv=doInv,
+                   doBdeck2=doBdeck2,
                    )
     if(verb): MF.dTimer('tmtrkN-base-%s-%s'%(model,dtg))
     

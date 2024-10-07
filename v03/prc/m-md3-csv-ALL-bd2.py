@@ -71,11 +71,8 @@ else:
 headAll='h-md3-all.txt'
 headSum='h-md3-sum.txt'
 
-rc=setCvsYearOptPaths(sbtSrcDir,oyearOpt,headAll,headSum,doWBTonly=doWBTonly)
-(allCvsPathMRG,sumCvsPathMRG)=rc
-
-# -- don't make -BT.csv just .csv and -MRG.csv
-#
+rc=setCvsYearOptPaths(sbtSrcDir,oyearOpt,headAll,headSum,doMergeOnly=0)
+(allCvsPath,allCvsPathBT,sumCvsPath,sumCvsPathBT)=rc
 
 for year in years:
     
@@ -102,65 +99,41 @@ for year in years:
         #
         for spath in spaths:
             
-            smpaths=smpathsBTs=[]
-            smpathMRGs=glob.glob("%s/???-%s-sum-md3-MRG.txt"%(spath,year))
-            if(len(smpathMRGs) == 1): smpathMRG=smpathMRGs[0]
-            else: smpathMRG=None
+            smpathBD2s=glob.glob("%s/???-%s-sum-md3-BT.txt"%(spath,year))
+            if(len(smpathBD2s) == 1): smpathBD2=smpathBD2s[0]
+            else: smpathBD2=None
             
-            if(smpathMRG == None):
-                print 'problem in smpathMGR: ',smpathMRG,' with smpathMRGs: ',smpathMRGs,' sayounara'
+            if(smpathBD2 == None):
+                print 'problem in smpathMGR: ',smpathBD2,' with smpathBD2s: ',smpathBD2s,' sayounara'
                 sys.exit()
             else:
-                cmd="cat %s >> %s"%(smpathMRG,sumCvsPathMRG)
+                cmd="cat %s >> %s"%(smpathBD2,sumCvsPathBT)
                 mf.runcmd(cmd,ropt)
 
         # -- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         # -- now do file with all
         #
-        # -- MMMMRRRGGG - merge has aready been done using m-md3-mrg-stm-dir-sum.py
-        #
         for spath in spaths:
             
-            mpathMRGs=glob.glob("%s/???-%s-md3-MRG.txt"%(spath,year))
-            if(len(mpathMRGs) == 1): mpathMRG=mpathMRGs[0]
-            else: mpathMRG=None
+            mpathBD2s=glob.glob("%s/???-%s-md3-BT.txt"%(spath,year))
+            if(len(mpathBD2s) == 1): mpathBD2=mpathBD2s[0]
+            else: mpathBD2=None
     
-            if(mpathMRG == None):
-                print 'EEE-%s find in mpathMRG for spath: %s year: %s ...Sayounara...'%(pypath,spath,year)
+            if(mpathBD2 == None):
+                print 'EEE-%s find in mpathBD2 for spath: %s year: %s ...Sayounara...'%(pypath,spath,year)
                 sys.exit()
             else:
-                cmd="cat %s >> %s"%(mpathMRG,allCvsPathMRG)
+                cmd="cat %s >> %s"%(mpathBD2,allCvsPathBT)
                 mf.runcmd(cmd,ropt)
                       
-            
-        if(doWBTonly):
-            
-            # -- DOOOOOOOOOOOMMMMMMEEEEEEERRRRRRRRRRGGGGGGGEEEEEEEEE
-            # -- do md3 md3-BT and make md3-MRG
-            # -- first all working
-            #
-            for spath in spaths:
-                
-                mpaths=glob.glob("%s/???-%s-md3.txt"%(spath,year))
-    
-                if(len(mpaths) == 1): mpath=mpaths[0]
-                else: mpath=None
-    
-                if(mpath == None): 
-                    print 'problem in spath: ',spath,' with mpaths: ',mpaths,' sayounara'
-                    sys.exit()
-    
-                cmd="cat %s >> %s"%(mpath,allCvsPath)
-                mf.runcmd(cmd,ropt)
-                
         MF.dTimer("csv-%s-%s"%(basin,year))
         
 # now cp over to sbt dir
 #
-cmd="cp %s %s/."%(allCvsPathMRG,sbtVerDirDat)
-mf.runcmd(cmd,ropt)
-cmd="cp %s %s/."%(sumCvsPathMRG,sbtVerDirDat)
+cmd="cp %s %s/."%(allCvsPathBT,sbtVerDirDat)
 mf.runcmd(cmd,ropt)
 
+cmd="cp %s %s/."%(sumCvsPathBT,sbtVerDirDat)
+mf.runcmd(cmd,ropt)
 MF.dTimer('AAA-cvs')
 

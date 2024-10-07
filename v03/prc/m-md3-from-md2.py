@@ -912,6 +912,7 @@ def parseDssTrk(dtg,dds,verb=0):
     if(poci != None and poci != undef and poci != 0):
         opoci="%4.0f"%(poci)
         
+    ovmax='   '
     if(vmax != None and vmax != undef):
         ovmax="%3.0f"%(vmax)
  
@@ -1261,6 +1262,7 @@ class MdeckCmdLine(CmdLine):
             'oPath':          ['o:',None,'a','write output to oPath'],
             'sumPath':        ['r:',None,'a','read path to generate summary card'],
             'doTrk':          ['T',0,1,'make the md3 trk from the -sum.txt files'],
+            'doBdeck2':       ['2',0,1,'use bdeck2 vice bdeck'],
             }
 
         self.purpose='''
@@ -1385,7 +1387,7 @@ if(stmopt != None):
     
     md3=Mdeck3(doBT=0,doSumOnly=1)
     
-    tcD=TcData(stmopt=stmopt,doWorkingBT=doWorkingBT,verb=verb)
+    tcD=TcData(stmopt=stmopt,doWorkingBT=doWorkingBT,doBdeck2=doBdeck2,verb=verb)
     stmids=tcD.makeStmListMdeck(stmopt,dobt=dobt,cnvSubbasin=0,verb=verb)
     
     for stmid in stmids:
@@ -1452,8 +1454,13 @@ if(stmopt != None):
             if(tdir != tdirNew):
                 print 'WWW-existing-tdir != current...'
                 print 'WWW-tdirNew:   ',tdirNew
-                print 'WWW-tdir(old): ',tdir,' rm -r'
-                cmd="rm -r -i %s"%(tdir)
+                if(doBdeck2):
+                    print 'WWW-tdir(old): ',tdir,' rm -r'
+                    cmd="rm -r %s"%(tdir)
+                else:
+                    print 'WWW-tdir(old): ',tdir,' rm -r -i'
+                    cmd="rm -r -i %s"%(tdir)
+                    
                 mf.runcmd(cmd,ropt)
                 tdir=tdirNew
             else:

@@ -24,7 +24,10 @@ class TmtrkCmdLine(CmdLine):
             'ropt':             ['N','','norun',' norun is norun'],
             'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
+            'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
+            'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
             'doTrackerOnly':    ['T',0,1,'do NOT run trackeronly'],
+            
         }
 
         self.purpose="""
@@ -43,7 +46,11 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-m3=Mdeck3()
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+doBT=0
+if(doBdeck2): doBT=1
+
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 if(dtgopt != None): MF.sTimer('AAA-TCTRK-%s'%(dtgopt))
 if(stmopt != None): MF.sTimer('AAA-TCTRK-%s'%(stmopt))
@@ -52,7 +59,7 @@ if(dtgopt != None and stmopt == None):
     dtgs=mf.dtg_dtgopt_prc(dtgopt)
 elif(stmopt != None and dtgopt == None):
     syear=None
-    dtgs=m3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
+    dtgs=md3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
 else:
     print 'EEE--(%s) must set either dtgopt or stmopt alone...sayounara'%(CL.pyfile)
     sys.exit()

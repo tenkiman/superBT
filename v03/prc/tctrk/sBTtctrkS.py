@@ -286,6 +286,7 @@ class TmTrkSimple(MFbase):
                  maxtauModel=168,
                  tcD=None,
                  md3=None,
+                 prcdir=None,
                  mintauTC=120,
                  maxtauTC=168,
                  verb=0,
@@ -302,6 +303,7 @@ class TmTrkSimple(MFbase):
                  doTrk3=0,
                  xgrads='grads',
                  doInv=0,
+                 doBdeck2=0,
                  ):
 
         self.dtg=dtg
@@ -346,8 +348,8 @@ class TmTrkSimple(MFbase):
 
         
         #self.prcdir="%s/tctrk"%(os.getenv("W2_PRC_DIR"))
-        self.prcdir="%s/prc/tctrk"%(sbtVerDir)
-
+        if(prcdir == None): self.prcdir=sbtPrcDirTctrk
+        else:               self.prcdir=prcdir
 
         self.trkmode=trkmode
         self.regridGen=regridGen
@@ -357,6 +359,8 @@ class TmTrkSimple(MFbase):
         #
         self.md3=md3
         self.tcD=tcD
+        
+        self.doBdeck2=doBdeck2
 
         if(md3 == None):
             print 'EEE -- cannot use w2 in TmTrkSimple'
@@ -434,6 +438,9 @@ for Mdeck3 need to turn off
         if(self.atcfname != None): omodel=self.atcfname
         omodel=omodel.lower()
 
+
+        doBdeck2=self.doBdeck2
+        
         otcgenPaths={}
         statTCgenS={}
 
@@ -511,10 +518,13 @@ for Mdeck3 need to turn off
             if(self.stmopt != None):
                 m3stmids=self.md3.getMd3Stmids(self.stmopt)
                 nstmids=[]
+
                 # -- use trk to find the stmids by dtg
                 #
                 for m3stmid in m3stmids:
-                    (rc,m3trk)=self.md3.getMd3track(m3stmid)
+                    
+                    (rc,m3trk)=self.md3.getMd3track(m3stmid,
+                                                    doBdeck2=doBdeck2)
                     if(self.dtg in m3trk.keys()):
                         nstmids.append(m3stmid)
                 
@@ -523,12 +533,15 @@ for Mdeck3 need to turn off
                     print 'EEE could find dtgs for stmopt:',self.stmopt,' dtg: ',self.dtg,'sayounara...'
                     sys.exit()
                     
-            trks=self.md3.getMd3tracks(tstmids)
+            trks=self.md3.getMd3tracks(tstmids,
+                                       doBdeck2=doBdeck2,
+                                       )
             self.tcVtrks=trks
-            (cards,tcvpath)=self.md3.makeTCvCards(tstmids,self.dtg,trks)
+            (cards,tcvpath,otcvstmids)=self.md3.makeTCvCards(tstmids,self.dtg,trks)
+            
             self.tcVcards=cards
             self.tcvpath=tcvpath
-            self.tcVstmids=tstmids
+            self.tcVstmids=otcvstmids
             
         haveTcs=0
         if(len(self.tcVcards) > 0): haveTcs=1
