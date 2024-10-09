@@ -79,10 +79,11 @@ if(not(doInv)):
     MF.ChkDir(abdirStm,'mk')
     MF.ChkDir(abdirDtg,'mk')
 
-print 'pppDDD',prcdir
-print 'tttBBB',tmtrkbdir
-print 'aaaSSS',abdirStm
-print 'aaaDDD',abdirDtg
+if(verb):
+    print 'pppDDD',prcdir
+    print 'tttBBB',tmtrkbdir
+    print 'aaaSSS',abdirStm
+    print 'aaaDDD',abdirDtg
     
 ptable=None
 
@@ -122,7 +123,6 @@ for dtg in dtgs:
     mdtg=mf.dtginc(dtg,-tauOffset)
     rc=getEra5Grb(era5bdir,mdtg,model='era5')
     (ctlpath2,sizgrb,ctlpath2a,sizgrb2a)=rc
-    print 'qqqq',sizgrb,ctlpath2
     
     if(sizgrb <= 0):
         print 'WWW-unable to find data in: ',ctlpath

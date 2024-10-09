@@ -537,8 +537,8 @@ for Mdeck3 need to turn off
                                        doBdeck2=doBdeck2,
                                        )
             self.tcVtrks=trks
+            # -- verb=1 in makeTCvCard...
             (cards,tcvpath,otcvstmids)=self.md3.makeTCvCards(tstmids,self.dtg,trks)
-            
             self.tcVcards=cards
             self.tcvpath=tcvpath
             self.tcVstmids=otcvstmids
@@ -563,6 +563,7 @@ for Mdeck3 need to turn off
             else:
                 tcvits=open(self.tcvpath).readlines()
                 
+
             self.tcvits=tcvits
 
             ostmids=[]
@@ -597,8 +598,10 @@ for Mdeck3 need to turn off
                     otctrksinkpathSTM="%s/tctrk.sink.%s.%s.%s"%(tdirAdeckStm,self.dtg,omodel,ostmid.upper())
                     otctrkpathSTMStat=MF.getPathNlines(otctrkpathSTM)
                     otctrksinkpathSTMStat=MF.getPathNlines(otctrksinkpathSTM)
-                    stattest=(otctrkpathSTMStat and ofileStat)
+                    
+                    stattest=(otctrkpathSTMStat > 0 and ofileStat)
                     statTCtrkS[ostmid]=-999
+                    #print 'sss---',otctrkpathSTMStat,ofileStat,stattest
                     if(stattest): statTCtrkS[ostmid]=1
                     
                     if(self.doTrk3):
@@ -647,7 +650,7 @@ for Mdeck3 need to turn off
             for ostmid in ostmids:
                 nzero=0
                 nthere=0
-                if(statTCtrkS[ostmid] <= 0):
+                if(statTCtrkS[ostmid] == 0):
                     nzero=nzero+1
                 elif(statTCtrkS[ostmid] > 0):
                     nthere=nthere+1
@@ -662,6 +665,8 @@ for Mdeck3 need to turn off
         else:
             statusTCtrk=-1
  
+        self.statusTCtrk=statusTCtrk
+        
         self.omodel=omodel
         self.otcgenPaths=otcgenPaths
         self.ostmids=ostmids
@@ -680,31 +685,58 @@ for Mdeck3 need to turn off
         #genTest=(                   not(os.path.exists(self.grb10path)) and (statusTCgen == 0) )
         #detTest=( (self.haveTcs and not(os.path.exists(self.grbpath)))  and (statusTCtrk == 0) )
 
-        self.genTest= (self.statusTCgen == 0 and not(self.doTrackerOnly)) 
-        self.detTest= (self.haveTcs == 1 and self.statusTCtrk == 0) 
-        
+        self.genTest= (self.statusTCgen == 1)
+        self.detTest= (self.haveTcs == 1 and self.statusTCtrk) 
+        #self.detTest2= (self.haveTcs == 1 and self.statusTCtrk == 0 and self.doTrackerOnly) 
         self.genGribTest=(MF.getPathSiz(self.grb10path) > 0)
         self.detGribTest=(MF.getPathSiz(self.grbpath) > 0)
         
 
     def setStatus(self):
 
+        
+        allDoneDet=0
+        if(self.detTest and not(self.override)): allDoneDet=1
+        allDoneGen=0
+        if(self.genTest and not(self.override)): allDoneGen=1
+
         print
         print 'SSSSSSSSSSSSSSSSSSSSSS - tracking status for ',self.omodel,' dtg: ',self.dtg
         print 'TCs  haveTcs: ',self.haveTcs,' #TCs: ',len(self.ostmids)
-        print 'GRIB   -- gen: ',self.genGribTest
-        print 'GRIB   -- trk: ',self.detGribTest
-        print 'DDDD  detTest: ',self.detTest
-        print 'GGGG  genTest: ',self.genTest
-        print 'OOOO override: ',self.override
-        if(not(self.detTest) and not(self.genTest) and not(self.override)):
-            print 'AAAAAAAAAAAAAAAAAAAAAAAAAA - tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
-                  ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
-            rc=0
+        print 'GRIB         -- gen: ',self.genGribTest
+        print 'GRIB         -- trk: ',self.detGribTest
+        print 'TTTT    statusTCtrk: ',self.statusTCtrk
+        print 'TTTT  doTrackerOnly: ',self.doTrackerOnly
+        print 'DDDD        detTest: ',self.detTest
+        print 'GGGG        genTest: ',self.genTest
+        print 'OOOO       override: ',self.override
+        print 'AADD     allDoneDet: ',allDoneDet
+        print 'AAGG     allDoneGen: ',allDoneGen
+
+        rc=1
+        if(self.doTrackerOnly):
+            if(not(self.haveTcs)):
+                print 'NNNoooTTTcccs'
+                print 'NNNoooTTTcccs for dtg: ',self.dtg,' AND doTrackerOnly...ja sayounara...'
+                print 'NNNoooTTTcccs'
+                rc=0
+                return(rc)
+                
+            if(allDoneDet):
+                print 'AAAAAAAAAA---DDDDDDDDDDDDD - DET -- tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                      ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
+                rc=0
+        
         else:
+            if(allDoneGen):
+                print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                      ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
+                rc=0
+                
+        if(rc):
             print 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD - doit.....'
-            rc=1
-        print
+            print
+
         return(rc)
     
     
@@ -770,7 +802,7 @@ for Mdeck3 need to turn off
                         sinkpath=rc[1]
                         orc=1
                     except:
-                        nl=-888
+                        nl=-888	
                         orc=0
                 else:
                     print 'EEE no %s in %s '%(ostmid.lower,str(self.tcVstmids))
@@ -806,7 +838,7 @@ for Mdeck3 need to turn off
             print 'III -- doCP for dtg: ',self.dtg,'not done...no TCs'
                         
                 
-
+	
 
 
     def doTrk(self,
@@ -838,7 +870,7 @@ for Mdeck3 need to turn off
         #
         didGenGrib=0
         if( not(self.doTrackerOnly) and 
-            ( ( (self.genTest and not(self.genGribTest)) ) or self.override
+            ( ( (not(self.genTest) and not(self.genGribTest)) ) or self.override
               and ropt != 'norun')
             ):
 
@@ -855,7 +887,8 @@ for Mdeck3 need to turn off
         # -- GGRRIIBB - full res (0.5 deg)  data for tracker mode
         #
         didTrkGrib=0
-        if( ( (self.detTest and not(self.detGribTest)) or self.override) and ropt != 'norun'):
+        print ''
+        if( ( (not(self.detTest) and not(self.detGribTest)) or self.override) and ropt != 'norun'):
             
             # -- gen and tracker the same res...cp vice lats
             #
@@ -908,22 +941,6 @@ for Mdeck3 need to turn off
         # -- TTMMTTRRKK - only run deterministic tracker if there are TCs...
         #
         if(self.haveTcs):
-
-            if(self.tcvpath != None and os.path.exists(self.tcvpath) and self.haveTcs):
-                cmd="cp %s fort.12"%(self.tcvpath)
-                MF.runcmd(cmd,ropt,lsopt='q')
-
-                # -- 3.9a uses this file for tcvitals
-                #
-                if(self.doTrk3):
-                    cmd="cp %s tcvit_rsmc_storms.txt"%(self.tcvpath)
-                    MF.runcmd(cmd,ropt,lsopt='q')
-                
-                
-            else:
-                print 'WWW(TCtrk) no tcvitals for ',self.dtg,' in: ',self.tcvpath
-                haveTcs=0
-
 
             if(os.path.exists(self.grbpath)):
                 cmd="ln -f -s %s fort.11"%(self.grbpath)
