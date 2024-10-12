@@ -76,6 +76,10 @@ rc=setCvsYearOptPaths(sbtSrcDir,oyearOpt,headAll,headSum,doMergeOnly=0)
 
 for year in years:
     
+    rc=setCvsYearOptPaths(sbtSrcDir,year,headAll,headSum,doMergeOnly=0)
+    (allCvsPath,allCvsPathBT,sumCvsPath,sumCvsPathBT)=rc
+    print 'yyyy----',year,allCvsPath
+
     tdir="%s/%s"%(sbtSrcDir,year)
     if(not(MF.ChkDir(tdir))):
         print 'tdir not there...'
@@ -105,7 +109,7 @@ for year in years:
             
             if(smpathBD2 == None):
                 print 'problem in smpathMGR: ',smpathBD2,' with smpathBD2s: ',smpathBD2s,' sayounara'
-                sys.exit()
+                #sys.exit()
             else:
                 cmd="cat %s >> %s"%(smpathBD2,sumCvsPathBT)
                 mf.runcmd(cmd,ropt)
@@ -121,19 +125,21 @@ for year in years:
     
             if(mpathBD2 == None):
                 print 'EEE-%s find in mpathBD2 for spath: %s year: %s ...Sayounara...'%(pypath,spath,year)
-                sys.exit()
+                #sys.exit()
             else:
                 cmd="cat %s >> %s"%(mpathBD2,allCvsPathBT)
                 mf.runcmd(cmd,ropt)
                       
         MF.dTimer("csv-%s-%s"%(basin,year))
         
-# now cp over to sbt dir
-#
-cmd="cp %s %s/."%(allCvsPathBT,sbtVerDirDat)
-mf.runcmd(cmd,ropt)
-
-cmd="cp %s %s/."%(sumCvsPathBT,sbtVerDirDat)
-mf.runcmd(cmd,ropt)
+    # now cp over to sbt dir
+    #
+    cmd="cp %s %s/."%(allCvsPathBT,sbtVerDirDat)
+    mf.runcmd(cmd,ropt)
+        
+    cmd="cp %s %s/."%(sumCvsPathBT,sbtVerDirDat)
+    mf.runcmd(cmd,ropt)
+        
+        
 MF.dTimer('AAA-cvs')
 

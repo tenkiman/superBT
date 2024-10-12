@@ -86,6 +86,8 @@ if(stmopt != None):
         
         #dds.ls()
         sname=dds.sname
+        # -- replace ' ' with '_'
+        sname=sname.replace(' ','_')
         
         try:
             stmid9x=dds.stmid9x.upper()
@@ -104,7 +106,16 @@ if(stmopt != None):
             
         if(IsNN(stmid)):
             tname=stmid.replace('.','-').upper()
-            tname="%s-%s-%s"%(tname,sname.upper(),stmid9x[0:3].upper())
+            osname=sname.upper()
+            ostmid9x=stmid9x[0:3].upper()
+            # -- handle case of shem using two subbasins
+            #
+            if(osname[0:2] == 'TC'):
+                osname=osname[0:2]+tname[0:3]
+            if(ostmid9x[0:2] == 'XX'):
+                ostmid9x=ostmid9x[0:2]+tname[2]
+            #print 'tttnnn---',osname,'9x: ',ostmid9x
+            tname="%s-%s-%s"%(tname,osname,ostmid9x)
         elif(stmidNN != None):
             tname=stmid9x.replace('.','-').upper()
             tname="%s-DEV-%s"%(tname,stmidNN[0:3].upper())

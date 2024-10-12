@@ -509,39 +509,17 @@ for Mdeck3 need to turn off
             #print self.tcvpath
 
         elif(self.md3 != None):
-            # -- get stmids for this dtg
-            #
-            tstmids=self.md3.getMd3Stmids4dtg(self.dtg)
             
-            # -- only track in stmopt
-            #
-            if(self.stmopt != None):
-                m3stmids=self.md3.getMd3Stmids(self.stmopt)
-                nstmids=[]
-
-                # -- use trk to find the stmids by dtg
-                #
-                for m3stmid in m3stmids:
-                    
-                    (rc,m3trk)=self.md3.getMd3track(m3stmid,
-                                                    doBdeck2=doBdeck2)
-                    if(self.dtg in m3trk.keys()):
-                        nstmids.append(m3stmid)
-                
-                tstmids=nstmids
-                if(len(nstmids) == 0):
-                    print 'EEE could find dtgs for stmopt:',self.stmopt,' dtg: ',self.dtg,'sayounara...'
-                    sys.exit()
-                    
-            trks=self.md3.getMd3tracks(tstmids,
-                                       doBdeck2=doBdeck2,
-                                       )
-            self.tcVtrks=trks
-            # -- verb=1 in makeTCvCard...
-            (cards,tcvpath,otcvstmids)=self.md3.makeTCvCards(tstmids,self.dtg,trks)
-            self.tcVcards=cards
+            (dtgstms,m3trks)=self.md3.getMd3tracks4dtg(self.dtg,dobt=0,doBdeck2=self.doBdeck2, 
+                                                       verb=self.verb)
+            
+            (tcVcards,tcvpath,ostmids)=self.md3.makeTCvCards(dtgstms,self.dtg,m3trks,verb=self.verb)
+            self.tcVcards=tcVcards
             self.tcvpath=tcvpath
-            self.tcVstmids=otcvstmids
+            self.tcVstmids=ostmids
+            
+            trks=self.md3.getMd3tracks(ostmids)
+            self.tcVtrks=trks
             
         haveTcs=0
         if(len(self.tcVcards) > 0): haveTcs=1
@@ -602,7 +580,7 @@ for Mdeck3 need to turn off
                     stattest=(otctrkpathSTMStat > 0 and ofileStat)
                     statTCtrkS[ostmid]=-999
                     #print 'sss---',otctrkpathSTMStat,ofileStat,stattest
-                    if(stattest): statTCtrkS[ostmid]=1
+                    if(stattest): statTCtrkS[ostmid]=otctrkpathSTMStat
                     
                     if(self.doTrk3):
                         otctrksnk2pathSTM="%s/tctrk.snk2.%s.%s.%s"%(tdirAdeckStm,self.dtg,omodel,ostmid.upper())
@@ -758,21 +736,33 @@ for Mdeck3 need to turn off
             for ostmid in self.ostmids:
                 trk=self.tcVtrks[ostmid.lower()][self.dtg]
                 vmax=int(trk[2])
+                if(vmax < 0):
+                    ovmax='***'
+                else:
+                    ovmax='%-3d'%(vmax)
 
                 if(ostmid.lower() in self.tcVstmids):
                     try:
                         rc=self.otctrkPaths[ostmid]
                         nl=self.statTCtrkS[ostmid]
-                        orc=rc[0]
+                        opath=rc[0]
+                        orcCode="good"
                     except:
                         nl=-888
-                        orc=0
+                        opath="NADA path"
+                        orcCode=str(nl)
                 else:
                     print 'EEE no %s in %s '%(ostmid.lower,str(self.tcVstmids))
                     nl=-777 
-                    orc=0
+                    opath="TRK FAIL"
+                    orcCode=str(nl)
                     
-                print ostmid,self.dtg,'vmax: %-3d'%(vmax),' nl: ',nl,'path: ',orc
+                if(nl == 1):
+                    orcCode='sngl'
+                    nl=999
+
+                onl="%-4d"%(nl)
+                print ostmid,self.dtg,'rcCode: %s'%(orcCode),'vmax: %s'%(ovmax),' nl: %s'%(onl),'path: %s'%(opath)
                 
                         
     def doCP(self,ropt=''):

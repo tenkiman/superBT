@@ -72,7 +72,7 @@ exec(CL.estr)
 if(verb): print CL.estr
 
 prcdir=sbtPrcDirTctrk
-MF.ChangeDir(prcdir,verb=1)
+MF.ChangeDir(prcdir,verb=verb)
 
 if(not(doInv)):
     MF.ChkDir(tmtrkbdir,'mk')

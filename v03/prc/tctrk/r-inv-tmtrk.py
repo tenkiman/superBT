@@ -21,6 +21,7 @@ class TmtrkCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
+            'doInvPath':        ['P',0,1,'do inv path default is NOT'],
             'ropt':             ['N','','norun',' norun is norun'],
         }
 
@@ -42,7 +43,11 @@ if(verb): print CL.estr
 invpath=getInvPath4Dtgopt(dtgopt,invdir='./inv')
 
 MF.sTimer('III-TMTRK-%s'%(dtgopt))
-cmd="time s-sbt-tmtrkN.py %s -i > %s"%(dtgopt,invpath)
+if(doInvPath):
+    cmd="time s-sbt-tmtrkN.py %s -i > %s"%(dtgopt,invpath)
+else:
+    cmd="time s-sbt-tmtrkN.py %s -i"%(dtgopt)
+    
 mf.runcmd(cmd,ropt)
 MF.dTimer('III-TMTRK-%s'%(dtgopt))
 

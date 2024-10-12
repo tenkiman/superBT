@@ -72,15 +72,14 @@ MF.sTimer('sum-md3-ALL')
 for year in years:
     tdir="%s/%s"%(sbtSrcDir,year)
     MF.ChkDir(tdir,'mk')
-    if(doBdeck2):
-        cmd='rm -r %s'%(tdir)
-        mf.runcmd(cmd,ropt)
-        MF.ChkDir(tdir,'mk')
 
     for basin in basins:
 
         btdir="%s/%s"%(tdir,basin)
-        MF.ChkDir(btdir,'mk')
+        if(doBdeck2):
+            cmd='rm -r %s'%(btdir)
+            mf.runcmd(cmd,ropt)
+            MF.ChkDir(btdir,'mk')
 
         bopt="%s.%s"%(basin[0],year)
         if(basin == 'epac'):
@@ -90,7 +89,6 @@ for year in years:
             bopt='h.%s'%(year)
             
         if(doBdeck2):
-            
             cmd='m-md3-from-md2-bd2.py -S %s'%(bopt)
             mf.runcmd(cmd,ropt)
             
