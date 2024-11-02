@@ -578,7 +578,10 @@ for Mdeck3 need to turn off
                     otctrksinkpathSTMStat=MF.getPathNlines(otctrksinkpathSTM)
                     
                     stattest=(otctrkpathSTMStat > 0 and ofileStat)
+                    stattest2=(ofileStat)
+                    
                     statTCtrkS[ostmid]=-999
+                    if(stattest2): statTCtrkS[ostmid]=-1  # it ran because we have stdout...
                     #print 'sss---',otctrkpathSTMStat,ofileStat,stattest
                     if(stattest): statTCtrkS[ostmid]=otctrkpathSTMStat
                     
@@ -625,18 +628,28 @@ for Mdeck3 need to turn off
                                          otctrksinkpathSTM,
                                          ofile)
 
+            # -- get sum of runs with and without output
+            #
+            
+            nzero=0
+            nthere=0
             for ostmid in ostmids:
-                nzero=0
-                nthere=0
-                if(statTCtrkS[ostmid] == 0):
+                if(statTCtrkS[ostmid] <= 0):
                     nzero=nzero+1
                 elif(statTCtrkS[ostmid] > 0):
                     nthere=nthere+1
                     
-            if(nthere == 0):
+                
+            nall=nzero+nthere
+            nostmids=len(ostmids)
+            
+            if(self.verb):
+                print 'TTTT nzero: ',nzero,' nthere: ',nthere,' nall: ',nall,'nostmids: ',nostmids
+                
+            # -- if sum of runs != # of storms
+            #
+            if(nall != nostmids):
                 statusTCtrk=0
-            if(nzero > 0):
-                statusTCtrk=-1
                 
             self.ostmids=ostmids
             
@@ -664,7 +677,7 @@ for Mdeck3 need to turn off
         #detTest=( (self.haveTcs and not(os.path.exists(self.grbpath)))  and (statusTCtrk == 0) )
 
         self.genTest= (self.statusTCgen == 1)
-        self.detTest= (self.haveTcs == 1 and self.statusTCtrk) 
+        self.detTest= (self.haveTcs == 1 and self.statusTCtrk == 1) 
         #self.detTest2= (self.haveTcs == 1 and self.statusTCtrk == 0 and self.doTrackerOnly) 
         self.genGribTest=(MF.getPathSiz(self.grb10path) > 0)
         self.detGribTest=(MF.getPathSiz(self.grbpath) > 0)

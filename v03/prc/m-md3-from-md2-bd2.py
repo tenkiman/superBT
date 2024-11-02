@@ -61,7 +61,6 @@ if(verb): print CL.estr
 if(stmopt != None):
 
     (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt=None,yearOpt=None)
-    
     md3=Mdeck3(oyearOpt=oyearOpt,doBT=0,doMd3Only=1)
     
     tcD=TcData(stmopt=stmopt,doWorkingBT=doWorkingBT,doBdeck2=doBdeck2,verb=verb)

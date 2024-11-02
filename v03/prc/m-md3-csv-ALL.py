@@ -79,6 +79,10 @@ rc=setCvsYearOptPaths(sbtSrcDir,oyearOpt,headAll,headSum,doWBTonly=doWBTonly)
 
 for year in years:
     
+    rc=setCvsYearOptPaths(sbtSrcDir,year,headAll,headSum,doMergeOnly=0)
+    (allCvsPath,allCvsPathBT,sumCvsPath,sumCvsPathBT)=rc
+    print 'yyyy----',year,allCvsPath
+
     tdir="%s/%s"%(sbtSrcDir,year)
     if(not(MF.ChkDir(tdir))):
         print 'tdir not there...'

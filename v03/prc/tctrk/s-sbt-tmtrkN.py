@@ -46,6 +46,7 @@ class TmtrkCmdLine(CmdLine):
             'stmopt':           ['S:',None,'a','stmopt'],
             'doTrackerOnly':    ['T',0,1,'run trackeronly'],
             'doClean':          ['C',1,0,'1 do NOT clean'],            
+            'doBail':           ['B',0,1,'1 bail if no era5 fields'],            
             'doInv':            ['i',0,1,'do Inventory'],            
             'doCpTctrk':        ['P',0,1,'make the tctrk.atcf|sink.dtg.txt from adeck_stm -> adeck_dtg'],            
         }
@@ -107,25 +108,32 @@ maxtau=168
 # -- get md3
 #
 yearOpt=None
+doBT=0
 (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
 if(doBdeck2): doBT=1
 
+# -- doBT set in md3.getCvsYearPaths vice at initiation
+#
 md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 for dtg in dtgs:
 
     ayear=dtg[0:4]
     
-    (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,doSfc=0)
+    (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,verb=verb,doSfc=0,doBail=doBail)
     
     # -- model dtg whe tauOffset=6
     #
-    mdtg=mf.dtginc(dtg,-tauOffset)
+    if(tauOffset != None):
+        mdtg=mf.dtginc(dtg,-tauOffset)
+    else:
+        mdtg=dtg
+
     rc=getEra5Grb(era5bdir,mdtg,model='era5')
     (ctlpath2,sizgrb,ctlpath2a,sizgrb2a)=rc
     
     if(sizgrb <= 0):
-        print 'WWW-unable to find data in: ',ctlpath
+        if(not(doInv)): print 'WWW-unable to find data in: ',ctlpath
         continue
 
     MF.sTimer("all-%s"%(dtg))
@@ -164,6 +172,7 @@ for dtg in dtgs:
     if(verb): MF.dTimer('tmtrkN-base-%s-%s'%(model,dtg))
     
     if(doInv):
+        
         MF.sTimer('tmtrkN-inv-%s-%s'%(model,dtg))
         TT.getStatPaths(dolsonly=1)
         TT.doLS()

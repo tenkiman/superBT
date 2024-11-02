@@ -15,7 +15,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.argv=argv
         self.argopts={
-            1:['yearopt', 'bYYYY.eYYYY'],
+            1:['yearOpt', 'bYYYY.eYYYY'],
         }
 
 
@@ -23,7 +23,8 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'basinOpt':         ['B:',None,'a','basin opt'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
-            'doTrk':            ['T',1,0,'do NOT make the track files'],
+            'stmopt':           ['S:',None,'a',' stmid target'],
+            'dtgopt':           ['d:',None,'a',' dtgopt'],
             'ropt':             ['N','','norun',' norun is norun'],
         }
 
@@ -42,20 +43,31 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-tt=yearopt.split('.')
+MF.sTimer('ALL')
 
-if(len(tt) == 2):
-    byear=tt[0]
-    eyear=tt[1]
-    years=yyyyrange(byear, eyear)
-    
-elif(len(tt) == 1):
-    years=[yearopt]
-    
-else:
-    print 'EEE -- invalid yearopt: ',yearopt
+# -- new way to start md3
+#
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
 
-md3=Mdeck3(verb=verb)
+yy=oyearOpt.split('.')
+if(len(yy) == 1):
+    years=[oyearOpt]
+    
+if(verb):
+    print 'sss---',stmopt
+    print 'ddd---',dtgopt
+    print 'yyy---',yearOpt
+    
+    print 'ooo---yyy',oyearOpt
+    print 'ooo---BBB',doBdeck2
+    
+doBT=0
+if(doBdeck2):
+    doBT=1
+    
+MF.sTimer('md3-load')
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
+MF.dTimer('md3-load')
 
 # -- work in the current version
 #
@@ -101,11 +113,13 @@ for year in years:
                     nCNN=nCNN+1
                     
             else:
+                
                 tt=sl[-2].split(':')
                 dtype=tt[0].strip()
                 d9x=tt[1].strip()
+                stmDev=sl[3]
                 
-                if(dtype == 'NN'):
+                if(stmDev == 'DEV'):
                     b1NN=d9x[-1]
                     b19X=sl[1][-1]
                     stmidNN="%s.%s"%(d9x,sl[0])
@@ -131,11 +145,10 @@ for year in years:
                 print card
                 print
         
+        kksNN=sNN.keys()
+        kks9X=s9X.keys()
+        print 'nnn-keys: Basin: %s.%s'%(basin,year),'len(sNN): %2d'%(len(kksNN)),' len(s9X): %2d '%(len(kks9X))
         if(verb):
-            kksNN=sNN.keys()
-            kks9X=s9X.keys()
-            print 'nnn-keys: len(sNN): ',len(kksNN),' len(s9X): ',len(kks9X)
-        
             kksNN.sort()
             for k in kksNN:
                 print 'kN:',k,sNN[k]

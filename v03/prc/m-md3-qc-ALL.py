@@ -78,8 +78,10 @@ if(yearOpt != None):
 
 
 if(stmopt != None):
-    
-    md3=Mdeck3(doBT=0,doSumOnly=1)
+ 
+    (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt=None,yearOpt=None)
+    md3=Mdeck3(oyearOpt=oyearOpt,doBT=0,doMd3Only=0,doSumOnly=1)
+    #md3=Mdeck3(doBT=0,doSumOnly=1)
     stmids=[]
     stmopts=getStmopts(stmopt)
     for stmopt in stmopts:
@@ -116,127 +118,145 @@ for stmid in stmids:
     if(doRedo): override=1
     if(doRedo or override): qc2paths=1
 
+    # -- 000000 make md3 and and check
+    #
+    
+    print 'Pass 0000 for ',stmid
+    
     rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,override=1)
     (opath3,mpath,mpathBT,savPath,savPathBT)=rc
     (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,bspdmax=bspdmax,verb=verb)
+    rccQC=setQcPassPath(rcc,qcpath,opath3,stmid,qcpass=0,bspdmax=bspdmax,override=0)
+    
+    if(rccQC == 0):
+        print 'problem in setQcPassPath...sayounara...'
+        sys.exit()
 
-    # -- case where passes check returning 1 because there still is a *QC-30 file
+    # -- passes QC... make a plot
     #
-
-    if(rcc == 1):
+    if(rccQC == 1):
+        
         
         plttag0='pass01'
         title20='RCC=1111111111 PASS 000000000000'
         rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
                      plttag=plttag0,title2=title20)
 
-        rc=raw_input("QC-1111 pass0 returned qcpath...okay? delete? y/n  ")
+    # -- first fail point
+    #
+    elif(rccQC == 2):
+        
+        plttag='pass0'
+        title20='RCC=1 PASS 000000000000000'
+        rc=doMd2Md3Mrg(stmid,doRedo=0,qc2paths=qc2paths,override=1)
+        (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,bspdmax=bspdmax,verb=verb)
+        rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
+                   plttag=plttag0,title2=title20)
+        rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,override=1)
+        (opath3,mpath,mpathBT,savPath,savPathBT)=rc
+        (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,bspdmax=bspdmax,verb=verb)
+        rccQC=setQcPassPath(rcc,qcpath,opath3,stmid,qcpass=1,bspdmax=bspdmax,override=0)
+
+        print '00000000000011111111111111111',rcc,qcpath,'rccQC: ',rccQC
+        
+        if(rcc):
+            qinput="QC-1111 pass2222 returned qcpath...okay? delete? y/n  "
+        else:
+            qinput="QC-0000 pass2222 still bad... delete? y/n  "
+            
+        rc=raw_input(qinput)
         if(rc.lower() != 'n'):
             mf.runcmd("rm -i %s"%(qcpath),ropt)
         else:
-            plttag='pass0'
-            title20='RCC=1 PASS 000000000000000'
-            rc=doMd2Md3Mrg(stmid,doRedo=0,qc2paths=qc2paths,override=1)
-            (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,bspdmax=bspdmax,verb=verb)
-            rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
-                       plttag=plttag0,title2=title20)
-            rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,override=1)
-            (opath3,mpath,mpathBT,savPath,savPathBT)=rc
-            (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,bspdmax=bspdmax,verb=verb)
-            print '00000000000011111111111111111',rcc,qcpath
-            if(rcc):
-                qinput="QC-1111 pass2222 returned qcpath...okay? delete? y/n  "
-            else:
-                qinput="QC-0000 pass2222 still bad... delete? y/n  "
-                
-            rc=raw_input(qinput)
-            if(rc.lower() != 'n'):
-                mf.runcmd("rm -i %s"%(qcpath),ropt)
-            else:
-                print 'WWWWW continue to next storm...catch on the second pass through'
-                continue
-     
-    # -- FFFF fail
-    #
-    qcpath0=qcpath
-    if(rcc == 2):
-        print 'SSSSSSSSingleton for: ',stmid
-        sys.exit()
-
-    if(rcc == 0):
+            print 'WWWWW continue to next storm...catch on the second pass through'
+            continue
+ 
+    else:
         
-        # -- 11111111111111111111111111111 first pass
+        # -- FFFF fail
         #
-        plttag1='pass1'
-        title21='RCC=0 PASS 1111111111111111'
-        rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
-                   plttag=plttag1,title2=title21)
-        
-        rc=doMd2Md3Mrg(stmid,qc2paths=qc2paths,override=1)
-        (opath3,mpath,mpathBT,savPath,savPathBT)=rc
-        (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,verb=verb)
-
-        delQC=0
-        doQC2=1
-        
-        if(rcc):
-
+        qcpath0=qcpath
+        if(rcc == 2):
+            print 'SSSSSSSSingleton for: ',stmid
+            sys.exit()
+    
+        if(rcc == 0):
+            
+            # -- 11111111111111111111111111111 first pass
+            #
             plttag1='pass1'
-            title21='RCC=111111111111 PASS 1111111111111111'
-            rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
-                         plttag=plttag1,title2=title21)
-            rc=raw_input("QC pass1 is okay? (rcc == 1) delete? y/n  ")
-            if(rc.lower() != 'n'):
-                delQC=1
-                mf.runcmd("rm -i %s"%(qcpath),ropt)
-                continue
-            else:
-                rc=raw_input("do you want to another 2nd pass here in pass1? y/n  ")
-                if(rc.lower() == 'n'):
-                    doQC2=0
-                    mf.runcmd("rm -i %s"%(qcpath0),ropt)
+            title21='RCC=0 PASS 1111111111111111'
+            rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
+                       plttag=plttag1,title2=title21)
+            
+            rc=doMd2Md3Mrg(stmid,qc2paths=qc2paths,override=1)
+            (opath3,mpath,mpathBT,savPath,savPathBT)=rc
+            (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,verb=verb)
+            rccQC=setQcPassPath(rcc,qcpath,opath3,stmid,qcpass=2,bspdmax=bspdmax,override=0)
+    
+            delQC=0
+            doQC2=1
+            
+            if(rcc):
+    
+                plttag1='pass1'
+                title21='RCC=111111111111 PASS 1111111111111111'
+                rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
+                             plttag=plttag1,title2=title21)
+                rc=raw_input("QC pass1 is okay? (rcc == 1) delete? y/n  ")
+                if(rc.lower() != 'n'):
+                    delQC=1
+                    mf.runcmd("rm -i %s"%(qcpath),ropt)
+                    continue
                 else:
+                    rc=raw_input("do you want to another 2nd pass here in pass1? y/n  ")
+                    if(rc.lower() == 'n'):
+                        doQC2=0
+                        mf.runcmd("rm -i %s"%(qcpath0),ropt)
+                    else:
+                        plttag2='pass2'
+                        title22='RCC=0 11111111111 PASS 222222222222222'
+                        rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
+                                   plttag=plttag1,title2=title21)
+                        rc=doMd2Md3Mrg(stmid,qc2paths=qc2paths,override=1)
+                        (opath3,mpath,mpathBT,savPath,savPathBT)=rc
+                        (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,verb=verb)
+                        rccQC=setQcPassPath(rcc,qcpath,opath3,stmid,qcpass=2,bspdmax=bspdmax,override=0)
+                        
+                        if(rcc):
+                            plttag21='pass20'
+                            title221='RCC=%d PASS 222222220000000000'%(rcc)
+                            rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
+                                         plttag=plttag21,title2=title21)
+                        
+                        rc=raw_input("QC pass2 okay to delete? 222 rcc: %d y/n  "%(rcc))
+                        if(rc.lower() == 'y'):
+                            mf.runcmd("rm -i %s"%(qcpath0),ropt)
+                        continue
+                        
+                    
+            else:
+                # -- 2222222222222222222222222222222 2nd pass
+                #
+                if( (rcc == 0 and not(delQC)) or not(doQC2)):
                     plttag2='pass2'
-                    title22='RCC=0 11111111111 PASS 222222222222222'
+                    title22='RCC=0 PASS 222222222222222'
                     rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
-                               plttag=plttag1,title2=title21)
+                               plttag=plttag2,title2=title22)
                     rc=doMd2Md3Mrg(stmid,qc2paths=qc2paths,override=1)
                     (opath3,mpath,mpathBT,savPath,savPathBT)=rc
                     (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,verb=verb)
+                    rccQC=setQcPassPath(rcc,qcpath,opath3,stmid,qcpass=3,bspdmax=bspdmax,override=0)
                     
-                    if(rcc):
-                        plttag21='pass20'
-                        title221='RCC=%d PASS 222222220000000000'%(rcc)
-                        rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
-                                     plttag=plttag21,title2=title21)
-                    
-                    rc=raw_input("QC pass2 okay to delete? 222 rcc: %d y/n  "%(rcc))
+                    plttag21='pass21'
+                    title221='RCC=%d PASS 22222222211111111'%(rcc)
+                    rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
+                                 plttag=plttag21,title2=title21)
+    
+                    rc=raw_input("QC pass2 rc=%d to delete? 222 y/n  "%(rcc))
                     if(rc.lower() == 'y'):
                         mf.runcmd("rm -i %s"%(qcpath0),ropt)
-                    continue
-                    
-                
-        else:
-            # -- 2222222222222222222222222222222 2nd pass
-            #
-            if( (rcc == 0 and not(delQC)) or not(doQC2)):
-                plttag2='pass2'
-                title22='RCC=0 PASS 222222222222222'
-                rc=doQCTrk(opath3,mpath,mpathBT,qcpath,savPath,
-                           plttag=plttag2,title2=title22)
-                rc=doMd2Md3Mrg(stmid,qc2paths=qc2paths,override=1)
-                (opath3,mpath,mpathBT,savPath,savPathBT)=rc
-                (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,verb=verb)
-                
-                plttag21='pass21'
-                title221='RCC=%d PASS 22222222211111111'%(rcc)
-                rc=doTrkPlot(opath3,override=1,doM3=1,doX=1,
-                             plttag=plttag21,title2=title21)
-
-                rc=raw_input("QC pass2 rc=%d to delete? 222 y/n  "%(rcc))
-                if(rc.lower() == 'y'):
-                    mf.runcmd("rm -i %s"%(qcpath0),ropt)
-                            
+                                
 
         
 sys.exit()

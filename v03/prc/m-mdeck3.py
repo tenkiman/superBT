@@ -24,6 +24,7 @@ class MdeckCmdLine(CmdLine):
 
         self.options={
             'dtgopt':         ['d:',None,'a','year'],
+            'yearOpt':        ['Y:',None,'a','yearOpt for doing Mdeck3()'],
             'override':       ['O',0,1,'override'],
             'verb':           ['V',0,1,'verb=1 is verbose'],
             'ropt':           ['N','','norun',' norun is norun'],
@@ -33,8 +34,7 @@ class MdeckCmdLine(CmdLine):
             'doWorkingBT':    ['W',0,1,'using working/b*.dat for bdecks vice ./b*.dat'],
             'oPath':          ['o:',None,'a','write output to oPath'],
             'sumPath':        ['r:',None,'a','read path to generate summary card'],
-            'doTrk':          ['T',0,1,'make the md3 trk from the -sum.txt files'],
-            'doBdeck2':       ['2',0,1,'run m-mdeck3.py for bdeck2 only ONLY'],
+            'doTrk':          ['T',0,1,'force setting of making md3 trk ...in case of MRG'],
             }
 
         self.purpose='''
@@ -56,7 +56,8 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-md3=Mdeck3(doBT=0,doSumOnly=1)
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt=None,yearOpt=yearOpt)
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=0,doMd3Only=1)
 
 
 if(stmopt != None):
@@ -136,10 +137,14 @@ if(sumPath != None):
 
     if(verb):
         print 'stm1id: ',stm1id	
+        print 'stm9xid: ',stm9xid
+
         print 'sname:  ',sname
         print 'stmDev: ',stmDev
+
         print 'sdir:   ',sdir
         print 'sfile:  ',sfile
+
         print 'ofile:  ',ofile
         print 'ofileS: ',ofileS
         
@@ -150,10 +155,12 @@ if(sumPath != None):
         for icard in icards:
             print 'iii',icard[0:-1]
         
+    useVmax4TcCode=0
     ocards=[]
     dom3=0
-    if(isMRG): dom3=0
-    md3=MD3trk(icards,stm1id,stm9xid,isBD2=isBD2,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+    if(isMRG): dom3=1
+    md3=MD3trk(icards,stm1id,stm9xid,isBD2=isBD2,dom3=dom3,sname=sname,basin=basin,stmDev=stmDev,
+               useVmax4TcCode=useVmax4TcCode,verb=verb)
     dtgs=md3.dtgs
     trk=md3.trk
     basin=md3.basin
@@ -207,12 +214,17 @@ if(sumPath != None):
             m3card=makeMd3Card(dtg,im3trk, m3i,m2trk,verb=verb)
             m3cards.append(m3card)
         #md3.m3tri=m3trki
+        print 'all path: ',opath
         rc=MF.WriteList2Path(m3cards, opath,verb=verb)
 
-        md3=MD3trk(m3cards,stm1id,stm9xid,dom3=1,sname=sname,basin=basin,stmDev=stmDev,verb=verb)
+        md3=MD3trk(m3cards,stm1id,stm9xid,dom3=1,isBD2=0,sname=sname,basin=basin,stmDev=stmDev,
+                   useVmax4TcCode=useVmax4TcCode,
+                   verb=verb)
+        print 'sum path: ',opathS
         (m3sum,rcsum)=md3.lsDSsStmSummary(doprint=0)
         m3sum=m3sum.replace(' ','')
         m3sum=m3sum+',\n'
+        print '333-M3SUM: ',m3sum[0:-1]
         rc=MF.WriteString2Path(m3sum, opathS)
         if(isBT):
             print '333-NNN',rcsum,m3sum[0:-1]
