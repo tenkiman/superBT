@@ -184,7 +184,6 @@ for dtg in dtgs:
             TT.doCP()
             MF.dTimer('tmtrkN-inv-%s-%s'%(model,dtg))
     else:
-        
         TT.getStatPaths()
         MF.sTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
         TT.doTrk(ropt=ropt)

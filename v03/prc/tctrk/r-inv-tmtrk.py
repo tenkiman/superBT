@@ -45,7 +45,7 @@ def makeTmtrkNInv(dtgopt,doInvPath,ropt,override=0):
         dtgs=mf.dtg_dtgopt_prc(dtgopt)
         for dtg in dtgs:
             cmd="s-sbt-tmtrkN.py %s -i >> %s"%(dtg,invpath)
-            mf.runcmd(cmd)
+            mf.runcmd(cmd,ropt)
             
         MF.dTimer("inv: %s"%(dtgopt))
     else:

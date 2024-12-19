@@ -403,7 +403,7 @@ for Mdeck3 need to turn off
         return(ostmid)
 
 
-    def getStatPaths(self,ofileSizMin=1000,dolsonly=0):
+    def getStatPaths(self,ofileSizMin=778,dolsonly=0):
         
         # -- PPPPPAAAAATTTTTHHHHHSSSSS - target dirs/paths
         #
@@ -566,7 +566,8 @@ for Mdeck3 need to turn off
                 #
                 ofile="%s/stdout.tctrk.%s.%s.%s.txt"%(self.tdir,self.dtg,omodel,stm3id.lower())
                 ofileSiz=MF.getPathSiz(ofile)
-                ofileStat=(ofileSiz > 0)
+                ofileStat=(ofileSiz > ofileSizMin)
+                print 'sssss',MF.getPathSiz(ofile),'ooo',ofileStat
 
                 #otctrkpathSTM    ="tctrk.atcf.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.64 - standard
                 #otctrkgtcvpathSTM="tctrk.gtcv.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.67 - genesis tcvitals
@@ -634,13 +635,15 @@ for Mdeck3 need to turn off
             nzero=0
             nthere=0
             for ostmid in ostmids:
-                if(statTCtrkS[ostmid] <= 0):
+                print 'ooooooo',ostmid,statTCtrkS[ostmid]
+                if(statTCtrkS[ostmid] < -1):
                     nzero=nzero+1
-                elif(statTCtrkS[ostmid] > 0):
+                elif(statTCtrkS[ostmid] >= -1):
                     nthere=nthere+1
                     
                 
             nall=nzero+nthere
+            nall=nthere
             nostmids=len(ostmids)
             
             if(self.verb):
@@ -705,7 +708,7 @@ for Mdeck3 need to turn off
         print 'AAGG     allDoneGen: ',allDoneGen
 
         rc=1
-        if(self.doTrackerOnly):
+        if(self.doTrackerOnly or allDoneDet == 0):
             if(not(self.haveTcs)):
                 print 'NNNoooTTTcccs'
                 print 'NNNoooTTTcccs for dtg: ',self.dtg,' AND doTrackerOnly...ja sayounara...'
