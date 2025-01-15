@@ -131,7 +131,7 @@ if(verb):
     print CL.opts
 
 prcdir=sbtPrcDirTcdiag
-MF.ChangeDir(prcdir,verb=1)
+MF.ChangeDir(prcdir,verb=verb)
 prcdirIships=prcdir
 
 (dtgs,modelsDiag)=getDtgsModels(CL,dtgopt,modelopt)
@@ -202,15 +202,26 @@ if(redoLsdiag): useLsdiagDat=1
 #
 
 didIt=0
+nStmAll=0
 
 for dtg in dtgs:
 
-    MF.sTimer(tag='SBT-LSDIAG-%s'%(dtg))
     # -- 20230314 -- will miss storms with missing dtgs...
     #    see inv/dtgmiss/m-B-2007-22.txt 
     #    need to add interpolated dtgs into 'all-md3-2007-2022-MRG.csv'
     #
     dstmids=md3.getMd3Stmids4dtg(dtg,convertXstm=1)
+    
+    # -- get number of stmids ... if 0 then go to next dtg
+    #
+    nStm=len(dstmids)
+    nStmAll=nStmAll+nStm
+
+    MF.sTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
+    
+    if(nStm == 0):        
+        MF.dTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
+        continue
     
     # -- only track in stmopt
     #
@@ -639,11 +650,11 @@ for dtg in dtgs:
     #cmd='p-lats4d.py %s'%(dtg)
     #mf.runcmd(cmd,roptLats)
 
-    MF.dTimer(tag='SBT-LSDIAG-%s'%(dtg))
+    MF.dTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
             
 # -- rsync over from web-config/tcdiag/YYYY to $W2_HFIP...
 #
-if(ropt != 'norun' and model != 'era5'):
+if(nStmAll > 0 and ropt != 'norun' and model != 'era5'):
     rc=rsync2data()
 
 # -- do inventory for tcdiag.php

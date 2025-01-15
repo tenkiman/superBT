@@ -34,6 +34,7 @@ class MdeckCmdLine(CmdLine):
             'doRedo':         ['R',0,1,'start from -SAV file'],
             'bspdmax':        ['m:',30.0,'f',' max 6-h speed'],
             'passNumber':     ['P:',None,'a',' passNumber'],
+            'bd2Update':      ['2',0,1,'update using -BT2.txt vice BT.txt'],
             }
 
         self.purpose='''
@@ -80,11 +81,20 @@ if(yearOpt != None):
 if(stmopt != None):
  
     (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt=None,yearOpt=None)
-    md3=Mdeck3(oyearOpt=oyearOpt,doBT=0,doMd3Only=0,doSumOnly=1)
+    doMd3Only=0
+    doBT=0
+    if(bd2Update):
+        doBdeck2=1
+        doMd3Only=0
+        doBT=1
+        dobt=1
+        
+    md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,doMd3Only=doMd3Only,doSumOnly=1,verb=verb)
     #md3=Mdeck3(doBT=0,doSumOnly=1)
     stmids=[]
     stmopts=getStmopts(stmopt)
     for stmopt in stmopts:
+        #dobt=0
         stmids=stmids+md3.getMd3Stmids(stmopt,dobt=dobt,verb=verb)
         
 elif(len(years) > 0):
@@ -123,7 +133,9 @@ for stmid in stmids:
     
     print 'Pass 0000 for ',stmid
     
-    rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,override=1)
+    rc=doMd2Md3Mrg(stmid,doRedo=doRedo,qc2paths=qc2paths,
+                   bd2Update=bd2Update,
+                   override=1)
     (opath3,mpath,mpathBT,savPath,savPathBT)=rc
     (rcc,qcpath)=chkSpdDirMd3Mrg(opath3,mpath,mpathBT,bspdmax=bspdmax,verb=verb)
     rccQC=setQcPassPath(rcc,qcpath,opath3,stmid,qcpass=0,bspdmax=bspdmax,override=0)

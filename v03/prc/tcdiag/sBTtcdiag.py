@@ -437,7 +437,7 @@ class TcDiagS(MFbase):
         
         self.initOutput()
         self.initTC(dtg)
-
+        
         if(justInit): return
 
 
@@ -7014,8 +7014,21 @@ class TcTrkPlot(DataSet):
         #else:                       
             #tD=tG.tD
 
-        (rc,self.m3trk)=self.md3.getMd3track(self.stmid,dobt=self.dobt,doBdeck2=1)
-        self.bts=self.m3trk
+        stmid9X=self.stmid[2]+self.stmid[0:2]+self.stmid[-5:]
+        print '9999999',stmid9X
+        
+        (rc9,m3trk9X)=self.md3.getMd3track(stmid9X,dobt=self.dobt,doBdeck2=1,verb=0)
+        (rc,m3trk)=self.md3.getMd3track(self.stmid,dobt=self.dobt,doBdeck2=1,verb=0)
+        dtgN9x=(self.dtg in m3trk9X.keys())
+        dtgN=(self.dtg in m3trk.keys())
+        
+        if(dtgN9x):
+            self.bts=m3trk9X
+        elif(dtgN):
+            self.bts=m3trk
+        else:
+            print 'ooopppsss self.dtg: ',self.dtg,' not in md3 ... sayounara...'
+            sys.exit()
 
         if(len(self.bts) == 0):
             print 'WWW TcTrkPlot no bts for stmid: ',self.stmid,' dtg: ',self.dtg
@@ -7185,7 +7198,9 @@ class TcTrkPlot(DataSet):
 
         ttl=ga.gp.title
         ttl.set(scale=0.85)
-        t1='%s TC: %s[%s] V`bmax`n: %3dkt bdtg: %s'%(modeltitle,self.stmid,self.stmname,int(self.bts[self.dtg][2]),self.dtg)
+
+        t1='%s TC: %s[%s] V`bmax`n: %3dkt bdtg: %s'%(modeltitle,self.stmid,self.stmname,\
+                                                     int(self.bts[self.dtg][2]),self.dtg)
         t2='TCDiag track plot'
         if(hasattr(self,'FtrkSource')):
             ts=self.FtrkSource[self.stmid]

@@ -14,7 +14,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.argv=argv
         self.argopts={
-            #1:['dtgopt',    'dtgopt'],
+            1:['dtgopt',    'dtgopt'],
         }
 
 
@@ -22,7 +22,7 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
-            'dtgopt':           ['d:',None,'a','dtgopt'],
+            #'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
