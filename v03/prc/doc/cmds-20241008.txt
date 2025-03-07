@@ -1,0 +1,381 @@
+1001  m-md3-stm-dir-sum-bd2.py 
+1002  m-md3-stm-dir-sum-bd2.py 1970.1974
+1003  m-md3-csv-ALL-bd2.py 
+1004  m-md3-csv-ALL-bd2.py 1970
+1005  m-md3-csv-ALL-bd2.py -Y 1970
+1006  m-md3-csv-ALL-bd2.py -Y 1971
+1007  m-md3-csv-ALL-bd2.py -Y 1972
+1008  m-md3-csv-ALL-bd2.py -Y 1973
+1009  m-md3-csv-ALL-bd2.py -Y 1974
+1010  m-md3-stm-dir-sum-bd2.py 1949.1969
+1011  m-md3-stm-dir-sum-bd2.py 1980.2006
+1012  m-md3-csv-ALL-bd2.py -Y 2006
+1013  m-md3-csv-ALL-bd2.py -Y 1949.2005 -N
+
+1016  m-md3-csv-ALL-bd2.py -Y 1949.2005
+1017  m-md3-csv-ALL-bd2.py -Y 1949.2006
+1018  m-md3-csv-ALL-bd2.py -Y 1949.2006 | l
+1019  m-md3-csv-ALL-bd2.py -Y 1949.1950
+1020  m-md3-csv-ALL-bd2.py -Y 1950.2006
+1021  p-md3-ls.py -S l.53 -s
+1022  m-md3-csv-ALL-bd2.py -Y 1953
+1023  p-md3-ls.py -S l.53 -s
+1024  m-md3-csv-ALL-bd2.py -Y 1969
+1025  m-md3-csv-ALL-bd2.py -Y 1969 -V
+
+1027  m-md3-stm-dir-sum-bd2.py 
+1028  m-md3-stm-dir-sum-bd2.py 1969
+1029  m-md3-csv-ALL-bd2.py -Y 1969 
+
+1030  la /data/w22/superBT-V04/src-v03/1969/lant/
+1031  la /data/w22/superBT-V04/src-v03/1969/lant/30L-1969-UNNAMED-XXL/
+1032  la /data/w22/superBT-V04/src-v03/1969/lant/30L-1969-UNNAMED-XXL/30L-sum.txt
+1033  pg /data/w22/superBT-V04/src-v03/1969/lant/30L-1969-UNNAMED-XXL/30L-sum.txt
+1034  la /data/w22/superBT-V04/src-v03/1969/lant/29L-1969-MARTHA-XXL/
+1035  la /data/w22/superBT-V04/src-v03/1969/lant/29L-1969-MARTHA-XXL/29L-sum-BT.txt
+1036  pg /data/w22/superBT-V04/src-v03/1969/lant/29L-1969-MARTHA-XXL/29L-sum-BT.txt
+
+1037  md2a -S 30l.69
+1038  md2a -S 29l.69
+1039  md2a -S 29l.69 -2
+1040  md2a -S 30l.69 -2
+
+1042  md2a -S 30l.69 -2
+
+1044  m-md3-stm-dir-sum-bd2.py 1969
+
+1046  m-md3-csv-ALL-bd2.py -Y 1969 
+1047  m-md3-csv-ALL-bd2.py -Y 1970.2006
+
+1049  p-md3-ls.py -S l.69 -s
+
+1052  m-md3-stm-dir-sum-bd2.py 1986
+
+1054  m-md3-csv-ALL-bd2.py -Y 1986
+1055  la /data/w22/superBT-V04/src-v03/1986/shem/
+1056  la /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY/
+1057  md2a -S 32s.86 -2 -s
+1058  md2a -S 32s.86 -2 
+
+1060  m-md3-stm-dir-sum-bd2.py 
+1061  m-md3-stm-dir-sum-bd2.py 1986 -B shem
+1062  m-md3-stm-dir-sum-bd2.py 1986 -B shem | l
+1063  la /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY/
+1064  la /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY/LILA-XXS/
+1065  la /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY/LILA-XXS/cp * ../.
+1066  pd /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY/
+
+1068  cp LILA-XXS/32S-sum* .
+
+1070  rmdir LILA-XXS
+1071  la LILA-XXS
+1072  mv LILA-XXS/* .
+
+1074  rmdir LILA-XXS
+1075  cd..
+1076  mv 32S-1986-BILLY 32S-1986-BILLY-XXS
+
+1079  m-md3-csv-ALL-bd2.py -Y 1986
+
+1081  m-md3-stm-dir-sum-bd2.py 1986
+1082  pd /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY/
+1083  mv LILA-XXS/* .
+
+1085  rmdir LILA-XXS/
+
+1087  mv 32S-1986-BILLY 32S-1986-BILLY-XXS
+
+1090  m-md3-csv-ALL-bd2.py -Y 1986
+1091  pd /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY-XXS/
+
+1095  m-md3-stm-dir-sum-bd2.py 1986 -N
+1096  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY-XXS/32S-sum.txt
+1097  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1986/shem/32S-1986-BILLY-XXS/32S-sum-BT.txt
+
+1099  m-md3-csv-ALL-bd2.py -Y 1986
+1100  m-md3-csv-ALL-bd2.py -Y 1987
+1101  m-md3-csv-ALL-bd2.py -Y 1988.2006
+
+1102  la /data/w22/superBT-V04/src-v03/1990/epac/
+1103  la /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/
+1104  la /data/w22/superBT-V04/src-v03/1990/epac/08E-1990-GENEVIEVE-XXE/
+
+1106  m-md3-stm-dir-sum-bd2.py 1990 -N
+1107  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1990/epac/08E-1990-GENEVIEVE-XXE/08E-sum-BT.txt
+1108  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/09E-sum.txt
+1109  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/09E-sum-BT.txt
+1110  la /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/09E-sum-BT.txt
+1111  pd /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/
+
+1113  pg 09E-sum.txt 
+1114  md2a -S 09e.90 -2
+
+1116  cp 09E-sum.txt 09E-sum-BT.txt 
+
+1118  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/09E-sum-BT.txt
+
+1120  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1990/epac/09E-1990-HERNAN-XXE/09E-sum-BT.txt
+
+1122  m-md3-csv-ALL-bd2.py -Y 1990
+1123  m-md3-csv-ALL-bd2.py -Y 1991
+1124  m-md3-csv-ALL-bd2.py -Y 1992.1999
+1125  pd /data/w22/superBT-V04/src-v03/1992/epac/
+
+1127  la 01E-1992-AGATHA-XXE/
+1128  la 01C-1992-EKEKA-XXC/
+1129  la 01E-1992-AGATHA-XXE/
+
+1132  m-md3-csv-ALL-bd2.py -Y 1992
+1133  pd /data/w22/superBT-V04/src-v03/1992/epac/
+1134  cd 02E-1992-TWO-XXE/
+
+1136  cd ../02C-1992-HALI-XXC/
+
+1138  cp 02C-sum.txt 02C-sum-BT.txt 
+
+1141  m-md3-stm-dir-sum-bd2.py 1990 -N
+1142  m-md3-stm-dir-sum-bd2.py 1992 -N
+1143  pd /data/w22/superBT-V04/src-v03/1992/shem/29S-1992-JANE
+
+1145  mv IRNA-XXS/* .
+
+1147  rmdir IRNA-XXS/
+
+1149  m-md3-stm-dir-sum-bd2.py 1992 -N
+1150  m-md3-stm-dir-sum-bd2.py 1992
+
+1152  m-md3-csv-ALL-bd2.py -Y 1992
+1153  pd /data/w22/superBT-V04/src-v03/1992/epac/01E-1992-AGATHA-XXE/
+
+1155  pd /data/w22/superBT-V04/src-v03/1992/epac/01C-1992-EKEKA-XXC/
+
+1157  pd /data/w22/superBT-V04/src-v03/1992/epac/02E-1992-TWO-XXE/
+1158  pa
+
+1160  cd /data/w22/superBT-V04/src-v03/1992/epac/02C-1992-HALI-XXC/
+
+1162  cp 02C-sum.txt 02C-sum-BT.txt 
+1163  cd ../../shem/
+
+1165  cd 29S-1992-JANE/
+
+1167  mv IRNA-XXS/* .
+
+1171  mv 29S-1992-JANE 29S-1992-JANE-XXS
+
+1174  m-md3-stm-dir-sum-bd2.py 1992 -N
+
+1176  m-md3-stm-dir-sum-bd2.py 1992 -N
+1177  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/shem/29S-1992-JANE-XXS/29S-sum.txt
+1178  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/shem/29S-1992-JANE-XXS/29S-sum-BT.txt
+1179  m-md3-stm-dir-sum-bd2.py 1992 -N | g 02E
+1180  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02E-1992-TWO-XXE/02E-sum.txt 
+1181  -mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02E-1992-TWO-XXE/02E-sum-BT.txt
+1182  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02E-1992-TWO-XXE/02E-sum-BT.txt
+
+1184  m-md3-csv-ALL-bd2.py -Y 1992
+1185  m-md3-stm-dir-sum-bd2.py 1992 -N | g 01E
+1186  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/01E-1992-AGATHA-XXE/01E-sum.txt  
+1187  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/01E-1992-AGATHA-XXE/01E-sum-BT.txt
+1188  m-md3-csv-ALL-bd2.py -Y 1992
+1189  m-md3-stm-dir-sum-bd2.py 1992 -N | g 02E
+1190  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02E-1992-TWO-XXE/02E-sum.txt
+1191  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02E-1992-TWO-XXE/02E-sum-BT.txt
+1192  m-md3-csv-ALL-bd2.py -Y 1992
+1193  pd /data/w22/superBT-V04/src-v03/1992/epac/01E-1992-AGATHA-XXE/
+
+1195  pd /data/w22/superBT-V04/src-v03/1992/epac/01C-1992-EKEKA-XXC/
+
+1197  cd ../02C-1992-HALI-XXC/
+
+1203  m-md3-stm-dir-sum-bd2.py 1992 -N | g 02E
+1204  m-md3-stm-dir-sum-bd2.py 1992 -N | g 02C
+1205  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02C-1992-HALI-XXC/02C-sum.txt
+1206  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1992/epac/02C-1992-HALI-XXC/02C-sum-BT.txt
+
+1208  m-md3-csv-ALL-bd2.py -Y 1992
+1209  m-md3-csv-ALL-bd2.py -Y 1993
+1210  m-md3-csv-ALL-bd2.py -Y 1994
+1211  m-md3-csv-ALL-bd2.py -Y 1995
+1212  m-md3-csv-ALL-bd2.py -Y 1996
+1213  pd /data/w22/superBT-V04/src-v03/1996/io/
+
+1215  la 08B-1996-NONAME-XXI/
+1216  cd ../shem/
+
+1218  cd 01S-1996-DARYL/
+
+1220  mv AGNI-XXS/* .
+
+1222  mv 01S-1996-DARYL 01S-1996-DARYL-XXS
+
+1225  m-md3-stm-dir-sum-bd2.py 1992 -N | g 02E
+1226  m-md3-stm-dir-sum-bd2.py 1996 -N | g 01S
+1227  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1996/shem/01S-1996-DARYL-XXS/01S-sum.txt
+1228  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1996/shem/01S-1996-DARYL-XXS/01S-sum-BT.txt
+1229  m-md3-csv-ALL-bd2.py -Y 1996
+1230  pd /data/w22/superBT-V04/src-v03/1996/shem/
+
+1232  cd 07S-1996-HUBERT/
+
+1234  mv COR-XXS/* .
+1235  rmdir COR-XXS/
+
+1237  mv 07S-1996-HUBERT 07S-1996-HUBERT-XXS
+
+1240  m-md3-stm-dir-sum-bd2.py 1996 -N | g 01S
+1241  m-md3-stm-dir-sum-bd2.py 1996 -N | g 07S
+1242  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1996/shem/07S-1996-HUBERT-XXS/07S-sum.txt
+1243  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1996/shem/07S-1996-HUBERT-XXS/07S-sum-BT.txt
+
+1245  m-md3-csv-ALL-bd2.py -Y 1996
+1246  m-md3-csv-ALL-bd2.py -Y 1997
+1247  pd /data/w22/superBT-V04/src-v03/1997/lant/
+
+1249  la 06L-1997-FIVE-XXL/
+1250  la 05L-1997-DANNY-XXL/
+1251  la 06L-1997-FIVE-XXL/
+1252  cd 06L-1997-FIVE-XXL/
+
+1254  cp 06L-sum.txt 06L-sum-BT.txt 
+
+1257  m-md3-stm-dir-sum-bd2.py 1996 -N | g 07S
+1258  m-md3-stm-dir-sum-bd2.py 1997 -N | g 06L
+1259  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1997/lant/06L-1997-FIVE-XXL/06L-sum.txt 
+1260  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1997/lant/06L-1997-FIVE-XXL/06L-sum-BT.txt
+
+1262  m-md3-csv-ALL-bd2.py -Y 1997
+1263  pd /data/w22/superBT-V04/src-v03/1997/shem/
+1264  la 04S-1997-ANTOINETTE-XXS/
+
+1266  cd 05S-1997-MELANIE/
+
+1268  mv BE-XXS/* .
+1269  rmdir BE-XXS/
+
+1272  m-md3-stm-dir-sum-bd2.py 1997 -N | g 06L
+1273  m-md3-stm-dir-sum-bd2.py 1997 -N | g 05S
+1274  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1997/shem/05S-1997-MELANIE/05S-sum.txt
+1275  pd /data/w22/superBT-V04/src-v03/1997/shem/
+
+1277  mv 05S-1997-MELANIE 05S-1997-MELANIE-XXS
+1278  la 05S-1997-MELANIE-XXS/
+
+1280  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1997/shem/05S-1997-MELANIE-XXS/05S-sum.txt
+1281  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/1997/shem/05S-1997-MELANIE-XXS/05S-sum-BT.txt
+
+1283  m-md3-csv-ALL-bd2.py -Y 1997
+1284  m-md3-csv-ALL-bd2.py -Y 1998
+1285  m-md3-csv-ALL-bd2.py -Y 1999
+1286  m-md3-csv-ALL-bd2.py -Y 2000
+1287  m-md3-csv-ALL-bd2.py -Y 2001
+1288  m-md3-csv-ALL-bd2.py -Y 2002
+1289  pd /data/w22/superBT-V04/src-v03/2002/shem
+
+1291  la 01S-2002-NONAME-XXS/
+1292  cd 01S-2002-NONAME-XXS/
+1293  cp 01S-sum.txt 01S-sum-BT.txt 
+
+1296  m-md3-stm-dir-sum-bd2.py 2002 -N | g 01S
+1297  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2002/shem/01S-2002-NONAME-XXS/01S-sum.txt
+1298  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2002/shem/01S-2002-NONAME-XXS/01S-sum-BT.txt
+
+1300  m-md3-csv-ALL-bd2.py -Y 2002
+1301  pd /data/w22/superBT-V04/src-v03/2002/shem/02S-2002-ALEX-XXS/
+
+1305  la 02S-2002-ALEX-XXS/
+1306  la 03S-2002-NONAME-XXS/
+1307  cd 03S-2002-NONAME-XXS/
+1308  cp 03S-sum.txt 03S-sum-BT.txt 
+
+1311  m-md3-stm-dir-sum-bd2.py 2002 -N | g 03S
+1312  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2002/shem/03S-2002-NONAME-XXS/03S-sum.txt
+1313  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2002/shem/03S-2002-NONAME-XXS/03S-sum-BT.txt 
+
+1315  m-md3-csv-ALL-bd2.py -Y 2002
+1316  m-md3-csv-ALL-bd2.py -Y 2003
+1317  pd /data/w22/superBT-V04/src-v03/2003/lant/
+
+1319  la 05L-2003-DANNY-XXL/
+1320  la 06L-2003-SIX-XXL/
+
+1322  cd 06L-2003-SIX-XXL/
+1323  cp 06L-sum.txt 06L-sum-BT.txt 
+
+1326  m-md3-stm-dir-sum-bd2.py 2002 -N | g 03S
+1327  m-md3-stm-dir-sum-bd2.py 2003 -N | g 06L
+1328  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2003/lant/06L-2003-SIX-XXL/06L-sum-BT.txt
+
+1330  m-md3-csv-ALL-bd2.py -Y 2003
+1331  m-md3-csv-ALL-bd2.py -Y 2004
+1332  m-md3-csv-ALL-bd2.py -Y 2005
+1333  pd /data/w22/superBT-V04/src-v03/2005/lant/
+
+1335  la 09L-2005-IRENE-XXL/
+1336  la 10L-2005-TEN-XXL/
+1337  cd 10L-2005-TEN-XXL/
+1338  cp 10L-sum.txt 10L-sum-BT.txt 
+
+1341  m-md3-stm-dir-sum-bd2.py 2005 -N | g 10L
+1342  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2005/lant/10L-2005-TEN-XXL/10L-sum-BT.txt
+1343  m-md3-csv-ALL-bd2.py -Y 2005
+1344  pd /data/w22/superBT-V04/src-v03/2005/lant/31L-2005-ZETA-XXL/
+
+1348  la A3L-2005-NONdev/
+
+1350  m-md3-stm-dir-sum-bd2.py 2005 -N | g 10L
+
+1352  m-md3-stm-dir-sum-bd2.py 2005 -N | g 31L
+1353  m-md3-stm-dir-sum-bd2.py 2005 -N | g lant
+1354  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2005/lant/31L-2005-ZETA-XXL/31L-sum-BT.txt
+1355  pd /data/w22/superBT-V04/src-v03/2005/lant/A3L-2005-NONdev/
+
+1359  m-md3-csv-ALL-bd2.py -Y 2005
+1360  p-md3-ls.py -S l.05 -s
+1361  p-md3-ls.py -S l.05 -s -b
+1362  p-md3-ls.py -S l.04 -s -b
+1363  p-md3-ls.py -S l.05 -s 
+1364  p-md3-ls.py -S l.05
+1365  pd /data/w22/superBT-V04/src-v03/2005/lant/A3L-2005-NONdev/
+
+1369  la [A-F]3L*
+1370  la -d [A-F]3L*
+1371  mkdir SAV
+1372  la -d [A-F]3L*
+1373  la [A-F]3L*
+1374  mv [A-F]3L* SAV/
+
+1376  mv SAV ../../.
+
+1378  cd ../../2006
+
+1380  la lant/
+
+1383  m-md3-csv-ALL-bd2.py -Y 2005
+1384  p-md3-ls.py -S l.05 -s
+1385  pd /data/w22/superBT-V04/src-v03/2005/lant/A3L-2005-NONdev/
+1386  pd /data/w22/superBT-V04/src-v03/2005/lant/
+1387  cd 15L-2005-NATE-D3L/
+
+1389  la 15L-sum-BT.txt
+1390  pg 15L-sum-BT.txt
+
+1392  mv 15L-2005-NATE-D3L 15L-2005-NATE-XXL
+
+1395  m-md3-csv-ALL-bd2.py -Y 2005
+
+1397  p-md3-ls.py -S l.05 -s
+
+1399  m-md3-stm-dir-sum-bd2.py 2005 -N | g 10L
+1400  m-md3-stm-dir-sum-bd2.py 2005 -N | g 15L
+1401  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2005/lant/15L-2005-NATE-XXL/15L-sum.txt
+1402  m-mdeck3-bd2.py -r /data/w22/superBT-V04/src-v03/2005/lant/15L-2005-NATE-XXL/15L-sum-BT.txt
+
+1404  m-md3-csv-ALL-bd2.py -Y 2005
+
+1406  p-md3-ls.py -S l.05 -s
+1407  m-md3-csv-ALL-bd2.py -Y 2006
+1408  p-md3-ls.py -S l.06 -s
+1409  md2a -S l.06 -s -b
+
+1412  h > cmds-20241008.txt

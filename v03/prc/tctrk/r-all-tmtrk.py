@@ -14,7 +14,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.argv=argv
         self.argopts={
-            #1:['dtgopt',    'dtgopt'],
+            1:['dtgopt',    'dtgopt'],
         }
 
 
@@ -22,17 +22,21 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
-            'dtgopt':           ['d:',None,'a','dtgopt'],
+            #'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
+            'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
+            'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
             'doTrackerOnly':    ['T',0,1,'do NOT run trackeronly'],
+            'doGenAlways'  :    ['G',0,1,'always run the genesis tracker'],
+            
         }
 
         self.purpose="""
 run s-sbt-tctrk.py by dtgs or stmopt"""
 
         self.examples='''
-%s -S l.07
-%s -d cur12-24'''
+%s 2007 -S l.07  # dtgopt ignored
+%s 197901.6'''
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
@@ -43,7 +47,11 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-m3=Mdeck3()
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+doBT=0
+if(doBdeck2): doBT=1
+
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 if(dtgopt != None): MF.sTimer('AAA-TCTRK-%s'%(dtgopt))
 if(stmopt != None): MF.sTimer('AAA-TCTRK-%s'%(stmopt))
@@ -52,7 +60,7 @@ if(dtgopt != None and stmopt == None):
     dtgs=mf.dtg_dtgopt_prc(dtgopt)
 elif(stmopt != None and dtgopt == None):
     syear=None
-    dtgs=m3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
+    dtgs=md3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
 else:
     print 'EEE--(%s) must set either dtgopt or stmopt alone...sayounara'%(CL.pyfile)
     sys.exit()
@@ -64,10 +72,15 @@ if(stmopt != None): MF.dTimer('AAA-TCTRK-%s'%(stmopt))
 #
 oopt=''
 if(override): oopt='-O'
+
 for dtg in dtgs:
     topt='-T'
-    if(dtg[8:10] == '00'): topt=''
-    cmd="s-sbt-tmtrkN.py %s %s %s"%(dtg,topt,oopt)
+    sopt=''
+    vopt=''
+    if(verb): vopt='-V'
+    #if(stmopt != None): sopt='-S %s'%(stmopt)
+    if(dtg[8:10] == '00' or doGenAlways): topt='' 
+    cmd="s-sbt-tmtrkN.py %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt)
     mf.runcmd(cmd,ropt)
     
 if(dtgopt != None): MF.dTimer('AAA-TCTRK-%s'%(dtgopt))

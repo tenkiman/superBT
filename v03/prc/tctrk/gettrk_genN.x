@@ -1,1 +1,1 @@
-../../../../src/tcgfdltrk/gettrk_genN.x
+/data/w22/src/tcgfdltrk/gettrk_genN.x

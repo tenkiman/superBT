@@ -1,1 +1,1 @@
-../../V04/py2/sBTcl.py
+/sbt/superBT-V04/py2/sBTcl.py

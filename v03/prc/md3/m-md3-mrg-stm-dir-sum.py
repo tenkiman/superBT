@@ -14,7 +14,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.argv=argv
         self.argopts={
-            1:['yearopt',    'yearopt YYYY or BYYYY.EYYYY'],
+            1:['yearOpt',    'yearOpt YYYY or BYYYY.EYYYY'],
         }
 
 
@@ -40,7 +40,7 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-tt=yearopt.split('.')
+tt=yearOpt.split('.')
 
 if(len(tt) == 2):
     byear=tt[0]
@@ -50,11 +50,11 @@ if(len(tt) == 2):
 
 elif(len(tt) == 1):
 
-    years=[yearopt]
-    oyearOpt=yearopt
+    years=[yearOpt]
+    oyearOpt=yearOpt
 
 else:
-    print 'EEE -- invalid yearopt: ',yearopt
+    print 'EEE -- invalid yearOpt: ',yearOpt
 
     
 MF.sTimer('AAA-MRG')
@@ -136,7 +136,7 @@ for year in years:
             vopt=''
             if(verb): vopt='-V'
 
-            cmd="m-mdeck3.py -r %s %s"%(mpathMRG,vopt)
+            cmd="m-mdeck3.py -r %s %s -Y %s"%(mpathMRG,vopt,year)
             #mf.runcmd(cmd,'quiet')
             mf.runcmd(cmd,ropt)
             

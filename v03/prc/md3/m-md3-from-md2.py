@@ -1,9 +1,8 @@
 #!/usr/bin/env pythonw
 
-from tcbase import *
-from sBT import Mdeck3,sbtSrcDir
+from tcbase import TcData
 
-undef=-999.
+from sBT import *
 
 class Trkdata(MFbase):
 
@@ -912,6 +911,7 @@ def parseDssTrk(dtg,dds,verb=0):
     if(poci != None and poci != undef and poci != 0):
         opoci="%4.0f"%(poci)
         
+    ovmax='   '
     if(vmax != None and vmax != undef):
         ovmax="%3.0f"%(vmax)
  
@@ -1251,6 +1251,7 @@ class MdeckCmdLine(CmdLine):
 
         self.options={
             'dtgopt':         ['d:',None,'a','year'],
+            'yearOpt':        ['Y:',None,'a','year'],
             'override':       ['O',0,1,'override'],
             'verb':           ['V',0,1,'verb=1 is verbose'],
             'ropt':           ['N','','norun',' norun is norun'],
@@ -1261,6 +1262,7 @@ class MdeckCmdLine(CmdLine):
             'oPath':          ['o:',None,'a','write output to oPath'],
             'sumPath':        ['r:',None,'a','read path to generate summary card'],
             'doTrk':          ['T',0,1,'make the md3 trk from the -sum.txt files'],
+            'doBdeck2':       ['2',0,1,'use bdeck2 vice bdeck'],
             }
 
         self.purpose='''
@@ -1382,21 +1384,22 @@ if(dtgopt != None):
 # -- storms
 #
 if(stmopt != None):
+
+    (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt=None,yearOpt=yearOpt)
     
-    md3=Mdeck3(doBT=0,doSumOnly=1)
+    md3=Mdeck3(oyearOpt=oyearOpt,doBT=0,doMd3Only=1)
+    #md3=Mdeck3(doBT=0,doSumOnly=1)
     
-    tcD=TcData(stmopt=stmopt,doWorkingBT=doWorkingBT,verb=verb)
+    tcD=TcData(stmopt=stmopt,doWorkingBT=doWorkingBT,doBdeck2=doBdeck2,verb=verb)
     stmids=tcD.makeStmListMdeck(stmopt,dobt=dobt,cnvSubbasin=0,verb=verb)
     
     for stmid in stmids:
           
         dobt=0      
-        print 'stmid: ',stmid
         (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
         
         dds=tcD.getDSsFullStm(stmid, dobt=dobt, doprint=0, set9xfirst=0, dowarn=0)
-        scard=tcD.lsDSsStmSummary(dds,stmid,doprint=0)
-        
+        scard=tcD.lsDSsStmSummary(dds,stmid,convert9x=0,doprint=0)
         # -- bypass active storms
         #
         ss=scard.split()
@@ -1407,6 +1410,8 @@ if(stmopt != None):
         
         #dds.ls()
         sname=dds.sname
+        # -- replace ' ' with '_'
+        sname=sname.replace(' ','_')
         
         try:
             stmid9x=dds.stmid9x.upper()
@@ -1423,17 +1428,32 @@ if(stmopt != None):
         except:
             stm1id=None
             
+        # -- get stmid from summary card
+        #
         
-        if(IsNN(stmid)):
-            tname=stmid.replace('.','-').upper()
-            tname="%s-%s-%s"%(tname,sname.upper(),stmid9x[0:3].upper())
-        elif(stmidNN != None):
-            tname=stmid9x.replace('.','-').upper()
-            tname="%s-DEV-%s"%(tname,stmidNN[0:3].upper())
-        elif(stm1id != None):
-            tname=stm1id.replace('.','-').upper()
-            tname="%s-NONdev"%(tname)
+        stmid9x0=stmidNN0=None
+        if(mf.find(scard,'9X:')):
+            ss=scard.split()
+            year=stmid.split('.')[-1]
+            stmid9x0="%s.%s"%(ss[-3],year)
+        
+        if(mf.find(scard,'NN:')):
+            ss=scard.split()
+            year=stmid.split('.')[-1]
+            bnum=ss[-1][0:2]
+            b1id0=stmid[2]
+            stmidNN0="%s%s.%s"%(bnum,b1id0,year)
 
+        
+        if(IsNN(stmid) and stmid9x0 != None):
+            tname=stmid.replace('.','-').upper()
+            tname="%s-%s-%s"%(tname,sname.upper(),stmid9x0[0:3].upper())
+        elif(Is9X(stmid) and stmidNN == None):
+            tname=stmid.replace('.','-').upper()
+            tname="%s-NONdev"%(tname)
+        elif(Is9X(stmid) and stmid9x0 == None):
+            tname=stmid.replace('.','-').upper()
+            tname="%s-DEV-%s"%(tname,stmidNN0[0:3].upper())
 
         basin=md3.getBasin4b1id(b1id)
         tdir="%s/%s/%s"%(sbtSrcDir,year,basin)
@@ -1452,8 +1472,13 @@ if(stmopt != None):
             if(tdir != tdirNew):
                 print 'WWW-existing-tdir != current...'
                 print 'WWW-tdirNew:   ',tdirNew
-                print 'WWW-tdir(old): ',tdir,' rm -r'
-                cmd="rm -r -i %s"%(tdir)
+                if(doBdeck2):
+                    print 'WWW-tdir(old): ',tdir,' rm -r'
+                    cmd="rm -r %s"%(tdir)
+                else:
+                    print 'WWW-tdir(old): ',tdir,' rm -r -i'
+                    cmd="rm -r -i %s"%(tdir)
+                    
                 mf.runcmd(cmd,ropt)
                 tdir=tdirNew
             else:
@@ -1482,7 +1507,7 @@ if(stmopt != None):
         # -- write to oPath != None
         #
         if(oPath != None):
-            MF.WriteList2Path(ocards,oPath,verb=1)
+            MF.WriteList2Path(ocards,oPath,verb=verb)
         
         if(IsNN(stmid)): 
             dobt=1
@@ -1499,7 +1524,7 @@ if(stmopt != None):
                 ocards.append(ocard)
         
             if(oPathBT != None):
-                MF.WriteList2Path(ocards,oPathBT,verb=1)
+                MF.WriteList2Path(ocards,oPathBT,verb=verb)
                 
 
 

@@ -50,6 +50,7 @@ class MyCmdLine(CmdLine):
             'quiet':            ['q',1,0,' turn OFF running GA in quiet mode'],
             'ropt':             ['N','','norun',' norun is norun'],
             'doTcFlds':         ['F',0,1,'''doTcFlds -- make f77 input files for lsdiags.x only'''],
+            'doTcFc':           ['f',0,1,'''increase taus for forecasting purposes...'''],
             'runInCron':        ['C',0,1,'''being run in crontab'''],
             'doCycle':          ['c',0,1,'cycle by dtgs'],
             'dowindow':         ['w',0,1,'1 - dowindow in GA.setGA()'],
@@ -84,7 +85,8 @@ class MyCmdLine(CmdLine):
             'dobt':             ['b:',0,'i','use BT or working BT 2'],
             'nminWait':         ['W:',30,'i','set number of minutes to wait on other runs'],
             'doEra5sst':        ['5',0,1,'use ERA5 00z daily SST'],
-            'doEcm5sst':        ['6',1,0,'make use ECM5 3-d ave SST the default -- oisst broken 20221201'],
+            'doEra5sst':        ['5',0,1,'use ERA5 00z daily SST'],
+            'doLats4d':         ['4',0,1,'convert .dat to .grb'],
             'useFldOutput':     ['U',0,1,'use fldoutput for plotting -- set to 1 for ERA5'],
             'doRoci':           ['p',1,0,'do NOT do roci/poci'],
             
@@ -130,11 +132,17 @@ if(verb):
     print CL.opts
 
 prcdir=sbtPrcDirTcdiag
-MF.ChangeDir(prcdir,verb=1)
+MF.ChangeDir(prcdir,verb=verb)
 prcdirIships=prcdir
 
 (dtgs,modelsDiag)=getDtgsModels(CL,dtgopt,modelopt)
-md3=Mdeck3()
+# -- get md3
+#
+yearOpt=None
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+doBT=0
+if(doBdeck2): doBT=1
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 cTest=(len(dtgs) == 1 and len(modelsDiag[dtgs[0]]) == 1)
 
@@ -172,7 +180,7 @@ if(not(doCycle) and not(bypassRunChk)):
         sys.exit()
 
 
-xgrads=setXgrads()
+xgrads=setXgrads(useStandard=1)
 
 
 # -- do inventory if cur in dtgopt
@@ -189,19 +197,34 @@ gaP=GaProc(Quiet=quiet,Bin=xgrads)
 useLsdiagDat=0
 if(redoLsdiag): useLsdiagDat=1
 
+
+
 # -- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm dtg loop
 #
 
 didIt=0
+nStmAll=0
+
+MF.sTimer(tag='AAA-SBT-LSDIAG-%s'%(dtgopt))
 
 for dtg in dtgs:
 
-    MF.sTimer(tag='SBT-LSDIAG-%s'%(dtg))
     # -- 20230314 -- will miss storms with missing dtgs...
     #    see inv/dtgmiss/m-B-2007-22.txt 
     #    need to add interpolated dtgs into 'all-md3-2007-2022-MRG.csv'
     #
-    dstmids=md3.getMd3Stmids4dtg(dtg)
+    dstmids=md3.getMd3Stmids4dtg(dtg,convertXstm=1)
+    
+    # -- get number of stmids ... if 0 then go to next dtg
+    #
+    nStm=len(dstmids)
+    nStmAll=nStmAll+nStm
+
+    MF.sTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
+    
+    if(nStm == 0):        
+        MF.dTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
+        continue
     
     # -- only track in stmopt
     #
@@ -257,17 +280,20 @@ for dtg in dtgs:
         doRealTime=0
         trkSource='tmtrkN'
         trkSource='tmtrkN-sbt'
-        docleanDpaths=1
+        #docleanDpaths=1
         doSfc=1
-        doTrkPlot=0
+        doTrkPlot=1
         itaus=[0,6,12,18,24]
+        if(doTcFc):
+            itaus=[0,6,12,18,24,36,48,60,72]
         useFldOutput=1
         atcfname='tera5'
         
+    
     for model in models:
 
         iyear=int(dtg[0:4])
-        if(model == 'era5' and iyear <= 2023):
+        if(model == 'era5' and iyear <= endEra5Year):
             doEra5sst=1
 
         print 'DDDDDDDDDDDDD doing dtg: ',dtg,' model: %-10s'%(model),' trkSource: ',trkSource,'dstmids: ',dstmids
@@ -293,7 +319,6 @@ for dtg in dtgs:
                 print 'WWW(fd.dslatestCompleteTau): ',fd.dslatestCompleteTau,' is < minTau: ',minTau,' model: ',model,' continue...'
                 #continue
 
-            
         dobail=0
         if(ropt == 'norun'): dobail=0
         MF.sTimer('tcdiag')
@@ -323,19 +348,16 @@ for dtg in dtgs:
                   doga=0,verb=verb)
 
 
-        # -- 20230607 -- clean all files if override -- to overcome problem
-        # of redos with storms in all hemis
-
+        # -- 20230607 -- clean all files if override -- to overcome problem of redos with storms in all hemis
+        #
         if(override):
             tG.cleanLsdiagAll()
-
+            
 
         if(tG.ctlStatus == 0):
             print 'WWW--w2.tc.lsdiag--tG.ctlStatus=0 '
             sys.exit()
         
-        #tG.ls()
-        #sys.exit()
         # -- check if done
         #
         chkOquiet=0
@@ -348,11 +370,8 @@ for dtg in dtgs:
 
         if(rc == -2):
             print 'WWW(chKOutput) 22222 rc: ',rc,'need to do the following: ',todoStmids
-        elif( (rc == 0) and not(override) and not(SSToverride) and 
-              not(redoLsdiag) and TDoverride == None and not(dols) and not(dolsDiag)
-              ):
-            print 'WWW(chKOutput) 00000 rc: ',rc,' override: ',override,' SSToverride: ',SSToverride,\
-                  'TDoveride: ',TDoverride,'redoLsdiag: ',redoLsdiag,'dols: ',\
+        elif( (rc == 0) and not(override) and not(SSToverride) and not(redoLsdiag) and TDoverride == None and not(dols) ):
+            print 'WWW(chKOutput) 00000 rc: ',rc,' override: ',override,' SSToverride: ',SSToverride,'TDoveride: ',TDoverride,'redoLsdiag: ',redoLsdiag,'dols: ',\
                   dols,'docleanPaths: ',docleanDpaths,' continue...'
             continue        
         
@@ -367,13 +386,6 @@ for dtg in dtgs:
 
         if(ropt == 'norun'):  continue
 
-
-        if(dolsDiag):
-            tG.ls()
-            
-            sys.exit()
-            
-            
         # -- check if a data tau 0
         #
         if(not(0 in tG.targetTaus)):
@@ -452,10 +464,7 @@ for dtg in dtgs:
             #
             mfT.reinitGA(gaP)
             MF.dTimer('fldinput:%s:%s'%(dtg,model))
-            
-
-
-
+           
         # -- setup .ga using field output file
         #
         if(doplot):
@@ -536,9 +545,18 @@ for dtg in dtgs:
                 if(redoLsdiag or override): overridePlot=1
                 
                 MF.sTimer('plots')
+                plat1=plat2=plon1=plon2=None
+                print 'sssss',stmid.lower()
+                if(stmid.lower() == '13l.1975'):
+                    plat1=5.0
+                    plat2=45.0
+                    plon1=255.0
+                    plon2=320.0
+
                 for tau in tG.taus:
                     
-                    rc=tG.setLatLonTimeByTau(dtg,model,stmid,tau)
+                    rc=tG.setLatLonTimeByTau(dtg,model,stmid,tau,
+                                             lat1=plat1,lat2=plat2,lon1=plon1,lon2=plon2)
                     if(rc < 0):
                         print 'ETETET -- too far poleward, bail...stop doing PLOTS'
                         continue
@@ -570,7 +588,7 @@ for dtg in dtgs:
                 MF.sTimer('tGtrk:%s:%s:%s'%(dtg,model,stmid))
                 TRKplotoverride=0
                 if(redoLsdiag or doplot): TRKplotoverride=1
-                tGtrk=TcTrkPlot(tG,stmid,zoomfact,doveribt=0,override=TRKplotoverride,verb=verb,Bin=xgrads)
+                tGtrk=TcTrkPlot(tG,md3,stmid,zoomfact,doveribt=0,override=TRKplotoverride,verb=verb,Bin=xgrads)
                 MF.dTimer('tGtrk:%s:%s:%s'%(dtg,model,stmid))
 
             # -- do html if NOT ERA5
@@ -619,24 +637,24 @@ for dtg in dtgs:
 
         # -- clean dpaths
         #
-        if(docleanDpaths):
+        if(docleanDpaths and not(doLats4d)):
             MF.sTimer('tcfldscleandpaths:%s:%s'%(dtg,model))
             mfT.cleanDpaths(ropt=ropt)
             MF.dTimer('tcfldscleandpaths:%s:%s'%(dtg,model))
 
-            
+        # -- run lats4d always run even if cleaning off main paths to always save the sfc-era5*grb
+        #
+        cmd='p-era5-lats4d.py %s'%(dtg)
+        mf.runcmd(cmd,ropt)
 
-    # -- run lats4d -- 20230314  -- disable during catchup
-    #
-    #roptLats='norun'
-    #cmd='p-lats4d.py %s'%(dtg)
-    #mf.runcmd(cmd,roptLats)
-
-    MF.dTimer(tag='SBT-LSDIAG-%s'%(dtg))
+    MF.dTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
             
+MF.dTimer(tag='AAA-SBT-LSDIAG-%s'%(dtgopt))
+
+
 # -- rsync over from web-config/tcdiag/YYYY to $W2_HFIP...
 #
-if(ropt != 'norun' and model != 'era5'):
+if(nStmAll > 0 and ropt != 'norun' and model != 'era5'):
     rc=rsync2data()
 
 # -- do inventory for tcdiag.php

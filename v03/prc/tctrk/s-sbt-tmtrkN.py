@@ -46,6 +46,7 @@ class TmtrkCmdLine(CmdLine):
             'stmopt':           ['S:',None,'a','stmopt'],
             'doTrackerOnly':    ['T',0,1,'run trackeronly'],
             'doClean':          ['C',1,0,'1 do NOT clean'],            
+            'doBail':           ['B',0,1,'1 bail if no era5 fields'],            
             'doInv':            ['i',0,1,'do Inventory'],            
             'doCpTctrk':        ['P',0,1,'make the tctrk.atcf|sink.dtg.txt from adeck_stm -> adeck_dtg'],            
         }
@@ -72,13 +73,18 @@ exec(CL.estr)
 if(verb): print CL.estr
 
 prcdir=sbtPrcDirTctrk
-MF.ChangeDir(prcdir,verb=1)
+MF.ChangeDir(prcdir,verb=verb)
 
 if(not(doInv)):
     MF.ChkDir(tmtrkbdir,'mk')
     MF.ChkDir(abdirStm,'mk')
     MF.ChkDir(abdirDtg,'mk')
 
+if(verb):
+    print 'pppDDD',prcdir
+    print 'tttBBB',tmtrkbdir
+    print 'aaaSSS',abdirStm
+    print 'aaaDDD',abdirDtg
     
 ptable=None
 
@@ -101,25 +107,34 @@ maxtau=168
 
 # -- get md3
 #
-md3=Mdeck3()
+yearOpt=None
+doBT=0
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+if(doBdeck2): doBT=1
+
+# -- doBT set in md3.getCvsYearPaths vice at initiation
+#
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 for dtg in dtgs:
 
     ayear=dtg[0:4]
     
-    (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,doSfc=0)
+    (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,verb=verb,doSfc=0,doBail=doBail)
     
     # -- model dtg whe tauOffset=6
     #
-    mdtg=mf.dtginc(dtg,-tauOffset)
+    if(tauOffset != None):
+        mdtg=mf.dtginc(dtg,-tauOffset)
+    else:
+        mdtg=dtg
+
     rc=getEra5Grb(era5bdir,mdtg,model='era5')
     (ctlpath2,sizgrb,ctlpath2a,sizgrb2a)=rc
-    #print 'qqqq',sizgrb,ctlpath2
     
     if(sizgrb <= 0):
-        print 'WWW-unable to find data in: ',ctlpath
+        if(not(doInv)): print 'WWW-unable to find data in: ',ctlpath
         continue
-
 
     MF.sTimer("all-%s"%(dtg))
 
@@ -139,6 +154,7 @@ for dtg in dtgs:
                    ctlpath,
                    taus,
                    md3=md3,
+                   prcdir=prcdir,
                    tcD=None,
                    tdirAdeck=tdirAdeck,
                    tbdirAdeckStm=abdirStm,
@@ -151,10 +167,12 @@ for dtg in dtgs:
                    override=override,
                    verb=verb,
                    doInv=doInv,
+                   doBdeck2=doBdeck2,
                    )
     if(verb): MF.dTimer('tmtrkN-base-%s-%s'%(model,dtg))
     
     if(doInv):
+        
         MF.sTimer('tmtrkN-inv-%s-%s'%(model,dtg))
         TT.getStatPaths(dolsonly=1)
         TT.doLS()
@@ -166,7 +184,6 @@ for dtg in dtgs:
             TT.doCP()
             MF.dTimer('tmtrkN-inv-%s-%s'%(model,dtg))
     else:
-        
         TT.getStatPaths()
         MF.sTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
         TT.doTrk(ropt=ropt)

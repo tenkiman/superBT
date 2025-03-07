@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from sbt import *
+from sBT import *
 
 
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -15,7 +15,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.argv=argv
         self.argopts={
-            1:['yearopt', 'bYYYY.eYYYY'],
+            1:['yearOpt', 'bYYYY.eYYYY'],
         }
 
 
@@ -24,6 +24,7 @@ class TmtrkCmdLine(CmdLine):
             'basinOpt':         ['B:',None,'a','basin opt'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'doTrk':            ['T',1,0,'do NOT make the track files'],
+            'doBdeck2':         ['2',0,1,'run m-md3-from-md2.py ONLY'],
             'ropt':             ['N','','norun',' norun is norun'],
         }
 
@@ -42,7 +43,7 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-tt=yearopt.split('.')
+tt=yearOpt.split('.')
 
 if(len(tt) == 2):
     byear=tt[0]
@@ -51,10 +52,10 @@ if(len(tt) == 2):
     
 elif(len(tt) == 1):
     
-    years=[yearopt]
+    years=[yearOpt]
     
 else:
-    print 'EEE -- invalid yearopt: ',yearopt
+    print 'EEE -- invalid yearOpt: ',yearOpt
 
 
 # -- work in the current version
@@ -71,10 +72,14 @@ MF.sTimer('sum-md3-ALL')
 for year in years:
     tdir="%s/%s"%(sbtSrcDir,year)
     MF.ChkDir(tdir,'mk')
+    
     for basin in basins:
 
         btdir="%s/%s"%(tdir,basin)
-        MF.ChkDir(btdir,'mk')
+        if(doBdeck2 or override):
+            cmd='rm -r %s'%(btdir)
+            mf.runcmd(cmd,ropt)
+            MF.ChkDir(btdir,'mk')
 
         bopt="%s.%s"%(basin[0],year)
         if(basin == 'epac'):
@@ -82,6 +87,11 @@ for year in years:
             
         if(basin == 'shem'):
             bopt='h.%s'%(year)
+            
+        # -- frist make the sum-??.txt files
+        #
+        cmd='m-md3-from-md2.py -S %s -Y %s'%(bopt,year)
+        mf.runcmd(cmd,ropt)
             
         smask="%s/%s/*"%(tdir,basin)
         
@@ -119,9 +129,10 @@ for year in years:
             if(verb): vopt='-V'
             topt=''
             if(doTrk): topt='-T'
+            if(doBdeck2): topt="%s -2"%(topt)
             #print 'mmm',mpath,mpathBT,mpathMRG
             if(mpath != None):
-                cmd="m-mdeck3.py -r %s %s %s"%(mpath,vopt,topt)
+                cmd="m-mdeck3.py -r %s %s %s -Y %s"%(mpath,vopt,topt,year)
                 #mf.runcmd(cmd,'quiet')
                 mf.runcmd(cmd,ropt)
             

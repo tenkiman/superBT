@@ -1,0 +1,250 @@
+505  c.sb.p
+
+1) m-md3-from-md2-update-bd2-only.py -S to generate the XXX-sum-BT.txt
+   using bd2 this also runs m-md3-qc-ALL.py -S i.2023 -2 that does qc
+   and generates the final -MRG.txt files
+
+2) m-md3-qc-ALL.py to update AFTER running #1... run outside to not
+   rewrite the -sum-BT.txt cards that are edited using meld and then
+   regerates the MRG
+
+3) m-md3-csv-ALL.py -Y 2023 do NOT use m-md3-csv-ALL-bd2.py
+   designed to make separate .csv
+
+4) md3a -S all.23 -s -b | g gendi | g -v ' -6' > gendiff-2023.txt
+
+5) c-9xtime-time2gen.py 2023 -2 -O ... hacked to use gendiff*.txt and
+   do by basins, this also generates -MRG.txt
+
+
+
+
+
+506  m-md3-from-md2-update-bd2-only.py 
+507  m-md3-from-md2-update-bd2-only.py -S 09w.23 -N
+508  m-md3-from-md2-update-bd2-only.py -S 09w.23
+509  h
+510  la *bd2*py
+511  la doc
+512  la ../doc/
+513  la cmds-*
+514  la cmds-20241008.txt 
+515  pg cmds-20241008.txt 
+516  m-md3-stm-dir-sum-bd2.py 2023 -N
+517  m-md3-stm-dir-sum-bd2.py 2023 -N | l
+518  m-md3-from-md2-bd2.py
+519  m-md3-from-md2-bd2.py -S w.23 -N
+520  m-md3-from-md2-update-bd2-only.py 
+521  m-md3-from-md2-update-bd2-only.py -S w.23
+522  m-md3-from-md2-update-bd2-only.py -S 18w.23 -N
+523  m-md3-qc-ALL.py -S 18W.2023 -2
+524  m-md3-qc-ALL.py -S W.2023 -2
+525  m-md3-qc-ALL.py -S 17W.2023 -2
+526  m-md3-qc-ALL.py -S w.2023 -2
+527  m-md3-qc-ALL.py -S 17w.2023 -2
+528  m-md3-from-md2-update-bd2-only.py -S i.23
+529  m-md3-from-md2-update-bd2-only.py -S e.23
+530  m-md3-qc-ALL.py -S 20e.2023 -2
+531  m-md3-from-md2-update-bd2-only.py -S l.23
+532  m-md3-from-md2-update-bd2-only.py -S c.23
+533  m-md3-from-md2-update-bd2-only.py -S h.23
+534  h
+535  m-md3-qc-ALL.py -S h.2023 -2
+536  m-md3-qc-ALL.py -S w.2023 -2
+537  m-md3-qc-ALL.py -S e.2023 -2
+538  m-md3-qc-ALL.py -S i.2023 -2
+539  m-md3-from-md2-update-bd2-only.py -S 04b.23
+540  m-md3-qc-ALL.py -S i.2023 -2
+541  m-md3-from-md2-update-bd2-only.py -S 05a.23
+542  md2a -S i.23 -s -b
+543* 
+544  md2a -S i.23 -s -b
+545  m-md3-from-md2-update-bd2-only.py -S 07b.23
+546  m-md3-from-md2-update-bd2-only.py -S 08b.23
+547  m-md3-qc-ALL.py -S i.2023 -2
+548  m-md3-qc-ALL.py -S h.2023 -2
+549  m-md3-qc-ALL.py -S 08h.2023 -2
+550  n
+551  m-md3-qc-ALL.py -S 08h.2023 -2
+552  h
+553  m-md3-from-md2-update-bd2-only.py -S 08b.23
+554  h
+555  m-md3-from-md2-update-bd2-only.py -S 08h.23
+556  m-md3-qc-ALL.py -S 08h.2023 -2
+557  n
+558  m-md3-qc-ALL.py -S 08h.2023 -2
+559  m-md3-from-md2-update-bd2-only.py -S 08h.23
+560  y
+561  pd /sbt/superBT-V04/src-v03/2023/shem/08S-2023-CHENESO-B6S
+562  la
+563  po
+564  m-md3-from-md2-update-bd2-only.py -S 08h.23
+565  m-md3-qc-ALL.py -S 08h.2023 -2
+566  m-md3-qc-ALL.py -S h.2023 -2
+567  m-md3-qc-ALL.py -S l.2023 -2
+568  h
+569  pd /sbt/superBT-V04/src-v03/2023/shem/08S-2023-CHENESO-B6S
+570  la
+571  lt
+572  lt *txt
+573  cd ../09P-2023-IRENE-C1S/
+574  la
+575  la 09P-2023-sum-md3-BT.txt 
+576  pg 09P-2023-sum-md3-BT.txt 
+577  md2a -S 09p.23 -s
+578  md2a -S 09p.23 -s -2
+579  h
+580  po
+581  m-md3-csv-ALL-bd2.py 
+582  m-md3-csv-ALL-bd2.py  -Y 2023
+583  md3a -S w.23 -s -b
+584  lt *py | head
+585  c-9xtime-time2gen.py 
+586  md3a -S w.23 -s -b
+587  md3a -S w.23 -s -b > gendiff-wpac-2023.txt 
+588  c-9xtime-time2gen.py 
+589  c-9xtime-time2gen.py -Y 2023
+590  c-9xtime-time2gen.py -Y 2023 -B w
+591  la gendiff-lant-2023.txt 
+592  pg gendiff-lant-2023.txt 
+593  g gendiff *txt
+594* la *txtp
+595  g gendiff cmd*txt
+596  g inv *txt
+597  g gendiff *txt
+598  g gendiff *txt | l
+599  md3a -S w.23 -s | g gendiff
+600  md3a -S l.23 -s | g gendiff
+601  md3a -S e.23 -s | g gendiff
+602  md3a -S all.23 -s | g gendiff
+603  md3a -S all.23 -s | g gendiff | g -v ' -6'
+604  md3a -S all.23 -s | g gendiff | g -v ' -6' > gendiff-2023.txt
+605  h
+606  pd /sbt/superBT-V04/src-v03/2023/shem/08S-2023-CHENESO-B6S
+607  po
+608  c-9xtime-time2gen.py -Y 2023
+609  c-9xtime-time2gen.py 2023
+610  c-9xtime-time2gen.py 2023 -2
+611  c-9xtime-time2gen.py 2023 -2 -B w
+612  c
+613  c-9xtime-time2gen.py 2023 -2 -B w
+614  pg gendiff-2023.txt 
+615  c
+616  c-9xtime-time2gen.py 2023 -2 -B w
+617  md3a -S 02w.23
+618  pg gendiff-2023.txt 
+619  h
+620  c-9xtime-time2gen.py 2023 -2 -B w
+621  md2a -S 02w.23
+622  md2a -S 02w.23 -2
+623  c-9xtime-time2gen.py 2023 -2 -B w
+624  c-9xtime-time2gen.py 2023 -2 -B w -O
+625  vi gendiff-2023.txt 
+626  h
+627  c-9xtime-time2gen.py 2023 -2 -B w
+628* 
+629  f
+630  c-9xtime-time2gen.py 2023 -2 -B w -O
+631  vi gendiff-2023.txt 
+632  c-9xtime-time2gen.py 2023 -2 -B w -O
+633  vi gendiff-2023.txt 
+634  c-9xtime-time2gen.py 2023 -2 
+635  c-9xtime-time2gen.py 2023 -2 -O
+636  pg gendiff-2023.txt 
+637  j
+638  kill %1
+639  la /sbt/superBT-V04/src-v03/2023/io/A1B-2023-DEV-01B/A1B-sum.txt /sbt/superBT-V04/src-v03/2023/io/01B-2023-MOCHA-A1B/01B-sum.txt /sbt/superBT-V04/src-v03/2023/io/01B-2023-MOCHA-A1B/01B-sum-BT2.txt
+640  la /sbt/superBT-V04/src-v03/2023/io/A1B-2023-DEV-01B/*
+641  lt /sbt/superBT-V04/src-v03/2023/io/A1B-2023-DEV-01B/*
+642  lt /sbt/superBT-V04/src-v03/2023/io/01B-2023-MOCHA-A1B/
+643  lt /sbt/superBT-V04/src-v03/2023/io/01B-2023-MOCHA-A1B/01B-2023-sum-md3-MRG.txt 
+644  pg /sbt/superBT-V04/src-v03/2023/io/01B-2023-MOCHA-A1B/01B-2023-sum-md3-MRG.txt 
+645  h
+646  h | g cvs
+647  h | g all
+648  m-md3-csv-ALL-bd2.py  -Y 2023
+649  la 
+650  md3a -S w.23 -s
+651  md3a -S w.23 -s -b
+652  h
+653  pd /sbt/superBT-V04/src-v03/2023/io/A1B-2023-DEV-01B/
+654  la
+655  lt
+656  diff  A1B-2023-md3-MRG-MRG.txt A1B-2023-md3-MRG.txt
+657  po
+658  la
+659  h
+660  m-md3-csv-ALL.py -Y 2023
+661  md3a -S w.23 -s -b
+662  md3a -S w.23 -s -b | g gendiff
+663  md3a -S all.23 -s -b | g gendiff
+664  md3a -S all.23 -s -b | g gendiff | g -v '  -6'
+665  vi gendiff-2023.txt 
+666  h
+667  c-9xtime-time2gen.py 2023 -2 -O
+668  kill %1
+669  h
+670  m-md3-csv-ALL.py -Y 2023
+671  h
+672  md3a -S all.23 -s -b | g gendiff | g -v '  -6'
+673  md3a -S all.23 -s -b | g gendiff 
+674  md3a -S all.23 -s -b | g gendiff | l
+675  md3a -S all.23 -s -b
+676  md3a -S all.23 -s -b -D
+677  md3a -S all.23 -s -b 
+678  md3a -S all.23 -s -b |g gendiff
+679  cp gendiff-2023.txt gendiff-2023-last.txt
+680  vi gendiff-2023-last.txt 
+681  h
+682* 
+683  vi gendiff-2023-last.txt
+684  h
+685  c-9xtime-time2gen.py 2023 -2 -O
+686  h
+687  m-md3-csv-ALL.py -Y 2023
+688  md3a -S l.23 -s -b
+689  md3a -S l.23 -s -b | g gendi
+690  md3a -S all.23 -s -b | g gendi | g -v '   -6'
+691  md3a -S all.23 -s -b | g gendi | g -v ' -6'
+692  c-9xtime-time2gen.py 2023 -2 -O
+693  la /sbt/superBT-V04/src-v03/2023/lant/A3L-2023-DEV-04L/A3L-2023-sum-md3-MRG.txt
+694  pg /sbt/superBT-V04/src-v03/2023/lant/A3L-2023-DEV-04L/A3L-2023-sum-md3-MRG.txt
+695  pg /sbt/superBT-V04/src-v03/2023/lant/04L-2023-CINDY-A3L/04L-2023-sum-md3-MRG.txt 
+696  md3a -S all.23 -s -b | g gendi | g -v ' -6'
+697  pg gendiff-2023.txt 
+698  md3a -S all.23 -s -b | g gendi | g -v ' -6'
+699  h
+700  h | g qc
+701  m-md3-qc-ALL.py -S 04l.2023 -2
+702  la /sbt/superBT-V04/src-v03/2023/lant/04L-2023-CINDY-A3L/
+703  la /sbt/superBT-V04/src-v03/2023/lant/04L-2023-CINDY-A3L/04L-2023-sum-md3-MRG.txt
+704  pg /sbt/superBT-V04/src-v03/2023/lant/04L-2023-CINDY-A3L/04L-2023-sum-md3-MRG.txt
+705  md3a -S 04l.23
+706  m-md3-qc-ALL.py -S a3l.2023 -2
+707  m-md3-qc-ALL.py -S a3l.2023 
+708* 
+709  pg /sbt/superBT-V04/src-v03/2023/lant/A3L-2023-DEV-04L/A3L-2023-sum-md3-MRG.txt
+710  la /sbt/superBT-V04/src-v03/2023/lant/A3L-2023-DEV-04L/A3L-2023-sum-md3-MRG.txt
+711  h
+712  pg /sbt/superBT-V04/src-v03/2023/lant/04L-2023-CINDY-A3L/04L-2023-sum-md3-MRG.txt
+713  pd /sbt/superBT-V04/src-v03/2023/lant/A3L-2023-DEV-04L/
+714  la
+715  vi A3L-sum.txt
+716  cd
+717  po
+718  h
+719  la /sbt/superBT-V04/src-v03/2023/lant/04L-2023-CINDY-A3L/
+720  m-md3-qc-ALL.py -S 04l.2023 -2
+721  h
+722  m-md3-csv-ALL.py -Y 2023
+723  md3a -S l.23 -s -b
+724  md3a -S l.23 -s -b | g gendiff
+725  md3a -S l.23 -s -b | g gendiff | g -v '  -6'
+726  h
+727  c-9xtime-time2gen.py 2023 -2 -O
+728  h
+729  m-md3-csv-ALL.py -Y 2023
+730  h
+731  md3a -S l.23 -s -b | g gendiff | g -v '  -6'
+732  md3a -S all.23 -s -b | g gendiff | g -v '  -6'
+733  h > cmds-20250307-bd2-2023.txt

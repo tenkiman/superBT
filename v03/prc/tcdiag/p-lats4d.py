@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from WxMAP2 import *
-w2=W2()
+from sBTtcdiag import * 
+#from WxMAP2 import *
+#w2=W2()
 
 def makeGribCtl(dtg,region,grb,gmp,verb=0):
 
@@ -75,53 +76,6 @@ ENDVARS"""%(grb,gmp,xydims,nt,gtime)
     return (ctl2)
     
 
-    ctl="""^%s
-defined parameter table (center 100-2 table 128), using NCEP-opn
-dset ^grads.lats.grb
-index ^grads.lats.grb.idx
-undef 9.999E+20
-title grads.lats.grb
-*  produced by grib2ctl v0.9.12.5p16
-
-defined parameter table (center 100-2 table 128), using NCEP-opn
-dtype grib 255
-ydef 361 linear -10.000000 0.25
-xdef 1440 linear 0.000000 0.250000
-tdef 5 linear 00Z10oct2021 6hr
-zdef 9 levels
-1000 925 850 700 500 400 300 250 200
-vars 28
-uas       0  1,1,0  ** uas [m/2]    
-vas       0  2,1,0  ** vas [m/2]
-psl       0  3,1,0  ** Pressure tendency [Pa/s]
-pr        0  4,1,0  ** Pot. vorticity [km^2/kg/s]
-prw       0  5,1,0  ** ICAO Standard Atmosphere Reference Height [M]
-vrt925    0  6,1,0  ** Geopotential [m^2/s^2]
-vrt850    0  7,1,0  ** Geopotential height [gpm]
-vrt700    0  8,1,0  ** Geometric height [m]
-zthklo    0  9,1,0  ** Std dev of height [m]
-zthkup    0 10,1,0  ** Total ozone [Dobson]
-z900      0 11,1,0  ** zg 900 [m]
-z850      0 12,1,0  ** zg 900 [m]
-z800      0 13,1,0  ** z
-z750      0 14,1,0  ** Pseudo-adiabatic pot. temp. [K]
-z700      0 15,1,0  ** Max. temp. [K]
-z650      0 16,1,0  ** Min. temp. [K]
-z600      0 17,1,0  ** Dew point temp. [K]
-z550      0 18,1,0  ** Dew point depression [K]
-z500      0 19,1,0  ** Lapse rate [K/m]
-z450      0 20,1,0  ** Visibility [m]
-z400      0 21,1,0  ** Radar spectra (1) [non-dim]
-z350      0 22,1,0  ** Radar spectra (2) [non-dim]
-z300      0 23,1,0  ** Radar spectra (3) [non-dim]
-ua        9 24,100,0 ** ua [m/s]
-sva        9 26,100,0 ** va [m/s]
-hur       9 25,100,0 ** RH [%%]
-ta        9 27,100,0 ** ta [K]
-zg        9 28,100,0 ** zg [m]
-ENDVARS"""
-
-
 
 from WxMAP2 import *
 w2=W2()
@@ -173,8 +127,7 @@ for dtg in dtgs:
     
     MF.sTimer("GRIB2-%s"%(dtg))
     year=dtg[0:4]
-    eraDir='/braid1/mfiorino/w22/dat/tc/tcanal/%s/%s/era5'%(year,dtg)
-    eraDir='/data/w22/dat/tc/tcanal/%s/%s/era5'%(year,dtg)
+    eraDir='/data/w22/dat/tc/tcanal/%s/%s/era5'%(TcTcanalDatDir, year,dtg)
     
     emask="%s/era5.%s.*.ctl"%(eraDir,dtg)
     efiles=glob.glob(emask)

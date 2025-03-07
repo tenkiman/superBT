@@ -12,7 +12,7 @@ modelOname={
     'gfs2':'GFS (NCEP GFS T574)',
     'navg':'NVG (FNMOC NAVGEM T359L42)',
     'ecm5':'ECM (ECMWF HRES T1299)',
-    'era5':'ERA5 T600L143',
+    'era5':'ERA5 (T602L143) dx 0.25deg',
     'jgsm':'JMA (GSM)',
     'cgd2':'CMC (CMC GDPS dx 0.15deg)',
     'ecmt':'ECM (ECMWF IFSCy38r1 T1299)',
@@ -437,7 +437,7 @@ class TcDiagS(MFbase):
         
         self.initOutput()
         self.initTC(dtg)
-
+        
         if(justInit): return
 
 
@@ -1870,11 +1870,12 @@ return
 
         #(self.stmids,self.btcs)=self.tD.getDtg(self.dtg,selectNN=self.selectNN,dobt=self.dobt,dupchk=0)
 
-        stmids=self.md3.getMd3Stmids4dtg(self.dtg)
-        stmids.sort()
+        stmids=self.md3.getMd3Stmids4dtg(self.dtg,convertXstm=0)
+        istmids=self.md3.getMd3Stmids4dtg(self.dtg,convertXstm=1)
+        istmids.sort()
         # -- md3 to get md3 btcs
         btcs={}
-        for stmid in stmids:
+        for stmid in istmids:
             (rc,m3trks)=self.md3.getMd3track(stmid)
             btcs[stmid]=m3trks[dtg]
         
@@ -2598,7 +2599,9 @@ nt: %3d (taus)"""%(diagfileAid.upper(),self.dtg,stmid.upper(),stm2id.upper(),stm
 
 
 
-    def setLatLonTimeByTau(self,dtg,model,stmid,tau,dfile=1):
+    def setLatLonTimeByTau(self,dtg,model,stmid,tau,
+                           lat1=None,lat2=None,lon1=None,lon2=None,
+                           dfile=1):
 
         try:
             rc=self.aidtrk[tau]
@@ -2655,10 +2658,17 @@ nt: %3d (taus)"""%(diagfileAid.upper(),self.dtg,stmid.upper(),stm2id.upper(),stm
             dlat=self.dlat*self.dlatETFact
             dlon=dlat*self.aspectRatio
 
-        ge.lat1=latc-dlat
-        ge.lat2=latc+dlat
-        ge.lon1=lonc-dlon
-        ge.lon2=lonc+dlon
+        if(lat1 == None): ge.lat1=latc-dlat
+        else:  ge.lat1=lat1
+        
+        if(lat2 == None): ge.lat2=latc+dlat
+        else:  ge.lat2=lat2
+        
+        if(lon1 == None): ge.lon1=lonc-dlon
+        else:  ge.lon1=lon1
+        
+        if(lon2 == None): ge.lon2=lonc+dlon
+        else:  ge.lon2=lon2
 
         # -- set the lat/lon/lev/time dims
         ge.lev1=ge.Levs[0]
@@ -6332,27 +6342,31 @@ class TcFldsDiag(f77GridOutput,W2areas):
 
     def cleanDpaths(self,verb=0,ropt=''):
 
-        # -- oisst
-        #
-        MF.sTimer('clean-oisst')
-        sstpath=self.sstdpath
-        if(MF.ChkPath(sstpath)):
-            cmd="rm %s"%(sstpath)
-            mf.runcmd(cmd,ropt)
-            
-        MF.dTimer('clean-oisst')
+        (odir,ofile)=os.path.split(self.ctlpathFldOutput)
+        (obase,oext)=os.path.splitext(ofile)
+        omaskc="%s/%s*.ctl"%(odir,obase)
+        omaskd="%s/%s*.dat"%(odir,obase)
+        if(verb): print 'ooo ',omaskc,omaskd
 
-        # -- meteo fields
-        #
-        for tau in self.taus:
-            try:
-                (rc,path)=self.dpaths[tau]
-            except:
-                print 'WWW -- TcFldsDiag.cleanDpaths() -- no dpaths...press...'
-                return
-            if(MF.ChkPath(path)):
-                cmd="rm %s"%(path)
-                mf.runcmd(cmd,ropt)
+        cmd="rm %s"%(omaskc)
+        mf.runcmd(cmd,ropt)
+
+        cmd="rm %s"%(omaskd)
+        mf.runcmd(cmd,ropt)
+        
+        (sdir,sfile)=os.path.split(self.sstcpath)
+        (sbase,sext)=os.path.splitext(sfile)
+        smaskc="%s/%s*.ctl"%(sdir,sbase)
+        smaskd="%s/%s*.dat"%(sdir,sbase)
+        
+        if(verb): print 'sss ',smaskc,smaskd
+        
+        cmd="rm %s"%(smaskc)
+        mf.runcmd(cmd,ropt)
+        cmd="rm %s"%(smaskd)
+        mf.runcmd(cmd,ropt)
+        
+        return
 
 
 
@@ -6436,8 +6450,8 @@ class Oisst(DataSet,f77GridOutput):
         ga('%s'%(sstdefineall))
 
         self.vars=[
-            ('sst','sst with mask [K]'),
-            ('sstall','sst filled in mask [K]'),
+            ('sst','sst with mask [C]'),
+            ('sstall','sst filled in mask [C]'),
             ('ssta','sst anom [C]'),
         ]
 
@@ -6571,6 +6585,8 @@ class Era5sst(DataSet,f77GridOutput):
 
     sstctl="%s/sst.ctl"%(ddir)
     sstcctl="%s/aoiclim.71_00.daily.ctl"%(ddirO)
+    # -- new daily climo from era5 1979-2022
+    sstcctl="%s/climo/era5-sst-daily-climo.ctl"%(ddir)
 
 
     def __init__(self,ga,ge,dtg,
@@ -6578,10 +6594,12 @@ class Era5sst(DataSet,f77GridOutput):
                  area=None,
                  reargs=None,
                  dpath=None,
-                 undef=1e20,
+                 # undef=1e20, standard
+                 undef=-9.99e8, # 20250306 -- new era5 daily climo sst
                  override=0,
                  verb=0):
 
+        verb=1
         self.dtg=dtg
         self.ctlpath2=ctlpath2
         self.ga=ga
@@ -6619,13 +6637,20 @@ class Era5sst(DataSet,f77GridOutput):
         else:
             nSST=2
             nSSTclim=3
+            
+            
+        print 'NNN---',nSST,nSSTclim
+        
         ga('set dfile %d'%(nSST))
         ga('set z 1')
 
         ge.setTimebyDtgTau(dtg,tau=0,verb=1)
 
         var='sst'
-        varall='sstall'
+        varE='sste'
+        varL='sstall'
+        varA='ssta'
+        varC='sstc'
 
         #ydef 180 linear -89.500000 1
         #xdef 360 linear 0.500000 1.000000
@@ -6637,23 +6662,34 @@ class Era5sst(DataSet,f77GridOutput):
         
         sstexpr="(re(%s,%d,linear,0.5,%f,%d,linear,-89.5,%f))"%(var,nxre,dlon,nyre,dlat)
         sstdefine="%s=(%s-273.15)*const(%sc.%d,1)"%(var,sstexpr,var,nSST)
-        sstdefine="%s=(%s-273.15)"%(var,sstexpr)
-        sstdefineA="%sall=const(%s,0,-u)"%(var,var)
-        sstanom="%sa=%s-%sc.%d"%(var,var,var,nSSTclim)
+        sstexprC="(re(%s.%d,%d,linear,0.5,%f,%d,linear,-89.5,%f))"%(var,nSSTclim,nxre,dlon,nyre,dlat)
+        sstdefineC="%s=(%s-273.15)*const(%sc.%d,1)"%(varC,sstexprC,var,nSSTclim)
+        sstanom="%sa=%s-%s"%(var,sstexpr,sstexprC)
+        sstanom="%sa=%s-%s.%d"%(var,var,var,nSSTclim)
+        sstexpr=var
+        sstexprC=var
+
+        sstdefineE="%s=(%s-273.15)"%(varE,var)
+        sstdefineL="%s=const(%s,0,-u)"%(varL,varE)
+        sstdefineC="%s=(%s.%d-273.15)"%(varC,var,nSSTclim)
+        sstdefineA="%s=%s-%s"%(varA,varE,varC)
 
         if(verb):
 
-            print '   sstctl: ',self.sstctl
-            print '  sstcctl: ',self.sstcctl
-            print 'sstdefine: ',sstdefine
-            print '  sstanom: ',sstanom
+            print '     sstctl: ',self.sstctl
+            print '    sstcctl: ',self.sstcctl
+            print ' sstdefineE: ',sstdefineE
+            print ' sstdefineL: ',sstdefineL
+            print ' sstdefineC: ',sstdefineC
+            print ' sstdefineA: ',sstdefineA
 
         # -- define before sst because uses sst in the the sstexpr
         #
-        ga('%s'%(sstdefine))
+        ga('%s'%(sstdefineE))
+        ga('%s'%(sstdefineL))
+        ga('%s'%(sstdefineC))
         ga('%s'%(sstdefineA))
-        ga('set dfile %d'%(nSSTclim))
-        ga('%s'%(sstanom))
+
         ga('set dfile %d'%(nSST))
 
         self.vars=[
@@ -6662,17 +6698,18 @@ class Era5sst(DataSet,f77GridOutput):
             ('ssta','sst anom [C]'),
         ]
 
+        print 'self.dpath: ------- ',self.dpath
         if(self.dpath != None):
+            
             ga.ge.setFwrite(name=self.dpath)
             ga('set gxout fwrite')
-            ga.dvar.dregrid0('sst','sst',self.reargs)
-            ga.dvar.dregrid0('sstall','sstall',self.reargs)
-            ga.dvar.dregrid0('ssta','ssta',self.reargs)
+            ga.dvar.dregrid(varE,varE,self.reargs)
+            ga.dvar.dregrid(varL,varL,self.reargs)
+            ga.dvar.dregrid(varA,varA,self.reargs)
             ga('disable fwrite')
 
             self.makeCtlfile()
-
-
+            
     def makeCtlfile(self):
 
         aa=self.area
@@ -6923,13 +6960,15 @@ class TcTrkPlot(DataSet):
     """plot tc trk
     """
 
-    def __init__(self,tG,stmid,zoomfact=None,verb=1,otau=48,override=0,
+    def __init__(self,tG,md3,stmid,zoomfact=None,verb=1,otau=48,override=0,
                  doveribt=1,
                  dobt=0,
                  Quiet=1,
                  Bin='grads',
                  ctlpath=None):
 
+        self.tG=tG
+        self.md3=md3
         self.year=tG.year
         self.dtg=tG.dtg
         self.model=tG.model
@@ -6994,22 +7033,36 @@ class TcTrkPlot(DataSet):
         self.curgxout=self.ga.getGxout()
         self.setInitialGA()
 
-        # -- get TC info and best track
-        #
-        if(not(hasattr(tG,'tD'))):  
-            print 'III-TCdiag.TcTrkPlot() -- making tD...'
-            tD=TcData(dtgopt=self.dtg)
-        else:                       
-            tD=tG.tD
+        ## -- get TC info and best track
+        ##
+        #if(not(hasattr(tG,'tD'))):  
+            #print 'III-TCdiag.TcTrkPlot() -- making tD...'
+            #tD=TcData(dtgopt=self.dtg)
+        #else:                       
+            #tD=tG.tD
 
-        self.bts=tD.getBtcs4Stmid(self.stmid,dtg=self.dtg,dobt=self.dobt)
+        stmid9X=self.stmid[2]+self.stmid[0:2]+self.stmid[-5:]
+        print '9999999',stmid9X
+        
+        (rc9,m3trk9X)=self.md3.getMd3track(stmid9X,dobt=self.dobt,doBdeck2=1,verb=0)
+        (rc,m3trk)=self.md3.getMd3track(self.stmid,dobt=self.dobt,doBdeck2=1,verb=0)
+        dtgN9x=(self.dtg in m3trk9X.keys())
+        dtgN=(self.dtg in m3trk.keys())
+        
+        if(dtgN9x):
+            self.bts=m3trk9X
+        elif(dtgN):
+            self.bts=m3trk
+        else:
+            print 'ooopppsss self.dtg: ',self.dtg,' not in md3 ... sayounara...'
+            sys.exit()
 
         if(len(self.bts) == 0):
             print 'WWW TcTrkPlot no bts for stmid: ',self.stmid,' dtg: ',self.dtg
             return
 
 
-        (self.stm3id,self.stmname)=tD.getStmName3id(self.stmid)
+        (self.stm3id,self.stmname)=getStmName3id(self.stmid)
 
         self.PlotTrk()
 
@@ -7023,6 +7076,7 @@ class TcTrkPlot(DataSet):
         except:
             btc=None
 
+        
         # -- override the reftrk for case when tceps doesn't get a good one...????
         #
         (alats,alons,refaid,reftau,reftrk)=GetOpsRefTrk(self.dtg,self.stmid,override=overrideRT,
@@ -7171,7 +7225,9 @@ class TcTrkPlot(DataSet):
 
         ttl=ga.gp.title
         ttl.set(scale=0.85)
-        t1='%s TC: %s[%s] V`bmax`n: %3dkt bdtg: %s'%(modeltitle,self.stmid,self.stmname,int(self.bts[self.dtg][2]),self.dtg)
+
+        t1='%s TC: %s[%s] V`bmax`n: %3dkt bdtg: %s'%(modeltitle,self.stmid,self.stmname,\
+                                                     int(self.bts[self.dtg][2]),self.dtg)
         t2='TCDiag track plot'
         if(hasattr(self,'FtrkSource')):
             ts=self.FtrkSource[self.stmid]

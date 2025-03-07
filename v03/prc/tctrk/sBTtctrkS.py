@@ -286,6 +286,7 @@ class TmTrkSimple(MFbase):
                  maxtauModel=168,
                  tcD=None,
                  md3=None,
+                 prcdir=None,
                  mintauTC=120,
                  maxtauTC=168,
                  verb=0,
@@ -302,6 +303,7 @@ class TmTrkSimple(MFbase):
                  doTrk3=0,
                  xgrads='grads',
                  doInv=0,
+                 doBdeck2=0,
                  ):
 
         self.dtg=dtg
@@ -346,8 +348,8 @@ class TmTrkSimple(MFbase):
 
         
         #self.prcdir="%s/tctrk"%(os.getenv("W2_PRC_DIR"))
-        self.prcdir="%s/prc/tctrk"%(sbtVerDir)
-
+        if(prcdir == None): self.prcdir=sbtPrcDirTctrk
+        else:               self.prcdir=prcdir
 
         self.trkmode=trkmode
         self.regridGen=regridGen
@@ -357,6 +359,8 @@ class TmTrkSimple(MFbase):
         #
         self.md3=md3
         self.tcD=tcD
+        
+        self.doBdeck2=doBdeck2
 
         if(md3 == None):
             print 'EEE -- cannot use w2 in TmTrkSimple'
@@ -399,7 +403,7 @@ for Mdeck3 need to turn off
         return(ostmid)
 
 
-    def getStatPaths(self,ofileSizMin=1000,dolsonly=0):
+    def getStatPaths(self,ofileSizMin=778,dolsonly=0):
         
         # -- PPPPPAAAAATTTTTHHHHHSSSSS - target dirs/paths
         #
@@ -434,6 +438,9 @@ for Mdeck3 need to turn off
         if(self.atcfname != None): omodel=self.atcfname
         omodel=omodel.lower()
 
+
+        doBdeck2=self.doBdeck2
+        
         otcgenPaths={}
         statTCgenS={}
 
@@ -502,33 +509,17 @@ for Mdeck3 need to turn off
             #print self.tcvpath
 
         elif(self.md3 != None):
-            # -- get stmids for this dtg
-            #
-            tstmids=self.md3.getMd3Stmids4dtg(self.dtg)
             
-            # -- only track in stmopt
-            #
-            if(self.stmopt != None):
-                m3stmids=self.md3.getMd3Stmids(self.stmopt)
-                nstmids=[]
-                # -- use trk to find the stmids by dtg
-                #
-                for m3stmid in m3stmids:
-                    (rc,m3trk)=self.md3.getMd3track(m3stmid)
-                    if(self.dtg in m3trk.keys()):
-                        nstmids.append(m3stmid)
-                
-                tstmids=nstmids
-                if(len(nstmids) == 0):
-                    print 'EEE could find dtgs for stmopt:',self.stmopt,' dtg: ',self.dtg,'sayounara...'
-                    sys.exit()
-                    
-            trks=self.md3.getMd3tracks(tstmids)
-            self.tcVtrks=trks
-            (cards,tcvpath)=self.md3.makeTCvCards(tstmids,self.dtg,trks)
-            self.tcVcards=cards
+            (dtgstms,m3trks)=self.md3.getMd3tracks4dtg(self.dtg,dobt=0,doBdeck2=self.doBdeck2, 
+                                                       verb=self.verb)
+            
+            (tcVcards,tcvpath,ostmids)=self.md3.makeTCvCards(dtgstms,self.dtg,m3trks,verb=self.verb)
+            self.tcVcards=tcVcards
             self.tcvpath=tcvpath
-            self.tcVstmids=tstmids
+            self.tcVstmids=ostmids
+            
+            trks=self.md3.getMd3tracks(ostmids)
+            self.tcVtrks=trks
             
         haveTcs=0
         if(len(self.tcVcards) > 0): haveTcs=1
@@ -550,6 +541,7 @@ for Mdeck3 need to turn off
             else:
                 tcvits=open(self.tcvpath).readlines()
                 
+
             self.tcvits=tcvits
 
             ostmids=[]
@@ -574,7 +566,8 @@ for Mdeck3 need to turn off
                 #
                 ofile="%s/stdout.tctrk.%s.%s.%s.txt"%(self.tdir,self.dtg,omodel,stm3id.lower())
                 ofileSiz=MF.getPathSiz(ofile)
-                ofileStat=(ofileSiz > 0)
+                ofileStat=(ofileSiz > ofileSizMin)
+                print 'sssss',MF.getPathSiz(ofile),'ooo',ofileStat
 
                 #otctrkpathSTM    ="tctrk.atcf.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.64 - standard
                 #otctrkgtcvpathSTM="tctrk.gtcv.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.67 - genesis tcvitals
@@ -584,9 +577,14 @@ for Mdeck3 need to turn off
                     otctrksinkpathSTM="%s/tctrk.sink.%s.%s.%s"%(tdirAdeckStm,self.dtg,omodel,ostmid.upper())
                     otctrkpathSTMStat=MF.getPathNlines(otctrkpathSTM)
                     otctrksinkpathSTMStat=MF.getPathNlines(otctrksinkpathSTM)
-                    stattest=(otctrkpathSTMStat and ofileStat)
+                    
+                    stattest=(otctrkpathSTMStat > 0 and ofileStat)
+                    stattest2=(ofileStat)
+                    
                     statTCtrkS[ostmid]=-999
-                    if(stattest): statTCtrkS[ostmid]=1
+                    if(stattest2): statTCtrkS[ostmid]=-1  # it ran because we have stdout...
+                    #print 'sss---',otctrkpathSTMStat,ofileStat,stattest
+                    if(stattest): statTCtrkS[ostmid]=otctrkpathSTMStat
                     
                     if(self.doTrk3):
                         otctrksnk2pathSTM="%s/tctrk.snk2.%s.%s.%s"%(tdirAdeckStm,self.dtg,omodel,ostmid.upper())
@@ -631,24 +629,38 @@ for Mdeck3 need to turn off
                                          otctrksinkpathSTM,
                                          ofile)
 
+            # -- get sum of runs with and without output
+            #
+            
+            nzero=0
+            nthere=0
             for ostmid in ostmids:
-                nzero=0
-                nthere=0
-                if(statTCtrkS[ostmid] <= 0):
+                print 'ooooooo',ostmid,statTCtrkS[ostmid]
+                if(statTCtrkS[ostmid] < -1):
                     nzero=nzero+1
-                elif(statTCtrkS[ostmid] > 0):
+                elif(statTCtrkS[ostmid] >= -1):
                     nthere=nthere+1
                     
-            if(nthere == 0):
+                
+            nall=nzero+nthere
+            nall=nthere
+            nostmids=len(ostmids)
+            
+            if(self.verb):
+                print 'TTTT nzero: ',nzero,' nthere: ',nthere,' nall: ',nall,'nostmids: ',nostmids
+                
+            # -- if sum of runs != # of storms
+            #
+            if(nall != nostmids):
                 statusTCtrk=0
-            if(nzero > 0):
-                statusTCtrk=-1
                 
             self.ostmids=ostmids
             
         else:
             statusTCtrk=-1
  
+        self.statusTCtrk=statusTCtrk
+        
         self.omodel=omodel
         self.otcgenPaths=otcgenPaths
         self.ostmids=ostmids
@@ -667,31 +679,58 @@ for Mdeck3 need to turn off
         #genTest=(                   not(os.path.exists(self.grb10path)) and (statusTCgen == 0) )
         #detTest=( (self.haveTcs and not(os.path.exists(self.grbpath)))  and (statusTCtrk == 0) )
 
-        self.genTest= (self.statusTCgen == 0 and not(self.doTrackerOnly)) 
-        self.detTest= (self.haveTcs == 1 and self.statusTCtrk == 0) 
-        
+        self.genTest= (self.statusTCgen == 1)
+        self.detTest= (self.haveTcs == 1 and self.statusTCtrk == 1) 
+        #self.detTest2= (self.haveTcs == 1 and self.statusTCtrk == 0 and self.doTrackerOnly) 
         self.genGribTest=(MF.getPathSiz(self.grb10path) > 0)
         self.detGribTest=(MF.getPathSiz(self.grbpath) > 0)
         
 
     def setStatus(self):
 
+        
+        allDoneDet=0
+        if(self.detTest and not(self.override)): allDoneDet=1
+        allDoneGen=0
+        if(self.genTest and not(self.override)): allDoneGen=1
+
         print
         print 'SSSSSSSSSSSSSSSSSSSSSS - tracking status for ',self.omodel,' dtg: ',self.dtg
         print 'TCs  haveTcs: ',self.haveTcs,' #TCs: ',len(self.ostmids)
-        print 'GRIB   -- gen: ',self.genGribTest
-        print 'GRIB   -- trk: ',self.detGribTest
-        print 'DDDD  detTest: ',self.detTest
-        print 'GGGG  genTest: ',self.genTest
-        print 'OOOO override: ',self.override
-        if(not(self.detTest) and not(self.genTest) and not(self.override)):
-            print 'AAAAAAAAAAAAAAAAAAAAAAAAAA - tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
-                  ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
-            rc=0
+        print 'GRIB         -- gen: ',self.genGribTest
+        print 'GRIB         -- trk: ',self.detGribTest
+        print 'TTTT    statusTCtrk: ',self.statusTCtrk
+        print 'TTTT  doTrackerOnly: ',self.doTrackerOnly
+        print 'DDDD        detTest: ',self.detTest
+        print 'GGGG        genTest: ',self.genTest
+        print 'OOOO       override: ',self.override
+        print 'AADD     allDoneDet: ',allDoneDet
+        print 'AAGG     allDoneGen: ',allDoneGen
+
+        rc=1
+        if(self.doTrackerOnly):
+            if(not(self.haveTcs)):
+                print 'NNNoooTTTcccs'
+                print 'NNNoooTTTcccs for dtg: ',self.dtg,' AND doTrackerOnly',self.doTrackerOnly,'...ja sayounara...'
+                print 'NNNoooTTTcccs'
+                rc=0
+                return(rc)
+                
+            if(allDoneDet):
+                print 'AAAAAAAAAA---DDDDDDDDDDDDD - DET -- tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                      ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
+                rc=0
+        
         else:
+            if(allDoneGen):
+                print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                      ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
+                rc=0
+                
+        if(rc):
             print 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD - doit.....'
-            rc=1
-        print
+            print
+
         return(rc)
     
     
@@ -713,21 +752,33 @@ for Mdeck3 need to turn off
             for ostmid in self.ostmids:
                 trk=self.tcVtrks[ostmid.lower()][self.dtg]
                 vmax=int(trk[2])
+                if(vmax < 0):
+                    ovmax='***'
+                else:
+                    ovmax='%-3d'%(vmax)
 
                 if(ostmid.lower() in self.tcVstmids):
                     try:
                         rc=self.otctrkPaths[ostmid]
                         nl=self.statTCtrkS[ostmid]
-                        orc=rc[0]
+                        opath=rc[0]
+                        orcCode="good"
                     except:
                         nl=-888
-                        orc=0
+                        opath="NADA path"
+                        orcCode=str(nl)
                 else:
                     print 'EEE no %s in %s '%(ostmid.lower,str(self.tcVstmids))
                     nl=-777 
-                    orc=0
+                    opath="TRK FAIL"
+                    orcCode=str(nl)
                     
-                print ostmid,self.dtg,'vmax: %-3d'%(vmax),' nl: ',nl,'path: ',orc
+                if(nl == 1):
+                    orcCode='sngl'
+                    nl=999
+
+                onl="%-4d"%(nl)
+                print ostmid,self.dtg,'rcCode: %s'%(orcCode),'vmax: %s'%(ovmax),' nl: %s'%(onl),'path: %s'%(opath)
                 
                         
     def doCP(self,ropt=''):
@@ -757,7 +808,7 @@ for Mdeck3 need to turn off
                         sinkpath=rc[1]
                         orc=1
                     except:
-                        nl=-888
+                        nl=-888	
                         orc=0
                 else:
                     print 'EEE no %s in %s '%(ostmid.lower,str(self.tcVstmids))
@@ -793,7 +844,7 @@ for Mdeck3 need to turn off
             print 'III -- doCP for dtg: ',self.dtg,'not done...no TCs'
                         
                 
-
+	
 
 
     def doTrk(self,
@@ -825,7 +876,7 @@ for Mdeck3 need to turn off
         #
         didGenGrib=0
         if( not(self.doTrackerOnly) and 
-            ( ( (self.genTest and not(self.genGribTest)) ) or self.override
+            ( ( (not(self.genTest) and not(self.genGribTest)) ) or self.override
               and ropt != 'norun')
             ):
 
@@ -842,7 +893,8 @@ for Mdeck3 need to turn off
         # -- GGRRIIBB - full res (0.5 deg)  data for tracker mode
         #
         didTrkGrib=0
-        if( ( (self.detTest and not(self.detGribTest)) or self.override) and ropt != 'norun'):
+        print ''
+        if( ( (not(self.detTest) and not(self.detGribTest)) or self.override) and ropt != 'norun'):
             
             # -- gen and tracker the same res...cp vice lats
             #
@@ -895,22 +947,6 @@ for Mdeck3 need to turn off
         # -- TTMMTTRRKK - only run deterministic tracker if there are TCs...
         #
         if(self.haveTcs):
-
-            if(self.tcvpath != None and os.path.exists(self.tcvpath) and self.haveTcs):
-                cmd="cp %s fort.12"%(self.tcvpath)
-                MF.runcmd(cmd,ropt,lsopt='q')
-
-                # -- 3.9a uses this file for tcvitals
-                #
-                if(self.doTrk3):
-                    cmd="cp %s tcvit_rsmc_storms.txt"%(self.tcvpath)
-                    MF.runcmd(cmd,ropt,lsopt='q')
-                
-                
-            else:
-                print 'WWW(TCtrk) no tcvitals for ',self.dtg,' in: ',self.tcvpath
-                haveTcs=0
-
 
             if(os.path.exists(self.grbpath)):
                 cmd="ln -f -s %s fort.11"%(self.grbpath)

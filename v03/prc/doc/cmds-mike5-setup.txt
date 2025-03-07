@@ -1,0 +1,588 @@
+  413  ln -s dat/*.csv .
+  414  la
+  415  pg .github/
+  416  la .github/
+  417  la .github/workflows/
+  418  la .github/workflows/static.yml
+  419  pg .github/workflows/static.yml
+  420  la
+  421  j
+  422  git s docs/.
+  423  cd docs/
+  424  la
+  425  cd ..
+  426  la
+  427  git commit -a
+  428  git push
+  429  git pull
+  430  la
+  431  la *.csv
+  432  del *.csv
+  433  git pull
+  434  la
+  435  git add dat/*
+  436  git commit -a
+  437  git push
+  438  cd docs/
+  439  la
+  440  git rm *.csv
+  441  la
+  442  git rm superBT-V04.tgz 
+  443  git rm QuickStart-V04-python2.docx 
+  444  la
+  445  git s .
+  446  la h-me
+  447  cd ..
+  448  la dat/h-meta-sbt-v04-vars.csv
+  449  vi dat/h-meta-sbt-v04-vars.csv
+  450  la
+  451  f
+  452  ws README.md
+  453  la /usr/lib/ispell/
+  454  la /var/lib/dict/
+  455  f
+  456  la ~/.emacs.nw
+  457  ws.nw ~/.emacs.nw
+  458  ws README.md
+  459  bg
+  460  git add README.md
+  461  git commit -a
+  462  git push
+  463  h | g tar
+  464  git mv superBT-V04.tgz docs/.
+  465  git commit -a
+  466  git push
+  467  la ~/Downloads/
+  468  la ~/Downloads/*super*
+  469  la ~/Downloads/*superBT*
+  470  del ~/Downloads/*superBT*
+  471  la ~/Downloads/*superBT*
+  472  del ~/Downloads/*superBT*
+  473  tar -tzvf docs/superBT-V04.tgz 
+  474  la
+  475  c.w2
+  476  la
+  477  mv README superBT/V04/
+  478  mv README-sbt-* superBT/V04/
+  479  la
+  480  c.sb
+  481  la
+  482  mv README README-sbt
+  483  la
+  484  c.w2
+  485  h 
+  486  h
+  487  h | gtar
+  488  h | g tar
+  489  c.sb
+  490  cd docs/
+  491  tar -tvzf superBT-V04.tgz 
+  492  cd ../py2/
+  493  la
+  494  del sbtLocal.py
+  495  mv sbtLocal.py-mike5 sbtLocal.py
+  496  la
+  497  ws.nw sbtLocal.py
+  498  p-md3-ls.py 
+  499  p-md3-ls.py  -S w.07 -s -b
+  500  cd ../plt/
+  501  la
+  502  cd 9xlife/
+  503  la
+  504  cd ../..
+  505  git mv plt/ docs/
+  506  git commit -a
+  507  git push
+  508  la docs
+  509  la docs/plt/
+  510  la docs/plt/9xlife/
+  511  h
+  512  la
+  513  ws README.md
+  514  bg
+  515  git add dat/
+  516  la dat/
+  517  la
+  518  git s
+  519  git s-u docs
+  520  git s-u docs/
+  521  git s docs/
+  522  la
+  523  la docs
+  524  cd docs/
+  525  cp QuickStart* SAV/
+  526  git rm QuickStart*
+  527  la
+  528  git rm --force QuickStart*
+  529  la
+  530  del QuickStart-V04.gdoc 
+  531  git rm --force QuickStart*
+  532  la
+  533  git mv README-sbt-mike5 README-sbt-mike5.md
+  534  git mr README-sbt-py2 README-sbt-py2.md
+  535  git mv README-sbt-py2 README-sbt-py2.md
+  536  pg README-sbt-V04
+  537  la
+  538  pg README-sbt-v04 
+  539  la
+  540  pg README-sbt-vars 
+  541  git mv README-sbt-vars README-sbt-vars.txt
+  542  mv README-sbt-vars README-sbt-vars.txt
+  543  git add README-sbt-vars.txt 
+  544  la
+  545  git s .
+  546  gmv README-sbt.md README-sbt-v04.md
+  547  git add t.md README-sbt-v04.md
+  548  mv README-sbt.md README-sbt-v04.md
+  549  git add README-sbt-v04.md
+  550  git s .
+  551  cd ..
+  552  la
+  553  la 03
+  554  la v03/
+  555  ws README.md
+  556  bg
+  557  la docs
+  558  ws README.md
+  559  bg
+  560  j
+  561  f 2
+  562  bg
+  563  cd docs/
+  564  ws README-sbt-v04.md 
+  565  bg
+  566  j
+  567  cd ..
+  568  git s-u
+  569  git commit -a
+  570  git push
+  571  git log
+  572  cd docs/
+  573  la
+  574  del index.html
+  575  ln -s README-sbt-v04.md index.html
+  576  git s-u
+  577  git commit -a
+  578  git push
+  579  git commit -a
+  580  git push
+  581  la
+  582  pg index.html
+  583  git add index.html
+  584  git add README-sbt-v04.md 
+  585  git commit -a
+  586  la
+  587  cd ..
+  588  la
+  589  cd docs/
+  590  la
+  591  ln README-sbt-v04.md index.html
+  592  ln -f README-sbt-v04.md index.html
+  593  la
+  594  git commit -a
+  595  git push
+  596  la
+  597  chmod a+x *
+  598  git commit -a
+  599  git push
+  600  la
+  601  del index.html.*
+  602  la
+  603  cd ..
+  604  la
+  605  cd docs/
+  606  la
+  607  cd ..
+  608  la
+  609  cd V04/
+  610  la
+  611  jekyll
+  612  sudo zypper in ruby-devel
+  613  sudo gem install jekyll
+  614  gem install rouge -v 3.30.0
+  615  sudo gem install rouge -v 3.30.0
+  616  sudo gem install jekyll
+  617  cnf ruby
+  618  cnf ruby3.3
+  619  sudo zypper ruby
+  620  sudo zypper ruby3
+  621  sudo zypper zypper-ruby3
+  622  sudo zypper update
+  623  cd ..
+  624  la
+  625  pg README.txt 
+  626  git mv README.txt docs/.
+  627  la
+  628  pg README.rst 
+  629  cd docs/
+  630  la
+  631  la ..
+  632  la
+  633  del superBT-dat.zip 
+  634  cd..
+  635  la
+  636  cd ..
+  637  la
+  638  la *py
+  639  la
+  640  cd V04/
+  641  la
+  642  del superBT-dat.zip 
+  643  git s .
+  644  tar -cvzf superBT.tgz *.csv py2/
+  645  tar -cvzf superBT.tgz *.csv py2/ docs/README*txt
+  646  la superBT.tgz
+  647  lh superBT.tgz
+  648  cd docs/
+  649  la
+  650  ws.nw README
+  651  la
+  652  git add index.html
+  653  git s .
+  654  git commit -a
+  655  git push
+  656  la
+  657  chmod 644 QuickStartV04.html 
+  658  la
+  659  chmod a+x *
+  660  la
+  661  git commit -a
+  662  git push
+  663  git rm index.html 
+  664  cp QuickStartV04.html index.html
+  665  git add index.html
+  666  git commit -a
+  667  git push
+  668  la
+  669  del index.html
+  670  ln -s QuickStartV04.html index.html
+  671  git add index.html
+  672  git commit -a
+  673  git push
+  674  cd ..
+  675  h | g tar
+  676  cd ..
+  677  cd ../..
+  678  tar -cvzf superBT/V04/docs/superBT-V04.tgz superBT/V04/*.csv superBT/V04/py2/ 
+  679  tar -cvzf superBT/V04/docs/superBT-V04.tgz superBT/V04/*.csv superBT/V04/py2/*py
+  680  la
+  681  pg README 
+  682  mv README README-w22
+  683  ln -s superBT/V04/docs/README README-sbt-v04
+  684  tar -cvzf superBT/V04/docs/superBT-V04.tgz superBT/V04/*.csv superBT/V04/py2/*py README-sbt-v04 
+  685  pd /tmp/
+  686  po
+  687  cp superBT/V04/docs/superBT-V04.tgz /tmp/.
+  688  pd /tmp
+  689  tar -xzvf superBT-V04.tgz 
+  690  pg README-sbt-v04 
+  691  po
+  692  ln superBT/V04/docs/README README-sbt-v04
+  693  la superBT/V04/docs/README
+  694  la superBT/V04/docs/README.txt
+  695  pg superBT/V04/docs/README.txt
+  696  h
+  697  tar -tzvf superBT/V04/docs/superBT-V04.tgz
+  698  tar -tzf superBT/V04/docs/superBT-V04.tgz
+  699  tar -tzvf superBT/V04/docs/superBT-V04.tgz
+  700  j
+  701  ws _config.yml
+  702  bg
+  703  pse
+  704  x
+  705  ruby -v
+  706  h
+  707  sudo gem install jekyll 
+  708  sudo zypper ar http://download.opensuse.org/repositories/devel:/languages:/ruby:/extensions/openSUSE_Leap_15.0/ devel:languages:ruby:extensions && zypper ref
+  709  sudo zypper ref
+  710  h
+  711  sudo gem install jekyll 
+  712  rbenv
+  713  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+  714  cd .rbenv/
+  715  v
+  716  la
+  717  rbenv
+  718  rbenv -l
+  719  bash export PATH="$HOME/.rbenv/bin:$PATH" export PATH="$HOME/usr/local/bin:$PATH" eval “$(rbenv init -)
+  720  echo $PATh
+  721  echo $PAT
+  722  echo $PATH
+  723  cd bin
+  724  la
+  725  rbenv
+  726  rbenv -l
+  727  rbenv whence
+  728  rbenv whence ruby
+  729  rbenv versions
+  730  which ruby
+  731  ruby -v
+  732  la
+  733  cd ..
+  734  la
+  735  la libexec/
+  736  la libexec/rbenv-version
+  737  libexec/rbenv-version
+  738  rbenv versions
+  739  cd bin
+  740  rbenv versions
+  741  rbenv 
+  742  rbenv commands
+  743  rbenv local
+  744  rbenv install
+  745  rbenv install -L
+  746  cd
+  747  ws.nw .bashrc
+  748  . .bashrc
+  749  which rbenv
+  750  la ~/.rbenv/bin/
+  751  rehash
+  752  rbenv
+  753  cd .rbenv/bin/
+  754  la
+  755  rbenv
+  756  bash rbenv
+  757  cd
+  758  bash rbenv
+  759  env | g path
+  760  echo $PATH
+  761  j
+  762  f
+  763  . .bashrc
+  764  rbenv
+  765  rehash
+  766  a | g reh
+  767  echo $PATh
+  768  echo $PATH
+  769  la
+  770  cd ..
+  771  la
+  772  la /home//fiorino/.rbenv/bin/
+  773  rbenv
+  774  env | g path
+  775  f
+  776  cd
+  777  . .bashrc
+  778  rbenv
+  779  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  780  rbenv install -L
+  781  rbenv install -l
+  782  rbenv install 3.2.2
+  783  bg
+  784  rbenv install -l
+  785  rbenv global 3.2.2
+  786  ruby -v
+  787  rehash
+  788  ruby -v
+  789  which ruby
+  790  la .rbenv/
+  791  la .rbenv/bin/
+  792  la .rbenv/libexec/
+  793  echo $PATH
+  794  rbenv install -L
+  795  echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
+  796  ws.nw .bashrc
+  797  . .bashrc
+  798  which ruby
+  799  ruby -v
+  800  gem install jekyll
+  801  gem update --system 3.5.4`
+  802  gem update --system 3.5.4
+  803  h
+  804  c.sb
+  805  la
+  806  which jekyll
+  807  jekyll new jdocs
+  808  cd jdocs/
+  809  la
+  810  bundle
+  811  bundle exec jekyll serve
+  812  bg
+  813  la
+  814  ws.nw _config.yml 
+  815  j
+  816  kill 53
+  817  kill %2
+  818  bundle exec jekyll serve
+  819  j
+  820  la
+  821  la _site/
+  822  la _site/about/
+  823  bundle exec jekyll serve --livereload
+  824  bg
+  825  la
+  826  ws.nw index.markdown 
+  827  la _site/
+  828  la _site/index.html
+  829  pg _site/index.html
+  830  screen -a
+  831  c.sb
+  832  cd docs/
+  833  la
+  834  git s-u
+  835  ws.nw index.html 
+  836  git commit -a
+  837  git push
+  838  f
+  839  j
+  840  h
+  841  ws index.html 
+  842  git add contents.md 
+  843  git commit -a
+  844  git push
+  845  cd ..
+  846  ws.nw README.md
+  847  git commit -a
+  848  git push
+  849  cd docs/
+  850  la
+  851  chmod a+x contents.md 
+  852  git commit -a
+  853  git push
+  854  git pull
+  855  git push
+  856  ws.nw ~/.bashrc
+  857  . ~/.bashrc
+  858  touch mystuff
+  859  la
+  860  umask 022
+  861  touch mystuff2
+  862  la
+  863  umask u=rwx,g=rx,o=rx
+  864  touch mystuff3
+  865  la
+  866  chmod a+rx my*
+  867  la
+  868  git pull
+  869  umask a=rx
+  870  umask
+  871  got mystuff5
+  872  touch mystuff5
+  873  la
+  874  del mystuff&
+  875  del mystuff
+  876  y
+  877  del mystuff*
+  878  la
+  879  pg README-sbt-v04.md 
+  880  git log README-sbt-v04.md
+  881  git checkout 1df34e8bd9e -- README-sbt-v04.md
+  882  la
+  883  git s-u
+  884  git pull
+  885  git commit -a
+  886  git push
+  887  git pusll
+  888  git pull
+  889  git push
+  890  git pul
+  891  git pull
+  892  la ../.git/rebase-merge/
+  893  rm -fr ../.git/rebase-merge/
+  894  git pull
+  895  git push
+  896  git pull
+  897  git rebase
+  898  git rebase --continue
+  899  git rebase --abort
+  900  git rebase --skip
+  901  la ../.git/rebase-merge/
+  902  rm -fr ../.git/rebase-merge/
+  903  git commit -a
+  904  git pull
+  905  git pull --rebase=i
+  906  la ../.git/rebase-merge/
+  907  rm -fr ../.git/rebase-merge/
+  908  la ../.git/rebase-merge/
+  909  git pull --rebase=i
+  910  git pull --rebase
+  911  git rebase --abovrt
+  912  git rebase --abort
+  913  git rebase --skip
+  914  git rebase --continue
+  915  rm -fr ../.git/rebase-merge/
+  916  la
+  917  ws.nw README-sbt-v04.md 
+  918  la README-sbt-v04.md 
+  919  chmod u+rwx README-sbt-v04.md 
+  920  la
+  921  git commit -a
+  922  git pull
+  923  git log
+  924  git reset --hard 4cd2e16acafa65
+  925  git s-u
+  926  git s .
+  927  git pull
+  928  la
+  929  git log
+  930  git checkout 1df34e8bd9e40 --file README-sbt-v04.md
+  931  git checkout 1df34e8bd9e40 -- README-sbt-v04.md
+  932  la
+  933  cp README-sbt-v04.md README-sbt-v04-SAV
+  934  git rm README-sbt-v04.md
+  935  git rm -f README-sbt-v04.md
+  936  git commit -a
+  937  git push
+  938  mv README-sbt-v04-SAV README-sbt-v04.md
+  939  git add README-sbt-v04.md
+  940  la
+  941  pg index.html 
+  942  git pull
+  943  git commit -a
+  944  git push
+  945  git pull
+  946  la index.html
+  947  chmod u+rwx index.html 
+  948  la
+  949  ws.nw index.html 
+  950  git commit -a
+  951  git add index.html 
+  952  git commit -a
+  953  chmod u+rwx *.md
+  954  la
+  955  git commit -a
+  956  git pull
+  957  cd ../.git
+  958  la
+  959  sudo chgrp -R users .
+  960  la
+  961  sudo chmod -R g+rwX .
+  962  sudo chmod -R a+rwX .
+  963  git commit -a
+  964  cd ..
+  965  git commit -a
+  966  git push
+  967  cd docs/
+  968  la
+  969  la contents.md
+  970  ws.nw index.html 
+  971  la
+  972  git commit -a
+  973  git push
+  974  la
+  975  ws README-sbt-mike5.md 
+  976  j
+  977  ws README-sbt-mike5.md &
+  978  git s-u
+  979  git commit -a
+  980  git push
+  981  git s-u
+  982  git commit -a
+  983  c.w2
+  984  c.sb
+  985  git commit -a
+  986  sudo chmod -R a+xrw .git/*
+  987  git commit -a
+  988  git push
+  989  cd docs
+  990  la contents.md
+  991  pg contents.md
+  992  ws.nw contents.md
+  993  la
+  994  f
+  995  ws.nw index.html 
+  996  git s-u
+  997  git commit -a
+  998  git push
+  999  ws.nw index.html 
+ 1000  h
