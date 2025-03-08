@@ -1,0 +1,57 @@
+		     2024 final qc'd md3 from md2
+			       20250308
+
+
+I blew away the terminal with all the commands I used today to make
+the final 2024 :(
+
+this is a reconstruction from memory,,,
+
+1) on mike6 w2-md-md3-redo.py 2024 -2 & -1
+
+2) rsync to mike5
+
+3) c.sb.m3 /sbt/superBT/v03/prc/md3/
+
+modified files
+-rwxr-xr-x 1 fiorino fiorino   4830 Mar  8 19:37 c-9xtime-time2gen.py
+-rw-r--r-- 1 fiorino fiorino 514480 Mar  8 16:23 sBTcl.py
+-rwxr-xr-x 1 fiorino fiorino   9259 Mar  8 16:21 m-md3-qc-ALL.py
+-rwxr-xr-x 1 fiorino fiorino   3678 Mar  8 16:13 m-md3-mrg-stm-dir-sum.py
+-rwxr-xr-x 1 fiorino fiorino  43519 Mar  8 16:09 m-md3-from-md2.py
+-rw-r--r-- 1 fiorino fiorino  11737 Mar  8 15:54 sBTvars.py
+
+needed h-md3-sum.txt and h-md3-all.txt as header for .csv files
+
+* run m-md3-stm-dir-sum.py 2024
+--> runs m-md3-from-md2.py
+
+# makes the directory structure in src-v03/2024/bbbb/ and the
+  input???-sum*.txt from md2
+
+* run m-md3-mrg-stm-dir-sum.py to create -MRG.txt files
+
+* run m-md3-csv-ALL.py to make the year .csv files
+
+* run m-md3-qc-ALL.py by basin, e.g., m-md3-qc-ALL.py -S w.24
+
+# this does the speed check and cleanup
+
+* do md3a -S all.24 -s -b | g gendiff | g -v '  -6' > gendiff-2024-bbbb.txt to find genesis mismatches
+
+* run c-9xtime-time2gen.py
+--> edit the file directly to set the inventory
+--> run by basin and after each meld adjustment run m-md3-csv-ALL.py 2024
+
+# found bugs in mismatch between 9x in one shem basin for a NN in a
+  different one
+
+# most mismatches were an extra posit in the 9X-dev, i.e., gendiff = 0
+  vice -6 for almost all the NHC storms
+
+The most labor intensive was m-md3-qc-ALL.py to take out the kinks in
+the tracks, also found diffs in 9x-sum.txt and NN-sum.txt
+
+The whole think took about 7 h...
+
+

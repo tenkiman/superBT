@@ -95,6 +95,7 @@ if(stmopt != None):
     stmopts=getStmopts(stmopt)
     for stmopt in stmopts:
         #dobt=0
+        print 'qqq',stmopt
         stmids=stmids+md3.getMd3Stmids(stmopt,dobt=dobt,verb=verb)
         
 elif(len(years) > 0):
@@ -117,7 +118,9 @@ if(stmopt != None):
     
 elif(yearOpt != None):
     oyearOpt=yearOpt.replace('.','-')
-    
+   
+
+print 'sss---',stmids 
 for stmid in stmids:
     
     if(ropt == 'norun'):

@@ -64,7 +64,6 @@ invpath="inv/diff-time9x-time2gen-2023.txt"
 invpath="gendiff-lant-2023.txt"
 invpath="gendiff-wpac-2023.txt"
 invpath="gendiff-2023-last.txt"   # last storm to in lant 2023
-cards=open(invpath).readlines()
 
 # -- work in the current version
 #
@@ -75,7 +74,17 @@ if(basinOpt != None):
 else:
     basins=['w','l','e','a','b','s','p','c']
 
-basins=['l']
+invpath="gendiff-2024-wpac.txt"
+invpath="gendiff-2024-io.txt"
+invpath="gendiff-2024-epac.txt"
+invpath="gendiff-2024-shem.txt"
+invpath="gendiff-2024-lant.txt"
+
+
+cards=open(invpath).readlines()
+
+
+
 MF.sTimer('sum-md3-ALL')
 
 for year in years:
