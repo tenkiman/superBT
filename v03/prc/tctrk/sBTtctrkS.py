@@ -567,7 +567,7 @@ for Mdeck3 need to turn off
                 ofile="%s/stdout.tctrk.%s.%s.%s.txt"%(self.tdir,self.dtg,omodel,stm3id.lower())
                 ofileSiz=MF.getPathSiz(ofile)
                 ofileStat=(ofileSiz > ofileSizMin)
-                print 'sssss',MF.getPathSiz(ofile),'ooo',ofileStat
+                #print 'sssss',MF.getPathSiz(ofile),'ooo',ofileStat
 
                 #otctrkpathSTM    ="tctrk.atcf.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.64 - standard
                 #otctrkgtcvpathSTM="tctrk.gtcv.%s.%s.%s.txt"%(self.dtg,omodel,stm3id.lower()) # fort.67 - genesis tcvitals
@@ -635,7 +635,7 @@ for Mdeck3 need to turn off
             nzero=0
             nthere=0
             for ostmid in ostmids:
-                print 'ooooooo',ostmid,statTCtrkS[ostmid]
+                #print 'ooooooo',ostmid,statTCtrkS[ostmid]
                 if(statTCtrkS[ostmid] < -1):
                     nzero=nzero+1
                 elif(statTCtrkS[ostmid] >= -1):
