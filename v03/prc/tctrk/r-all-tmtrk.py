@@ -21,6 +21,7 @@ class TmtrkCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
+            'doLog':            ['L',0,1,'send output from s-sbt-tmttrN to a logfile'],
             'ropt':             ['N','','norun',' norun is norun'],
             #'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
@@ -64,6 +65,15 @@ elif(stmopt != None and dtgopt == None):
 else:
     print 'EEE--(%s) must set either dtgopt or stmopt alone...sayounara'%(CL.pyfile)
     sys.exit()
+    
+if(doLog):
+    if(dtgopt != None and stmopt == None): 
+        logName=dtgopt
+    elif(stmopt != None and dtgopt == None): 
+        logName=stmopt.lower()
+    else:
+        logName="%s-%s"%(dtgopt,stmopt)
+
 
 if(dtgopt != None): MF.dTimer('AAA-TCTRK-%s'%(dtgopt))
 if(stmopt != None): MF.dTimer('AAA-TCTRK-%s'%(stmopt))
@@ -80,8 +90,20 @@ for dtg in dtgs:
     if(verb): vopt='-V'
     #if(stmopt != None): sopt='-S %s'%(stmopt)
     if(dtg[8:10] == '00' or doGenAlways): topt='' 
-    cmd="s-sbt-tmtrkN.py %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt)
+    if(doLog):
+        logPath="/ptmp/loG-sbt-tmtrk-%s.txt"%(logName)
+        logOpt=">> %s 2>&1"%(logPath)
+        print 'LLL -- logging to: %s'%(logPath)
+        if(MF.ChkPath(logPath)):
+            cmd="rm -i %s"%(logPath)
+            mf.runcmd(cmd)
+        
+    else:
+        logOpt=""
+    MF.sTimer('sbt-TCTRK-%s'%(dtg))
+    cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt,logOpt)
     mf.runcmd(cmd,ropt)
+    MF.dTimer('sbt-TCTRK-%s'%(dtg))
     
 if(dtgopt != None): MF.dTimer('AAA-TCTRK-%s'%(dtgopt))
 if(stmopt != None): MF.dTimer('AAA-TCTRK-%s'%(stmopt))

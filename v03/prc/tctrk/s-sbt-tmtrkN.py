@@ -136,7 +136,7 @@ for dtg in dtgs:
         if(not(doInv)): print 'WWW-unable to find data in: ',ctlpath
         continue
 
-    MF.sTimer("all-%s"%(dtg))
+    MF.sTimer("sbt-tmtrkN-%s"%(dtg))
 
     tdirAdeck='%s/%s/%s'%(abdirDtg,ayear,dtg)
     tdir='%s/%s/%s'%(tmtrkbdir,ayear,dtg)
@@ -194,4 +194,4 @@ for dtg in dtgs:
         MF.dTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
 
     
-        MF.dTimer("all-%s"%(dtg))
+    MF.dTimer("sbt-tmtrkN-%s"%(dtg))
