@@ -21,12 +21,13 @@ class TcdiagCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
-            'doLog':            ['L',0,1,'send output from s-sbt-tmttrN to a logfile'],
+            'doLog':            ['L',1,0,'do NOT do logfile to raid02/log'],
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
-            'doLats4d':         ['4',0,1,'convert .dat to .grb'],
+            'doLats4d':         ['4',1,0,'do NOT do lats4d of .dat -> .grb'],
+            'lats4dInc':        ['I:',None,'i','dtg inc to output all grids using lats4d'],
             'doTcFc':           ['f',0,1,'''increase taus for forecasting purposes...'''],
             
         }
@@ -101,15 +102,39 @@ if(stmopt != None): sopt='-S %s'%(stmopt)
 fopt=''
 if(doTcFc): fopt='-f'
 
-latsOpt=''
-if(doLats4d): latsOpt='-4'
+
+if(lats4dInc != None):
+    if(lats4dInc < 0):
+        doLats4d=0
+        lats4dInc=999
+else:
+    lats4dInc=18
     
+    
+bdtg = dtgs[0]
 
 for dtg in dtgs:
-    MF.sTimer('sbt-TCDIAG-%s'%(dtg))
+    
+    # -- set up doing lats4d
+    #
+    latsOpt=''
+    if(doLats4d):
+        
+        if(lats4dInc <= 24):
+
+            hourDtg = mf.dtgdiff(bdtg, dtg)
+            doAutoLats = hourDtg % lats4dInc
+            if(doLats4d and doAutoLats == 0): latsOpt = '-4'
+            
+        else:
+            latsOpt=''
+            
+    # -- run tcdiag
+    #
+    MF.sTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     cmd="s-sbt-tcdiag.py %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,latsOpt,logOpt)
     mf.runcmd(cmd,ropt)
-    MF.dTimer('sbt-TCDIAG-%s'%(dtg))
+    MF.dTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
 if(stmopt != None): MF.dTimer('AAA-TCDIAG-%s'%(stmopt))
