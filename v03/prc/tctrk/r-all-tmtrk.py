@@ -23,7 +23,6 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'doLog':            ['L',0,1,'send output from s-sbt-tmttrN to a logfile'],
             'ropt':             ['N','','norun',' norun is norun'],
-            #'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
@@ -68,9 +67,11 @@ else:
     
 if(doLog):
     if(dtgopt != None and stmopt == None): 
-        logName=dtgopt
+        logName=dtgopt.replace('.','-')
+        logName=logName.replace(',','-')
     elif(stmopt != None and dtgopt == None): 
         logName=stmopt.lower()
+        logName=logName.replace(',','-')
     else:
         logName="%s-%s"%(dtgopt,stmopt)
 
