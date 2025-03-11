@@ -74,6 +74,19 @@ if(doLog):
         logName=logName.replace(',','-')
     else:
         logName="%s-%s"%(dtgopt,stmopt)
+        
+    logPath="/ptmp/loG-sbt-tmtrk-%s.txt"%(logName)
+        
+    if(MF.ChkPath(logPath)):
+        cmd="rm -i %s"%(logPath)
+        mf.runcmd(cmd)
+    
+    print 'LLL -- logging to: %s'%(logPath)
+    
+if(doLog): 
+    logOpt=">> %s 2>&1"%(logPath)
+else:      
+    logOpt=""
 
 
 if(dtgopt != None): MF.dTimer('AAA-TCTRK-%s'%(dtgopt))
@@ -89,18 +102,9 @@ for dtg in dtgs:
     sopt=''
     vopt=''
     if(verb): vopt='-V'
-    #if(stmopt != None): sopt='-S %s'%(stmopt)
+    if(stmopt != None): sopt='-S %s'%(stmopt)
     if(dtg[8:10] == '00' or doGenAlways): topt='' 
-    if(doLog):
-        logPath="/ptmp/loG-sbt-tmtrk-%s.txt"%(logName)
-        logOpt=">> %s 2>&1"%(logPath)
-        print 'LLL -- logging to: %s'%(logPath)
-        if(MF.ChkPath(logPath)):
-            cmd="rm -i %s"%(logPath)
-            mf.runcmd(cmd)
-        
-    else:
-        logOpt=""
+
     MF.sTimer('sbt-TCTRK-%s'%(dtg))
     cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt,logOpt)
     mf.runcmd(cmd,ropt)
