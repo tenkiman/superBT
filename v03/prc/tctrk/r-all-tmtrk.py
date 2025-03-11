@@ -75,7 +75,7 @@ if(doLog):
     else:
         logName="%s-%s"%(dtgopt,stmopt)
         
-    logDir='/sbt/suprBT-V04/log-sbt'
+    logDir='sbt/superBT-V04/log-sbt'
     logPath="/%s/loG-sbt-tmtrk-%s.txt"%(logDir,logName)
         
     if(MF.ChkPath(logPath)):
