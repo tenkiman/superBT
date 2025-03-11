@@ -6,7 +6,7 @@ from sBT import *
 # command line setup
 #
 
-class TmtrkCmdLine(CmdLine):
+class TcdiagCmdLine(CmdLine):
 
     def __init__(self,argv=sys.argv):
 
@@ -21,11 +21,12 @@ class TmtrkCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
+            'doLog':            ['L',0,1,'send output from s-sbt-tmttrN to a logfile'],
             'ropt':             ['N','','norun',' norun is norun'],
-            #'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
+            'doLats4d':         ['4',0,1,'convert .dat to .grb'],
             'doTcFc':           ['f',0,1,'''increase taus for forecasting purposes...'''],
             
         }
@@ -40,7 +41,7 @@ reconstruct stm-sum cards using mdeck3.trk data in src directories in dat/tc/sbt
 #
 
 argv=sys.argv
-CL=TmtrkCmdLine(argv=argv)
+CL=TcdiagCmdLine(argv=argv)
 CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
@@ -51,16 +52,45 @@ if(doBdeck2): doBT=1
 
 md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
+if(dtgopt != None): MF.sTimer('AAA-TCDIAG-%s'%(dtgopt))
+if(stmopt != None): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
+
 if(dtgopt != None and stmopt == None):
     dtgs=mf.dtg_dtgopt_prc(dtgopt)
 elif(stmopt != None and dtgopt == None):
-    dtgs=md3.getMd3StmDtgs4Stmopt(stmopt)
+    syear=None
+    dtgs=md3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
 else:
     print 'EEE--(%s) must set either dtgopt or stmopt alone...sayounara'%(CL.pyfile)
     sys.exit()
+    
+if(doLog):
+    if(dtgopt != None and stmopt == None): 
+        logName=dtgopt.replace('.','-')
+        logName=logName.replace(',','-')
+    elif(stmopt != None and dtgopt == None): 
+        logName=stmopt.lower()
+        logName=logName.replace(',','-')
+    else:
+        logName="%s-%s"%(dtgopt,stmopt)
+        
+    logPath="%s/loG-%s-sbt-tcdiag-%s.txt"%(sbtLogDir,sbtHost,logName)
+        
+    if(MF.ChkPath(logPath)):
+        cmd="rm -i %s"%(logPath)
+        mf.runcmd(cmd)
+    
+    print 'LLL -- logging to: %s'%(logPath)
+    
+if(doLog): 
+    logOpt=">> %s 2>&1"%(logPath)
+else:      
+    logOpt=""
 
 if(dtgopt != None): MF.sTimer('AAA-TCDIAG-%s'%(dtgopt))
 if(stmopt != None): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
+
+# -- options
 
 oopt=''
 if(override): oopt='-O'
@@ -71,14 +101,15 @@ if(stmopt != None): sopt='-S %s'%(stmopt)
 fopt=''
 if(doTcFc): fopt='-f'
 
+latsOpt=''
+if(doLats4d): latsOpt='-4'
+    
+
 for dtg in dtgs:
-    dEnd=mf.dtgdiff(dtg,endEra5Dtg)
-    if(dEnd <= 0.0):
-        print 'no ERA5 fields for: ',dtg,' press...'
-        continue
-    else:
-        cmd="s-sbt-tcdiag.py %s %s %s %s"%(dtg,sopt,fopt,oopt)
-        mf.runcmd(cmd,ropt)
+    MF.sTimer('sbt-TCDIAG-%s'%(dtg))
+    cmd="s-sbt-tcdiag.py %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,latsOpt,logOpt)
+    mf.runcmd(cmd,ropt)
+    MF.dTimer('sbt-TCDIAG-%s'%(dtg))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
 if(stmopt != None): MF.dTimer('AAA-TCDIAG-%s'%(stmopt))
