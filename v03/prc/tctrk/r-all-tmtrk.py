@@ -75,7 +75,8 @@ if(doLog):
     else:
         logName="%s-%s"%(dtgopt,stmopt)
         
-    logPath="/ptmp/loG-sbt-tmtrk-%s.txt"%(logName)
+    logDir='/sbt/suprBT-V04/log-sbt'
+    logPath="/%s/loG-sbt-tmtrk-%s.txt"%(logDir,logName)
         
     if(MF.ChkPath(logPath)):
         cmd="rm -i %s"%(logPath)
