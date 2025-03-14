@@ -2,7 +2,7 @@
 #import M2
 #from M2 import setModel2
 
-from sBT import *
+from sBTcl import *
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 # package variables

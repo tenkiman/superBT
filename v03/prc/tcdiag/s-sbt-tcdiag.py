@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-from sBTtcdiag import *  # imports sBT
+from sBT import *
+from sBTtcdiag import *
+
 #from sbt import  *
 #from M2 import setModel2
 
@@ -44,14 +46,14 @@ class MyCmdLine(CmdLine):
             'TDoverride':       ['o:',None,'a','TDoverride invokes tests in lsDiagProc(): test-trkplot | test-htmlonly | test-plot-html'],
             'SSToverride':      ['z',0,1,'override just making oisst -- for old cases when grid changed'],
             'redoLsdiag':       ['R',0,1,'override just running the '],
-            'doRealTime':       ['r',1,0,'default is to do real time'],
+            'doRealTime':       ['1',1,0,'default is to do real time'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'iVunlink':         ['v',0,1,'unlink invHash pypdb'],
             'quiet':            ['q',1,0,' turn OFF running GA in quiet mode'],
             'ropt':             ['N','','norun',' norun is norun'],
             'doTcFlds':         ['F',0,1,'''doTcFlds -- make f77 input files for lsdiags.x only'''],
             'doTcFc':           ['f',0,1,'''increase taus for forecasting purposes...'''],
-            'runInCron':        ['C',0,1,'''being run in crontab'''],
+            'runInCron':        ['r',0,1,'''being run in crontab'''],
             'doCycle':          ['c',0,1,'cycle by dtgs'],
             'dowindow':         ['w',0,1,'1 - dowindow in GA.setGA()'],
             'doLgemOnly':       ['G',0,1,'doLgemOnly'],
@@ -85,10 +87,10 @@ class MyCmdLine(CmdLine):
             'dobt':             ['b:',0,'i','use BT or working BT 2'],
             'nminWait':         ['W:',30,'i','set number of minutes to wait on other runs'],
             'doEra5sst':        ['5',0,1,'use ERA5 00z daily SST'],
-            'doEra5sst':        ['5',0,1,'use ERA5 00z daily SST'],
             'doLats4d':         ['4',0,1,'convert .dat to .grb'],
             'useFldOutput':     ['U',0,1,'use fldoutput for plotting -- set to 1 for ERA5'],
             'doRoci':           ['p',1,0,'do NOT do roci/poci'],
+            'doLocal':          ['C',0,1,'''run on local filesystem in /sbt/local'''],
             
 
         }
@@ -113,6 +115,42 @@ def errAD(option,opt=None):
         print 'Stopping in errAD: ',option
 
     sys.exit()
+
+def rsyncEra2Local(dtg):
+        
+    MF.sTimer('Local-TCdiag-rsync-%s' % (dtg))
+    year = dtg[0:4]
+    if(sbtHost != 'mike8'):
+        sdirA = 'fiorino@mike8:/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
+    else:
+        sdirA = '/raid02/sbt/dat/adeck-dtg'
+        
+    tdirA = "%s/adeck-dtg/%s/%s" % (sbtDatDirL, year, dtg)
+    MF.ChkDir(tdirA, 'mk')
+
+    # -- for era5 use pull previous 00/12 run if 06/18
+    #
+    eradtg = dtg
+    if(is0618Z(dtg)):
+        eradtg = mf.dtginc(dtg, -6)
+    if(sbtHost != 'mike5'):
+        sdirE = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+    else:
+        sdirE = '/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        
+    tdirE = "%s/nwp2/w2flds/dat/era5/%s/%s" % (sbtDatDirL, year, eradtg)
+    rc = MF.ChkDir(tdirE, 'mk')
+    
+    cmdA = "rsync -alv %s/ %s/" % (sdirA, tdirA)
+    mf.runcmd(cmdA, ropt)
+    
+    cmdE = "rsync -alv %s/ %s/" % (sdirE, tdirE)
+    mf.runcmd(cmdE, ropt)
+
+    MF.dTimer('Local-TCdiag-rsync-%s' % (dtg))
+    return(tdirE)
+
+    
 
 
 
@@ -146,6 +184,18 @@ md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 cTest=(len(dtgs) == 1 and len(modelsDiag[dtgs[0]]) == 1)
 
+
+# -- lllllllllllllllllllllllllllllllllllll -- set local dirs
+#
+if(doLocal):
+    era5DatDir = sbtDatDirL
+    adeckSdir = adeckSdirL
+    sbtProdDir =  sbtProdDirL
+    tbdir=TcTcanalDatDirL
+    tsbdbdir = tsbdbdirL
+#    
+# -- lllllllllllllllllllllllllllllllllllll -- set local dirs
+    
 if(doCycle and not(cTest)):
     MF.sTimer('ALL-cycle-%s'%(dtgopt))
     for dtg in dtgs:
@@ -208,6 +258,10 @@ nStmAll=0
 MF.sTimer(tag='AAA-SBT-LSDIAG-%s'%(dtgopt))
 
 for dtg in dtgs:
+
+    # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
+    #
+    if(doLocal): tdirE = rsyncEra2Local(dtg)
 
     # -- 20230314 -- will miss storms with missing dtgs...
     #    see inv/dtgmiss/m-B-2007-22.txt 
@@ -347,7 +401,6 @@ for dtg in dtgs:
                   sbtProdDir=sbtProdDir,
                   doga=0,verb=verb)
 
-
         # -- 20230607 -- clean all files if override -- to overcome problem of redos with storms in all hemis
         #
         if(override):
@@ -370,10 +423,20 @@ for dtg in dtgs:
 
         if(rc == -2):
             print 'WWW(chKOutput) 22222 rc: ',rc,'need to do the following: ',todoStmids
+
         elif( (rc == 0) and not(override) and not(SSToverride) and not(redoLsdiag) and TDoverride == None and not(dols) ):
             print 'WWW(chKOutput) 00000 rc: ',rc,' override: ',override,' SSToverride: ',SSToverride,'TDoveride: ',TDoverride,'redoLsdiag: ',redoLsdiag,'dols: ',\
                   dols,'docleanPaths: ',docleanDpaths,' continue...'
+
+            # -- because tG needs the fields... and we always get even if done... -- llllllllllllllllllllllllllllll
+            #
+            if(doLocal):
+                cmd = "rm %s/*" % (tdirE)
+                mf.runcmd(cmd, ropt)
+            
             continue        
+
+        if(doLocal): tdirE = rsyncEra2Local(dtg)
         
         tG.grads21Cmd=xgrads
         tG.md3=md3
@@ -644,9 +707,18 @@ for dtg in dtgs:
 
         # -- run lats4d always run even if cleaning off main paths to always save the sfc-era5*grb
         #
-        cmd='p-era5-lats4d.py %s'%(dtg)
+        lopt = ''
+        if(doLocal): lopt = '-C'
+        cmd='p-era5-lats4d.py %s %s'%(dtg, lopt)
         mf.runcmd(cmd,ropt)
 
+        # -- if local blow away rsync'd era5 -- lllllllllllllllllllllllllllllllllllllllllllllllll
+        #
+        if(doLocal):
+            cmd = "rm %s/*" % (tdirE)
+            mf.runcmd(cmd, ropt)
+            
+            
     MF.dTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
             
 MF.dTimer(tag='AAA-SBT-LSDIAG-%s'%(dtgopt))

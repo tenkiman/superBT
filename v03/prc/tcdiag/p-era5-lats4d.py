@@ -48,6 +48,7 @@ class TmtrkCmdLine(CmdLine):
             'doClean':          ['K',1,0,'do NOT clean .dat and .grb files'],
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
+            'doLocal':          ['C',0,1,'use local files vice mike8:/raid01'],
             'ropt':             ['N','','norun',' norun is norun'],
         }
 
@@ -68,6 +69,8 @@ if(verb): print CL.estr
 
 dtgs=mf.dtg_dtgopt_prc(dtgopt)
 
+if(doLocal):
+    TcTcanalDatDir = TcTcanalDatDirL
 
 MF.sTimer("ALL-lats")
 for dtg in dtgs:

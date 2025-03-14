@@ -29,6 +29,7 @@ class TcdiagCmdLine(CmdLine):
             'doLats4d':         ['4',1,0,'do NOT do lats4d of .dat -> .grb'],
             'lats4dInc':        ['I:',None,'i','dtg inc to output all grids using lats4d'],
             'doTcFc':           ['f',0,1,'''increase taus for forecasting purposes...'''],
+            'doLocal':          ['C',0,1,'''run on local filesystem in /sbt/local'''],
             
         }
 
@@ -74,8 +75,12 @@ if(doLog):
         logName=logName.replace(',','-')
     else:
         logName="%s-%s"%(dtgopt,stmopt)
-        
-    logPath="%s/loG-%s-sbt-tcdiag-%s.txt"%(sbtLogDir,sbtHost,logName)
+    
+    sbldir = sbtLogDir
+    if(doLocal): sbldir = sbtLogDirL
+         
+    
+    logPath="%s/loG-%s-sbt-tcdiag-%s.txt"%(sbldir,sbtHost,logName)
         
     if(MF.ChkPath(logPath)):
         cmd="rm -i %s"%(logPath)
@@ -101,6 +106,8 @@ if(stmopt != None): sopt='-S %s'%(stmopt)
 
 fopt=''
 if(doTcFc): fopt='-f'
+lopt = ''
+if(doLocal): lopt ='-C'     
 
 
 if(lats4dInc != None):
@@ -132,7 +139,7 @@ for dtg in dtgs:
     # -- run tcdiag
     #
     MF.sTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
-    cmd="s-sbt-tcdiag.py %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,latsOpt,logOpt)
+    cmd="s-sbt-tcdiag.py %s %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,lopt, latsOpt,logOpt)
     mf.runcmd(cmd,ropt)
     MF.dTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     
