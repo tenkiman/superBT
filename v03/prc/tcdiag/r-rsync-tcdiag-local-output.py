@@ -25,6 +25,7 @@ class TcdiagCmdLine(CmdLine):
             'doIt':             ['X',0,1,' execute'],
             'ymdOpt':           ['Y:',None,'a','ymdOpt for setting dirs to rsync'],
             'rType':            ['R:',None,'a','type of rsync dat | prod'],
+            'doDelete':         ['d',0,1,' use --delete option'],
            
         }
 
@@ -66,8 +67,15 @@ else:
     print """EEE -- invalid rType -- must be either 'dat' | 'prod'"""
     sys.exit()
 
+    
+if(doDelete):
+    datDel='%s --remove-source-files --delete --exclude INV'%(rsyncType)
+else:
+    datDel='%s --remove-source-files --exclude INV'%(rsyncType)
+
+
 datDirs={
-    'dat':('tcdiag','%s --remove-source-files --delete --exclude INV'%(rsyncType)),
+    'dat':('tcdiag','%s'%(datDel)),
     'prod':('','%s --remove-source-files'%(rsyncType)),
 }
 
