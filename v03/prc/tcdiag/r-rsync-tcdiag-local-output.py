@@ -70,13 +70,15 @@ else:
     
 if(doDelete):
     datDel='%s --remove-source-files --delete --exclude INV'%(rsyncType)
+    prodDel='%s --remove-source-files --delete'%(rsyncType)
 else:
     datDel='%s --remove-source-files --exclude INV'%(rsyncType)
+    prodDel='%s --remove-source-files'%(rsyncType)
 
 
 datDirs={
     'dat':('tcdiag','%s'%(datDel)),
-    'prod':('','%s --remove-source-files'%(rsyncType)),
+    'prod':('','%s'%(prodDel)),
 }
 
 year=ymdOpt[0:4]
