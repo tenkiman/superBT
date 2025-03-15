@@ -123,7 +123,7 @@ def rsyncEra2Local(dtg):
     if(sbtHost != 'mike8'):
         sdirA = 'fiorino@mike8:/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
     else:
-        sdirA = '/raid02/sbt/dat/adeck-dtg'
+        sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
         
     tdirA = "%s/adeck-dtg/%s/%s" % (sbtDatDirL, year, dtg)
     MF.ChkDir(tdirA, 'mk')
@@ -299,7 +299,6 @@ for dtg in dtgs:
 
     models=modelsDiag[dtg]
     year=dtg[0:4]
-    tbdir=TcTcanalDatDir
     tbdirInv="%s/%s/INV"%(tbdir,year)
     MF.ChkDir(tbdirInv,'mk')
     
