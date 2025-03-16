@@ -230,7 +230,8 @@ if(not(doCycle) and not(bypassRunChk)):
         sys.exit()
 
 
-xgrads=setXgrads(useStandard=1)
+#xgrads=setXgrads(useStandard=1)   # hi res plots
+xgrads=setXgrads(useX11=1)
 
 
 # -- do inventory if cur in dtgopt
