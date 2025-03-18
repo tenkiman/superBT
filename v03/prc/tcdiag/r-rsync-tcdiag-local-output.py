@@ -26,6 +26,10 @@ class TcdiagCmdLine(CmdLine):
             'ymdOpt':           ['Y:',None,'a','ymdOpt for setting dirs to rsync'],
             'rType':            ['R:',None,'a','type of rsync dat | prod'],
             'doDelete':         ['d',0,1,' use --delete option'],
+            'doRmvSrcFiles':    ['r',0,0,' NEVER use ...remove locally'],
+            'doCleanLocal':     ['K',0,1,' rm */*/* local'],
+            'doLsLocal':        ['l',0,1,' do local ls -la'],
+            'doLsRemote':       ['L',0,1,' do ls -la on RAID02'],
            
         }
 
@@ -44,8 +48,8 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-print 'ddd',sbtDatDirL,sbtDatDir,'ppp',sbtProdDirL,sbtProdDir
-
+# -- set rsync type
+#
 if(doIt and ropt == ''): 
     rsyncType='-alv'
 elif(doIt and ropt == 'norun'):
@@ -53,11 +57,13 @@ elif(doIt and ropt == 'norun'):
     ropt=''
 else:
     rsyncType='-alvn'
-    
-    
+
+# -- set source/target dirs
+#
 if(rType == 'dat'):
     sdir=sbtDatDirL
     tdir=sbtDatDir
+    exOpt='--exclude INV'
     
 elif(rType == 'prod'):
     sdir=sbtProdDirL
@@ -67,24 +73,26 @@ else:
     print """EEE -- invalid rType -- must be either 'dat' | 'prod'"""
     sys.exit()
 
+# -- set rsync opts
+#
+rsfOpt=''
+if(doRmvSrcFiles):
+    rsfOpt='--remove-source-files'
+
+delOpt=''
+if(doDelete):delOpt='--delete'
+
+exOpt=''
+#if(rType == 'dat'): exOpt='--exclude INV'
+     
+rsyncOpt="%s %s %s %s"%(rsyncType,rsfOpt,delOpt,exOpt)
     
-if(doDelete):
-    datDel='%s --remove-source-files --delete --exclude INV'%(rsyncType)
-    prodDel='%s --remove-source-files --delete'%(rsyncType)
-else:
-    datDel='%s --remove-source-files --exclude INV'%(rsyncType)
-    prodDel='%s --remove-source-files'%(rsyncType)
-
-
-datDirs={
-    'dat':('tcdiag','%s'%(datDel)),
-    'prod':('','%s'%(prodDel)),
-}
-
 year=ymdOpt[0:4]
 tymd="%s/"%(year)
 if(len(ymdOpt) == 4):
     symd="%s/"%(year)
+elif(len(ymdOpt) == 5):
+    symd='''%s/%s?????'''%(year,ymdOpt)
 elif(len(ymdOpt) == 6):
     symd='''%s/%s????'''%(year,ymdOpt)
 elif(len(ymdOpt) == 7):
@@ -98,10 +106,26 @@ else:
     sys.exit()
     
     
+if(rType == 'dat'): 
+    sdir="%s/tcdiag"%(sdir)
+    tdir="%s/tcdiag"%(tdir)
+
+if(verb):
+    print 'SSS: ',sdir
+    print 'TTT: ',tdir
+    print 'YMD: ',symd
+    print 'RRR: ',rsyncOpt
+
 MF.sTimer('rsync-%s-%s-%s'%(sbtHost,ymdOpt,rType))
-(datdir,rsyncOpt)=datDirs[rType]
-cmd="rsync %s %s/%s/%s %s/%s/%s"%(rsyncOpt,sdir,datdir,symd,
-                                        tdir,datdir,tymd)
+cmd="rsync %s %s/%s %s/%s"%(rsyncOpt,sdir,symd,tdir,tymd)
+if(doCleanLocal):  
+    cmd="rm %s/%s/*/*"%(sdir,symd)
+elif(doLsLocal):
+    cmd="ls -la %s/%s/*"%(sdir,symd)
+elif(doLsRemote):
+    cmd="ls -la %s/%s/*"%(tdir,symd)
+    
+#print 'ccc: ',cmd,'ropt: ',ropt,' <==='
 mf.runcmd(cmd,ropt)
 MF.dTimer('rsync-%s-%s-%s'%(sbtHost,ymdOpt,rType))
     
