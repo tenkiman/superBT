@@ -120,6 +120,10 @@ else:
     
 bdtg = dtgs[0]
 
+# -- use 010100 as the start for doing the all lats every 18 h
+#
+bdtgLats= "%s010100"%(bdtg[0:4])
+
 for dtg in dtgs:
     
     # -- set up doing lats4d
@@ -129,7 +133,7 @@ for dtg in dtgs:
         
         if(lats4dInc <= 24):
 
-            hourDtg = mf.dtgdiff(bdtg, dtg)
+            hourDtg = mf.dtgdiff(bdtgLats, dtg)
             doAutoLats = hourDtg % lats4dInc
             if(doLats4d and doAutoLats == 0): latsOpt = '-4'
             

@@ -83,13 +83,14 @@ for lsOpt in lsOpts:
             #print 'LLL',remotels
 
 print 'lll: ',localls,' LLL: ',remotels            
+cmd="%s %s"%(app,killOpt)
 if(localls == remotels):
-    cmd="%s %s"%(app,killOpt)
     mf.runcmd(cmd, ropt)
-    
+else:
+    print 'WWW -- diff in # of local v remote'
+    mf.runcmd(cmd, 'norun')
 
 MF.sTimer("all-rsync-%s"%(ymdOpt))
-    
 
 sys.exit()
 
