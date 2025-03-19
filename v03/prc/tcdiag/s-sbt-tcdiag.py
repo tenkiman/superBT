@@ -134,7 +134,8 @@ def rsyncEra2Local(dtg):
     if(is0618Z(dtg)):
         eradtg = mf.dtginc(dtg, -6)
     if(sbtHost != 'mike5'):
-        sdirE = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        sdirE  = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        sdirE2 = '/mnt/mike5-mnt/USB3RAID5-01/dat/nwp2/w2flds/dat/era5/%s/%s'%(year,eradtg)
     else:
         sdirE = '/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
         
