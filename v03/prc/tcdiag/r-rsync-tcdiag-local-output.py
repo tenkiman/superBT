@@ -58,6 +58,14 @@ elif(doIt and ropt == 'norun'):
 else:
     rsyncType='-alvn'
 
+# -- clean local
+#
+if(doCleanLocal):
+    if(doIt):
+        ropt=''
+    else:
+        ropt='norun'
+    
 # -- set source/target dirs
 #
 if(rType == 'dat'):
@@ -120,6 +128,7 @@ MF.sTimer('rsync-%s-%s-%s'%(sbtHost,ymdOpt,rType))
 cmd="rsync %s %s/%s %s/%s"%(rsyncOpt,sdir,symd,tdir,tymd)
 if(doCleanLocal):  
     cmd="rm %s/%s/*/*"%(sdir,symd)
+    cmd='''for f in %s/%s/*/* ; do echo rm $f ; rm $f ; done'''%(sdir,symd)
 elif(doLsLocal):
     cmd="ls -la %s/%s/*"%(sdir,symd)
 elif(doLsRemote):
