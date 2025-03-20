@@ -275,7 +275,7 @@ for dtg in dtgs:
     #
     nStm=len(dstmids)
     nStmAll=nStmAll+nStm
-    if(len(nStm) == 0):
+    if(nStm == 0):
         print 'III no storms at dtg: ',dtg,' press ...'
         continue
         
