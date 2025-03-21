@@ -72,6 +72,7 @@ if(rType == 'dat'):
     sdir=sbtDatDirL
     tdir=sbtDatDir
     exOpt='--exclude INV'
+    exOpt=''
     
 elif(rType == 'prod'):
     sdir=sbtProdDirL

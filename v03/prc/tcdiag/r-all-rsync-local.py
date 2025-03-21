@@ -70,6 +70,8 @@ cmd="%s %s"%(app,rsyncOpt)
 mf.runcmd(cmd, ropt)
     
 roptls=''
+localls=-999
+remotels=-999
 for lsOpt in lsOpts:
     cmd="%s %s"%(app,lsOpt)
     #mf.runcmd(cmd, ropt)
