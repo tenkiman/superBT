@@ -145,6 +145,9 @@ for dtg in dtgs:
     MF.sTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     cmd="s-sbt-tcdiag.py %s %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,lopt, latsOpt,logOpt)
     mf.runcmd(cmd,ropt)
+    # -- sleep for 5 s to see if the coredumps on mike6 come from memory not cleaning
+    #
+    sleep(5)
     MF.dTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
