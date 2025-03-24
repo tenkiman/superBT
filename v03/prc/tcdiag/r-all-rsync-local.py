@@ -107,24 +107,6 @@ for rType in rTypes:
         cmd="%s %s"%(app,rsyncOpt)
         mf.runcmd(cmd, ropt)
             
-        (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
-        
-        #roptls=''
-        #localls=-999
-        #remotels=-999
-        #for lsOpt in lsOpts:
-            #cmd="%s %s"%(app,lsOpt)
-            ##mf.runcmd(cmd, ropt)
-            #rc=mf.runcmd2(cmd, roptls, verb=verb, lsopt='', prefix='', postfix='', ostdout=1, wait=False)
-            #if(rc[0] == 1):
-                #if(mf.find(lsOpt,'-l | ')):
-                    #localls=int(rc[1][0])
-                    ##print 'lll',localls
-                #if(mf.find(lsOpt,'-L | ')):
-                    #remotels=int(rc[1][0])
-                    ##print 'LLL',remotels
-        
-        
         MF.dTimer("all-rsync-%s-%s"%(ymdOpt,rType))
 
 for rType in rTypes:
@@ -146,8 +128,11 @@ for rType in rTypes:
         
         if(doKill and doIt):
             mf.runcmd(cmd, ropt)
+            (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
+            print 'AfterKill -- %4s ymd: %s   lll-local: %6d'%(rType,ymdOpt,localls),' LLL-remote: %6d'%(remotels)
         else:
             mf.runcmd(cmdno, 'norun')
+
 
 MF.dTimer('AAA-RRR-%s'%(str(ymdOpts)))
 
