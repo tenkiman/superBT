@@ -21,7 +21,7 @@ class TcdiagCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
-            'ropt':             ['N','','norun',' norun is norun'],
+            'doLsOnly':         ['L',0,1,' just do ls of files local and remote'],
             'doIt':             ['X',0,1,' execute'],
             'doDelete':         ['d',0,1,' use -d to delete files on the targe if not on the source'],
             'doKill':           ['K',0,1,' do kill if # of files the same on both local/remote'],
@@ -105,7 +105,7 @@ for rType in rTypes:
 
         # -- bypass actual rsync...if doing kill or 'norun'
         #
-        if(doKill): continue
+        if(doKill or doLsOnly): continue
 
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
         if(doIt):
