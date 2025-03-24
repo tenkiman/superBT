@@ -87,24 +87,27 @@ MF.sTimer('AAA-RRR-%s'%(str(ymdOpts)))
 delOpt=''
 if(doDelete): delOpt='-d'
     
+# -- do rsync of local to remote with option to delete not on remote (-d)
+#
 for rType in rTypes:
-    
     for ymdOpt in ymdOpts:
 
-        if(doKill):    continue
-        
+        # -- bypass actual rsync...if doing kill or 'norun'
+        #
+        if(ropt == 'norun' or doKill): continue
+
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
-    
         if(doIt):
             rsyncOpt="-Y %s %s -R %s -X"%(ymdOpt,delOpt,rType)
             ropt=''
-
+                 
         MF.sTimer("all-rsync-%s-%s"%(ymdOpt,rType))
         cmd="%s %s"%(app,rsyncOpt)
         mf.runcmd(cmd, ropt)
-            
         MF.dTimer("all-rsync-%s-%s"%(ymdOpt,rType))
 
+# -- do listing and kill of local files
+#
 for rType in rTypes:
     for ymdOpt in ymdOpts:
 
@@ -129,7 +132,7 @@ for rType in rTypes:
             (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
             print 'AfterKill -- %4s ymd: %s   lll-local: %6d'%(rType,ymdOpt,localls),' LLL-remote: %6d'%(remotels)
         else:
-            mf.runcmd(cmdno, 'norun')
+            mf.runcmd(cmdno, 'norun',lsopt='q')
 
 
 MF.dTimer('AAA-RRR-%s'%(str(ymdOpts)))
