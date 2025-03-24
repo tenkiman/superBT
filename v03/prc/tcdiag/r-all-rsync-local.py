@@ -39,23 +39,30 @@ reconstruct stm-sum cards using mdeck3.trk data in src directories in dat/tc/sbt
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
 
-def getLsTdiagLocalRemote(app,lsOpts):
+def getLsTdiagLocalRemote(app,ymdOpt, doPrint= 0):
+
+    lsOpts=[
+        "-Y %s -R %s -l | wc -l"%(ymdOpt,rType),
+        "-Y %s -R %s -L | wc -l"%(ymdOpt,rType),
+    ]
     
     roptls=''
     localls=-999
     remotels=-999
     for lsOpt in lsOpts:
         cmd="%s %s"%(app,lsOpt)
-        #mf.runcmd(cmd, ropt)
         rc=mf.runcmd2(cmd, roptls, verb=verb, lsopt='q', prefix='', postfix='', ostdout=1, wait=False)
         if(rc[0] == 1):
             if(mf.find(lsOpt,'-l | ')):
                 localls=int(rc[1][0])
-                #print 'lll',localls
             if(mf.find(lsOpt,'-L | ')):
                 remotels=int(rc[1][0])
-                #print 'LLL',remotels
                 
+    if(doPrint):
+        print 'lll--local  ls: ', localls
+        print 'LLL--remote ls: ', remotels
+        
+        
     return(localls,remotels)
 
 
@@ -89,26 +96,38 @@ if(doDelete): delOpt='-d'
     
 # -- do rsync of local to remote with option to delete not on remote (-d)
 #
+ropt = 'norun'
+didRsync = 0
+if(doIt): ropt = ''
+     
 for rType in rTypes:
     for ymdOpt in ymdOpts:
 
         # -- bypass actual rsync...if doing kill or 'norun'
         #
-        if(ropt == 'norun' or doKill): continue
+        if(doKill): continue
 
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
         if(doIt):
             rsyncOpt="-Y %s %s -R %s -X"%(ymdOpt,delOpt,rType)
-            ropt=''
                  
         MF.sTimer("all-rsync-%s-%s"%(ymdOpt,rType))
         cmd="%s %s"%(app,rsyncOpt)
         mf.runcmd(cmd, ropt)
         MF.dTimer("all-rsync-%s-%s"%(ymdOpt,rType))
-
+        
+        # -- set rsync flag
+        #
+        if(doIt): didRsync = 1
+        
+        
 # -- do listing and kill of local files
 #
+ropt = 'norun'
+if(didRsync): doIt = 0
+
 for rType in rTypes:
+    
     for ymdOpt in ymdOpts:
 
         if(doIt): ropt = ''
@@ -116,20 +135,15 @@ for rType in rTypes:
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
         killOpt="-Y %s %s -R %s -K -X"%(ymdOpt,delOpt,rType)
         killOptNorun="-Y %s %s -R %s -K -N"%(ymdOpt,delOpt,rType)
-
-        lsOpts=[
-            "-Y %s -R %s -l | wc -l"%(ymdOpt,rType),
-            "-Y %s -R %s -L | wc -l"%(ymdOpt,rType),
-        ]
         
-        (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
+        (localls,remotels)=getLsTdiagLocalRemote(app,ymdOpt)
         print '%4s ymd: %s   lll-local: %6d'%(rType,ymdOpt,localls),' LLL-remote: %6d'%(remotels)
         cmd="%s %s"%(app,killOpt)
         cmdno="%s %s"%(app,killOptNorun)
         
         if(doKill and doIt):
             mf.runcmd(cmd, ropt)
-            (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
+            (localls,remotels)=getLsTdiagLocalRemote(app,ymdOpt)
             print 'AfterKill -- %4s ymd: %s   lll-local: %6d'%(rType,ymdOpt,localls),' LLL-remote: %6d'%(remotels)
         else:
             mf.runcmd(cmdno, 'norun',lsopt='q')
