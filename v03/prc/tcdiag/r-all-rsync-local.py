@@ -102,7 +102,6 @@ for rType in rTypes:
             "-Y %s %s -R %s -L | wc -l"%(ymdOpt,delOpt,rType),
         ]
         
-        killOpt="-Y %s %s -R %s -K -X"%(ymdOpt,delOpt,rType)
         
         MF.sTimer("all-rsync-%s-%s"%(ymdOpt,rType))
         cmd="%s %s"%(app,rsyncOpt)
@@ -130,7 +129,10 @@ for rType in rTypes:
 
 for rType in rTypes:
     for ymdOpt in ymdOpts:
+
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
+        killOpt="-Y %s %s -R %s -K -X"%(ymdOpt,delOpt,rType)
+        killOptNorun="-Y %s %s -R %s -K -N"%(ymdOpt,delOpt,rType)
 
         lsOpts=[
             "-Y %s -R %s -l | wc -l"%(ymdOpt,rType),
@@ -140,11 +142,12 @@ for rType in rTypes:
         (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
         print '%4s ymd: %s   lll-local: %6d'%(rType,ymdOpt,localls),' LLL-remote: %6d'%(remotels)
         cmd="%s %s"%(app,killOpt)
-        if(localls == remotels and doKill):
+        cmdno="%s %s"%(app,killOptNorun)
+        
+        if(doKill and doIt):
             mf.runcmd(cmd, ropt)
         else:
-            print 'WWW -- diff in # of local v remote'
-            mf.runcmd(cmd, 'norun')
+            mf.runcmd(cmdno, 'norun')
 
 MF.dTimer('AAA-RRR-%s'%(str(ymdOpts)))
 
