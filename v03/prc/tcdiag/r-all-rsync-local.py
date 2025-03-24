@@ -125,13 +125,6 @@ for rType in rTypes:
                     #remotels=int(rc[1][0])
                     ##print 'LLL',remotels
         
-        #print 'lll: ',localls,' LLL: ',remotels            
-        cmd="%s %s"%(app,killOpt)
-        if(localls == remotels and doKill):
-            mf.runcmd(cmd, ropt)
-        else:
-            print 'WWW -- diff in # of local v remote'
-            mf.runcmd(cmd, 'norun')
         
         MF.dTimer("all-rsync-%s-%s"%(ymdOpt,rType))
 
@@ -146,6 +139,13 @@ for rType in rTypes:
         
         (localls,remotels)=getLsTdiagLocalRemote(app,lsOpts)
         print '%4s ymd: %s   lll-local: %6d'%(rType,ymdOpt,localls),' LLL-remote: %6d'%(remotels)
+        cmd="%s %s"%(app,killOpt)
+        if(localls == remotels and doKill):
+            mf.runcmd(cmd, ropt)
+        else:
+            print 'WWW -- diff in # of local v remote'
+            mf.runcmd(cmd, 'norun')
+
 MF.dTimer('AAA-RRR-%s'%(str(ymdOpts)))
 
 sys.exit()
