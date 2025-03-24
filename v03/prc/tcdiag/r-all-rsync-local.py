@@ -91,18 +91,14 @@ for rType in rTypes:
     
     for ymdOpt in ymdOpts:
 
+        if(doKill):    continue
+        
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
     
         if(doIt):
             rsyncOpt="-Y %s %s -R %s -X"%(ymdOpt,delOpt,rType)
             ropt=''
 
-        lsOpts=[
-            "-Y %s %s -R %s -l | wc -l"%(ymdOpt,delOpt,rType),
-            "-Y %s %s -R %s -L | wc -l"%(ymdOpt,delOpt,rType),
-        ]
-        
-        
         MF.sTimer("all-rsync-%s-%s"%(ymdOpt,rType))
         cmd="%s %s"%(app,rsyncOpt)
         mf.runcmd(cmd, ropt)
@@ -112,6 +108,8 @@ for rType in rTypes:
 for rType in rTypes:
     for ymdOpt in ymdOpts:
 
+        if(doIt): ropt = ''
+             
         rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
         killOpt="-Y %s %s -R %s -K -X"%(ymdOpt,delOpt,rType)
         killOptNorun="-Y %s %s -R %s -K -N"%(ymdOpt,delOpt,rType)
