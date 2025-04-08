@@ -261,10 +261,6 @@ MF.sTimer(tag='AAA-SBT-LSDIAG-%s'%(dtgopt))
 
 for dtg in dtgs:
 
-    # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
-    #
-    if(doLocal): tdirE = rsyncEra2Local(dtg)
-
     # -- 20230314 -- will miss storms with missing dtgs...
     #    see inv/dtgmiss/m-B-2007-22.txt 
     #    need to add interpolated dtgs into 'all-md3-2007-2022-MRG.csv'
@@ -275,17 +271,19 @@ for dtg in dtgs:
     #
     nStm=len(dstmids)
     nStmAll=nStmAll+nStm
-    if(nStm == 0):
-        print 'III no storms at dtg: ',dtg,' press ...'
-        continue
-        
-
 
     MF.sTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
     
     if(nStm == 0):        
+        print 'III no storms at dtg: ',dtg,' press ...'
         MF.dTimer(tag='SBT-LSDIAG-%s-Nstm: %02d'%(dtg,nStm))
         continue
+
+    # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
+    # -- IIFF there are storms
+    #
+    if(doLocal): tdirE = rsyncEra2Local(dtg)
+
     
     # -- only track in stmopt
     #
