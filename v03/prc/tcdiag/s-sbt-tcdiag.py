@@ -712,6 +712,12 @@ for dtg in dtgs:
         # -- run lats4d always run even if cleaning off main paths to always save the sfc-era5*grb
         #
         lopt = ''
+        
+        # -- if on mike6 -- pause before doing lats...problem accessing python2 in p-era5-lats4d.py?
+        #
+        if (sbtHost == 'mike6'):
+            sleep(3)
+        
         if(doLocal): lopt = '-C'
         cmd='p-era5-lats4d.py %s %s'%(dtg, lopt)
         mf.runcmd(cmd,ropt)
