@@ -78,7 +78,16 @@ if(rType == 'all'):
 else:
     rTypes=[rType]
     
-ymdOpts=ymdOpt.split(',')
+
+if(mf.find(ymdOpt,'.')):
+    tt=ymdOpt.split('.')
+    if(len(tt) == 2):
+        bymd=int(tt[0])
+        eymd=int(tt[1])
+        ymdOpts=range(bymd,eymd+1)
+else:
+    ymdOpts=ymdOpt.split(',')
+        
 
 if(not(mf.find(str(rTypes),'dat') or mf.find(str(rTypes),'prod'))):
     print 'EEE -R must be either dat or prod'
@@ -89,7 +98,7 @@ app="r-rsync-tcdiag-local-output.py"
 
 ropt='norun'
 
-MF.sTimer('AAA-RRR-%s'%(str(ymdOpts)))
+MF.sTimer('AAA-RRR-%s-%s'%(str(ymdOpts[0]),str(ymdOpts[-1])))
 
 delOpt=''
 if(doDelete): delOpt='-d'
@@ -105,23 +114,24 @@ for rType in rTypes:
 
         # -- bypass actual rsync...if doing kill or 'norun'
         #
+        symdOpt=str(ymdOpt)
         if(doKill or doLsOnly): continue
 
-        rsyncOpt="-Y %s %s -R %s -N"%(ymdOpt,delOpt,rType)
+        rsyncOpt="-Y %s %s -R %s -N"%(symdOpt,delOpt,rType)
         if(doIt):
-            rsyncOpt="-Y %s %s -R %s -X"%(ymdOpt,delOpt,rType)
+            rsyncOpt="-Y %s %s -R %s -X"%(symdOpt,delOpt,rType)
                  
-        MF.sTimer("all-rsync-%s-%s"%(ymdOpt,rType))
+        MF.sTimer("all-rsync-%s-%s"%(symdOpt,rType))
         cmd="%s %s"%(app,rsyncOpt)
         mf.runcmd(cmd, ropt)
-        MF.dTimer("all-rsync-%s-%s"%(ymdOpt,rType))
+        MF.dTimer("all-rsync-%s-%s"%(symdOpt,rType))
         
         # -- set rsync flag
         #
         if(doIt): didRsync = 1
         
         
-# -- do listing and kill of local files
+# -- do listing and kill off local files
 #
 ropt = 'norun'
 if(didRsync): doIt = 0
@@ -149,7 +159,7 @@ for rType in rTypes:
             mf.runcmd(cmdno, 'norun',lsopt='q')
 
 
-MF.dTimer('AAA-RRR-%s'%(str(ymdOpts)))
+MF.dTimer('AAA-RRR-%s-%s'%(str(ymdOpts[0]),str(ymdOpts[-1])))
 
 sys.exit()
 
