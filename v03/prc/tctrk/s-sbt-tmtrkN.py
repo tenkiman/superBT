@@ -22,6 +22,33 @@ def getEra5Grb(era5bdir,dtg,model='era5'):
     
     return(ctlpath,sizgrb,ctlpath2,sizgrb2)
 
+def rsyncEra2Local(dtg):
+        
+    MF.sTimer('Local-TCtrk-rsync-%s' % (dtg))
+
+    # -- for era5 use pull previous 00/12 run if 06/18
+    #
+    eradtg = dtg
+    if(is0618Z(dtg)):
+        eradtg = mf.dtginc(dtg, -6)
+        
+    year=eradtg[0:4]
+    if(sbtHost != 'mike5'):
+        sdirE2  = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        sdirE = '/mnt/mike5-mnt/USB3RAID5-01/dat/nwp2/w2flds/dat/era5/%s/%s'%(year,eradtg)
+    else:
+        sdirE = '/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        
+    tdirE = "%s/nwp2/w2flds/dat/era5/%s/%s" % (sbtDatDirL, year, eradtg)
+    era5bdir= "%s/nwp2/w2flds/dat/era5" % (sbtDatDirL)
+    rc = MF.ChkDir(tdirE, 'mk')
+    
+    cmdE = "rsync -alv %s/ %s/" % (sdirE, tdirE)
+    mf.runcmd(cmdE, ropt)
+
+    MF.dTimer('Local-TCtrk-rsync-%s' % (dtg))
+    return(tdirE,era5bdir)
+
 
 
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -49,6 +76,8 @@ class TmtrkCmdLine(CmdLine):
             'doBail':           ['B',0,1,'1 bail if no era5 fields'],            
             'doInv':            ['i',0,1,'do Inventory'],            
             'doCpTctrk':        ['P',0,1,'make the tctrk.atcf|sink.dtg.txt from adeck_stm -> adeck_dtg'],            
+            'doLocal':          ['C',0,1,'''run on local filesystem in /sbt/local'''],
+            
         }
 
         self.purpose="""
@@ -74,6 +103,17 @@ if(verb): print CL.estr
 
 prcdir=sbtPrcDirTctrk
 MF.ChangeDir(prcdir,verb=verb)
+
+# -- lllllllllllllllllllllllllllllllllllll -- set local dirs
+#
+if(doLocal):
+    tsbdbdir = tsbdbdirL
+    tmtrkbdir= tmtrkbdirL
+    abdirDtg=abdirDtgL
+    abdirStm=abdirStmL
+    
+#    
+# -- lllllllllllllllllllllllllllllllllllll -- set local dirs
 
 if(not(doInv)):
     MF.ChkDir(tmtrkbdir,'mk')
@@ -128,6 +168,12 @@ for dtg in dtgs:
         mdtg=mf.dtginc(dtg,-tauOffset)
     else:
         mdtg=dtg
+
+    # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
+    # -- IIFF there are storms
+    #
+    if(doLocal): 
+        (tdirE,era5bdir) = rsyncEra2Local(dtg)
 
     rc=getEra5Grb(era5bdir,mdtg,model='era5')
     (ctlpath2,sizgrb,ctlpath2a,sizgrb2a)=rc
@@ -193,5 +239,9 @@ for dtg in dtgs:
         #TT.doCP()
         MF.dTimer('tmtrkN-doTrk-%s-%s'%(model,dtg))
 
+
+    if(doLocal):
+        cmd = "rm %s/*" % (tdirE)
+        mf.runcmd(cmd, ropt)
     
     MF.dTimer("sbt-tmtrkN-%s"%(dtg))
