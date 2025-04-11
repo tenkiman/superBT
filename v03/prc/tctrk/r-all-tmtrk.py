@@ -47,6 +47,9 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
+if(mf.find(dtgopt,'no')): dtgopt=None
+    
+
 (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
 doBT=0
 if(doBdeck2): doBT=1
