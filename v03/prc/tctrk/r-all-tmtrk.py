@@ -110,7 +110,8 @@ for dtg in dtgs:
     if(dtg[8:10] == '00' or doGenAlways): topt='' 
     lopt=''
     if(doLocal): lopt='-C'
-         
+    if(doTrackerOnly): topt='-T'
+    
     
     MF.sTimer('sbt-TCTRK-%s'%(dtg))
     cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt,lopt, logOpt)
