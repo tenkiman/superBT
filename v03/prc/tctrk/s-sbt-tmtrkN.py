@@ -72,7 +72,7 @@ class TmtrkCmdLine(CmdLine):
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'doTrackerOnly':    ['T',0,1,'run trackeronly'],
-            'doClean':          ['C',1,0,'1 do NOT clean'],            
+            'doClean':          ['K',1,0,'1 do NOT clean'],            
             'doBail':           ['B',0,1,'1 bail if no era5 fields'],            
             'doInv':            ['i',0,1,'do Inventory'],            
             'doCpTctrk':        ['P',0,1,'make the tctrk.atcf|sink.dtg.txt from adeck_stm -> adeck_dtg'],            
