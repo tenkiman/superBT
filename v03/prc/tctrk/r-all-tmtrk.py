@@ -28,6 +28,7 @@ class TmtrkCmdLine(CmdLine):
             'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
             'doTrackerOnly':    ['T',0,1,'do NOT run trackeronly'],
             'doGenAlways'  :    ['G',0,1,'always run the genesis tracker'],
+            'doLocal':          ['C',0,1,'''run on local filesystem in /sbt/local'''],
             
         }
 
@@ -107,9 +108,12 @@ for dtg in dtgs:
     if(verb): vopt='-V'
     if(stmopt != None): sopt='-S %s'%(stmopt)
     if(dtg[8:10] == '00' or doGenAlways): topt='' 
-
+    lopt=''
+    if(doLocal): lopt='-C'
+         
+    
     MF.sTimer('sbt-TCTRK-%s'%(dtg))
-    cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt,logOpt)
+    cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt,lopt, logOpt)
     mf.runcmd(cmd,ropt)
     MF.dTimer('sbt-TCTRK-%s'%(dtg))
     
