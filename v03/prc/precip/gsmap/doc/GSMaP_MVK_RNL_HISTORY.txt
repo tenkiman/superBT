@@ -1,0 +1,108 @@
+Version History and notification of GSMaP_MVK, GSMaP_Gauge, GSMaP_RNL and GSMaP_Gauge_RNL
+
+updated: 09 October 2024
+Earth Observation Research Center (EORC), Japan Aerospace Exploration Agency (JAXA).
+
+***************************************************************************************
+History of Standard (GSMaP_MVK & GSMaP_Gauge) product
+***************************************************************************************
+
+***  Algorithm Version 4  ***
+
+   Mar. 2007: GSMaP_MWR Version 4.8.4 during 1998-2006 and MVK during 2003-2006 were processed and released via JST/CREST GSMaP Project Website at Osaka Prefecture University.
+
+21 Jul. 2009: GSMaP Project Website was moved to JAXA/EORC Web site.
+
+
+***  Algorithm Version 5  ***
+
+07 Dec. 2010: GSMaP_MVK Version 5.112 for 2007 were processed and uploaded. Files of Satellite Information Flag and Observation Time Flag were newly added.
+
+06 Mar. 2012: GSMaP_MVK Version 5.222 from Mar. 2000 to Nov. 2010 were processed and uploaded. All files except text format file and Time Information Flag are available.
+
+30 Mar. 2012: Time Information Flag files were uploaded.
+
+12 Apr. 2012: Updated satellite operation period in USERS_GUIDE_MVK_v5.222.pdf.
+
+17 Aug. 2012: GSMaP_MVK Version 5.222.1 were uploaded. Correct input database (rain/no-rain detection) for AMSR-E retrievals from 2006 to 2010, and remove several anomalous data (NOAA-N16 over the land from 2008 to 2010, NOAA-15/-16/-17 over the ocean during 1-5 Jan. 2004, DMSP-F17 from 21Z 30 Jun. to 19Z 1 Jul., 2008, and DMSP-F17 at 12Z 18 Mar. 2008.)
+
+18 Oct. 2012: Daily products in text format of the GSMaP_MVK Version 5.222.1 were uploaded.
+
+10 Jul. 2013: Hourly products in text format of the GSMaP_MVK Version 5.222.1 were uploaded.
+
+21 Nov. 2013: GSMaP_Gauge Version 5.222.1 were uploaded.
+
+14 Dec. 2018: Move GSMaP_Gauge Version 5.222.1 from "standard_gauge/v5/hourly" to "standard/v5/hourly_G". 
+
+
+***  Algorithm Version 6  ***
+
+03 Sep. 2014: GSMaP_MVK Version 6.0000, which is the same to GPM Global Rainfall Map (GPM-GSMaP) product distributed through the G-Portal data service system (https://www.gportal.jaxa.jp), from 1 September 2014 to present were uploaded. Data will be updated operationally about three days after observation. Data from March 2000 to August 2014 will be updated later. 
+
+04 Sep. 2014: Updated Table 3 in DataFormatDescription_MVK_v6.0000.pdf.
+
+18 Nov. 2014: Reprocsssing data of GSMaP_MVK (Product Version 03C; Algorithm Version 6.2123.0) were uploaded. See Caveats (https://www.gportal.jaxa.jp/gportal_file/qty/GPM/GPM_Product_List.pdf) for details of modification. 
+
+25 Mar. 2015: Introduction of SSMIS on board DMSP-F19.
+
+26 Mar. 2015: Algorithm version up (Product Version 03D; Algorithm Version 6.4133.0) without reprocessing. See Caveats (https://www.gportal.jaxa.jp/gportal_file/qty/GPM/GPM_Product_List.pdf) for details of modification.
+
+29 Jun. 2015: Modify output format of rain rate, which is stored in text format files, from F5.2 to F6.2.
+
+14 Dec. 2018: Change directory names of GSMaP_Gauge product (gauge_hr -> hourly_G, gauge_dy -> daily_G). Addition of Reanalysis (GSMaP_RNL) product. 
+
+14 DEC. 2018: Bug fixed (MWR algorithm). A bug with low temperature handling in the MWR algorithm has been fixed.
+
+21 Feb. 2019: Revised products of GSMaP_Gauge (hourly_Grev & daily_Grev) were newly released.
+              Reprocsssing data of GSMaP_MVK and GSMaP_Gauge (Product Version 03E; Algorithm Version 6.4133) were replaced from March 2014 to April 2015.
+
+09 Mar. 2020: Monthly product was released.
+
+11 Dec. 2020: Bug fixed (MMG algorithm). A bug with the observation area of each satellite was shifted to the west by 1 pixel in MMG algorithm has been fixed. (from 00:00UTC December 10 2020 to current)
+
+
+***  Algorithm Version 7  ***
+
+17 Jan. 2017: Major version up from Product Version 3.0 to 4.0. Algorithm Version is V7.0000.0, which is the same to GPM Global Rainfall Map (GPM-GSMaP) product distributed through the G-Portal data service system (https://www.gportal.jaxa.jp).
+
+27 Feb. 2017: Minor version up (Bug fixed of microwave-IR combined algorithm). Algorithm Version is V7.0001.0.
+
+01 Oct. 2017: Minor version up (Bug fixed of microwave-imager & microwave-IR combined algorithms). Algorithm Version is V7.1002.0.
+
+13 May. 2018: Minor version up (Bug fixed of microwave -imager, -sounder and -imager/sounder algorithms). Algorithm Version is V7.2112.0.
+
+14 Dec. 2018: Change directory names of gauge-calibrated rain (gauge_hr -> hourly_G, gauge_dy -> daily_G).
+
+15 May. 2019: Minor version up (Bug fixed of microwave -imager algorithms). Algorithm Version is V7.3112.0.
+
+09 Mar. 2020: Monthly product was released.
+
+09 Oct. 2024: Add HDF format data since 1 Jan.2024.
+
+
+***  Algorithm Version 8  ***
+
+01 Dec. 2021: Major version up from Product Version 4.0 to 5.0. Algorithm Version is V8.0000.0, which is the same to GPM Global Rainfall Map (GPM-GSMaP) product distributed through the G-Portal data service system (https://www.gportal.jaxa.jp).
+
+10 Jul. 2023: Algorithm Version is V8.0000.0 from Jan. 1998 to Nov. 2021 was processed and uploaded.
+
+15 Sep. 2023: The product version of the reprocessed data was changed from 'V8.0000.0' to 'V8.0000.1'. (Replaced from Jan. 1998 to Feb. 2000 and form Jan. 2015 to Nov. 2021.)
+
+05 Jun. 2024: NetCDF products after December 2021 was released.
+
+09 Oct. 2024: Add HDF format data since 1 Jan.2024.
+
+
+***************************************************************************************
+History of Reanalysis (GSMaP_RNL & GSMaP_Gauge_RNL) product
+***************************************************************************************
+
+***  Algorithm Version 6  ***
+
+25 Sep. 2015: GSMaP_RNL (Algorithm Version 6.5133.0 before Oct 3 2011, Version 6.3133.0 after Oct 4 2011) from Jan. 2011 to Feb. 2014 was processed and uploaded. From Version 6.3133.0 to Version 6.5133.0, GSMaP AMSR-E algorithm was updated. The AMSR-E normal operation was halted on 3 Oct 2011.
+
+15 Apr. 2016: GSMaP_RNL Version 6.5133.0 from Mar. 2000 to Dec. 2010 was processed and uploaded.
+
+14 Dec. 2018: Reliability flag from 1 Mar. 2000 to 28 Feb. 2014 was uploaded. Move GSMaP_RNL product from "reanalysis/v6" to "standard/v6".
+
+09 Mar. 2020: Monthly product was released.

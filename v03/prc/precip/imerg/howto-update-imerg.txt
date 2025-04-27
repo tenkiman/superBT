@@ -1,0 +1,26 @@
+process imerg 202301-05
+
+in /dat3/dat/pr/imerg/cmorph_grid/2023
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2023-0101-0131.txt 
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2023-0101-0531.txt 
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2023-0201-0531.txt 
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-missing-2023-V1.txt 
+
+check for missing times by editing and running
+
+ 1015  p-imerg-chk.py 
+
+restore lats table
+
+ 1029  git restore lats.pr.table.txt
+
+convert nc to grb and make yearly .ctl
+
+ 1041  p-nc-2-grb.py  2023 -Y
+ 1042  p-nc-2-grb.py  2023 -Y -G
+
+make produtcs and yearly .ctl
+
+ 1045  w2-fld-pr-imerg-products.py 202301.202305.6 -D
+ 1049  w2-fld-pr-imerg-products.py 2023010100 -Y 2023 -G
+

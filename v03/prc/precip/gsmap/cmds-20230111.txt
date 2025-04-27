@@ -1,0 +1,64 @@
+# get 202212 for gsmap v6 v8 v6-gauge
+1038  w2-fld-wget-mirror-pr-gsmap.py 202212.24 -6 -G 
+1039  w2-fld-wget-mirror-pr-gsmap.py 202212.24 -6  
+1041  w2-fld-wget-mirror-pr-gsmap.py 202212.24 
+
+1050  w2-fld-pr-make-gsmap-yearCtl.py  -Y 2022 -6 -G
+1051  w2-fld-pr-gsmap-products.py  202212.6 -6 -G
+
+1052  w2-fld-pr-make-gsmap-yearCtl.py  -Y 2022 -6 
+1054  w2-fld-pr-gsmap-products.py  202212.6 -6
+
+# -- make yearly prod
+1057  w2-fld-pr-gsmap-products.py 2021010100 -G -6 -g
+1058  w2-fld-pr-gsmap-products.py 2020010100 -G -6 -g
+1059  w2-fld-pr-gsmap-products.py 2019010100 -G -6 -g
+1060  w2-fld-pr-gsmap-products.py 2018010100 -G -6 -g
+1061  w2-fld-pr-gsmap-products.py 2017010100 -G -6 -g
+1062  w2-fld-pr-gsmap-products.py 2016010100 -G -6 -g
+1063  w2-fld-pr-gsmap-products.py 2015010100 -G -6 -g
+1064  w2-fld-pr-gsmap-products.py 2014010100 -G -6 -g
+1068  w2-fld-pr-gsmap-products.py 2013010100 -G -6 -g
+1069  w2-fld-pr-gsmap-products.py 2012010100 -G -6 -g
+1070  w2-fld-pr-gsmap-products.py 2011010100 -G -6 -g
+1071  w2-fld-pr-gsmap-products.py 2010010100 -G -6 -g
+
+1075  w2-fld-pr-gsmap-products.py 2011010100 -G -6 -g
+1076  w2-fld-pr-gsmap-products.py 2010010100 -G -6 -g
+1077  w2-fld-pr-gsmap-products.py 2009010100 -G -6 -g
+1078  w2-fld-pr-gsmap-products.py 2008010100 -G -6 -g
+1080  w2-fld-pr-gsmap-products.py 2008072300.2008072400.6 -G -6 -D
+
+1082  w2-fld-pr-make-gsmap-yearCtl.py -Y 2008 -6 -G
+
+1085  w2-fld-wget-mirror-pr-gsmap.py 2008072300 -6 -G
+1086  w2-fld-wget-mirror-pr-gsmap.py 2008072300 -6 -G -O
+1087  w2-fld-pr-make-gsmap-yearCtl.py -Y 2008 -6 -G
+1088  w2-fld-pr-make-gsmap-yearCtl.py -Y 2008 -6 -G > /tmp/t6.txt
+
+1097  w2-fld-pr-gsmap-products.py 2008072300.2008072400.6 -G -6 -D
+1098  w2-fld-pr-gsmap-products.py 2008010100 -G -6 -g
+1101  w2-fld-pr-gsmap-products.py 2007010100 -G -6 -g
+
+# -- problem with 20070225-28 in gsmapV6_Gaug
+1118  w2-fld-wget-mirror-pr-gsmap.py 2007022500.2007022800.24 -6 -G -O
+1120  w2-fld-pr-gsmap-products.py 2007022500.2007022800.6 -6 -G -D
+1123  w2-fld-pr-make-gsmap-yearCtl.py -Y 2007 -6 -G
+
+1150  w2-fld-pr-make-gsmap-yearCtl.py -Y 2001 -6 -G
+1152  w2-fld-pr-make-gsmap-yearCtl.py -Y 2002 -6 -G
+1153  w2-fld-pr-make-gsmap-yearCtl.py -Y 2003 -6 -G
+1154  w2-fld-pr-make-gsmap-yearCtl.py -Y 2004 -6 -G
+1159  w2-fld-pr-make-gsmap-yearCtl.py -Y 2005 -6 -G
+1160  w2-fld-pr-make-gsmap-yearCtl.py -Y 2006 -6 -G
+
+1162  w2-fld-pr-gsmap-products.py 200101.200612.6 -6 -G -D
+
+1165  w2-fld-pr-gsmap-products.py 2001010100 -6 -G -g
+1166  w2-fld-pr-gsmap-products.py 2002010100 -6 -G -g
+1167  w2-fld-pr-gsmap-products.py 2003010100 -6 -G -g
+1170  w2-fld-pr-gsmap-products.py 2004010100 -6 -G -g
+1171  w2-fld-pr-gsmap-products.py 2005010100 -6 -G -g
+1172  w2-fld-pr-gsmap-products.py 2006010100 -6 -G -g
+
+

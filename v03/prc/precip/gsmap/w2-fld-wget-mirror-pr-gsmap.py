@@ -1,0 +1,1 @@
+/data/w22/prc/flddat/w2-fld-wget-mirror-pr-gsmap.py

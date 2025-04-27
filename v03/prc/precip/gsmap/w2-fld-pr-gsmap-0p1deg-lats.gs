@@ -1,0 +1,1 @@
+/w21/prc/flddat/w2-fld-pr-gsmap-0p1deg-lats.gs

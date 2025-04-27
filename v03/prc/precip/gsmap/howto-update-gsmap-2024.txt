@@ -1,0 +1,49 @@
+process 202411-12 gsmap on 20250411-0412
+----------------------------------------
+
+w2-fld-wget-mirror-pr-gsmap.py 202412.24 
+w2-fld-wget-mirror-pr-gsmap.py 202411.24
+
+had to regen because do updating gsmapV8-G
+
+w2-fld-wget-mirror-pr-gsmap.py 2024111600.2024123100.24 -G 
+w2-fld-wget-mirror-pr-gsmap.py 2024111600.2024123100.24 
+
+for gauge:
+=========
+
+w2-fld-pr-make-gsmap-yearCtl.py -Y 2024 -G
+
+# -- make yearly using:
+#
+w2-fld-pr-gsmap-products-year.py -y 1998.2000 -G
+
+update missing in gauge:
+
+w2-fld-wget-mirror-pr-gsmap.py 1999062500 -G
+w2-fld-wget-mirror-pr-gsmap.py 1999062600 -G
+w2-fld-wget-mirror-pr-gsmap.py 1999062400 -G -O
+
+w2-fld-pr-make-gsmap-yearCtl.py -Y 1999 -G 
+
+w2-fld-pr-gsmap-products.py 1999062400.1999062700.6 -G -O
+
+# -- this works but...
+#
+w2-fld-pr-gsmap-products.py 1999010100 -G -Y
+
+# -- better to use:
+#
+w2-fld-pr-gsmap-products-year.py -y 1998.2024 -G             # make product yearly .ctl
+
+
+nongauge:
+========
+
+w2-fld-wget-mirror-pr-gsmap.py 2024111600.2024123100.24 -O  # redo because had written gauge to non-gauge
+
+w2-fld-pr-make-gsmap-yearCtl.py -Y 2024                     # yearly for 30-min data
+
+w2-fld-pr-gsmap-products.py 202411.202412.6 -O              # redo 6-h products
+
+w2-fld-pr-gsmap-products-year.py -y 1998.2024               # make product yearly .ctl

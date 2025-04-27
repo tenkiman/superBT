@@ -1,0 +1,6 @@
+process 202301-05 gsmap
+
+ 1012  w2-fld-wget-mirror-pr-gsmap.py  202301.202305.24 -G -6
+ 1016  w2-fld-pr-make-gsmap-yearCtl.py -Y 2023 -6 -G
+ 1025  w2-fld-pr-gsmap-products.py 2023010100.2023053112.6 -6 -G -D 
+ 1031  w2-fld-pr-gsmap-products.py 2023010100 -6 -G -g

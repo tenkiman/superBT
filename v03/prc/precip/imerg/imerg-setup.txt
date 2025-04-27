@@ -1,0 +1,53 @@
+20221223
+========
+
+putting the previous year's last day into the current year
+so the year.ctl can find the previous year's data for the first
+day of the new year....
+
+ 1241  la ../2020/*20201231* | wc -l
+ 1242  cp ../2020/*20201231* .
+
+ 1245  la ../2020/*20191231* | wc -l
+ 1246  cd ../2019/
+ 1247  la ../2019/*20181231* | wc -l
+
+ 1248  cd ../2018/
+ 1249  la ../2018/*20171231* | wc -l
+ 1250  cp ../2017/*20171231* .
+ 1251  la ../2018/*20171231* | wc -l
+
+ 1252  cd ../2017
+ 1253  la ../2017/*20161231* | wc -l
+ 1254  cp ../2016/*20161231* .
+ 1255  la ../2017/*20161231* | wc -l
+
+ 1256  cd ../2016
+ 1257  la ../2015/*20151231* | wc -l
+ 1258  cp ../2015/*20151231* .
+ 1259  la ../2016/*20151231* | wc -l
+
+ 1260  cd ../2015
+ 1261  la ../2015/*20141231* | wc -l
+ 1262  cp ../2014/*20141231* .
+ 1263  la ../2015/*20141231* | wc -l
+
+# 2013 not ready yet
+ 1264  cd ../2014
+ 1265  la ../2014/*20131231* | wc -l
+ 1266  cp ../2013/*20131231* .
+
+
+getting 2013-2010:
+
+cd 2013
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2013.txt
+
+cd 2012
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2012.txt
+
+cd 2011
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2011.txt
+
+cd 2010
+time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2010.txt

@@ -1,0 +1,780 @@
+Open Error:  Can't open description file
+Error opening /data/w22/dat/pr/pr_gsmap/prg_a06h-2001.ctl
+fg 0 /data/w22/dat/pr/pr_gsmap/prg_a06h-2001.ctl
+f6 1 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2001.ctl
+fc 2 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2001.ctl
+fi 3 /data/w22/dat/pr/pr_imerg/pri_a06h-2001.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2001 to 00Z01JAN2002  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2001 360mn
+Fri 13 Jan 2023 01:58:44 AM UTC
+Fri 13 Jan 2023 01:59:27 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2001.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2001.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2001 to 00Z24DEC2001  T = 1 to 1429
+fi 2  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1429 linear 00Z01JAN2001 360mn
+Fri 13 Jan 2023 01:59:27 AM UTC
+Fri 13 Jan 2023 01:59:58 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2001.dat.
+Wrote 1429 of 1429 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2001.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2001 to 00Z01JAN2002  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2001 360mn
+Fri 13 Jan 2023 01:59:58 AM UTC
+Fri 13 Jan 2023 02:00:26 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2001.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2001.dat as Stream Little_Endian
+
+SET DFILE error:  file 4 not open
+fi 4 dims T is varying   Time = 00Z01JAN2001 to 00Z01JAN2002  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2001 360mn
+Fri 13 Jan 2023 02:00:26 AM UTC
+Fri 13 Jan 2023 02:00:53 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2001.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2001.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+Open Error:  Can't open description file
+Error opening /data/w22/dat/pr/pr_gsmap/prg_a06h-2002.ctl
+fg 0 /data/w22/dat/pr/pr_gsmap/prg_a06h-2002.ctl
+f6 1 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2002.ctl
+fc 2 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2002.ctl
+fi 3 /data/w22/dat/pr/pr_imerg/pri_a06h-2002.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2002 to 00Z01JAN2003  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2002 360mn
+Fri 13 Jan 2023 02:00:53 AM UTC
+Fri 13 Jan 2023 02:01:43 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2002.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2002.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2002 to 00Z24DEC2002  T = 1 to 1429
+fi 2  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1429 linear 00Z01JAN2002 360mn
+Fri 13 Jan 2023 02:01:43 AM UTC
+Fri 13 Jan 2023 02:02:14 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2002.dat.
+Wrote 1429 of 1429 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2002.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2002 to 00Z01JAN2003  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2002 360mn
+Fri 13 Jan 2023 02:02:14 AM UTC
+Fri 13 Jan 2023 02:02:43 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2002.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2002.dat as Stream Little_Endian
+
+SET DFILE error:  file 4 not open
+fi 4 dims T is varying   Time = 00Z01JAN2002 to 00Z01JAN2003  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2002 360mn
+Fri 13 Jan 2023 02:02:43 AM UTC
+Fri 13 Jan 2023 02:03:12 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2002.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2002.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+Open Error:  Can't open description file
+Error opening /data/w22/dat/pr/pr_gsmap/prg_a06h-2003.ctl
+fg 0 /data/w22/dat/pr/pr_gsmap/prg_a06h-2003.ctl
+f6 1 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2003.ctl
+fc 2 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2003.ctl
+fi 3 /data/w22/dat/pr/pr_imerg/pri_a06h-2003.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2003 to 00Z01JAN2004  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2003 360mn
+Fri 13 Jan 2023 02:03:12 AM UTC
+Fri 13 Jan 2023 02:03:55 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2003.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2003 to 00Z24DEC2003  T = 1 to 1429
+fi 2  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1429 linear 00Z01JAN2003 360mn
+Fri 13 Jan 2023 02:03:55 AM UTC
+Fri 13 Jan 2023 02:04:25 AM UTC
+Wrote 1429 of 1429 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2003.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2003 to 00Z01JAN2004  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2003 360mn
+Fri 13 Jan 2023 02:04:25 AM UTC
+Fri 13 Jan 2023 02:04:53 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2003.dat as Stream Little_Endian
+
+SET DFILE error:  file 4 not open
+fi 4 dims T is varying   Time = 00Z01JAN2003 to 00Z01JAN2004  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2003 360mn
+Fri 13 Jan 2023 02:04:53 AM UTC
+Fri 13 Jan 2023 02:05:19 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2003.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+Open Error:  Can't open description file
+Error opening /data/w22/dat/pr/pr_gsmap/prg_a06h-2004.ctl
+fg 0 /data/w22/dat/pr/pr_gsmap/prg_a06h-2004.ctl
+f6 1 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2004.ctl
+fc 2 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2004.ctl
+fi 3 /data/w22/dat/pr/pr_imerg/pri_a06h-2004.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2004 to 00Z01JAN2005  T = 1 to 1465
+fi 1  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1465 linear 00Z01JAN2004 360mn
+Fri 13 Jan 2023 02:05:19 AM UTC
+Fri 13 Jan 2023 02:05:59 AM UTC
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2004.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2004 to 00Z24DEC2004  T = 1 to 1433
+fi 2  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1433 linear 00Z01JAN2004 360mn
+Fri 13 Jan 2023 02:05:59 AM UTC
+Fri 13 Jan 2023 02:06:29 AM UTC
+Wrote 1433 of 1433 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2004.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2004 to 00Z01JAN2005  T = 1 to 1465
+fi 3  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1465 linear 00Z01JAN2004 360mn
+Fri 13 Jan 2023 02:06:29 AM UTC
+Fri 13 Jan 2023 02:06:57 AM UTC
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2004.dat as Stream Little_Endian
+
+SET DFILE error:  file 4 not open
+fi 4 dims T is varying   Time = 00Z01JAN2004 to 00Z01JAN2005  T = 1 to 1465
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1465 linear 00Z01JAN2004 360mn
+Fri 13 Jan 2023 02:06:57 AM UTC
+Fri 13 Jan 2023 02:07:24 AM UTC
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2004.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+Open Error:  Can't open description file
+Error opening /data/w22/dat/pr/pr_gsmap/prg_a06h-2005.ctl
+fg 0 /data/w22/dat/pr/pr_gsmap/prg_a06h-2005.ctl
+f6 1 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2005.ctl
+fc 2 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2005.ctl
+fi 3 /data/w22/dat/pr/pr_imerg/pri_a06h-2005.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2005 to 00Z01JAN2006  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2005 360mn
+Fri 13 Jan 2023 02:07:24 AM UTC
+Fri 13 Jan 2023 02:08:06 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2005.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2005 to 00Z24DEC2005  T = 1 to 1429
+fi 2  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1429 linear 00Z01JAN2005 360mn
+Fri 13 Jan 2023 02:08:06 AM UTC
+Fri 13 Jan 2023 02:08:35 AM UTC
+Wrote 1429 of 1429 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2005.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2005 to 00Z01JAN2006  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2005 360mn
+Fri 13 Jan 2023 02:08:35 AM UTC
+Fri 13 Jan 2023 02:09:04 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2005.dat as Stream Little_Endian
+
+SET DFILE error:  file 4 not open
+fi 4 dims T is varying   Time = 00Z01JAN2005 to 00Z01JAN2006  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2005 360mn
+Fri 13 Jan 2023 02:09:04 AM UTC
+Fri 13 Jan 2023 02:09:31 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2005.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+Open Error:  Can't open description file
+Error opening /data/w22/dat/pr/pr_gsmap/prg_a06h-2006.ctl
+fg 0 /data/w22/dat/pr/pr_gsmap/prg_a06h-2006.ctl
+f6 1 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2006.ctl
+fc 2 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2006.ctl
+fi 3 /data/w22/dat/pr/pr_imerg/pri_a06h-2006.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2006 to 00Z01JAN2007  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2006 360mn
+Fri 13 Jan 2023 02:09:31 AM UTC
+Fri 13 Jan 2023 02:10:12 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2006.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2006 to 00Z24DEC2006  T = 1 to 1429
+fi 2  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1429 linear 00Z01JAN2006 360mn
+Fri 13 Jan 2023 02:10:12 AM UTC
+Fri 13 Jan 2023 02:10:41 AM UTC
+Wrote 1429 of 1429 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2006.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2006 to 00Z01JAN2007  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2006 360mn
+Fri 13 Jan 2023 02:10:41 AM UTC
+Fri 13 Jan 2023 02:11:10 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2006.dat as Stream Little_Endian
+
+SET DFILE error:  file 4 not open
+fi 4 dims T is varying   Time = 00Z01JAN2006 to 00Z01JAN2007  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2006 360mn
+Fri 13 Jan 2023 02:11:10 AM UTC
+Fri 13 Jan 2023 02:11:38 AM UTC
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2006.dat as Stream Little_Endian
+
+Config: v2.2.1.oga.1 little-endian readline grib2 netcdf hdf4-sds hdf5 opendap-grids,stn athena geotiff shapefile
+Issue 'q config' and 'q gxconfig' commands for more detailed configuration information
+Loading User Defined Extensions table </data/w22/app/opengrads-2.2.1.oga.1/Contents/Linux/Versions/2.2.1.oga.1/x86_64/gex/udxt> ... ok.
+GX Package Initialization: Size = 11 8.5 
+Running in Batch mode
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2007.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2007.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2007.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2007.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2007 to 00Z01JAN2008  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2007 360mn
+Thu 12 Jan 2023 11:43:07 PM UTC
+Thu 12 Jan 2023 11:43:44 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2007.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2007.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2007 to 00Z01JAN2008  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2007 360mn
+Thu 12 Jan 2023 11:43:44 PM UTC
+Thu 12 Jan 2023 11:44:18 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2007.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2007.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2007 to 00Z01JAN2008  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2007 360mn
+Thu 12 Jan 2023 11:44:18 PM UTC
+Thu 12 Jan 2023 11:44:50 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2007.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2007.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2007 to 00Z01JAN2008  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2007 360mn
+Thu 12 Jan 2023 11:44:50 PM UTC
+Thu 12 Jan 2023 11:45:19 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2007.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2007.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2008.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2008.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2008.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2008.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2008 to 00Z01JAN2009  T = 1 to 1465
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1465 linear 00Z01JAN2008 360mn
+Thu 12 Jan 2023 11:45:19 PM UTC
+Thu 12 Jan 2023 11:45:57 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2008.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2008.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2008 to 00Z01JAN2009  T = 1 to 1465
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1465 linear 00Z01JAN2008 360mn
+Thu 12 Jan 2023 11:45:57 PM UTC
+Thu 12 Jan 2023 11:46:33 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2008.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2008.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2008 to 00Z01JAN2009  T = 1 to 1465
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1465 linear 00Z01JAN2008 360mn
+Thu 12 Jan 2023 11:46:33 PM UTC
+Thu 12 Jan 2023 11:47:03 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2008.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2008.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2008 to 00Z01JAN2009  T = 1 to 1465
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1465 linear 00Z01JAN2008 360mn
+Thu 12 Jan 2023 11:47:03 PM UTC
+Thu 12 Jan 2023 11:47:32 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2008.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2008.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2009.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2009.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2009.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2009.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2009 to 00Z01JAN2010  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2009 360mn
+Thu 12 Jan 2023 11:47:32 PM UTC
+Thu 12 Jan 2023 11:48:09 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2009.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2009.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2009 to 00Z01JAN2010  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2009 360mn
+Thu 12 Jan 2023 11:48:09 PM UTC
+Thu 12 Jan 2023 11:48:45 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2009.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2009.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2009 to 00Z01JAN2010  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2009 360mn
+Thu 12 Jan 2023 11:48:45 PM UTC
+Thu 12 Jan 2023 11:49:16 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2009.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2009.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2009 to 00Z01JAN2010  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2009 360mn
+Thu 12 Jan 2023 11:49:16 PM UTC
+Thu 12 Jan 2023 11:49:44 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2009.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2009.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2010.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2010.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2010.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2010.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2010 to 00Z01JAN2011  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2010 360mn
+Thu 12 Jan 2023 11:49:44 PM UTC
+Thu 12 Jan 2023 11:50:21 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2010.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2010.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2010 to 00Z01JAN2011  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2010 360mn
+Thu 12 Jan 2023 11:50:21 PM UTC
+Thu 12 Jan 2023 11:50:58 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2010.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2010.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2010 to 00Z01JAN2011  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2010 360mn
+Thu 12 Jan 2023 11:50:58 PM UTC
+Thu 12 Jan 2023 11:51:29 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2010.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2010.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2010 to 00Z01JAN2011  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2010 360mn
+Thu 12 Jan 2023 11:51:29 PM UTC
+Thu 12 Jan 2023 11:51:58 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2010.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2010.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2011.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2011.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2011.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2011.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2011 to 00Z01JAN2012  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2011 360mn
+Thu 12 Jan 2023 11:51:58 PM UTC
+Thu 12 Jan 2023 11:52:37 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2011.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2011.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2011 to 00Z01JAN2012  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2011 360mn
+Thu 12 Jan 2023 11:52:37 PM UTC
+Thu 12 Jan 2023 11:53:15 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2011.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2011.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2011 to 00Z01JAN2012  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2011 360mn
+Thu 12 Jan 2023 11:53:15 PM UTC
+Thu 12 Jan 2023 11:53:48 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2011.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2011.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2011 to 00Z01JAN2012  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2011 360mn
+Thu 12 Jan 2023 11:53:48 PM UTC
+Thu 12 Jan 2023 11:54:18 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2011.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2011.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2012.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2012.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2012.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2012.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2012 to 00Z01JAN2013  T = 1 to 1465
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1465 linear 00Z01JAN2012 360mn
+Thu 12 Jan 2023 11:54:18 PM UTC
+Thu 12 Jan 2023 11:54:56 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2012.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2012.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2012 to 00Z01JAN2013  T = 1 to 1465
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1465 linear 00Z01JAN2012 360mn
+Thu 12 Jan 2023 11:54:56 PM UTC
+Thu 12 Jan 2023 11:55:34 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2012.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2012.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2012 to 00Z01JAN2013  T = 1 to 1465
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1465 linear 00Z01JAN2012 360mn
+Thu 12 Jan 2023 11:55:34 PM UTC
+Thu 12 Jan 2023 11:56:08 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2012.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2012.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2012 to 00Z01JAN2013  T = 1 to 1465
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1465 linear 00Z01JAN2012 360mn
+Thu 12 Jan 2023 11:56:08 PM UTC
+Thu 12 Jan 2023 11:56:37 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2012.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2012.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2013.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2013.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2013.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2013.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2013 to 00Z01JAN2014  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2013 360mn
+Thu 12 Jan 2023 11:56:37 PM UTC
+Thu 12 Jan 2023 11:57:15 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2013.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2013.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2013 to 00Z01JAN2014  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2013 360mn
+Thu 12 Jan 2023 11:57:15 PM UTC
+Thu 12 Jan 2023 11:57:53 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2013.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2013.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2013 to 00Z01JAN2014  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2013 360mn
+Thu 12 Jan 2023 11:57:53 PM UTC
+Thu 12 Jan 2023 11:58:26 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2013.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2013.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2013 to 00Z01JAN2014  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2013 360mn
+Thu 12 Jan 2023 11:58:26 PM UTC
+Thu 12 Jan 2023 11:58:56 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2013.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2013.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2014.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2014.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2014.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2014.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2014 to 00Z01JAN2015  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2014 360mn
+Thu 12 Jan 2023 11:58:57 PM UTC
+Thu 12 Jan 2023 11:59:31 PM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2014.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2014.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2014 to 00Z01JAN2015  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2014 360mn
+Thu 12 Jan 2023 11:59:31 PM UTC
+Fri 13 Jan 2023 12:00:08 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2014.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2014.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2014 to 00Z01JAN2015  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2014 360mn
+Fri 13 Jan 2023 12:00:08 AM UTC
+Fri 13 Jan 2023 12:00:41 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2014.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2014.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2014 to 00Z01JAN2015  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2014 360mn
+Fri 13 Jan 2023 12:00:41 AM UTC
+Fri 13 Jan 2023 12:01:11 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2014.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2014.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2015.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2015.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2015.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2015.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2015 to 00Z01JAN2016  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2015 360mn
+Fri 13 Jan 2023 12:01:11 AM UTC
+Fri 13 Jan 2023 12:01:46 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2015.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2015.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2015 to 00Z01JAN2016  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2015 360mn
+Fri 13 Jan 2023 12:01:46 AM UTC
+Fri 13 Jan 2023 12:02:24 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2015.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2015.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2015 to 00Z01JAN2016  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2015 360mn
+Fri 13 Jan 2023 12:02:24 AM UTC
+Fri 13 Jan 2023 12:02:57 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2015.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2015.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2015 to 00Z01JAN2016  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2015 360mn
+Fri 13 Jan 2023 12:02:57 AM UTC
+Fri 13 Jan 2023 12:03:27 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2015.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2015.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2016.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2016.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2016.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2016.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2016 to 00Z01JAN2017  T = 1 to 1465
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1465 linear 00Z01JAN2016 360mn
+Fri 13 Jan 2023 12:03:27 AM UTC
+Fri 13 Jan 2023 12:04:03 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2016.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2016.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2016 to 00Z01JAN2017  T = 1 to 1465
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1465 linear 00Z01JAN2016 360mn
+Fri 13 Jan 2023 12:04:03 AM UTC
+Fri 13 Jan 2023 12:04:41 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2016.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2016.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2016 to 00Z01JAN2017  T = 1 to 1465
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1465 linear 00Z01JAN2016 360mn
+Fri 13 Jan 2023 12:04:41 AM UTC
+Fri 13 Jan 2023 12:05:15 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2016.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2016.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2016 to 00Z01JAN2017  T = 1 to 1465
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1465 linear 00Z01JAN2016 360mn
+Fri 13 Jan 2023 12:05:15 AM UTC
+Fri 13 Jan 2023 12:05:49 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2016.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2016.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2017.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2017.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2017.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2017.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2017 to 00Z01JAN2018  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2017 360mn
+Fri 13 Jan 2023 12:05:49 AM UTC
+Fri 13 Jan 2023 12:06:26 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2017.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2017.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2017 to 00Z01JAN2018  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2017 360mn
+Fri 13 Jan 2023 12:06:26 AM UTC
+Fri 13 Jan 2023 12:07:03 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2017.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2017.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2017 to 00Z01JAN2018  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/cmorph-v10/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2017 360mn
+Fri 13 Jan 2023 12:07:03 AM UTC
+Fri 13 Jan 2023 12:07:36 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2017.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2017.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2017 to 00Z01JAN2018  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2017 360mn
+Fri 13 Jan 2023 12:07:36 AM UTC
+Fri 13 Jan 2023 12:08:06 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2017.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2017.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2018.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2018.ctl
+fc 3 /data/w22/dat/pr/cmorph-v10/pr_cmorph/prc_a06h-2018.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2018.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2018 to 00Z01JAN2019  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2018 360mn
+Fri 13 Jan 2023 12:08:06 AM UTC
+Fri 13 Jan 2023 12:08:45 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2018.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2018.dat as Streg-2019.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2019.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2020.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2020.ctl
+fc 3 /data/w22/dat/pr/pr_cmorph/prc_a06h-2020.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2020.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2020 to 00Z01JAN2021  T = 1 to 1465
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1465 linear 00Z01JAN2020 360mn
+Fri 13 Jan 2023 01:42:24 AM UTC
+Fri 13 Jan 2023 01:43:01 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2020.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2020.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2020 to 00Z01JAN2021  T = 1 to 1465
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1465 linear 00Z01JAN2020 360mn
+Fri 13 Jan 2023 01:43:01 AM UTC
+Fri 13 Jan 2023 01:43:37 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2020.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2020.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2020 to 18Z31DEC2020  T = 1 to 1464
+fi 3  dset dset /data/w22/dat/pr/pr_cmorph/grib/2020/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1464 linear 00Z01JAN2020 360mn
+Fri 13 Jan 2023 01:43:37 AM UTC
+Fri 13 Jan 2023 01:44:07 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2020.dat.
+Wrote 1464 of 1464 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2020.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2020 to 00Z01JAN2021  T = 1 to 1465
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1465 linear 00Z01JAN2020 360mn
+Fri 13 Jan 2023 01:44:07 AM UTC
+Fri 13 Jan 2023 01:44:36 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2020.dat.
+Wrote 1465 of 1465 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2020.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2021.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2021.ctl
+fc 3 /data/w22/dat/pr/pr_cmorph/prc_a06h-2021.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2021.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2021 to 00Z01JAN2022  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2021 360mn
+Fri 13 Jan 2023 01:44:36 AM UTC
+Fri 13 Jan 2023 01:45:13 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2021.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2021.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2021 to 00Z01JAN2022  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2021 360mn
+Fri 13 Jan 2023 01:45:13 AM UTC
+Fri 13 Jan 2023 01:45:50 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2021.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2021.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2021 to 18Z01JAN2022  T = 1 to 1464
+fi 3  dset dset /data/w22/dat/pr/pr_cmorph/grib/2021/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1464 linear 00Z01JAN2021 360mn
+Fri 13 Jan 2023 01:45:50 AM UTC
+Fri 13 Jan 2023 01:46:21 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2021.dat.
+Wrote 1464 of 1464 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2021.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2021 to 00Z01JAN2022  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2021 360mn
+Fri 13 Jan 2023 01:46:21 AM UTC
+Fri 13 Jan 2023 01:46:52 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2021.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2021.dat as Stream Little_Endian
+
+All files closed; all defined objects released;
+All GrADS attributes have been reinitialized
+fg 1 /data/w22/dat/pr/pr_gsmap/prg_a06h-2022.ctl
+f6 2 /data/w22/dat/pr/pr_gsmapV6-Grev/prg_a06h-2022.ctl
+fc 3 /data/w22/dat/pr/pr_cmorph/prc_a06h-2022.ctl
+fi 4 /data/w22/dat/pr/pr_imerg/pri_a06h-2022.ctl
+fi 1 dims T is varying   Time = 00Z01JAN2022 to 00Z01JAN2023  T = 1 to 1461
+fi 1  dset dset /data/w22/dat/pr/pr_gsmap/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 1  tdef tdef 1461 linear 00Z01JAN2022 360mn
+Fri 13 Jan 2023 01:46:52 AM UTC
+Fri 13 Jan 2023 01:47:26 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmap-2022.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmap-2022.dat as Stream Little_Endian
+
+fi 2 dims T is varying   Time = 00Z01JAN2022 to 00Z01JAN2023  T = 1 to 1461
+fi 2  dset dset /data/w22/dat/pr/pr_gsmapV6-Grev/grib/%y4/prg_a06h_%y4%m2%d2%h2.grb
+fi 2  tdef tdef 1461 linear 00Z01JAN2022 360mn
+Fri 13 Jan 2023 01:47:26 AM UTC
+Fri 13 Jan 2023 01:48:04 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2022.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-gsmapV6-2022.dat as Stream Little_Endian
+
+fi 3 dims T is varying   Time = 00Z01JAN2022 to 00Z01JAN2023  T = 1 to 1461
+fi 3  dset dset /data/w22/dat/pr/pr_cmorph/grib/%y4/prc_a06h_%y4%m2%d2%h2.grb
+fi 3  tdef tdef 1461 linear 00Z01JAN2022 360mn
+Fri 13 Jan 2023 01:48:04 AM UTC
+Fri 13 Jan 2023 01:48:35 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-cmorph-2022.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-cmorph-2022.dat as Stream Little_Endian
+
+fi 4 dims T is varying   Time = 00Z01JAN2022 to 00Z01JAN2023  T = 1 to 1461
+fi 4  dset dset /data/w22/dat/pr/pr_imerg/grib/%y4/pri_a06h_%y4%m2%d2%h2.grb
+fi 4  tdef tdef 1461 linear 00Z01JAN2022 360mn
+Fri 13 Jan 2023 01:48:35 AM UTC
+Fri 13 Jan 2023 01:49:04 AM UTC
+Replacing file /data/w22/prj-superBT/dat/gave/gave-imerg-2022.dat.
+Wrote 1461 of 1461 elements to /data/w22/prj-superBT/dat/gave/gave-imerg-2022.dat as Stream Little_Endian
+

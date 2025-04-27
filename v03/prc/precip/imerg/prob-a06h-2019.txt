@@ -1,0 +1,11 @@
+fail to make 6-h lats because of failing the tau check
+
+problem tau ranges:
+
+2019051600 
+
+2019051906-2019052000 
+
+2019052106-2019052112 
+
+2019121112-2019121812

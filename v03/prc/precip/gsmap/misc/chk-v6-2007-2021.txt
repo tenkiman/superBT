@@ -1,0 +1,144 @@
+yyy prg_a06h-2007.ctl fc 1
+Tue 27 Dec 2022 05:01:26 PM UTC
+Tue 27 Dec 2022 05:02:26 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2007 360mn
+Undef count = 1  Valid count = 1460
+Min, Max = 1.7741 3.26585
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.37135 5.66482 2.38009
+Stats[(sigma,var)(n)]:     0.203725 0.041504
+
+yyy prg_a06h-2008.ctl fc 1
+Tue 27 Dec 2022 05:02:26 PM UTC
+Tue 27 Dec 2022 05:03:27 PM UTC
+I Dimension = 1 to 1465 Linear 00Z01JAN2008 360mn
+Undef count = 6  Valid count = 1459
+Min, Max = -6.44146 8.36182
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.32132 5.79444 2.40716
+Stats[(sigma,var)(n)]:     0.637124 0.405927
+
+yyy prg_a06h-2009.ctl fc 1
+Tue 27 Dec 2022 05:03:27 PM UTC
+Tue 27 Dec 2022 05:04:27 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2009 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.5643 3.15476
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.41111 5.87325 2.42348
+Stats[(sigma,var)(n)]:     0.244575 0.0598168
+
+yyy prg_a06h-2010.ctl fc 1
+Tue 27 Dec 2022 05:04:27 PM UTC
+Tue 27 Dec 2022 05:05:29 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2010 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.74137 3.32351
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.47439 6.19054 2.48808
+Stats[(sigma,var)(n)]:     0.260661 0.0679439
+
+yyy prg_a06h-2011.ctl fc 1
+Tue 27 Dec 2022 05:05:29 PM UTC
+Tue 27 Dec 2022 05:06:31 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2011 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.75145 3.24797
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.40325 5.82554 2.41361
+Stats[(sigma,var)(n)]:     0.223444 0.0499274
+
+yyy prg_a06h-2012.ctl fc 1
+Tue 27 Dec 2022 05:06:31 PM UTC
+Tue 27 Dec 2022 05:07:34 PM UTC
+I Dimension = 1 to 1465 Linear 00Z01JAN2012 360mn
+Undef count = 3  Valid count = 1462
+Min, Max = 1.67872 3.36265
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.44336 6.02611 2.45481
+Stats[(sigma,var)(n)]:     0.236886 0.0561149
+
+yyy prg_a06h-2013.ctl fc 1
+Tue 27 Dec 2022 05:07:34 PM UTC
+Tue 27 Dec 2022 05:08:35 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2013 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.67993 3.31334
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.35272 5.58611 2.36349
+Stats[(sigma,var)(n)]:     0.225391 0.050801
+
+yyy prg_a06h-2014.ctl fc 1
+Tue 27 Dec 2022 05:08:35 PM UTC
+Tue 27 Dec 2022 05:09:51 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2014 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.80952 4.1846
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.46412 6.13336 2.47656
+Stats[(sigma,var)(n)]:     0.247972 0.0614899
+
+yyy prg_a06h-2015.ctl fc 1
+Tue 27 Dec 2022 05:09:51 PM UTC
+Tue 27 Dec 2022 05:11:07 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2015 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.90984 4.17674
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.57938 6.70388 2.58919
+Stats[(sigma,var)(n)]:     0.225124 0.0506809
+
+yyy prg_a06h-2016.ctl fc 1
+Tue 27 Dec 2022 05:11:07 PM UTC
+Tue 27 Dec 2022 05:12:26 PM UTC
+I Dimension = 1 to 1465 Linear 00Z01JAN2016 360mn
+Undef count = 0  Valid count = 1465
+Min, Max = 1.89921 3.47347
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.57931 6.70597 2.58959
+Stats[(sigma,var)(n)]:     0.230458 0.053111
+
+yyy prg_a06h-2017.ctl fc 1
+Tue 27 Dec 2022 05:12:26 PM UTC
+Tue 27 Dec 2022 05:13:43 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2017 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 2.00737 3.42149
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.56612 6.63156 2.57518
+Stats[(sigma,var)(n)]:     0.215834 0.0465844
+
+yyy prg_a06h-2018.ctl fc 1
+Tue 27 Dec 2022 05:13:43 PM UTC
+Tue 27 Dec 2022 05:14:59 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2018 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.88347 3.3721
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.53757 6.49203 2.54795
+Stats[(sigma,var)(n)]:     0.229738 0.0527795
+
+yyy prg_a06h-2019.ctl fc 1
+Tue 27 Dec 2022 05:37:24 PM UTC
+Tue 27 Dec 2022 05:38:38 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2019 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.94238 3.30144
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.56939 6.65327 2.57939
+Stats[(sigma,var)(n)]:     0.226928 0.0514964
+
+yyy prg_a06h-2020.ctl fc 1
+Tue 27 Dec 2022 05:29:21 PM UTC
+Tue 27 Dec 2022 05:30:35 PM UTC
+I Dimension = 1 to 1465 Linear 00Z01JAN2020 360mn
+Undef count = 0  Valid count = 1465
+Min, Max = 1.78768 4.1995
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.55986 6.60952 2.5709
+Stats[(sigma,var)(n)]:     0.237988 0.0566383
+
+yyy prg_a06h-2021.ctl fc 1
+Tue 27 Dec 2022 05:30:35 PM UTC
+Tue 27 Dec 2022 05:31:50 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2021 360mn
+Undef count = 0  Valid count = 1461
+Min, Max = 1.82744 3.20916
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.47378 6.1739 2.48473
+Stats[(sigma,var)(n)]:     0.233035 0.0543051
+
+yyy prg_a06h-2022.ctl fc 1
+Tue 27 Dec 2022 05:41:07 PM UTC
+Tue 27 Dec 2022 05:42:14 PM UTC
+I Dimension = 1 to 1461 Linear 00Z01JAN2022 360mn
+Undef count = 125  Valid count = 1336
+Min, Max = 1.75935 3.14256
+Stats[(sum,sumsqr,root(sumsqr))/n]:     2.44075 6.00145 2.44979
+Stats[(sigma,var)(n)]:     0.210215 0.0441905
+

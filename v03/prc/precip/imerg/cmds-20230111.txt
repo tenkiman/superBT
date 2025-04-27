@@ -1,0 +1,14 @@
+ 1034  lt ~/Downloads/subset_GPM_3IMERG*
+
+ 1035  cp /home/fiorino/Downloads/subset_GPM_3IMERGHHL_06_20230111_122824_.txt imerg-2022-1228-1231.txt
+ 1037  time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2022-1228-1231.txt 
+
+ 1046  cd imerg/
+ 1048  p-nc-2-grb.py 
+ 1049  p-nc-2-grb.py 2022
+ 1051  p-nc-2-grb.py 2022 -Y
+ 1053  p-nc-2-grb.py 2022 -Y -G
+
+ 1057  w2-fld-pr-imerg-products.py 202212.6 -D
+ 1059  w2-fld-pr-imerg-products.py 202211.6 -D
+ 1064  w2-fld-pr-imerg-products.py 2022010100 -Y 2022 -G

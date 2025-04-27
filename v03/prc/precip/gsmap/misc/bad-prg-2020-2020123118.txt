@@ -1,0 +1,9 @@
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020022512.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020050506.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020052218.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020052300.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020060600.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020060606.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020061318.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020061400.grb
+gribmap: Warning! could not open GRIB file grib/2020/prg_a06h_2020061406.grb

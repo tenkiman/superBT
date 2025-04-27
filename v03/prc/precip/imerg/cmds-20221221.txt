@@ -1,0 +1,6 @@
+Thu 22 Dec 2022 05:53:25 AM UTC
+
+1076  wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i ~/Downloads/subset_GPM_3IMERGHH_06_20221221_123828_.txt
+
+1098  time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2019.txt 
+1070  time wget --load-cookies C:\.urs_cookies --save-cookies C:\.urs_cookies --auth-no-challenge=on --keep-session-cookies --user=tenkiman --content-disposition -i imerg-2018.txt
