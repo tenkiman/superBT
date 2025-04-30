@@ -8,6 +8,7 @@ i=1
 dtg=subwrd(args,i)     ; i=i+1
 dpath=subwrd(args,i)   ; i=i+1
 opath=subwrd(args,i)   ; i=i+1
+ltable=subwrd(args,i)  ; i=i+1
 
 outconv='grads_grib'
 outconv='grib_only'
@@ -49,7 +50,7 @@ if(fd<=0) ; say 'no data file' ; 'quit' ; endif
 
 rc=metadata(fd,'y')
 
-'set_lats parmtab lats.pr.table.txt'
+'set_lats parmtab 'ltable
 
 'set_lats convention 'outconv
 'set_lats calendar standard'

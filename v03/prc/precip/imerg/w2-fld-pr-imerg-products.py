@@ -137,15 +137,10 @@ class WgetCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
-            'doCtlOnly':        ['G',0,1,"""just make ctl/gribmap"""],
-            'doDatOnly':        ['D',0,1,'make dat only'],
-            'doYearCtlOnly':    ['Y',0,1,'make yearctl only'],
-            'setYear':          ['y:',None,'a',"""force using yearly files for 30min data"""],
-
             }
 
         self.purpose='''
-make cpc qmorph products'''
+make imerg 6-h products'''
 
         self.examples="""
 %s cur"""
@@ -180,19 +175,17 @@ source='imerg'
 sbdir  ="%s/pr/%s/grib"%(w2.W2BaseDirDat,source)
 tbdir="%s/pr/model/pr_imerg"%(w2.W2BaseDirDat)
 grbdir="%s/grib"%(tbdir)
-prodpre="pr%s"%(source[0])
 
-# -- use yearly .ctl if old...
-#
-if(setYear != None):
-    if(mf.find(setYear,'cur')): setYear=curdtg[0:4]
-    gadpath="%s/%s-%s.ctl"%(tbdir,source,setYear)
+prodpre="pr%s"%(source[0])
 
 pbases=['pri_a06h','pri_a12h']
 pbases=['pri_a06h']
 pbase=pbases[0]
 
 curhrdtg=mf.dtg('dtgcurhr')
+
+prcdir=curdir
+prtable="%s/lats.pr.table.txt"%(prcdir)
 
 #gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
 # 
@@ -201,26 +194,10 @@ curhrdtg=mf.dtg('dtgcurhr')
 setYear=dtgs[0][0:4]
 thours=None
 
-grbdiryy="%s/%s"%(grbdir,setYear)
-MF.ChkDir(grbdiryy,'mk')
-
 MF.sTimer('AAA-%s'%(setYear))
-
-if(doYearCtlOnly):
-    rc=makeYearCtl(grbdir,pbase,dtgs[0],thours,tbdir,setYear,ropt)
-    MF.dTimer('AAA-%s'%(setYear))
-    sys.exit()
-    
-
-pdtgs=GetExistingDtgs(grbdir,dtgs,pbase,thours)
 
 for dtg in dtgs:
 
-    if(dtg in pdtgs):
-        if(not(doDatOnly) or verb): print 'already run for dtg: ',dtg
-        if(not(override)):
-            continue
-    
     year=dtg[0:4]
     yymmddhh=dtg[4:10]
     yyyymmdd=dtg[0:8]
@@ -231,10 +208,17 @@ for dtg in dtgs:
     
     gadpath="%s/%s-grb-%s.ctl"%(sbdir,source,year)
 
+    pdtgs=GetExistingDtgs(grbdir,[dtg],pbase,thours)
+
+    if(dtg in pdtgs):
+        print 'already run for dtg: ',dtg
+        if(not(override)): continue
+    
+
     os.chdir(pdir)
     (base,ext)=os.path.splitext(pyfile)
     gscmd="%s.gs"%(base)
-    cmd="%s -lbc \"%s %s %s %s/%s\""%(xgrads,gscmd,dtg,gadpath,grbdiryy,prodpre)
+    cmd="%s -lbc \"%s %s %s %s/%s %s\""%(xgrads,gscmd,dtg,gadpath,grbdiryy,prodpre,prtable)
     
     lines=MF.runcmdLog(cmd,ropt)
     rc=parseGradsLog(lines,verb=verb)
@@ -244,13 +228,6 @@ for dtg in dtgs:
         print 'WWW-%s -- no data for: %s  dtg: %s'%(pyfile,prodpre,dtg)
         continue
         
-if(doDatOnly):
-    print 'DDD -- only dat no yearctl...'
-    MF.dTimer('AAA-%s'%(setYear))
-    sys.exit()
-
-rc=makeYearCtl(grbdir,pbase,dtgs[0],thours,tbdir,setYear,ropt)
-
 MF.dTimer('AAA-%s'%(setYear))
 
 sys.exit()

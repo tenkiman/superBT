@@ -137,15 +137,12 @@ class WgetCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
-            'doCtlOnly':        ['G',1,0,"""just make ctl/gribmap"""],
-            'doDatOnly':        ['D',0,1,'make dat only'],
-            'doYearCtlOnly':    ['Y',1,0,'make yearctl only'],
             'setYear':          ['y:',None,'a',"""force using yearly files for 30min data"""],
 
             }
 
         self.purpose='''
-make cpc qmorph products'''
+make imerg products year .ctl'''
 
         self.examples="""
 %s cur"""
@@ -213,4 +210,3 @@ for setYear in mf.yyyyrange(byear,eyear):
     MF.dTimer('AAA-%s'%(setYear))
     
 sys.exit()
-    
