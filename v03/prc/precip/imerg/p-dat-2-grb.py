@@ -18,10 +18,9 @@ def makeImergGrbCtl(year,tbdir,ropt=''):
     gtime="00:00z31Dec%s"%(syearm1)
     nt=MF.nDayYear(year)*48+48
     print 'nnnnnn',nt,gtime
-    nt=324
     
     ctlpath="%s/imerg-grb-%s.ctl"%(tbdir,year)
-    ctlfile="""dset ^%%y4/imerg-%%y4-%%m2.grb
+    ctlfile="""dset ^%%y4/imerg-%%y4%%m2%%d2-%%h2-%%n2.grb
 index ^imerg-grb-%s.gmp
 undef 9.999E+20
 title imerg-20211004-10-00.grb
@@ -30,7 +29,8 @@ dtype grib 255
 options template
 ydef  480 linear  -59.875 0.25
 xdef 1440 linear -180.000 0.25
-tdef %d linear %s 1mo
+#tdef 1 linear 00:00Z01jan2021 30mn
+tdef %d linear %s 30mn
 zdef 1 linear 1 1
 vars 1
 pr  0 59,1,0  ** Precipitation rate [mm/h]
@@ -59,7 +59,7 @@ class WgetCmdLine(CmdLine):
         
         self.argv=argv
         self.argopts={
-            1:['yearOpt',    'no default'],
+            1:['dtgopt',    'no default'],
             }
 
         self.defaults={
@@ -71,6 +71,8 @@ class WgetCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
             'doCtlOnly':        ['G',0,1,"""just make ctl/gribmap"""],
+            'doYearCtlOnly':    ['Y',0,1,'make yearctl only'],
+
             }
 
         self.purpose='''
@@ -89,63 +91,62 @@ CL=WgetCmdLine(argv=argv)
 CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
-   
-tt=yearOpt.split('.') 
 
-if(len(tt) == 2):
-    byear=int(tt[0])
-    eyear=int(tt[1])
-    years=range(byear,eyear+1)
+prcdir=curdir
+table="-table %s/lats.pr.table.txt"%(prcdir)
+
+dtgs=mf.dtg_dtgopt_prc(dtgopt)
+
+for dtg in dtgs:
+
+    syear=dtg[0:4]
     
-else:
-    years=[yearOpt]
-
-for year in years:
-
-    syear=str(year)
-    
-    MF.sTimer('NC2GRB-%s'%(syear))
+    MF.sTimer('DATGRB-%s'%(dtg))
     MF.ChangeDir(syear,verb=1)
     source='imerg'
-    sbdir="%s/%s/cmorph_grid/monthly"%(w2.PrDatRoot,source)
-    tbdir="%s/%s/grib/monthly"%(w2.PrDatRoot,source)
+    sbdir="%s/%s/cmorph_grid"%(w2.PrDatRoot,source)
+    tbdir="%s/%s/grib"%(w2.PrDatRoot,source)
     print 'sbdir',sbdir
     print 'tbdir',tbdir
-    sdir="%s"%(sbdir)
+    sdir="%s/%s"%(sbdir,syear)
     tdir="%s/%s"%(tbdir,syear)
     
     print 'sss',sdir
     print 'ttt',tdir
     
-    MF.ChkDir(tdir,'mk')
+    MF.ChkDir(tdir)
 
-    if(doCtlOnly):
-        rc=makeImergGrbCtl(syear,tbdir,ropt)
-
-    else:    
+    (yyyy,mm,dd,hh)=mf.dtg2ymdh(dtg)
+    nmask="%s/*%s-%s-%s*.ctl"%(sdir,yyyy,mm,dd)
+    print 'nnn',nmask
+    npaths=glob.glob(nmask)
+    npaths.sort()
+    latscmd="lats4d.sh -ftype sdf -format grib"
+    latscmd="lats4d.sh -format grib"
+    for npath in npaths:
+        (sdir,sfile)=os.path.split(npath)
+        ss=sfile.split('.')
+        gfile=ss[-2]
+        ss=gfile.split('-')
+        yyyy=ss[-5]
+        mm=ss[-4]
+        dd=ss[-3]
+        hh=ss[-2]
+        mn=ss[-1]
+        yyyymmdd="%s%s%s"%(yyyy,mm,dd)
+        tfile='imerg-%s-%s-%s'%(yyyymmdd,hh,mn)
+        spath=npath
+        tpath="%s/%s"%(tdir,tfile)
+        gpath="%s.grb"%(tpath)
+        tsiz=MF.getPathSiz(gpath)
+        if(tsiz <= 0 or override):
+            cmd="%s %s -i %s -o %s "%(latscmd,table,spath,tpath)
+            #cmd='ln -s %s %s'%(spath,tpath)
+            mf.runcmd(cmd,ropt)
+        else:
+            print 'AAA already done: ',sfile
     
-        npaths=glob.glob("%s/*.%s????-*.nc4"%(sdir,syear))
-        npaths.sort()
-        latscmd="lats4d.sh -ftype sdf -format grib"
-        table="-table %s/lats.pr.table.txt"%(sbdir)
-        for npath in npaths:
-            (sdir,sfile)=os.path.split(npath)
-            ss=sfile.split('.')
-            yyyy=ss[4][0:4]
-            mm=ss[4][4:6]
-            tfile='imerg-%s-%s'%(yyyy,mm)
-            spath=npath
-            tpath="%s/%s"%(tdir,tfile)
-            gpath="%s.grb"%(tpath)
-            tsiz=MF.getPathSiz(gpath)
-
-            if(tsiz <= 0 or override):
-                cmd="%s %s -i %s -o %s "%(latscmd,table,spath,tpath)
-                mf.runcmd(cmd,ropt)
-            else:
-                print 'AAA already done: ',sfile
-        
-    MF.dTimer('NC2GRB-%s'%(year))
+    MF.dTimer('DATGRB-%s'%(dtg))
         
 sys.exit()
 

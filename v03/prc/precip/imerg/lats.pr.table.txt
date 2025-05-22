@@ -46,6 +46,7 @@
 #
 #---------------------------------------------------------------------------------------------------
 precipitation   | 59 | imerge precip. (mm/hr)                                        |      | float | sfc | -999 | 16 |   |   |
+precip   | 59 | imerge precip. (mm/hr)                                        |      | float | sfc | -999 | 16 |   |   |
 pr        | 59 | qmorph precip. (mm/hr)                                                |      | float | sfc | -999 | 16 |   |   |
 pr1       | 60 | qmorph precip. (mm/hr)                                                |      | float | sfc | -999 | 8 |   |   |
 pr3       | 61 | qmorph precip. (mm/hr)                                                |      | float | sfc | -999 | 8 |   |   |
