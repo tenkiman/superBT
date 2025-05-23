@@ -2,7 +2,7 @@
 
 from sBT import *
 
-def getAdecksStmid(tstmid,ropt='',qropt='quiet',verb=0,override=0):
+def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
     
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
     sdir="%s/%s"%(abdirStm,year)
@@ -33,7 +33,8 @@ def getAdecksStmid(tstmid,ropt='',qropt='quiet',verb=0,override=0):
     for m3dtg in m3dtgs:
         if(not(m3dtg in adtgs)): missdtgs.append(m3dtg)
             
-        
+
+    rdtgs=[]
     missOK=1
     for missdtg in missdtgs:
         myear=missdtg[0:4]
@@ -44,8 +45,17 @@ def getAdecksStmid(tstmid,ropt='',qropt='quiet',verb=0,override=0):
         if(len(sfiles) == 1):
             if(verb): print 'std there...trk was run for ',missdtg
         else:
+            rdtgs.append(missdtg)
             missOK=0
             
+    #-- print out
+    #
+    rdtgs.sort()
+    if(len(rdtgs) > 0):
+        print 'RR-- for stmid: ',tstmid
+        print 'RR-- redo dtgs: ',rdtgs
+        
+    
     if(missOK):
         rmOpt='-i'
         if(override): rmOpt=''
@@ -61,20 +71,58 @@ def getAdecksStmid(tstmid,ropt='',qropt='quiet',verb=0,override=0):
         onl=MF.getPathNlines(opath)
         osz=MF.getPathSiz(opath)
         
-        print 'opath: ',opath,' onl: ',onl,' osz: ',osz
+        print 'opath: ',opath,' onl: %4d'%(onl),' osz: %6d'%(osz)
+        return(1)
         
     else:
-        print 'EEEE problem with trackers for tstmid: ',tstmid
-        sys.exit()
         
+        if(redoTrk):
+            #ropt='norun'
+            for rdtg in rdtgs:
+                cmd='s-sbt-tmtrkN.py %s -T -O'%(rdtg)
+                mf.runcmd(cmd,ropt)
+            return(2)
+        else:
+            print 'EEE problem with trackers for tstmid: ',tstmid
+            return(0)
         
+def getStmopts(stmopt,verb=0):
     
+    tt=stmopt.split('.')
+    yy=tt[-1]
+    bb=tt[0]
+    tt=bb.split(',')
+    if(len(tt) > 1):
+        bbs=tt
+    else:
+        bbs=[bb]
     
-            
-            
+    tt=yy.split('-')
+    if(len(tt) == 2):
+        y0=int(tt[0])
+        y1=int(tt[1])
+        yys=range(y0,y1+1)
+    else:
+        yys=[yy]
+    
+    if(mf.find(stmopt,'all')):
+        bbs=['h','i','w','e','l']
         
-            
+    stmopts=[]
+    for yy in yys:
+        syy=str(yy)
+        iyy=int(yy)
+        for bb in bbs:
+            # -- epac best track starts in 1949
+            #
+            if(verb): print iyy,bb,(iyy >= 45 and iyy <= 48 and bb == 'e')
+            if(iyy >= 45 and iyy <= 48 and bb == 'e'):
+               continue 
+            stmopts=stmopts+[
+                '%s.%s'%(bb,syy),
+            ]
     
+    return(stmopts)
         
 
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -99,6 +147,7 @@ class TmtrkCmdLine(CmdLine):
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
+            'redoTrk':          ['R',0,1,' run tracker for missing dtgs'],
             
         }
 
@@ -119,17 +168,30 @@ if(verb): print CL.estr
 
 dtgopt=yearOpt=None
 
-(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
-doBT=0
-if(doBdeck2): doBT=1
-
-md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
-
-tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
-
-for tstmid in tstmids:
-    rc=getAdecksStmid(tstmid,override=override,verb=verb)
+stmopts=getStmopts(stmopt)
+    
+for stmopt in stmopts:
+    
+    (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+    doBT=0
+    if(doBdeck2): doBT=1
+    
+    md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
+    
+    tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
+    
+    for tstmid in tstmids:
         
+        rc=getAdecksStmid(tstmid,redoTrk=redoTrk,override=override,verb=verb)
+        
+        if(rc == 0):
+            print 'EEE -- still missing trackers for : ',tstmid,' press...'
+    
+        if(rc == 2):
+            print 'RRR -- reran tracker... now redo...'
+            rc=getAdecksStmid(tstmid,redoTrk=0,override=1,verb=verb)
+            print 'RRR -- rc after rerun: ',rc
+                
         
 sys.exit()
 
