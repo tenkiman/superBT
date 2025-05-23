@@ -168,9 +168,13 @@ if(verb): print CL.estr
 
 dtgopt=yearOpt=None
 
+istmopt=stmopt
 stmopts=getStmopts(stmopt)
     
+MF.sTimer('atcf-ALL-%s'%(istmopt))
 for stmopt in stmopts:
+    
+    MF.sTimer('atcf-stmopt-%s'%(stmopt))
     
     (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
     doBT=0
@@ -191,7 +195,10 @@ for stmopt in stmopts:
             print 'RRR -- reran tracker... now redo...'
             rc=getAdecksStmid(tstmid,redoTrk=0,override=1,verb=verb)
             print 'RRR -- rc after rerun: ',rc
+            
+    MF.dTimer('atcf-stmopt-%s'%(stmopt))
                 
+MF.dTimer('atcf-ALL-%s'%(istmopt))
         
 sys.exit()
 
