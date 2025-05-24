@@ -159,15 +159,33 @@ md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 for dtg in dtgs:
 
     ayear=dtg[0:4]
+    mmdd=dtg[4:8]
     
     (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,verb=verb,doSfc=0,doBail=doBail)
-    
+
+    # -- special case of no 022900 for 1952 1956
+    #
+    if((ayear == '1952' or ayear == '1956') and mmdd == '0229'):
+        hh=dtg[-2:]
+        if(hh == '00'):
+            tauOffset=24
+        elif(hh == '06'):
+            tauOffset=30
+        elif(hh == '12'):
+            tauOffset=36
+        elif(hh == '18'):
+            tauOffset=42
+            
+        print 'SSS--special case: for dtg: ',dtg,' tauOffset: ',tauOffset
     # -- model dtg whe tauOffset=6
     #
     if(tauOffset != None):
         mdtg=mf.dtginc(dtg,-tauOffset)
     else:
         mdtg=dtg
+
+    if(tauOffset > 0):
+        (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,mdtg,maxtau=maxtau,verb=verb,doSfc=0,doBail=doBail)
 
     # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
     # -- IIFF there are storms
