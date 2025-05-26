@@ -1,0 +1,15 @@
+20250411
+bug in md2!!!
+no posits in nhc/storm_list.txt for 1980-89!!!
+redid md2 on mike7
+redid w2-tc-names.py 1980.1989 to use storm.table
+
+2075  m-md3-stm-dir-sum-bd2.py 1980.1989 -B epac 
+2076  m-md3-stm-dir-sum-bd2.py 1980.1989 -B lant
+
+2089  m-md3-csv-ALL-bd2.py -Y 1980.1989
+
+that's it ... but have to redo tctrk and tcdiag...lant/epac
+
+r-all-tmtrk.py none -S e.80,c.80,l.80 -O -N
+
