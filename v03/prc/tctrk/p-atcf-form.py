@@ -106,7 +106,7 @@ def getStmopts(stmopt,verb=0):
         yys=[yy]
     
     if(mf.find(stmopt,'all')):
-        bbs=['h','i','w','e','l']
+        bbs=['h','i','w','c','e','l']
         
     stmopts=[]
     for yy in yys:
