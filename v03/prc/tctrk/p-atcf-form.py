@@ -3,12 +3,47 @@
 from sBT import *
 
 def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
-    
-    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
-    sdir="%s/%s"%(abdirStm,year)
-    stm1=stm1id.upper()
-    adecks=glob.glob("%s/tctrk.atcf.*.%s"%(sdir,stm1))
+
+    # -- get track
+    #
+    rc=md3.getMd3track(tstmid,dobt=0,verb=verb)
+    astmids=[]
+
+    if(rc[0]):
+        m3trk=rc[1]
+        m3dtgs=m3trk.keys()
+        m3dtgs.sort()
+        
+        for m3dtg in m3dtgs:
+            astmid=m3trk[m3dtg][-4]
+            astmids.append(astmid)
+            #print 'asdf---',m3dtg,astmid,m3trk[m3dtg]
+    else:
+        print 'EEE -- no track for tstmid: ',tstmid
+        sys.exit()
+        
+    astmids=mf.uniq(astmids)
+    #if(isShemBasinStm(tstmid)):
+        #nstmids=[]
+        #for astmid in astmids:
+            #if(astmid[2] == 'p'): nstmid=astmid.replace('p','s')
+            #if(astmid[2] == 's'): nstmid=astmid.replace('s','p')
+            #print 'asdfasdfsdaf',astmid,nstmid
+            #nstmids.append(astmid)
+            #nstmids.append(nstmid)
+            
+        #astmids=nstmids
+            
+    adecks=[]
+    for astmid in astmids:
+        (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(astmid)
+        sdir="%s/%s"%(abdirStm,year)
+        stm1=stm1id.upper()
+        amask="%s/tctrk.atcf.*.%s"%(sdir,stm1)
+        if(verb): print 'amask: ',amask
+        adecks=adecks+glob.glob(amask)
     adecks.sort()
+    adecks=mf.uniq(adecks)
     adtgs=[]
     for adeck in adecks:
         (adir,afile)=os.path.split(adeck)
@@ -18,17 +53,10 @@ def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
         
     odir="%s/%s/era5"%(abdirAtcf,year)
     MF.ChkDir(odir,'mk')
+    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
     ofile='a%s%s%s.dat'%(b2id.lower(),stm2id[2:4],year)
     opath="%s/%s"%(odir,ofile)
 
-    # -- get track
-    #
-    rc=md3.getMd3track(tstmid,dobt=dobt,verb=verb)
-    if(rc[0]):
-        m3trk=rc[1]
-        m3dtgs=m3trk.keys()
-        m3dtgs.sort()
-        
     missdtgs=[]
     for m3dtg in m3dtgs:
         if(not(m3dtg in adtgs)): missdtgs.append(m3dtg)
@@ -38,9 +66,12 @@ def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
     missOK=1
     for missdtg in missdtgs:
         myear=missdtg[0:4]
-        mmask="%s/%s/%s/*%s%s.txt"%(tmtrkbdir,myear,missdtg,snum,b1id)
-        sfiles=glob.glob(mmask)
-        if(verb): print 'MMM',mmask,missdtg,sfiles
+        sfiles=[]
+        for astmid in astmids:
+            (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(astmid)
+            mmask="%s/%s/%s/*%s%s.txt"%(tmtrkbdir,myear,missdtg,snum,b1id)
+            sfiles=sfiles+glob.glob(mmask)
+            if(verb): print 'MMM',mmask,missdtg,sfiles
              
         if(len(sfiles) == 1):
             if(verb): print 'std there...trk was run for ',missdtg
