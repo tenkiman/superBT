@@ -1,7 +1,1 @@
-# -- local vars
-from sbtLocal import *
-# -- global vars
-from sBTvars import *
-from sBTvm import *
-from sBTcl import *
-
+/sbt/superBT-V04/py2/sBT.py

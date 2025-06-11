@@ -2,7 +2,7 @@
 
 from sBT import *
 
-def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
+def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
 
     # -- get track
     #
@@ -23,16 +23,6 @@ def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
         sys.exit()
         
     astmids=mf.uniq(astmids)
-    #if(isShemBasinStm(tstmid)):
-        #nstmids=[]
-        #for astmid in astmids:
-            #if(astmid[2] == 'p'): nstmid=astmid.replace('p','s')
-            #if(astmid[2] == 's'): nstmid=astmid.replace('s','p')
-            #print 'asdfasdfsdaf',astmid,nstmid
-            #nstmids.append(astmid)
-            #nstmids.append(nstmid)
-            
-        #astmids=nstmids
             
     adecks=[]
     for astmid in astmids:
@@ -40,29 +30,30 @@ def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
         sdir="%s/%s"%(abdirStm,year)
         stm1=stm1id.upper()
         amask="%s/tctrk.atcf.*.%s"%(sdir,stm1)
-        if(verb): print 'amask: ',amask
-        adecks=adecks+glob.glob(amask)
+        ndecks=glob.glob(amask)
+        if(verb): print 'amask: ',amask,len(ndecks)
+        adecks=adecks+ndecks
     adecks.sort()
     adecks=mf.uniq(adecks)
+    
     adtgs=[]
     for adeck in adecks:
+        nladeck=MF.getPathNlines(adeck)
         (adir,afile)=os.path.split(adeck)
         aa=afile.split('.')
         adtg=aa[2]
         adtgs.append(adtg)
-        
-    odir="%s/%s/era5"%(abdirAtcf,year)
-    MF.ChkDir(odir,'mk')
-    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
-    ofile='a%s%s%s.dat'%(b2id.lower(),stm2id[2:4],year)
-    opath="%s/%s"%(odir,ofile)
-
-    adtgs=mf.uniq(adtgs)
+        atype='tmtrkN'
+        if(nladeck <= 4): atype='best'
+        adStat[tstmid,adtg]=(1,atype,nladeck)    
+            
+    # -- missing adecks
+    #
+    
     missdtgs=[]
     for m3dtg in m3dtgs:
         if(not(m3dtg in adtgs)): missdtgs.append(m3dtg)
             
-
     rdtgs=[]
     missOK=1
     for missdtg in missdtgs:
@@ -76,49 +67,79 @@ def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
              
         if(len(sfiles) >= 1):
             if(verb): print 'std there...trk was run for ',missdtg
+            adtgs.append(missdtg)
+            adStat[tstmid,missdtg]=(1,'stdout')
         else:
+            # -- worse case -- tracker not run at all
+            #
+            adtgs.append(missdtg)
+            adStat[tstmid,missdtg]=(0,'miss')
             rdtgs.append(missdtg)
             missOK=0
+
+    if(verbose):
+        adtgs.sort()
+        for adtg in adtgs:
+            print 'getAD: ',tstmid,adtg,adStat[tstmid,adtg]
             
-    #-- print out
+        print
+        print
+            
+            
+
+    # -- now go after tcdiag decks...
     #
-    rdtgs.sort()
-    if(len(rdtgs) > 0):
-        print 'RR-- for stmid: ',tstmid
-        print 'RR-- redo dtgs: ',rdtgs
-        
+    for astmid in astmids:
+        rc=getTcdiagFiles(m3dtgs,astmid,tstmid,verb=1)
+
+    if(verbose): 
+        for dtg in m3dtgs:
+            print 'getTd: ',tstmid,dtg,tcdStat[tstmid,dtg]
     
-    if(missOK):
-        rmOpt='-i'
-        if(override): rmOpt=''
-        if(MF.ChkPath(opath)):
-            cmd="rm %s %s ; touch %s"%(rmOpt,opath,opath)
+    return(missOK)
+
+
+
+def getTcdiagFiles(m3dtgs,astmid,tstmid,verb=0):
+    
+
+    # -- relabel with tstmid for 9X for year >= 2007
+    #
+    (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(astmid)
+
+    sdir=tsbdbdir
+    for dtg in m3dtgs:
+        myear=dtg[0:4]
+        mmask="%s/%s/%s/era5/tcdiag*%s%s*.txt"%(sdir,myear,dtg,snum,b1id)
+        tfile=glob.glob(mmask)
+        tcdsiz=len(tfile)
+        tcdtype=''
+        if(tcdsiz == 1):
+            tt=tfile[0].split('.')
+            tcdtype=tt[-2].split('-')[-1]
+            tcdStat[tstmid,dtg]=(tcdsiz,tcdtype)
         else:
-            cmd="touch %s"%(opath)
-        mf.runcmd(cmd,qropt)
-        for adeck in adecks:
-            cmd='cat %s >> %s'%(adeck,opath)
-            mf.runcmd(cmd,qropt)
+            tcdStat[tstmid,dtg]=(0,tcdtype)
             
-        onl=MF.getPathNlines(opath)
-        osz=MF.getPathSiz(opath)
+            
         
-        print 'opath: ',opath,' onl: %4d'%(onl),' osz: %6d'%(osz)
-        return(1)
-        
-    else:
-        
-        if(redoTrk):
-            #ropt='norun'
-            for rdtg in rdtgs:
-                cmd='s-sbt-tmtrkN.py %s -T -O'%(rdtg)
-                mf.runcmd(cmd,ropt)
-            return(2)
-        else:
-            print 'EEE problem with trackers for tstmid: ',tstmid
-            return(0)
+
+    rc=1
+    return(rc)
+    
+    
         
 def getStmopts(stmopt,verb=0):
+    
+    ttc=stmopt.split(',')
+    
+    if(len(ttc) > 1):
+        stmopts=[]
+        for ss in ttc:
+            sopts=getStmopts(ss)
+            stmopts=stmopts+sopts
+
+        return(stmopts)
     
     tt=stmopt.split('.')
     yy=tt[-1]
@@ -155,6 +176,45 @@ def getStmopts(stmopt,verb=0):
             ]
     
     return(stmopts)
+
+def anlAdTdStat(tstmids,verb=1):
+
+    redoAd=[]
+    redoTd=[]
+    
+    for tstmid in tstmids:
+
+        kk=tcdStat.keys()
+        tdtgs=[]
+        kk.sort()
+        for k in kk:
+            stmid=k[0]
+            dtg=k[1]
+            if(stmid == tstmid):
+                tdtgs.append(dtg)
+            
+        tdtgs.sort()
+        for tdtg in tdtgs:
+            if(verb): 
+                print 'stmid: ',tstmid,'tcd: ',tdtg,\
+                      'ADstat: %-18s'%str(adStat[tstmid,tdtg]),\
+                      'TDStat: %-18s'%(str(tcdStat[tstmid,tdtg]))
+                
+            td=tcdStat[tstmid,tdtg]
+            ad=adStat[tstmid,tdtg]
+                
+            if(td[0] == 0):
+                if(verb): print 'redoTD: ',tstmid,tdtg,td
+                redoTd.append(tdtg)
+            if(ad[0] == 0):
+                if(verb): print 'redoAD: ',tstmid,tdtg,ad
+                redoTd.append(tdtg)
+    
+    return(redoAd,redoTd)
+    
+        
+            
+    
         
 
 #cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -176,10 +236,11 @@ class TmtrkCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
+            'verbose':          ['v',0,1,'verbose=1 is REALLY verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
-            'redoTrk':          ['R',0,1,' run tracker for missing dtgs'],
+            'rerunAdTd':        ['R',0,1,' run tcdiag and/or tracker for missing dtgs'],
             
         }
 
@@ -202,11 +263,14 @@ dtgopt=yearOpt=None
 
 istmopt=stmopt
 stmopts=getStmopts(stmopt)
-    
-MF.sTimer('atcf-ALL-%s'%(istmopt))
+
+tcdStat={}
+adStat={}
+aStmids=[]
+MF.sTimer('aDtD-ALL-%s'%(istmopt))
 for stmopt in stmopts:
     
-    MF.sTimer('atcf-stmopt-%s'%(stmopt))
+    MF.sTimer('aDtD-stmopt-%s'%(stmopt))
     
     (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
     doBT=0
@@ -215,22 +279,35 @@ for stmopt in stmopts:
     md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
     
     tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
+    aStmids=aStmids+tstmids
     
     for tstmid in tstmids:
+        rc=getAdeckTcdiag4Stmid(tstmid,verb=verb,verbose=verbose)
         
-        rc=getAdecksStmid(tstmid,redoTrk=redoTrk,override=override,verb=verb)
-        
-        if(rc == 0):
-            print 'EEE -- still missing trackers for : ',tstmid,' press...'
+    MF.dTimer('aDtD-stmopt-%s'%(stmopt))
     
-        if(rc == 2):
-            print 'RRR -- reran tracker... now redo...'
-            rc=getAdecksStmid(tstmid,redoTrk=0,override=1,verb=verb)
-            print 'RRR -- rc after rerun: ',rc
-            
-    MF.dTimer('atcf-stmopt-%s'%(stmopt))
-                
-MF.dTimer('atcf-ALL-%s'%(istmopt))
+MF.sTimer('anl-adtd-%s'%(istmopt))
+(redoAd,redoTd)=anlAdTdStat(aStmids,verb=verb)
+MF.dTimer('anl-adtd-%s'%(istmopt))
+
+if(len(redoAd) > 0):
+    print 'AAADDD redo:',redoAd
+if(len(redoTd) > 0):
+    print 'TTTDDD redo Nruns:',len(redoTd)
+    if(rerunAdTd):
+        MF.ChangeDir('tcdiag')
+        MF.sTimer('redoTD-All')
+        for dtg in redoTd:
+            MF.sTimer('redoTD-All')
+            cmd="r-all-tcdiag.py %s -L"%(dtg)
+            mf.runcmd(cmd,ropt)
+            MF.sTimer('redoTD-All')
+        MF.sTimer('redoTD-All')
+        MF.ChangeDir('../')
+    
+
+
+MF.dTimer('aDtD-ALL-%s'%(istmopt))
         
 sys.exit()
 

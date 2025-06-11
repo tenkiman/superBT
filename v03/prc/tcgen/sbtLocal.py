@@ -1,5 +1,1 @@
-# -- full path with local installation directories
-#
-sbtRoot='/sbt/superBT-V04'
-sbtRootLocal = '/sbt/local'
-sbtVersion='V04'
+/sbt/superBT-V04/py2/sbtLocal.py

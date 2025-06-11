@@ -188,10 +188,11 @@ cTest=(len(dtgs) == 1 and len(modelsDiag[dtgs[0]]) == 1)
 
 # -- lllllllllllllllllllllllllllllllllllll -- set local dirs
 #
+tbdir=TcTcanalDatDir
 if(doLocal):
     era5DatDir = sbtDatDirL
     adeckSdir = adeckSdirL
-    sbtProdDir =  sbtProdDirL
+    sbtProdDir =  sbtProdDirDiagL
     tbdir=TcTcanalDatDirL
     tsbdbdir = tsbdbdirL
 #    
@@ -402,7 +403,7 @@ for dtg in dtgs:
                   md3=md3,
                   doSfc=doSfc,
                   doRoci=doRoci,
-                  sbtProdDir=sbtProdDir,
+                  sbtProdDir=sbtProdDirDiag,
                   doga=0,verb=verb)
 
         # -- 20230607 -- clean all files if override -- to overcome problem of redos with storms in all hemis

@@ -75,8 +75,8 @@ if(rType == 'dat'):
     exOpt=''
     
 elif(rType == 'prod'):
-    sdir=sbtProdDirL
-    tdir=sbtProdDir
+    sdir=sbtProdDirDiagL
+    tdir=sbtProdDirDiag
 
 else:
     print """EEE -- invalid rType -- must be either 'dat' | 'prod'"""

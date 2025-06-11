@@ -37,7 +37,9 @@ class TcdiagCmdLine(CmdLine):
 reconstruct stm-sum cards using mdeck3.trk data in src directories in dat/tc/sbt by year and basin"""
 
         self.examples='''
-%s 2019'''
+%s 2019
+%s all -S 11p.98 # set dtgs with stmid
+'''
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
@@ -48,11 +50,8 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
-doBT=0
-if(doBdeck2): doBT=1
-
-md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
+if(dtgopt != None and mf.find(dtgopt,'all')):
+    dtgopt=None
 
 if(dtgopt != None): MF.sTimer('AAA-TCDIAG-%s'%(dtgopt))
 if(stmopt != None): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
@@ -60,11 +59,22 @@ if(stmopt != None): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
 if(dtgopt != None and stmopt == None):
     dtgs=mf.dtg_dtgopt_prc(dtgopt)
 elif(stmopt != None and dtgopt == None):
-    syear=None
-    dtgs=md3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
+    dtgs=None
 else:
     print 'EEE--(%s) must set either dtgopt or stmopt alone...sayounara'%(CL.pyfile)
     sys.exit()
+
+# -- get md3
+#
+(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+doBT=0
+if(doBdeck2): doBT=1
+    
+md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
+ 
+if(dtgs == None):
+    syear=None
+    dtgs=md3.getMd3StmDtgs4Stmopt(stmopt,syear=syear)
     
 if(doLog):
     if(dtgopt != None and stmopt == None): 
@@ -101,8 +111,9 @@ if(stmopt != None): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
 oopt=''
 if(override): oopt='-O'
 
+# -- set stmopt to '' to tcdiag unless override
 sopt=''
-if(stmopt != None): sopt='-S %s'%(stmopt)
+if(stmopt != None and override): sopt='-S %s'%(stmopt)
 
 fopt=''
 if(doTcFc): fopt='-f'
@@ -147,7 +158,7 @@ for dtg in dtgs:
     mf.runcmd(cmd,ropt)
     # -- sleep for 5 s to see if the coredumps on mike6 come from memory not cleaning
     #
-    sleep(5)
+    sleep(3)
     MF.dTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
