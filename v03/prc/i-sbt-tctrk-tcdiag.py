@@ -90,11 +90,15 @@ def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
     # -- now go after tcdiag decks...
     #
     for astmid in astmids:
-        rc=getTcdiagFiles(m3dtgs,astmid,tstmid,verb=1)
+        rc=getTcdiagFiles(m3dtgs,astmid,tstmid,verb=verb)
 
-    if(verbose): 
-        for dtg in m3dtgs:
-            print 'getTd: ',tstmid,dtg,tcdStat[tstmid,dtg]
+    for dtg in m3dtgs:
+        try:
+            td=tcdStat[tstmid,dtg]
+        except:
+            tcdStat[tstmid,dtg]=(0,dtg)
+            
+        print 'getTd: ',tstmid,dtg,tcdStat[tstmid,dtg]
     
     return(missOK)
 
@@ -118,11 +122,6 @@ def getTcdiagFiles(m3dtgs,astmid,tstmid,verb=0):
             tt=tfile[0].split('.')
             tcdtype=tt[-2].split('-')[-1]
             tcdStat[tstmid,dtg]=(tcdsiz,tcdtype)
-        else:
-            tcdStat[tstmid,dtg]=(0,tcdtype)
-            
-            
-        
 
     rc=1
     return(rc)
