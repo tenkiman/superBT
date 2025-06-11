@@ -81,7 +81,6 @@ def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
         adtgs.sort()
         for adtg in adtgs:
             print 'getAD: ',tstmid,adtg,adStat[tstmid,adtg]
-            
         print
         print
             
@@ -98,7 +97,7 @@ def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
         except:
             tcdStat[tstmid,dtg]=(0,dtg)
             
-        print 'getTd: ',tstmid,dtg,tcdStat[tstmid,dtg]
+        if(verbose): print 'getTD: ',tstmid,dtg,tcdStat[tstmid,dtg]
     
     return(missOK)
 
