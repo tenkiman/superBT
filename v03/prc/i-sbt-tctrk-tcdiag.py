@@ -239,6 +239,9 @@ class TmtrkCmdLine(CmdLine):
             'stmopt':           ['S:',None,'a','stmopt'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
             'rerunAdTd':        ['R',0,1,' run tcdiag and/or tracker for missing dtgs'],
+            'doLog':            ['L',1,0,'do NOT do logfile to raid02/log'],
+            'doLocal':          ['C',1,0,'''default is to run locally'''],
+            
             
         }
 
@@ -262,6 +265,13 @@ dtgopt=yearOpt=None
 istmopt=stmopt
 stmopts=getStmopts(stmopt)
 
+lopt='-L'
+if(doLog): lopt=''
+
+copt=''
+if(doLocal): copt='-C'
+    
+
 tcdStat={}
 adStat={}
 aStmids=[]
@@ -279,7 +289,10 @@ for stmopt in stmopts:
     tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
     aStmids=aStmids+tstmids
     
+    tyears=[]
     for tstmid in tstmids:
+        (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
+        tyears.append(year)
         rc=getAdeckTcdiag4Stmid(tstmid,verb=verb,verbose=verbose)
         
     MF.dTimer('aDtD-stmopt-%s'%(stmopt))
@@ -291,16 +304,24 @@ MF.dTimer('anl-adtd-%s'%(istmopt))
 if(len(redoAd) > 0):
     print 'AAADDD redo:',redoAd
 if(len(redoTd) > 0):
+    
+    redoTd=mf.uniq(redoTd)
     print 'TTTDDD redo Nruns:',len(redoTd)
     if(rerunAdTd):
         MF.ChangeDir('tcdiag')
         MF.sTimer('redoTD-All')
         for dtg in redoTd:
             MF.sTimer('redoTD-All')
-            cmd="r-all-tcdiag.py %s -L"%(dtg)
+            cmd="r-all-tcdiag.py %s %s %s"%(dtg,lopt,copt)
             mf.runcmd(cmd,ropt)
             MF.sTimer('redoTD-All')
         MF.sTimer('redoTD-All')
+        # -- now sync over...
+        if(doLocal):
+            tyears=mf.uniq(tyears)
+            for tyear in tyears:
+                cmd='r-rsync-tcdiag-local-output.py -R dat -Y %s -X'%(tyear)
+                mf.runcmd(cmd,ropt)
         MF.ChangeDir('../')
     
 

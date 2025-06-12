@@ -403,7 +403,7 @@ for dtg in dtgs:
                   md3=md3,
                   doSfc=doSfc,
                   doRoci=doRoci,
-                  sbtProdDir=sbtProdDirDiag,
+                  sbtProdDir=sbtProdDir,
                   doga=0,verb=verb)
 
         # -- 20230607 -- clean all files if override -- to overcome problem of redos with storms in all hemis

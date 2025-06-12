@@ -137,6 +137,8 @@ elif(doLsRemote):
     
 #print 'ccc: ',cmd,'ropt: ',ropt,' <==='
 mf.runcmd(cmd,ropt)
+
+    
 MF.dTimer('rsync-%s-%s-%s'%(sbtHost,ymdOpt,rType))
     
 
