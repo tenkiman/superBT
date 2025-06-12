@@ -322,6 +322,8 @@ if(len(redoTd) > 0):
             for tyear in tyears:
                 cmd='r-rsync-tcdiag-local-output.py -R dat -Y %s -X'%(tyear)
                 mf.runcmd(cmd,ropt)
+                cmd='r-rsync-tcdiag-local-output.py -R prod -Y %s -X'%(tyear)
+                mf.runcmd(cmd,ropt)
         MF.ChangeDir('../')
     
 
