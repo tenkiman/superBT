@@ -306,11 +306,13 @@ for dtg in dtgs:
     models=modelsDiag[dtg]
     year=dtg[0:4]
     tbdirInv="%s/%s/INV"%(tbdir,year)
+
     MF.ChkDir(tbdirInv,'mk')
     
     # -- inventory object
     #
     dbname='invTcdiag.%s'%(dtg)
+    print 'dddd',dbname
     
     iV=InvHash(dbname=dbname,
                tbdir=tbdirInv,
