@@ -303,6 +303,9 @@ MF.dTimer('anl-adtd-%s'%(istmopt))
 
 if(len(redoAd) > 0):
     print 'AAADDD redo:',redoAd
+else:
+    print 'AAADDD -- trackers ALLGOOD   for istmopt: ',istmopt
+    
 if(len(redoTd) > 0):
     
     redoTd=mf.uniq(redoTd)
@@ -311,6 +314,14 @@ if(len(redoTd) > 0):
         MF.ChangeDir('tcdiag')
         MF.sTimer('redoTD-All')
         for dtg in redoTd:
+            
+            # -- check for bad dtgs
+            #
+            tdtg=dtg
+            if(IsBadEra5Dtg(tdtg) == 0):
+                print 'EEE---BBB era5 dtg...press...'
+                continue
+            
             MF.sTimer('redoTD-All')
             cmd="r-all-tcdiag.py %s %s %s"%(dtg,lopt,copt)
             mf.runcmd(cmd,ropt)
@@ -326,6 +337,8 @@ if(len(redoTd) > 0):
                 mf.runcmd(cmd,ropt)
         MF.ChangeDir('../')
     
+else:
+    print 'TTTDDD -- diag files ALLGOOD for istmopt: ',istmopt
 
 
 MF.dTimer('aDtD-ALL-%s'%(istmopt))

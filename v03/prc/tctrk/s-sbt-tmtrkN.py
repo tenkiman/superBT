@@ -158,6 +158,11 @@ md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
 
 for dtg in dtgs:
 
+    tdtg=dtg
+    if(IsBadEra5Dtg(tdtg) == 0):
+        print 'EEE---BBB era5 dtg...press...'
+        continue
+
     ayear=dtg[0:4]
     mmdd=dtg[4:8]
     

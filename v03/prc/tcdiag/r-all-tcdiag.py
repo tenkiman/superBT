@@ -138,6 +138,11 @@ bdtgLats= "%s010100"%(bdtg[0:4])
 
 for dtg in dtgs:
     
+    tdtg=dtg
+    if(IsBadEra5Dtg(tdtg) == 0):
+        print 'EEE---BBB era5 dtg...press...'
+        continue
+    
     # -- set up doing lats4d
     #
     latsOpt=''

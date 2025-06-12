@@ -259,8 +259,13 @@ didIt=0
 nStmAll=0
 
 MF.sTimer(tag='AAA-SBT-LSDIAG-%s'%(dtgopt))
-
 for dtg in dtgs:
+
+    tdtg=dtg
+    if(IsBadEra5Dtg(tdtg) == 0):
+        print 'EEE---BBB era5 dtg...press...'
+        continue
+    
 
     # -- 20230314 -- will miss storms with missing dtgs...
     #    see inv/dtgmiss/m-B-2007-22.txt 

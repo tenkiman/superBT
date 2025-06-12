@@ -102,6 +102,12 @@ oopt=''
 if(override): oopt='-O'
 
 for dtg in dtgs:
+    
+    tdtg=dtg
+    if(IsBadEra5Dtg(tdtg) == 0):
+        print 'EEE---BBB era5 dtg...press...'
+        continue
+    
     topt='-T'
     sopt=''
     vopt=''
