@@ -92,9 +92,10 @@ if(doLog):
     
     logPath="%s/loG-%s-sbt-tcdiag-%s.txt"%(sbldir,sbtHost,logName)
         
-    if(MF.ChkPath(logPath)):
-        cmd="rm -i %s"%(logPath)
-        mf.runcmd(cmd)
+    # -- allways append
+    #if(MF.ChkPath(logPath)):
+        #cmd="rm -i %s"%(logPath)
+        #mf.runcmd(cmd)
     
     print 'LLL -- logging to: %s'%(logPath)
     
