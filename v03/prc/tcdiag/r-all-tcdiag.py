@@ -120,6 +120,9 @@ fopt=''
 if(doTcFc): fopt='-f'
 lopt = ''
 if(doLocal): lopt ='-C'     
+vopt=''
+if(verb): vopt='-V'
+    
 
 
 if(lats4dInc != None):
@@ -160,11 +163,11 @@ for dtg in dtgs:
     # -- run tcdiag
     #
     MF.sTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
-    cmd="s-sbt-tcdiag.py %s %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,lopt, latsOpt,logOpt)
+    cmd="s-sbt-tcdiag.py %s %s %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,lopt, latsOpt,logOpt,vopt)
     mf.runcmd(cmd,ropt)
     # -- sleep for 5 s to see if the coredumps on mike6 come from memory not cleaning
     #
-    sleep(3)
+    sleep(2)
     MF.dTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))

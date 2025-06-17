@@ -130,13 +130,18 @@ cmd="rsync %s %s/%s %s/%s"%(rsyncOpt,sdir,symd,tdir,tymd)
 if(doCleanLocal):  
     cmd="rm %s/%s/*/*"%(sdir,symd)
     cmd='''for f in %s/%s/*/* ; do echo rm $f ; rm $f ; done'''%(sdir,symd)
+    cmd2='''for f in %s/%s/*/*/* ; do echo rm $f ; rm $f ; done'''%(sdir,symd)
 elif(doLsLocal):
     cmd="ls -la %s/%s/*"%(sdir,symd)
 elif(doLsRemote):
     cmd="ls -la %s/%s/*"%(tdir,symd)
     
 #print 'ccc: ',cmd,'ropt: ',ropt,' <==='
+if(rType == 'prod'):
+    cmd=cmd2
 mf.runcmd(cmd,ropt)
+mf.runcmd(cmd2,ropt)
+    
 
     
 MF.dTimer('rsync-%s-%s-%s'%(sbtHost,ymdOpt,rType))

@@ -117,6 +117,8 @@ def getTcdiagFiles(m3dtgs,astmid,tstmid,verb=0):
         tfile=glob.glob(mmask)
         tcdsiz=len(tfile)
         tcdtype=''
+        #print 'ttt',mmask,tfile,tcdsiz,tcdtype
+        
         if(tcdsiz == 1):
             tt=tfile[0].split('.')
             tcdtype=tt[-2].split('-')[-1]

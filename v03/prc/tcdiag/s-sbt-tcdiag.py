@@ -120,8 +120,8 @@ def rsyncEra2Local(dtg):
         
     MF.sTimer('Local-TCdiag-rsync-%s' % (dtg))
     year = dtg[0:4]
-    if(sbtHost != 'mike8'):
-        sdirA = 'fiorino@mike8:/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
+    if(sbtHost != raid02Location):
+        sdirA = 'fiorino@%s:/raid02/sbt/dat/adeck-dtg/%s/%s' % (raid02Location, year, dtg)
     else:
         sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
         
@@ -137,7 +137,7 @@ def rsyncEra2Local(dtg):
         sdirE2  = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
         sdirE = '/mnt/mike5-mnt/USB3RAID5-01/dat/nwp2/w2flds/dat/era5/%s/%s'%(year,eradtg)
     else:
-        sdirE = '/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        sdirE = '/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
         
     tdirE = "%s/nwp2/w2flds/dat/era5/%s/%s" % (sbtDatDirL, year, eradtg)
     rc = MF.ChkDir(tdirE, 'mk')
@@ -317,7 +317,6 @@ for dtg in dtgs:
     # -- inventory object
     #
     dbname='invTcdiag.%s'%(dtg)
-    print 'dddd',dbname
     
     iV=InvHash(dbname=dbname,
                tbdir=tbdirInv,
