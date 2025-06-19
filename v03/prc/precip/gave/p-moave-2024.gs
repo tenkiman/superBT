@@ -4,29 +4,58 @@ rc=gsfallow(on)
 rc=const()
 
 dov8only=0
-doimergonly=1
+doimergonly=0
+dosbtonly=1
 
 
 byear=2024 ; eyear=2024
 byear=1998 ; eyear=2024
+#byear=1998 ; eyear=1998
 
-nave.1='gsmapV6'
-nave.2='gsmapV8'
-nave.3='gsmapV8-G'
-nave.4='imerg'
 
 bdir='/data/w22'
 odir='/sbt/superBT-V04/v03/prc/precip/dat/mo'
+odir='../dat/mo'
+
+# -- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm main loop
+#
 
 year=byear
 while(year <= eyear)
   'reinit'
 
+if(dosbtonly)
+
+  nave.1='gsmapV8-G'
+  nave.2='imerg'
+
+  gfile8g='prg_a06h-'year'.ctl'
+  ifile='pri_a06h-'year'.ctl'
+
+  gpath8g=bdir'/dat/pr/pr_gsmapV8-G/'gfile8g
+  ipath=bdir'/dat/pr/pr_imerg/'ifile
+
+  fg8g=ofile(gpath8g)
+  fi=ofile(ipath)
+
+  print 'fg8g 'fg8g' 'gpath8g
+  print 'fi   'fi  ' 'ipath
+
+  bfi=1
+  efi=2
+
+else
+
+  nave.1='gsmapV6'
+  nave.2='gsmapV8'
+  nave.3='gsmapV8-G'
+  nave.4='imerg'
+  
   gfile6='prg_a06h-'year'.ctl'
   gfile8='prg_a06h-'year'.ctl'
   gfile8g='prg_a06h-'year'.ctl'
   ifile='pri_a06h-'year'.ctl'
-
+  
   gpath6=bdir'/dat/pr/pr_gsmapV6-Grev/'gfile6
   gpath8=bdir'/dat/pr/pr_gsmapV8/'gfile8
   gpath8g=bdir'/dat/pr/pr_gsmapV8-G/'gfile8g
@@ -37,50 +66,62 @@ while(year <= eyear)
   fg8g=ofile(gpath8g)
   fi=ofile(ipath)
   
-print 'fg6  'fg6 ' 'gpath6
-print 'fg8  'fg8 ' 'gpath8
-print 'fg8g 'fg8g' 'gpath8g
-print 'fi   'fi  ' 'ipath
+  print 'fg6  'fg6 ' 'gpath6
+  print 'fg8  'fg8 ' 'gpath8
+  print 'fg8g 'fg8g' 'gpath8g
+  print 'fi   'fi  ' 'ipath
 
-ogpath=odir
-
-bfi=1
-efi=4
+  bfi=1
+  efi=4
 
 # -- case with no gsmapV6
 #
-if( fg6 = 0)
-  efi=3
-  nave.1='gsmapV8'
-  nave.2='gsmapV8-G'
-  nave.3='imerg'
-else
-  nave.1='gsmapV6'
-  nave.2='gsmapV8'
-  nave.3='gsmapV8-G'
-  nave.4='imerg'
-endif
+  if( fg6 = 0)
+    efi=3
+    nave.1='gsmapV8'
+    nave.2='gsmapV8-G'
+    nave.3='imerg'
+  else
+    nave.1='gsmapV6'
+    nave.2='gsmapV8'
+    nave.3='gsmapV8-G'
+    nave.4='imerg'
+  endif
 
 # - just do v8
-if(dov8only = 1)
-  bfi=2
-  efi=2
-endif
+  if(dov8only = 1)
+    bfi=2
+    efi=2
+  endif
 
-if(doimergonly = 1)
-  bfi=fi
-  efi=fi
+  if(doimergonly = 1)
+    bfi=fi
+    efi=fi
+  endif
+
 endif
 
 print 'bfi 'bfi' efi 'efi
 
+# -- outdoor path
+#
+ogpath=odir
+
+# -- pppppppppppppppppppppppppppp processing loop for each 12 months
+#
+
+# -- fffffff file loop
+#
 ff=bfi
 while(ff<=efi)
 
-    bmo=1 ; emo=12
-    mo=bmo
-    
-    while(mo <= emo)
+  bmo=1 ; emo=12
+#  emo=1
+  mo=bmo
+ 
+# -- mmmmmmm month loop
+#
+  while(mo <= emo)
     
     print 'lllllll 'ff' mo: 'mo
     'set dfile 'ff
@@ -109,6 +150,7 @@ while(ff<=efi)
     'd re(pm,0.25)'
     print result
     'disable fwrite'
+    
 '!date'
 
     mo=mo+1
@@ -122,9 +164,12 @@ endwhile
 year=year+1
 
 endwhile
+'quit'
+
 return
 
-
+# -- ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+#
 function getbounds(year,mo)
 
 # -- get x/y bounds

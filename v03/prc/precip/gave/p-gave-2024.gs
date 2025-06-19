@@ -49,18 +49,18 @@ while(year <= eyear)
   gfile8g='prg_a06h-'year'.ctl'
   ifile='pri_a06h-'year'.ctl'
 
-  gpath6=bdir'/dat/pr/pr_gsmapV6-Grev/'gfile6
-  gpath8=bdir'/dat/pr/pr_gsmapV8/'gfile8
+#  gpath6=bdir'/dat/pr/pr_gsmapV6-Grev/'gfile6
+#  gpath8=bdir'/dat/pr/pr_gsmapV8/'gfile8
   gpath8g=bdir'/dat/pr/pr_gsmapV8-G/'gfile8g
   ipath=bdir'/dat/pr/pr_imerg/'ifile
   
-  fg6=ofile(gpath6)
-  fg8=ofile(gpath8)
+#  fg6=ofile(gpath6)
+#  fg8=ofile(gpath8)
   fg8g=ofile(gpath8g)
   fi=ofile(ipath)
   
-print 'fg6  'fg6 ' 'gpath6
-print 'fg8  'fg8 ' 'gpath8
+#print 'fg6  'fg6 ' 'gpath6
+#print 'fg8  'fg8 ' 'gpath8
 print 'fg8g 'fg8g' 'gpath8g
 print 'fi   'fi  ' 'ipath
 
@@ -83,11 +83,22 @@ else
   nave.4='imerg'
 endif
 
+nave.1='gsmapV8-G'
+nave.2='imerg'
+
 # - just do v8
 if(dov8only = 1)
   bfi=2
   efi=2
 endif
+
+# -- just do the two we're going to use
+#
+nave.1='gsmapV8-G'
+nave.2='imerg'
+bfi=1
+efi=2
+
 print 'bfi 'bfi' efi 'efi
 
 fi=bfi

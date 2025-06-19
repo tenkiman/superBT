@@ -324,19 +324,28 @@ if(len(redoTd) > 0):
                 print 'EEE---BBB era5 dtg...press...'
                 continue
             
-            MF.sTimer('redoTD-All')
+            MF.sTimer('redoTD-All-%s'%(dtg))
             cmd="r-all-tcdiag.py %s %s %s"%(dtg,lopt,copt)
             mf.runcmd(cmd,ropt)
-            MF.sTimer('redoTD-All')
-        MF.sTimer('redoTD-All')
+            MF.dTimer('redoTD-All-%s'%(dtg))
+        MF.dTimer('redoTD-All')
         # -- now sync over...
         if(doLocal):
             tyears=mf.uniq(tyears)
+            
+            # -- always do the previous year in case of shem
+            #
+            tyearm1=int(tyears[0])-1
+            tyearm1=str(tyearm1)
+
+            tyears.append(tyearm1)
+            
             for tyear in tyears:
                 cmd='r-rsync-tcdiag-local-output.py -R dat -Y %s -X'%(tyear)
                 mf.runcmd(cmd,ropt)
                 cmd='r-rsync-tcdiag-local-output.py -R prod -Y %s -X'%(tyear)
                 mf.runcmd(cmd,ropt)
+
         MF.ChangeDir('../')
     
 else:
