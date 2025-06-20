@@ -50,6 +50,10 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
+# -- turn on/off diags
+#
+warn=0
+
 if(dtgopt != None and mf.find(dtgopt,'all')):
     dtgopt=None
 
@@ -97,15 +101,16 @@ if(doLog):
         #cmd="rm -i %s"%(logPath)
         #mf.runcmd(cmd)
     
-    print 'LLL -- logging to: %s'%(logPath)
+    if(warn): print 'LLL -- logging to: %s'%(logPath)
     
 if(doLog): 
     logOpt=">> %s 2>&1"%(logPath)
 else:      
     logOpt=""
-
-if(dtgopt != None): MF.sTimer('AAA-TCDIAG-%s'%(dtgopt))
-if(stmopt != None): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
+    
+doAllTimer=0
+if(dtgopt != None and doAllTimer): MF.sTimer('AAA-TCDIAG-%s'%(dtgopt))
+if(stmopt != None and doAllTimer): MF.sTimer('AAA-TCDIAG-%s'%(stmopt))
 
 # -- options
 
@@ -181,8 +186,8 @@ for dtg in dtgs:
     sleep(2)
     MF.dTimer('sbt-TCDIAG-%s-nTCs-%02d-lats: %s'%(dtg,nstms,latsOpt))
     
-if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
-if(stmopt != None): MF.dTimer('AAA-TCDIAG-%s'%(stmopt))
+if(dtgopt != None and doAllTimer): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
+if(stmopt != None and doAllTimer): MF.dTimer('AAA-TCDIAG-%s'%(stmopt))
 
 sys.exit()
 

@@ -308,6 +308,9 @@ if(len(redoAd) > 0):
 else:
     print 'AAADDD -- trackers ALLGOOD   for istmopt: ',istmopt
     
+    
+doAllTimer=0
+
 if(len(redoTd) > 0):
     
     redoTd=mf.uniq(redoTd)
@@ -329,10 +332,10 @@ if(len(redoTd) > 0):
                 print 'EEE---BBB era5 dtg...press...'
                 continue
             
-            MF.sTimer('redoTD-All-%s'%(dtg))
+            if(doAllTimer): MF.sTimer('redoTD-All-%s'%(dtg))
             cmd="r-all-tcdiag.py %s %s %s"%(dtg,lopt,copt)
             mf.runcmd(cmd,ropt)
-            MF.dTimer('redoTD-All-%s'%(dtg))
+            if(doAllTimer): MF.dTimer('redoTD-All-%s'%(dtg))
      
         MF.dTimer('redoTD-All')
         
