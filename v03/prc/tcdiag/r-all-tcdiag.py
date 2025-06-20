@@ -162,13 +162,13 @@ for dtg in dtgs:
             
     # -- run tcdiag
     #
-    MF.sTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
+    MF.sTimer('sbt-TCDIAG-%s-lats: %s'%(dtg,latsOpt))
     cmd="s-sbt-tcdiag.py %s %s %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,lopt, latsOpt,logOpt,vopt)
     mf.runcmd(cmd,ropt)
     # -- sleep for 5 s to see if the coredumps on mike6 come from memory not cleaning
     #
     sleep(2)
-    MF.dTimer('sbt-TCDIAG-%s-%s'%(dtg,latsOpt))
+    MF.dTimer('sbt-TCDIAG-%s-lats: %s'%(dtg,latsOpt))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
 if(stmopt != None): MF.dTimer('AAA-TCDIAG-%s'%(stmopt))

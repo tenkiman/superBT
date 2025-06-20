@@ -312,8 +312,13 @@ if(len(redoTd) > 0):
     
     redoTd=mf.uniq(redoTd)
     print 'TTTDDD redo Nruns:',len(redoTd)
+    
+    # -- if do rerun...
+    #
     if(rerunAdTd):
+     
         MF.ChangeDir('tcdiag')
+     
         MF.sTimer('redoTD-All')
         for dtg in redoTd:
             
@@ -328,9 +333,13 @@ if(len(redoTd) > 0):
             cmd="r-all-tcdiag.py %s %s %s"%(dtg,lopt,copt)
             mf.runcmd(cmd,ropt)
             MF.dTimer('redoTD-All-%s'%(dtg))
+     
         MF.dTimer('redoTD-All')
+        
         # -- now sync over...
+        #
         if(doLocal):
+         
             tyears=mf.uniq(tyears)
             
             # -- always do the previous year in case of shem
@@ -345,7 +354,9 @@ if(len(redoTd) > 0):
                 mf.runcmd(cmd,ropt)
                 cmd='r-rsync-tcdiag-local-output.py -R prod -Y %s -X'%(tyear)
                 mf.runcmd(cmd,ropt)
-
+                
+        # -- go back up to man prc dir
+        #
         MF.ChangeDir('../')
     
 else:
