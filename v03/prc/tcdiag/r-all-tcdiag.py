@@ -141,6 +141,17 @@ bdtgLats= "%s010100"%(bdtg[0:4])
 
 for dtg in dtgs:
     
+    
+    (dtgstms,m3trks)=md3.getMd3tracks4dtg(dtg,dobt=0,doBdeck2=doBdeck2, 
+                                          verb=verb)
+
+    tccards=[]
+    for stmid in dtgstms:
+        card=printMd3Trk(m3trks[stmid],dtg)
+        tccards.append(card)
+        
+    nstms=len(tccards)
+        
     tdtg=dtg
     if(IsBadEra5Dtg(tdtg) == 0):
         print 'EEE---BBB era5 dtg...press...'
@@ -162,13 +173,13 @@ for dtg in dtgs:
             
     # -- run tcdiag
     #
-    MF.sTimer('sbt-TCDIAG-%s-lats: %s'%(dtg,latsOpt))
+    MF.sTimer('sbt-TCDIAG-%s-nTCs-%02d-lats: %s'%(dtg,nstms,latsOpt))
     cmd="s-sbt-tcdiag.py %s %s %s %s %s %s %s %s"%(dtg,sopt,fopt,oopt,lopt, latsOpt,logOpt,vopt)
     mf.runcmd(cmd,ropt)
     # -- sleep for 5 s to see if the coredumps on mike6 come from memory not cleaning
     #
     sleep(2)
-    MF.dTimer('sbt-TCDIAG-%s-lats: %s'%(dtg,latsOpt))
+    MF.dTimer('sbt-TCDIAG-%s-nTCs-%02d-lats: %s'%(dtg,nstms,latsOpt))
     
 if(dtgopt != None): MF.dTimer('AAA-TCDIAG-%s'%(dtgopt))
 if(stmopt != None): MF.dTimer('AAA-TCDIAG-%s'%(stmopt))
