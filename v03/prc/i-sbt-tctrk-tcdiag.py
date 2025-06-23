@@ -291,10 +291,8 @@ for stmopt in stmopts:
     tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
     aStmids=aStmids+tstmids
     
-    tyears=[]
     for tstmid in tstmids:
         (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
-        tyears.append(year)
         rc=getAdeckTcdiag4Stmid(tstmid,verb=verb,verbose=verbose)
         
     MF.dTimer('aDtD-stmopt-%s'%(stmopt))
@@ -319,6 +317,10 @@ if(len(redoTd) > 0):
     # -- if do rerun...
     #
     if(rerunAdTd):
+
+        # -- get years based on dtg
+        #
+        lyears=[]
      
         MF.ChangeDir('tcdiag')
      
@@ -328,6 +330,10 @@ if(len(redoTd) > 0):
             # -- check for bad dtgs
             #
             tdtg=dtg
+            
+            lyear=dtg[0:4]
+            lyears.append(lyear)
+            
             if(IsBadEra5Dtg(tdtg) == 0):
                 print 'EEE---BBB era5 dtg...press...'
                 continue
@@ -339,23 +345,18 @@ if(len(redoTd) > 0):
      
         MF.dTimer('redoTD-All')
         
+        lyears=mf.uniq(lyears)
+        
         # -- now sync over...
         #
         if(doLocal):
-         
-            tyears=mf.uniq(tyears)
-            
-            # -- always do the previous year in case of shem
+                        
+            # -- 20250623 -- use lyears based on dtgs to rsync
             #
-            tyearm1=int(tyears[0])-1
-            tyearm1=str(tyearm1)
-
-            tyears.append(tyearm1)
-            
-            for tyear in tyears:
-                cmd='r-rsync-tcdiag-local-output.py -R dat -Y %s -X'%(tyear)
+            for lyear in lyears:
+                cmd='r-rsync-tcdiag-local-output.py -R dat -Y %s -X'%(lyear)
                 mf.runcmd(cmd,ropt)
-                cmd='r-rsync-tcdiag-local-output.py -R prod -Y %s -X'%(tyear)
+                cmd='r-rsync-tcdiag-local-output.py -R prod -Y %s -X'%(lyear)
                 mf.runcmd(cmd,ropt)
                 
         # -- go back up to man prc dir
