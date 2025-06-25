@@ -10,7 +10,8 @@ dosbtonly=1
 
 byear=2024 ; eyear=2024
 byear=1998 ; eyear=2024
-#byear=1998 ; eyear=1998
+byear=1998 ; eyear=1998
+byear=2022 ; eyear=2024
 
 
 bdir='/data/w22'

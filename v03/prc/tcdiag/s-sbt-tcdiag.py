@@ -133,11 +133,15 @@ def rsyncEra2Local(dtg):
     eradtg = dtg
     if(is0618Z(dtg)):
         eradtg = mf.dtginc(dtg, -6)
-    if(sbtHost != 'mike5'):
-        sdirE2  = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
-        sdirE = '/mnt/mike5-mnt/USB3RAID5-01/dat/nwp2/w2flds/dat/era5/%s/%s'%(year,eradtg)
-    else:
-        sdirE = '/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
+    #if(sbtHost != 'mike5'):
+        #sdirE2  = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
+        #sdirE = '/mnt/mike5-mnt/USB3RAID5-01/dat/nwp2/w2flds/dat/era5/%s/%s'%(year,eradtg)
+    #else:
+        #sdirE = '/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
+
+    # -- 20250625 -- always linked to /w21/dat/... location
+    #
+    sdirE = '/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
         
     tdirE = "%s/nwp2/w2flds/dat/era5/%s/%s" % (sbtDatDirL, year, eradtg)
     rc = MF.ChkDir(tdirE, 'mk')
