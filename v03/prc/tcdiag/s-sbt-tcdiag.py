@@ -120,11 +120,15 @@ def rsyncEra2Local(dtg):
         
     MF.sTimer('Local-TCdiag-rsync-%s' % (dtg))
     year = dtg[0:4]
-    if(sbtHost != raid02Location):
-        sdirA = 'fiorino@%s:/raid02/sbt/dat/adeck-dtg/%s/%s' % (raid02Location, year, dtg)
-    else:
-        sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
+    
+    # -- now all machines are ln -s to /raid02/
+    #
+    #if(sbtHost != raid02Location):
+        #sdirA = 'fiorino@%s:/raid02/sbt/dat/adeck-dtg/%s/%s' % (raid02Location, year, dtg)
+    #else:
+        #sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
         
+    sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
     tdirA = "%s/adeck-dtg/%s/%s" % (sbtDatDirL, year, dtg)
     MF.ChkDir(tdirA, 'mk')
 
@@ -133,11 +137,13 @@ def rsyncEra2Local(dtg):
     eradtg = dtg
     if(is0618Z(dtg)):
         eradtg = mf.dtginc(dtg, -6)
+
     #if(sbtHost != 'mike5'):
         #sdirE2  = 'fiorino@mike5:/raid01/dat/nwp2/w2flds/dat/era5/%s/%s' % (year, eradtg)
         #sdirE = '/mnt/mike5-mnt/USB3RAID5-01/dat/nwp2/w2flds/dat/era5/%s/%s'%(year,eradtg)
     #else:
         #sdirE = '/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
+
 
     # -- 20250625 -- always linked to /w21/dat/... location
     #
@@ -151,9 +157,17 @@ def rsyncEra2Local(dtg):
     
     cmdE = "rsync -alv %s/ %s/" % (sdirE, tdirE)
     mf.runcmd(cmdE, ropt)
+    
+    ctls=glob.glob("%s/*ctl"%(tdirE))
+    
+    ctlPathUa=ctlPathSfc=None
+    if(len(ctls) == 2):
+        for ctl in ctls:
+            if(mf.find(ctl,'ua')): ctlPathUa=ctl
+            if(mf.find(ctl,'sfc')): ctlPathSfc=ctl
 
     MF.dTimer('Local-TCdiag-rsync-%s' % (dtg))
-    return(tdirE)
+    return(tdirE,ctlPathUa,ctlPathSfc)
 
     
 
@@ -292,8 +306,7 @@ for dtg in dtgs:
     # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
     # -- IIFF there are storms
     #
-    if(doLocal): tdirE = rsyncEra2Local(dtg)
-
+    if(doLocal): (tdirE,ctlPathUa,ctlPathSfc) = rsyncEra2Local(dtg)
     
     # -- only track in stmopt
     #
@@ -451,7 +464,8 @@ for dtg in dtgs:
             
             continue        
 
-        if(doLocal): tdirE = rsyncEra2Local(dtg)
+        # -- don't have to do again...
+        #if(doLocal): (tdirE,ctlPathUa,ctlPathSfc) = rsyncEra2Local(dtg)
         
         tG.grads21Cmd=xgrads
         tG.md3=md3
@@ -460,8 +474,12 @@ for dtg in dtgs:
 
         # -- get storms and make sure ctlpath there...
         #
-        ctlpath=tG.ctlpath
-
+        if(doLocal):
+            ctlpath=ctlPathUa
+            ctlpath2=ctlPathSfc
+        else:
+            ctlpath=tG.ctlpath
+            
         if(ropt == 'norun'):  continue
 
         # -- check if a data tau 0
@@ -493,7 +511,7 @@ for dtg in dtgs:
 
 
         mfT=TcFldsDiag(dtg,model,ctlpath,
-                       ctlpath2=tG.ctlpath2,
+                       ctlpath2=ctlpath2,
                        taus=tG.targetTaus,
                        tauoffset=tG.tauOffset,
                        dstmids=dstmids,
