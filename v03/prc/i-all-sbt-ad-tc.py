@@ -73,7 +73,7 @@ MF.sTimer('AALLLL-AD-TD-%s'%(oyearOpt))
 rerunopt=''
 if(rerunAdTd): rerunopt='-R'
 roptSbt=''
-if(ropt == 'norun'): roptSbt=ropt
+if(ropt == 'norun'): roptSbt='-N'
 if(doit): ropt=''
 
 for year in years:
