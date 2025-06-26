@@ -12,6 +12,7 @@ byear=2024 ; eyear=2024
 byear=1998 ; eyear=2024
 byear=1998 ; eyear=1998
 byear=2022 ; eyear=2024
+byear=2023 ; eyear=2023
 
 
 bdir='/data/w22'

@@ -22,6 +22,7 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'verbose':          ['v',0,1,'verbose=1 is REALLY verbose'],
+            'doit':             ['X',0,1,'do it anyway...'],
             'ropt':             ['N','','norun',' norun is norun'],
             'yearopt':          ['Y:',None,'a','yearopt YYYY or BYYYY.EYYYY'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
@@ -71,14 +72,17 @@ MF.sTimer('AALLLL-AD-TD-%s'%(oyearOpt))
 
 rerunopt=''
 if(rerunAdTd): rerunopt='-R'
-    
+roptSbt=''
+if(ropt == 'norun'): roptSbt=ropt
+if(doit): ropt=''
+
 for year in years:
     syear=str(year)
     MF.sTimer('AD-TD-%s'%(syear))
     for b1id in b1ids:
         MF.sTimer('B1ID-AD-TD-%s-%s'%(b1id,syear))
         sopt="%s.%s"%(b1id,syear)
-        cmd='i-sbt-tctrk-tcdiag.py -S %s %s'%(sopt,rerunopt)
+        cmd='i-sbt-tctrk-tcdiag.py -S %s %s %s'%(sopt,rerunopt,roptSbt)
         mf.runcmd(cmd,ropt)
         MF.dTimer('B1ID-AD-TD-%s-%s'%(b1id,syear))
     MF.dTimer('AD-TD-%s'%(syear))
