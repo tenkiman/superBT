@@ -45,6 +45,7 @@ def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
         adtgs.append(adtg)
         atype='tmtrkN'
         if(nladeck <= 4): atype='best'
+        #print 'adtg: ',adtg,'nladeck: ',nladeck
         adStat[tstmid,adtg]=(1,atype,nladeck)    
             
     # -- missing adecks
@@ -63,7 +64,7 @@ def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
             (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(astmid)
             mmask="%s/%s/%s/*%s%s.txt"%(tmtrkbdir,myear,missdtg,snum,b1id)
             sfiles=sfiles+glob.glob(mmask)
-            if(verb): print 'MMM',mmask,missdtg,sfiles
+            if(verb): print 'MMM',mmask,missdtg,len(sfiles),'---'
              
         if(len(sfiles) >= 1):
             if(verb): print 'std there...trk was run for ',missdtg
@@ -208,7 +209,7 @@ def anlAdTdStat(tstmids,verb=1):
                 redoTd.append(tdtg)
             if(ad[0] == 0):
                 if(verb): print 'redoAD: ',tstmid,tdtg,ad
-                redoTd.append(tdtg)
+                redoAd.append(tdtg)
     
     return(redoAd,redoTd)
     
@@ -297,9 +298,9 @@ for stmopt in stmopts:
         
     MF.dTimer('aDtD-stmopt-%s'%(stmopt))
     
-MF.sTimer('anl-adtd-%s'%(istmopt))
+#MF.sTimer('anl-adtd-%s'%(istmopt))
 (redoAd,redoTd)=anlAdTdStat(aStmids,verb=verb)
-MF.dTimer('anl-adtd-%s'%(istmopt))
+#MF.dTimer('anl-adtd-%s'%(istmopt))
 
 if(len(redoAd) > 0):
     print 'AAADDD redo:',redoAd
@@ -308,6 +309,24 @@ else:
     
     
 doAllTimer=0
+
+# -- redo tracker...
+if(len(redoAd) > 0):
+    redoAd=mf.uniq(redoAd)
+    print 'AAADDD redo tmtrkN Nruns:',len(redoAd)
+
+    MF.ChangeDir('tctrk')
+    
+    for dtg in redoAd:
+        if(doAllTimer): MF.sTimer('redoAD-All-%s-AD'%(dtg))
+        cmd="r-all-tmtrk.py %s -T"%(dtg)
+        mf.runcmd(cmd,ropt)
+        if(doAllTimer): MF.dTimer('redoAD-All-%s-AD'%(dtg))
+
+
+    MF.ChangeDir('../')
+        
+    
 
 if(len(redoTd) > 0):
     
