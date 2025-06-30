@@ -2289,8 +2289,10 @@ nt: %3d (taus)"""%(diagfileAid.upper(),self.dtg,stmid.upper(),stm2id.upper(),stm
 
         for stmid in dstmids:
             rctrk=self.setTCtracker(stmid,aidSource,quiet=quiet)
+            #print 'rctrk: ',rctrk
             if(rctrk == 0): continue
             (rcdiag,dtime,dpath)=self.setDiagPath(stmid,tbdir=self.tbdir)
+            #print 'rcdiag,dtime,dpath:  ',rcdiag,dtime,dpath
             sizStmid.append(rcdiag)
             if(rcdiag == -999):
                 todoStmids.append(stmid)
@@ -2303,6 +2305,7 @@ nt: %3d (taus)"""%(diagfileAid.upper(),self.dtg,stmid.upper(),stm2id.upper(),stm
             status=-2
 
         status=0
+        #print 'ssbb: ',sizStmid,len(sizStmid),max(sizStmid),len(todoStmids)
         if(len(sizStmid) == 0): status=-1
         elif(max(sizStmid) <= 0): status=-1
         elif(len(todoStmids) > 0): status=-2

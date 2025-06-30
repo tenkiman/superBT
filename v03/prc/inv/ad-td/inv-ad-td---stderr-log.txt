@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "./i-all-sbt-ad-tc.py", line 59, in <module>
+    years=mf.yyyyrange(byear, eyear)
+  File "/data/sbt/superBT/v03/prc/mf.py", line 355, in yyyyrange
+    yyyy=yyyyinc(yyyy,inc)
+  File "/data/sbt/superBT/v03/prc/mf.py", line 391, in yyyyinc
+    yyyy=int(yyyy)
+ValueError: invalid literal for int() with base 10: ''

@@ -159,7 +159,6 @@ def rsyncEra2Local(dtg):
     mf.runcmd(cmdE, ropt)
     
     ctls=glob.glob("%s/*ctl"%(tdirE))
-    
     ctlPathUa=ctlPathSfc=None
     if(len(ctls) == 2):
         for ctl in ctls:
@@ -452,8 +451,14 @@ for dtg in dtgs:
         if(rc == -2):
             print 'WWW(chKOutput) 22222 rc: ',rc,'need to do the following: ',todoStmids
 
-        elif( (rc == 0) and not(override) and not(SSToverride) and not(redoLsdiag) and TDoverride == None and not(dols) ):
-            print 'WWW(chKOutput) 00000 rc: ',rc,' override: ',override,' SSToverride: ',SSToverride,'TDoveride: ',TDoverride,'redoLsdiag: ',redoLsdiag,'dols: ',\
+        elif( (rc == 0) and not(override) and 
+              not(SSToverride) and 
+              not(redoLsdiag) and 
+              TDoverride == None 
+              and not(dols) ):
+            
+            print 'WWW(chKOutput) 00000 rc: ',rc,' override: ',override,' SSToverride: ',\
+                  SSToverride,'TDoveride: ',TDoverride,'redoLsdiag: ',redoLsdiag,'dols: ',\
                   dols,'docleanPaths: ',docleanDpaths,' continue...'
 
             # -- because tG needs the fields... and we always get even if done... -- llllllllllllllllllllllllllllll

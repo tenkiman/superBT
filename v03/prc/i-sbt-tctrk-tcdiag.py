@@ -124,7 +124,22 @@ def getTcdiagFiles(m3dtgs,astmid,tstmid,verb=0):
             tt=tfile[0].split('.')
             tcdtype=tt[-2].split('-')[-1]
             tcdStat[tstmid,dtg]=(tcdsiz,tcdtype)
-
+        # -- case when both 'best' and 'tmtrk' are available...always choose 'tmtrk'
+        if(tcdsiz == 2):
+            gottmtrk=0
+            for tf in tfile:
+                if(mf.find(tf,'tmtrk')):
+                    tt=tf.split('.')
+                    tcdtype=tt[-2].split('-')[-1]
+                    tcdStat[tstmid,dtg]=(tcdsiz,tcdtype)
+                    gottmtrk=1
+                    
+            if(gottmtrk == 0):
+                tt=tfile[0]
+                tcdtype=tt[-2].split('-')[-1]
+                tcdStat[tstmid,dtg]=(tcdsiz,tcdtype)
+                print 'WWW - had two diag files...no tmtrk...'
+                
     rc=1
     return(rc)
     

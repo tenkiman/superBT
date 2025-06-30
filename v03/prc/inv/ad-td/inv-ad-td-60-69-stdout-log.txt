@@ -1,0 +1,405 @@
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.60                                                        :  2.152      at: 2025063012 00:46:48
+AAADDD -- trackers ALLGOOD   for istmopt:  h.60
+TTTDDD -- diag files ALLGOOD for istmopt:  h.60
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.60                                                           :  2.258      at: 2025063012 00:46:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.60                                                        :  4.247      at: 2025063012 00:46:53
+AAADDD -- trackers ALLGOOD   for istmopt:  w.60
+TTTDDD -- diag files ALLGOOD for istmopt:  w.60
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.60                                                           :  4.358      at: 2025063012 00:46:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.60                                                        :  0.761      at: 2025063012 00:46:54
+AAADDD -- trackers ALLGOOD   for istmopt:  e.60
+TTTDDD -- diag files ALLGOOD for istmopt:  e.60
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.60                                                           :  0.863      at: 2025063012 00:46:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.60                                                        :  1.283      at: 2025063012 00:46:55
+AAADDD -- trackers ALLGOOD   for istmopt:  l.60
+TTTDDD -- diag files ALLGOOD for istmopt:  l.60
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.60                                                           :  1.387      at: 2025063012 00:46:55
+WWW-getMd2Years-- no storms for stmopt:  c.1960
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.60                                                        :  0.139      at: 2025063012 00:46:56
+AAADDD -- trackers ALLGOOD   for istmopt:  c.60
+TTTDDD -- diag files ALLGOOD for istmopt:  c.60
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.60                                                           :  0.240      at: 2025063012 00:46:56
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.60                                                        :  1.211      at: 2025063012 00:46:57
+AAADDD -- trackers ALLGOOD   for istmopt:  i.60
+TTTDDD -- diag files ALLGOOD for istmopt:  i.60
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.60                                                           :  1.316      at: 2025063012 00:46:57
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.61                                                        :  2.939      at: 2025063012 00:47:00
+AAADDD -- trackers ALLGOOD   for istmopt:  h.61
+TTTDDD -- diag files ALLGOOD for istmopt:  h.61
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.61                                                           :  3.051      at: 2025063012 00:47:01
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.61                                                        :  3.817      at: 2025063012 00:47:04
+AAADDD -- trackers ALLGOOD   for istmopt:  w.61
+TTTDDD -- diag files ALLGOOD for istmopt:  w.61
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.61                                                           :  3.930      at: 2025063012 00:47:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.61                                                        :  0.593      at: 2025063012 00:47:05
+AAADDD -- trackers ALLGOOD   for istmopt:  e.61
+TTTDDD -- diag files ALLGOOD for istmopt:  e.61
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.61                                                           :  0.694      at: 2025063012 00:47:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.61                                                        :  2.142      at: 2025063012 00:47:08
+AAADDD -- trackers ALLGOOD   for istmopt:  l.61
+TTTDDD -- diag files ALLGOOD for istmopt:  l.61
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.61                                                           :  2.248      at: 2025063012 00:47:08
+WWW-getMd2Years-- no storms for stmopt:  c.1961
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.61                                                        :  0.140      at: 2025063012 00:47:08
+AAADDD -- trackers ALLGOOD   for istmopt:  c.61
+TTTDDD -- diag files ALLGOOD for istmopt:  c.61
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.61                                                           :  0.241      at: 2025063012 00:47:08
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.61                                                        :  1.520      at: 2025063012 00:47:10
+AAADDD -- trackers ALLGOOD   for istmopt:  i.61
+TTTDDD -- diag files ALLGOOD for istmopt:  i.61
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.61                                                           :  1.626      at: 2025063012 00:47:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.62                                                        :  2.819      at: 2025063012 00:47:13
+AAADDD -- trackers ALLGOOD   for istmopt:  h.62
+TTTDDD -- diag files ALLGOOD for istmopt:  h.62
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.62                                                           :  2.928      at: 2025063012 00:47:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.62                                                        :  4.256      at: 2025063012 00:47:18
+AAADDD -- trackers ALLGOOD   for istmopt:  w.62
+TTTDDD -- diag files ALLGOOD for istmopt:  w.62
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.62                                                           :  4.371      at: 2025063012 00:47:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.62                                                        :  0.742      at: 2025063012 00:47:19
+AAADDD -- trackers ALLGOOD   for istmopt:  e.62
+TTTDDD -- diag files ALLGOOD for istmopt:  e.62
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.62                                                           :  0.844      at: 2025063012 00:47:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.62                                                        :  0.979      at: 2025063012 00:47:20
+AAADDD -- trackers ALLGOOD   for istmopt:  l.62
+TTTDDD -- diag files ALLGOOD for istmopt:  l.62
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.62                                                           :  1.081      at: 2025063012 00:47:20
+CCC: i-sbt-tctrk-tcdiag.py -S h.60 -R -N   ---> CurDT: 20250630 12:46:46 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-60                                                         :  2.393      at: 2025063012 00:46:48
+CCC: i-sbt-tctrk-tcdiag.py -S w.60 -R -N   ---> CurDT: 20250630 12:46:48 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-60                                                         :  4.502      at: 2025063012 00:46:53
+CCC: i-sbt-tctrk-tcdiag.py -S e.60 -R -N   ---> CurDT: 20250630 12:46:53 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-60                                                         :  1.017      at: 2025063012 00:46:54
+CCC: i-sbt-tctrk-tcdiag.py -S l.60 -R -N   ---> CurDT: 20250630 12:46:54 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-60                                                         :  1.532      at: 2025063012 00:46:55
+CCC: i-sbt-tctrk-tcdiag.py -S c.60 -R -N   ---> CurDT: 20250630 12:46:55 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-60                                                         :  0.393      at: 2025063012 00:46:56
+CCC: i-sbt-tctrk-tcdiag.py -S i.60 -R -N   ---> CurDT: 20250630 12:46:56 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-60                                                         :  1.464      at: 2025063012 00:46:57
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-60                                                                : 11.402      at: 2025063012 00:46:57
+CCC: i-sbt-tctrk-tcdiag.py -S h.61 -R -N   ---> CurDT: 20250630 12:46:57 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-61                                                         :  3.198      at: 2025063012 00:47:01
+CCC: i-sbt-tctrk-tcdiag.py -S w.61 -R -N   ---> CurDT: 20250630 12:47:01 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-61                                                         :  4.075      at: 2025063012 00:47:05
+CCC: i-sbt-tctrk-tcdiag.py -S e.61 -R -N   ---> CurDT: 20250630 12:47:05 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-61                                                         :  0.848      at: 2025063012 00:47:06
+CCC: i-sbt-tctrk-tcdiag.py -S l.61 -R -N   ---> CurDT: 20250630 12:47:06 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-61                                                         :  2.392      at: 2025063012 00:47:08
+CCC: i-sbt-tctrk-tcdiag.py -S c.61 -R -N   ---> CurDT: 20250630 12:47:08 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-61                                                         :  0.385      at: 2025063012 00:47:08
+CCC: i-sbt-tctrk-tcdiag.py -S i.61 -R -N   ---> CurDT: 20250630 12:47:08 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-61                                                         :  1.767      at: 2025063012 00:47:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-61                                                                : 12.765      at: 2025063012 00:47:10
+CCC: i-sbt-tctrk-tcdiag.py -S h.62 -R -N   ---> CurDT: 20250630 12:47:10 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-62                                                         :  3.081      at: 2025063012 00:47:13
+CCC: i-sbt-tctrk-tcdiag.py -S w.62 -R -N   ---> CurDT: 20250630 12:47:13 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-62                                                         :  4.515      at: 2025063012 00:47:18
+CCC: i-sbt-tctrk-tcdiag.py -S e.62 -R -N   ---> CurDT: 20250630 12:47:18 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-62                                                         :  0.988      at: 2025063012 00:47:19
+CCC: i-sbt-tctrk-tcdiag.py -S l.62 -R -N   ---> CurDT: 20250630 12:47:19 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-62                                                         :  1.230WWW-getMd2Years-- no storms for stmopt:  c.1962
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.62                                                        :  0.139      at: 2025063012 00:47:20
+AAADDD -- trackers ALLGOOD   for istmopt:  c.62
+TTTDDD -- diag files ALLGOOD for istmopt:  c.62
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.62                                                           :  0.240      at: 2025063012 00:47:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.62                                                        :  1.349      at: 2025063012 00:47:22
+AAADDD -- trackers ALLGOOD   for istmopt:  i.62
+TTTDDD -- diag files ALLGOOD for istmopt:  i.62
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.62                                                           :  1.454      at: 2025063012 00:47:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.63                                                        :  5.486      at: 2025063012 00:47:28
+AAADDD -- trackers ALLGOOD   for istmopt:  h.63
+TTTDDD -- diag files ALLGOOD for istmopt:  h.63
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.63                                                           :  5.607      at: 2025063012 00:47:28
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.63                                                        :  2.558      at: 2025063012 00:47:30
+AAADDD -- trackers ALLGOOD   for istmopt:  w.63
+TTTDDD -- diag files ALLGOOD for istmopt:  w.63
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.63                                                           :  2.664      at: 2025063012 00:47:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.63                                                        :  0.317      at: 2025063012 00:47:31
+AAADDD -- trackers ALLGOOD   for istmopt:  e.63
+TTTDDD -- diag files ALLGOOD for istmopt:  e.63
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.63                                                           :  0.418      at: 2025063012 00:47:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.63                                                        :  1.614      at: 2025063012 00:47:33
+AAADDD -- trackers ALLGOOD   for istmopt:  l.63
+TTTDDD -- diag files ALLGOOD for istmopt:  l.63
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.63                                                           :  1.720      at: 2025063012 00:47:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.63                                                        :  0.224      at: 2025063012 00:47:33
+AAADDD -- trackers ALLGOOD   for istmopt:  c.63
+TTTDDD -- diag files ALLGOOD for istmopt:  c.63
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.63                                                           :  0.325      at: 2025063012 00:47:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.63                                                        :  1.692      at: 2025063012 00:47:35
+AAADDD -- trackers ALLGOOD   for istmopt:  i.63
+TTTDDD -- diag files ALLGOOD for istmopt:  i.63
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.63                                                           :  1.799      at: 2025063012 00:47:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.64                                                        :  4.772      at: 2025063012 00:47:40
+AAADDD -- trackers ALLGOOD   for istmopt:  h.64
+TTTDDD -- diag files ALLGOOD for istmopt:  h.64
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.64                                                           :  4.887      at: 2025063012 00:47:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.64                                                        :  4.428      at: 2025063012 00:47:45
+AAADDD -- trackers ALLGOOD   for istmopt:  w.64
+TTTDDD -- diag files ALLGOOD for istmopt:  w.64
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.64                                                           :  4.543      at: 2025063012 00:47:45
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.64                                                        :  0.434      at: 2025063012 00:47:46
+AAADDD -- trackers ALLGOOD   for istmopt:  e.64
+TTTDDD -- diag files ALLGOOD for istmopt:  e.64
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.64                                                           :  0.535      at: 2025063012 00:47:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.64                                                        :  2.364      at: 2025063012 00:47:48
+AAADDD -- trackers ALLGOOD   for istmopt:  l.64
+TTTDDD -- diag files ALLGOOD for istmopt:  l.64
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.64                                                           :  2.471      at: 2025063012 00:47:48
+WWW-getMd2Years-- no storms for stmopt:  c.1964
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.64                                                        :  0.141      at: 2025063012 00:47:49
+AAADDD -- trackers ALLGOOD   for istmopt:  c.64
+TTTDDD -- diag files ALLGOOD for istmopt:  c.64
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.64                                                           :  0.241      at: 2025063012 00:47:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.64                                                        :  1.451      at: 2025063012 00:47:50
+AAADDD -- trackers ALLGOOD   for istmopt:  i.64
+TTTDDD -- diag files ALLGOOD for istmopt:  i.64
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.64                                                           :  1.556      at: 2025063012 00:47:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.65                                                        :  4.533      at: 2025063012 00:47:55
+AAADDD -- trackers ALLGOOD   for istmopt:  h.65
+TTTDDD -- diag files ALLGOOD for istmopt:  h.65
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.65                                                           :  4.649      at: 2025063012 00:47:55
+      at: 2025063012 00:47:20
+CCC: i-sbt-tctrk-tcdiag.py -S c.62 -R -N   ---> CurDT: 20250630 12:47:20 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-62                                                         :  0.390      at: 2025063012 00:47:20
+CCC: i-sbt-tctrk-tcdiag.py -S i.62 -R -N   ---> CurDT: 20250630 12:47:20 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-62                                                         :  1.596      at: 2025063012 00:47:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-62                                                                : 11.901      at: 2025063012 00:47:22
+CCC: i-sbt-tctrk-tcdiag.py -S h.63 -R -N   ---> CurDT: 20250630 12:47:22 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-63                                                         :  5.748      at: 2025063012 00:47:28
+CCC: i-sbt-tctrk-tcdiag.py -S w.63 -R -N   ---> CurDT: 20250630 12:47:28 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-63                                                         :  2.805      at: 2025063012 00:47:31
+CCC: i-sbt-tctrk-tcdiag.py -S e.63 -R -N   ---> CurDT: 20250630 12:47:31 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-63                                                         :  0.552      at: 2025063012 00:47:31
+CCC: i-sbt-tctrk-tcdiag.py -S l.63 -R -N   ---> CurDT: 20250630 12:47:31 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-63                                                         :  1.855      at: 2025063012 00:47:33
+CCC: i-sbt-tctrk-tcdiag.py -S c.63 -R -N   ---> CurDT: 20250630 12:47:33 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-63                                                         :  0.472      at: 2025063012 00:47:34
+CCC: i-sbt-tctrk-tcdiag.py -S i.63 -R -N   ---> CurDT: 20250630 12:47:34 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-63                                                         :  1.944      at: 2025063012 00:47:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-63                                                                : 13.477      at: 2025063012 00:47:36
+CCC: i-sbt-tctrk-tcdiag.py -S h.64 -R -N   ---> CurDT: 20250630 12:47:36 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-64                                                         :  5.032      at: 2025063012 00:47:41
+CCC: i-sbt-tctrk-tcdiag.py -S w.64 -R -N   ---> CurDT: 20250630 12:47:41 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-64                                                         :  4.686      at: 2025063012 00:47:45
+CCC: i-sbt-tctrk-tcdiag.py -S e.64 -R -N   ---> CurDT: 20250630 12:47:45 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-64                                                         :  0.679      at: 2025063012 00:47:46
+CCC: i-sbt-tctrk-tcdiag.py -S l.64 -R -N   ---> CurDT: 20250630 12:47:46 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-64                                                         :  2.625      at: 2025063012 00:47:49
+CCC: i-sbt-tctrk-tcdiag.py -S c.64 -R -N   ---> CurDT: 20250630 12:47:49 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-64                                                         :  0.392      at: 2025063012 00:47:49
+CCC: i-sbt-tctrk-tcdiag.py -S i.64 -R -N   ---> CurDT: 20250630 12:47:49 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-64                                                         :  1.700      at: 2025063012 00:47:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-64                                                                : 15.215      at: 2025063012 00:47:51
+CCC: i-sbt-tctrk-tcdiag.py -S h.65 -R -N   ---> CurDT: 20250630 12:47:51 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-65                                                         :  4.794      at: 2025063012 00:47:56
+CCC: i-sbt-tctrk-tcTTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.65                                                        :  4.458      at: 2025063012 00:48:00
+AAADDD -- trackers ALLGOOD   for istmopt:  w.65
+TTTDDD -- diag files ALLGOOD for istmopt:  w.65
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.65                                                           :  4.573      at: 2025063012 00:48:00
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.65                                                        :  1.276      at: 2025063012 00:48:02
+AAADDD -- trackers ALLGOOD   for istmopt:  e.65
+TTTDDD -- diag files ALLGOOD for istmopt:  e.65
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.65                                                           :  1.380      at: 2025063012 00:48:02
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.65                                                        :  1.256      at: 2025063012 00:48:03
+AAADDD -- trackers ALLGOOD   for istmopt:  l.65
+TTTDDD -- diag files ALLGOOD for istmopt:  l.65
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.65                                                           :  1.358      at: 2025063012 00:48:03
+WWW-getMd2Years-- no storms for stmopt:  c.1965
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.65                                                        :  0.141      at: 2025063012 00:48:04
+AAADDD -- trackers ALLGOOD   for istmopt:  c.65
+TTTDDD -- diag files ALLGOOD for istmopt:  c.65
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.65                                                           :  0.241      at: 2025063012 00:48:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.65                                                        :  1.252      at: 2025063012 00:48:05
+AAADDD -- trackers ALLGOOD   for istmopt:  i.65
+TTTDDD -- diag files ALLGOOD for istmopt:  i.65
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.65                                                           :  1.357      at: 2025063012 00:48:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.66                                                        :  3.686      at: 2025063012 00:48:09
+AAADDD -- trackers ALLGOOD   for istmopt:  h.66
+TTTDDD -- diag files ALLGOOD for istmopt:  h.66
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.66                                                           :  3.798      at: 2025063012 00:48:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.66                                                        :  4.197      at: 2025063012 00:48:14
+AAADDD -- trackers ALLGOOD   for istmopt:  w.66
+TTTDDD -- diag files ALLGOOD for istmopt:  w.66
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.66                                                           :  4.310      at: 2025063012 00:48:14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.66                                                        :  1.525      at: 2025063012 00:48:15
+AAADDD -- trackers ALLGOOD   for istmopt:  e.66
+TTTDDD -- diag files ALLGOOD for istmopt:  e.66
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.66                                                           :  1.631      at: 2025063012 00:48:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.66                                                        :  2.127      at: 2025063012 00:48:18
+AAADDD -- trackers ALLGOOD   for istmopt:  l.66
+TTTDDD -- diag files ALLGOOD for istmopt:  l.66
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.66                                                           :  2.233      at: 2025063012 00:48:18
+WWW-getMd2Years-- no storms for stmopt:  c.1966
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.66                                                        :  0.143      at: 2025063012 00:48:18
+AAADDD -- trackers ALLGOOD   for istmopt:  c.66
+TTTDDD -- diag files ALLGOOD for istmopt:  c.66
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.66                                                           :  0.243      at: 2025063012 00:48:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.66                                                        :  1.837      at: 2025063012 00:48:20
+AAADDD -- trackers ALLGOOD   for istmopt:  i.66
+TTTDDD -- diag files ALLGOOD for istmopt:  i.66
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.66                                                           :  1.943      at: 2025063012 00:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.67                                                        :  3.958      at: 2025063012 00:48:25
+AAADDD -- trackers ALLGOOD   for istmopt:  h.67
+TTTDDD -- diag files ALLGOOD for istmopt:  h.67
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.67                                                           :  4.070      at: 2025063012 00:48:25
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.67                                                        :  4.825      at: 2025063012 00:48:30
+AAADDD -- trackers ALLGOOD   for istmopt:  w.67
+TTTDDD -- diag files ALLGOOD for istmopt:  w.67
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.67                                                           :  4.941      at: 2025063012 00:48:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.67                                                        :  0.779      at: 2025063012 00:48:31
+AAADDD -- trackers ALLGOOD   for istmopt:  e.67
+TTTDDD -- diag files ALLGOOD for istmopt:  e.67
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.67                                                           :  0.881      at: 2025063012 00:48:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.67                                                        :  1.279      at: 2025063012 00:48:32
+AAADDD -- trackers ALLGOOD   for istmopt:  l.67
+TTTDDD -- diag files ALLGOOD for istmopt:  l.67
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.67                                                           :  1.385      at: 2025063012 00:48:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.67                                                        :  0.339      at: 2025063012 00:48:33
+AAADDD -- trackers ALLGOOD   for istmopt:  c.67
+TTTDDD -- diag files ALLGOOD for istmopt:  c.67
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.67                                                           :  0.439      at: 2025063012 00:48:33
+diag.py -S w.65 -R -N   ---> CurDT: 20250630 12:47:56 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-65                                                         :  4.738      at: 2025063012 00:48:00
+CCC: i-sbt-tctrk-tcdiag.py -S e.65 -R -N   ---> CurDT: 20250630 12:48:00 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-65                                                         :  1.543      at: 2025063012 00:48:02
+CCC: i-sbt-tctrk-tcdiag.py -S l.65 -R -N   ---> CurDT: 20250630 12:48:02 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-65                                                         :  1.513      at: 2025063012 00:48:03
+CCC: i-sbt-tctrk-tcdiag.py -S c.65 -R -N   ---> CurDT: 20250630 12:48:03 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-65                                                         :  0.385      at: 2025063012 00:48:04
+CCC: i-sbt-tctrk-tcdiag.py -S i.65 -R -N   ---> CurDT: 20250630 12:48:04 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-65                                                         :  1.523      at: 2025063012 00:48:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-65                                                                : 14.596      at: 2025063012 00:48:05
+CCC: i-sbt-tctrk-tcdiag.py -S h.66 -R -N   ---> CurDT: 20250630 12:48:05 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-66                                                         :  3.950      at: 2025063012 00:48:09
+CCC: i-sbt-tctrk-tcdiag.py -S w.66 -R -N   ---> CurDT: 20250630 12:48:09 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-66                                                         :  4.455      at: 2025063012 00:48:14
+CCC: i-sbt-tctrk-tcdiag.py -S e.66 -R -N   ---> CurDT: 20250630 12:48:14 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-66                                                         :  1.773      at: 2025063012 00:48:16
+CCC: i-sbt-tctrk-tcdiag.py -S l.66 -R -N   ---> CurDT: 20250630 12:48:16 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-66                                                         :  2.380      at: 2025063012 00:48:18
+CCC: i-sbt-tctrk-tcdiag.py -S c.66 -R -N   ---> CurDT: 20250630 12:48:18 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-66                                                         :  0.390      at: 2025063012 00:48:18
+CCC: i-sbt-tctrk-tcdiag.py -S i.66 -R -N   ---> CurDT: 20250630 12:48:18 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-66                                                         :  2.084      at: 2025063012 00:48:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-66                                                                : 15.132      at: 2025063012 00:48:21
+CCC: i-sbt-tctrk-tcdiag.py -S h.67 -R -N   ---> CurDT: 20250630 12:48:21 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-67                                                         :  4.213      at: 2025063012 00:48:25
+CCC: i-sbt-tctrk-tcdiag.py -S w.67 -R -N   ---> CurDT: 20250630 12:48:25 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-67                                                         :  5.087      at: 2025063012 00:48:30
+CCC: i-sbt-tctrk-tcdiag.py -S e.67 -R -N   ---> CurDT: 20250630 12:48:30 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-67                                                         :  1.019      at: 2025063012 00:48:31
+CCC: i-sbt-tctrk-tcdiag.py -S l.67 -R -N   ---> CurDT: 20250630 12:48:31 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-67                                                         :  1.521      at: 2025063012 00:48:32
+CCC: i-sbt-tctrk-tcdiag.py -S c.67 -R -N   ---> CurDT: 20250630 12:48:32 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-67                                                         :  0.586      at: 202506301TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.67                                                        :  1.101      at: 2025063012 00:48:34
+AAADDD -- trackers ALLGOOD   for istmopt:  i.67
+TTTDDD -- diag files ALLGOOD for istmopt:  i.67
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.67                                                           :  1.204      at: 2025063012 00:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.68                                                        :  4.079      at: 2025063012 00:48:39
+AAADDD -- trackers ALLGOOD   for istmopt:  h.68
+TTTDDD -- diag files ALLGOOD for istmopt:  h.68
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.68                                                           :  4.191      at: 2025063012 00:48:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.68                                                        :  4.260      at: 2025063012 00:48:43
+AAADDD -- trackers ALLGOOD   for istmopt:  w.68
+TTTDDD -- diag files ALLGOOD for istmopt:  w.68
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.68                                                           :  4.371      at: 2025063012 00:48:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.68                                                        :  2.310      at: 2025063012 00:48:46
+AAADDD -- trackers ALLGOOD   for istmopt:  e.68
+TTTDDD -- diag files ALLGOOD for istmopt:  e.68
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.68                                                           :  2.417      at: 2025063012 00:48:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.68                                                        :  1.600      at: 2025063012 00:48:47
+AAADDD -- trackers ALLGOOD   for istmopt:  l.68
+TTTDDD -- diag files ALLGOOD for istmopt:  l.68
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.68                                                           :  1.706      at: 2025063012 00:48:48
+WWW-getMd2Years-- no storms for stmopt:  c.1968
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.68                                                        :  0.141      at: 2025063012 00:48:48
+AAADDD -- trackers ALLGOOD   for istmopt:  c.68
+TTTDDD -- diag files ALLGOOD for istmopt:  c.68
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.68                                                           :  0.241      at: 2025063012 00:48:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.68                                                        :  1.412      at: 2025063012 00:48:50
+AAADDD -- trackers ALLGOOD   for istmopt:  i.68
+TTTDDD -- diag files ALLGOOD for istmopt:  i.68
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.68                                                           :  1.516      at: 2025063012 00:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.69                                                        :  4.014      at: 2025063012 00:48:54
+AAADDD -- trackers ALLGOOD   for istmopt:  h.69
+TTTDDD -- diag files ALLGOOD for istmopt:  h.69
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.69                                                           :  4.127      at: 2025063012 00:48:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.69                                                        :  2.461      at: 2025063012 00:48:57
+AAADDD -- trackers ALLGOOD   for istmopt:  w.69
+TTTDDD redo Nruns: 4
+cd--->  tcdiag 
+EEE---BBB era5 dtg...press...
+EEE---BBB era5 dtg...press...
+EEE---BBB era5 dtg...press...
+EEE---BBB era5 dtg...press...
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: redoTD-All                                                              :  0.100      at: 2025063012 00:48:57
+CCC: r-rsync-tcdiag-local-output.py -R dat -Y 1969 -X   ---> CurDT: 20250630 12:48:57 <--- 
+CCC: r-rsync-tcdiag-local-output.py -R prod -Y 1969 -X   ---> CurDT: 20250630 12:48:57 <--- 
+cd--->  ../ 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.69                                                           :  2.665      at: 2025063012 00:48:57
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.69                                                        :  1.059      at: 2025063012 00:48:58
+AAADDD -- trackers ALLGOOD   for istmopt:  e.69
+TTTDDD -- diag files ALLGOOD for istmopt:  e.69
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.69                                                           :  1.162      at: 2025063012 00:48:58
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.69                                                        :  3.128      at: 2025063012 00:49:01
+AAADDD -- trackers ALLGOOD   for istmopt:  l.69
+TTTDDD redo Nruns: 4
+cd--->  tcdiag 
+EEE---BBB era5 dtg...press...
+EEE---BBB era5 dtg...press...
+EEE---BBB era5 dtg...press...
+EEE---BBB era5 dtg...press...
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: redoTD-All                                                              :  0.100      at: 2025063012 00:49:01
+CCC: r-rsync-tcdiag-local-output.py -R dat -Y 1969 -X   ---> CurDT: 20250630 12:49:01 <--- 
+CCC: r-rsync-tcdiag-local-output.py -R prod -Y 1969 -X   ---> CurDT: 20250630 12:49:01 <--- 
+cd--->  ../ 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.69                                                           :  3.338      at: 2025063012 00:49:02
+WWW-getMd2Years-- no storms for stmopt:  c.1969
+WWW-setyears to em3year:  2024
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.69                                                        :  0.140      at: 2025063012 00:49:02
+AAADDD -- trackers ALLGOOD   for istmopt:  c.69
+TTTDDD -- diag files ALLGOOD for istmopt:  c.69
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.69                                                           :  0.240      at: 2025063012 00:49:02
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.69                                                        :  1.187      at: 2025063012 00:49:03
+AAADDD -- trackers ALLGOOD   for istmopt:  i.69
+TTTDDD -- diag files ALLGOOD for istmopt:  i.69
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.69                                                           :  1.292      at: 2025063012 00:49:03
+2 00:48:33
+CCC: i-sbt-tctrk-tcdiag.py -S i.67 -R -N   ---> CurDT: 20250630 12:48:33 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-67                                                         :  1.356      at: 2025063012 00:48:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-67                                                                : 13.882      at: 2025063012 00:48:34
+CCC: i-sbt-tctrk-tcdiag.py -S h.68 -R -N   ---> CurDT: 20250630 12:48:34 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-68                                                         :  4.340      at: 2025063012 00:48:39
+CCC: i-sbt-tctrk-tcdiag.py -S w.68 -R -N   ---> CurDT: 20250630 12:48:39 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-68                                                         :  4.513      at: 2025063012 00:48:43
+CCC: i-sbt-tctrk-tcdiag.py -S e.68 -R -N   ---> CurDT: 20250630 12:48:43 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-68                                                         :  2.565      at: 2025063012 00:48:46
+CCC: i-sbt-tctrk-tcdiag.py -S l.68 -R -N   ---> CurDT: 20250630 12:48:46 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-68                                                         :  1.850      at: 2025063012 00:48:48
+CCC: i-sbt-tctrk-tcdiag.py -S c.68 -R -N   ---> CurDT: 20250630 12:48:48 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-68                                                         :  0.388      at: 2025063012 00:48:48
+CCC: i-sbt-tctrk-tcdiag.py -S i.68 -R -N   ---> CurDT: 20250630 12:48:48 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-68                                                         :  1.661      at: 2025063012 00:48:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-68                                                                : 15.418      at: 2025063012 00:48:50
+CCC: i-sbt-tctrk-tcdiag.py -S h.69 -R -N   ---> CurDT: 20250630 12:48:50 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-69                                                         :  4.267      at: 2025063012 00:48:54
+CCC: i-sbt-tctrk-tcdiag.py -S w.69 -R -N   ---> CurDT: 20250630 12:48:54 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-69                                                         :  2.810      at: 2025063012 00:48:57
+CCC: i-sbt-tctrk-tcdiag.py -S e.69 -R -N   ---> CurDT: 20250630 12:48:57 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-69                                                         :  1.309      at: 2025063012 00:48:58
+CCC: i-sbt-tctrk-tcdiag.py -S l.69 -R -N   ---> CurDT: 20250630 12:48:58 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-69                                                         :  3.480      at: 2025063012 00:49:02
+CCC: i-sbt-tctrk-tcdiag.py -S c.69 -R -N   ---> CurDT: 20250630 12:49:02 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-69                                                         :  0.383      at: 2025063012 00:49:02
+CCC: i-sbt-tctrk-tcdiag.py -S i.69 -R -N   ---> CurDT: 20250630 12:49:02 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-69                                                         :  1.449      at: 2025063012 00:49:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-69                                                                : 13.800      at: 2025063012 00:49:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AALLLL-AD-TD-60-69                                                      : 137.690      at: 2025063012 00:49:04

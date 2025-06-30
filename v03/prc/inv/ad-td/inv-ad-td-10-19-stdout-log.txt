@@ -1,0 +1,371 @@
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.10                                                        : 15.099      at: 2025063012 03:14:26
+AAADDD -- trackers ALLGOOD   for istmopt:  h.10
+TTTDDD -- diag files ALLGOOD for istmopt:  h.10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.10                                                           : 15.288      at: 2025063012 03:14:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.10                                                        : 10.131      at: 2025063012 03:14:36
+AAADDD -- trackers ALLGOOD   for istmopt:  w.10
+TTTDDD -- diag files ALLGOOD for istmopt:  w.10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.10                                                           : 10.293      at: 2025063012 03:14:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.10                                                        :  3.800      at: 2025063012 03:14:40
+AAADDD -- trackers ALLGOOD   for istmopt:  e.10
+TTTDDD -- diag files ALLGOOD for istmopt:  e.10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.10                                                           :  3.910      at: 2025063012 03:14:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.10                                                        :  8.708      at: 2025063012 03:14:49
+AAADDD -- trackers ALLGOOD   for istmopt:  l.10
+TTTDDD -- diag files ALLGOOD for istmopt:  l.10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.10                                                           :  8.837      at: 2025063012 03:14:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.10                                                        :  1.088      at: 2025063012 03:14:50
+AAADDD -- trackers ALLGOOD   for istmopt:  c.10
+TTTDDD -- diag files ALLGOOD for istmopt:  c.10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.10                                                           :  1.190      at: 2025063012 03:14:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.10                                                        :  4.019      at: 2025063012 03:14:55
+AAADDD -- trackers ALLGOOD   for istmopt:  i.10
+TTTDDD -- diag files ALLGOOD for istmopt:  i.10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.10                                                           :  4.135      at: 2025063012 03:14:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.11                                                        : 11.788      at: 2025063012 03:15:07
+AAADDD -- trackers ALLGOOD   for istmopt:  h.11
+TTTDDD -- diag files ALLGOOD for istmopt:  h.11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.11                                                           : 11.938      at: 2025063012 03:15:07
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.11                                                        : 15.375      at: 2025063012 03:15:23
+AAADDD -- trackers ALLGOOD   for istmopt:  w.11
+TTTDDD -- diag files ALLGOOD for istmopt:  w.11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.11                                                           : 15.557      at: 2025063012 03:15:23
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.11                                                        :  4.214      at: 2025063012 03:15:27
+AAADDD -- trackers ALLGOOD   for istmopt:  e.11
+TTTDDD -- diag files ALLGOOD for istmopt:  e.11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.11                                                           :  4.325      at: 2025063012 03:15:27
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.11                                                        :  6.788      at: 2025063012 03:15:34
+AAADDD -- trackers ALLGOOD   for istmopt:  l.11
+TTTDDD -- diag files ALLGOOD for istmopt:  l.11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.11                                                           :  6.912      at: 2025063012 03:15:34
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.11                                                        :  0.265      at: 2025063012 03:15:35
+AAADDD -- trackers ALLGOOD   for istmopt:  c.11
+TTTDDD -- diag files ALLGOOD for istmopt:  c.11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.11                                                           :  0.365      at: 2025063012 03:15:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.11                                                        :  3.297      at: 2025063012 03:15:38
+AAADDD -- trackers ALLGOOD   for istmopt:  i.11
+TTTDDD -- diag files ALLGOOD for istmopt:  i.11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.11                                                           :  3.405      at: 2025063012 03:15:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.12                                                        :  8.768      at: 2025063012 03:15:47
+AAADDD -- trackers ALLGOOD   for istmopt:  h.12
+TTTDDD -- diag files ALLGOOD for istmopt:  h.12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.12                                                           :  8.915      at: 2025063012 03:15:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.12                                                        : 13.569      at: 2025063012 03:16:01
+AAADDD -- trackers ALLGOOD   for istmopt:  w.12
+TTTDDD -- diag files ALLGOOD for istmopt:  w.12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.12                                                           : 13.748      at: 2025063012 03:16:01
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.12                                                        :  5.624      at: 2025063012 03:16:07
+AAADDD -- trackers ALLGOOD   for istmopt:  e.12
+TTTDDD -- diag files ALLGOOD for istmopt:  e.12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.12                                                           :  5.751      at: 2025063012 03:16:07
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.12                                                        :  8.274      at: 2025063012 03:16:16
+AAADDD -- trackers ALLGOOD   for istmopt:  l.12
+TTTDDD -- diag files ALLGOOD for istmopt:  l.12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.12                                                           :  8.397      at: 2025063012 03:16:16
+CCC: i-sbt-tctrk-tcdiag.py -S h.10 -R -N   ---> CurDT: 20250630 15:14:10 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-10                                                         : 15.429      at: 2025063012 03:14:26
+CCC: i-sbt-tctrk-tcdiag.py -S w.10 -R -N   ---> CurDT: 20250630 15:14:26 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-10                                                         : 10.441      at: 2025063012 03:14:36
+CCC: i-sbt-tctrk-tcdiag.py -S e.10 -R -N   ---> CurDT: 20250630 15:14:36 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-10                                                         :  4.068      at: 2025063012 03:14:40
+CCC: i-sbt-tctrk-tcdiag.py -S l.10 -R -N   ---> CurDT: 20250630 15:14:40 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-10                                                         :  8.978      at: 2025063012 03:14:49
+CCC: i-sbt-tctrk-tcdiag.py -S c.10 -R -N   ---> CurDT: 20250630 15:14:49 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-10                                                         :  1.336      at: 2025063012 03:14:51
+CCC: i-sbt-tctrk-tcdiag.py -S i.10 -R -N   ---> CurDT: 20250630 15:14:51 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-10                                                         :  4.281      at: 2025063012 03:14:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-10                                                                : 44.635      at: 2025063012 03:14:55
+CCC: i-sbt-tctrk-tcdiag.py -S h.11 -R -N   ---> CurDT: 20250630 15:14:55 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-11                                                         : 12.102      at: 2025063012 03:15:07
+CCC: i-sbt-tctrk-tcdiag.py -S w.11 -R -N   ---> CurDT: 20250630 15:15:07 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-11                                                         : 15.701      at: 2025063012 03:15:23
+CCC: i-sbt-tctrk-tcdiag.py -S e.11 -R -N   ---> CurDT: 20250630 15:15:23 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-11                                                         :  4.473      at: 2025063012 03:15:27
+CCC: i-sbt-tctrk-tcdiag.py -S l.11 -R -N   ---> CurDT: 20250630 15:15:27 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-11                                                         :  7.057      at: 2025063012 03:15:34
+CCC: i-sbt-tctrk-tcdiag.py -S c.11 -R -N   ---> CurDT: 20250630 15:15:34 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-11                                                         :  0.501      at: 2025063012 03:15:35
+CCC: i-sbt-tctrk-tcdiag.py -S i.11 -R -N   ---> CurDT: 20250630 15:15:35 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-11                                                         :  3.551      at: 2025063012 03:15:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-11                                                                : 43.486      at: 2025063012 03:15:39
+CCC: i-sbt-tctrk-tcdiag.py -S h.12 -R -N   ---> CurDT: 20250630 15:15:39 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-12                                                         :  9.077      at: 2025063012 03:15:48
+CCC: i-sbt-tctrk-tcdiag.py -S w.12 -R -N   ---> CurDT: 20250630 15:15:48 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-12                                                         : 13.899      at: 2025063012 03:16:02
+CCC: i-sbt-tctrk-tcdiag.py -S e.12 -R -N   ---> CurDT: 20250630 15:16:02 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-12                                                         :  5.898      at: 2025063012 03:16:07
+CCC: i-sbt-tctrk-tcdiag.py -S l.12 -R -N   ---> CurDT: 20250630 15:16:07 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-12                                                         :  8.550TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.12                                                        :  0.284      at: 2025063012 03:16:16
+AAADDD -- trackers ALLGOOD   for istmopt:  c.12
+TTTDDD -- diag files ALLGOOD for istmopt:  c.12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.12                                                           :  0.384      at: 2025063012 03:16:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.12                                                        :  2.312      at: 2025063012 03:16:19
+AAADDD -- trackers ALLGOOD   for istmopt:  i.12
+TTTDDD -- diag files ALLGOOD for istmopt:  i.12
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.12                                                           :  2.416      at: 2025063012 03:16:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.13                                                        : 11.096      at: 2025063012 03:16:30
+AAADDD -- trackers ALLGOOD   for istmopt:  h.13
+TTTDDD -- diag files ALLGOOD for istmopt:  h.13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.13                                                           : 11.270      at: 2025063012 03:16:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.13                                                        : 13.328      at: 2025063012 03:16:44
+AAADDD -- trackers ALLGOOD   for istmopt:  w.13
+TTTDDD -- diag files ALLGOOD for istmopt:  w.13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.13                                                           : 13.549      at: 2025063012 03:16:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.13                                                        :  5.161      at: 2025063012 03:16:50
+AAADDD -- trackers ALLGOOD   for istmopt:  e.13
+TTTDDD -- diag files ALLGOOD for istmopt:  e.13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.13                                                           :  5.289      at: 2025063012 03:16:50
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.13                                                        :  4.274      at: 2025063012 03:16:54
+AAADDD -- trackers ALLGOOD   for istmopt:  l.13
+TTTDDD -- diag files ALLGOOD for istmopt:  l.13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.13                                                           :  4.392      at: 2025063012 03:16:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.13                                                        :  0.989      at: 2025063012 03:16:55
+AAADDD -- trackers ALLGOOD   for istmopt:  c.13
+TTTDDD -- diag files ALLGOOD for istmopt:  c.13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.13                                                           :  1.091      at: 2025063012 03:16:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.13                                                        :  2.690      at: 2025063012 03:16:58
+AAADDD -- trackers ALLGOOD   for istmopt:  i.13
+TTTDDD -- diag files ALLGOOD for istmopt:  i.13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.13                                                           :  2.796      at: 2025063012 03:16:58
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.14                                                        : 10.211      at: 2025063012 03:17:09
+AAADDD -- trackers ALLGOOD   for istmopt:  h.14
+TTTDDD -- diag files ALLGOOD for istmopt:  h.14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.14                                                           : 10.385      at: 2025063012 03:17:09
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.14                                                        : 11.243      at: 2025063012 03:17:20
+AAADDD -- trackers ALLGOOD   for istmopt:  w.14
+TTTDDD -- diag files ALLGOOD for istmopt:  w.14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.14                                                           : 11.405      at: 2025063012 03:17:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.14                                                        :  6.244      at: 2025063012 03:17:27
+AAADDD -- trackers ALLGOOD   for istmopt:  e.14
+TTTDDD -- diag files ALLGOOD for istmopt:  e.14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.14                                                           :  6.378      at: 2025063012 03:17:27
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.14                                                        :  4.032      at: 2025063012 03:17:31
+AAADDD -- trackers ALLGOOD   for istmopt:  l.14
+TTTDDD -- diag files ALLGOOD for istmopt:  l.14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.14                                                           :  4.155      at: 2025063012 03:17:31
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.14                                                        :  1.645      at: 2025063012 03:17:33
+AAADDD -- trackers ALLGOOD   for istmopt:  c.14
+TTTDDD -- diag files ALLGOOD for istmopt:  c.14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.14                                                           :  1.745      at: 2025063012 03:17:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.14                                                        :  2.066      at: 2025063012 03:17:36
+AAADDD -- trackers ALLGOOD   for istmopt:  i.14
+TTTDDD -- diag files ALLGOOD for istmopt:  i.14
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.14                                                           :  2.169      at: 2025063012 03:17:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.15                                                        :  8.247      at: 2025063012 03:17:44
+AAADDD -- trackers ALLGOOD   for istmopt:  h.15
+TTTDDD -- diag files ALLGOOD for istmopt:  h.15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.15                                                           :  8.406      at: 2025063012 03:17:44
+      at: 2025063012 03:16:16
+CCC: i-sbt-tctrk-tcdiag.py -S c.12 -R -N   ---> CurDT: 20250630 15:16:16 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-12                                                         :  0.535      at: 2025063012 03:16:17
+CCC: i-sbt-tctrk-tcdiag.py -S i.12 -R -N   ---> CurDT: 20250630 15:16:17 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-12                                                         :  2.584      at: 2025063012 03:16:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-12                                                                : 40.643      at: 2025063012 03:16:19
+CCC: i-sbt-tctrk-tcdiag.py -S h.13 -R -N   ---> CurDT: 20250630 15:16:19 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-13                                                         : 11.428      at: 2025063012 03:16:31
+CCC: i-sbt-tctrk-tcdiag.py -S w.13 -R -N   ---> CurDT: 20250630 15:16:31 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-13                                                         : 13.700      at: 2025063012 03:16:44
+CCC: i-sbt-tctrk-tcdiag.py -S e.13 -R -N   ---> CurDT: 20250630 15:16:44 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-13                                                         :  5.440      at: 2025063012 03:16:50
+CCC: i-sbt-tctrk-tcdiag.py -S l.13 -R -N   ---> CurDT: 20250630 15:16:50 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-13                                                         :  4.542      at: 2025063012 03:16:54
+CCC: i-sbt-tctrk-tcdiag.py -S c.13 -R -N   ---> CurDT: 20250630 15:16:54 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-13                                                         :  1.229      at: 2025063012 03:16:56
+CCC: i-sbt-tctrk-tcdiag.py -S i.13 -R -N   ---> CurDT: 20250630 15:16:56 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-13                                                         :  2.952      at: 2025063012 03:16:59
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-13                                                                : 39.392      at: 2025063012 03:16:59
+CCC: i-sbt-tctrk-tcdiag.py -S h.14 -R -N   ---> CurDT: 20250630 15:16:59 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-14                                                         : 10.542      at: 2025063012 03:17:09
+CCC: i-sbt-tctrk-tcdiag.py -S w.14 -R -N   ---> CurDT: 20250630 15:17:09 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-14                                                         : 11.544      at: 2025063012 03:17:21
+CCC: i-sbt-tctrk-tcdiag.py -S e.14 -R -N   ---> CurDT: 20250630 15:17:21 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-14                                                         :  6.529      at: 2025063012 03:17:27
+CCC: i-sbt-tctrk-tcdiag.py -S l.14 -R -N   ---> CurDT: 20250630 15:17:27 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-14                                                         :  4.306      at: 2025063012 03:17:32
+CCC: i-sbt-tctrk-tcdiag.py -S c.14 -R -N   ---> CurDT: 20250630 15:17:32 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-14                                                         :  1.889      at: 2025063012 03:17:33
+CCC: i-sbt-tctrk-tcdiag.py -S i.14 -R -N   ---> CurDT: 20250630 15:17:33 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-14                                                         :  2.320      at: 2025063012 03:17:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-14                                                                : 37.231      at: 2025063012 03:17:36
+CCC: i-sbt-tctrk-tcdiag.py -S h.15 -R -N   ---> CurDT: 20250630 15:17:36 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-15                                                         :  8.542      at: 2025063012 03:17:44
+CCC: i-sbt-tctrk-tcTTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.15                                                        :  4.664      at: 2025063012 03:17:49
+AAADDD -- trackers ALLGOOD   for istmopt:  w.15
+TTTDDD -- diag files ALLGOOD for istmopt:  w.15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.15                                                           :  4.825      at: 2025063012 03:17:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.15                                                        :  5.362      at: 2025063012 03:17:55
+AAADDD -- trackers ALLGOOD   for istmopt:  e.15
+TTTDDD -- diag files ALLGOOD for istmopt:  e.15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.15                                                           :  5.483      at: 2025063012 03:17:55
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.15                                                        :  2.198      at: 2025063012 03:17:57
+AAADDD -- trackers ALLGOOD   for istmopt:  l.15
+TTTDDD -- diag files ALLGOOD for istmopt:  l.15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.15                                                           :  2.305      at: 2025063012 03:17:57
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.15                                                        :  2.477      at: 2025063012 03:18:00
+AAADDD -- trackers ALLGOOD   for istmopt:  c.15
+TTTDDD -- diag files ALLGOOD for istmopt:  c.15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.15                                                           :  2.583      at: 2025063012 03:18:00
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.15                                                        :  2.058      at: 2025063012 03:18:02
+AAADDD -- trackers ALLGOOD   for istmopt:  i.15
+TTTDDD -- diag files ALLGOOD for istmopt:  i.15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.15                                                           :  2.161      at: 2025063012 03:18:02
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.16                                                        :  3.153      at: 2025063012 03:18:06
+AAADDD -- trackers ALLGOOD   for istmopt:  h.16
+TTTDDD -- diag files ALLGOOD for istmopt:  h.16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.16                                                           :  3.293      at: 2025063012 03:18:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.16                                                        :  4.061      at: 2025063012 03:18:10
+AAADDD -- trackers ALLGOOD   for istmopt:  w.16
+TTTDDD -- diag files ALLGOOD for istmopt:  w.16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.16                                                           :  4.224      at: 2025063012 03:18:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.16                                                        :  4.578      at: 2025063012 03:18:15
+AAADDD -- trackers ALLGOOD   for istmopt:  e.16
+TTTDDD -- diag files ALLGOOD for istmopt:  e.16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.16                                                           :  4.700      at: 2025063012 03:18:15
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.16                                                        :  2.411      at: 2025063012 03:18:18
+AAADDD -- trackers ALLGOOD   for istmopt:  l.16
+TTTDDD -- diag files ALLGOOD for istmopt:  l.16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.16                                                           :  2.523      at: 2025063012 03:18:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.16                                                        :  0.572      at: 2025063012 03:18:18
+AAADDD -- trackers ALLGOOD   for istmopt:  c.16
+TTTDDD -- diag files ALLGOOD for istmopt:  c.16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.16                                                           :  0.673      at: 2025063012 03:18:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.16                                                        :  1.508      at: 2025063012 03:18:20
+AAADDD -- trackers ALLGOOD   for istmopt:  i.16
+TTTDDD -- diag files ALLGOOD for istmopt:  i.16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.16                                                           :  1.610      at: 2025063012 03:18:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.17                                                        :  6.005      at: 2025063012 03:18:27
+AAADDD -- trackers ALLGOOD   for istmopt:  h.17
+TTTDDD -- diag files ALLGOOD for istmopt:  h.17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.17                                                           :  6.154      at: 2025063012 03:18:27
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.17                                                        :  9.214      at: 2025063012 03:18:36
+AAADDD -- trackers ALLGOOD   for istmopt:  w.17
+TTTDDD -- diag files ALLGOOD for istmopt:  w.17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.17                                                           :  9.393      at: 2025063012 03:18:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.17                                                        :  2.646      at: 2025063012 03:18:39
+AAADDD -- trackers ALLGOOD   for istmopt:  e.17
+TTTDDD -- diag files ALLGOOD for istmopt:  e.17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.17                                                           :  2.755      at: 2025063012 03:18:39
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.17                                                        :  3.069      at: 2025063012 03:18:42
+AAADDD -- trackers ALLGOOD   for istmopt:  l.17
+TTTDDD -- diag files ALLGOOD for istmopt:  l.17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.17                                                           :  3.186      at: 2025063012 03:18:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.17                                                        :  0.210      at: 2025063012 03:18:43
+AAADDD -- trackers ALLGOOD   for istmopt:  c.17
+TTTDDD -- diag files ALLGOOD for istmopt:  c.17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.17                                                           :  0.311      at: 2025063012 03:18:43
+diag.py -S w.15 -R -N   ---> CurDT: 20250630 15:17:44 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-15                                                         :  4.966      at: 2025063012 03:17:49
+CCC: i-sbt-tctrk-tcdiag.py -S e.15 -R -N   ---> CurDT: 20250630 15:17:49 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-15                                                         :  5.622      at: 2025063012 03:17:55
+CCC: i-sbt-tctrk-tcdiag.py -S l.15 -R -N   ---> CurDT: 20250630 15:17:55 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-15                                                         :  2.452      at: 2025063012 03:17:57
+CCC: i-sbt-tctrk-tcdiag.py -S c.15 -R -N   ---> CurDT: 20250630 15:17:57 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-15                                                         :  2.738      at: 2025063012 03:18:00
+CCC: i-sbt-tctrk-tcdiag.py -S i.15 -R -N   ---> CurDT: 20250630 15:18:00 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-15                                                         :  2.306      at: 2025063012 03:18:02
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-15                                                                : 26.727      at: 2025063012 03:18:03
+CCC: i-sbt-tctrk-tcdiag.py -S h.16 -R -N   ---> CurDT: 20250630 15:18:03 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-16                                                         :  3.431      at: 2025063012 03:18:06
+CCC: i-sbt-tctrk-tcdiag.py -S w.16 -R -N   ---> CurDT: 20250630 15:18:06 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-16                                                         :  4.365      at: 2025063012 03:18:10
+CCC: i-sbt-tctrk-tcdiag.py -S e.16 -R -N   ---> CurDT: 20250630 15:18:10 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-16                                                         :  4.836      at: 2025063012 03:18:15
+CCC: i-sbt-tctrk-tcdiag.py -S l.16 -R -N   ---> CurDT: 20250630 15:18:15 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-16                                                         :  2.666      at: 2025063012 03:18:18
+CCC: i-sbt-tctrk-tcdiag.py -S c.16 -R -N   ---> CurDT: 20250630 15:18:18 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-16                                                         :  0.814      at: 2025063012 03:18:19
+CCC: i-sbt-tctrk-tcdiag.py -S i.16 -R -N   ---> CurDT: 20250630 15:18:19 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-16                                                         :  1.759      at: 2025063012 03:18:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-16                                                                : 17.972      at: 2025063012 03:18:21
+CCC: i-sbt-tctrk-tcdiag.py -S h.17 -R -N   ---> CurDT: 20250630 15:18:21 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-17                                                         :  6.294      at: 2025063012 03:18:27
+CCC: i-sbt-tctrk-tcdiag.py -S w.17 -R -N   ---> CurDT: 20250630 15:18:27 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-17                                                         :  9.530      at: 2025063012 03:18:36
+CCC: i-sbt-tctrk-tcdiag.py -S e.17 -R -N   ---> CurDT: 20250630 15:18:36 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-17                                                         :  2.891      at: 2025063012 03:18:39
+CCC: i-sbt-tctrk-tcdiag.py -S l.17 -R -N   ---> CurDT: 20250630 15:18:39 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-17                                                         :  3.324      at: 2025063012 03:18:43
+CCC: i-sbt-tctrk-tcdiag.py -S c.17 -R -N   ---> CurDT: 20250630 15:18:43 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-17                                                         :  0.457      at: 202506301TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.17                                                        :  1.201      at: 2025063012 03:18:44
+AAADDD -- trackers ALLGOOD   for istmopt:  i.17
+TTTDDD -- diag files ALLGOOD for istmopt:  i.17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.17                                                           :  1.303      at: 2025063012 03:18:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.18                                                        :  8.251      at: 2025063012 03:18:53
+AAADDD -- trackers ALLGOOD   for istmopt:  h.18
+TTTDDD -- diag files ALLGOOD for istmopt:  h.18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.18                                                           :  8.418      at: 2025063012 03:18:53
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.18                                                        : 13.461      at: 2025063012 03:19:07
+AAADDD -- trackers ALLGOOD   for istmopt:  w.18
+TTTDDD -- diag files ALLGOOD for istmopt:  w.18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.18                                                           : 13.665      at: 2025063012 03:19:07
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.18                                                        :  8.509      at: 2025063012 03:19:15
+AAADDD -- trackers ALLGOOD   for istmopt:  e.18
+TTTDDD -- diag files ALLGOOD for istmopt:  e.18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.18                                                           :  8.640      at: 2025063012 03:19:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.18                                                        :  3.262      at: 2025063012 03:19:19
+AAADDD -- trackers ALLGOOD   for istmopt:  l.18
+TTTDDD -- diag files ALLGOOD for istmopt:  l.18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.18                                                           :  3.380      at: 2025063012 03:19:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.18                                                        :  0.862      at: 2025063012 03:19:20
+AAADDD -- trackers ALLGOOD   for istmopt:  c.18
+TTTDDD -- diag files ALLGOOD for istmopt:  c.18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.18                                                           :  0.963      at: 2025063012 03:19:20
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.18                                                        :  1.571      at: 2025063012 03:19:22
+AAADDD -- trackers ALLGOOD   for istmopt:  i.18
+TTTDDD -- diag files ALLGOOD for istmopt:  i.18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.18                                                           :  1.676      at: 2025063012 03:19:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.19                                                        : 10.643      at: 2025063012 03:19:33
+AAADDD -- trackers ALLGOOD   for istmopt:  h.19
+TTTDDD -- diag files ALLGOOD for istmopt:  h.19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.19                                                           : 10.804      at: 2025063012 03:19:33
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.19                                                        :  8.700      at: 2025063012 03:19:42
+AAADDD -- trackers ALLGOOD   for istmopt:  w.19
+TTTDDD -- diag files ALLGOOD for istmopt:  w.19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.19                                                           :  8.851      at: 2025063012 03:19:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.19                                                        :  3.150      at: 2025063012 03:19:45
+AAADDD -- trackers ALLGOOD   for istmopt:  e.19
+TTTDDD -- diag files ALLGOOD for istmopt:  e.19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.19                                                           :  3.269      at: 2025063012 03:19:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.19                                                        :  2.998      at: 2025063012 03:19:49
+AAADDD -- trackers ALLGOOD   for istmopt:  l.19
+TTTDDD -- diag files ALLGOOD for istmopt:  l.19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.19                                                           :  3.113      at: 2025063012 03:19:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.19                                                        :  0.401      at: 2025063012 03:19:49
+AAADDD -- trackers ALLGOOD   for istmopt:  c.19
+TTTDDD -- diag files ALLGOOD for istmopt:  c.19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.19                                                           :  0.501      at: 2025063012 03:19:49
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.19                                                        :  1.587      at: 2025063012 03:19:51
+AAADDD -- trackers ALLGOOD   for istmopt:  i.19
+TTTDDD -- diag files ALLGOOD for istmopt:  i.19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.19                                                           :  1.693      at: 2025063012 03:19:51
+2 03:18:43
+CCC: i-sbt-tctrk-tcdiag.py -S i.17 -R -N   ---> CurDT: 20250630 15:18:43 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-17                                                         :  1.453      at: 2025063012 03:18:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-17                                                                : 24.049      at: 2025063012 03:18:45
+CCC: i-sbt-tctrk-tcdiag.py -S h.18 -R -N   ---> CurDT: 20250630 15:18:45 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-18                                                         :  8.561      at: 2025063012 03:18:53
+CCC: i-sbt-tctrk-tcdiag.py -S w.18 -R -N   ---> CurDT: 20250630 15:18:53 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-18                                                         : 13.803      at: 2025063012 03:19:07
+CCC: i-sbt-tctrk-tcdiag.py -S e.18 -R -N   ---> CurDT: 20250630 15:19:07 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-18                                                         :  8.788      at: 2025063012 03:19:16
+CCC: i-sbt-tctrk-tcdiag.py -S l.18 -R -N   ---> CurDT: 20250630 15:19:16 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-18                                                         :  3.515      at: 2025063012 03:19:19
+CCC: i-sbt-tctrk-tcdiag.py -S c.18 -R -N   ---> CurDT: 20250630 15:19:19 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-18                                                         :  1.102      at: 2025063012 03:19:20
+CCC: i-sbt-tctrk-tcdiag.py -S i.18 -R -N   ---> CurDT: 20250630 15:19:20 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-18                                                         :  1.819      at: 2025063012 03:19:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-18                                                                : 37.689      at: 2025063012 03:19:22
+CCC: i-sbt-tctrk-tcdiag.py -S h.19 -R -N   ---> CurDT: 20250630 15:19:22 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-19                                                         : 10.947      at: 2025063012 03:19:33
+CCC: i-sbt-tctrk-tcdiag.py -S w.19 -R -N   ---> CurDT: 20250630 15:19:33 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-19                                                         :  8.996      at: 2025063012 03:19:42
+CCC: i-sbt-tctrk-tcdiag.py -S e.19 -R -N   ---> CurDT: 20250630 15:19:42 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-19                                                         :  3.406      at: 2025063012 03:19:46
+CCC: i-sbt-tctrk-tcdiag.py -S l.19 -R -N   ---> CurDT: 20250630 15:19:46 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-19                                                         :  3.258      at: 2025063012 03:19:49
+CCC: i-sbt-tctrk-tcdiag.py -S c.19 -R -N   ---> CurDT: 20250630 15:19:49 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-19                                                         :  0.655      at: 2025063012 03:19:50
+CCC: i-sbt-tctrk-tcdiag.py -S i.19 -R -N   ---> CurDT: 20250630 15:19:50 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-19                                                         :  1.844      at: 2025063012 03:19:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-19                                                                : 29.206      at: 2025063012 03:19:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AALLLL-AD-TD-10-19                                                      : 341.130      at: 2025063012 03:19:52
