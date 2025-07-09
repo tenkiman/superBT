@@ -2,7 +2,8 @@
 
 from sBT import *
 
-def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
+def getAdecksStmid(tstmid,redoTrk=0,dryRun=0,
+                   ropt='',qropt='quiet',verb=0,override=0):
 
     # -- get track
     #
@@ -62,7 +63,51 @@ def getAdecksStmid(tstmid,redoTrk=0,ropt='',qropt='quiet',verb=0,override=0):
     for m3dtg in m3dtgs:
         if(not(m3dtg in adtgs)): missdtgs.append(m3dtg)
             
+    # -- dryrun
+    #
+        
+    if(dryRun):
+        
+        finalMissDtgs=[]
+        
+        for missdtg in missdtgs:
+            myear=missdtg[0:4]
+            sfiles=[]
+            for astmid in astmids:
+                (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(astmid)
+                mmask="%s/%s/%s/*%s%s.txt"%(tmtrkbdir,myear,missdtg,snum,b1id)
+                sfiles=sfiles+glob.glob(mmask)
+                 
+            if(len(sfiles) >= 1):
+                adtgs.append(missdtg)
+            else:
+                finalMissDtgs.append(missdtg)
+                
 
+        adtgs.sort()        
+        nmiss=len(finalMissDtgs)
+        
+        nlAdecks=0
+        nsAdecks=0
+        if(nmiss == 0):
+            for adeck in adecks:
+                nlAdecks=nlAdecks+MF.getPathNlines(adeck)
+                nsAdecks=nsAdecks+MF.getPathSiz(adeck)
+                
+            if(MF.ChkPath(opath)):
+                onl=MF.getPathNlines(opath)
+                osz=MF.getPathSiz(opath)
+            
+            print 'tstmid: ',tstmid,' astmids: ',astmids,' N adtgs: ',len(adtgs),' N m3dtgs: ',len(m3dtgs),' N miss: ',\
+                  nmiss,'nlAdecks: ',nlAdecks,' nsAdecks: ',nsAdecks
+            print 'opath: ',opath,' onl: %4d'%(onl),' osz: %6d'%(osz)
+            
+        elif(nmiss > 0):
+            print 'MMMMMMMMM for ',tstmid
+        
+        return(1)
+        
+        
     rdtgs=[]
     missOK=1
     for missdtg in missdtgs:
@@ -180,6 +225,7 @@ class TmtrkCmdLine(CmdLine):
             'stmopt':           ['S:',None,'a','stmopt'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
             'redoTrk':          ['R',0,1,' run tracker for missing dtgs'],
+            'dryRun':           ['D',0,1,' do a dryRun'],
             
         }
 
@@ -218,7 +264,7 @@ for stmopt in stmopts:
     
     for tstmid in tstmids:
         
-        rc=getAdecksStmid(tstmid,redoTrk=redoTrk,override=override,verb=verb)
+        rc=getAdecksStmid(tstmid,redoTrk=redoTrk,dryRun=dryRun,override=override,verb=verb)
         
         if(rc == 0):
             print 'EEE -- still missing trackers for : ',tstmid,' press...'

@@ -1,0 +1,500 @@
+  512  0630 16:38:56 la /sbt/local/dat/tcdiag/2020/2020010200/era5/
+  513  0630 16:40:56 s-sbt-tcdiag.py 2020010200 -C -L 
+  514  0630 16:44:40 s-sbt-tcdiag.py 2020010200 -C 
+  515  0630 16:49:46 la /sbt/local/dat/nwp2/w2flds/dat/era5/2020/2020010200/
+  516  0630 16:50:02 la /w21/dat/nwp2/w2flds/dat/era5/2020/2020010200/
+  517  0630 16:50:08 df
+  518  0630 16:50:31 s-sbt-tcdiag.py 2020010200 -C 
+  519  0630 16:50:55 la /w21/dat/nwp2/w2flds/dat/era5/2020/2020010200/
+  520  0630 16:51:02 del /w21/dat/nwp2/w2flds/dat/era5/2020/2020010200/tt.ctl*
+  521  0630 16:51:14 del /sbt/local/dat/nwp2/w2flds/dat/era5/2020/2020010200/tt*
+  522  0630 16:51:24 s-sbt-tcdiag.py 2020010200 -C 
+  523  0630 16:52:15 h
+  524  0630 16:52:21 i-sbt-tctrk-tcdiag.py -S h.20 -R
+  525  0630 16:52:24 cd .
+  526  0630 16:52:26 cd ..
+  527  0630 16:52:27 i-sbt-tctrk-tcdiag.py -S h.20 -R
+  528  0630 16:53:16 i-sbt-tctrk-tcdiag.py -S h.20 -R -n
+  529  0630 16:53:18 i-sbt-tctrk-tcdiag.py -S h.20 -R -N
+  530  0630 16:53:37 h
+  531  0630 16:53:54 i-final-inv-ad-td.sh
+  532  0630 16:54:00 i-final-inv-ad-td.sh 20 24
+  533  0630 16:58:52 g nrun -B 1 -A 3 inv-ad-td-20-24-stdout-log.txt 
+  534  0630 16:59:00 la
+  535  0630 16:59:02 la *txt
+  536  0630 16:59:14 demla
+  537  0630 16:59:15 la
+  538  0630 16:59:29 la inv
+  539  0630 16:59:37 mkdir inv/ad-td
+  540  0630 16:59:48 mv inv*txt inv/ad-td/
+  541  0630 16:59:49 la
+  542  0630 16:59:55 git add inv/ad-td/*
+  543  0630 16:59:57 git s-u
+  544  0630 17:00:15 git rm inv-ad*.log
+  545  0630 17:00:19 git s-u
+  546  0630 17:00:41 git commit -a
+  547  0630 17:01:23 git push
+  548  0630 17:01:28 c.sb.l
+  549  0630 17:01:28 la
+  550  0630 17:01:30 cd dat/
+  551  0630 17:01:31 la
+  552  0630 17:01:37 ud nwp2/
+  553  0630 17:01:48 ud nwp2/w2flds/dat/
+  554  0630 17:01:51 ud nwp2/w2flds/dat/era5/
+  555  0630 17:02:02 rm nwp2/w2flds/dat/era5/*/*/*
+  556  0630 17:02:05 ud nwp2/w2flds/dat/era5/
+  557  0630 17:02:13 cd tcdiag/
+  558  0630 17:02:13 la
+  559  0630 17:02:16 ud 
+  560  0630 17:02:17 ud .
+  561  0630 17:02:39 la */*/era5/*
+  562  0630 17:02:44 rm */*/era5/*
+  563  0630 17:02:50 ud .
+  564  0630 17:02:55 cd ..
+  565  0630 17:02:55 la
+  566  0630 17:02:58 la tmtrkN/
+  567  0630 17:03:06 ud tmtrkN/
+  568  0630 17:03:12 ud adeck-dtg/
+  569  0630 17:03:25 ud adeck-stm/
+  570  0630 17:03:32 la
+  571  0630 17:03:35 df /
+  572  0630 17:03:41 la tc
+  573  0630 17:03:44 la tc/names/
+  574  0630 17:03:46 la
+  575  0630 17:03:59 del .*~
+  576  0630 17:04:01 la
+  577  0630 17:04:08 mike6
+  578  0630 17:09:13 mike7
+  579  0630 17:10:55 mike8
+  580  0701 18:44:00 c.sb
+  581  0701 18:44:02 git s-u
+  582  0701 18:44:05 git commit -a
+  583  0701 18:44:17 git pull
+  584  0701 18:44:20 git push
+  585  0701 18:44:27 c.sb.p
+  586  0701 18:44:31 cd tctrk/
+  587  0701 18:44:32 la
+  588  0701 18:44:46 c.sb
+  589  0701 18:44:48 c.w2
+  590  0701 18:44:49 git s-u
+  591  0701 18:44:53 git commit -a
+  592  0701 18:45:06 git pull
+  593  0701 18:45:12 git push
+  594  0701 18:45:32 c.sb.ptt
+  595  0701 18:45:44 p-atcf-form.py 
+  596  0701 18:47:56 p-atcf-form.py -S all.45
+  597  0701 18:48:07 kill %1
+  598  0701 18:48:25 p-atcf-form.py -S all.45 -N
+  599  0701 18:48:29 kill %2
+  600  0701 18:48:30 j
+  601  0701 19:06:26 p-atcf-form.py -S 01h.45 -V
+  602  0701 19:23:37 kill %1
+  603  0701 19:23:40 p-atcf-form.py -S 01h.45 
+  604  0701 19:41:52 la /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat
+  605  0701 19:41:54 pg /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat
+  606  0701 19:42:17 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c1-120
+  607  0701 19:42:42 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c1-120 | l
+  608  0701 19:43:20 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c10-20
+  609  0701 19:43:25 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c9-20
+  610  0701 19:43:28 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c9-19
+  611  0701 19:43:35 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c9-18
+  612  0701 19:43:39 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c9-18 | uniq
+  613  0701 19:43:45 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c9-18 | uniq | wc -l
+  614  0701 19:44:20 md3a -S 01h.45
+  615  0701 19:44:29 md3a -S 01h.45 | wc -l
+  616  0701 19:45:08 h
+  617  0701 19:45:13 p-atcf-form.py -S 01h.45 
+  618  0701 19:45:43 p-atcf-form.py -S 01h.45 -O
+  619  0701 19:45:52 cat /sbt/superBT-V04/dat-v03/atcf-form/1945/era5/ash011945.dat | cut -c9-18 | uniq | wc -l
+  620  0701 19:56:12 p-atcf-form.py -S all.45 -O
+  621  0701 19:56:37 p-atcf-form.py -S 01h.45 
+  622  0701 19:57:44 md3a -S e.46 -s
+  623  0701 19:57:48 md3a -S e.48 -s
+  624  0701 19:57:51 md3a -S e.49 -s
+  625  0701 19:57:53 f
+  626  0701 19:58:24 p-atcf-form.py -S all.46-50 -O
+  627  0701 19:58:44 kill %2
+  628  0701 19:58:45 j
+  629  0701 19:58:47 kill %1
+  630  0701 19:58:51 p-atcf-form.py -S all.46-50 -O
+  631  0701 20:02:04 p-atcf-form.py -S 01h.45 -O
+  632  0701 20:03:04 p-atcf-form.py -S 01h.45 -D
+  633  0701 20:03:16 p-atcf-form.py -S h.45 -D
+  634  0701 20:12:48 p-atcf-form.py -S all.45 -D
+  635  0701 20:14:15 p-atcf-form.py -S all.45-50 -D
+  636  0701 20:15:12 p-atcf-form.py -S all.51-60 -O
+  637  0701 20:15:34 f
+  638  0701 20:19:14 p-atcf-form.py -S all.61-70 -O
+  639  0701 20:21:20 f
+  640  0701 20:21:39 p-atcf-form.py -S all.71-80 -O
+  641  0701 20:23:58 f
+  642  0701 20:25:34 p-atcf-form.py -S all.81-90 -O
+  643  0701 20:28:14 p-atcf-form.py -S all.91-00 -O
+  644  0701 20:28:26 p-atcf-form.py -S all.91-99 -O
+  645  0701 20:30:50 p-atcf-form.py -S all.00-10 -O
+  646  0701 20:34:36 p-atcf-form.py -S c.2007 -O
+  647  0701 20:34:41 p-atcf-form.py -S e.2007 -O
+  648  0701 20:34:53 p-atcf-form.py -S all.2007 -O
+  649  0701 20:35:31 p-atcf-form.py -S all.2008-2010 -O
+  650  0701 20:38:00 p-atcf-form.py -S all.2011-2020 -O
+  651  0701 20:44:31 p-atcf-form.py -S all.2021-2024 -O
+  652  0702 11:22:35 la
+  653  0702 11:22:39 cd ..
+  654  0702 11:22:42 mkdir tcveri
+  655  0702 11:22:44 cd tcveri/
+  656  0703 11:48:03 c.sb
+  657  0703 11:48:05 la
+  658  0703 11:48:10 cd v03/
+  659  0703 11:48:10 la
+  660  0703 11:48:13 cd prc/
+  661  0703 11:48:13 la
+  662  0703 11:48:28 del tee 
+  663  0703 11:49:57 ad2 era5 -S all.45 -N
+  664  0703 11:50:09 ad2 era5 -S all.45 -O1
+  665  0703 11:52:35 kill %1
+  666  0703 11:55:17 ad2 era5 -S 01l.45 -O1
+  667  0703 11:55:52 ad2 era5 -S l.45 -O1
+  668  0703 11:58:25 ad2 era5 -S w.45 -O1
+  669  0703 12:00:36 ad2 era5 -S 01w.45 -O1
+  670* 0703 12:00:39 
+  671  0703 12:00:40 j
+  672  0703 12:00:43 kill T1
+  673  0703 12:01:13 ad2 era5 -S 01w.45 -O1
+  674  0703 12:01:17 j
+  675  0703 12:01:19 kill %1
+  676  0703 12:01:21 j
+  677  0703 12:01:23 ad2 era5 -S 01w.45 -O1
+  678* 0703 12:01:26 j 
+  679  0703 12:01:31 ad2 era5 -S 01w.45 -O1 -W
+  680  0703 12:02:38 ad2 era5 -S 01w.45 -O1
+  681  0703 12:03:03 ad2 era5 -S w.45 -O1
+  682  0703 12:03:20 ad2 era5 -S w.45 -O1 -W
+  683  0703 12:03:44 ad2 era5 -S w.24 -O1
+  684  0703 12:03:50 kill %1
+  685  0703 12:03:55 ad2 era5 -S 01w.24 -O1
+  686  0703 12:04:00 ad2 era5 -S 01w.24 -O1 -W
+  687  0703 12:05:06 ad2 era5 -S 01w.24 -O1 
+  688  0703 12:05:22 md3a -S 01w.24
+  689  0703 12:05:26 md3a -S 01w.24 -b
+  690  0703 12:06:16 md3a -S b3w.24 
+  691  0703 12:06:27 ad2 era5 -S b3w.24 -O1 
+  692  0703 12:06:57 ad2 era5 -S w.24 -O1 -W
+  693  0703 12:07:27 ad2 era5 -S all.24 -O1 -W -N
+  694  0703 12:07:34 ad2 era5 -S all.24 -O1
+  695  0703 12:08:47 ad2 era5 -S all.23 -O1 -W
+  696  0703 12:10:21 kill %1
+  697  0703 12:10:34 md3a -S 2023091912
+  698  0703 12:10:40 md3a -d 2023091912
+  699  0703 12:11:01 md3a -S 15l.23
+  700  0703 12:25:09 h
+  701  0703 12:25:35 ad2 era5 -S x0l.23 -O1
+  702  0703 12:26:00 md2a -S 06l.23
+  703  0703 12:26:27 md2a -S 06l.23 -b
+  704  0703 12:26:31 md2a -S 06l.23 -B
+  705  0703 12:26:34 md2a -S 06l.23 -b
+  706  0703 12:26:37 md3a -S 06l.23 -b
+  707  0703 12:27:02 md2a -S 06l.23
+  708  0703 12:27:22 md2a -S 06l.23 -2
+  709  0703 12:27:45 ad2 era5 -S x0l.23 -O1 -2
+  710  0703 12:28:36 ad2 era5 -S 06l.23 -O1 
+  711  0703 12:28:58 del /data/w22/dat/tc/DSs/bd2-2023.pypdb
+  712  0703 12:29:01 ad2 era5 -S 06l.23 -O1 
+  713  0703 12:29:14 ad2 era5 -S x0l.23 -O1 
+  714  0703 12:29:22 ad2 era5 -S l.23 -O1 
+  715  0703 12:42:24 md2a -S 06l.23
+  716  0703 12:59:06 hh
+  717  0703 12:59:07 h
+  718  0703 12:59:14 ad2 era5 -S 06l.23 -O1 
+  719  0703 12:59:30 ad2 era5 -S l.23 -O1 
+  720  0703 13:06:39 ad2 era5 -S all.23 -O1 -W
+  721  0703 13:07:36 ad2 era5 -S all.22 -O1 -W
+  722  0703 13:08:46 ad2 era5 -S all.21 -O1 -W
+  723  0703 13:09:05 f
+  724  0703 13:14:13 ad2 era5 -S all.20 -O1 -W
+  725  0703 13:31:05 ad2 era5 -S all.18-19 -O1 -W
+  726  0703 13:31:21 f
+  727  0703 13:34:25 ad2 era5 -S all.10-17 -O1 -W
+  728  0703 13:35:32 d
+  729  0703 13:35:35 f
+  730  0703 13:44:58 ad2 era5 -S all.00-09 -O1 -W
+  731  0703 14:12:56 ad2 era5 -S all.80-99 -O1 -W
+  732  0703 14:29:56 f
+  733  0703 14:38:46 ad2 era5 -S all.60-79 -O1 -W
+  734  0703 16:42:54 ad2 era5 -S all.50-69 -O1 -W
+  735  0703 16:57:48 ad2 era5 -S all.45-49 -O1 -W
+  736  0703 17:09:42 cd tcveri/
+  737  0703 17:09:42 la
+  738  0703 17:09:45 h
+  739  0703 17:09:51 h | g ad2
+  740  0703 17:10:27 h | g ad2 | g 24
+  741  0703 17:10:51 ad2 era5 -S all.24
+  742  0703 17:21:21 h | g ad2
+  743  0703 17:21:34 vi ~/.bashrc
+  744  0703 17:21:45 . ~/.bashrc
+  745  0703 17:21:48 h
+  746  0703 17:21:55 h | g ad2
+  747  0703 17:22:21 ws.nw cmds-era5-ad2-20250703.txt
+  748  0703 17:22:43 h
+  749  0703 17:22:52 ad2 era5 -S all.24 -O1
+  750  0703 17:23:11 j
+  751  0703 17:23:15 kill %2
+  752  0703 17:23:17 h
+  753  0703 17:23:24 ad2 era5 -S all.24 -O1 -W
+  754  0703 17:24:20 f
+  755  0703 17:24:51 cd ..
+  756  0703 17:24:55 git add tcveri/*
+  757  0703 17:27:12 cd tcveri/
+  758  0703 17:28:23 cp /sbt/wxmap2-prj-superBT/p-vd2a.py .
+  759* 0703 17:28:28 cp /sbt/wxmap2-prj-superBT/p-2
+  760  0703 17:28:35 cp /sbt/wxmap2-prj-superBT/p-plot.py 
+  761  0703 17:28:39 cp /sbt/wxmap2-prj-superBT/p-plot.py  .
+  762  0703 17:28:40 la
+  763  0703 17:28:47 git add *.py
+  764  0703 17:30:45 c.sb.ptt
+  765  0703 17:31:11 r-inv-tmtrk.py 
+  766  0703 17:31:35 r-inv-tmtrk.py -Y 1945 -N
+  767  0703 17:31:50 r-inv-tmtrk.py -Y 1945 
+  768  0703 17:32:30 pg inv/inv-sbt-track-v00-194501.194512.6.txt 
+  769  0703 17:33:05 tail inv/inv-sbt-track-v00-194501.194512.6.txt 
+  770  0703 17:33:06 f
+  771  0703 17:34:58 tail inv/inv-sbt-track-v00-194501.194512.6.txt 
+  772  0703 17:35:03 tail -100 inv/inv-sbt-track-v00-194501.194512.6.txt 
+  773  0703 17:35:07 f
+  774  0703 17:37:17 tail -100 inv/inv-sbt-track-v00-194501.194512.6.txt 
+  775  0703 17:37:26 f
+  776  0703 17:39:32 a-inv-tmtrk.py 
+  777  0703 17:39:42 a-inv-tmtrk.py -Y 1945
+  778  0703 17:40:01 a-inv-tmtrk.py -Y 1945 -V
+  779  0703 17:42:49 a-inv-tmtrk.py -Y 1945 
+  780  0703 17:42:52 a-inv-tmtrk.py
+  781  0703 17:43:17 a-inv-tmtrk.py -Y 1945 -A
+  782  0703 17:44:31 a-inv-tmtrk.py -Y 1945 -A | l
+  783  0703 17:46:04 la /sbt/superBT-V04/dat-v03/adeck-stm/1945/tctrk.atcf.1945020106.tera5.03S.1945
+  784  0703 17:46:07 pg /sbt/superBT-V04/dat-v03/adeck-stm/1945/tctrk.atcf.1945020106.tera5.03S.1945
+  785  0703 17:46:21 a-inv-tmtrk.py -Y 1945 -A | l
+  786  0703 17:51:13 a-inv-tmtrk.py -Y 1945 
+  787  0703 17:51:16 a-inv-tmtrk.py -Y 1945 -A
+  788  0703 17:52:32 a-inv-tmtrk.py -Y 2024 -A
+  789  0703 17:52:35 h
+  790  0703 17:52:49 a-inv-tmtrk.py -Y 2024
+  791  0703 17:53:09 r-inv-tmtrk.py -Y 2024
+  792  0703 17:53:22 tail inv/inv-sbt-track-v00-202401.202412.6.txt
+  793  0703 17:53:26 f
+  794  0703 18:02:54 s-sbt-tmtrkN.py 2024122012 -i
+  795  0703 18:02:59 s-sbt-tmtrkN.py 2024122018 -i
+  796  0703 18:03:08 a-inv-tmtrk.py -Y 2024
+  797  0703 18:03:44 r-inv-tmtrk.py 
+  798  0703 18:03:56 r-inv-tmtrk.py -Y 1946.1947 -N
+  799  0703 18:04:19 r-inv-tmtrk.py -Y 1946.2023
+  800  0707 16:54:22 s-sbt-tmtrkN.py 2023090700 -i
+  801  0707 16:54:38 s-sbt-tmtrkN.py 1953090700 -i
+  802  0707 16:55:10 md3a -S 04l.53
+  803  0707 16:55:28 s-sbt-tmtrkN.py 1953082900 -i
+  804  0707 16:58:39 s-sbt-tmtrkN.py 1945090700 -i
+  805  0707 16:58:55 md3a -S 07b.45
+  806  0707 16:59:21 md3a -S l.45 -s
+  807  0707 16:59:40 md3a -S 09l.45 
+  808  0707 17:00:15 md2a -S 09l.45
+  809  0707 17:00:17 md2a -S 09l.45 -X
+  810  0707 17:01:54 s-sbt-tmtrkN.py 1945091600 -i
+  811  0707 17:03:40 h
+  812  0707 17:03:49 a-inv-tmtrk.py -Y 1945
+  813  0707 17:03:55 a-inv-tmtrk.py -Y 1945 -V
+  814  0707 17:04:11 lg inv/inv-sbt-track-v00-194501.194512.6.txt 
+  815  0707 17:04:13 pg inv/inv-sbt-track-v00-194501.194512.6.txt 
+  816  0707 17:05:06 a-inv-tmtrk.py -Y 1945 -V
+  817  0707 17:05:08 a-inv-tmtrk.py -Y 1945 
+  818  0707 17:14:44 a-inv-tmtrk.py
+  819  0707 17:14:50 a-inv-tmtrk.py -Y 1945  -1
+  820  0707 17:14:59 a-inv-tmtrk.py -Y 1945  -9
+  821  0707 17:15:21 a-inv-tmtrk.py -Y 1945 -1
+  822  0707 17:24:42 a-inv-tmtrk.py -Y 1945 
+  823  0707 17:25:21 md3a -S c.20-24 -s
+  824  0707 17:25:30 a-inv-tmtrk.py -Y 2020
+  825  0707 17:25:37 a-inv-tmtrk.py -Y 2020 | g ep
+  826  0707 17:28:37 a-inv-tmtrk.py -Y 2020 
+  827  0707 17:36:56 a-inv-tmtrk.py -Y 1945
+  828  0707 17:37:57 object
+  829  0707 17:42:17 a-inv-tmtrk.py -Y 1945
+  830  0707 17:54:54 object
+  831  0707 17:54:58 a-inv-tmtrk.py -Y 1945
+  832  0707 18:02:45 s-sbt-tmtrkN.py 1945101612 -i
+  833  0707 18:03:00 la /sbt/superBT-V04/dat-v03/adeck-stm/1945/tctrk.atcf.1945101612.tera5.11L.1945
+  834  0707 18:03:14 la /sbt/superBT-V04/dat-v03/adeck-stm/1945/tctrk.atcf.1945101612.tera5.09B.1945
+  835  0707 18:03:43 s-sbt-tmtrkN.py 1945101412 -i
+  836  0707 18:03:53 la /sbt/superBT-V04/dat-v03/adeck-stm/1945/tctrk.atcf.1945101412.tera5.11L.1945
+  837  0707 18:03:55 pg /sbt/superBT-V04/dat-v03/adeck-stm/1945/tctrk.atcf.1945101412.tera5.11L.1945
+  838  0707 18:05:19 s-sbt-tmtrkN.py 1945101412 -i -V
+  839  0707 18:05:56 s-sbt-tmtrkN.py 1945101612 -i -V
+  840  0707 18:05:59 s-sbt-tmtrkN.py 1945101412 -i -V
+  841  0707 18:06:14 la /sbt/superBT-V04/dat-v03/tmtrkN/1945/1945101412/stdout.tctrk.1945101412.tera5.11l.txt
+  842  0707 18:06:16 pg /sbt/superBT-V04/dat-v03/tmtrkN/1945/1945101412/stdout.tctrk.1945101412.tera5.11l.txt
+  843  0707 18:07:11 a-inv-tmtrk.py -Y 1945
+  844  0707 18:13:05 a-inv-tmtrk.py -Y 2020
+  845  0707 18:29:47 a-inv-tmtrk.py -Y 1945
+  846  0707 18:31:00 a-inv-tmtrk.py -Y 2020
+  847  0707 18:34:23 a-inv-tmtrk.py -Y 1945
+  848  0707 18:34:46 a-inv-tmtrk.py -Y 2020
+  849  0707 18:37:07 a-inv-tmtrk.py -Y 1945
+  850  0707 18:37:31 a-inv-tmtrk.py -Y 1946
+  851  0707 18:39:03 a-inv-tmtrk.py -Y 2020
+  852  0707 18:39:08 a-inv-tmtrk.py -Y 2024
+  853  0707 18:40:16 a-inv-tmtrk.py -Y 1945
+  854  0707 18:52:07 a-inv-tmtrk.py -Y 2024
+  855  0707 18:54:35 a-inv-tmtrk.py -Y 1945
+  856  0707 18:58:08 a-inv-tmtrk.py -Y 2024
+  857  0707 18:58:51 a-inv-tmtrk.py -Y 1945
+  858  0707 19:01:46 a-inv-tmtrk.py -Y 1945 | g cp
+  859  0707 19:01:59 a-inv-tmtrk.py -Y 2024 | g cp
+  860  0707 19:02:30 a-inv-tmtrk.py -Y 2024
+  861  0707 19:04:15 a-inv-tmtrk.py -Y 2024 | g cp
+  862  0707 19:05:57 a-inv-tmtrk.py -Y 2024 
+  863  0707 19:06:25 a-inv-tmtrk.py -Y 1945
+  864  0707 19:06:35 la inv/
+  865  0707 19:06:53 a-inv-tmtrk.py -Y 2020
+  866  0707 19:08:13 a-inv-tmtrk.py -Y 2024
+  867  0707 19:09:40 a-inv-tmtrk.py -Y 1945
+  868  0707 19:14:52 a-inv-tmtrk.py -Y 2024
+  869  0707 19:15:18 a-inv-tmtrk.py -Y 1955
+  870  0707 19:15:27 a-inv-tmtrk.py -Y 1965
+  871  0707 19:15:46 a-inv-tmtrk.py -Y 1975
+  872  0707 19:16:24 a-inv-tmtrk.py -Y 1985
+  873  0707 19:16:47 a-inv-tmtrk.py -Y 1974
+  874  0707 19:16:51 a-inv-tmtrk.py -Y 1976
+  875  0707 19:18:35 la inv/*1975*
+  876  0707 19:18:49 h
+  877  0707 19:18:54 a-inv-tmtrk.py -Y 1975
+  878  0707 19:21:04 la inv/inv-sbt-track-v00-197501.197512.6.txt
+  879  0707 19:21:07 la inv/inv-sbt-track-v01-197501.197512.6.txt
+  880  0707 19:21:32 a-inv-tmtrk.py -Y 1975
+  881  0707 19:25:59 a-inv-tmtrk.py -Y 1985
+  882  0707 19:26:03 a-inv-tmtrk.py -Y 1995
+  883  0707 19:26:09 a-inv-tmtrk.py -Y 2005
+  884  0707 19:26:14 a-inv-tmtrk.py -Y 2000
+  885  0707 19:29:52 a-inv-tmtrk.py -Y 2024
+  886  0707 19:32:46 a-inv-tmtrk.py -Y 1945
+  887  0707 19:33:59 la ../inv/
+  888  0707 19:34:02 la ../inv/ad-td/
+  889  0707 19:36:44 a-inv-tmtrk.py -Y 1945
+  890  0707 19:39:25 a-inv-tmtrk.py -Y 1945 -V
+  891  0707 19:40:00 a-inv-tmtrk.py -Y 1945
+  892  0707 19:42:14 a-inv-tmtrk.py -Y 1945 -V
+  893  0707 19:45:45 a-inv-tmtrk.py -Y 1945 
+  894  0707 19:47:26 vd2a -S h.45 -T tera5
+  895  0707 19:47:40 vd2a -S h.45 -T tera5 -O
+  896  0707 19:47:57 ad2
+  897  0707 19:48:19 ad2 era5 -S h.45 -O1
+  898  0707 19:48:31 vd2a -S h.45 -T tera5 -O
+  899  0707 19:48:53 ad2 -S h.45 -T era5 -L
+  900  0707 19:49:22 vd2a -S 01s.45 
+  901  0707 19:49:30 vd2a -S 01s.45 -T all
+  902  0707 19:49:41 cd ../tcveri/
+  903  0707 19:49:41 la
+  904  0707 19:49:49 pg cmds-era5-ad2-20250703.txt 
+  905  0707 19:50:17 ad2 era5 -S all.45 -O1
+  906  0707 19:51:05 vd2a -S l.45 -T tera5 
+  907  0707 19:51:10 vd2a -S h.45 -T tera5 
+  908  0707 19:51:25 vd2a -S w.45 -T tera5 
+  909  0707 19:52:02 vd2a -S h.50 -T tera5 
+  910  0707 19:52:20 ad2 era5 -S h.50 -O1
+  911  0707 19:52:35 vd2a -S h.50 -T tera5 
+  912  0707 19:53:44 ad2 -S h.45 -T era5 -L
+  913  0707 19:53:47 ad2 -S h.45 -T era5 -F
+  914  0707 19:54:42 ad2 -S 06h.45 -T era5 -F
+  915  0707 19:54:53 ad2 era5 -S 06h.45 -O1
+  916  0707 19:54:56 ad2 -S 06h.45 -T era5 -F
+  917  0707 19:55:14 ad2 -S 06h.45 -T era5 -L
+  918  0707 19:55:56 vd2a -S 05h45 -T era5
+  919  0707 19:56:03 vd2a -S 05h.45 -T era5
+  920  0707 19:56:06 vd2a -S 05h.45 -T era5 -V
+  921  0707 19:56:14 vd2a -S 05h.45 -T tera5 -V
+  922  0707 19:56:35 vd2a -S 05h.45 -T tera5 -V -O
+  923  0707 19:57:30 md3a -S h.50 -s
+  924  0707 19:57:40 md3a -S h.55 -s
+  925  0707 19:57:46 md3a -S h.65 -s
+  926  0707 19:57:54 md3a -S h.75 -s
+  927  0707 19:57:58 md3a -S h.85 -s
+  928  0707 19:58:27 md2a -S h.45 -s
+  929  0707 20:02:49 vd2a -S 05h.45 -T tera5
+  930  0707 20:03:03 vd2a -S 05h.45 -T tera5 -O
+  931  0707 20:10:44 vd2a -S h.45 -T tera5 -O
+  932  0707 20:13:52 vd2a -S h.55 -T tera5 -O
+  933  0707 20:14:17 ad2 era5 -S h.55 -O1
+  934  0707 20:14:35 vd2a -S h.55 -T tera5 -O
+  935  0707 20:14:51 crla
+  936  0707 20:15:09 w2l
+  937  0707 20:15:28 la /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5 
+  938  0707 20:15:32 tail -1000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5 
+  939  0707 20:15:37 tail -1000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | l
+  940* 0707 20:15:44 g QQQQQ
+  941  0707 20:16:00 g QQQQ /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | l
+  942  0707 20:16:15 g QQQQ /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | g QQQ
+  943  0707 20:16:43 tail -5000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | g qqqqq\
+  944  0707 20:16:45 tail -5000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | g qqqqq
+  945  0707 20:16:49 tail -3000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | g qqqqq
+  946  0707 20:16:53 tail -1000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | g qqqqq
+  947  0707 20:17:04 tail -1000 /ptmp/log-w2-rsync-mike6-tc-mike5.py.TCMIKE6_5  | l
+  948  0707 20:17:21 tc
+  949  0707 20:17:23 h
+  950  0707 20:17:37 vd2a -S h.55 -T tera5
+  951  0707 20:17:46 vd2a -S w.55 -T tera5
+  952  0707 20:18:06 vd2a -S w.45 -T tera5
+  953  0707 20:18:16 vd2a -S h.45 -T tera5
+  954  0707 20:18:25 vd2a -S h.46 -T tera5
+  955  0707 20:18:34 pg cmds-era5-ad2-20250703.txt 
+  956  0707 20:18:53 ad2 era5 -S h.45-49 -O1 -W
+  957  0707 20:19:19 vd2a -S h.46 -T tera5
+  958  0707 20:19:23 vd2a -S h.46 -T tera5 -O1
+  959  0707 20:19:26 vd2a -S h.46 -T tera5 -O
+  960  0707 20:19:45 ad2 era5 -S h.46 -O1 -W
+  961  0707 20:20:01 vd2a -S h.46 -T tera5 -O
+  962  0707 20:20:11 vd2a -S h.47 -T tera5 -O
+  963  0707 20:20:38 ad2 era5 -S h.47-49 -O3
+  964  0707 20:21:00 vd2a -S h.47 -T tera5 -O
+  965  0707 20:21:13 ad2 era5 -S h.47 -O3
+  966  0707 20:21:31 vd2a -S h.47 -T tera5 -O
+  967  0707 20:21:40 vd2a -S w.47 -T tera5 -O
+  968  0707 20:21:58 vd2a -S w.48 -T tera5 -O
+  969  0707 20:22:14 vd2a -S w.49 -T tera5 -O
+  970  0707 20:22:27 vd2a -S h.49 -T tera5 -O
+  971  0707 20:22:36 vd2a -S h.48 -T tera5 -O
+  972  0707 20:22:47 ad2 era5 -S h.48 -O3
+  973  0707 20:23:03 vd2a -S h.48 -T tera5 -O
+  974  0707 20:23:16 vd2a -S h.49 -T tera5 -O
+  975  0707 20:23:26 vd2a -S h.50 -T tera5 -O
+  976  0707 20:23:35 vd2a -S h.51 -T tera5 -O
+  977  0707 20:23:47 ad2 era5 -S h.51-55 -O3
+  978  0707 20:24:01 ad2 era5 -S h.51-55 
+  979  0707 20:24:04 ad2 era5 -S h.51-55 -O
+  980  0707 20:24:06 ad2 era5 -S h.51-55 -O5
+  981  0707 20:24:17 ad2 era5 -S h.51-55 -N
+  982  0707 20:24:25 ad2 era5 -S h.51
+  983  0707 20:24:45 ad2 era5 -S h.52-53
+  984  0707 20:24:47 ad2 era5 -S h.52
+  985  0707 20:25:07 ad2 era5 -S h.53-55
+  986  0707 20:25:12 pg cmds-era5-ad2-20250703.txt 
+  987  0707 20:25:30 ad2 era5 -S h.53-54 -O1
+  988  0707 20:25:46 ad2 era5 -S w.53-55
+  989  0707 20:26:35 ad2 era5 -S h.60-61
+  990  0707 20:26:57 ad2 era5 -S h.1953-1955
+  991  0707 20:27:02 ad2 era5 -S h.1953
+  992  0707 20:27:20 ad2 era5 -S h.1954-1955
+  993  0707 20:27:23 ad2 era5 -S h.1954
+  994  0707 20:27:39 ad2 era5 -S h.1955-1956
+  995  0707 20:27:46 ad2 era5 -S h.1960-1961
+  996  0707 20:28:03 ad2 era5 -S h.1955
+  997  0707 20:28:20 ad2 era5 -S h.1955,h.56,h.57
+  998  0707 20:29:22 ad2 era5 -S h.58,h.59,h.60
+  999  0707 20:30:17 ad2 era5 -S h.60
+ 1000  0707 20:30:33 ad2 era5 -S h.61-66
+ 1001  0707 20:32:18 ad2 era5 -S h.66
+ 1002  0707 20:32:36 ad2 era5 -S h.66 -O1
+ 1003  0707 20:33:11 vd2a -S h.65 -T tera5
+ 1004  0707 20:33:28 vd2a -S w.65 -T tera5
+ 1005  0707 20:33:46 vd2a -S w.75 -T tera5
+ 1006  0707 20:34:01 vd2a -S w.85 -T tera5
+ 1007  0707 20:34:08 vd2a -S h.85 -T tera5
+ 1008  0707 20:35:45 vd2a -S h.85 -T tera5 -O
+ 1009  0707 20:37:36 vd2a -S w.85 -T tera5 
+ 1010  0707 20:37:47 h
+ 1011  0707 20:38:12 h > cmds-era5-ad2-20250707.txt 

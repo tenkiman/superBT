@@ -44,6 +44,9 @@ def makeTmtrkNInv(dtgopt,doInvPath,ropt,override=0):
         
         dtgs=mf.dtg_dtgopt_prc(dtgopt)
         for dtg in dtgs:
+            
+            if(dtg in badEra5Dtgs): continue
+                
             cmd="s-sbt-tmtrkN.py %s -i >> %s"%(dtg,invpath)
             mf.runcmd(cmd,ropt)
             

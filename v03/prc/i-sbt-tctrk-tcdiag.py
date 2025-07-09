@@ -2,7 +2,7 @@
 
 from sBT import *
 
-def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
+def getAdeckTcdiag4Stmid(tstmid,ssizMin=778,verb=0,verbose=0):
 
     # -- get track
     #
@@ -67,9 +67,19 @@ def getAdeckTcdiag4Stmid(tstmid,verb=0,verbose=0):
             if(verb): print 'MMM',mmask,missdtg,len(sfiles),'---'
              
         if(len(sfiles) >= 1):
+            stdOk=0
+            for sfile in sfiles:
+                ssiz=MF.getPathSiz(sfile)
+                if(ssiz > ssizMin and stdOk == 0): stdOk=1
+                    
             if(verb): print 'std there...trk was run for ',missdtg
             adtgs.append(missdtg)
-            adStat[tstmid,missdtg]=(1,'stdout')
+            if(stdOk):
+                adStat[tstmid,missdtg]=(1,'stdout')
+            else:
+                print 'WWW stdout for ad not good:',ssiz,' for ',tstmid,'missdig: ',missdtg,'...setting to a miss...'
+                adStat[tstmid,missdtg]=(0,'miss')
+                
         else:
             # -- worse case -- tracker not run at all
             #
@@ -326,10 +336,14 @@ else:
 doAllTimer=0
 
 # -- redo tracker...
+#
 if(len(redoAd) > 0):
+    
     redoAd=mf.uniq(redoAd)
-    print 'AAADDD redo tmtrkN Nruns:',len(redoAd)
+    print 'AAADDD redo tmtrkN/tcdiag Nruns:',len(redoAd)
 
+    # -- run tracker first
+    #
     MF.ChangeDir('tctrk')
     
     for dtg in redoAd:
@@ -339,11 +353,29 @@ if(len(redoAd) > 0):
         if(doAllTimer): MF.dTimer('redoAD-All-%s-AD'%(dtg))
 
 
+    # -- now rerun tcdiag for missing stms/dtgs locally
+    #
+    MF.ChangeDir('../tcdiag')
+    
+    for dtg in redoAd:
+        if(doAllTimer): MF.sTimer('redoAD-All-%s-AD'%(dtg))
+        cmd="r-all-tcdiag.py %s -C -L"%(dtg)
+        mf.runcmd(cmd,ropt)
+        if(doAllTimer): MF.dTimer('redoAD-All-%s-AD'%(dtg))
+        
+    # -- now sync over to raid02
+    #
+    cmd='r-rsync-tcdiag-local-output.py -R dat -Y %s -X'%(dtg[0:4])
+    mf.runcmd(cmd,ropt)
+
+    cmd='r-rsync-tcdiag-local-output.py -R prod -Y %s -X'%(dtg[0:4])
+    mf.runcmd(cmd,ropt)
+
     MF.ChangeDir('../')
         
     
 
-if(len(redoTd) > 0):
+if(len(redoTd) > 0 and len(redoAd) == 0):
     
     redoTd=mf.uniq(redoTd)
     print 'TTTDDD redo Nruns:',len(redoTd)

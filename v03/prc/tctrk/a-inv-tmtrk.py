@@ -6,6 +6,213 @@ from sBT import *
 # command line setup
 #
 
+def parseInvPath(invpath):
+    
+    print
+    print 'iii',invpath
+    cards=open(invpath).readlines()
+    for card in cards:
+
+        if(mf.find(card,'vmax')):
+
+            tt=card.split()
+            stmid=tt[0]
+            (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(stmid)
+
+            # -- bypass bad era5 dtgs
+            #
+            dtg=tt[1]
+            if(dtg in badEra5Dtgs):
+                print 'bbb bypass bad dtg: ',dtg
+                continue
+                 
+            
+            rccode=tt[3]
+            tvmax=tt[5]
+            nl=int(tt[7])
+            
+            if(tvmax == "***"): 
+                tvmax=-999
+            else:
+                tvmax=int(tvmax)
+                
+            
+            (mrc,mtrk)=md3.getMd3track(stmid)
+            rc=mtrk[dtg]
+            (mlat,mlon,mvmax,mpmin)=rc[0:4]
+            mtccode=rc[8]
+            mwncode=rc[9]
+            mlat=float(mlat)
+            tmlat=abs(mlat)
+            isTC=(IsTc(mtccode) == 1)
+            isWN=(IsWarn(mwncode) == 1)
+            
+            
+            lb2id=b2id.lower()
+
+            # -- put cp in ep
+            #
+            if(lb2id == 'cp'): lb2id='ep'
+                 
+            #print 'ss',stmid,stm2id,lb2id,dtg
+            MF.appendDictList(rall,(lb2id,dtg),(nl,stmid,tvmax,mlat,mlon,mvmax,mpmin,isTC,isWN))
+            
+    return(rall)
+
+
+
+def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
+    
+    kk=rall.keys()
+    
+    nall={}
+    t9all={}
+    n9all={}
+    
+    rfail={}
+    
+    abids=[]
+    adtgs={}
+    for k in kk:
+        bid=k[0]
+        bdtg=k[1]
+        abids.append(bid)
+        MF.appendDictList(adtgs, bid, bdtg)
+        
+    abids=mf.uniq(abids)
+    
+    
+    for abid in abids:
+
+        nfail=0
+        n999=0
+        n999badLat=0
+        n999badVmax=0
+        n999badBoth=0
+        ngood=0
+
+        dtgs=adtgs[abid]
+        dtgs=mf.uniq(dtgs)
+        
+        for dtg in dtgs:
+            acs=rall[abid,dtg]
+            for ac in acs:
+                (nl,stmid,tvmax,mlat,mlon,mvmax,mpmin,isTC,isWN)=ac
+                # -- bypass 9X
+                #
+                if(not(IsNN(stmid))):
+                   continue
+
+                if(nl == -999):
+                    nfail=nfail+1
+                    MF.appendDictList(rfail, abid, dtg)
+
+                elif(nl == 999 or nl == -1):
+                    n999=n999+1
+                    amlat=abs(mlat)
+                    badlat=0
+                    badvmax=0
+    
+                    chkvmax=-999
+                    if(tvmax != -999): chkvmax=tvmax
+                    MF.appendDictList(t9all, abid, (stmid,dtg,chkvmax,mlat) )
+
+                    if(amlat < r1latmax):
+                        n999badLat=n999badLat+1
+                        badlat=1
+                        
+                    if(tvmax != -999 and tvmax < r1vmin):
+                        badvmax=1
+                        n999badVmax=n999badVmax+1
+                        
+                    if(badlat and badvmax):
+                        n999badLat=n999badLat-1
+                        n999badVmax=n999badVmax-1
+                        n999badBoth=n999badBoth+1
+                        
+                        
+                    if(verb): print '999',stmid,dtg,amlat,r1latmax,mvmax,r1vmin
+
+                elif(nl > 1):
+                    ngood=ngood+1
+
+                else:
+                    print 'ooopppsss nl: ',dtg,nl
+                
+        n999sum=n999badLat+n999badVmax+n999badBoth
+        nsum=ngood+n999+nfail
+        
+        ptrk=(float(ngood)/float(nsum))*100.0
+        pnotrk=100.0-ptrk
+        psignotrk=(float(n999sum)/float(nsum))*100.0
+        
+        poknotrk=pnotrk-psignotrk
+        if(poknotrk < 0.0): poknotrk=0.0
+             
+        
+        if(verb):
+            print 'basin: ',abid,'Nsum: ',nsum,'ngood: ',ngood,'n999',n999,'nfail: ',nfail
+            print 'n999badLat: ',n999badLat,' n999badVmax: ',n999badVmax,'n999badBoth',n999badBoth,\
+                  'n999sum:',n999sum
+            
+        nall[abid]=(nsum,nfail,n999,ptrk,pnotrk,psignotrk,poknotrk)
+        
+    kk=t9all.keys()
+    kk.sort()
+
+    for k in kk:
+        n9s=t9all[k]
+        ntd=0
+        nts=0
+        nty=0
+        nunk=0
+        ntot=0
+
+        for n9 in n9s:
+            (stmid,dtg,vmax,blat)=n9
+            #print 'asdfasdf',k,stmid,dtg,vmax,blat
+            if(vmax > 0 and vmax < 35):
+                ntd=ntd+1
+            elif(vmax >= 35 and vmax < 65):
+                nts=nts+1
+            elif(vmax >= 65):
+                nty=nty+1
+            elif(vmax < 0):
+                nunk=nunk+1
+            else:
+                print 'ooopppsss',n9
+                sys.exit()
+                
+            ntot=ntot+1
+            
+        n9tot=ntd+nts+nty+nunk
+        
+        if(n9tot != ntot):
+            print 'problem for basin ',k,'n9 by vmax failed'
+            sys.exit()
+            
+        if(ntot > 0):
+            
+            pn9td=(float(ntd)/float(ntot))*100.0
+            pn9ts=(float(nts)/float(ntot))*100.0
+            pn9ty=(float(nty)/float(ntot))*100.0
+            pn9unk=(float(nunk)/float(ntot))*100.0
+            
+            pn9all=nall[k][4]
+            
+            #print 'PP: %s notrk: %5.1f  td: %5.1f  ts: %5.1f ty: %5.1f  unk: %5.1f '%(k.upper(),pn9all,pn9td,pn9ts,pn9ty,pn9unk)
+                
+        n9all[k]=(pn9td,pn9ts,pn9ty,pn9unk,n9tot)
+            
+                
+        #print 'NN99 basin: %s -- ntd: %4d  nts: %4d  nty: %4d nunk: %4d ntot: %4d %d'%(k.upper(),ntd,nts,nty,nunk,ntot,n9tot)
+                
+        
+        
+        
+    return(nall,n9all,rfail)
+
+
 class TmtrkCmdLine(CmdLine):
 
     def __init__(self,argv=sys.argv):
@@ -30,7 +237,7 @@ class TmtrkCmdLine(CmdLine):
             'lsAll':            ['A',0,1,'ls all'],
             'doSig':            ['G',0,1,'ls only Sig'],
             'do9Xonly':         ['X',0,1,'ls only Sig'],
-            'doReRun':          ['R:',0,'i','rerun singletone'],
+            'doReRun':          ['R',0,1,'rerun failed trkers'],
         }
 
         self.purpose="""
@@ -52,183 +259,87 @@ r9vmin=35
 r9latmax=40.0
 r1vmin=35
 r1latmax=40.0
-r999={}
-r111={}
-rall={}
-n11=0
-n99=0
-n11sig=0
-n99sig=0
-naa=0
 
-if(yearOpt != None and dtgopt == None):
-    year=yearOpt
-    iyear=str(year)
+if(mf.find(yearOpt,'-')):
+    tt=yearOpt.split('-')
+    byear=int(tt[0])
+    eyear=int(tt[1])
+    
+else:
+    byear=int(yearOpt)
+    eyear=int(yearOpt)
+
+
+for iyear in range(byear,eyear+1):
+
+    rall={}
+
+    year=str(iyear)
     dtgopt="%s01.%s12.6"%(iyear,iyear)
     
-doInvPath=1
-yearOpt=None
-(oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
-doBT=0
-if(doBdeck2): doBT=1
+    doInvPath=1
+    yearOpt=None
+    (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
+    doBT=0
+    if(doBdeck2): doBT=1
 
-print 'oyearOpt: ',oyearOpt,' dtgopt: ',dtgopt
 
-md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
-
-invpath=getInvPath4Dtgopt(dtgopt,invdir='./inv',getonly=1)
-
-print 'iii',invpath
-cards=open(invpath).readlines()
-for card in cards:
-    if(mf.find(card,'vmax')):
-        naa=naa+1
-        tt=card.split()
-        stmid=tt[0]
-        dtg=tt[1]
-        rccode=tt[3]
-        vmax=tt[5]
-        nl=int(tt[7])
-        
-        if(vmax == "***"): 
-            vmax=-999
-        else:
-            vmax=int(vmax)
-        
-        MF.appendDictList(rall,dtg,(nl,stmid,vmax))
-
-        if(nl == -999):
-            MF.appendDictList(r999,dtg,(stmid,vmax))
-        elif(nl == 999):
-            MF.appendDictList(r111,dtg,(stmid,vmax))
-            
-            
-if(ls9only or lsAll):
-    print
-    #print '-----99999'
+    md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
     
-kk9=r999.keys()
-kk9.sort()
-for k9 in kk9:
-    r9=r999[k9]
-    l9=len(r9)
-    r9stmids=[]
-    for k in range(0,l9):
-        r9stmids.append((r9[k][0],r9[k][1]))
-        n99=n99+1
-    for k in range(0,l9):
-        tstmid=r9stmids[k][0]
-        tvmax=int(r9stmids[k][1])
-        tdtg=k9
-        if(tvmax >= r9vmin):
-            rc=getStmParams(tstmid)
-            tstmid9x="%s%s.%s"%(rc[1],rc[0],rc[2])
-            tstmid9x=tstmid9x
-            (mrc,mtrk)=md3.getMd3track(tstmid,dobt=0,doBdeck2=doBdeck2)
-            (mrc9,mtrk9)=md3.getMd3track(tstmid9x,dobt=0,doBdeck2=doBdeck2)
-            dtgs9x=mtrk9.keys()
-            dtgsNN=mtrk.keys()
+    invpath=getInvPath4Dtgopt(dtgopt,invdir='./inv',getonly=1)
     
-            inNN=(tdtg in dtgsNN)
-            in9X=(tdtg in dtgs9x)
-            
-            if(inNN):
-                rc=mtrk[tdtg]
-            elif(in9X):
-                rc=mtrk9[tdtg]
+    rall=parseInvPath(invpath)
+    
+    (nall,n9all,rfail)=anlInvByBasin(rall,r1latmax,r1vmin,verb=verb)
+    
+    abids=nall.keys()
+    abids.sort()
+    
+    rfailDtgs=[]
+
+    if(len(rfail) != 0):
+        print 'adf',rfail
+        for abid in abids:
+            try:
+                fdtgs=rfail[abid]
+            except:
+                continue
+                
+            rfailDtgs=rfailDtgs+fdtgs
+        
+        rfailDtgs.sort()
+        rfailDtgs=mf.uniq(rfailDtgs)
+
+        # -- reran both tmtrk and tcdiag
+        #
+        #MF.ChangeDir('../tcdiag')  # tctrk
+        #MF.ChangeDir('../tcdiag')  # tcdiag
+        
+        for fdtg in rfailDtgs:
+            if(doReRun):
+                cmd='r-all-tmtrk.py %s -T'%(fdtg)  # tctrk
+                #cmd='r-all-tcdiag.py %s -C -L'%(fdtg)  # tcdiag
+                mf.runcmd(cmd,ropt)
             else:
-                print 'no joy finding: ',tstmid,tstmid9x,'dtg: ',tdtg
-                sys.exit()
-            
-            (mlat,mlon,mvmax,mpmin)=rc[0:4]
-            mtccode=rc[8]
-            mwncode=rc[9]
-            tmlat=float(mlat)
-            tmlat=abs(tmlat)
-            isTC=(IsTc(mtccode) == 1)
-            isWN=(IsWarn(mwncode) == 1)
-            
-            if(tmlat <= r9latmax):
-                doRun=(isTC and isWN)
-            
-                lssig=(doSig and doRun)
-                if((ls9only or lsAll)):
-                    if(lssig):
-                        print '999-SSS',tdtg,tstmid,tvmax,mlat,mlon,mvmax,mpmin,mtccode,mwncode,isTC,isWN
-                    elif(not(doSig)):
-                        if(Is9X(tstmid)):
-                            print '999-SSS-999999999',tdtg,tstmid,tvmax,mlat,mlon,mvmax,mpmin,mtccode,mwncode,isTC,isWN
-                        else:
-                            print '999',tdtg,tstmid,tvmax,mlat,mlon,mvmax,mpmin,mtccode,mwncode,isTC,isWN
+                cmd='s-sbt-tmtrkN.py %s -i'%(fdtg)
+                mf.runcmd(cmd,ropt)
+        
                 
-                if(doRun):
-                    n99sig=n99sig+1
-                if(doReRun == 9 and doRun):
-                    cmd="s-sbt-tmtrkN.py %s -S %s -T -O"%(tdtg,tstmid)
-                    mf.runcmd(cmd,ropt)
+                
+            
+        
     
-if(ls1only or lsAll):    
-    print
-    #print '-----11111'
-kk1=r111.keys()
-kk1.sort()
-for k1 in kk1:
-    r1=r111[k1]
-    l1=len(r1)
-    r1stmids=[]
-    for k in range(0,l1):
-        r1stmids.append((r1[k][0],r1[k][1]))
-        n11=n11+1
+    for abid in abids:
+        (nsum,nfail,n999,ptrk,pnotrk,psignotrk,poknotrk)=nall[abid]
+        (pn9td,pn9ts,pn9ty,pn9unk,n9tot)=n9all[abid]
+        
+        pcard=' ptrk: %4.1f pNOtrk: %4.1f pNOsig: %4.1f  pNOok: %4.1f'%(ptrk,pnotrk,psignotrk,poknotrk)
+        opn9unk=''
+        if(pn9unk != 0.0):
+            opn9unk="UNK: %5.1f"%(pn9unk)
+        pcard9=' pNObyVmax  td: %5.1f ts: %5.1f TY: %5.1f %s'%(pn9td,pn9ts,pn9ty,opn9unk)
+        print '%s %s  N: %5d.%-5d %s  %s'%(abid,iyear,nsum,nfail,pcard,pcard9)
 
-    for k in range(0,l1):
-        tstmid=r1stmids[k][0]
-        tvmax=int(r1stmids[k][1])
-        tdtg=k1
-        if(tvmax >= r1vmin):
-            (mrc,mtrk)=md3.getMd3track(tstmid)
-            rc=mtrk[tdtg]
-            (mlat,mlon,mvmax,mpmin)=rc[0:4]
-            mtccode=rc[8]
-            mwncode=rc[9]
-            mlat=float(mlat)
-            tmlat=abs(mlat)
-            isTC=(IsTc(mtccode) == 1)
-            isWN=(IsWarn(mwncode) == 1)
-            if(tmlat <= r1latmax):
-                
-                doRun=(isTC and isWN)
-
-                lssig=(doSig and doRun)
-
-                if((ls1only or lsAll)):
-                    if(lssig):
-                        print '111-SSS',tdtg,tstmid,tvmax,mlat,mlon,mvmax,mpmin,mtccode,mwncode,isTC,isWN
-                    elif(not(doSig)):
-                        if(Is9X(tstmid)):
-                            print '111-SSS-99999999',tdtg,tstmid,tvmax,mlat,mlon,mvmax,mpmin,mtccode,mwncode,isTC,isWN
-                        else:
-                            print '111',tdtg,tstmid,tvmax,mlat,mlon,mvmax,mpmin,mtccode,mwncode,isTC,isWN
-
-                if(doRun):
-                    n11sig=n11sig+1
-                    if(doReRun == 1 and doRun):
-                        cmd="s-sbt-tmtrkN.py %s -S %s -T -O"%(tdtg,tstmid)
-                        mf.runcmd(cmd,ropt)
-
-
-
-p99=(n99*1.0/naa*1.0)*100.
-p11=(n11*1.0/naa*1.0)*100.
-p99sig=(n99sig*1.0/naa*1.0)*100.
-p11sig=(n11sig*1.0/naa*1.0)*100.
-
-p99sigEX=((n99-n99sig)*1.0/n99*1.0)*100.
-p11sigEX=((n11-n11sig)*1.0/n11*1.0)*100.
-
-print
-print 'NNN %s naa: %-5d n99: %-5d n11: %-5d   p99/p99sig/p99sigEX:  %4.1f/%-4.1f/%-4.1f  p11/p11sig/p11sigEX: %4.1f/%-4.1f/%-4.1f'%\
-      (dtgopt,naa,n99,n11,p99,p99sig,p99sigEX,p11,p11sig,p11sigEX)
-print
 sys.exit()
 
 

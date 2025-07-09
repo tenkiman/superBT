@@ -1,0 +1,555 @@
+
+iii inv/inv-sbt-track-v00-194501.194512.6.txt
+al 1945  N:   247.0      ptrk: 74.1 pNOtrk: 25.9 pNOsig: 23.9  pNOok:  2.0   pNObyVmax  td:  25.0 ts:  60.9 TY:  14.1 
+io 1945  N:   194.0      ptrk: 78.9 pNOtrk: 21.1 pNOsig: 21.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1945  N:   390.0      ptrk: 31.3 pNOtrk: 68.7 pNOsig: 68.7  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1945  N:   560.0      ptrk: 69.6 pNOtrk: 30.4 pNOsig: 28.9  pNOok:  1.4   pNObyVmax  td:  39.4 ts:  53.5 TY:   7.1 
+
+iii inv/inv-sbt-track-v00-194601.194612.6.txt
+al 1946  N:   134.0      ptrk: 73.1 pNOtrk: 26.9 pNOsig: 20.1  pNOok:  6.7   pNObyVmax  td:  22.2 ts:  52.8 TY:  25.0 
+io 1946  N:   264.0      ptrk: 73.9 pNOtrk: 26.1 pNOsig: 26.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1946  N:   506.0      ptrk: 33.8 pNOtrk: 66.2 pNOsig: 66.2  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1946  N:   455.0      ptrk: 69.2 pNOtrk: 30.8 pNOsig: 29.5  pNOok:  1.3   pNObyVmax  td:   4.3 ts:  27.1 TY:  68.6 
+
+iii inv/inv-sbt-track-v00-194701.194712.6.txt
+al 1947  N:   262.0      ptrk: 69.8 pNOtrk: 30.2 pNOsig: 30.2  pNOok:  0.0   pNObyVmax  td:  15.2 ts:  75.9 TY:   8.9 
+io 1947  N:   246.0      ptrk: 76.8 pNOtrk: 23.2 pNOsig: 23.2  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1947  N:   396.0      ptrk: 28.3 pNOtrk: 71.7 pNOsig: 71.7  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1947  N:   501.0      ptrk: 61.7 pNOtrk: 38.3 pNOsig: 37.9  pNOok:  0.4   pNObyVmax  td:  20.3 ts:  34.4 TY:  45.3 
+
+iii inv/inv-sbt-track-v00-194801.194812.6.txt
+al 1948  N:   272.0      ptrk: 79.8 pNOtrk: 20.2 pNOsig: 19.1  pNOok:  1.1   pNObyVmax  td:  12.7 ts:  34.5 TY:  52.7 
+io 1948  N:   250.0      ptrk: 73.2 pNOtrk: 26.8 pNOsig: 26.8  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1948  N:   527.0      ptrk: 35.5 pNOtrk: 64.5 pNOsig: 64.5  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1948  N:   544.0      ptrk: 67.8 pNOtrk: 32.2 pNOsig: 31.8  pNOok:  0.4   pNObyVmax  td:  16.0 ts:  51.4 TY:  32.6 
+
+iii inv/inv-sbt-track-v00-194901.194912.6.txt
+al 1949  N:   388.0      ptrk: 77.1 pNOtrk: 22.9 pNOsig: 19.3  pNOok:  3.6   pNObyVmax  td:  22.5 ts:  62.9 TY:  14.6 
+ep 1949  N:    82.0      ptrk: 25.6 pNOtrk: 74.4 pNOsig: 74.4  pNOok:  0.0   pNObyVmax  td:   1.6 ts:  88.5 TY:   9.8 
+io 1949  N:   156.0      ptrk: 57.7 pNOtrk: 42.3 pNOsig: 42.3  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1949  N:   486.0      ptrk: 36.6 pNOtrk: 63.4 pNOsig: 63.4  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1949  N:   559.0      ptrk: 77.3 pNOtrk: 22.7 pNOsig: 21.3  pNOok:  1.4   pNObyVmax  td:  32.3 ts:  45.7 TY:  22.0 
+
+iii inv/inv-sbt-track-v00-195001.195012.6.txt
+al 1950  N:   529.0      ptrk: 73.9 pNOtrk: 26.1 pNOsig: 24.0  pNOok:  2.1   pNObyVmax  td:  15.9 ts:  57.2 TY:  26.8 
+ep 1950  N:   117.0      ptrk: 52.1 pNOtrk: 47.9 pNOsig: 47.9  pNOok:  0.0   pNObyVmax  td:  14.3 ts:  17.9 TY:  67.9 
+io 1950  N:   242.0      ptrk: 59.1 pNOtrk: 40.9 pNOsig: 40.9  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1950  N:   522.0      ptrk: 46.9 pNOtrk: 53.1 pNOsig: 53.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1950  N:   348.0      ptrk: 77.6 pNOtrk: 22.4 pNOsig: 21.6  pNOok:  0.9   pNObyVmax  td:  15.4 ts:  56.4 TY:  28.2 
+
+iii inv/inv-sbt-track-v00-195101.195112.6.txt
+al 1951  N:   409.0      ptrk: 76.3 pNOtrk: 23.7 pNOsig: 21.3  pNOok:  2.4   pNObyVmax  td:  20.6 ts:  46.4 TY:  33.0 
+ep 1951  N:   131.0      ptrk: 55.0 pNOtrk: 45.0 pNOsig: 45.0  pNOok:  0.0   pNObyVmax  td:   3.4 ts:  94.9 TY:   1.7 
+io 1951  N:   152.0      ptrk: 70.4 pNOtrk: 29.6 pNOsig: 29.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1951  N:   750.0      ptrk: 52.0 pNOtrk: 48.0 pNOsig: 48.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1951  N:   506.0      ptrk: 84.8 pNOtrk: 15.2 pNOsig: 15.0  pNOok:  0.2   pNObyVmax  td:  13.0 ts:  37.7 TY:  49.4 
+
+iii inv/inv-sbt-track-v00-195201.195212.6.txt
+al 1952  N:   305.0      ptrk: 66.6 pNOtrk: 33.4 pNOsig: 31.8  pNOok:  1.6   pNObyVmax  td:  42.2 ts:  47.1 TY:  10.8 
+ep 1952  N:    95.0      ptrk: 49.5 pNOtrk: 50.5 pNOsig: 50.5  pNOok:  0.0   pNObyVmax  td:   0.0 ts:  75.0 TY:  25.0 
+io 1952  N:   178.0      ptrk: 64.6 pNOtrk: 35.4 pNOsig: 35.4  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1952  N:   577.0      ptrk: 45.2 pNOtrk: 54.8 pNOsig: 54.8  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1952  N:   723.0      ptrk: 75.7 pNOtrk: 24.3 pNOsig: 23.9  pNOok:  0.4   pNObyVmax  td:  27.3 ts:  44.3 TY:  28.4 
+
+iii inv/inv-sbt-track-v00-195301.195312.6.txt
+al 1953  N:   379.0      ptrk: 77.3 pNOtrk: 22.7 pNOsig: 18.5  pNOok:  4.2   pNObyVmax  td:   9.3 ts:  68.6 TY:  22.1 
+ep 1953  N:    52.0      ptrk: 78.8 pNOtrk: 21.2 pNOsig: 21.2  pNOok:  0.0   pNObyVmax  td:   0.0 ts:  81.8 TY:  18.2 
+io 1953  N:   116.0      ptrk: 79.3 pNOtrk: 20.7 pNOsig: 20.7  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1953  N:   368.0      ptrk: 42.9 pNOtrk: 57.1 pNOsig: 57.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1953  N:   718.0      ptrk: 79.8 pNOtrk: 20.2 pNOsig: 19.9  pNOok:  0.3   pNObyVmax  td:  41.4 ts:  39.3 TY:  19.3 
+
+iii inv/inv-sbt-track-v00-195401.195412.6.txt
+al 1954  N:   348.0      ptrk: 85.3 pNOtrk: 14.7 pNOsig:  9.8  pNOok:  4.9   pNObyVmax  td:  23.5 ts:  56.9 TY:  19.6 
+ep 1954  N:   246.0      ptrk: 50.8 pNOtrk: 49.2 pNOsig: 49.2  pNOok:  0.0   pNObyVmax  td:   0.0 ts:  59.5 TY:  40.5 
+io 1954  N:   100.0      ptrk: 85.0 pNOtrk: 15.0 pNOsig: 15.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1954  N:   430.0      ptrk: 57.4 pNOtrk: 42.6 pNOsig: 42.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1954  N:   645.0      ptrk: 81.7 pNOtrk: 18.3 pNOsig: 17.4  pNOok:  0.9   pNObyVmax  td:  41.5 ts:  33.1 TY:  25.4 
+
+iii inv/inv-sbt-track-v00-195501.195512.6.txt
+al 1955  N:   464.0      ptrk: 84.9 pNOtrk: 15.1 pNOsig: 12.7  pNOok:  2.4   pNObyVmax  td:  28.6 ts:  47.1 TY:  24.3 
+ep 1955  N:    70.0      ptrk: 78.6 pNOtrk: 21.4 pNOsig: 21.4  pNOok:  0.0   pNObyVmax  td:   0.0 ts:  60.0 TY:  40.0 
+io 1955  N:   150.0      ptrk: 89.3 pNOtrk: 10.7 pNOsig: 10.7  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1955  N:   733.0      ptrk: 61.7 pNOtrk: 38.3 pNOsig: 38.1  pNOok:  0.3   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1955  N:   540.0      ptrk: 83.9 pNOtrk: 16.1 pNOsig: 14.8  pNOok:  1.3   pNObyVmax  td:  21.8 ts:  56.3 TY:  21.8 
+
+iii inv/inv-sbt-track-v00-195601.195612.6.txt
+al 1956  N:   270.0      ptrk: 77.8 pNOtrk: 22.2 pNOsig: 18.1  pNOok:  4.1   pNObyVmax  td:  35.0 ts:  40.0 TY:  25.0 
+ep 1956  N:   114.0      ptrk: 50.9 pNOtrk: 49.1 pNOsig: 49.1  pNOok:  0.0   pNObyVmax  td:   1.8 ts:  30.4 TY:  67.9 
+io 1956  N:   190.0      ptrk: 88.4 pNOtrk: 11.6 pNOsig: 11.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1956  N:   978.0      ptrk: 63.0 pNOtrk: 37.0 pNOsig: 36.7  pNOok:  0.3   pNObyVmax  td:  16.3 ts:   1.4 TY:   0.0 UNK:  82.3
+wp 1956  N:   572.0      ptrk: 86.5 pNOtrk: 13.5 pNOsig: 13.5  pNOok:  0.0   pNObyVmax  td:  37.7 ts:  39.0 TY:  23.4 
+
+iii inv/inv-sbt-track-v00-195701.195712.6.txt
+al 1957  N:   232.0      ptrk: 88.8 pNOtrk: 11.2 pNOsig: 10.8  pNOok:  0.4   pNObyVmax  td:  26.9 ts:  23.1 TY:  50.0 
+ep 1957  N:   279.0      ptrk: 48.0 pNOtrk: 52.0 pNOsig: 52.0  pNOok:  0.0   pNObyVmax  td:   3.4 ts:  31.7 TY:  64.8 
+io 1957  N:    94.0      ptrk: 91.5 pNOtrk:  8.5 pNOsig:  8.5  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1957  N:   733.0      ptrk: 65.2 pNOtrk: 34.8 pNOsig: 34.8  pNOok:  0.0   pNObyVmax  td:  18.8 ts:   1.2 TY:   0.0 UNK:  80.0
+wp 1957  N:   743.0      ptrk: 81.2 pNOtrk: 18.8 pNOsig: 17.4  pNOok:  1.5   pNObyVmax  td:  13.6 ts:  35.0 TY:  51.4 
+
+iii inv/inv-sbt-track-v00-195801.195812.6.txt
+al 1958  N:   361.0      ptrk: 77.6 pNOtrk: 22.4 pNOsig: 18.8  pNOok:  3.6   pNObyVmax  td:  25.9 ts:  45.7 TY:  28.4 
+ep 1958  N:   192.0      ptrk: 59.4 pNOtrk: 40.6 pNOsig: 40.6  pNOok:  0.0   pNObyVmax  td:  19.2 ts:  33.3 TY:  47.4 
+sh 1958  N:   745.0      ptrk: 63.5 pNOtrk: 36.5 pNOsig: 36.5  pNOok:  0.0   pNObyVmax  td:  22.8 ts:   0.7 TY:   0.0 UNK:  76.5
+wp 1958  N:   627.0      ptrk: 90.3 pNOtrk:  9.7 pNOsig:  9.6  pNOok:  0.2   pNObyVmax  td:  11.5 ts:  37.7 TY:  41.0 UNK:   9.8
+
+iii inv/inv-sbt-track-v01-195901.195912.6.txt
+al 1959  N:   344.0      ptrk: 84.9 pNOtrk: 15.1 pNOsig: 12.8  pNOok:  2.3   pNObyVmax  td:  32.7 ts:  48.1 TY:  19.2 
+ep 1959  N:   224.0      ptrk: 59.4 pNOtrk: 40.6 pNOsig: 40.6  pNOok:  0.0   pNObyVmax  td:   2.2 ts:  68.1 TY:  29.7 
+io 1959  N:   280.0      ptrk: 93.2 pNOtrk:  6.8 pNOsig:  6.8  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1959  N:   902.0      ptrk: 61.8 pNOtrk: 38.2 pNOsig: 38.2  pNOok:  0.0   pNObyVmax  td:   4.6 ts:   0.0 TY:   0.0 UNK:  95.4
+wp 1959  N:   640.0      ptrk: 89.8 pNOtrk: 10.2 pNOsig:  8.0  pNOok:  2.2   pNObyVmax  td:  29.2 ts:  47.7 TY:  23.1 
+
+iii inv/inv-sbt-track-v01-196001.196012.6.txt
+al 1960  N:   251.0      ptrk: 83.3 pNOtrk: 16.7 pNOsig: 13.5  pNOok:  3.2   pNObyVmax  td:  42.9 ts:  38.1 TY:  19.0 
+ep 1960  N:   138.0      ptrk: 77.5 pNOtrk: 22.5 pNOsig: 22.5  pNOok:  0.0   pNObyVmax  td:   3.2 ts:  74.2 TY:  22.6 
+io 1960  N:   224.0      ptrk: 91.1 pNOtrk:  8.9 pNOsig:  8.9  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1960  N:   643.0      ptrk: 63.9 pNOtrk: 36.1 pNOsig: 36.1  pNOok:  0.0   pNObyVmax  td:   0.9 ts:   0.0 TY:   0.0 UNK:  99.1
+wp 1960  N:   841.0      ptrk: 87.5 pNOtrk: 12.5 pNOsig: 10.8  pNOok:  1.7   pNObyVmax  td:  35.2 ts:  54.3 TY:  10.5 
+
+iii inv/inv-sbt-track-v01-196101.196112.6.txt
+al 1961  N:   429.0      ptrk: 84.4 pNOtrk: 15.6 pNOsig: 12.6  pNOok:  3.0   pNObyVmax  td:  14.9 ts:  44.8 TY:  40.3 
+ep 1961  N:    93.0      ptrk: 76.3 pNOtrk: 23.7 pNOsig: 23.7  pNOok:  0.0   pNObyVmax  td:   9.1 ts:  77.3 TY:  13.6 
+io 1961  N:   282.0      ptrk: 91.5 pNOtrk:  8.5 pNOsig:  8.5  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1961  N:   709.0      ptrk: 47.1 pNOtrk: 52.9 pNOsig: 52.6  pNOok:  0.3   pNObyVmax  td:  12.0 ts:   0.0 TY:   0.0 UNK:  88.0
+wp 1961  N:   741.0      ptrk: 86.1 pNOtrk: 13.9 pNOsig: 13.2  pNOok:  0.7   pNObyVmax  td:  34.0 ts:  27.2 TY:  19.4 UNK:  19.4
+
+iii inv/inv-sbt-track-v01-196201.196212.6.txt
+al 1962  N:   173.0      ptrk: 83.8 pNOtrk: 16.2 pNOsig: 13.3  pNOok:  2.9   pNObyVmax  td:  25.0 ts:  64.3 TY:  10.7 
+ep 1962  N:   133.0      ptrk: 71.4 pNOtrk: 28.6 pNOsig: 28.6  pNOok:  0.0   pNObyVmax  td:  26.3 ts:  52.6 TY:  21.1 
+io 1962  N:   250.0      ptrk: 88.0 pNOtrk: 12.0 pNOsig: 12.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1962  N:   814.0      ptrk: 47.1 pNOtrk: 52.9 pNOsig: 52.9  pNOok:  0.0   pNObyVmax  td:  23.9 ts:   1.6 TY:   0.0 UNK:  74.5
+wp 1962  N:   860.0      ptrk: 85.5 pNOtrk: 14.5 pNOsig: 13.1  pNOok:  1.4   pNObyVmax  td:  48.8 ts:  34.4 TY:  16.8 
+
+iii inv/inv-sbt-track-v01-196301.196312.6.txt
+al 1963  N:   370.0      ptrk: 80.8 pNOtrk: 19.2 pNOsig: 16.8  pNOok:  2.4   pNObyVmax  td:  56.3 ts:  28.2 TY:  15.5 
+ep 1963  N:   158.0      ptrk: 60.1 pNOtrk: 39.9 pNOsig: 39.9  pNOok:  0.0   pNObyVmax  td:  60.3 ts:  28.6 TY:  11.1 
+io 1963  N:   326.0      ptrk: 87.4 pNOtrk: 12.6 pNOsig: 12.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1963  N:  1016.0      ptrk: 68.0 pNOtrk: 32.0 pNOsig: 31.2  pNOok:  0.8   pNObyVmax  td:  12.9 ts:   3.1 TY:   0.3 UNK:  83.7
+wp 1963  N:   674.0      ptrk: 89.0 pNOtrk: 11.0 pNOsig: 10.2  pNOok:  0.7   pNObyVmax  td:  50.0 ts:  29.7 TY:  20.3 
+
+iii inv/inv-sbt-track-v01-196401.196412.6.txt
+al 1964  N:   480.0      ptrk: 88.3 pNOtrk: 11.7 pNOsig: 10.4  pNOok:  1.3   pNObyVmax  td:  35.7 ts:  44.6 TY:  19.6 
+ep 1964  N:    63.0      ptrk: 81.0 pNOtrk: 19.0 pNOsig: 19.0  pNOok:  0.0   pNObyVmax  td:  16.7 ts:  83.3 TY:   0.0 
+io 1964  N:   254.0      ptrk: 89.0 pNOtrk: 11.0 pNOsig: 11.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1964  N:  1128.0      ptrk: 65.2 pNOtrk: 34.8 pNOsig: 34.8  pNOok:  0.1   pNObyVmax  td:  17.0 ts:   2.5 TY:   0.0 UNK:  80.4
+wp 1964  N:   839.0      ptrk: 81.8 pNOtrk: 18.2 pNOsig: 17.9  pNOok:  0.4   pNObyVmax  td:  38.6 ts:  39.2 TY:  22.2 
+
+iii inv/inv-sbt-track-v01-196501.196512.6.txt
+al 1965  N:   246.0      ptrk: 87.4 pNOtrk: 12.6 pNOsig:  9.8  pNOok:  2.8   pNObyVmax  td:  29.0 ts:  32.3 TY:  38.7 
+ep 1965  N:   248.0      ptrk: 69.4 pNOtrk: 30.6 pNOsig: 30.6  pNOok:  0.0   pNObyVmax  td:  43.4 ts:  56.6 TY:   0.0 
+io 1965  N:   225.0      ptrk: 84.9 pNOtrk: 15.1 pNOsig: 15.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1965  N:   938.0      ptrk: 67.9 pNOtrk: 32.1 pNOsig: 32.1  pNOok:  0.0   pNObyVmax  td:  28.2 ts:   0.7 TY:   0.0 UNK:  71.1
+wp 1965  N:   858.0      ptrk: 85.4 pNOtrk: 14.6 pNOsig: 13.4  pNOok:  1.2   pNObyVmax  td:  28.0 ts:  37.6 TY:  34.4 
+
+iii inv/inv-sbt-track-v01-196601.196612.6.txt
+al 1966  N:   420.0      ptrk: 81.2 pNOtrk: 18.8 pNOsig: 15.7  pNOok:  3.1   pNObyVmax  td:  48.1 ts:  36.7 TY:  15.2 
+ep 1966  N:   318.0      ptrk: 51.3 pNOtrk: 48.7 pNOsig: 48.7  pNOok:  0.0   pNObyVmax  td:  33.5 ts:  56.1 TY:  10.3 
+io 1966  N:   334.0      ptrk: 90.4 pNOtrk:  9.6 pNOsig:  9.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1966  N:   972.0      ptrk: 55.3 pNOtrk: 44.7 pNOsig: 44.7  pNOok:  0.0   pNObyVmax  td:  23.0 ts:   1.8 TY:   0.0 UNK:  75.1
+wp 1966  N:   786.0      ptrk: 88.2 pNOtrk: 11.8 pNOsig: 10.9  pNOok:  0.9   pNObyVmax  td:  51.6 ts:  32.3 TY:  16.1 
+
+iii inv/inv-sbt-track-v01-196701.196712.6.txt
+al 1967  N:   482.0      ptrk: 85.1 pNOtrk: 14.9 pNOsig: 13.3  pNOok:  1.7   pNObyVmax  td:  54.2 ts:  38.9 TY:   6.9 
+ep 1967  N:   475.0      ptrk: 60.6 pNOtrk: 39.4 pNOsig: 39.4  pNOok:  0.0   pNObyVmax  td:  34.8 ts:  55.6 TY:   9.6 
+io 1967  N:   206.0      ptrk: 82.0 pNOtrk: 18.0 pNOsig: 18.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1967  N:   742.0      ptrk: 70.4 pNOtrk: 29.6 pNOsig: 29.6  pNOok:  0.0   pNObyVmax  td:  12.7 ts:   8.6 TY:   0.0 UNK:  78.6
+wp 1967  N:   903.0      ptrk: 88.7 pNOtrk: 11.3 pNOsig: 10.3  pNOok:  1.0   pNObyVmax  td:  26.5 ts:  54.9 TY:  18.6 
+
+iii inv/inv-sbt-track-v01-196801.196812.6.txt
+al 1968  N:   298.0      ptrk: 84.6 pNOtrk: 15.4 pNOsig: 12.4  pNOok:  3.0   pNObyVmax  td:  41.3 ts:  37.0 TY:  21.7 
+ep 1968  N:   466.0      ptrk: 72.3 pNOtrk: 27.7 pNOsig: 27.7  pNOok:  0.0   pNObyVmax  td:  58.9 ts:  34.9 TY:   6.2 
+io 1968  N:   248.0      ptrk: 90.3 pNOtrk:  9.7 pNOsig:  9.7  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1968  N:   847.0      ptrk: 77.8 pNOtrk: 22.2 pNOsig: 22.2  pNOok:  0.0   pNObyVmax  td:  16.0 ts:   1.1 TY:   0.0 UNK:  83.0
+wp 1968  N:   815.0      ptrk: 94.7 pNOtrk:  5.3 pNOsig:  5.2  pNOok:  0.1   pNObyVmax  td:  48.8 ts:  32.6 TY:  18.6 
+
+iii inv/inv-sbt-track-v01-196901.196912.6.txt
+al 1969  N:   639.0      ptrk: 83.6 pNOtrk: 16.4 pNOsig: 12.7  pNOok:  3.8   pNObyVmax  td:  38.1 ts:  43.8 TY:  18.1 
+ep 1969  N:   195.0      ptrk: 75.9 pNOtrk: 24.1 pNOsig: 24.1  pNOok:  0.0   pNObyVmax  td:  40.4 ts:  51.1 TY:   8.5 
+io 1969  N:   216.0      ptrk: 93.1 pNOtrk:  6.9 pNOsig:  6.9  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1969  N:   675.0      ptrk: 75.3 pNOtrk: 24.7 pNOsig: 24.7  pNOok:  0.0   pNObyVmax  td:  35.3 ts:   4.8 TY:   0.0 UNK:  59.9
+wp 1969  N:   466.0      ptrk: 90.8 pNOtrk:  9.2 pNOsig:  8.6  pNOok:  0.6   pNObyVmax  td:  23.3 ts:  55.8 TY:  20.9 
+
+iii inv/inv-sbt-track-v01-197001.197012.6.txt
+al 1970  N:   528.0      ptrk: 76.7 pNOtrk: 23.3 pNOsig: 21.6  pNOok:  1.7   pNObyVmax  td:  68.3 ts:  28.5 TY:   3.3 
+ep 1970  N:   408.0      ptrk: 77.0 pNOtrk: 23.0 pNOsig: 22.8  pNOok:  0.2   pNObyVmax  td:  33.0 ts:  57.4 TY:   9.6 
+io 1970  N:   284.0      ptrk: 93.0 pNOtrk:  7.0 pNOsig:  7.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1970  N:   934.0      ptrk: 74.7 pNOtrk: 25.3 pNOsig: 25.3  pNOok:  0.0   pNObyVmax  td:  14.4 ts:   1.7 TY:   0.0 UNK:  83.9
+wp 1970  N:   536.0      ptrk: 93.7 pNOtrk:  6.3 pNOsig:  5.8  pNOok:  0.6   pNObyVmax  td:  38.2 ts:  50.0 TY:  11.8 
+
+iii inv/inv-sbt-track-v01-197101.197112.6.txt
+al 1971  N:   600.0      ptrk: 81.5 pNOtrk: 18.5 pNOsig: 16.7  pNOok:  1.8   pNObyVmax  td:  76.6 ts:  21.6 TY:   1.8 
+ep 1971  N:   487.0      ptrk: 74.1 pNOtrk: 25.9 pNOsig: 25.9  pNOok:  0.0   pNObyVmax  td:  44.4 ts:  40.5 TY:  15.1 
+io 1971  N:   174.0      ptrk: 94.3 pNOtrk:  5.7 pNOsig:  5.7  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+sh 1971  N:   957.0      ptrk: 84.2 pNOtrk: 15.8 pNOsig: 15.8  pNOok:  0.0   pNObyVmax  td:  27.2 ts:   7.3 TY:   0.0 UNK:  65.6
+wp 1971  N:   776.0      ptrk: 92.7 pNOtrk:  7.3 pNOsig:  7.3  pNOok:  0.0   pNObyVmax  td:  28.1 ts:  56.1 TY:  15.8 
+
+iii inv/inv-sbt-track-v01-197201.197212.6.txt
+al 1972  N:   379.0      ptrk: 78.6 pNOtrk: 21.4 pNOsig: 20.8  pNOok:  0.5   pNObyVmax  td:  91.4 ts:   7.4 TY:   1.2 
+ep 1972  N:   437.0      ptrk: 78.7 pNOtrk: 21.3 pNOsig: 21.3  pNOok:  0.0   pNObyVmax  td:  40.9 ts:  47.3 TY:  11.8 
+io 1972  N:   322.0      ptrk: 80.4 pNOtrk: 19.6 pNOsig: 19.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   3.2 TY:   0.0 UNK:  96.8
+sh 1972  N:  1005.0      ptrk: 83.7 pNOtrk: 16.3 pNOsig: 16.2  pNOok:  0.1   pNObyVmax  td:  23.8 ts:   4.9 TY:   0.0 UNK:  71.3
+wp 1972  N:  1252.0      ptrk: 84.3 pNOtrk: 15.7 pNOsig: 14.9  pNOok:  0.9   pNObyVmax  td:  57.4 ts:  23.4 TY:  16.2 UNK:   3.0
+
+iii inv/inv-sbt-track-v01-197301.197312.6.txt
+al 1973  N:   329.0      ptrk: 83.6 pNOtrk: 16.4 pNOsig: 14.0  pNOok:  2.4   pNObyVmax  td:  72.2 ts:  13.0 TY:  14.8 
+ep 1973  N:   314.0      ptrk: 63.4 pNOtrk: 36.6 pNOsig: 36.6  pNOok:  0.0   pNObyVmax  td:  27.8 ts:  31.3 TY:  40.9 
+io 1973  N:   248.0      ptrk: 96.4 pNOtrk:  3.6 pNOsig:  3.6  pNOok:  0.0   pNObyVmax  td:   0.0 ts:  11.1 TY:   0.0 UNK:  88.9
+sh 1973  N:  1246.0      ptrk: 79.9 pNOtrk: 20.1 pNOsig: 19.8  pNOok:  0.2   pNObyVmax  td:   0.0 ts:   0.4 TY:   0.4 UNK:  99.2
+wp 1973  N:   631.0      ptrk: 90.6 pNOtrk:  9.4 pNOsig:  8.9  pNOok:  0.5   pNObyVmax  td:  83.1 ts:  16.9 TY:   0.0 
+
+iii inv/inv-sbt-track-v01-197401.197412.6.txt
+al 1974  N:   404.0      ptrk: 63.4 pNOtrk: 36.6 pNOsig: 32.4  pNOok:  4.2   pNObyVmax  td:  64.9 ts:  23.6 TY:  11.5 
+ep 1974  N:   396.0      ptrk: 57.1 pNOtrk: 42.9 pNOsig: 42.9  pNOok:  0.0   pNObyVmax  td:  37.1 ts:  46.5 TY:  16.5 
+io 1974  N:   168.0      ptrk: 83.9 pNOtrk: 16.1 pNOsig: 16.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   7.4 TY:   0.0 UNK:  92.6
+sh 1974  N:   732.0      ptrk: 85.8 pNOtrk: 14.2 pNOsig: 14.1  pNOok:  0.1   pNObyVmax  td:   1.9 ts:   0.0 TY:   0.0 UNK:  98.1
+wp 1974  N:   991.0      ptrk: 89.6 pNOtrk: 10.4 pNOsig: 10.1  pNOok:  0.3   pNObyVmax  td:  62.1 ts:  32.0 TY:   5.8 
+
+iii inv/inv-sbt-track-v01-197501.197512.6.txt
+al 1975  N:   916.0      ptrk: 72.5 pNOtrk: 27.5 pNOsig: 26.2  pNOok:  1.3   pNObyVmax  td:  79.4 ts:   9.5 TY:  11.1 
+ep 1975  N:   782.0      ptrk: 81.3 pNOtrk: 18.7 pNOsig: 18.2  pNOok:  0.5   pNObyVmax  td:  27.4 ts:  37.0 TY:  35.6 
+io 1975  N:   688.0      ptrk: 91.0 pNOtrk:  9.0 pNOsig:  9.0  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   0.0 TY:   3.2 UNK:  96.8
+sh 1975  N:  1676.0      ptrk: 80.0 pNOtrk: 20.0 pNOsig: 19.8  pNOok:  0.2   pNObyVmax  td:   8.9 ts:   1.8 TY:   0.0 UNK:  89.3
+wp 1975  N:  1332.0      ptrk: 89.9 pNOtrk: 10.1 pNOsig:  8.4  pNOok:  1.7   pNObyVmax  td:  59.7 ts:  28.4 TY:  11.9 
+
+iii inv/inv-sbt-track-v01-197601.197612.6.txt
+al 1976  N:   443.0      ptrk: 74.3 pNOtrk: 25.7 pNOsig: 24.6  pNOok:  1.1   pNObyVmax  td:  77.2 ts:  18.4 TY:   4.4 
+ep 1976  N:   452.0      ptrk: 63.9 pNOtrk: 36.1 pNOsig: 36.1  pNOok:  0.0   pNObyVmax  td:  46.6 ts:  33.7 TY:  19.6 
+io 1976  N:   357.0      ptrk: 87.7 pNOtrk: 12.3 pNOsig: 12.3  pNOok:  0.0   pNObyVmax  td:   0.0 ts:   6.8 TY:   0.0 UNK:  93.2
+sh 1976  N:   824.0      ptrk: 79.2 pNOtrk: 20.8 pNOsig: 20.6  pNOok:  0.1   pNObyVmax  td:   0.0 ts:   0.0 TY:   0.0 UNK: 100.0
+wp 1976  N:  1018.0      ptrk: 88.5 pNOtrk: 11.5 pNOsig: 11.0  pNOok:  0.5   pNObyVmax  td:  64.1 ts:  30.8 TY:   5.1 
+
+iii inv/inv-sbt-track-v00-197701.197712.6.txt
+al 1977  N:   174.0      ptrk: 73.6 pNOtrk: 26.4 pNOsig: 24.7  pNOok:  1.7   pNObyVmax  td:  82.6 ts:  13.0 TY:   4.3 
+ep 1977  N:   126.0      ptrk: 61.1 pNOtrk: 38.9 pNOsig: 38.9  pNOok:  0.0   pNObyVmax  td:  40.8 ts:  44.9 TY:  14.3 
+io 1977  N:   181.0      ptrk: 90.1 pNOtrk:  9.9 pNOsig:  9.9  pNOok:  0.0   pNObyVmax  td:   0.0 ts:  22.2 TY:   0.0 UNK:  77.8
+sh 1977  N:   977.0      ptrk: 73.3 pNOtrk: 26.7 pNOsig: 26.7  pNOok:  0.0   pNObyVmax  td:   4.2 ts:  14.6 TY:   0.8 UNK:  80.5
+wp 1977  N:   492.0      ptrk: 90.0 pNOtrk: 10.0 pNOsig:  9.8  pNOok:  0.2   pNObyVmax  td:  53.1 ts:  34.7 TY:  12.2 
+
+iii inv/inv-sbt-track-v01-197801.197812.6.txt
+al 1978  N:   452.0      ptrk: 72.6 pNOtrk: 27.4 pNOsig: 24.8  pNOok:  2.7   pNObyVmax  td:  67.7 ts:  23.4 TY:   8.9 
+ep 1978  N:   526.0      ptrk: 68.1 pNOtrk: 31.9 pNOsig: 31.9  pNOok:  0.0   pNObyVmax  td:  31.5 ts:  38.1 TY:  30.4 
+io 1978  N:   110.0      ptrk: 90.0 pNOtrk: 10.0 pNOsig: 10.0  pNOok:  0.0   pNObyVmax  td:  18.2 ts:  81.8 TY:   0.0 
+sh 1978  N:   816.0      ptrk: 82.0 pNOtrk: 18.0 pNOsig: 18.0  pNOok:  0.0   pNObyVmax  td:   8.8 ts:  10.9 TY:   4.8 UNK:  75.5
+wp 1978  N:  1015.0      ptrk: 87.0 pNOtrk: 13.0 pNOsig: 12.8  pNOok:  0.2   pNObyVmax  td:  79.5 ts:  13.6 TY:   6.8 
+
+iii inv/inv-sbt-track-v01-197901.197912.6.txt
+al 1979  N:   549.0      ptrk: 79.8 pNOtrk: 20.2 pNOsig: 19.3  pNOok:  0.9   pNObyVmax  td:  80.2 ts:  15.3 TY:   4.5 
+ep 1979  N:   189.0      ptrk: 74.6 pNOtrk: 25.4 pNOsig: 25.4  pNOok:  0.0   pNObyVmax  td:  25.0 ts:  45.8 TY:  29.2 
+io 1979  N:   166.0      ptrk: 92.8 pNOtrk:  7.2 pNOsig:  7.2  pNOok:  0.0   pNObyVmax  td:  16.7 ts:  16.7 TY:   0.0 UNK:  66.7
+sh 1979  N:   966.0      ptrk: 83.7 pNOtrk: 16.3 pNOsig: 15.9  pNOok:  0.3   pNObyVmax  td:  16.6 ts:  22.9 TY:  16.6 UNK:  43.9
+wp 1979  N:   957.0      ptrk: 87.4 pNOtrk: 12.6 pNOsig: 12.6  pNOok:  0.0   pNObyVmax  td:  76.0 ts:  17.4 TY:   6.6 
+
+iii inv/inv-sbt-track-v01-198001.198012.6.txt
+al 1980  N:   459.0      ptrk: 77.1 pNOtrk: 22.9 pNOsig: 20.3  pNOok:  2.6   pNObyVmax  td:  71.4 ts:   8.6 TY:  20.0 
+ep 1980  N:   274.0      ptrk: 75.9 pNOtrk: 24.1 pNOsig: 24.1  pNOok:  0.0   pNObyVmax  td:  37.9 ts:  50.0 TY:  12.1 
+io 1980  N:   101.0      ptrk: 55.4 pNOtrk: 44.6 pNOsig: 44.6  pNOok:  0.0   pNObyVmax  td:  84.4 ts:   6.7 TY:   0.0 UNK:   8.9
+sh 1980  N:   812.0      ptrk: 82.6 pNOtrk: 17.4 pNOsig: 17.1  pNOok:  0.2   pNObyVmax  td:  23.4 ts:  44.0 TY:   3.5 UNK:  29.1
+wp 1980  N:   809.0      ptrk: 89.2 pNOtrk: 10.8 pNOsig: 10.8  pNOok:  0.0   pNObyVmax  td:  58.6 ts:  35.6 TY:   5.7 
+
+iii inv/inv-sbt-track-v01-198101.198112.6.txt
+al 1981  N:   475.0      ptrk: 77.1 pNOtrk: 22.9 pNOsig: 21.5  pNOok:  1.5   pNObyVmax  td:  78.9 ts:  16.5 TY:   4.6 
+ep 1981  N:   318.0      ptrk: 69.2 pNOtrk: 30.8 pNOsig: 30.8  pNOok:  0.0   pNObyVmax  td:  30.6 ts:  53.1 TY:  16.3 
+io 1981  N:    70.0      ptrk: 85.7 pNOtrk: 14.3 pNOsig: 14.3  pNOok:  0.0   pNObyVmax  td:  50.0 ts:  50.0 TY:   0.0 
+sh 1981  N:   757.0      ptrk: 86.4 pNOtrk: 13.6 pNOsig: 13.6  pNOok:  0.0   pNObyVmax  td:  40.8 ts:  30.1 TY:  11.7 UNK:  17.5
+wp 1981  N:   727.0      ptrk: 92.3 pNOtrk:  7.7 pNOsig:  7.3  pNOok:  0.4   pNObyVmax  td:  58.9 ts:  26.8 TY:  14.3 
+
+iii inv/inv-sbt-track-v01-198201.198212.6.txt
+al 1982  N:   153.0      ptrk: 77.8 pNOtrk: 22.2 pNOsig: 18.3  pNOok:  3.9   pNObyVmax  td:  76.5 ts:  14.7 TY:   8.8 
+ep 1982  N:   653.0      ptrk: 68.8 pNOtrk: 31.2 pNOsig: 31.2  pNOok:  0.0   pNObyVmax  td:  43.6 ts:  39.7 TY:  16.7 
+io 1982  N:    82.0      ptrk: 87.8 pNOtrk: 12.2 pNOsig: 12.2  pNOok:  0.0   pNObyVmax  td:  30.0 ts:  70.0 TY:   0.0 
+sh 1982  N:   700.0      ptrk: 91.9 pNOtrk:  8.1 pNOsig:  8.1  pNOok:  0.0   pNObyVmax  td:  52.6 ts:  45.6 TY:   1.8 
+wp 1982  N:   903.0      ptrk: 95.3 pNOtrk:  4.7 pNOsig:  4.7  pNOok:  0.0   pNObyVmax  td:  64.3 ts:  21.4 TY:  14.3 
+
+iii inv/inv-sbt-track-v01-198301.198312.6.txt
+al 1983  N:   132.0      ptrk: 83.3 pNOtrk: 16.7 pNOsig: 16.7  pNOok:  0.0   pNObyVmax  td:  90.9 ts:   9.1 TY:   0.0 
+ep 1983  N:   613.0      ptrk: 80.4 pNOtrk: 19.6 pNOsig: 19.6  pNOok:  0.0   pNObyVmax  td:  37.5 ts:  50.0 TY:  12.5 
+io 1983  N:    49.0      ptrk: 77.6 pNOtrk: 22.4 pNOsig: 22.4  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1983  N:   843.0      ptrk: 92.1 pNOtrk:  7.9 pNOsig:  7.9  pNOok:  0.0   pNObyVmax  td:  61.2 ts:  34.3 TY:   4.5 
+wp 1983  N:   636.0      ptrk: 89.3 pNOtrk: 10.7 pNOsig: 10.7  pNOok:  0.0   pNObyVmax  td:  73.5 ts:  26.5 TY:   0.0 
+
+iii inv/inv-sbt-track-v01-198401.198412.6.txt
+al 1984  N:   435.0      ptrk: 85.7 pNOtrk: 14.3 pNOsig: 11.7  pNOok:  2.5   pNObyVmax  td:  64.5 ts:  35.5 TY:   0.0 
+ep 1984  N:   659.0      ptrk: 78.0 pNOtrk: 22.0 pNOsig: 22.0  pNOok:  0.0   pNObyVmax  td:  51.7 ts:  35.9 TY:  12.4 
+io 1984  N:   108.0      ptrk: 87.0 pNOtrk: 13.0 pNOsig: 13.0  pNOok:  0.0   pNObyVmax  td:  85.7 ts:  14.3 TY:   0.0 
+sh 1984  N:   754.0      ptrk: 85.7 pNOtrk: 14.3 pNOsig: 14.3  pNOok:  0.0   pNObyVmax  td:  50.9 ts:  41.7 TY:   7.4 
+wp 1984  N:   754.0      ptrk: 93.0 pNOtrk:  7.0 pNOsig:  6.9  pNOok:  0.1   pNObyVmax  td:  58.5 ts:  22.6 TY:  18.9 
+
+iii inv/inv-sbt-track-v01-198501.198512.6.txt
+al 1985  N:   364.0      ptrk: 87.4 pNOtrk: 12.6 pNOsig: 10.7  pNOok:  1.9   pNObyVmax  td:  54.3 ts:  30.4 TY:  15.2 
+ep 1985  N:   704.0      ptrk: 68.0 pNOtrk: 32.0 pNOsig: 32.0  pNOok:  0.0   pNObyVmax  td:  47.1 ts:  32.4 TY:  20.4 
+io 1985  N:    86.0      ptrk: 91.9 pNOtrk:  8.1 pNOsig:  8.1  pNOok:  0.0   pNObyVmax  td:  57.1 ts:  42.9 TY:   0.0 
+sh 1985  N:   837.0      ptrk: 91.0 pNOtrk:  9.0 pNOsig:  9.0  pNOok:  0.0   pNObyVmax  td:  49.3 ts:  37.3 TY:  13.3 
+wp 1985  N:   702.0      ptrk: 92.6 pNOtrk:  7.4 pNOsig:  7.3  pNOok:  0.1   pNObyVmax  td:  36.5 ts:  53.8 TY:   9.6 
+
+iii inv/inv-sbt-track-v01-198601.198612.6.txt
+al 1986  N:   230.0      ptrk: 81.7 pNOtrk: 18.3 pNOsig: 15.2  pNOok:  3.0   pNObyVmax  td:  66.7 ts:  26.2 TY:   7.1 
+ep 1986  N:   391.0      ptrk: 75.4 pNOtrk: 24.6 pNOsig: 24.6  pNOok:  0.0   pNObyVmax  td:  47.9 ts:  31.2 TY:  20.8 
+io 1986  N:    29.0      ptrk: 69.0 pNOtrk: 31.0 pNOsig: 31.0  pNOok:  0.0   pNObyVmax  td:  55.6 ts:  44.4 TY:   0.0 
+sh 1986  N:   731.0      ptrk: 86.7 pNOtrk: 13.3 pNOsig: 13.3  pNOok:  0.0   pNObyVmax  td:  52.6 ts:  46.4 TY:   1.0 
+wp 1986  N:   850.0      ptrk: 92.0 pNOtrk:  8.0 pNOsig:  8.0  pNOok:  0.0   pNObyVmax  td:  33.8 ts:  50.0 TY:  16.2 
+
+iii inv/inv-sbt-track-v01-198701.198712.6.txt
+al 1987  N:   367.0      ptrk: 83.7 pNOtrk: 16.3 pNOsig: 14.4  pNOok:  1.9   pNObyVmax  td:  76.7 ts:  13.3 TY:  10.0 
+ep 1987  N:   435.0      ptrk: 87.1 pNOtrk: 12.9 pNOsig: 12.9  pNOok:  0.0   pNObyVmax  td:  50.0 ts:  48.2 TY:   1.8 
+io 1987  N:   201.0      ptrk: 81.6 pNOtrk: 18.4 pNOsig: 18.4  pNOok:  0.0   pNObyVmax  td:  67.6 ts:  32.4 TY:   0.0 
+sh 1987  N:   701.0      ptrk: 84.5 pNOtrk: 15.5 pNOsig: 15.5  pNOok:  0.0   pNObyVmax  td:  43.1 ts:  55.0 TY:   1.8 
+wp 1987  N:  1018.0      ptrk: 89.7 pNOtrk: 10.3 pNOsig: 10.3  pNOok:  0.0   pNObyVmax  td:  75.2 ts:  16.2 TY:   8.6 
+
+iii inv/inv-sbt-track-v01-198801.198812.6.txt
+al 1988  N:   420.0      ptrk: 83.3 pNOtrk: 16.7 pNOsig: 15.2  pNOok:  1.4   pNObyVmax  td:  71.4 ts:  25.7 TY:   2.9 
+ep 1988  N:   550.0      ptrk: 91.8 pNOtrk:  8.2 pNOsig:  8.2  pNOok:  0.0   pNObyVmax  td:  75.6 ts:  20.0 TY:   4.4 
+io 1988  N:    93.0      ptrk: 96.8 pNOtrk:  3.2 pNOsig:  3.2  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1988  N:   644.0      ptrk: 93.0 pNOtrk:  7.0 pNOsig:  7.0  pNOok:  0.0   pNObyVmax  td:  62.2 ts:  31.1 TY:   6.7 
+wp 1988  N:   684.0      ptrk: 88.3 pNOtrk: 11.7 pNOsig: 11.5  pNOok:  0.1   pNObyVmax  td:  72.5 ts:  18.8 TY:   8.8 
+
+iii inv/inv-sbt-track-v01-198901.198912.6.txt
+al 1989  N:   443.0      ptrk: 88.5 pNOtrk: 11.5 pNOsig:  9.7  pNOok:  1.8   pNObyVmax  td:  66.7 ts:  23.5 TY:   9.8 
+ep 1989  N:   515.0      ptrk: 81.0 pNOtrk: 19.0 pNOsig: 19.0  pNOok:  0.0   pNObyVmax  td:  60.2 ts:  26.5 TY:  13.3 
+io 1989  N:    41.0      ptrk: 92.7 pNOtrk:  7.3 pNOsig:  7.3  pNOok:  0.0   pNObyVmax  td:  33.3 ts:  66.7 TY:   0.0 
+sh 1989  N:  1001.0      ptrk: 94.7 pNOtrk:  5.3 pNOsig:  5.3  pNOok:  0.0   pNObyVmax  td:  83.0 ts:  13.2 TY:   3.8 
+wp 1989  N:  1224.0      ptrk: 83.8 pNOtrk: 16.2 pNOsig: 16.0  pNOok:  0.2   pNObyVmax  td:  81.3 ts:  15.7 TY:   3.0 
+
+iii inv/inv-sbt-track-v01-199001.199012.6.txt
+al 1990  N:   501.0      ptrk: 84.8 pNOtrk: 15.2 pNOsig: 14.2  pNOok:  1.0   pNObyVmax  td:  65.8 ts:  30.3 TY:   3.9 
+ep 1990  N:   720.0      ptrk: 90.4 pNOtrk:  9.6 pNOsig:  9.6  pNOok:  0.0   pNObyVmax  td:  53.6 ts:  36.2 TY:  10.1 
+io 1990  N:    60.0      ptrk: 91.7 pNOtrk:  8.3 pNOsig:  8.3  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1990  N:   874.0      ptrk: 92.6 pNOtrk:  7.4 pNOsig:  7.4  pNOok:  0.0   pNObyVmax  td:  69.2 ts:  27.7 TY:   3.1 
+wp 1990  N:  1321.0      ptrk: 84.9 pNOtrk: 15.1 pNOsig: 14.8  pNOok:  0.3   pNObyVmax  td:  90.0 ts:   8.0 TY:   2.0 
+
+iii inv/inv-sbt-track-v01-199101.199112.6.txt
+al 1991  N:   234.0      ptrk: 85.0 pNOtrk: 15.0 pNOsig: 14.1  pNOok:  0.9   pNObyVmax  td:  60.0 ts:  28.6 TY:  11.4 
+ep 1991  N:   491.0      ptrk: 93.9 pNOtrk:  6.1 pNOsig:  6.1  pNOok:  0.0   pNObyVmax  td:  30.0 ts:  43.3 TY:  26.7 
+io 1991  N:   103.0      ptrk: 80.6 pNOtrk: 19.4 pNOsig: 19.4  pNOok:  0.0   pNObyVmax  td:  85.0 ts:  15.0 TY:   0.0 
+sh 1991  N:   854.0      ptrk: 93.4 pNOtrk:  6.6 pNOsig:  6.4  pNOok:  0.1   pNObyVmax  td:  69.6 ts:  25.0 TY:   5.4 
+wp 1991  N:   599.0      ptrk: 89.0 pNOtrk: 11.0 pNOsig: 11.0  pNOok:  0.0   pNObyVmax  td:  86.4 ts:  10.6 TY:   3.0 
+
+iii inv/inv-sbt-track-v01-199201.199212.6.txt
+al 1992  N:   267.0      ptrk: 93.6 pNOtrk:  6.4 pNOsig:  5.6  pNOok:  0.7   pNObyVmax  td:  58.8 ts:  41.2 TY:   0.0 
+ep 1992  N:   885.0      ptrk: 94.1 pNOtrk:  5.9 pNOsig:  5.9  pNOok:  0.0   pNObyVmax  td:  69.2 ts:  23.1 TY:   7.7 
+io 1992  N:   308.0      ptrk: 82.1 pNOtrk: 17.9 pNOsig: 17.9  pNOok:  0.0   pNObyVmax  td:  70.9 ts:  29.1 TY:   0.0 
+sh 1992  N:   776.0      ptrk: 91.6 pNOtrk:  8.4 pNOsig:  8.4  pNOok:  0.0   pNObyVmax  td:  67.7 ts:  26.2 TY:   6.2 
+wp 1992  N:  1430.0      ptrk: 88.5 pNOtrk: 11.5 pNOsig: 11.3  pNOok:  0.2   pNObyVmax  td:  84.8 ts:  11.5 TY:   3.6 
+
+iii inv/inv-sbt-track-v01-199301.199312.6.txt
+al 1993  N:   216.0      ptrk: 90.7 pNOtrk:  9.3 pNOsig:  7.4  pNOok:  1.9   pNObyVmax  td:  15.0 ts:  65.0 TY:  20.0 
+ep 1993  N:   541.0      ptrk: 95.7 pNOtrk:  4.3 pNOsig:  4.3  pNOok:  0.0   pNObyVmax  td:  69.6 ts:  21.7 TY:   8.7 
+io 1993  N:    81.0      ptrk: 93.8 pNOtrk:  6.2 pNOsig:  6.2  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1993  N:   831.0      ptrk: 91.9 pNOtrk:  8.1 pNOsig:  8.1  pNOok:  0.0   pNObyVmax  td:  71.6 ts:  20.9 TY:   7.5 
+wp 1993  N:  1411.0      ptrk: 84.3 pNOtrk: 15.7 pNOsig: 15.5  pNOok:  0.3   pNObyVmax  td:  87.8 ts:   9.9 TY:   2.3 
+
+iii inv/inv-sbt-track-v01-199401.199412.6.txt
+al 1994  N:   225.0      ptrk: 95.6 pNOtrk:  4.4 pNOsig:  4.0  pNOok:  0.4   pNObyVmax  td:  40.0 ts:  40.0 TY:  20.0 
+ep 1994  N:   653.0      ptrk: 93.7 pNOtrk:  6.3 pNOsig:  6.3  pNOok:  0.0   pNObyVmax  td:  63.4 ts:  31.7 TY:   4.9 
+io 1994  N:   118.0      ptrk: 90.7 pNOtrk:  9.3 pNOsig:  9.3  pNOok:  0.0   pNObyVmax  td:  81.8 ts:  18.2 TY:   0.0 
+sh 1994  N:  1094.0      ptrk: 92.8 pNOtrk:  7.2 pNOsig:  7.2  pNOok:  0.0   pNObyVmax  td:  75.9 ts:  13.9 TY:  10.1 
+wp 1994  N:  1677.0      ptrk: 88.4 pNOtrk: 11.6 pNOsig: 11.3  pNOok:  0.3   pNObyVmax  td:  88.7 ts:   8.2 TY:   3.1 
+
+iii inv/inv-sbt-track-v01-199501.199512.6.txt
+al 1995  N:   744.0      ptrk: 90.5 pNOtrk:  9.5 pNOsig:  6.5  pNOok:  3.1   pNObyVmax  td:  31.0 ts:  50.7 TY:  18.3 
+ep 1995  N:   295.0      ptrk: 95.6 pNOtrk:  4.4 pNOsig:  4.4  pNOok:  0.0   pNObyVmax  td:  92.3 ts:   7.7 TY:   0.0 
+io 1995  N:   115.0      ptrk: 80.9 pNOtrk: 19.1 pNOsig: 19.1  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1995  N:   694.0      ptrk: 91.6 pNOtrk:  8.4 pNOsig:  8.2  pNOok:  0.1   pNObyVmax  td:  79.3 ts:  17.2 TY:   3.4 
+wp 1995  N:   520.0      ptrk: 81.0 pNOtrk: 19.0 pNOsig: 18.3  pNOok:  0.8   pNObyVmax  td:  84.8 ts:   8.1 TY:   7.1 
+
+iii inv/inv-sbt-track-v01-199601.199612.6.txt
+al 1996  N:   536.0      ptrk: 92.9 pNOtrk:  7.1 pNOsig:  5.2  pNOok:  1.9   pNObyVmax  td:  55.3 ts:  28.9 TY:  15.8 
+ep 1996  N:   281.0      ptrk: 92.5 pNOtrk:  7.5 pNOsig:  7.5  pNOok:  0.0   pNObyVmax  td:  85.7 ts:   9.5 TY:   4.8 
+io 1996  N:   303.0      ptrk: 94.1 pNOtrk:  5.9 pNOsig:  5.9  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1996  N:  1283.0      ptrk: 89.7 pNOtrk: 10.3 pNOsig: 10.2  pNOok:  0.1   pNObyVmax  td:  83.3 ts:  14.4 TY:   2.3 
+wp 1996  N:  1754.0      ptrk: 82.5 pNOtrk: 17.5 pNOsig: 17.0  pNOok:  0.5   pNObyVmax  td:  89.3 ts:   6.5 TY:   4.2 
+
+iii inv/inv-sbt-track-v01-199701.199712.6.txt
+al 1997  N:   197.0      ptrk: 90.9 pNOtrk:  9.1 pNOsig:  8.1  pNOok:  1.0   pNObyVmax  td:  38.9 ts:  44.4 TY:  16.7 
+ep 1997  N:   719.0      ptrk: 94.7 pNOtrk:  5.3 pNOsig:  5.3  pNOok:  0.0   pNObyVmax  td:  65.8 ts:  34.2 TY:   0.0 
+io 1997  N:   136.0      ptrk: 86.8 pNOtrk: 13.2 pNOsig: 13.2  pNOok:  0.0   pNObyVmax  td:  83.3 ts:  16.7 TY:   0.0 
+sh 1997  N:  1448.0      ptrk: 92.6 pNOtrk:  7.4 pNOsig:  7.1  pNOok:  0.3   pNObyVmax  td:  78.5 ts:  18.7 TY:   2.8 
+wp 1997  N:  1671.0      ptrk: 88.7 pNOtrk: 11.3 pNOsig: 10.4  pNOok:  0.8   pNObyVmax  td:  70.7 ts:  22.3 TY:   6.9 
+
+iii inv/inv-sbt-track-v03-199801.199812.6.txt
+al 1998  N:   527.0      ptrk: 92.4 pNOtrk:  7.6 pNOsig:  3.8  pNOok:  3.8   pNObyVmax  td:  25.0 ts:  52.5 TY:  22.5 
+ep 1998  N:   391.0      ptrk: 98.0 pNOtrk:  2.0 pNOsig:  2.0  pNOok:  0.0   pNObyVmax  td:  87.5 ts:  12.5 TY:   0.0 
+io 1998  N:   164.0      ptrk: 83.5 pNOtrk: 16.5 pNOsig: 16.5  pNOok:  0.0   pNObyVmax  td:  70.4 ts:  29.6 TY:   0.0 
+sh 1998  N:  1047.0      ptrk: 94.7 pNOtrk:  5.3 pNOsig:  5.3  pNOok:  0.0   pNObyVmax  td:  62.5 ts:  25.0 TY:  12.5 
+wp 1998  N:   629.0      ptrk: 85.4 pNOtrk: 14.6 pNOsig: 13.7  pNOok:  1.0   pNObyVmax  td:  84.8 ts:   8.7 TY:   6.5 
+
+iii inv/inv-sbt-track-v02-199901.199912.6.txt
+al 1999  N:   444.0      ptrk: 94.8 pNOtrk:  5.2 pNOsig:  4.5  pNOok:  0.7   pNObyVmax  td:  60.9 ts:  21.7 TY:  17.4 
+ep 1999  N:   277.0      ptrk: 97.5 pNOtrk:  2.5 pNOsig:  2.5  pNOok:  0.0   pNObyVmax  td:  71.4 ts:  14.3 TY:  14.3 
+io 1999  N:   118.0      ptrk: 99.2 pNOtrk:  0.8 pNOsig:  0.8  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 1999  N:   748.0      ptrk: 96.5 pNOtrk:  3.5 pNOsig:  3.5  pNOok:  0.0   pNObyVmax  td:  88.5 ts:  11.5 TY:   0.0 
+wp 1999  N:   757.0      ptrk: 90.5 pNOtrk:  9.5 pNOsig:  9.4  pNOok:  0.1   pNObyVmax  td:  88.9 ts:   6.9 TY:   4.2 
+
+iii inv/inv-sbt-track-v02-200001.200012.6.txt
+al 2000  N:   459.0      ptrk: 89.3 pNOtrk: 10.7 pNOsig:  8.1  pNOok:  2.6   pNObyVmax  td:  57.1 ts:  32.7 TY:  10.2 
+ep 2000  N:   413.0      ptrk: 94.9 pNOtrk:  5.1 pNOsig:  5.1  pNOok:  0.0   pNObyVmax  td:  57.1 ts:  42.9 TY:   0.0 
+io 2000  N:    87.0      ptrk: 96.6 pNOtrk:  3.4 pNOsig:  3.4  pNOok:  0.0   pNObyVmax  td:  33.3 ts:  66.7 TY:   0.0 
+sh 2000  N:   832.0      ptrk: 97.7 pNOtrk:  2.3 pNOsig:  2.3  pNOok:  0.0   pNObyVmax  td:  73.7 ts:  26.3 TY:   0.0 
+wp 2000  N:   852.0      ptrk: 94.5 pNOtrk:  5.5 pNOsig:  5.4  pNOok:  0.1   pNObyVmax  td:  70.2 ts:  21.3 TY:   8.5 
+
+iii inv/inv-sbt-track-v02-200101.200112.6.txt
+al 2001  N:   481.0      ptrk: 91.7 pNOtrk:  8.3 pNOsig:  5.6  pNOok:  2.7   pNObyVmax  td:  32.5 ts:  52.5 TY:  15.0 
+ep 2001  N:   371.0      ptrk: 94.3 pNOtrk:  5.7 pNOsig:  5.7  pNOok:  0.0   pNObyVmax  td:  71.4 ts:  28.6 TY:   0.0 
+io 2001  N:    88.0      ptrk: 96.6 pNOtrk:  3.4 pNOsig:  3.4  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2001  N:   592.0      ptrk: 98.5 pNOtrk:  1.5 pNOsig:  1.5  pNOok:  0.0   pNObyVmax  td:  44.4 ts:  44.4 TY:  11.1 
+wp 2001  N:   921.0      ptrk: 96.1 pNOtrk:  3.9 pNOsig:  3.8  pNOok:  0.1   pNObyVmax  td:  61.1 ts:  27.8 TY:  11.1 
+
+iii inv/inv-sbt-track-v01-200201.200212.6.txt
+al 2002  N:   380.0      ptrk: 91.1 pNOtrk:  8.9 pNOsig:  7.4  pNOok:  1.6   pNObyVmax  td:  61.8 ts:  35.3 TY:   2.9 
+ep 2002  N:   463.0      ptrk: 95.5 pNOtrk:  4.5 pNOsig:  4.3  pNOok:  0.2   pNObyVmax  td:  61.9 ts:  33.3 TY:   4.8 
+io 2002  N:    78.0      ptrk: 97.4 pNOtrk:  2.6 pNOsig:  2.6  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2002  N:   632.0      ptrk: 96.4 pNOtrk:  3.6 pNOsig:  3.6  pNOok:  0.0   pNObyVmax  td:  52.2 ts:  43.5 TY:   4.3 
+wp 2002  N:   883.0      ptrk: 95.5 pNOtrk:  4.5 pNOsig:  4.5  pNOok:  0.0   pNObyVmax  td:  75.0 ts:  12.5 TY:  12.5 
+
+iii inv/inv-sbt-track-v01-200301.200312.6.txt
+al 2003  N:   576.0      ptrk: 91.1 pNOtrk:  8.9 pNOsig:  7.5  pNOok:  1.4   pNObyVmax  td:  54.9 ts:  31.4 TY:  13.7 
+ep 2003  N:   429.0      ptrk: 97.7 pNOtrk:  2.3 pNOsig:  2.3  pNOok:  0.0   pNObyVmax  td:  80.0 ts:  20.0 TY:   0.0 
+io 2003  N:    99.0      ptrk: 97.0 pNOtrk:  3.0 pNOsig:  3.0  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2003  N:   982.0      ptrk: 96.7 pNOtrk:  3.3 pNOsig:  3.3  pNOok:  0.0   pNObyVmax  td:  46.9 ts:  34.4 TY:  18.8 
+wp 2003  N:   890.0      ptrk: 94.9 pNOtrk:  5.1 pNOsig:  5.1  pNOok:  0.0   pNObyVmax  td:  53.3 ts:  20.0 TY:  26.7 
+
+iii inv/inv-sbt-track-v01-200401.200412.6.txt
+al 2004  N:   585.0      ptrk: 88.7 pNOtrk: 11.3 pNOsig:  9.6  pNOok:  1.7   pNObyVmax  td:  45.5 ts:  39.4 TY:  15.2 
+ep 2004  N:   381.0      ptrk: 94.2 pNOtrk:  5.8 pNOsig:  5.8  pNOok:  0.0   pNObyVmax  td:  81.8 ts:  13.6 TY:   4.5 
+io 2004  N:   147.0      ptrk: 94.6 pNOtrk:  5.4 pNOsig:  5.4  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2004  N:   682.0      ptrk: 98.8 pNOtrk:  1.2 pNOsig:  1.0  pNOok:  0.1   pNObyVmax  td:  50.0 ts:  37.5 TY:  12.5 
+wp 2004  N:  1067.0      ptrk: 94.2 pNOtrk:  5.8 pNOsig:  5.5  pNOok:  0.3   pNObyVmax  td:  58.1 ts:  32.3 TY:   9.7 
+
+iii inv/inv-sbt-track-v01-200501.200512.6.txt
+al 2005  N:   862.0      ptrk: 93.6 pNOtrk:  6.4 pNOsig:  5.0  pNOok:  1.4   pNObyVmax  td:  60.0 ts:  36.4 TY:   3.6 
+ep 2005  N:   456.0      ptrk: 95.4 pNOtrk:  4.6 pNOsig:  4.6  pNOok:  0.0   pNObyVmax  td:  81.0 ts:  19.0 TY:   0.0 
+io 2005  N:   168.0      ptrk: 93.5 pNOtrk:  6.5 pNOsig:  6.5  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2005  N:   650.0      ptrk: 98.0 pNOtrk:  2.0 pNOsig:  2.0  pNOok:  0.0   pNObyVmax  td:  76.9 ts:  23.1 TY:   0.0 
+wp 2005  N:   735.0      ptrk: 96.9 pNOtrk:  3.1 pNOsig:  3.1  pNOok:  0.0   pNObyVmax  td:  73.9 ts:  21.7 TY:   4.3 
+
+iii inv/inv-sbt-track-v01-200601.200612.6.txt
+al 2006  N:   392.0      ptrk: 93.1 pNOtrk:  6.9 pNOsig:  4.8  pNOok:  2.0   pNObyVmax  td:  40.7 ts:  33.3 TY:  25.9 
+ep 2006  N:   684.0      ptrk: 95.3 pNOtrk:  4.7 pNOsig:  4.5  pNOok:  0.1   pNObyVmax  td:  84.4 ts:  12.5 TY:   3.1 
+io 2006  N:   117.0      ptrk: 95.7 pNOtrk:  4.3 pNOsig:  4.3  pNOok:  0.0   pNObyVmax  td:  80.0 ts:  20.0 TY:   0.0 
+sh 2006  N:   622.0      ptrk: 95.3 pNOtrk:  4.7 pNOsig:  4.7  pNOok:  0.0   pNObyVmax  td:  72.4 ts:  24.1 TY:   3.4 
+wp 2006  N:   774.0      ptrk: 96.4 pNOtrk:  3.6 pNOsig:  3.5  pNOok:  0.1   pNObyVmax  td:  78.6 ts:  10.7 TY:  10.7 
+
+iii inv/inv-sbt-track-v03-200701.200712.6.txt
+al 2007  N:   351.0      ptrk: 93.4 pNOtrk:  6.6 pNOsig:  6.0  pNOok:  0.6   pNObyVmax  td:  73.9 ts:  26.1 TY:   0.0 
+ep 2007  N:   378.0      ptrk: 97.4 pNOtrk:  2.6 pNOsig:  2.6  pNOok:  0.0   pNObyVmax  td:  90.0 ts:  10.0 TY:   0.0 
+io 2007  N:   121.0      ptrk: 93.4 pNOtrk:  6.6 pNOsig:  6.6  pNOok:  0.0   pNObyVmax  td:  75.0 ts:  25.0 TY:   0.0 
+sh 2007  N:   613.0      ptrk: 97.4 pNOtrk:  2.6 pNOsig:  2.6  pNOok:  0.0   pNObyVmax  td:  56.2 ts:  37.5 TY:   6.2 
+wp 2007  N:   527.0      ptrk: 95.4 pNOtrk:  4.6 pNOsig:  4.2  pNOok:  0.4   pNObyVmax  td:  54.2 ts:  29.2 TY:  16.7 
+
+iii inv/inv-sbt-track-v01-200801.200812.6.txt
+al 2008  N:   502.0      ptrk: 93.0 pNOtrk:  7.0 pNOsig:  4.8  pNOok:  2.2   pNObyVmax  td:  54.3 ts:  28.6 TY:  17.1 
+ep 2008  N:   523.0      ptrk: 94.8 pNOtrk:  5.2 pNOsig:  5.2  pNOok:  0.0   pNObyVmax  td:  88.9 ts:  11.1 TY:   0.0 
+io 2008  N:   104.0      ptrk: 96.2 pNOtrk:  3.8 pNOsig:  3.8  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2008  N:   668.0      ptrk: 98.8 pNOtrk:  1.2 pNOsig:  1.2  pNOok:  0.0   pNObyVmax  td:  75.0 ts:  25.0 TY:   0.0 
+wp 2008  N:   541.0      ptrk: 96.9 pNOtrk:  3.1 pNOsig:  3.1  pNOok:  0.0   pNObyVmax  td:  47.1 ts:  52.9 TY:   0.0 
+
+iii inv/inv-sbt-track-v02-200901.200912.6.txt
+al 2009  N:   225.0      ptrk: 82.7 pNOtrk: 17.3 pNOsig: 13.3  pNOok:  4.0   pNObyVmax  td:  71.8 ts:  17.9 TY:  10.3 
+ep 2009  N:   571.0      ptrk: 92.6 pNOtrk:  7.4 pNOsig:  7.4  pNOok:  0.0   pNObyVmax  td:  83.3 ts:  14.3 TY:   2.4 
+io 2009  N:    59.0      ptrk: 94.9 pNOtrk:  5.1 pNOsig:  5.1  pNOok:  0.0   pNObyVmax  td:   0.0 ts: 100.0 TY:   0.0 
+sh 2009  N:   632.0      ptrk: 97.6 pNOtrk:  2.4 pNOsig:  2.4  pNOok:  0.0   pNObyVmax  td:  66.7 ts:  33.3 TY:   0.0 
+wp 2009  N:   682.0      ptrk: 97.5 pNOtrk:  2.5 pNOsig:  2.3  pNOok:  0.1   pNObyVmax  td:  23.5 ts:  52.9 TY:  23.5 
+
+iii inv/inv-sbt-track-v02-201001.201012.6.txt
+al 2010  N:   592.0      ptrk: 94.3 pNOtrk:  5.7 pNOsig:  4.6  pNOok:  1.2   pNObyVmax  td:  38.2 ts:  41.2 TY:  20.6 
+ep 2010  N:   219.0      ptrk: 96.3 pNOtrk:  3.7 pNOsig:  3.7  pNOok:  0.0   pNObyVmax  td:  87.5 ts:  12.5 TY:   0.0 
+io 2010  N:   110.0      ptrk: 98.2 pNOtrk:  1.8 pNOsig:  1.8  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2010  N:   557.0      ptrk: 95.5 pNOtrk:  4.5 pNOsig:  4.5  pNOok:  0.0   pNObyVmax  td:  84.0 ts:  12.0 TY:   4.0 
+wp 2010  N:   407.0      ptrk: 95.8 pNOtrk:  4.2 pNOsig:  4.2  pNOok:  0.0   pNObyVmax  td:  88.2 ts:   5.9 TY:   5.9 
+
+iii inv/inv-sbt-track-v02-201101.201112.6.txt
+al 2011  N:   484.0      ptrk: 88.4 pNOtrk: 11.6 pNOsig:  7.6  pNOok:  3.9   pNObyVmax  td:  30.4 ts:  57.1 TY:  12.5 
+ep 2011  N:   354.0      ptrk: 95.8 pNOtrk:  4.2 pNOsig:  4.2  pNOok:  0.0   pNObyVmax  td:  93.3 ts:   6.7 TY:   0.0 
+io 2011  N:   100.0      ptrk: 93.0 pNOtrk:  7.0 pNOsig:  7.0  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2011  N:   469.0      ptrk: 97.4 pNOtrk:  2.6 pNOsig:  2.6  pNOok:  0.0   pNObyVmax  td:  25.0 ts:  41.7 TY:  33.3 
+wp 2011  N:   658.0      ptrk: 96.0 pNOtrk:  4.0 pNOsig:  3.6  pNOok:  0.3   pNObyVmax  td:  65.4 ts:  19.2 TY:  15.4 
+
+iii inv/inv-sbt-track-v02-201201.201212.6.txt
+al 2012  N:   591.0      ptrk: 93.2 pNOtrk:  6.8 pNOsig:  5.4  pNOok:  1.4   pNObyVmax  td:  62.5 ts:  30.0 TY:   7.5 
+ep 2012  N:   459.0      ptrk: 96.9 pNOtrk:  3.1 pNOsig:  3.1  pNOok:  0.0   pNObyVmax  td:  85.7 ts:  14.3 TY:   0.0 
+io 2012  N:    52.0      ptrk: 94.2 pNOtrk:  5.8 pNOsig:  5.8  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2012  N:   549.0      ptrk: 98.9 pNOtrk:  1.1 pNOsig:  1.1  pNOok:  0.0   pNObyVmax  td:  16.7 ts:  83.3 TY:   0.0 
+wp 2012  N:   720.0      ptrk: 96.7 pNOtrk:  3.3 pNOsig:  2.8  pNOok:  0.6   pNObyVmax  td:  41.7 ts:  58.3 TY:   0.0 
+
+iii inv/inv-sbt-track-v03-201301.201312.6.txt
+al 2013  N:   323.0      ptrk: 86.7 pNOtrk: 13.3 pNOsig: 12.7  pNOok:  0.6   pNObyVmax  td:  62.8 ts:  37.2 TY:   0.0 
+ep 2013  N:   463.0      ptrk: 95.2 pNOtrk:  4.8 pNOsig:  4.8  pNOok:  0.0   pNObyVmax  td:  81.8 ts:  18.2 TY:   0.0 
+io 2013  N:   146.0      ptrk: 96.6 pNOtrk:  3.4 pNOsig:  3.4  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2013  N:   677.0      ptrk: 97.6 pNOtrk:  2.4 pNOsig:  2.4  pNOok:  0.0   pNObyVmax  td:  68.8 ts:  25.0 TY:   6.2 
+wp 2013  N:   740.0      ptrk: 95.8 pNOtrk:  4.2 pNOsig:  3.9  pNOok:  0.3   pNObyVmax  td:  58.1 ts:  22.6 TY:  19.4 
+
+iii inv/inv-sbt-track-v02-201401.201412.6.txt
+al 2014  N:   250.0      ptrk: 90.8 pNOtrk:  9.2 pNOsig:  6.8  pNOok:  2.4   pNObyVmax  td:  56.5 ts:  13.0 TY:  30.4 
+ep 2014  N:   770.0      ptrk: 97.1 pNOtrk:  2.9 pNOsig:  2.9  pNOok:  0.0   pNObyVmax  td:  86.4 ts:   4.5 TY:   9.1 
+io 2014  N:   108.0      ptrk: 91.7 pNOtrk:  8.3 pNOsig:  8.3  pNOok:  0.0   pNObyVmax  td:  88.9 ts:  11.1 TY:   0.0 
+sh 2014  N:   557.0      ptrk: 96.8 pNOtrk:  3.2 pNOsig:  3.2  pNOok:  0.0   pNObyVmax  td:  72.2 ts:  27.8 TY:   0.0 
+wp 2014  N:   609.0      ptrk: 97.0 pNOtrk:  3.0 pNOsig:  3.0  pNOok:  0.0   pNObyVmax  td:  77.8 ts:  22.2 TY:   0.0 
+
+iii inv/inv-sbt-track-v01-201501.201512.6.txt
+al 2015  N:   301.0      ptrk: 95.3 pNOtrk:  4.7 pNOsig:  3.3  pNOok:  1.3   pNObyVmax  td:  50.0 ts:  35.7 TY:  14.3 
+ep 2015  N:   992.0      ptrk: 96.5 pNOtrk:  3.5 pNOsig:  3.0  pNOok:  0.5   pNObyVmax  td:  71.4 ts:  25.7 TY:   2.9 
+io 2015  N:   102.0      ptrk: 96.1 pNOtrk:  3.9 pNOsig:  3.9  pNOok:  0.0   pNObyVmax  td:  75.0 ts:  25.0 TY:   0.0 
+sh 2015  N:   618.0      ptrk: 96.6 pNOtrk:  3.4 pNOsig:  3.4  pNOok:  0.0   pNObyVmax  td:  57.1 ts:  19.0 TY:  23.8 
+wp 2015  N:   894.0      ptrk: 97.9 pNOtrk:  2.1 pNOsig:  2.1  pNOok:  0.0   pNObyVmax  td:  57.9 ts:  36.8 TY:   5.3 
+
+iii inv/inv-sbt-track-v01-201601.201612.6.txt
+al 2016  N:   507.0      ptrk: 94.1 pNOtrk:  5.9 pNOsig:  4.3  pNOok:  1.6   pNObyVmax  td:  53.3 ts:  43.3 TY:   3.3 
+ep 2016  N:   717.0      ptrk: 92.7 pNOtrk:  7.3 pNOsig:  7.3  pNOok:  0.0   pNObyVmax  td:  98.1 ts:   1.9 TY:   0.0 
+io 2016  N:   107.0      ptrk: 98.1 pNOtrk:  1.9 pNOsig:  1.9  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2016  N:   486.0      ptrk: 98.8 pNOtrk:  1.2 pNOsig:  1.2  pNOok:  0.0   pNObyVmax  td:  50.0 ts:  50.0 TY:   0.0 
+wp 2016  N:   611.0      ptrk: 95.3 pNOtrk:  4.7 pNOsig:  4.1  pNOok:  0.7   pNObyVmax  td:  62.1 ts:  27.6 TY:  10.3 
+
+iii inv/inv-sbt-track-v01-201701.201712.6.txt
+al 2017  N:   562.0      ptrk: 93.6 pNOtrk:  6.4 pNOsig:  4.3  pNOok:  2.1   pNObyVmax  td:  36.1 ts:  52.8 TY:  11.1 
+ep 2017  N:   465.0      ptrk: 96.6 pNOtrk:  3.4 pNOsig:  3.4  pNOok:  0.0   pNObyVmax  td:  75.0 ts:  25.0 TY:   0.0 
+io 2017  N:    55.0      ptrk: 98.2 pNOtrk:  1.8 pNOsig:  1.8  pNOok:  0.0   pNObyVmax  td:   0.0 ts: 100.0 TY:   0.0 
+sh 2017  N:   421.0      ptrk: 96.7 pNOtrk:  3.3 pNOsig:  3.3  pNOok:  0.0   pNObyVmax  td:  78.6 ts:  21.4 TY:   0.0 
+wp 2017  N:   731.0      ptrk: 93.4 pNOtrk:  6.6 pNOsig:  6.0  pNOok:  0.5   pNObyVmax  td:  68.8 ts:  25.0 TY:   6.2 
+
+iii inv/inv-sbt-track-v01-201801.201812.6.txt
+al 2018  N:   568.0      ptrk: 91.9 pNOtrk:  8.1 pNOsig:  4.8  pNOok:  3.3   pNObyVmax  td:  41.3 ts:  37.0 TY:  21.7 
+ep 2018  N:   768.0      ptrk: 96.1 pNOtrk:  3.9 pNOsig:  3.8  pNOok:  0.1   pNObyVmax  td:  43.3 ts:  50.0 TY:   6.7 
+io 2018  N:   146.0      ptrk: 98.6 pNOtrk:  1.4 pNOsig:  1.4  pNOok:  0.0   pNObyVmax  td:   0.0 ts: 100.0 TY:   0.0 
+sh 2018  N:   814.0      ptrk: 98.5 pNOtrk:  1.5 pNOsig:  1.4  pNOok:  0.1   pNObyVmax  td:  25.0 ts:  58.3 TY:  16.7 
+wp 2018  N:   928.0      ptrk: 96.9 pNOtrk:  3.1 pNOsig:  2.8  pNOok:  0.3   pNObyVmax  td:  27.6 ts:  58.6 TY:  13.8 
+
+iii inv/inv-sbt-track-v01-201901.201912.6.txt
+al 2019  N:   435.0      ptrk: 93.3 pNOtrk:  6.7 pNOsig:  4.1  pNOok:  2.5   pNObyVmax  td:  37.9 ts:  41.4 TY:  20.7 
+ep 2019  N:   458.0      ptrk: 90.4 pNOtrk:  9.6 pNOsig:  9.6  pNOok:  0.0   pNObyVmax  td:  79.5 ts:  20.5 TY:   0.0 
+io 2019  N:   164.0      ptrk: 97.6 pNOtrk:  2.4 pNOsig:  2.4  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2019  N:   714.0      ptrk: 98.5 pNOtrk:  1.5 pNOsig:  1.5  pNOok:  0.0   pNObyVmax  td:  36.4 ts:  63.6 TY:   0.0 
+wp 2019  N:   864.0      ptrk: 94.9 pNOtrk:  5.1 pNOsig:  4.6  pNOok:  0.5   pNObyVmax  td:  59.1 ts:  31.8 TY:   9.1 
+
+iii inv/inv-sbt-track-v01-202001.202012.6.txt
+al 2020  N:   763.0      ptrk: 95.5 pNOtrk:  4.5 pNOsig:  2.9  pNOok:  1.6   pNObyVmax  td:  44.1 ts:  38.2 TY:  17.6 
+ep 2020  N:   412.0      ptrk: 98.3 pNOtrk:  1.7 pNOsig:  1.7  pNOok:  0.0   pNObyVmax  td:  57.1 ts:  42.9 TY:   0.0 
+io 2020  N:    84.0      ptrk: 86.9 pNOtrk: 13.1 pNOsig: 13.1  pNOok:  0.0   pNObyVmax  td:  90.9 ts:   9.1 TY:   0.0 
+sh 2020  N:   617.0      ptrk: 96.3 pNOtrk:  3.7 pNOsig:  3.7  pNOok:  0.0   pNObyVmax  td:  39.1 ts:  39.1 TY:  21.7 
+wp 2020  N:   532.0      ptrk: 95.3 pNOtrk:  4.7 pNOsig:  3.9  pNOok:  0.8   pNObyVmax  td:  56.0 ts:  36.0 TY:   8.0 
+
+iii inv/inv-sbt-track-v01-202101.202112.6.txt
+al 2021  N:   517.0      ptrk: 94.4 pNOtrk:  5.6 pNOsig:  3.7  pNOok:  1.9   pNObyVmax  td:  31.0 ts:  48.3 TY:  20.7 
+ep 2021  N:   426.0      ptrk: 96.2 pNOtrk:  3.8 pNOsig:  3.8  pNOok:  0.0   pNObyVmax  td:  81.2 ts:  18.8 TY:   0.0 
+io 2021  N:    93.0      ptrk: 98.9 pNOtrk:  1.1 pNOsig:  1.1  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2021  N:   624.0      ptrk: 97.4 pNOtrk:  2.6 pNOsig:  2.6  pNOok:  0.0   pNObyVmax  td:  50.0 ts:  50.0 TY:   0.0 
+wp 2021  N:   698.0      ptrk: 95.8 pNOtrk:  4.2 pNOsig:  4.2  pNOok:  0.0   pNObyVmax  td:  72.4 ts:  17.2 TY:  10.3 
+
+iii inv/inv-sbt-track-v01-202201.202212.6.txt
+al 2022  N:   431.0      ptrk: 95.8 pNOtrk:  4.2 pNOsig:  3.5  pNOok:  0.7   pNObyVmax  td:  55.6 ts:  11.1 TY:  33.3 
+ep 2022  N:   563.0      ptrk: 97.3 pNOtrk:  2.7 pNOsig:  2.7  pNOok:  0.0   pNObyVmax  td:  73.3 ts:  26.7 TY:   0.0 
+io 2022  N:    84.0      ptrk: 96.4 pNOtrk:  3.6 pNOsig:  3.6  pNOok:  0.0   pNObyVmax  td:  66.7 ts:  33.3 TY:   0.0 
+sh 2022  N:   701.0      ptrk: 97.4 pNOtrk:  2.6 pNOsig:  2.6  pNOok:  0.0   pNObyVmax  td:  94.4 ts:   5.6 TY:   0.0 
+wp 2022  N:   553.0      ptrk: 92.4 pNOtrk:  7.6 pNOsig:  6.7  pNOok:  0.9   pNObyVmax  td:  61.9 ts:  28.6 TY:   9.5 
+
+iii inv/inv-sbt-track-v00-202301.202312.6.txt
+al 2023  N:   724.0      ptrk: 93.4 pNOtrk:  6.6 pNOsig:  5.4  pNOok:  1.2   pNObyVmax  td:  68.8 ts:  27.1 TY:   4.2 
+ep 2023  N:   513.0      ptrk: 94.5 pNOtrk:  5.5 pNOsig:  5.5  pNOok:  0.0   pNObyVmax  td:  67.9 ts:  14.3 TY:  17.9 
+io 2023  N:   134.0      ptrk: 97.8 pNOtrk:  2.2 pNOsig:  2.2  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2023  N:   597.0      ptrk: 96.1 pNOtrk:  3.9 pNOsig:  3.9  pNOok:  0.0   pNObyVmax  td:  43.5 ts:  43.5 TY:  13.0 
+wp 2023  N:   580.0      ptrk: 94.8 pNOtrk:  5.2 pNOsig:  4.8  pNOok:  0.3   pNObyVmax  td:  76.7 ts:  16.7 TY:   6.7 
+
+iii inv/inv-sbt-track-v00-202401.202412.6.txt
+al 2024  N:   432.0      ptrk: 95.8 pNOtrk:  4.2 pNOsig:  3.7  pNOok:  0.5   pNObyVmax  td:  61.1 ts:  11.1 TY:  27.8 
+ep 2024  N:   266.0      ptrk: 99.2 pNOtrk:  0.8 pNOsig:  0.8  pNOok:  0.0   pNObyVmax  td:  50.0 ts:  50.0 TY:   0.0 
+io 2024  N:    67.0      ptrk: 97.0 pNOtrk:  3.0 pNOsig:  3.0  pNOok:  0.0   pNObyVmax  td: 100.0 ts:   0.0 TY:   0.0 
+sh 2024  N:   548.0      ptrk: 96.2 pNOtrk:  3.8 pNOsig:  3.8  pNOok:  0.0   pNObyVmax  td:  52.4 ts:  28.6 TY:  19.0 
+wp 2024  N:   651.0      ptrk: 96.9 pNOtrk:  3.1 pNOsig:  2.5  pNOok:  0.6   pNObyVmax  td:  60.0 ts:  35.0 TY:   5.0 
