@@ -9,8 +9,8 @@ I.load_all_storms()
 
 ddir='/w21/dat/tc/ib3/'
 
-byear=1945
-eyear=1950
+byear=1940
+eyear=1944
 years=range(byear,eyear+1)
 
 for year in years:
