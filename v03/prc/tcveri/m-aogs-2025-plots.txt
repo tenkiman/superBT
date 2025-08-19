@@ -1,0 +1,10 @@
+688  0727 18:22:48 p-vdplot.py -y 2007.2024 -b w -T tera500,ecop00 -o 72 -X -l z0012-tera5-ecop-homo -p gainxype -1 "WPAC 2007-2024 72-h PE %improve ERA5 v ECMWF OPS" -2 "ERA5 model circa IFS 2016" -c wpac-tau72-pimprove-era5-ecmwfop-2007-2024
+547  0727 19:30:43 p-vdplot.py -y 2007.2024 -b w -T tera5,ecop -o 72 -p pe-line -X -1 "WPAC 2007-2034 72-h PE ERA5 v ECMWF OPS" -2 "ERA5 model circa IFS 2016" -c wpac-tau72-pe-era5-ecmwfop-2007-2024
+550  0727 19:32:08 p-vdplot.py -y 1945.2024 -b w -T clim,tera5 -o 72 -p pe-line -X -1 "WPAC 1945-2024 72-h PE ERA5 v CLIM" -c wpac-tau72-pe-era5-clim-1945-2024
+574  0727 19:47:32 p-vdplot.py -y 2007.2024 -b w -T tera500,ecop00 -o 72 -X -l z0012-tera5-ecop-homo -p gainxype -1 "WPAC 2007-2024 72-h PE %improve ERA5 v ECMWF OPS" -2 "ERA5 model circa IFS 2016" -c wpac-tau72-pimprove-era5-ecmwfop-2007-2024
+
+560  0727 19:38:16 cp plt/pod.wpac-tau00-pod-era5-1945-2024.png ~/pCloudDrive/GMU/TALKS/20250729\ -\ AOGS\ 2025/plt/.
+562  0727 19:39:02 cp plt/pe-line.wpac-tau72-pe-era5-ecmwfop-1945-2024.png ~/pCloudDrive/GMU/TALKS/20250729\ -\ AOGS\ 2025/plt/.
+578  0727 19:51:21 cp plt/gainxype.wpac-tau72-pimprove-era5-ecmwfop-2007-2024.png ~/pCloudDrive/GMU/TALKS/20250729\ -\ AOGS\ 2025/plt/.
+587  0727 21:05:56 cp plt/pe-line.wpac-tau72-pe-era5-ecop-2007-2024.png ~/pCloudDrive/GMU/TALKS/20250729\ -\ AOGS\ 2025/plt/
+

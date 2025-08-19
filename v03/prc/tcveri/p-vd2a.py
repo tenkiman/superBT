@@ -21,7 +21,7 @@ this is for the super bt project... consistent aids 1979-2021
     if(phrOpt == 6):
         filtOpt='z0618'
 
-    yearEnd=2021
+    yearEnd=2024
     yearClip=2017
     yearClp5=2019
     

@@ -58,7 +58,6 @@ if(verb): print CL.estr
 
 md3=Mdeck3(doBT=0,doMd3Only=1)
 
-
 if(stmopt != None):
     
     stmids=[]
@@ -73,11 +72,12 @@ if(stmopt != None):
             print 'mpath:   ',mpath
             print 'mpathBT: ',mpathBT
             if(mpath9X != None): print 'mpath9X: ',mpath9X
-        
-        
 
     sys.exit()
     
+
+# -- mmmmmmmmmmmmmmmmmmmmmmmmm main
+#
 isBT=0
 isMRG=0
 isDEV=0

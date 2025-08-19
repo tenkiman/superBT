@@ -2,6 +2,8 @@
 
 from sBT import *
 
+abdirAtcfW21='/w21/dat/tc/adeck/atcf-form'
+
 def getAdecksStmid(tstmid,redoTrk=0,dryRun=0,
                    ropt='',qropt='quiet',verb=0,override=0):
 
@@ -225,6 +227,7 @@ class TmtrkCmdLine(CmdLine):
             'stmopt':           ['S:',None,'a','stmopt'],
             'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
             'redoTrk':          ['R',0,1,' run tracker for missing dtgs'],
+            'rsyncOnly':        ['s',0,1,' only do rsync to /w21/dat/tc/'],
             'dryRun':           ['D',0,1,' do a dryRun'],
             
         }
@@ -248,7 +251,14 @@ dtgopt=yearOpt=None
 
 istmopt=stmopt
 stmopts=getStmopts(stmopt)
-    
+
+if(rsyncOnly):
+
+    cmd="rsync -alv %s/ %s/"%(abdirAtcf,abdirAtcfW21)
+    mf.runcmd(cmd,ropt)
+    sys.exit()
+
+
 MF.sTimer('atcf-ALL-%s'%(istmopt))
 for stmopt in stmopts:
     
@@ -277,6 +287,11 @@ for stmopt in stmopts:
     MF.dTimer('atcf-stmopt-%s'%(stmopt))
                 
 MF.dTimer('atcf-ALL-%s'%(istmopt))
+
+# -- rsync from sbt to /w21/dat/tc/adeck/atcf-form/
+#
+cmd="rsync -alv %s/ %s/"%(abdirAtcf,abdirAtcfW21)
+mf.runcmd(cmd,ropt)
         
 sys.exit()
 
