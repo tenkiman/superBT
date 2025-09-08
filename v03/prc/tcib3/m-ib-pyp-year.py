@@ -1,26 +1,130 @@
 #!/usr/bin/env python3
 
-from sBT import *
-from ibtracs import Ibtracs
-import pickle
+from ibvm import *
 
-I = Ibtracs()
-I.load_all_storms()
+usePy=1
+
+if(not(usePy)):
+    MF.sTimer('load-ib')
+    I.load_all_storms()
+    MF.dTimer('load-ib')
 
 ddir='/w21/dat/tc/ib3/'
 
+
 byear=1940
-eyear=1944
+
+#eyear=1944
+
+byear=1940
+eyear=2023
+
+byear=2000
+eyear=2023
+
 years=range(byear,eyear+1)
 
 for year in years:
-    
+        
     syear=str(year)
-    TCs=[tc for tc in I.storms if tc.season == year]
-    print ('year: ',year,len(TCs))
-    P=open('%s/iTC%s.pyp'%(ddir,syear),'wb')
-    pickle.dump(TCs,P)
+
+    # -- use existing pickle dump by year
+    if(usePy):
+
+        P=open('%s/iTC%s.pyp'%(ddir,syear),'rb')
+        TCs=pickle.load(P)
+        P.close()
+
+    else:
+    
+        TCs=[tc for tc in I.storms if tc.season == year]
+        print ('year: ',year,len(TCs))
+        P=open('%s/iTC%s.pyp'%(ddir,syear),'wb')
+        pickle.dump(TCs,P)
+        P.close()
+
+    nTCs=len(TCs)
+    atcfID={}
+    noatcfID={}
+    for n in range(0,nTCs):
+        tc=TCs[n]
+        print('nnn',year,n,tc)
+        (sid,sid2,astmid)=convertIb2AtcfId(tc)
+        if(verb): print('tc sid',n,sid,sid2,tc.ID,tc.ATCF_ID,tc.genesis)
+        #continue
+        #rc=getibTCs4aTCs(aTCs,year,basin,tstmids)
+        #sys.exit()
+        #continue
+        if(tc.ATCF_ID != None):
+            stmid=getStm1id4Atcfid(tc.ATCF_ID,sid)
+            if(verb): print ('atcf-stmid: ',stmid)
+            #if(domd3):
+                #(rc,md3trk)=md3.getMd3track(stmid,dobt=1,verb=verb)
+                #dtgs=list(md3trk.keys())
+                #print (dtgs)
+                #dtgs.sort()
+                #rc=md3trk[dtgs[0]]
+                #print ('rc: ',rc)
+                
+            #(lat,lon,mslp,wind,time)=getITCvars(tc)
+            #print(time)
+            
+            #sys.exit()
+            ##stmid="%2s%s.%s"
+            atcfID[n]=tc
+            
+        else:
+            noatcfID[n]=tc
+            
+        if(verb):    
+            print('n: basin : subbasin: ',n,tc.ATCF_ID,tc.basin,tc.subbasin,'sid: %s.%d'%(sid,year))
+    
+    # -- out as dict with stmid as key
+    #
+    
+    oTCs={}
+    
+    # -- first the ones with ATCF_ID
+    #
+    kk=atcfID.keys()
+    for k in kk:
+        tc=atcfID[k]
+        (sid,sid2,astmid)=convertIb2AtcfId(tc)
+        oTCs[astmid]=tc
+        print ('yyyy: ',k,sid,sid2,astmid)
+
+    # -- now the ones with out a stmid... start at 51 in each basin
+    #
+    sids=[]
+    snums={}
+    kk=noatcfID.keys()
+    for k in kk:
+        tc=noatcfID[k]
+        (sid,sid2,astmid)=convertIb2AtcfId(tc)
+        sids.append(sid)
+        MF.appendDictList(snums,sid,k)
+        
+    sids=mf.uniq(sids)
+    for sid in sids:
+        bsnums=snums[sid]
+        inum=51
+        for bsnum in bsnums:
+            tc=noatcfID[bsnum]
+            byear=tc.season
+            (sid,sid2,astmid)=convertIb2AtcfId(tc)
+            bstmid="%s%s.%s"%(inum,sid,byear)
+            oTCs[bstmid]=tc
+            print('nnnn: ',bsnum,sid,sid2,bstmid)
+            inum=inum+1
+            
+
+    # -- now pickle dump
+    #
+    P=open('%s/iTC%s-stmid.pyp'%(ddir,syear),'wb')
+    pickle.dump(oTCs,P)
     P.close()
+            
+
 
 #I.storms
 #I.possible_basins

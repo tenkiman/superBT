@@ -1,181 +1,150 @@
 #!/usr/bin/env python3
 
-from sBT import *
-from ibtracs import Ibtracs
-import pickle
+from ibvm import *
 
-I = Ibtracs()
-print(I.possible_basins)
-print(I.possible_subbasins)
+        
+class TmtrkCmdLine(CmdLine):
 
-def convertIb2AtcfId(tc):
+    def __init__(self,argv=sys.argv):
+
+        if(argv == None): argv=sys.argv
+
+        self.argv=argv
+        self.argopts={
+            #1:['yearopt',    'yearopt YYYY or BYYYY.EYYYY'],
+        }
+
+
+        self.options={
+            'override':         ['O',0,1,'override'],
+            'verb':             ['V',0,1,'verb=1 is verbose'],
+            'yearOpt':          ['Y:',None,'a','yearOpt -- to select byear-eyear range default is 2007-2022 in sBTvars.py'],
+            'stmopt':           ['S:',None,'a',' stmid target'],
+            'sumonly':          ['s',0,1,'list stmids only'],
+            'dtgopt':           ['d:',None,'a',' dtgopt'],
+            'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
+        }
+
+        self.purpose="""
+an 'ls' or listing app for 'mdeck3' data two filter options are available:
+-S by storm
+-d by dtg or date-time-group or YYYYMMDDHH"""
+
+        self.examples='''
+%s -S w.19 -s       # list just the summary for ALL WPAC storms in 2019 including 9Xdev and 9Xnon and NN
+%s -S w.19 -s -B    # list the summary for only numbered or NN WPAC storms in 2019 w/o summary of 9Xdev
+%s -S 20w.19        # list all posits for supertyphoon HAGIBIS -- the largest TC to hit Tokyo
+%s -S l.18-22 -s -B # list all atLANTic storms 2018-2022
+'''
+
+#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+#
+
+argv=sys.argv
+CL=TmtrkCmdLine(argv=argv)
+CL.CmdLine()
+exec(CL.estr)
+if(verb): print(CL.estr)
+
+byear=1940
+eyear=2023
+
+# -- get the iTCs tcnames for MakeStmList()
+#
+
+PA=open('%s/iTC-%s-%s.pyp'%(ddir,byear,eyear),'rb')
+aTCs=pickle.load(PA)
+PA.close()
+astmids=list(aTCs.keys())
+
+PN=open('%s/iTC-tcnamesAll.pyp'%(ddir),'rb')
+tcnamesAll=pickle.load(PN)
+PN.close()
+astmids=list(aTCs.keys())
+
+# -- get the ib3 stmids
+#
+
+stmids=MakeStmList(stmopt,tcnamesAll,verb=0)
+nstmids=len(stmids)
+
+if(nstmids == 0):
+    print('WWW no ib3 stms for stmopt %s ... press ...'%(stmopt))
+    sys.exit()
+
+# -- get md3 stmids
+#
+(domd3,basin,year,tstmid)=getBasinYearsFromStmopt(stmopt)
+print(domd3,basin,year,'tstmid:',tstmid)
+
+if(domd3):
     
-    if(tc.basin == 'NA'): 
-        sid='l'
-    elif(tc.basin == 'WP'): 
-        sid='w'
-    elif(tc.basin == 'EP'):
-        if(tc.subbasin == 'CP'): 
-            sid='c'
-        else:
-            sid='e'
+    (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)        
 
-    elif(tc.basin == 'NI'):
-        if(tc.subbasin == 'BB'): 
-            sid='b'
-        elif(tc.subbasin == 'AS'): 
-            sid='a'
-        else:
-            sid='i'
-            
-    elif(tc.basin == 'SI'): 
-        sid='s'
-    elif(tc.basin == 'SP'): 
-        sid='p'
-    elif(tc.basin == 'SA'): 
-        sid='q'
-    else:
-        print ('ooopppsss: tc.basin = ',tc.basin)
-        sys.exit()
-    return(sid)
-        
-        
-        
-        
+    doBT = 0
+    if(doBdeck2): doBT=1
+
+    if(verb): MF.sTimer('md3-load')
+    md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
+    if(verb): MF.dTimer('md3-load')
+    tstmids=md3.getMd3Stmids(stmopt,dobt=1)
+
+    years=getIntYears4oyearOpt(oyearOpt)
     
+else:
+    tstmids=None
+    md3=None
+    years=[year]
 
-#I.load_all_storms()
+print ('oooo',years)
+year=years[0]
+tcnames=GetTCnamesHash(year)
 
-ddir='/w21/dat/tc/ib3/'
+#print ('ttt---nnn',tcnames)
+stmid2tcname={}
+kk=tcnames.keys()
+otcnames={}
 
-#for tc in I.storms:
-#    print (tc.ID,tc.season)
-    
-#sb=I.possible_subbasins
-#print(sb)
-
-byear=1945
-eyear=1950
-eyear=2024
-years=range(byear,eyear+1)
-
-MF.sTimer('pyp-load')
-aTCs={}
-for year in years:
-    
-    syear=str(year)
-    #TCs=[tc for tc in I.storms if tc.season == year]
-    P=open('%s/iTC%s.pyp'%(ddir,syear),'rb')
-    TCs=pickle.load(P)
-    #print ('year: ',year,len(TCs))
-    aTCs[year]=TCs
-    P.close()
-MF.dTimer('pyp-load')
-
-year=1945
-atcfID={}
-noatcfID={}
-for tc in aTCs[year]:
-    sid=convertIb2AtcfId(tc)
-    if(tc.ATCF_ID != None):
-        MF.appendDictList(atcfID, sid, tc.ATCF_ID)
-    else:
-        MF.appendDictList(noatcfID, sid,tc.genesis )
-        
-        
-    print('basin:subbasin: ',tc.ATCF_ID,tc.basin,tc.subbasin,'sid: %s.%d'%(sid,year))
-
-kk=atcfID.keys()
-kk=mf.uniq(list(kk))
 for k in kk:
-    stm2ids=atcfID[k]
-    stm2ids.sort()
-    for stm2 in stm2ids:
-        print('k: ',k,stm2)
+    ndat="%s.%s"%(k[1].lower(),k[0])
+    nbasin=k[1][-1:].lower()
+    #print(k,nbasin)
+    nkey=(tcnames[k],nbasin)
+    otcnames[nkey]=ndat
+    
+kk=otcnames.keys()
+
+if(verb):
+    for k in kk:
+        print('ooo===',k,otcnames[k])
+
+otcs={}
+for stmid in stmids:
+    tc=aTCs[stmid.lower()]
+    tcbasin=stmid[2:3]
+    tcname=tc.name
+    md3name=''
+    md3key=(tcname,tcbasin)
+    try:
+        md3stmid=otcnames[md3key]
+        #print('ffff---',md3key,md3stmid)
+    except:
+        md3stmid=None
+    
+    if(md3stmid != None):
+        otcs[md3stmid]=tc
+    else:
+        otcs[stmid]=tc
         
-kk=noatcfID.keys()
-kk=mf.uniq(list(kk))
-for k in kk:
-    stm2ids=noatcfID[k]
-    stm2ids.sort()
-    for stm2 in stm2ids:
-        print('NO-k: ',k,stm2)
-
-
-#I.storms
-#I.possible_basins
-#I.possible_subbasins
-#print([a for a in dir(I) if not a.startswith('_')])
-#query = 'SELECT DISTINCT name,genesis FROM storms WHERE season=2005 AND basin="NA" AND lat>20 AND lat<30 AND lon>260 AND lon<280 ORDER BY genesis'
-#for row in I.db.execute(query):
-    #print(row)
-#> ('ARLENE', '2005-06-08 18:00:00')
-#> ('BRET', '2005-06-28 18:00:00')
-#> ('CINDY', '2005-07-03 18:00:00')
-#> ('DENNIS', '2005-07-04 18:00:00')
-#> ('EMILY', '2005-07-11 00:00:00')
-#> ...
-#query = 'SELECT DISTINCT name,genesis FROM storms WHERE season=2005 AND basin="NA" AND lat>20 AND lat<30 AND lon>260 AND lon<280 ORDER BY genesis'
-#rows=I.db.execute(query)
-#rows
-#print(rows)
-#I.load_all_storms()
-#TCs = [tc for tc in I.storms if tc.season == 2005]
-#import pickle as pck
-#for tc in TCs:
-         #print(tc.name)
-#TCs = [tc for tc in I.storms if tc.season == 1945]
-#for tc in TCs:
-         #print(tc.name)
-#for tc in TCs:
-         #print(tc.id)
-#tc0=TCs[0]
-#tc0
-#tc0.attr
-#tc0.ACE
-#tc0.lat
-#tc0.lon
-#tc0.wind
-#tc0.ATCF_ID
-#tc0.metadata
-#tc0.ID
-#tc0.basin
-#tc0.subbasin
-#tc0.subbasins
-#TC2005s = [tc for tc in I.storms if tc.season == 2005]
-#TC1945s = [tc for tc in I.storms if tc.season == 1945]
-#for tc in TC2005s:
-    #print tc.ID
-#for tc in TC2005s:
-    #print(tc.ID,tc.ATCF_NAME)
-#for tc in TC2005s:
-    #print(tc.ID,tc.ATCF_ID)
-#tc0=TC2005s[0]
-#tc0.subbasin
-#tc0.basin
-#tc0.basin
-#tc0.lat
-#tc0.lon
-#tc0.times
-#tc0.q
-#tc0.data_at_time()
-#tc0.to_json()
-#tc0=TC1945s[0]
-#tc0.to_json
-#tc0.lat
-#tc0.lon
-#tc0.ATCF_ID
-#tc0.ID
-#P=open('.dat/ib-1945.pyp','wb')
-#P=open('./dat/ib-1945.pyp','wb')
-#pck.dump(TC1945s,P)
-#P.close()
-#P=open('./dat/ib-1945.pyp','rb')
-#tc45s=pck.load(P)
-#tc2=tc45s[0]
-#tc2.v
-#print(len(tc45s))
-#print(I.logfile)
-#help
-#help()
-#get_ipython().run_line_magic('save', '')
+okk=list(otcs.keys())
+okk.sort()
+for ok in okk:
+    inmd3='---'
+    if(ok in tstmids):
+        inmd3='md3'
+    print ('33333-------',inmd3,ok,otcs[ok])
+    itc=otcs[ok]
+    rc=getITCvars(itc,ok,verb=verb)
+    
+sys.exit()
+    
