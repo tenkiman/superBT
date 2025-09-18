@@ -51,7 +51,6 @@ eyear=2023
 
 # -- get the iTCs tcnames for MakeStmList()
 #
-
 PA=open('%s/iTC-%s-%s.pyp'%(ddir,byear,eyear),'rb')
 aTCs=pickle.load(PA)
 PA.close()
@@ -62,10 +61,22 @@ tcnamesAll=pickle.load(PN)
 PN.close()
 astmids=list(aTCs.keys())
 
+# -- get the jtwc bd2s 
+#
+byearjt=1945
+eyearjt=2023
+PJ=open('%s/iTC-bd2-jtwc-%s-%s.pyp'%(ddir,byearjt,eyearjt),'rb')
+oBD2s=pickle.load(PJ)
+PJ.close()
+
+PMJ=open('%s/iTC-md2-jtwc-%s-%s.pyp'%(ddir,byearjt,eyearjt),'rb')
+oMD2s=pickle.load(PMJ)
+PMJ.close()
+
+
 # -- get the ib3 stmids
 #
-
-stmids=MakeStmList(stmopt,tcnamesAll,verb=0)
+stmids=MakeStmList(stmopt,tcnamesAll,verb=verb)
 nstmids=len(stmids)
 
 if(nstmids == 0):
@@ -75,32 +86,9 @@ if(nstmids == 0):
 # -- get md3 stmids
 #
 (domd3,basin,year,tstmid)=getBasinYearsFromStmopt(stmopt)
-print(domd3,basin,year,'tstmid:',tstmid)
 
-if(domd3):
-    
-    (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)        
-
-    doBT = 0
-    if(doBdeck2): doBT=1
-
-    if(verb): MF.sTimer('md3-load')
-    md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
-    if(verb): MF.dTimer('md3-load')
-    tstmids=md3.getMd3Stmids(stmopt,dobt=1)
-
-    years=getIntYears4oyearOpt(oyearOpt)
-    
-else:
-    tstmids=None
-    md3=None
-    years=[year]
-
-print ('oooo',years)
-year=years[0]
 tcnames=GetTCnamesHash(year)
 
-#print ('ttt---nnn',tcnames)
 stmid2tcname={}
 kk=tcnames.keys()
 otcnames={}
@@ -121,30 +109,52 @@ if(verb):
 otcs={}
 for stmid in stmids:
     tc=aTCs[stmid.lower()]
-    tcbasin=stmid[2:3]
     tcname=tc.name
-    md3name=''
-    md3key=(tcname,tcbasin)
-    try:
-        md3stmid=otcnames[md3key]
-        #print('ffff---',md3key,md3stmid)
-    except:
-        md3stmid=None
-    
-    if(md3stmid != None):
-        otcs[md3stmid]=tc
-    else:
-        otcs[stmid]=tc
+    otcs[stmid]=tc
         
 okk=list(otcs.keys())
 okk.sort()
-for ok in okk:
-    inmd3='---'
-    if(ok in tstmids):
-        inmd3='md3'
-    print ('33333-------',inmd3,ok,otcs[ok])
-    itc=otcs[ok]
-    rc=getITCvars(itc,ok,verb=verb)
+
+aastmids=[]
+mmstmids=[]
+iistmids=[]
+
+for tstmid in okk:
+    itc=otcs[tstmid]
+    #lsIBtrack(itc, tstmid)
+
+    (b2trk,b2dtgs)=getB2trk(tstmid,oBD2s)
+    (m2trk,m2dtgs)=getM2trk(tstmid,oMD2s)
+        
+    bdstat='---'
+    if(len(b2trk) > 0 and len(m2trk) > 0): 
+        bdstat=tstmid[0:3]
+        aastmids.append(tstmid)
+    else:
+        
+        # -- search for matching b/mdeck
+        #
+        m2dtgs=getM2dtgsByYear(oMD2s, tstmid)
+        b2dtgs=getB2dtgsByYear(oBD2s, tstmid)
+        
+        rc=getBD2ForIB(itc,oBD2s,tstmid,b2dtgs)
+        (mstmid,m2trk,pcmd2)=getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,verb=verb)
+        if(mstmid != None):
+            mmstmids.append((tstmid,mstmid,pcmd2))
+            bdstat=mstmid[0:3]
+            #print('MMM %s -> %s'%(tstmid,mstmid),'pcmd2: %3.0f'%(pcmd2))
+        else:
+            iistmids.append(tstmid)
+            
+    print('mmmsssbdeck3: %s md2: %s'%(tstmid,bdstat))
+    rc=getITCvars(itc,tstmid,m2trk,verb=verb,doprint=0)
     
+print('aaaaa',aastmids,len(aastmids))
+print('mmmmm',mmstmids,len(mmstmids))
+print('iiiii',iistmids,len(iistmids))
+
+for mmstmid in mmstmids:
+    nstmid=getMD2stmid(mmstmid, tcnamesAll)
+    print('mm',mmstmid,'nn',nstmid)
 sys.exit()
     

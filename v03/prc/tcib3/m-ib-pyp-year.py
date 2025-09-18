@@ -2,7 +2,7 @@
 
 from ibvm import *
 
-usePy=1
+usePy=0
 
 if(not(usePy)):
     MF.sTimer('load-ib')
@@ -16,14 +16,25 @@ byear=1940
 
 #eyear=1944
 
-byear=1940
-eyear=2023
 
 byear=2000
 eyear=2023
 
+byear=1980
+eyear=1980
+
+# -- 20250916 -- redo to keep do correct SH/IO number >= 51
+#
+byear=1940
+eyear=2023
+
+# -- 20250917 -- redo to keep ALL noatcfID like in WESTPAC
+#
+#byear=eyear=1980
+
 years=range(byear,eyear+1)
 
+verb=0
 for year in years:
         
     syear=str(year)
@@ -48,7 +59,7 @@ for year in years:
     noatcfID={}
     for n in range(0,nTCs):
         tc=TCs[n]
-        print('nnn',year,n,tc)
+        #print('nnn',year,n,tc)
         (sid,sid2,astmid)=convertIb2AtcfId(tc)
         if(verb): print('tc sid',n,sid,sid2,tc.ID,tc.ATCF_ID,tc.genesis)
         #continue
@@ -91,33 +102,90 @@ for year in years:
         tc=atcfID[k]
         (sid,sid2,astmid)=convertIb2AtcfId(tc)
         oTCs[astmid]=tc
-        print ('yyyy: ',k,sid,sid2,astmid)
+        print ('yyyyyyyy: %4d %s %s %s '%(k,sid,sid2,astmid))
 
     # -- now the ones with out a stmid... start at 51 in each basin
     #
     sids=[]
     snums={}
     kk=noatcfID.keys()
+    
+    # -- bdeck in shem always have SH and io IO
+    #
+    sidsSH=[]
+    snumsSH={}
+    sidsIO=[]
+    snumsIO={}
+    sidsEX=[]
+    snumsEX={}
+    
     for k in kk:
         tc=noatcfID[k]
         (sid,sid2,astmid)=convertIb2AtcfId(tc)
-        sids.append(sid)
-        MF.appendDictList(snums,sid,k)
         
-    sids=mf.uniq(sids)
+        if(sid2 == 'SH'):
+            sidsSH.append(sid)
+            MF.appendDictList(snumsSH,sid,k)
+        elif(sid2 == 'IO'):
+            sidsIO.append(sid)
+            MF.appendDictList(snumsIO,sid,k)
+        else:
+            sidsEX.append(sid)
+            MF.appendDictList(snumsEX,sid,k)
+        
+    # -- SHEM
+    #
+    sids=mf.uniq(sidsSH)
+
+    inum=51
     for sid in sids:
-        bsnums=snums[sid]
-        inum=51
+        bsnums=snumsSH[sid]
         for bsnum in bsnums:
+            tc=noatcfID[bsnum]
+            
+            byear=tc.season
+            (sid,sid2,astmid)=convertIb2AtcfId(tc)
+            bstmid="%s%s.%s"%(inum,sid,byear)
+            oTCs[bstmid]=tc
+            print('nnnnshem: %4d %s %s %s'%(bsnum,sid,sid2,bstmid))
+            inum=inum+1
+            
+    # -- IO
+    #
+    sids=mf.uniq(sidsIO)
+
+    inum=51
+    for sid in sids:
+        bsnums=snumsIO[sid]
+        for bsnum in bsnums:
+            tc=noatcfID[bsnum]
+            
+            byear=tc.season
+            (sid,sid2,astmid)=convertIb2AtcfId(tc)
+            bstmid="%s%s.%s"%(inum,sid,byear)
+            oTCs[bstmid]=tc
+            print('nnnnio  : %4d %s %s %s'%(bsnum,sid,sid2,bstmid))
+            inum=inum+1
+            
+    # -- EX
+    #
+    sids=mf.uniq(sidsEX)
+
+    inum=51
+    for sid in sids:
+        
+        bsnums=snumsEX[sid]
+        
+        for bsnum in bsnums:
+            
             tc=noatcfID[bsnum]
             byear=tc.season
             (sid,sid2,astmid)=convertIb2AtcfId(tc)
             bstmid="%s%s.%s"%(inum,sid,byear)
             oTCs[bstmid]=tc
-            print('nnnn: ',bsnum,sid,sid2,bstmid)
+            print('nnnnXXXX: %4d %s %s %s'%(bsnum,sid,sid2,bstmid))
             inum=inum+1
             
-
     # -- now pickle dump
     #
     P=open('%s/iTC%s-stmid.pyp'%(ddir,syear),'wb')
