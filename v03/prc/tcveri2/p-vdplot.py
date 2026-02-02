@@ -23,14 +23,16 @@ class MyearVd2aCmdLine(CmdLine):
             'modelOpt':            ['T:',None,'a','aids to plot'],
             'otauOpt':             ['o:','72','a',"""output Tau; 'all' for a single year""" ],
             'phrOpt':              ['h:','','a',""" ['']  no BC | 0 - 0-h BC | 6 - 6-h BC"""],
-            'pfilt':               ['f:',None,'a',"""filter: 'z0012' | 'z0618'..."""],
+            'pfilt':               ['f:','','a',"""filter: 'z0012' | 'z0618'..."""],
             'veriOptHomo':         ['H',0,1,"""" 1 for homogeneous; [0] for heterogeneous """],
             'doxv':                ['X',0,1,"""" 1 -> xv plot """],
-            'veriStat':            ['p:','pe','a',"""['pe'] for position error | 'pod' | gainxype """],
+            'veriStat':            ['p:','pe-line','a',"""['pe'] for position error | 'pod' | gainxype """],
             'yearOpt':             ['y:','2007.2018','a',"""byear.eyear for a range of years"""],
             'toptitle1':           ['1:',None,'a','toplabel1'],
             'toptitle2':           ['2:','','a','toplabel2'],
             'veriLabel':           ['l:',None,'a','veriLabel for zip file'],
+            'doAllYears':          ['a',0,1,'do summary of allyears'],
+            'dotable':             ['t',0,1,'do summary of allyears'],
             'pcase':               ['c:',None,'a','set pcase for pngpath'],
             'do2axis':             ['A',0,1,"""" use 2 axis plot"""],
             'verirule':            ['3:','std','a',"""set verirule: 'std' :: NHC rule  or 'td':: any posit >= 20kt or 'ts' :: initial posit is >=35 kts"""],
@@ -153,12 +155,16 @@ pdir='%s/plt'%(CL.curdir)
 dopng=1
 doline=0
 
-dotable=1
 xlab=None
 if(veriStat == 'pe-line' or veriStat == 'pod'): 
-    xlab='Year'
-    doline=1
-    dotable=0
+    if(dotable):
+        xlab=''
+        doline=1
+    else:
+        xlab='Year'
+        doline=1
+        dotable=0
+
     
 docp=0
 verb=verb
@@ -175,7 +181,9 @@ SSMs={}
 for otau in otaus:
     for ibasin in basins:
         SSM=SumStatMultiYear(byear,eyear,ibasin,setOpt,
-                             baseModels,veriOpt,phrOpt,veriStat,veriStatRead,otau,
+                             baseModels,veriOpt,phrOpt,
+                             veriStat,veriStatRead,
+                             otau,pfilt,
                              veriLabel=veriLabel,
                              verirule=verirule,
                              verb=verb)
@@ -201,8 +209,7 @@ if(veriStat == 'gainxype'):
 else:
     stype=veriStatRead
 
-doAllYears=1
-if(basin == 'w'): doAllYears=1
+#if(basin == 'w'): doAllYears=1
 if(otau == 'all' and byear == eyear): 
     times=SSM.taus
     doAllYears=0
@@ -231,7 +238,12 @@ if(itoptitle1 == None):
 
     # -- name of png file
     #
-    pcase="%s.%s.%s"%(basin,otau,SSM.veriLabel)
+    omodels=modelOpt.replace(',','-')
+    oyears=yearOpt.replace('.','-')
+    oplotopt=''
+    if(do2axis):oplotopt='cnts_'
+        
+    pcase="%s%s_%s_%s_%s_%s"%(oplotopt,basin,otau,omodels,oyears,SSM.veriLabel)
         
     # -- top title
     #
@@ -323,16 +335,6 @@ MF.dTimer('makesDicts')
 
 MF.sTimer('makePlot')
 
-# -- name of png file
-#
-if(pcase == None):
-    pcase="%s.%s.%s-%s"%(basin,otau,yearOpt.replace('.','-'),SSM.veriLabel)
-
-if(itoptitle1 == None):
-    # -- top title
-    #
-    toptitle1="%s pcase: %s"%(toptitle1,pcase)
-
 taids=SSM.models
 tstmids=[]
 
@@ -366,7 +368,7 @@ if(pltcntvar != None):
 
 pss.setControls(controlsVar=plotcontrolVar)
 
-if(baseModels[-1] == 'clip5' and not(mf.find(veriStat,'gainxy'))): pss.controls[0][1]=pss.controls[0][1]*2.0
+#if(baseModels[-1] == 'clip5' and not(mf.find(veriStat,'gainxy'))): pss.controls[0][1]=pss.controls[0][1]*2.0
 
 if(len(otaus) == 2): do2ndplot=1
 

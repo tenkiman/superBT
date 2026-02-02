@@ -77,7 +77,7 @@ MF.sTimer('ALL')
 
 # -- make sbt object
 #
-
+version=sbtVersion
 MF.sTimer('sbt')
 sbt=superBT(version,verb=verb)
 MF.dTimer('sbt')
