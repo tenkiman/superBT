@@ -219,9 +219,15 @@ for stmopt in stmopts:
     print
 
     (ovopt,logpath)=setVd2aRun(doZip,override=override)
-    if(ovopt == None):
+
+    if(ovopt == None and pfilt == None):
         continue
+        
+    if(pfilt != None and ovopt == None):
+        ovopt=''
     
+    #print 'nnnnn',ovopt,fopt
+    #sys.exit()
     # -- vd2a raw
     #
     MF.sTimer('vd2-%s'%(stmopt))

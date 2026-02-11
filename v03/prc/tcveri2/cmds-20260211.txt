@@ -1,0 +1,506 @@
+# -- does both clp3 ad2 and the vd2
+#
+0211 02:51:25 m-all-ad2-vd2.py -Y 2010.2024 -A
+
+# -- does just vd2
+0211 02:40:09 m-all-ad2-vd2.py -Y 1948.2006 
+
+0211 16:54:24 ws.nw cmds-20260211.txt 
+
+0130 16:09:00 n-redo-ad2.py
+0130 16:09:42 w2-tc-dss-ad2.py era5,tmtrkN,jt-nhc -S all.2023 -O1 
+0130 16:10:18 f
+0130 16:17:23 la
+0130 16:17:26 la adinv/
+0130 16:17:30 la adinv/*txt
+0130 16:17:40 la adinv/adinv-2023.txt 
+0130 16:17:42 pg adinv/adinv-2023.txt 
+0130 16:17:53 la *inv*
+0130 16:17:58 la *inv*py
+0130 16:18:03 pg p-adinv.py 
+0130 16:18:58 j
+0130 16:18:58 h
+0130 16:19:01 f
+0130 16:19:03 j
+0130 16:19:08 h
+0130 16:25:33 n-redo-ad2.py
+0130 18:21:38 h
+0130 18:21:53 ad2 -S w.00 -T cl -L
+0130 18:22:12 ad2 -S l.00 -T cl -L
+0130 18:22:25 ad2 -S l.10 -T cl -L
+0130 18:22:35 cd ..
+0130 18:22:35 la
+0130 18:22:43 mkdir tcveri2
+0130 18:22:46 cd tcveri2
+0130 18:22:52 ad2 -S l.10 -T cl -L
+0130 18:23:38 ad2 -S l.10 -T clip -L | g -v interp
+0130 18:23:56 ad2 -S l.10 -T clp5 -L | g -v interp
+0130 18:24:08 ad2 -S l.00 -T clp5 -L | g -v interp
+0130 18:24:15 ad2 -S l.00 -T clip -L | g -v interp
+0130 18:24:37 mkdir adinv
+0130 18:26:47 cp ../tcveri/m-ad2inv.py .
+0130 18:27:01 cp ../tcveri/ad2vm.py .
+0130 18:27:02 la
+0130 18:27:06 m-ad2inv.py 
+0130 18:28:12 m-ad2inv.py -Y 2000 -i
+0130 18:30:08 m-ad2inv.py -Y 2000 -i -N
+0130 18:30:29 m-ad2inv.py -Y 2000 -N
+0130 18:30:36 m-ad2inv.py -Y 2000 
+0130 18:30:45 kill %1
+0130 18:31:53 m-ad2inv.py -Y 2000 -i -N
+0130 18:33:15 m-ad2inv.py -Y 2000 -i 
+0130 18:33:34 la adinv/
+0130 18:33:39 la adinv/adinv-2000.txt 
+0130 18:33:43 g cl adinv/adinv-2000.txt 
+0130 18:38:34 cp ../tcveri/p-adinv.py 
+0130 18:38:36 cp ../tcveri/p-adinv.py  .
+0130 18:38:36 la
+0130 18:38:39 p-adinv.py 
+0130 18:39:38 p-adinv.py -S l.00 -a
+0130 18:42:09 la ../tcveri/sB*py
+0130 18:42:18 cp ../tcveri/sB*py .
+0130 18:42:23 la ../tcveri/sbtLocal.py
+0130 18:42:27 cp ../tcveri/sbtLocal.py .
+0130 18:42:27 la
+0130 18:42:33 p-adinv.py -S l.00 -a
+0130 18:42:57 pg sbtLocal.py
+0130 18:43:07 la /sbt/superBT-V04/
+0130 18:43:14 la /sbt/superBT-V04/dat
+0130 18:43:19 la /sbt/superBT-V04/dat-v03 
+0130 18:43:23 la /sbt/superBT-V04/dat-v03/
+0130 18:43:34 w2-mount-mike7-fs.sh 
+0130 18:43:41 p-adinv.py -S l.00 -a
+0130 18:44:47 p-adinv.py -S l.00 
+0130 18:52:19 md2a -S l.20 -s -b
+0130 18:53:02 md3a -S l.20 -s
+0130 18:53:04 md3a -S l.20 -s -b
+0130 18:53:09 h
+0130 18:53:24 md3a -S l.00 -s -b
+0130 18:53:35 p-adinv.py -S 13l.00 
+0130 18:53:41 p-adinv.py 
+0130 18:54:01 p-adinv.py -S 13l.00 -0 -O
+0130 18:54:40 p-adinv.py -S 13l.00 
+0130 18:54:44 p-adinv.py -S 13l.00 -a
+0130 18:55:13 la
+0130 18:55:31 m-ad2inv.py 
+0130 18:56:11 p-adinv.py -S 13l.00 -0
+0130 18:56:19 ln -s ../tcveri/DSs-local .
+0130 18:56:20 la
+0130 18:56:28 p-adinv.py -S 13l.00 -0
+0130 18:56:31 p-adinv.py -S 13l.00 -0 -O
+0130 18:56:39 p-adinv.py -S 13l.00 
+0130 18:57:00 p-adinv.py
+0130 18:57:11 p-adinv.py -S 13l.00 -A
+0130 18:57:32 p-adinv.py -S 13l.00 -a
+0130 18:57:34 p-adinv.py -S 13l.00 
+0130 18:57:47 m-ad2inv.py 
+0130 18:58:37 m-ad2inv.py  -Y 2000 -i -N
+0130 18:58:58 p-adinv.py -S 13l.00 
+0130 18:59:14 m-ad2inv.py 
+0130 18:59:33 m-ad2inv.py -Y 2000 -0 -N
+0130 18:59:57 ad2
+0130 19:00:17 m-ad2inv.py -Y 2000 -0 -N
+0130 19:01:45 ad2
+0130 19:01:55 ad2 | g bd2
+0130 19:02:15 m-ad2inv.py -Y 2000 -0 -N
+0130 19:02:41 p-adinv.py -S all.2000 -A -O
+0130 19:02:46 kill %1
+0130 19:02:49 p-adinv.py -S all.2000 -A -O -N
+0130 19:03:29 p-adinv.py 
+0130 19:04:19 la
+0130 19:04:29 cp ../tcveri/p-vdinv.py .
+0130 19:04:38 p-vdinv.py 
+0130 19:05:47 p-vdinv.py -S 13l.00 -N
+0130 19:07:01 mkdir vd2out
+0130 19:07:04 mkdir vd2inv
+0130 19:07:08 p-vdinv.py -S 13l.00
+0130 19:07:38 la
+0130 19:07:41 m-ad2inv.py 
+0130 19:08:20 m-ad2inv.py  -Y 2000 -0 -N
+0130 19:08:27 m-ad2inv.py  -Y 2000 -0 
+0130 19:11:09 la
+0130 19:11:24 p-vdinv.py 
+0130 19:12:07 p-vdinv.py -S 13l.00 -N
+0130 19:12:45 la vd2out/vd2out-13l.2000-pe-all-hetero.txt 
+0130 19:12:47 pg vd2out/vd2out-13l.2000-pe-all-hetero.txt 
+0130 19:13:18 p-vdinv.py
+0130 19:13:43 p-vdinv.py -S 13l.00 -p pod
+0130 19:13:53 p-vdinv.py -S all.00 -p pod
+0130 19:19:14 la
+0130 19:19:17 la vd2inv/
+0130 19:19:21 la vd2out/
+0130 19:19:28 lt vd2out/
+0130 19:19:36 lt vd2out/*13l*
+0130 19:19:38 del vd2out/*13l*
+0130 19:19:46 h
+0130 19:20:06 m-ad2inv.py 
+0130 19:20:28 m-ad2inv.py -Y 2001 -i -N
+0130 19:21:24 pg adinv/adinv-2001.txt 
+0130 19:22:23 m-ad2inv.py 
+0130 19:22:51 m-ad2inv.py -Y 2000 -0 -N
+0130 19:23:21 m-ad2inv.py -Y 2001 -0 
+0130 19:50:29 h
+0130 19:51:01 p-vdinv.py -S all.01
+0131 02:37:07 h
+0131 02:37:11 m-ad2inv.py 
+0131 02:37:16 m-ad2inv.py -Y 1945
+0131 02:38:01 m-ad2inv.py -Y 1946.2024
+0131 05:21:07 la
+0131 05:21:15 h
+0131 05:23:32 m-ad2inv.py -Y 2001 -0 -N
+0131 05:24:25 m-ad2inv.py -Y 1945.2024 -0 -N
+0131 05:25:50 j
+0131 05:25:52 kill %1
+0131 05:26:10 m-ad2inv.py -Y 1945.2024 -0 -N | l
+0131 05:26:55 m-ad2inv.py -Y 1945 -0
+0131 05:28:37 m-ad2inv.py -Y 1946.2024 -0
+0131 05:39:18 h | g p-vdinv.py 
+0131 05:39:35 f
+0131 05:45:24 h | g m-ad2
+0131 05:45:42 f
+0131 09:31:30 h
+0131 09:33:00 m-all-sbt-bd2.py
+0131 09:37:12 f
+0131 09:38:23 psmac
+0131 09:38:30 psmas
+0131 09:38:33 f
+0126 19:16:34 la
+0126 19:16:37 git branch -a -v
+0126 19:16:44 la dat
+0126 19:16:48 git s-u
+0126 19:17:07 cd dat
+0126 19:17:08 la
+0126 19:17:16 la *2007-2022*
+0126 19:17:26 git add *2007-2022*
+0126 19:20:07 git s-u
+0126 19:20:37 git c
+0126 19:20:44 git commit -a
+0126 19:21:31 git push
+0130 15:23:43 c.w2.2
+0130 15:23:59 c.w2.d
+0130 15:24:03 cd tc
+0130 15:24:06 cd bdeck2/
+0130 15:24:06 la
+0130 15:24:09 cd nhc/
+0130 15:24:10 la
+0130 15:24:17 jt
+0130 15:24:19 c.w2.2
+0130 15:24:21 la *bd2*
+0130 15:24:25 w2-tc-bd2-redo.py 
+0130 16:14:35 c.w2.d
+0130 16:14:43 cd tc/adeck/atcf-form/
+0130 16:14:46 la 1979
+0130 16:14:58 la 1979/tmtrkN
+0130 16:15:02 g ecmt 1979/tmtrkN
+0130 16:15:05 g ecmt 1979/tmtrkN/*
+0130 16:15:12 g ecmt 2007/tmtrkN/*
+0130 16:15:18 g ecmt 2006/tmtrkN/*
+0130 16:15:44 g ec 2007/tmtrkN/*
+0130 16:15:53 g ec 2000/tmtrkN/*
+0130 16:15:59 g ec 2010/tmtrkN/*
+0130 16:16:07 g ec 2015/tmtrkN/*
+0130 16:16:09 f
+0130 16:16:38 ad2 -S l.15 -L
+0131 06:40:32 c.sb.ptv
+0131 06:40:39 . ~/.bashrc
+0131 06:40:44 c.sb.ptv
+0131 06:40:52 cd ../tcveri2/
+0131 06:41:06 cp ../tcveri/m-sbt-bd2.py .
+0131 06:41:10 m-sbt-bd2.py 
+0131 06:41:27 m-sbt-bd2.py -S w.01
+0131 06:42:21 m-sbt-bd2.py -S all.01
+0130 14:54:27 c.w2.d
+0130 14:54:28 la
+0130 14:54:31 la tc
+0130 14:54:33 la tc/
+0130 14:55:20 la tc/adeck/atcf-form/1945.zip 
+0130 14:55:25 unzip -l tc/adeck/atcf-form/1945.zip 
+0130 14:55:50 cd tc/adeck/atcf-form/
+0130 14:55:51 la
+0130 14:55:57 unzip 1945.zip 
+0130 14:56:06 unzip 194?.zip
+0130 14:56:10 la
+0130 14:56:16 la 194?.zip
+0130 14:56:25 pg p-zip.py 
+0130 14:56:40 cp p-zip.py p-unzip.py
+0130 14:56:44 ws.nw p-unzip.py 
+0130 14:57:24 p-unzip.py
+0130 14:57:31 la
+0130 14:57:35 la 2017
+0130 14:57:37 f
+0130 14:57:46 killf
+0130 14:57:52 f
+0130 14:58:13 p-unzip.py
+0130 14:58:15 f
+0130 14:58:22 p-unzip.py
+0130 14:58:24 f
+0130 14:58:31 p-unzip.py
+0130 15:40:53 c.w2.d
+0130 15:40:56 cd tc
+0130 15:40:57 la
+0130 15:41:04 cd adeck
+0130 15:41:04 la
+0130 15:41:07 la atcf-form/
+0130 15:41:32 la ????/tmtrkN
+0130 15:41:34 la ????/tmtrkN/
+0130 15:41:49 la atcf-form/2024
+0130 15:42:05 la atcf-form/????/tmtrkN
+0130 15:42:12 la atcf-form/????/tmtrkN | l
+0130 15:44:46 la nhc/
+0130 15:45:00 la nhc/1945
+0130 15:45:11 la nhc/????/*dat
+0130 15:45:15 la nhc/????/*dat | l
+0130 15:45:50 la jtwc/????/*dat | l
+0130 16:01:30 la atcf-form/
+0130 16:01:32 la atcf-form/2024
+0130 16:01:35 la atcf-form/2024/era5/
+0130 16:11:53 c.sb.ptv
+0130 16:11:54 la
+0130 16:11:56 la DSs-local
+0130 16:12:05 ud DSs-local
+0130 16:12:37 la /
+0130 16:12:46 df
+0130 16:12:58 df | g nvme
+0130 16:13:07 df | g nvme0np2
+0130 16:13:16 df | g nvme0n1p2
+0130 16:19:06 j
+0130 18:00:38 n-redo-ad2.py
+0130 18:01:32 d
+0130 18:01:34 f
+0131 05:30:44 h
+0131 05:33:25 ad2 | g warn
+0131 05:37:32 cd ../tcveri2/
+0131 05:37:43 p-vdinv.py 
+0131 05:38:59 h | g p-vdin
+0131 05:39:50 p-vdinv.py -S all.01 -N
+0131 05:40:27 p-vdinv.py -S all.01 -p pod -N
+0131 05:40:43 p-vdinv.py -S all.01 -N
+0131 05:41:14 la
+0131 05:41:25 la vd2out/*2001*
+0131 05:41:35 la vd2out/*w*2001*
+0131 05:41:41 pg vd2out/*w*2001*
+0131 05:41:48 g SSS vd2out/*w*2001*
+0131 05:42:10 g SSS vd2out/*w*2001* | g ' 72 '
+0131 05:42:53 la adinv/
+0131 05:43:03 la adinv/*2001*txt
+0131 05:43:09 pg adinv/*2001*txt
+0131 05:43:37 g nog adinv/*2001*txt
+0131 05:43:54 g ngps adinv/*2001*txt
+0131 05:44:07 g ngps adinv/*2001*txt | g -v '00 '
+0131 05:44:21 g ngps adinv/*2001*txt | g -v 'ngps00 '
+0131 05:45:58 m-ad2inv.py 
+0131 05:46:10 m-ad2inv.py -S w.01
+0131 05:46:38 p-vdinv.py 
+0131 05:46:51 p-vdinv.py -S w.01 -N
+0131 05:47:18 m-ad2inv.py 
+0131 05:47:56 m-ad2inv.py -Y 2001 -N
+0131 05:48:10 psep
+0131 05:48:25 m-ad2inv.py -Y 2001 -0 -N
+0131 05:48:56 p-adinv.py -S w.2001 -A -O -N
+0131 05:49:49 p-adinv.py -S w.2001 -a
+0131 05:50:23 la vd2inv/
+0131 05:51:07 la vd2inv/ad2inv-w.2001.txt 
+0131 05:51:10 pg vd2inv/ad2inv-w.2001.txt 
+0131 05:51:52 la
+0131 05:52:04 la vd2out/
+0131 05:52:32 la vd2out/vd2out-w.2001-pe-all-hetero.txt 
+0131 05:52:35 g sssss vd2out/vd2out-w.2001-pe-all-hetero.txt 
+0131 05:52:49 g sssss vd2out/vd2out-w.2001-pe-all-hetero.txt  | g navy
+0131 05:54:13 p-vdinv.py 
+0131 05:54:37 p-vdinv.py -S w.01
+0131 05:55:13 p-vdinv.py -S w.01 -O -N
+0131 05:55:59 m-ad2inv.py -S w.01 -0 -N
+0131 05:56:54 m-ad2inv.py -Y 2001 
+0131 05:57:09 kill %1
+0131 05:57:14 la DSs-local/*lck
+0131 05:57:45 m-ad2inv.py -Y 2001 -N
+0131 05:58:13 m-ad2inv.py -Y 2001 -N -2
+0131 05:58:45 p-adinv.py -S all.2001 -A -O -N
+0131 05:59:21 g navy *.py
+0131 06:03:10 p-adinv.py -S all.2001 -O -N
+0131 06:03:19 p-adinv.py 
+0131 06:03:34 p-adinv.py -S all.2001 -O -A -N
+0131 06:03:53 p-adinv.py -S all.2001 -O -A -N -V
+0131 06:05:02 p-adinv.py -S w.2001 -O -A -N -V
+0131 06:05:46 p-adinv.py -S w.2001 -O -A -N 
+0131 06:05:57 p-adinv.py -S w.2001 -O -N 
+0131 06:06:05 p-adinv.py -S w.2001 -O -A -N 
+0131 06:06:13 p-adinv.py -S w.2001 -O -A -V -N 
+0131 06:06:37 c
+0131 06:06:41 p-adinv.py -S w.2001 -O -A -V -N 
+0131 06:07:05 p-adinv.py -S w.2001 -V -N 
+0131 06:07:18 p-adinv.py -S w.2001 -V 
+0131 06:09:05 p-adinv.py
+0131 06:09:41 la vd2out/
+0131 06:09:50 la vd2inv/
+0131 06:09:55 la vd2inv/vd2inv-w.2001.txt 
+0131 06:10:25 p-vdinv.py 
+0131 06:10:43 p-vdinv.py -S w.01 -p pod -N
+0131 06:11:15 la vd2inv/vd2inv-w.2001.txt 
+0131 06:11:22 pg vd2inv/vd2inv-w.2001.txt 
+0131 06:11:36 la vd2out/
+0131 06:12:29 p-adinv.py -S all.2001 -V 
+0131 06:14:44 p-adinv.py -S all.2001 -A -N
+0131 06:15:05 p-adinv.py 
+0131 06:15:19 p-adinv.py -S all.2001 -A -V -N
+0131 06:15:43 p-vdinv.py 
+0131 06:15:59 p-vdinv.py -S w.01 -N
+0131 06:16:29 p-vdinv.py -S w.01 -O -N
+0131 06:17:36 p-vdinv.py -S w.01 -a
+0131 06:17:41 p-vdinv.py -S w.01 -A -N
+0131 06:17:49 p-vdinv.py -S w.01 -N
+0131 06:18:11 g navy vd2out/vd2out-w.2001-pe-all-hetero.txt 
+0131 06:18:29 p-vdinv.py -S w.01 -O -N
+0131 06:18:32 p-vdinv.py -S w.01 -O 
+0131 06:21:19 p-adinv.py -S w.01 -0 -N
+0131 06:21:29 p-adinv.py -S w.01 -0 
+0131 06:21:40 p-adinv.py 
+0131 06:21:52 p-adinv.py -S w.01 -0 -A
+0131 06:22:16 p-adinv.py -S w.01 -0 -A -O
+0131 06:23:12 g navy vd2out/vd2out-w.2001-pe-all-hetero.txt 
+0131 06:23:24 p-vdinv.py -S w.01 -N
+0131 06:23:31 p-vdinv.py -S w.01 -O
+0131 06:25:49 h
+0131 06:25:57 psep
+0131 06:26:30 m-ad2inv.py -Y 2001 -0 -N
+0131 06:26:42 psep
+0131 06:27:30 psmac
+0131 06:27:45 psmas
+0131 06:28:03 h
+0131 06:28:33 lt vd2out/* | head
+0131 06:29:03 p-vdinv.py -S w.01 -p pod -N
+0131 06:29:15 p-vdinv.py -S w.01 -p pod -N -O
+0131 06:29:30 p-vdinv.py -S w.01 -p pod 
+0131 06:30:17 g navy ./vd2out/vd2out-w.2001-pod-all-hetero.txt 
+0131 06:30:44 g era5 ./vd2out/vd2out-w.2001-pod-all-hetero.txt 
+0131 06:31:13 g sss | g era5 ./vd2out/vd2out-w.2001-pod-all-hetero.txt 
+0131 06:31:46 g sss ./vd2out/vd2out-w.2001-pod-all-hetero.txt  | g ear5
+0131 06:31:52 g sss ./vd2out/vd2out-w.2001-pod-all-hetero.txt  | g era5
+0131 06:32:22 p-vdinv.py -S w.01 -p pe,pod -N
+0131 06:32:38 p-vdinv.py -S w.01 -p pod
+0131 06:32:53 p-vdinv.py -S w.01 -p pod -O -N
+0131 06:34:31 h | g vdin
+0131 06:35:22 p-vdinv.py -S all.01 -N
+0131 06:35:48 p-vdinv.py -S all.01 -O -N
+0131 06:36:11 p-vdinv.py -S all.01 
+0131 06:36:28 la vd2out/vd2out-l.2001-pe-all-hetero.txt 
+0131 06:36:34 g navy vd2out/vd2out-l.2001-pe-all-hetero.txt 
+0131 06:36:47 p-vdinv.py -S all.01 -O -N
+0131 06:37:03 p-vdinv.py -S all.01 -O 
+0131 06:43:27 p-vdinv.py -S all.01 -p pod
+0131 06:44:02 la
+0131 06:44:11 lt vd2out/* | l
+0131 06:44:36 lt vd2out/*w*2001*
+0131 06:44:51 g sss vd2out/*w*2001*
+0131 06:45:12 g sss vd2out/*w*2001*pe*
+0131 06:45:33 g sss vd2out/*w*2001*pe* | g era5
+0131 06:46:02 g sss vd2out/*w*2001*pod* | g era5
+0131 06:48:36 psmac
+0131 06:48:42 psmas
+0131 06:49:55 psmac
+0131 06:50:01 psep
+0131 06:50:25 psmac
+0131 09:12:57 psmas
+0131 09:13:17 h
+0131 09:14:33 m-sbt-bd2.py 
+0131 09:14:51 m-sbt-bd2.py -Y 1945.2024
+0131 09:15:11 m-sbt-bd2.py -Y 1945-2024
+0131 09:15:37 m-sbt-bd2.py -S all.45-24
+0131 09:16:23 kill %1
+0131 09:16:26 m-sbt-bd2.py -S all.45
+0131 09:18:30 ws.nw m-all-sbt-bd2.py
+0131 09:19:57 h
+0131 09:20:04 f
+0131 09:20:59 chmoda 
+0131 09:21:08 m-all-sbt-bd2.py 
+0131 09:21:20 h
+0131 09:21:25 f
+0131 09:21:38 m-all-sbt-bd2.py 
+0131 09:22:06 f
+0131 09:23:22 kill %2
+0131 09:26:56 h
+0131 09:27:09 m-sbt-bd2.py -S all.45 -V
+0117 11:38:01 cd /raid02/
+0117 11:38:01 la
+0117 11:38:04 cd dat
+0117 11:38:04 la
+0117 11:38:07 cd pr/
+0117 11:38:07 la
+0117 11:40:51 cd ../..
+0117 11:40:51 la
+0117 11:40:55 la sbt/
+0117 11:40:58 la sbt/d
+0117 11:41:02 la sbt/dat/
+0117 11:41:22 la sbt/dat/tc
+0117 11:41:31 la
+0117 11:41:38 la sbt
+0117 11:41:43 la sbt/superBT/
+0117 11:41:49 la sbt/src/
+0117 11:41:53 la sbt/src/ | l
+0117 11:42:05 la sbt/products/
+0117 11:42:12 la sbt/products/tcdiag/
+0117 11:42:26 la sbt/log/
+0117 11:42:51 la sbt/dat/
+0117 11:43:02 la sbt/dat/tcdiag/
+0117 11:43:06 la sbt/dat/tcgen/
+0117 11:43:09 la sbt/dat/tcdiag/
+0117 11:43:17 la sbt/dat/atcf-form/
+0117 11:43:20 la sbt/dat/atcf-form/2024/
+0117 11:43:23 la sbt/dat/atcf-form/2024/era5/
+0118 20:59:25 df
+0201 14:53:07 la *1983*
+0201 14:53:25 la mde*1983*
+0201 14:53:37 c.w2.d
+0201 14:53:38 la
+0211 00:34:51 c.sb.ptv
+0211 00:34:57 cd ../tcveri2/
+0211 00:35:13 psep
+0211 00:35:31 m-ad2inv.py -C -0 -Y 2007 -N
+0211 00:35:36 m-ad2inv.py -C -0 -Y 2007
+0211 00:36:09 kill %1
+0211 00:56:24 h
+0211 00:56:27 j
+0211 00:56:33 m-ad2inv.py -C -0 -Y 2007
+0211 01:31:18 h
+0211 01:31:35 psep
+0211 01:31:49 m-vdinv.py 
+0211 01:31:59 m-vdinv.py -Y 2007
+0211 01:32:07 m-vdinv.py -Y 2007 -O
+0211 01:52:57 m-vdinv.py -Y 2007 -f z0012
+0211 01:53:57 la *all*
+0211 01:54:21 cp m-all-sbt-bd2.py m-all-ad2-vd2.py 
+0211 01:56:39 h
+0211 02:01:27 m-all-ad2-vd2.py 
+0211 02:03:55 m-all-ad2-vd2.py -Y 2008
+0211 02:04:26 m-all-ad2-vd2.py -Y 2008 -N
+0211 02:05:21 psep
+0211 02:06:41 m-all-ad2-vd2.py -Y 2008 -N
+0211 02:06:45 m-all-ad2-vd2.py -Y 2008 -N -A
+0211 02:07:09 m-all-ad2-vd2.py -Y 2008 -A -N
+0211 02:07:21 m-all-ad2-vd2.py -Y 2008 -A 
+0211 02:08:48 kill %1
+0211 02:08:59 m-ad2inv.py 
+0211 02:09:50 p-
+0211 02:09:51 ad2
+0211 02:09:57 ad2 | g chk
+0211 02:11:40 m-all-ad2-vd2.py -Y 2008 -A  -N
+0211 02:11:47 m-all-ad2-vd2.py -Y 2008 -A 
+0211 02:14:14 kill %1
+0211 02:14:22 m-all-ad2-vd2.py -Y 2008 -A -N
+0211 02:14:35 m-ad2inv.py -C -0 -Y 2008  -O -N
+0211 02:14:58 psep
+0211 02:15:14 m-ad2inv.py -C -0 -Y 2008  -O 
+0211 02:18:39 m-ad2inv.py -C -0 -Y 2008  -O -N
+0211 02:19:26 p-adinv.py -S 01h.2008 -A -O -N
+0211 02:19:45 p-adinv.py -S all.2008 -A -O -N
+0211 02:20:00 p-adinv.py -S all.2008 -A -O 
+0211 02:20:49 f
+0211 02:22:21 h
+0211 02:23:20 p-adinv.py -S 01l.2009 -A -O 
+0211 02:23:57 m-ad2inv.py -C -0 -Y 2008  -O -N
+0211 02:28:00 m-ad2inv.py -C -0 -Y 2009 -N
+0211 02:29:00 m-all-ad2-vd2.py 
+0211 02:29:09 m-all-ad2-vd2.py -Y 2009 -A -N
+0211 02:29:27 m-ad2inv.py -C -0 -Y 2009 -N
+0211 02:29:52 m-all-ad2-vd2.py -Y 2009 -A
+

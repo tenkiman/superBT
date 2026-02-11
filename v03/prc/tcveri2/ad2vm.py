@@ -1,7 +1,7 @@
 from sBT import *
 from ATCF import AidProp
 
-clpAids=['clip','clim','hpac','c120','clp5',
+clpAids=['clp3','clip','clim','hpac','c120','clp5',
          #'tclp'
          ]
 humAids=['ofcl','jtwc']
@@ -4213,8 +4213,115 @@ def getFstmids4Tstmids(tstmids,aidStms,verb=0):
         
     return(fstmids)
         
+def getDsbdir(dssDir):
     
+    if(dssDir != None):
+        dsbdir=dssDir
+        
+    else:
+        # -- local for DSs or DSs-local in .
+        #
+        dsbdir="%s/DSs"%(TcDataBdir)
+        localDSs=os.path.abspath('./DSs')
+        localDSsLocal=os.path.abspath('./DSs-local')
+        
+        if(os.path.exists(localDSs) and dolocalDSs):
+            print 'llllllllllll',localDSs
+            dsbdir=localDSs
+            
+        elif(os.path.exists(localDSsLocal) and dolocalDSs):
+            print 'llllllllllll--------lllllllllll',localDSsLocal
+            dsbdir=localDSsLocal
+    
+        else:
+            dsbdir="%s/DSs"%(TcDataBdir)
+            
+    return(dsbdir)
+        
+def tcbasin(lat,lon):
+
+    basin='00'
+
+    if(lat > 0.0 and lon >= 40.0 and lon < 75.0 ):
+        basin='NIA'
+        
+    if(lat > 0.0 and lon >= 75.0 and lon < 100.0 ):
+        basin='NIB'
 
 
+    if(lat > 0.0 and lon >= 100.0 and lon < 180.0):
+        basin='WPC'
+
+    # 20011029
+    # Jim Gross says that for cliper purposes CPC=EPC
+    #
+
+    if( (lat > 0.0 and lat <= 90.0 ) and (lon >= 180.0 and lon < 258.0) ):
+        basin='EPC'
+
+    if( (lat > 0.0 and lat <= 17.0 ) and (lon >= 258.0 and lon < 270.0) ):
+        basin='EPC'
+    elif( (lat > 17.0) and (lon >= 258.0 and lon < 270.0) ):
+        basin='ATL'
+    
+    if( (lat > 0 and lat <= 14.0 ) and (lon >= 270 and lon < 275) ):
+        basin='EPC'
+    elif( (lat > 14) and (lon >= 270 and lon < 275) ):
+        basin='ATL'
+        
+    if( (lat > 0 and lat <= 9 ) and (lon >= 275 and lon < 285) ):
+        basin='EPC'
+    elif( (lat > 9) and (lon >= 275 and lon < 285) ):
+        basin='ATL'
 
 
+    if( lat > 0 and lon >= 285):
+        basin='ATL'
+
+
+    if( lat < 0 and lon >= 135):
+        basin='SEP'
+
+    if( lat < 0 and ( lon > 40 and lon < 135) ):
+        basin='SIO'
+        
+    return(basin)
+
+    
+def cliperinput(dtg,source='neumann'):
+
+    verb=0
+    
+    tcs=findtc(dtg)
+    if(verb): print tcs
+
+    f=string.atof
+    
+    o=open('/tmp/clip.input.txt','w')
+
+    for tc in tcs:
+        if(verb): print tc
+        tt=string.split(tc)
+        sname=tt[1]
+        vmax=f(tt[2])
+        lat0=f(tt[4])
+        lon0=f(tt[5])
+        dir=f(tt[8])
+        spd=f(tt[9])
+
+        (latm12,lonm12)=rumltlg(dir,spd,-12,lat0,lon0)
+        (latm24,lonm24)=rumltlg(dir,spd,-24,lat0,lon0)
+
+        basin=tcbasin(lat0,lon0)
+        if(verb): print "ssss ",sname,vmax,lat0,lon0,dir,spd
+        if(verb): print "mmmm ",latm12,lonm12,latm24,lonm24
+        part1="%10s %3s %3s  vmax: %03d "%(dtg,sname,basin,vmax)
+        part2="motion: %6.2f %5.2f  tau0: %5.1f %6.1f "%(dir,spd,lat0,lon0)
+        part3="taum12: %5.1f %6.1f  taum24: %5.1f %6.1f"%(latm12,lonm12,latm24,lonm24)
+        clipcard=part1+part2+part3+'\n'
+
+        print part1,part2,part3
+
+        o.writelines(clipcard)
+        
+    o.close()

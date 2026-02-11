@@ -22,7 +22,7 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
             'yearOpt':          ['Y:',None,'a','yearOpt'],
-            'doAtcf':           ['A',0,1,'make atcf-form for era5'],
+            'redoClp3Ad2':      ['C',0,1,'redoClp3Ad2 only'],
             'doAd2Inv':         ['I',1,0,'do NOT do ad2inv'],
             'dobt':             ['b',1,0,'only do NN is the default'],
             'redoTrk':          ['R',0,1,' run tracker for missing dtgs'],
@@ -63,6 +63,7 @@ if(doAd2InvOnly):
     redoAd2=0
     redoAd2Phr0=0
     doAtcf=0
+    redoClp3Ad=0
     doAd2Inv=1
 
 MF.sTimer('Mk-Ad-All')
@@ -97,20 +98,24 @@ for year in years:
         MF.dTimer('redoEra5Ad2-%s'%(syear))
 
 
-    if(doAtcf):
-        MF.sTimer('atcf-%s'%(syear))
-        cmd='p-atcf-form.py -S all.%s -O'%(syear)
+    if(redoClp3Ad2):
+        
+        MF.sTimer('atcf-CLP3-%s'%(syear))
+        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py clp3 -S all.%s -O1 -s -W'%(syear)
         mf.runcmd(cmd,ropt)
-        MF.dTimer('atcf-%s'%(syear))
+        MF.dTimer('atcf-CLP3-%s'%(syear))
 
-    if(not(doAd2InvOnly) and redoEra5Ad2):
-        
-        MF.sTimer('adera-%s'%(syear))
-        stmopt=makeStmOptByBasin(syear)
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py era5 -o -S %s -O3 -W'%(stmopt)
+        MF.sTimer('adinv-%s'%(syear))
+        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -L > %s'%(syear,opath)
         mf.runcmd(cmd,ropt)
-        MF.dTimer('adera-%s'%(syear))
+        MF.dTimer('adinv-%s'%(syear))
         
+        if(ropt != 'norun'):
+            MF.sTimer('adinv-pyp-%s'%(syear))
+            rc=parseAd2Inv(syear)
+            MF.dTimer('adinv-pyp-%s'%(syear))
+        
+
     # -- now do the ad2 -h 0
     #
     if(redoAd2 or redoAd2Phr0):
