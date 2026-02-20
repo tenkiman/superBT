@@ -326,7 +326,6 @@ class TcDiagS(MFbase):
         else:
             self.adeckSdir=adeckSdir
 
-
         if(tbdir == None):
             tbdir=TcTcanalDatDir
 

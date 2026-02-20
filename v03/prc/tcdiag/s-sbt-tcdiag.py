@@ -128,8 +128,8 @@ def rsyncEra2Local(dtg):
     #else:
         #sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
         
-    sdirA = '/raid02/sbt/dat/adeck-dtg/%s/%s' % (year, dtg)
-    tdirA = "%s/adeck-dtg/%s/%s" % (sbtDatDirL, year, dtg)
+    sdirA='/sbt/superBT-V04/dat-v03/adeck-dtg/%s/%s' % (year, dtg)
+    tdirA="%s/adeck-dtg/%s/%s" % (sbtDatDirL, year, dtg)
     MF.ChkDir(tdirA, 'mk')
 
     # -- for era5 use pull previous 00/12 run if 06/18
@@ -147,15 +147,15 @@ def rsyncEra2Local(dtg):
 
     # -- 20250625 -- always linked to /w21/dat/... location
     #
-    sdirE = '/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
+    sdirE='/%s/dat/nwp2/w2flds/dat/era5/%s/%s' % (raid01Location, year, eradtg)
         
-    tdirE = "%s/nwp2/w2flds/dat/era5/%s/%s" % (sbtDatDirL, year, eradtg)
-    rc = MF.ChkDir(tdirE, 'mk')
+    tdirE="%s/nwp2/w2flds/dat/era5/%s/%s" % (sbtDatDirL, year, eradtg)
+    rc=MF.ChkDir(tdirE, 'mk')
     
-    cmdA = "rsync -alv %s/ %s/" % (sdirA, tdirA)
+    cmdA="rsync -alv %s/ %s/" % (sdirA, tdirA)
     mf.runcmd(cmdA, ropt)
     
-    cmdE = "rsync -alv %s/ %s/" % (sdirE, tdirE)
+    cmdE="rsync -alv %s/ %s/" % (sdirE, tdirE)
     mf.runcmd(cmdE, ropt)
     
     ctls=glob.glob("%s/*ctl"%(tdirE))
@@ -252,7 +252,6 @@ if(not(doCycle) and not(bypassRunChk)):
 #xgrads=setXgrads(useStandard=1)   # hi res plots
 xgrads=setXgrads(useX11=1)
 
-
 # -- do inventory if cur in dtgopt
 #
 doInvAtEnd=0
@@ -282,7 +281,6 @@ for dtg in dtgs:
     if(IsBadEra5Dtg(tdtg) == 0):
         print 'EEE---BBB era5 dtg...press...'
         continue
-    
 
     # -- 20230314 -- will miss storms with missing dtgs...
     #    see inv/dtgmiss/m-B-2007-22.txt 
@@ -305,7 +303,7 @@ for dtg in dtgs:
     # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
     # -- IIFF there are storms
     #
-    if(doLocal): (tdirE,ctlPathUa,ctlPathSfc) = rsyncEra2Local(dtg)
+    (tdirE,ctlPathUa,ctlPathSfc) = rsyncEra2Local(dtg)
     
     # -- only track in stmopt
     #
@@ -428,6 +426,7 @@ for dtg in dtgs:
                   sbtProdDir=sbtProdDir,
                   doga=0,verb=verb)
 
+
         # -- 20230607 -- clean all files if override -- to overcome problem of redos with storms in all hemis
         #
         if(override):
@@ -479,11 +478,8 @@ for dtg in dtgs:
 
         # -- get storms and make sure ctlpath there...
         #
-        if(doLocal):
-            ctlpath=ctlPathUa
-            ctlpath2=ctlPathSfc
-        else:
-            ctlpath=tG.ctlpath
+        ctlpath=ctlPathUa
+        ctlpath2=ctlPathSfc
             
         if(ropt == 'norun'):  continue
 

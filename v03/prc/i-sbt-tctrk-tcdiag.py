@@ -360,7 +360,7 @@ if(len(redoAd) > 0):
     
     for dtg in redoAd:
         if(doAllTimer): MF.sTimer('redoAD-All-%s-AD'%(dtg))
-        cmd="r-all-tcdiag.py %s -C -L"%(dtg)
+        cmd="r-all-tcdiag.py %s -C %s"%(dtg,lopt)
         mf.runcmd(cmd,ropt)
         if(doAllTimer): MF.dTimer('redoAD-All-%s-AD'%(dtg))
         
