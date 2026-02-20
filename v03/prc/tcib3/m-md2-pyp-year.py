@@ -36,9 +36,17 @@ eyear=1980
 byear=1945
 eyear=2023
 
-#byear=eyear=2000
 #byear=eyear=1953
 #byear=eyear=1981
+
+# -- 20251009 -- redo to keep with nhc adecks
+#
+byear=1940
+eyear=2023
+
+#byear=eyear=2010
+#byear=eyear=1954
+verb=0
 
 MF.sTimer('md2-%s-%s'%(byear,eyear))
 years=range(byear,eyear+1)
@@ -48,15 +56,29 @@ for year in years:
         
     syear=str(year)
     
-    b2mask="%s/%s/b????????.dat"%(bdirj,syear)
-    bd2s=glob.glob(b2mask)
+    b2maskj="%s/%s/b????????.dat"%(bdirj,syear)
+    b2maskn="%s/%s/b????????.dat"%(bdirn,syear)
+    bd2s=glob.glob(b2maskj) + glob.glob(b2maskn)
     bd2s.sort()
     
     for bd2 in bd2s:
         
+        ad2='/tmp/zy0x122'
         (bdir,bfile)=os.path.split(bd2)
+        b2id=bfile[1:3]
+        bnum=bfile[3:5]
+        isnhc=IsNhcBasin(b2id)
+
         afile=bfile.replace('b','a')
-        ad2="%s/%s/%s"%(adirj,syear,afile)
+        ad2j="%s/%s/%s"%(adirj,syear,afile)
+        ad2n="%s/%s/%s"%(adirn,syear,afile)
+        
+        if(MF.ChkPath(ad2j) and not(isnhc)):
+            ad2=ad2j
+        if(MF.ChkPath(ad2n) and isnhc):
+            ad2=ad2n
+            
+        print ('bbb222',bd2,'aaa222',ad2,'isnhc',isnhc,'bnum: ',bnum)
         #print ('bb',bfile,'aa',afile,'ad2:',ad2)
         
 
@@ -79,12 +101,22 @@ for year in years:
             #acards=open(ad2).readlines()
         #except:
             #acards=[]
-            
+        print ('aaa',b2id,snum,syear,len(acards))
+        print ('bbb',len(bcards))
         abcards=acards+bcards
+        
         bd=MDdeck(abcards,b2id,snum,syear)
-        bd.getDtgRangeNN(bd.mD,nhours=48,verb=verb,warn=verb)
-        bdtgs=list(bd.mD.uniqStmdtgs.keys())
+        #bd.getDtgRangeNN(bd.mD,nhours=48,verb=verb,warn=verb)
+        #bdtgs=list(bd.mD.uniqStmdtgs.keys())
+        
+        # -- only use the best track dtgs
+        #
+        bdtgs=list(bd.mD.best.keys())
         bdtgs.sort()
+        
+        # -- set the mD dtgs to best track
+        #
+        bd.mD.dtgs=bdtgs
         
         if(len(bdtgs) == 0):
             print('WWW for: %s  no bdtgs! .. press... '%(tstmid))
@@ -92,7 +124,7 @@ for year in years:
 
         # -- case for dtg breaks in bdeck
         #
-        bd.mD.dtgs=bd.mD.uniqStmdtgs[bdtgs[-1]]
+        #bd.mD.dtgs=bd.mD.uniqStmdtgs[bdtgs[-1]]
 
         smD=bd.mD
         smDBT=copy.deepcopy(bd.mD)
@@ -103,7 +135,6 @@ for year in years:
         # -- btonly bbbbbbbbbbbbbbbbbbb
         #
         smDBT.setMDtrk(verb=verb,docq00=0,btonly=1)
-    
         # -- put BT to pypdb
         #
         smDBT.cleanMD()
@@ -115,15 +146,25 @@ for year in years:
             
         m2trk={}
         m2trk=smDBT.getMDtrk()
+        
+        #if(stm1id == '01L.1954'):
+            #print(abcards)
+            #print(bdtgs)
+            #bd.mD.ls()
+            #(trk,dtgs)=m2trk
+            #dtgs.sort()
+            #for dtg in dtgs:
+                #print(dtg,trk[dtg])
+            ##bd.ls()
+            #sys.exit()
+        
     
         oMD2s[tstmid]=m2trk
-        
-        #print('ttt',tstmid,m2trk)
         
         
 # -- now pickle dump
 #
-P=open('%s/iTC-md2-jtwc-%s-%s.pyp'%(ddir,byear,eyear),'wb')
+P=open('%s/iTC-md2-jtwc-nhc-%s-%s.pyp'%(ddir,byear,eyear),'wb')
 pickle.dump(oMD2s,P)
 P.close()
 MF.dTimer('md2-%s-%s'%(byear,eyear))

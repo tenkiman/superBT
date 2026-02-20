@@ -20,6 +20,7 @@ bdirn='/w21/dat/tc/bdeck2/nhc'
 #
 adirj='/w21/dat/tc/adeck/jtwc'
 adirn='/w21/dat/tc/adeck/nhc'
+adirn='/w21/dat/tc/adeck2/nhc'
 
 class bdeck(MFutils):
     
@@ -71,48 +72,117 @@ class bdeck(MFutils):
         return
         
         
+def getIbBasin(basins):
     
+    cntb={}
+    for basin in basins:
+        try:
+            cntb[basin]=cntb[basin]+1
+        except:
+            cntb[basin]=1
+            
+    bbs=list(cntb.keys())
+
+    if(len(bbs) == 1): obasin=bbs[0]
+    
+    if(len(bbs) > 1):
+        nbs=-999
+        for bb in bbs:
+            if(cntb[bb] > nbs):
+                nbs=cntb[bb]
+                obasin=bb
+                
+    return(obasin)
+        
+            
+        
     
 
 def convertIb2AtcfId(tc,tstmid=None,verb=0):
     
+    #ibasin=tc.basin
+    #isubbasin=tc.subbasin
+    
     year=tc.season
     atcfid=tc.ATCF_ID
     
-    if(tc.basin == 'NA'): 
+    ibasin=getIbBasin(tc.basins)
+    isubbasin=getIbBasin(tc.subbasins)
+    
+    #if(atcfid != None):
+        #ibBB=ibasin
+        #abBB=atcfid[0:2]
+        #ibSH=isShemBasinStm(ibBB)
+        #abSH=isShemBasinStm(abBB)
+        #ibIO=isIOBasinStm(ibBB)
+        #abIO=isIOBasinStm(abBB)
+        #ibNH=not(ibSH) and not(ibIO)
+        #abNH=not(abSH) and not(abIO)
+        #obasin=getIbBasin(tc.basins)
+        #osubbasin=getIbBasin(tc.subbasins)
+        ##print ('qqq--',tc.ID,tc.ATCF_ID,ibBB,abBB,tc.basins,tc.lon)
+        #print ('ooo--',ibasin,'ooo',obasin,osubbasin)
+
+        ##if(ibNH and abNH):
+            ##if(
+                ##(ibBB == 'NA' and abBB == 'AL') or
+                ##(ibBB == 'EP' and abBB == 'EP') or
+                ##(ibBB == 'EP' and abBB == 'CP') or
+                ##(ibBB == 'WP' and abBB == 'WP')
+                ##):
+                ##iok=1
+            ##else:
+                ##iok=0
+                
+            ##if(not(iok)):
+                ###ibasin=abBB
+                ##if(abBB == 'AL'):
+                    ##ibasin='NA'
+                ##print('mmmiiisssmatch',ibBB,abBB,tc.ID,\
+                      ##'setting ibasin:',ibasin,'sb:',tc.subbasin,'lat/lon: %4.1f %5.1f end:  %4.1f %5.1f '%\
+                      ##(tc.lat[0],tc.lon[0],tc.lat[-1],tc.lon[-1]))
+                
+        
+    
+    if(ibasin == 'NA'): 
         sid='l'
         sid2='AL'
-    elif(tc.basin == 'WP'): 
+        
+    elif(ibasin == 'WP'): 
         sid='w'
         sid2='WP'
-    elif(tc.basin == 'EP'):
-        if(tc.subbasin == 'CP'): 
+        
+    elif(ibasin == 'EP'):
+        if(isubbasin == 'CP'): 
             sid='c'
             sid2='CP'
         else:
             sid='e'
             sid2='EP'
 
-    elif(tc.basin == 'NI'):
-        if(tc.subbasin == 'BB'): 
+    elif(ibasin == 'NI'):
+        if(isubbasin == 'BB'): 
             sid='b'
-        elif(tc.subbasin == 'AS'): 
+        elif(isubbasin == 'AS'): 
             sid='a'
         else:
             sid='i'
         sid2='IO'
             
-    elif(tc.basin == 'SI'): 
+    elif(ibasin == 'SI'): 
         sid='s'
         sid2='SH'
-    elif(tc.basin == 'SP'): 
+        
+    elif(ibasin == 'SP'): 
         sid='p'
         sid2='SH'
-    elif(tc.basin == 'SA'): 
+        
+    elif(ibasin == 'SA'): 
         sid='q'
         sid2='SL'
+        
     else:
-        print ('ooopppsss: tc.basin = ',tc.basin)
+        print ('ooopppsss: ibasin = ',ibasin)
         sys.exit()
         
     snum='99'
@@ -121,7 +191,7 @@ def convertIb2AtcfId(tc,tstmid=None,verb=0):
         
     astmid="%s%s.%s"%(snum,sid,year)
         
-    return(sid,sid2,astmid)
+    return(sid,sid2,astmid,ibasin,isubbasin)
         
 def getIb3aTCs(byear=1940, eyear=2024):
     
@@ -594,35 +664,37 @@ def getMD2trk(md2trk):
      r34m,r50m,alf,sname,
      r34,r50,depth,
      ) = md2trk
+
+    irlat=int(rlat*10)
+    rlat=irlat*0.1
+    irlon=int(rlon*10)
+    rlon=irlon*0.1
     
-    posit=(rlat,rlon,vmax,pmin,tccode,wncode,trkdir,trkspd,r34)
+    if(vmax == None): vmax=undef
+    if(pmin == None): pmin=undef
+    
+    posit=(rlat,rlon,vmax,pmin,tccode,wncode,trkdir,trkspd,alf,r34,r50)
     return(posit)
 
     
     
-def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
+def getITCvars(tc,tstmid,mstmid,m2trk=None,sundef='-999',
                m2distMax=100.0,
                verb=0,doprint=1):
     
-    (sid,sid2,astmid)=convertIb2AtcfId(tc,tstmid,verb=verb)
-    
+    (sid,sid2,astmid,ibasin,isubbasin)=convertIb2AtcfId(tc,tstmid,verb=verb)
 
     ags=mf.uniq(tc.agencies)
     ibAgency=getAgency(ags)
     
     if(verb):
-        print('sidsid2 ',sid,sid2,astmid,'tstmid: ',tstmid)
+        print('sidsid2 ',sid,sid2,astmid,'tstmid: ',tstmid,'ATCF_ID:',tc.ATCF_ID)
         print('agencies',tc.agencies,mf.uniq(tc.agencies))
         print('aaggeennccy: ',ibAgency)
     
     
     m2dtgs=list(m2trk.keys())
     m2dtgs.sort()
-    #for m2dtg in m2dtgs:
-    #    print('mm22',m2dtg,m2trk[m2dtg])
-        
-    #if(b2trk == None):
-    #    b2trk=getB2trk(tstmid)
 
     lats=tc.lat
     lons=tc.lon
@@ -643,42 +715,78 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
             print (k,metas[k])
     
     dtgs=[]
+    m2posits={}
     ibtrk={}
     dirspd={}
     radii={}
     
+    cntDtgs=0
+    cntBd=0
+    cntV=0
+    cntP=0
+    cntBdV=0
+    cntBdP=0
+    cntWck=0
+    meanDist=0.0
+    nMd2=0
+    nDist=0
+    
     for n in range(0,len(times)):
+
         tt=times[n]
         dtg=convertItime2Dtg(tt)
         dtgs.append(dtg)
+        
+        cntDtgs=cntDtgs+1
 
-        b2lat=b2lon=b2mslp=b2wind=undef
+        m2lat=m2lon=m2mslp=m2wind=undef
+        m2dir=m2spd=undef
+        m2alf=undef
+        m2tccode=m2wncode='--'
+        m2r34=m2r50=m2r64=None
+
         r34=r50=r64=None
-        b2tccode=b2wncode='--'
         
         try:
             md2posit=getMD2trk(m2trk[dtg])
             #print('md2posit',md2posit)
             
-            b2lat=md2posit[0]
-            b2lon=md2posit[1]
-            b2wind=md2posit[2]
-            b2slp=md2posit[3]
-            b2dir=md2posit[6]
-            b2spd=md2posit[7]
-            b2tccode=md2posit[4]
-            b2wncode=md2posit[5]
-            ib2lat=int(b2lat*10.0)
-            b2lat=ib2lat/10.0
-            ib2lon=int(b2lon*10.0)
-            b2lon=ib2lon/10.0
-            #if(b2slp > 0.0):
-                #b2mslp=int(b2mslp)
-            #else:
-                #b2mslp=undef
+            m2lat=md2posit[0]
+            m2lon=md2posit[1]
+            m2wind=md2posit[2]
+            m2mslp=md2posit[3]
+            m2tccode=md2posit[4]
+            m2wncode=md2posit[5]
+            m2dir=md2posit[6]
+            m2spd=md2posit[7]
+            m2alf=md2posit[8]
+            m2r34=md2posit[9]
+            m2r50=md2posit[10]
+            im2lat=int(m2lat*10.0)
+            m2lat=im2lat/10.0
+            im2lon=int(m2lon*10.0)
+            m2lon=im2lon/10.0
+            if(m2mslp > 0.0):
+                m2mslp=int(m2mslp)
+            else:
+                m2mslp=undef
+            cntBd=cntBd+1
+            
         except:
             None
-            
+
+        # -- m2 posit info
+        #
+        m2posit=(m2lat,m2lon,m2mslp,m2wind,m2tccode,m2wncode,m2alf,m2r34,m2r50)
+        m2posits[dtg]=m2posit
+        #print('m2posit',dtg,m2posit)
+        if(m2wind != undef):
+            cntBdV=cntBdV+1
+        if(m2mslp != undef):
+            cntBdP=cntBdP+1
+
+        # -- ibtrac
+        #
         lat=lats[n]
         lon=lons[n]
         
@@ -689,19 +797,25 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
         
         mslp=mslps[n]
         dojtwc=0
-        if(b2lat != undef):
-            b2dist=gc_dist(lat,lon,b2lat,b2lon)
-            #print('b2dist %4.0f'%(b2dist),lat,lon,b2lat,b2lon,b2wind,b2slp)
+        if(m2lat != undef):
+            nMd2=nMd2+1
+            m2dist=gc_dist(lat,lon,m2lat,m2lon)
+            #print('m2dist %4.0f m2posit: %4.1f %5.1f %4.1f %5.1f %3.0f %4.0f'%(m2dist,lat,lon,m2lat,m2lon,m2wind,m2mslp))
             
-            if(b2dist <= m2distMax):
+            if(m2dist <= m2distMax):
                 dojtwc=1
-
+                nDist=nDist+1
+                meanDist=meanDist+m2dist
+                
+        m2posits[dtg]=m2posit
+        
         wind=winds[n]
         tctype=tctypes[n]
         agency=agencies[n]
         if(agency == ''):
              agency='jtwc'
-        #print('qqq',dtg,lat,b2lat,lon,b2lon,mslp,b2mslp,wind,b2wind,agency)
+        
+        #print('qqq',dtg,lat,m2lat,lon,m2lon,mslp,m2mslp,wind,m2wind,agency)
         d2land=dist2lands[n]
         rmw=rmws[n]
         
@@ -712,13 +826,18 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
             cmslp=' -999'
         else:
             cmslp='%5.0f'%(mslp)
+            cntP=cntP+1
         if(isnan(wind)):
             wind=sundef
+        else:
+            cntV=cntV+1
+            
         if(isnan(rmw)):
             rmw=' '
             crmw='   '
         else:
             crmw="%3.0f"%(rmw)
+        
         
         # -- convert to 1-min ave wind
         #
@@ -741,7 +860,6 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
             vmaxha=nearest5kts(vmaxha)
             vmaxck=CourtneyKnaffPminVmax(mslp)
             vmaxck=nearest5kts(vmaxck)
-            
 
             
         (clat,clon)=Rlatlon2Clatlon(lat,lon,dodec=0)
@@ -749,13 +867,22 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
         if(doprint):
             print ('dtg: ',sid,dtg,'%5s %6s %s'%(clat,clon,cmslp),'w0-1 %5.0f %5.0f  '%(wind0,wind1),\
                    'ha %5.0f ck %5.0f %3s %-10s'%(vmaxha,vmaxck,tctype,agency),'%6.0f %s'%(d2land,crmw),\
-                   'm2: %5.0f tc: %s wn: %s'%(b2wind,b2tccode,b2wncode),\
+                   'm2: %5.0f %5.0f alf: %3.2f dr-sp: %3.0f/%2.0f tc-wn: %s : %s'%(m2wind,m2mslp,m2alf,m2dir,m2spd,m2tccode,m2wncode),\
+                   #'m2: %5.0f dr-sp: %4.0f %4.0f tc-wn: %s : %s'%(m2wind,m2dir,m2spd,m2tccode,m2wncode),\
                    'dojtwc',dojtwc)
         
     # -- get prev 12-h track dir/spd
     #
     dtgs.sort()
     ndtgs=len(dtgs)
+    
+    print('CCCCCCCCCC ',mstmid,'cntDtgs: %2d cntBd: %2d cntV: %2d cntP: %2d'%(cntDtgs,cntBd,cntV,cntP),\
+          'cntBdV: %2d cntBdP: %2d'%(cntBdV,cntBdP))
+    if(nDist> 0):
+        meanDist=meanDist/(nDist*1.0)
+        
+    print('CCC111 nDtgs: %3d nDist: %3d nMd2: %3d  meanDist: %4.1f'%(ndtgs,nDist,nMd2,meanDist))
+    #return()
 
     for n in range(0,ndtgs):
 
@@ -789,13 +916,15 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
             dt=mf.dtgdiff(dtgs[nm1],dtgs[n0])
             (trkdir,trkspd,umotion,vmotion)=rumhdsp(rlatm1,rlonm1,rlat0,rlon0,dt)
     
-        #print('dddd',dtgs[n],dt,nm1,n0,trkdir,trkspd,spds[n])
+        if(doprint):
+            print('dir-spd-12h: %s %2.0f %3d %3d %4.0f %4.0f %4.0f %4.0f'%(dtgs[n],dt,nm1,n0,trkdir,trkspd,m2dir,m2spd))
+            
         dirspd[dtg]=(trkdir,trkspd)        
         
         (gotR34,gotR50,gotR64,r34,r50,r64)=getRadii(tc,n)
         radii[dtg]=(gotR34,gotR50,gotR64,r34,r50,r64)
         
-        if(verb):
+        if(doprint):
             if(gotR34 == 0 and gotR50 == 0 and gotR64 == 0):
                 print('rrrnnnooo',dtgs[n],n)
     
@@ -811,7 +940,7 @@ def getITCvars(tc,tstmid,m2trk=None,sundef='-999',
 
     return(ibtrk,dirspd,radii)
 
-def getB2trk(tstmid,oBD2s):
+def getB2trk(tstmid,oBD2s,verb=0):
 
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
     if(b2id == 'SH'):
@@ -819,12 +948,15 @@ def getB2trk(tstmid,oBD2s):
     if(b2id == 'IO'):
         tstmid="%s%s.%s"%(snum,'i',year)
             
+    if(verb):
         
-    kk=oBD2s.keys()
-    #for k in kk:
-        #if(mf.find(k,'1980')):
-            #if(mf.find(k,'s') or mf.find(k,'p')):
-                #print('k: ',k)obj
+        kk=oBD2s.keys()
+        for k in kk:
+            #print('bdd--dd',k)
+            if(mf.find(k,year)):
+                if( mf.find(k,'s') or mf.find(k,'p') ):
+                    print('kbd: ',k)
+                
     try:
         b2trk=oBD2s[tstmid]
     except:
@@ -842,7 +974,7 @@ def getB2trk(tstmid,oBD2s):
             
     return(ob2trk,bdtgs)
 
-def getM2trk(tstmid,oMD2s):
+def getM2trk(tstmid,oMD2s,verb=0):
 
     (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
     if(b2id == 'SH'):
@@ -851,11 +983,12 @@ def getM2trk(tstmid,oMD2s):
         tstmid="%s%s.%s"%(snum,'i',year)
             
         
-    kk=oMD2s.keys()
-    #for k in kk:
-        #if(mf.find(k,'1980')):
-            #if(mf.find(k,'s') or mf.find(k,'p')):
-                #print('k: ',k)obj
+    if(verb):
+        kk=oMD2s.keys()
+        for k in kk:
+            if(mf.find(k,year)):
+                if(mf.find(k,'s') or mf.find(k,'p')):
+                    print('k: ',k)
     try:
         m2=oMD2s[tstmid]
     except:
@@ -888,6 +1021,26 @@ def getB2dtgsByYear(oBD2s,tstmid):
                 
     return(b2dtgs)
 
+def getNNstmsByYear(oMD2s,tstmid):
+    
+    (snum,b1id,iyear,ib2id,istm2id,stm1id)=getStmParams(tstmid)
+    if(ib2id == 'SH'):
+        tstmid="%s%s.%s"%(snum,'s',iyear)
+    if(ib2id == 'IO'):
+        tstmid="%s%s.%s"%(snum,'i',iyear)
+
+    nStms=0
+    kk=oMD2s.keys()
+    for k in kk:
+        (snum,b1id,kyear,kb2id,kstm2id,stm1id)=getStmParams(k)
+        if(kyear == iyear):
+            if(ib2id == kb2id):
+                #print('nn--kk',k,iyear,kyear,kstm2id,istm2id)
+                nStms=nStms+1
+            
+    return(nStms,ib2id,iyear)
+    
+
 def getM2dtgsByYear(oMD2s,tstmid):
 
     (snum,b1id,iyear,im2id,stm2id,stm1id)=getStmParams(tstmid)
@@ -898,8 +1051,9 @@ def getM2dtgsByYear(oMD2s,tstmid):
     for k in kk:
         (snum,b1id,kyear,km2id,stm2id,stm1id)=getStmParams(k)
         if(kyear == iyear):
+            #if(im2id == km2id and (k == tstmid)):
             if(im2id == km2id):
-                #print(k,km2id,im2id)
+                #print(k,km2id,im2id,tstmid)
                 dtgs=list(oMD2s[k][1])
                 dtgs.sort()
                 m2dtgs[k]=dtgs
@@ -929,7 +1083,7 @@ def getBD2ForIB(itc,oBD2s,tstmid,b2dtgs):
         b2trk=getB2trk(mstmid,oBD2s)
         #print('bbb',b2trk)
     
-def getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,distMax=100.0,pcmd2Min=50.0,verb=0):
+def getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,distMax=100.0,pcmd2Min=10.0,verb=0):
     
     idtgs=[]
     iposit={}
@@ -944,7 +1098,7 @@ def getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,distMax=100.0,pcmd2Min=50.0,verb=0)
         ilon=itc.lon[n]
         iposit[dtg]=(ilat,ilon)
         
-        if(verb): print('ibtrac',tstmid,n,dtg,'%4.1f %5.1f'%(ilat,ilon))
+        if(verb): print('ibtrac---',tstmid,n,dtg,'%4.1f %5.1f'%(ilat,ilon))
         
     nidtgs=len(idtgs)
     m2trk={}
@@ -954,6 +1108,7 @@ def getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,distMax=100.0,pcmd2Min=50.0,verb=0)
     for stm in stms:
         mdtgs=m2dtgs[stm]
         mtrk=oMD2s[stm][0]
+        #print('mm---',stm,mtrk.keys())
 
         for idtg in idtgs:
             
@@ -977,7 +1132,7 @@ def getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,distMax=100.0,pcmd2Min=50.0,verb=0)
     if(verb):
         for mstmid in mstmids:
             print('cccnnn',mstmid,cnts[mstmid],'nndd',nidtgs)
-        print('111ssstttmmm',tstmid,mstmids)
+        print('111ssstttmmm',tstmid,mstmids,len(mstmids))
     
     pcmd2=-99
     if(len(mstmids) == 1):
@@ -997,7 +1152,7 @@ def getMD2ForIB(itc,oMD2s,tstmid,m2dtgs,aTCs,distMax=100.0,pcmd2Min=50.0,verb=0)
             mstmid=None
             m2trk={}
         else:
-            if(verb): print('mmmssstttmmm',tstmid,mstmid,'cnts: ',cnts[mstmid],'ndtgs: ',nidtgs,'mitc:',len(mtrk))
+            if(verb): print('mmmssstttmmm---222',tstmid,mstmid,'cnts: ',cnts[mstmid],'ndtgs: ',nidtgs,'mitc:',len(mtrk))
     else:
         mstmid=None
         m2trk={}

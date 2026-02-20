@@ -3,6 +3,7 @@
 from ibvm import *
 
 usePy=0
+verb=0
 
 if(not(usePy)):
     MF.sTimer('load-ib')
@@ -12,34 +13,26 @@ if(not(usePy)):
 ddir='/w21/dat/tc/ib3/'
 
 
-byear=1940
-
-#eyear=1944
-
-
-byear=2000
-eyear=2023
-
-byear=1980
-eyear=1980
-
-# -- 20250916 -- redo to keep do correct SH/IO number >= 51
-#
-byear=1940
-eyear=2023
 
 # -- 20250917 -- redo to keep ALL noatcfID like in WESTPAC
+# -- 20251003 -- correct method of getting ibtracs basin, subbasin
 #
-#byear=eyear=1980
+byear=eyear=1949
+
+# -- 20250916 -- redo to keep do correct SH/IO number >= 51
+# -- 20251003 -- redo whole thing
+#
+byear=1940
+eyear=2023
 
 years=range(byear,eyear+1)
 
-verb=0
 for year in years:
         
     syear=str(year)
 
     # -- use existing pickle dump by year
+    #
     if(usePy):
 
         P=open('%s/iTC%s.pyp'%(ddir,syear),'rb')
@@ -59,29 +52,12 @@ for year in years:
     noatcfID={}
     for n in range(0,nTCs):
         tc=TCs[n]
-        #print('nnn',year,n,tc)
-        (sid,sid2,astmid)=convertIb2AtcfId(tc)
+        (sid,sid2,astmi,ibasin,isubbasin)=convertIb2AtcfId(tc)
         if(verb): print('tc sid',n,sid,sid2,tc.ID,tc.ATCF_ID,tc.genesis)
-        #continue
-        #rc=getibTCs4aTCs(aTCs,year,basin,tstmids)
-        #sys.exit()
-        #continue
+
         if(tc.ATCF_ID != None):
             stmid=getStm1id4Atcfid(tc.ATCF_ID,sid)
             if(verb): print ('atcf-stmid: ',stmid)
-            #if(domd3):
-                #(rc,md3trk)=md3.getMd3track(stmid,dobt=1,verb=verb)
-                #dtgs=list(md3trk.keys())
-                #print (dtgs)
-                #dtgs.sort()
-                #rc=md3trk[dtgs[0]]
-                #print ('rc: ',rc)
-                
-            #(lat,lon,mslp,wind,time)=getITCvars(tc)
-            #print(time)
-            
-            #sys.exit()
-            ##stmid="%2s%s.%s"
             atcfID[n]=tc
             
         else:
@@ -100,9 +76,11 @@ for year in years:
     kk=atcfID.keys()
     for k in kk:
         tc=atcfID[k]
-        (sid,sid2,astmid)=convertIb2AtcfId(tc)
+        (sid,sid2,astmid,ibasin,isubbasin)=convertIb2AtcfId(tc)
         oTCs[astmid]=tc
-        print ('yyyyyyyy: %4d %s %s %s '%(k,sid,sid2,astmid))
+        if(verb):
+            print ('yyyyyyyy: %4d %s %s %s lat/lon: %5.1f %5.1f end: %5.1f %5.1f id: %s %s'%\
+                   (k,sid,sid2,astmid,tc.lat[0],tc.lon[0],tc.lat[-1],tc.lon[-1],tc.ID,tc.ATCF_ID))
 
     # -- now the ones with out a stmid... start at 51 in each basin
     #
@@ -121,7 +99,7 @@ for year in years:
     
     for k in kk:
         tc=noatcfID[k]
-        (sid,sid2,astmid)=convertIb2AtcfId(tc)
+        (sid,sid2,astmid,ibasin,isubbasin)=convertIb2AtcfId(tc)
         
         if(sid2 == 'SH'):
             sidsSH.append(sid)
@@ -144,10 +122,12 @@ for year in years:
             tc=noatcfID[bsnum]
             
             byear=tc.season
-            (sid,sid2,astmid)=convertIb2AtcfId(tc)
+            (sid,sid2,astmid,ibasin,isubbasin)=convertIb2AtcfId(tc)
             bstmid="%s%s.%s"%(inum,sid,byear)
             oTCs[bstmid]=tc
-            print('nnnnshem: %4d %s %s %s'%(bsnum,sid,sid2,bstmid))
+            if(verb):
+                print ('nnnnshem: %4d %s %s %s lat/lon: %5.1f %5.1f end: %5.1f %5.1f id: %s %s'%\
+                       (bsnum,sid,sid2,astmid,tc.lat[0],tc.lon[0],tc.lat[-1],tc.lon[-1],tc.ID,tc.ATCF_ID))
             inum=inum+1
             
     # -- IO
@@ -161,10 +141,12 @@ for year in years:
             tc=noatcfID[bsnum]
             
             byear=tc.season
-            (sid,sid2,astmid)=convertIb2AtcfId(tc)
+            (sid,sid2,astmid,ibasin,isubbasin)=convertIb2AtcfId(tc)
             bstmid="%s%s.%s"%(inum,sid,byear)
             oTCs[bstmid]=tc
-            print('nnnnio  : %4d %s %s %s'%(bsnum,sid,sid2,bstmid))
+            if(verb):
+                print ('nnnnIOIO: %4d %s %s %s lat/lon: %5.1f %5.1f end: %5.1f %5.1f id: %s %s'%\
+                       (bsnum,sid,sid2,astmid,tc.lat[0],tc.lon[0],tc.lat[-1],tc.lon[-1],tc.ID,tc.ATCF_ID),tc)
             inum=inum+1
             
     # -- EX
@@ -180,10 +162,12 @@ for year in years:
             
             tc=noatcfID[bsnum]
             byear=tc.season
-            (sid,sid2,astmid)=convertIb2AtcfId(tc)
+            (sid,sid2,astmid,ibasin,isubbasin)=convertIb2AtcfId(tc)
             bstmid="%s%s.%s"%(inum,sid,byear)
             oTCs[bstmid]=tc
-            print('nnnnXXXX: %4d %s %s %s'%(bsnum,sid,sid2,bstmid))
+            if(verb):
+                print ('nnnnXXXX: %4d %s %s %s lat/lon: %5.1f %5.1f end: %5.1f %5.1f id: %s %s'%\
+                       (bsnum,sid,sid2,astmid,tc.lat[0],tc.lon[0],tc.lat[-1],tc.lon[-1],tc.ID,tc.ATCF_ID))
             inum=inum+1
             
     # -- now pickle dump
