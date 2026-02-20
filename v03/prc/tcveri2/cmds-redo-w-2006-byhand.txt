@@ -1,0 +1,77 @@
+-S l.2015
+
+0211 21:34:48 del DSs-local/ad2-al-2015.pypdb 
+
+0211 21:35:32 ad2 all -S l.15 -O1 -o
+0211 21:36:53 ad2 era5,clp3 -S l.15 -O1 -o
+
+0211 21:37:56 p-adinv.py -S l.15 -A -O 
+
+0211 21:38:40 m-ad2inv.py -i -Y 2015
+
+0211 21:42:06 p-adinv.py -S l.15 -A -O 
+
+0211 21:44:20 p-vdinv.py -S l.15 -O -N
+0211 21:44:31 p-vdinv.py -S l.15 -O -p pod
+0211 21:44:43 p-vdinv.py -S l.15 -O -p pod -f z0012
+0211 21:44:59 p-vdinv.py -S l.15 -O -f z0012
+
+
+
+final
+-----
+
+0211 21:03:55 del DSs-local/ad2-al-2012.pypdb 
+
+0211 21:04:08 ad2 all -o -S l.2012 -O1
+
+0211 21:06:07 la DSs-local/ad2-al-2012.pypdb 
+
+0211 21:06:36 ad2 era5 -S l.2012 -O1 -o
+0211 21:06:53 ad2 clp3 -S l.2012 -O1 -o
+0211 21:15:40 p-adinv.py -S l.2012 -A                      # makes 00 bias-corr
+
+0211 20:30:43 m-ad2inv.py -i -Y 2006               # redo inv
+
+0211 21:26:10 p-vdinv.py -S l.2012 -O
+0211 21:28:00 p-vdinv.py -S l.2012 -f z0012
+0211 21:28:13 p-vdinv.py -S l.2012 -O -p pod
+0211 21:28:28 p-vdinv.py -S l.2012 -O -p pod -f z0012
+
+
+1st attempts
+------------
+
+0211 20:26:01 rm DSs-local/ad2-wp-2005.pypdb       # delete bad pypdb
+0211 20:26:19 ad2 all -S w.2006 -O1                # redo with all sources
+0211 20:28:16 ad2 era5 -S w.2006 -O1               # add era5
+
+0211 20:30:43 m-ad2inv.py -i -Y 2006               # redo inv
+
+0211 20:41:54 p-vdinv.py -S w.2006 -O              # make vd2
+0211 20:43:15 p-vdinv.py -S w.2006 -f z0012        # filter z0012
+0211 20:43:55 p-vdinv.py -S w.2006 -p pod -O       # pod
+0211 20:44:12 p-vdinv.py -S w.2006 -f z0012 -p pod # pod of z0012
+
+0211 21:04:08 ad2 all -S l.2012 -O1
+0211 21:06:07 la DSs-local/ad2-al-2012.pypdb 
+0211 21:06:36 ad2 era5 -S l.2012 -O1 -o
+0211 21:06:53 ad2 clp3 -S l.2012 -O1 -o
+0211 21:13:56 h
+0211 21:14:04 p-adinv.py 
+0211 21:14:21 p-adinv.py -Y 2012 -0 -N
+0211 21:14:34 p-adinv.py -S l.2012 -0 -N
+0211 21:14:48 p-adinv.py -S l.2012 -0 
+0211 21:14:56 p-adinv.py -S l.2012 -0 -O
+0211 21:15:21 p-adinv.py -S l.2012 -0 -N
+0211 21:15:23 p-adinv.py -S l.2012 -0 -N -C
+0211 21:15:26 p-adinv.py -S l.2012 -0 -N -A
+0211 21:15:40 p-adinv.py -S l.2012 -A
+0211 21:15:48 p-adinv.py -S l.2012 -A -O
+0211 21:16:25 p-vdinv.py -S l.2012 -f z0012
+0211 21:17:05 h
+0211 21:17:23 p-adinv.py -S w.2006 -A -O
+0211 21:18:15 p-vdinv.py -S w.2006 -O
+0211 21:20:25 p-vdinv.py -S w.2006 -f z0012
+0211 21:20:37 p-vdinv.py -S w.2006 -O -p pod
+0211 21:20:52 p-vdinv.py -S w.2006 -O -p pod -f z0012

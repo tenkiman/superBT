@@ -107,7 +107,7 @@ for stmopt in stmopts:
             continue
         MF.sTimer('AD2-h0-%s'%(stmopt))
         aapp='w2-tc-dss-ad2.py'
-        cmd='''%s/%s -S %s -T %s -h 0 -O1 -W -B | tee %s'''%(prcdir,aapp,stmopt,aaids,logpath)
+        cmd='''%s/%s -S %s -T %s -h 0 -O1 -W -B -o | tee %s'''%(prcdir,aapp,stmopt,aaids,logpath)
         mf.runcmd(cmd,ropt)
         MF.dTimer('AD2-h0-%s'%(stmopt))
         

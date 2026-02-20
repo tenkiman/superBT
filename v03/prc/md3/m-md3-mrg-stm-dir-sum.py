@@ -129,16 +129,18 @@ for year in years:
             #
             if(mpathMRG == None): 
                 print 'problem in spath: ',spath,' with mpathMRG: ',mpathMRG
-                sys.exit()
+                #sys.exit()
                 
-            # -- now do the summary
-            #
-            vopt=''
-            if(verb): vopt='-V'
-
-            cmd="m-mdeck3.py -r %s %s -Y %s"%(mpathMRG,vopt,year)
-            #mf.runcmd(cmd,'quiet')
-            mf.runcmd(cmd,ropt)
+            else:
+                
+                # -- now do the summary
+                #
+                vopt=''
+                if(verb): vopt='-V'
+                
+                cmd="m-mdeck3.py -r %s %s -Y %s"%(mpathMRG,vopt,year)
+                #mf.runcmd(cmd,'quiet')
+                mf.runcmd(cmd,ropt)
             
 
                 

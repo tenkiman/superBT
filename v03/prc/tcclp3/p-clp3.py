@@ -12,6 +12,11 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
 
     lstau12=lasttau%12
     lasttau=lasttau-lstau12
+    
+    if(lasttau <= 12):
+        print 'BBB bailing on stmid: %s lasttau: %2d dtg: %s'%(stmid,lasttau,dtg)
+        acards=[]
+        return(acards)
 
     eadeck={}
     eataus=[]
@@ -36,7 +41,7 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
     tcspd=bposit[4]
     idtg=dtg[2:]
     
-    print 'setClp3 for ',stmid,' lasttau: ',lasttau
+    print 'setClp3 for ',stmid,' lasttau: %3d  dtg: %s'%(lasttau,dtg)
     
     (latm12,lonm12)=rumltlg(tcdir,tcspd,-12.0,lat0,lon0)
     (latm24,lonm24)=rumltlg(tcdir,tcspd,-24.0,lat0,lon0)
@@ -82,8 +87,8 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
         
         nsind=-999
         
-        
-        if( lat0>  1.0 and lat0< 60.0 ):
+
+        if( lat0 > 0.3 and lat0 < 60.0 ):
             if( lon0>=100.0 and lon0 <=180.0):
                 clipermodel='wpclpr'
         #  NIO
@@ -98,7 +103,7 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
                 clipermodel='oclip'
                 nsind=4
                 
-        elif( lat0>-60.0 and lat0< -1.0 ):
+        elif(lat0 > -60.0 and lat0< -1.0 ):
     
         #  SWPAC
         #
@@ -270,8 +275,8 @@ def getEra5Adeck(stmid,m3trk,verb=0):
     if(MF.getPathSiz(apath) > 0):
         acards=open(apath).readlines()
     else:
-        print 'no joy finding era5 adeck: ',apath
-        sys.exit()
+        print 'no joy finding era5 adeck: ',apath,'...return...'
+        return
         
     adts={}
     adkcs={}

@@ -87,6 +87,7 @@ if(stmopt != None):
         sname=dds.sname
         # -- replace ' ' with '_'
         sname=sname.replace(' ','_')
+        sname=sname.replace('/','_')
         
         try:
             stmid9x=dds.stmid9x.upper()
@@ -149,7 +150,7 @@ if(stmopt != None):
                 mf.runcmd(cmd,ropt)
                 tdir=tdirNew
             else:
-                print 'III-tdir for: ',stmid,'already there: ',tdir
+                print 'III-tdir for: ',stmid,'already there: ',tdir,' do the nnb-sum.txt'
         else:
             tdir="%s/%s"%(tdir,tname)
             print 'WWW-tdir for: ',stmid,'...making target dir: ',tdir

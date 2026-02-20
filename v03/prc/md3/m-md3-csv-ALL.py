@@ -113,7 +113,7 @@ for year in years:
             
             if(smpathMRG == None):
                 print 'problem in smpathMGR: ',smpathMRG,' with smpathMRGs: ',smpathMRGs,' sayounara'
-                sys.exit()
+                #sys.exit()
             else:
                 cmd="cat %s >> %s"%(smpathMRG,sumCvsPathMRG)
                 mf.runcmd(cmd,ropt)
@@ -131,7 +131,7 @@ for year in years:
     
             if(mpathMRG == None):
                 print 'EEE-%s find in mpathMRG for spath: %s year: %s ...Sayounara...'%(pypath,spath,year)
-                sys.exit()
+                #sys.exit()
             else:
                 cmd="cat %s >> %s"%(mpathMRG,allCvsPathMRG)
                 mf.runcmd(cmd,ropt)

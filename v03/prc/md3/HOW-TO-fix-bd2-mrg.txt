@@ -1,0 +1,49 @@
+# -- problem when:
+0218 15:33:39 m-md3-mrg-stm-dir-sum.py 1945.2006
+# problem storms
+32s.1986
+29h.1992
+17e.1997
+12p.2004
+f3l.2005
+
+0218 15:37:44 m-md3-from-md2-bd2.py -S 32s.1986
+0218 15:38:18 m-md3-stm-dir-sum-bd2.py 
+0218 15:38:24 m-md3-stm-dir-sum-bd2.py 1986
+0218 15:39:02 md2a -S 32s.86
+0218 15:41:31 m-md3-from-md2-bd2.py -S 32s.86
+0218 15:44:28 m-md3-stm-dir-sum-bd2.py 
+0218 15:44:38 m-md3-stm-dir-sum-bd2.py 1986 -B shem
+0218 15:44:58 m-md3-mrg-stm-dir-sum.py 1986
+
+0218 15:45:15 m-md3-mrg-stm-dir-sum.py 1987.2006
+0218 15:46:02 md2a -S 29h.92
+
+0218 15:47:06 m-md3-stm-dir-sum-bd2.py 1992 -B shem
+0218 15:47:23 m-md3-mrg-stm-dir-sum.py 1992
+
+0218 15:48:26 m-md3-stm-dir-sum-bd2.py 1996 -B shem
+0218 15:48:38 m-md3-mrg-stm-dir-sum.py 1997
+
+0218 15:50:48 m-md3-mrg-stm-dir-sum.py 1997
+0218 15:51:04 md2a -S 17e.97
+0218 15:51:25 md2a -S e.97 -s
+0218 15:52:10 m-md3-mrg-stm-dir-sum.py 1997
+0218 15:52:32 la /sbt/superBT-V04/src-v03/1997/epac/17E-1997-OLAF-XXE/
+0218 15:53:17 h
+0218 15:53:52 m-md3-stm-dir-sum-bd2.py 
+0218 15:54:07 m-md3-stm-dir-sum-bd2.py 1997
+0218 15:55:35 m-mdeck3-bd2.py -r /sbt/superBT-V04/src-v03/1997/epac/17E-1997-OLAF-XXE/17E-sum.txt 
+
+0218 15:58:35 pd /sbt/superBT-V04/src-v03/2004/shem/12P-2004-FRITZ-XXP/
+0218 15:58:47 ws.nw 12P-sum.txt 
+0218 15:59:36 m-md3-mrg-stm-dir-sum.py 2004
+0218 16:00:06 pd /sbt/superBT-V04/src-v03/2004/shem/12P-2004-FRITZ-XXP/
+0218 16:00:50 m-mdeck3-bd2.py -r /sbt/superBT-V04/src-v03/2004/shem/12P-2004-FRITZ-XXP/12P-sum.txt
+
+0218 16:01:27 pd /sbt/superBT-V04/src-v03/2005/lant/F3L-2005-NONdev
+0218 16:02:29 ws.nw /sbt/superBT-V04/src-v03/2005/lant/F3L-2005-NONdev/F3L-sum.txt 
+0218 16:03:07 m-mdeck3-bd2.py -r /sbt/superBT-V04/src-v03/2005/lant/F3L-2005-NONdev/F3L-sum.txt
+
+0218 16:03:20 m-md3-mrg-stm-dir-sum.py 2005
+0218 16:03:32 m-md3-mrg-stm-dir-sum.py 2006

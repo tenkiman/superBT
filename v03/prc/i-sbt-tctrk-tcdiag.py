@@ -2,11 +2,11 @@
 
 from sBT import *
 
-def getAdeckTcdiag4Stmid(tstmid,ssizMin=778,verb=0,verbose=0):
+def getAdeckTcdiag4Stmid(tstmid,ssizMin=778,dobt=0,verb=0,verbose=0):
 
     # -- get track
     #
-    rc=md3.getMd3track(tstmid,dobt=0,verb=verb)
+    rc=md3.getMd3track(tstmid,dobt=dobt,verb=verb)
     astmids=[]
 
     if(rc[0]):
@@ -264,8 +264,9 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'verbose':          ['v',0,1,'verbose=1 is REALLY verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
+            'doIt':             ['X',0,1,' do it'],
             'stmopt':           ['S:',None,'a','stmopt'],
-            'dobt':             ['b',0,1,'dobt for both get stmid and trk'],
+            'dobt':             ['b',1,0,'do NOT dobt for both get stmid and trk'],
             'rerunAdTd':        ['R',0,1,' run tcdiag and/or tracker for missing dtgs'],
             'doLog':            ['L',1,0,'do NOT do logfile to raid02/log'],
             'doLocal':          ['C',1,0,'''default is to run locally'''],
@@ -319,7 +320,7 @@ for stmopt in stmopts:
     
     for tstmid in tstmids:
         (snum,b1id,year,b2id,stm2id,stm1id)=getStmParams(tstmid)
-        rc=getAdeckTcdiag4Stmid(tstmid,verb=verb,verbose=verbose)
+        rc=getAdeckTcdiag4Stmid(tstmid,dobt=dobt,verb=verb,verbose=verbose)
         
     MF.dTimer('aDtD-stmopt-%s'%(stmopt))
     
@@ -373,12 +374,11 @@ if(len(redoAd) > 0):
 
     MF.ChangeDir('../')
         
-    
 
 if(len(redoTd) > 0 and len(redoAd) == 0):
     
     redoTd=mf.uniq(redoTd)
-    print 'TTTDDD redo Nruns:',len(redoTd)
+    print 'TTTDDD redo Nruns:',len(redoTd),redoTd
     
     # -- if do rerun...
     #
@@ -396,7 +396,8 @@ if(len(redoTd) > 0 and len(redoAd) == 0):
             # -- check for bad dtgs
             #
             tdtg=dtg
-            
+            print 'AAADDD -- trackers ALLGOOD   for istmopt: ',istmopt
+
             lyear=dtg[0:4]
             lyears.append(lyear)
             
@@ -428,10 +429,11 @@ if(len(redoTd) > 0 and len(redoAd) == 0):
         # -- go back up to man prc dir
         #
         MF.ChangeDir('../')
+        
+if(len(redoTd) == 0):
+    print 'TTTDDD -- tcdiag   ALLGOOD   for istmopt: ',istmopt
     
-else:
-    print 'TTTDDD -- diag files ALLGOOD for istmopt: ',istmopt
-
+   
 
 MF.dTimer('aDtD-ALL-%s'%(istmopt))
         

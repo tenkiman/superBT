@@ -93,7 +93,7 @@ for year in years:
     if(redoEra5Ad2):
         
         MF.sTimer('redoEra5Ad2-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py era5 -S all.%s -O1 -W'%(syear)
+        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py era5 -S all.%s -O1 -o -W'%(syear)
         mf.runcmd(cmd,ropt)
         MF.dTimer('redoEra5Ad2-%s'%(syear))
 
@@ -101,12 +101,12 @@ for year in years:
     if(redoClp3Ad2):
         
         MF.sTimer('atcf-CLP3-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py clp3 -S all.%s -O1 -s -W'%(syear)
+        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py clp3 -S all.%s -O1 -o -W'%(syear)
         mf.runcmd(cmd,ropt)
         MF.dTimer('atcf-CLP3-%s'%(syear))
 
         MF.sTimer('adinv-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -L > %s'%(syear,opath)
+        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -o -L > %s'%(syear,opath)
         mf.runcmd(cmd,ropt)
         MF.dTimer('adinv-%s'%(syear))
         
@@ -127,10 +127,10 @@ for year in years:
         
     # -- always do by default
     #
-    if(doAd2Inv):
+    if(doAd2Inv or doAd2InvOnly):
         
         MF.sTimer('adinv-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -L > %s'%(syear,opath)
+        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -o -L > %s'%(syear,opath)
         mf.runcmd(cmd,ropt)
         MF.dTimer('adinv-%s'%(syear))
         

@@ -1,0 +1,188 @@
+basic recipe:
+
+# -- redo from scratch -- blows away lsdiag. and pr. for the sBT V04
+#
+m-md3-stm-dir-sum-bd2.py 2021 -B lant
+
+# -- do merge
+#
+m-md3-mrg-stm-dir-sum.py 2021 -B lant
+
+# -- make yearly .csv file
+#
+m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+
+# -- generate gendiff file
+#
+md3a -S l.21 -s -b | g gendi > gendiff/gendiff-2021-lant.txt
+
+# -- run through gendiff check
+#
+c-9xtime-time2gen.py 2021 -B lant
+
+# -- only did qc for bad storms?? not really, but 16l.21 was hosed so run the qc
+#
+m-md3-qc-ALL.py -S 16l.21 -V
+
+# -- blowaway redundant MRG files:
+
+cd /sbt/superBT-V04/src-v03/2021/lant/16L-2021-PETER-C5L
+cd ..
+rm */*MRG-MRG*
+
+cd /sbt/superBT-V04/src-v03/2021/lant/16L-2021-PETER-C5L
+cd ../../../2017/lant/
+la */*MRG-MRG*
+rm */*MRG-MRG*
+
+
+1072  0220 12:09:40 p-md3-ls.py -S l.17 -s -b -y 
+1073  0220 12:09:49 p-md3-ls.py -S l.17 -s -b 
+1074  0220 12:11:13 m-md3-qc-ALL.py 
+1075  0220 12:11:20 m-md3-qc-ALL.py  -S 01l.17 -N
+1076  0220 12:14:13 m-md3-qc-ALL.py  -S 01l.17 -V
+1077  0220 12:14:55 md3a -S 01l.17 
+1078  0220 12:15:05 la *gen*
+1079  0220 12:15:12 g gendiff *.py
+1080  0220 12:15:32 c-9xtime-time2gen.py 
+1081  0220 12:15:44 c-9xtime-time2gen.py -S 01l.17
+1082  0220 12:16:00 la gendiff/
+1083  0220 12:16:11 la gendiff/gendiff-epac-2023.txt 
+1084  0220 12:16:13 pg gendiff/gendiff-epac-2023.txt 
+1085  0220 12:16:34 pg gendiff/gendiff-2-24
+1086  0220 12:16:46 pg gendiff/gendiff-2024.txt 
+1087  0220 12:17:02 md3a -S l.17 -b
+1088  0220 12:17:04 md3a -S l.17 -b -s
+1089  0220 12:17:22 md3a -S l.17 -b -s | g gendi
+1090  0220 12:17:42 md3a -S l.17 -b -s | g gendi > gendiff/gendiff-2017-lant.txt
+1091  0220 12:17:54 h
+1092  0220 12:18:03 c-9xtime-time2gen.py -S 01l.17
+1093  0220 12:20:26 h
+1094  0220 12:20:48 c-9xtime-time2gen.py -S 01l.17
+1095* 0220 12:20:55 
+1096  0220 12:21:26 c-9xtime-time2gen.py -S 01l.17
+1097  0220 12:22:06 c-9xtime-time2gen.py 
+1098  0220 12:22:13 c-9xtime-time2gen.py 2017
+1099  0220 12:22:47 h
+1100  0220 12:23:11 m-md3-qc-ALL.py 
+1101  0220 12:27:41 c-9xtime-time2gen.py 2017
+1102  0220 12:36:38 j
+1103  0220 12:36:50 ws.nw gendiff/gendiff-2017-lant.txt 
+1104  0220 12:37:21 c-9xtime-time2gen.py 2017
+1105  0220 12:44:46 c-9xtime-time2gen.py 2017 -O
+1106  0220 12:46:01 kill %2
+1107  0220 12:46:02 j
+1108  0220 12:48:50 la *cvs*
+1109  0220 12:48:52 la
+1110  0220 12:49:10 m-md3-csv-ALL-bd2.py 
+1111  0220 12:49:22 m-md3-csv-ALL-bd2.py 2017 -B lant
+1112  0220 12:49:31 m-md3-csv-ALL-bd2.py -Y 2017 -B lant
+1113  0220 12:49:41 md3a -S 01l.17
+1114  0220 12:50:03 f
+1115  0220 12:50:56 c-9xtime-time2gen.py 2017 
+1116  0220 12:51:32 f
+1117  0220 12:51:49 c-9xtime-time2gen.py 2017 
+1118  0220 12:59:23 f
+1119  0220 12:59:37 m-md3-csv-ALL-bd2.py -Y 2017 -B lant
+1120  0220 12:59:50 md3a -S l.17 -s -b
+1121  0220 13:00:23 md3a -S l.21 -s -b
+1122  0220 13:01:32 md2a -S 16l.2021
+1123  0220 13:01:55 md3a -S 16l.2021
+1124  0220 13:05:08 h | g md2
+1125  0220 13:05:44 h | g dir
+1126  0220 13:06:03 m-md3-mrg-stm-dir-sum.py 2021 -B lant
+1127  0220 13:06:52 m-md3-stm-dir-sum-bd2.py 
+1128  0220 13:07:03 m-md3-stm-dir-sum-bd2.py 2021 -B lant
+1129  0220 13:07:19 h
+1130  0220 13:07:27 m-md3-mrg-stm-dir-sum.py 2021 -B lant
+1131  0220 13:07:33 h
+1132  0220 13:07:51 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1133  0220 13:08:01 md3a -S l.21 -s -b
+1134  0220 13:12:40 h | g qc
+1135  0220 13:12:54 m-md3-qc-ALL.py -S 16l.21 -V
+1136  0220 13:14:30 h
+1137  0220 13:14:36 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1138  0220 13:14:45 md3a -S 16l.21
+1139  0220 13:16:11 pg gendiff/gendiff-2021-lant.txt 
+1140  0220 13:16:30 h
+1141  0220 13:19:12 c-9xtime-time2gen.py 
+1142  0220 13:19:48 c-9xtime-time2gen.py 2021 -B lant
+1143  0220 13:23:15 c-9xtime-time2gen.py 
+1144  0220 13:23:18 c-9xtime-time2gen.py 2021 -B lant
+1145  0220 13:23:50 j
+1146  0220 13:23:52 f
+1147  0220 13:24:25 c-9xtime-time2gen.py 2021 -B lant
+1148  0220 13:25:50 c-9xtime-time2gen.py 2021
+1149  0220 13:26:52 f
+1150  0220 13:27:11 c-9xtime-time2gen.py 2021
+1151  0220 13:43:58 wc -l gendiff/gendiff-2021-lant.txt
+1152  0220 13:44:04 j
+1153  0220 13:44:08 f 1
+1154  0220 13:44:23 j
+1155  0220 13:44:25 kill %2
+1156  0220 13:45:25 h
+1157  0220 13:45:34 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1158  0220 13:45:43 md3a -S l.21 -s -b
+1159  0220 13:46:18 f
+1160  0220 13:47:33 h
+1161  0220 13:47:43 c-9xtime-time2gen.py 2021
+1162  0220 13:47:49 c-9xtime-time2gen.py 2021 | l
+1163  0220 13:48:44 c-9xtime-time2gen.py 2021 -B lant
+1164  0220 13:49:56 c-9xtime-time2gen.py 2021 -B l
+1165  0220 13:51:03 c-9xtime-time2gen.py 2021 -B l -O
+1166  0220 13:52:20 f
+1167  0220 13:52:46 c-9xtime-time2gen.py 2021 -B l 
+1168  0220 13:52:48 c-9xtime-time2gen.py 2021 -B l -O
+1169  0220 13:53:08 h
+1170  0220 13:53:17 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1171  0220 13:53:23 md3a -S l.21 -s -b
+1172  0220 13:53:36 f
+1173  0220 13:54:12 c-9xtime-time2gen.py 2021 -B l -O
+1174  0220 13:54:24 h
+1175  0220 13:54:29 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1176  0220 13:54:35 md3a -S l.21 -s -b
+1177  0220 13:55:09 md3a -S l.21 -s -b | g gendi > gendiff/gendiff-2021-lant.txt
+1178  0220 13:55:11 f
+1179  0220 13:55:56 c-9xtime-time2gen.py 2021 -B l 
+1180  0220 13:56:58 c-9xtime-time2gen.py 2021 -B l  | g qqq
+1181  0220 13:57:34 c-9xtime-time2gen.py 2021 -B l 
+1182  0220 13:59:41 h
+1183  0220 13:59:48 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1184  0220 13:59:55 h
+1185  0220 14:00:00 md3a -S l.21 -s -b
+1186  0220 14:01:02 c-9xtime-time2gen.py 2021 -B l | l
+1187  0220 14:02:34 f
+1188  0220 14:02:51 c-9xtime-time2gen.py 2021 -B l -O
+1189  0220 14:03:45 h
+1190  0220 14:03:55 m-md3-csv-ALL-bd2.py -Y 2021 -B lant
+1191  0220 14:04:04 md3a -S l.21 -s -b
+1192  0220 14:10:29 m-md3-csv-ALL-bd2.py -Y 2021
+1193  0220 14:10:56 md3a -S w.21 -s -b
+1194  0220 14:11:00 md3a -S w.21 -s -b | g gendi
+1195* 0220 14:11:07 
+1196  0220 14:11:36 m-md3-csv-ALL-bd2.py -Y 2017
+1197  0220 14:11:48 md3a -S w.17 -s -b | g gendi
+1198  0220 14:11:57 md3a -S all.17 -s -b | g gendi
+1199  0220 14:12:16 md3a -S 04l.17
+1200  0220 14:12:21 md2a -S 04l.17
+1201  0220 14:12:28 md3a -S 04l.17
+1202* 0220 14:12:58 md3a -S l.17 -s -
+1203  0220 14:13:30 md2a -S 04l.17
+1204  0220 14:13:38 md2a -S 04l.17 -b
+1205  0220 14:13:49 md2a -S 04l.17
+1206  0220 14:14:13 md2a -S 04l.17 -b
+1207  0220 14:14:21 md2a -S 04l.17 -b -B
+1208  0220 14:14:32 md3a -S 04l.17 -b 
+1209  0220 14:14:38 md3a -S 04l.17 
+1210  0220 14:15:03 md3a -S 04l.17 -b
+1211  0220 14:15:56 md3a -S 16l.21 -b
+1212  0220 14:16:00 md3a -S 16l.21 
+1213  0220 14:16:12 md3a -S 16l.21 -b 
+1214  0220 14:16:15 md3a -S 16l.21 -b -s
+1215  0220 14:20:30 md3a -S 16l.21 
+1216  0220 14:24:50 md3a -S c5l.21 
+1217  0220 14:25:55 md3a -S l.21 
+1218  0220 14:25:57 md3a -S l.21  -s
+1219  0220 14:26:11 md3a -S 16l.21 
+1220  0220 14:26:14 md3a -S 16l.21  -b
+1221  0220 14:27:49 h > cmds-20260220-fix-lant-2017-2021.txt

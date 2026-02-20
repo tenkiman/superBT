@@ -520,8 +520,7 @@ def getAidstrs(stmopt,aidStms,dobt=1,lsProb=1,lsAll=0,verb=0,warn=1):
     if(doBdeck2): doBT=1
     
     md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
-    tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
-    
+    tstmids=md3.getMd3Stmids(stmopt,dobt=dobt,verb=verb)
     ecmstrS=[]
     clpstrS=[]
     humstrS=[]

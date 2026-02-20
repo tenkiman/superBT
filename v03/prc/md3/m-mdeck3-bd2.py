@@ -154,7 +154,8 @@ if(sumPath != None):
         for icard in icards:
             print 'iii',icard[0:-1]
         
-    useVmax4TcCode=1
+    # -- 20260218 -- why? useVmax4TcCode=1
+    useVmax4TcCode=0
     ocards=[]
     dom3=0
     if(isMRG): dom3=0
@@ -190,7 +191,7 @@ if(sumPath != None):
         ocards=[]
         
         for kt in ktrk:
-            ocard=parseDssTrkMD3(kt,trk[kt],stm1id,stm9xid,basin,rcsum=rcsum,sname=sname)
+            ocard=parseDssTrkMD3(kt,trk[kt],stm1id,stm9xid,basin,rcsum=rcsum,sname=sname,verb=verb)
             ocard=ocard.replace(' ','')
             if(verb): print 'ooo---iii',ocard,len(ocard.split(','))
             ocards.append(ocard)

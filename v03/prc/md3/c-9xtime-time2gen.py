@@ -80,6 +80,17 @@ invpath="gendiff-2024-epac.txt"
 invpath="gendiff-2024-shem.txt"
 invpath="gendiff-2024-lant.txt"
 
+# -- 20260220 redo of 2017-lant in f-bad9x-adeck-bd2.py
+# -- make gendiff-*txt by
+#    md3a -S l.17 -b -s | g gendi > gendiff/gendiff-2017-lant.txt
+#invpath="gendiff/gendiff-2017-lant.txt"
+
+# -- 20260220 redo of 2021-lant in f-bad9x-adeck-bd2.py
+#    md3a -S l.21 -b -s | g gendi > gendiff/gendiff-2021-lant.txt
+#
+invpath="gendiff/gendiff-2021-lant.txt"
+
+
 
 cards=open(invpath).readlines()
 
@@ -117,6 +128,8 @@ for year in years:
 
                 if(not(b1idNN in basins)): continue
                 if(genDiff == -6): continue
+                
+                print '--------==============',genDiff
 
 
                 pNNmask="%s/%s/%s/%s*/%s?-sum.txt"%(sbtSrcDir,year,ibasin,stmNN[0:2],stmNN[0:2])
@@ -137,6 +150,22 @@ for year in years:
                 p9X=p9Xs[0]
                 p9XSav="%s-SAV"%(p9X)
                 np9XSav=MF.getPathSiz(p9XSav)
+                
+                if(npNNBTSav < 0):
+                    cmd="cp %s %s"%(pNNBT,pNNBTSav)
+                    mf.runcmd(cmd)
+                    npNNBTSav=MF.getPathSiz(pNNBTSav)
+                    
+                if(npNNSav < 0):
+                    cmd="cp %s %s"%(pNN,pNNSav)
+                    mf.runcmd(cmd)
+                    npNNSav=MF.getPathSiz(pNNSav)
+                    
+
+                if(np9XSav < 0):
+                    cmd="cp %s %s"%(p9X,p9XSav)
+                    mf.runcmd(cmd)
+                    np9XSav=MF.getPathSiz(p9XSav)
 
                 print '  stmid: ',stmid
                 print '  stmNN: ',stmNN
@@ -155,7 +184,7 @@ for year in years:
                     print 'SAV file missing...'
                     sys.exit()
                 
-                rc=doMd2Md3MrgGenChk(stmid,doGenChk=1,bd2Update=bd2Update,override=override,verb=0)
+                rc=doMd2Md3MrgGenChk(stmid,doGenChk=1,bd2Update=bd2Update,override=override,verb=verb)
                 
                 print 'RRRCCC ',stmid,'rc: ',rc
                 
