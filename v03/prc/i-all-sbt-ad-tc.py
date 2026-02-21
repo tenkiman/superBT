@@ -25,7 +25,7 @@ class TmtrkCmdLine(CmdLine):
             'doit':             ['X',0,1,'do it anyway...'],
             'ropt':             ['N','','norun',' norun is norun'],
             'yearopt':          ['Y:',None,'a','yearopt YYYY or BYYYY.EYYYY'],
-            'dobt':             ['b',1,0,'do NOT dobt for both get stmid and trk'],
+            #'dobt':             ['b',0,1,' set by year ... do NOT dobt for both get stmid and trk'],
             'rerunAdTd':        ['R',0,1,' run tcdiag and/or tracker for missing dtgs'],
             'doLog':            ['L',1,0,'do NOT do logfile to raid02/log'],
             'doLocal':          ['C',1,0,'''do NOT do local - default is to run locally'''],
@@ -75,16 +75,23 @@ if(rerunAdTd): rerunopt='-R'
 roptSbt=''
 if(ropt == 'norun'): 
     roptSbt='-N'
-    ropt=''
+    #ropt=''
 if(doit): ropt=''
-
+    
 for year in years:
+
     syear=str(year)
+    
+    # -- turn off dobt for 2007-2024
+    #
+    btopt=''
+    if(year <= 2006): btopt='-b'
+    
     MF.sTimer('AD-TD-%s'%(syear))
     for b1id in b1ids:
         MF.sTimer('B1ID-AD-TD-%s-%s'%(b1id,syear))
         sopt="%s.%s"%(b1id,syear)
-        cmd='i-sbt-tctrk-tcdiag.py -S %s %s %s'%(sopt,rerunopt,roptSbt)
+        cmd='i-sbt-tctrk-tcdiag.py -S %s %s %s %s'%(sopt,rerunopt,roptSbt,btopt)
         mf.runcmd(cmd,ropt)
         MF.dTimer('B1ID-AD-TD-%s-%s'%(b1id,syear))
     MF.dTimer('AD-TD-%s'%(syear))

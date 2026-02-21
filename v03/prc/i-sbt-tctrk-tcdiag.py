@@ -266,7 +266,7 @@ class TmtrkCmdLine(CmdLine):
             'ropt':             ['N','','norun',' norun is norun'],
             'doIt':             ['X',0,1,' do it'],
             'stmopt':           ['S:',None,'a','stmopt'],
-            'dobt':             ['b',1,0,'do NOT dobt for both get stmid and trk'],
+            'dobt':             ['b',0,1,'DO dobt for both get stmid and trk'],
             'rerunAdTd':        ['R',0,1,' run tcdiag and/or tracker for missing dtgs'],
             'doLog':            ['L',1,0,'do NOT do logfile to raid02/log'],
             'doLocal':          ['C',1,0,'''default is to run locally'''],

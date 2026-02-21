@@ -16,7 +16,7 @@ else
     echo "$efile does not exist."
 fi
 
-cmd="i-all-sbt-ad-tc.py -Y $1.$2 -R -N > >(tee -a $sfile) 2> >(tee -a $efile  >&2)"
+cmd="i-all-sbt-ad-tc.py -Y $1.$2 -R -X > >(tee -a $sfile) 2> >(tee -a $efile  >&2)"
 echo $cmd
 eval "$cmd"
 
