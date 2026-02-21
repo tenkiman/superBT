@@ -1,0 +1,386 @@
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1950                                                      :  4.011      at: 2026022100 04:00:43
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1950
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1950
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1950                                                         :  4.121      at: 2026022100 04:00:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1950                                                      :  3.171      at: 2026022100 04:00:46
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1950
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1950
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1950                                                         :  3.277      at: 2026022100 04:00:46
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1950                                                      :  0.793      at: 2026022100 04:00:47
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1950
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1950
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1950                                                         :  0.894      at: 2026022100 04:00:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1950                                                      :  4.006      at: 2026022100 04:00:51
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1950
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1950
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1950                                                         :  4.117      at: 2026022100 04:00:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1950                                                      :  0.300      at: 2026022100 04:00:52
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1950
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1950
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1950                                                         :  0.401      at: 2026022100 04:00:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1950                                                      :  2.021      at: 2026022100 04:00:54
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1950
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1950
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1950                                                         :  2.126      at: 2026022100 04:00:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1951                                                      :  6.219      at: 2026022100 04:01:01
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1951
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1951                                                         :  6.339      at: 2026022100 04:01:01
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1951                                                      :  4.525      at: 2026022100 04:01:06
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1951
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1951                                                         :  4.632      at: 2026022100 04:01:06
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1951                                                      :  1.267      at: 2026022100 04:01:07
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1951
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1951                                                         :  1.369      at: 2026022100 04:01:07
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1951                                                      :  3.069      at: 2026022100 04:01:10
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1951
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1951                                                         :  3.175      at: 2026022100 04:01:11
+WWW-getMd2Years-- no storms for stmopt:  c.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1951                                                      :  0.317      at: 2026022100 04:01:11
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1951
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1951                                                         :  0.417      at: 2026022100 04:01:11
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1951                                                      :  1.404      at: 2026022100 04:01:13
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1951
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1951
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1951                                                         :  1.507      at: 2026022100 04:01:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1952                                                      :  5.872      at: 2026022100 04:01:19
+AAADDD redo: ['1952052600', '1952052606']
+AAADDD redo tmtrkN/tcdiag Nruns: 2
+cd--->  tctrk 
+CCC: r-all-tmtrk.py 1952052600 -T   ---> CurDT: 20260221 04:01:19 <--- 
+CCC: r-all-tmtrk.py 1952052606 -T   ---> CurDT: 20260221 04:01:19 <--- 
+cd--->  ../tcdiag 
+CCC: r-all-tcdiag.py 1952052600 -C    ---> CurDT: 20260221 04:01:19 <--- 
+CCC: r-all-tcdiag.py 1952052606 -C    ---> CurDT: 20260221 04:01:19 <--- 
+CCC: r-rsync-tcdiag-local-output.py -R dat -Y 1952 -X   ---> CurDT: 20260221 04:01:19 <--- 
+CCC: r-rsync-tcdiag-local-output.py -R prod -Y 1952 -X   ---> CurDT: 20260221 04:01:19 <--- 
+cd--->  ../ 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1952                                                         :  5.981      at: 2026022100 04:01:19
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1952                                                      :  6.396      at: 2026022100 04:01:26
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1952
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1952
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1952                                                         :  6.508      at: 2026022100 04:01:26
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1952                                                      :  0.900      at: 2026022100 04:01:27
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1952
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1952
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1952                                                         :  1.001      at: 2026022100 04:01:27
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1952                                                      :  2.366      at: 2026022100 04:01:29
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1952
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1952
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1952                                                         :  2.469      at: 2026022100 04:01:29
+CCC: i-sbt-tctrk-tcdiag.py -S h.1950 -R -N   ---> CurDT: 20260221 04:00:39 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1950                                                       :  4.258      at: 2026022100 04:00:43
+CCC: i-sbt-tctrk-tcdiag.py -S w.1950 -R -N   ---> CurDT: 20260221 04:00:43 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1950                                                       :  3.434      at: 2026022100 04:00:46
+CCC: i-sbt-tctrk-tcdiag.py -S e.1950 -R -N   ---> CurDT: 20260221 04:00:46 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1950                                                       :  1.037      at: 2026022100 04:00:47
+CCC: i-sbt-tctrk-tcdiag.py -S l.1950 -R -N   ---> CurDT: 20260221 04:00:47 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1950                                                       :  4.281      at: 2026022100 04:00:52
+CCC: i-sbt-tctrk-tcdiag.py -S c.1950 -R -N   ---> CurDT: 20260221 04:00:52 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1950                                                       :  0.552      at: 2026022100 04:00:52
+CCC: i-sbt-tctrk-tcdiag.py -S i.1950 -R -N   ---> CurDT: 20260221 04:00:52 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1950                                                       :  2.276      at: 2026022100 04:00:54
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1950                                                              : 15.939      at: 2026022100 04:00:54
+CCC: i-sbt-tctrk-tcdiag.py -S h.1951 -R -N   ---> CurDT: 20260221 04:00:54 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1951                                                       :  6.492      at: 2026022100 04:01:01
+CCC: i-sbt-tctrk-tcdiag.py -S w.1951 -R -N   ---> CurDT: 20260221 04:01:01 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1951                                                       :  4.800      at: 2026022100 04:01:06
+CCC: i-sbt-tctrk-tcdiag.py -S e.1951 -R -N   ---> CurDT: 20260221 04:01:06 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1951                                                       :  1.538      at: 2026022100 04:01:07
+CCC: i-sbt-tctrk-tcdiag.py -S l.1951 -R -N   ---> CurDT: 20260221 04:01:07 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1951                                                       :  3.339      at: 2026022100 04:01:11
+CCC: i-sbt-tctrk-tcdiag.py -S c.1951 -R -N   ---> CurDT: 20260221 04:01:11 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1951                                                       :  0.575      at: 2026022100 04:01:11
+CCC: i-sbt-tctrk-tcdiag.py -S i.1951 -R -N   ---> CurDT: 20260221 04:01:11 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1951                                                       :  1.658      at: 2026022100 04:01:13
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1951                                                              : 18.503      at: 2026022100 04:01:13
+CCC: i-sbt-tctrk-tcdiag.py -S h.1952 -R -N   ---> CurDT: 20260221 04:01:13 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1952                                                       :  6.142      at: 2026022100 04:01:19
+CCC: i-sbt-tctrk-tcdiag.py -S w.1952 -R -N   ---> CurDT: 20260221 04:01:19 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1952                                                       :  6.649      at: 2026022100 04:01:26
+CCC: i-sbt-tctrk-tcdiag.py -S e.1952 -R -N   ---> CurDT: 20260221 04:01:26 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1952                                                       :  1.163      at: 2026022100 04:01:27
+CCC: i-sbt-tctrk-tcdiag.py -S l.1952 -R -N   ---> CurDT: 20260221 04:01:27 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1952                               WWW-getMd2Years-- no storms for stmopt:  c.1952
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1952                                                      :  0.292      at: 2026022100 04:01:30
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1952
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1952
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1952                                                         :  0.392      at: 2026022100 04:01:30
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1952                                                      :  1.700      at: 2026022100 04:01:32
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1952
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1952
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1952                                                         :  1.804      at: 2026022100 04:01:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1953                                                      :  3.449      at: 2026022100 04:01:36
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1953
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1953                                                         :  3.560      at: 2026022100 04:01:36
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1953                                                      :  5.854      at: 2026022100 04:01:42
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1953
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1953                                                         :  5.962      at: 2026022100 04:01:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1953                                                      :  0.563      at: 2026022100 04:01:43
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1953
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1953                                                         :  0.664      at: 2026022100 04:01:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1953                                                      :  3.110      at: 2026022100 04:01:46
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1953
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1953                                                         :  3.216      at: 2026022100 04:01:46
+WWW-getMd2Years-- no storms for stmopt:  c.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1953                                                      :  0.286      at: 2026022100 04:01:47
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1953
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1953                                                         :  0.386      at: 2026022100 04:01:47
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1953                                                      :  1.140      at: 2026022100 04:01:48
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1953
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1953
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1953                                                         :  1.241      at: 2026022100 04:01:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1954                                                      :  3.186      at: 2026022100 04:01:51
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1954
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1954                                                         :  3.291      at: 2026022100 04:01:52
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1954                                                      :  5.410      at: 2026022100 04:01:57
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1954
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1954                                                         :  5.524      at: 2026022100 04:01:57
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1954                                                      :  2.033      at: 2026022100 04:01:59
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1954
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1954                                                         :  2.137      at: 2026022100 04:02:00
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1954                                                      :  3.132      at: 2026022100 04:02:03
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1954
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1954                                                         :  3.239      at: 2026022100 04:02:03
+WWW-getMd2Years-- no storms for stmopt:  c.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1954                                                      :  0.308      at: 2026022100 04:02:03
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1954
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1954                                                         :  0.408      at: 2026022100 04:02:03
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1954                                                      :  1.097      at: 2026022100 04:02:05
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1954
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1954
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1954                                                         :  1.198      at: 2026022100 04:02:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1955                                                      :  6.243      at: 2026022100 04:02:11
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1955
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1955                                                         :  6.362      at: 2026022100 04:02:11
+                        :  2.612      at: 2026022100 04:01:30
+CCC: i-sbt-tctrk-tcdiag.py -S c.1952 -R -N   ---> CurDT: 20260221 04:01:30 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1952                                                       :  0.558      at: 2026022100 04:01:30
+CCC: i-sbt-tctrk-tcdiag.py -S i.1952 -R -N   ---> CurDT: 20260221 04:01:30 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1952                                                       :  1.951      at: 2026022100 04:01:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1952                                                              : 19.176      at: 2026022100 04:01:32
+CCC: i-sbt-tctrk-tcdiag.py -S h.1953 -R -N   ---> CurDT: 20260221 04:01:32 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1953                                                       :  3.713      at: 2026022100 04:01:36
+CCC: i-sbt-tctrk-tcdiag.py -S w.1953 -R -N   ---> CurDT: 20260221 04:01:36 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1953                                                       :  6.113      at: 2026022100 04:01:42
+CCC: i-sbt-tctrk-tcdiag.py -S e.1953 -R -N   ---> CurDT: 20260221 04:01:42 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1953                                                       :  0.818      at: 2026022100 04:01:43
+CCC: i-sbt-tctrk-tcdiag.py -S l.1953 -R -N   ---> CurDT: 20260221 04:01:43 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1953                                                       :  3.364      at: 2026022100 04:01:46
+CCC: i-sbt-tctrk-tcdiag.py -S c.1953 -R -N   ---> CurDT: 20260221 04:01:46 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1953                                                       :  0.532      at: 2026022100 04:01:47
+CCC: i-sbt-tctrk-tcdiag.py -S i.1953 -R -N   ---> CurDT: 20260221 04:01:47 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1953                                                       :  1.407      at: 2026022100 04:01:48
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1953                                                              : 16.048      at: 2026022100 04:01:48
+CCC: i-sbt-tctrk-tcdiag.py -S h.1954 -R -N   ---> CurDT: 20260221 04:01:48 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1954                                                       :  3.449      at: 2026022100 04:01:52
+CCC: i-sbt-tctrk-tcdiag.py -S w.1954 -R -N   ---> CurDT: 20260221 04:01:52 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1954                                                       :  5.680      at: 2026022100 04:01:57
+CCC: i-sbt-tctrk-tcdiag.py -S e.1954 -R -N   ---> CurDT: 20260221 04:01:57 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1954                                                       :  2.290      at: 2026022100 04:02:00
+CCC: i-sbt-tctrk-tcdiag.py -S l.1954 -R -N   ---> CurDT: 20260221 04:02:00 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1954                                                       :  3.416      at: 2026022100 04:02:03
+CCC: i-sbt-tctrk-tcdiag.py -S c.1954 -R -N   ---> CurDT: 20260221 04:02:03 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1954                                                       :  0.562      at: 2026022100 04:02:04
+CCC: i-sbt-tctrk-tcdiag.py -S i.1954 -R -N   ---> CurDT: 20260221 04:02:04 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1954                                                       :  1.358      at: 2026022100 04:02:05
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1954                                                              : 16.856      at: 2026022100 04:02:05
+CCC: i-sbt-tctrk-tcdiag.py -S h.1955 -R -N   ---> CurDT: 20260221 04:02:05 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1955                                                  TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1955                                                      :  4.620      at: 2026022100 04:02:16
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1955
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1955                                                         :  4.727      at: 2026022100 04:02:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1955                                                      :  0.795      at: 2026022100 04:02:17
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1955
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1955                                                         :  0.896      at: 2026022100 04:02:17
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1955                                                      :  3.464      at: 2026022100 04:02:21
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1955
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1955                                                         :  3.570      at: 2026022100 04:02:21
+WWW-getMd2Years-- no storms for stmopt:  c.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1955                                                      :  0.303      at: 2026022100 04:02:22
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1955
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1955                                                         :  0.403      at: 2026022100 04:02:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1955                                                      :  1.457      at: 2026022100 04:02:23
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1955
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1955
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1955                                                         :  1.559      at: 2026022100 04:02:23
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1956                                                      :  7.921      at: 2026022100 04:02:32
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1956
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1956                                                         :  8.038      at: 2026022100 04:02:32
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1956                                                      :  5.035      at: 2026022100 04:02:37
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1956
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1956                                                         :  5.142      at: 2026022100 04:02:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1956                                                      :  0.994      at: 2026022100 04:02:38
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1956
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1956                                                         :  1.096      at: 2026022100 04:02:38
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1956                                                      :  2.448      at: 2026022100 04:02:41
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1956
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1956                                                         :  2.552      at: 2026022100 04:02:41
+WWW-getMd2Years-- no storms for stmopt:  c.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1956                                                      :  0.318      at: 2026022100 04:02:41
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1956
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1956                                                         :  0.418      at: 2026022100 04:02:42
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1956                                                      :  1.726      at: 2026022100 04:02:43
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1956
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1956
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1956                                                         :  1.829      at: 2026022100 04:02:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1957                                                      :  6.608      at: 2026022100 04:02:50
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1957
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1957
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1957                                                         :  6.719      at: 2026022100 04:02:51
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1957                                                      :  6.567      at: 2026022100 04:02:57
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1957
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1957
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1957                                                         :  6.683      at: 2026022100 04:02:57
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1957                                                      :  1.472      at: 2026022100 04:02:59
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1957
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1957
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1957                                                         :  1.574      at: 2026022100 04:02:59
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1957                                                      :  2.036      at: 2026022100 04:03:01
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1957
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1957
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1957                                                         :  2.138      at: 2026022100 04:03:01
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1957                                                      :  0.799      at: 2026022100 04:03:02
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1957
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1957
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1957                                                         :  0.900      at: 2026022100 04:03:02
+     :  6.522      at: 2026022100 04:02:12
+CCC: i-sbt-tctrk-tcdiag.py -S w.1955 -R -N   ---> CurDT: 20260221 04:02:12 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1955                                                       :  4.897      at: 2026022100 04:02:17
+CCC: i-sbt-tctrk-tcdiag.py -S e.1955 -R -N   ---> CurDT: 20260221 04:02:17 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1955                                                       :  1.056      at: 2026022100 04:02:18
+CCC: i-sbt-tctrk-tcdiag.py -S l.1955 -R -N   ---> CurDT: 20260221 04:02:18 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1955                                                       :  3.734      at: 2026022100 04:02:21
+CCC: i-sbt-tctrk-tcdiag.py -S c.1955 -R -N   ---> CurDT: 20260221 04:02:21 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1955                                                       :  0.567      at: 2026022100 04:02:22
+CCC: i-sbt-tctrk-tcdiag.py -S i.1955 -R -N   ---> CurDT: 20260221 04:02:22 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1955                                                       :  1.705      at: 2026022100 04:02:24
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1955                                                              : 18.583      at: 2026022100 04:02:24
+CCC: i-sbt-tctrk-tcdiag.py -S h.1956 -R -N   ---> CurDT: 20260221 04:02:24 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1956                                                       :  8.207      at: 2026022100 04:02:32
+CCC: i-sbt-tctrk-tcdiag.py -S w.1956 -R -N   ---> CurDT: 20260221 04:02:32 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1956                                                       :  5.293      at: 2026022100 04:02:37
+CCC: i-sbt-tctrk-tcdiag.py -S e.1956 -R -N   ---> CurDT: 20260221 04:02:37 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1956                                                       :  1.248      at: 2026022100 04:02:38
+CCC: i-sbt-tctrk-tcdiag.py -S l.1956 -R -N   ---> CurDT: 20260221 04:02:38 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1956                                                       :  2.711      at: 2026022100 04:02:41
+CCC: i-sbt-tctrk-tcdiag.py -S c.1956 -R -N   ---> CurDT: 20260221 04:02:41 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1956                                                       :  0.567      at: 2026022100 04:02:42
+CCC: i-sbt-tctrk-tcdiag.py -S i.1956 -R -N   ---> CurDT: 20260221 04:02:42 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1956                                                       :  1.990      at: 2026022100 04:02:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1956                                                              : 20.117      at: 2026022100 04:02:44
+CCC: i-sbt-tctrk-tcdiag.py -S h.1957 -R -N   ---> CurDT: 20260221 04:02:44 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1957                                                       :  6.864      at: 2026022100 04:02:51
+CCC: i-sbt-tctrk-tcdiag.py -S w.1957 -R -N   ---> CurDT: 20260221 04:02:51 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1957                                                       :  6.838      at: 2026022100 04:02:57
+CCC: i-sbt-tctrk-tcdiag.py -S e.1957 -R -N   ---> CurDT: 20260221 04:02:57 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1957                                                       :  1.729      at: 2026022100 04:02:59
+CCC: i-sbt-tctrk-tcdiag.py -S l.1957 -R -N   ---> CurDT: 20260221 04:02:59 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1957                                                       :  2.289      at: 2026022100 04:03:02
+CCC: i-sbt-tctrk-tcdiag.py -S c.1957 -R -N   ---> CurDT: 20260221 04:03:02 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1957                                                      :  0.927      at: 2026022100 04:03:04
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1957
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1957
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1957                                                         :  1.028      at: 2026022100 04:03:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1958                                                      :  6.456      at: 2026022100 04:03:10
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1958
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1958
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1958                                                         :  6.567      at: 2026022100 04:03:10
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1958                                                      :  5.464      at: 2026022100 04:03:16
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1958
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1958
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1958                                                         :  5.572      at: 2026022100 04:03:16
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1958                                                      :  1.507      at: 2026022100 04:03:18
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1958
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1958
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1958                                                         :  1.611      at: 2026022100 04:03:18
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1958                                                      :  2.895      at: 2026022100 04:03:21
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1958
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1958
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1958                                                         :  3.000      at: 2026022100 04:03:21
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1958                                                      :  0.178      at: 2026022100 04:03:21
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1958
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1958
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1958                                                         :  0.278      at: 2026022100 04:03:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1958                                                      :  0.115      at: 2026022100 04:03:22
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1958
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1958
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1958                                                         :  0.216      at: 2026022100 04:03:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-h.1959                                                      :  6.554      at: 2026022100 04:03:29
+AAADDD -- trackers ALLGOOD   for istmopt:  h.1959
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  h.1959
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-h.1959                                                         :  6.676      at: 2026022100 04:03:29
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-w.1959                                                      :  5.865      at: 2026022100 04:03:35
+AAADDD -- trackers ALLGOOD   for istmopt:  w.1959
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  w.1959
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-w.1959                                                         :  5.982      at: 2026022100 04:03:35
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-e.1959                                                      :  1.561      at: 2026022100 04:03:37
+AAADDD -- trackers ALLGOOD   for istmopt:  e.1959
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  e.1959
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-e.1959                                                         :  1.664      at: 2026022100 04:03:37
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-l.1959                                                      :  2.776      at: 2026022100 04:03:40
+AAADDD -- trackers ALLGOOD   for istmopt:  l.1959
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  l.1959
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-l.1959                                                         :  2.881      at: 2026022100 04:03:40
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-c.1959                                                      :  0.489      at: 2026022100 04:03:41
+AAADDD -- trackers ALLGOOD   for istmopt:  c.1959
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  c.1959
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-c.1959                                                         :  0.590      at: 2026022100 04:03:41
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-stmopt-i.1959                                                      :  2.395      at: 2026022100 04:03:43
+AAADDD -- trackers ALLGOOD   for istmopt:  i.1959
+TTTDDD -- tcdiag   ALLGOOD   for istmopt:  i.1959
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: aDtD-ALL-i.1959                                                         :  2.501      at: 2026022100 04:03:43
+AD-TD-c-1957                                                       :  1.055      at: 2026022100 04:03:03
+CCC: i-sbt-tctrk-tcdiag.py -S i.1957 -R -N   ---> CurDT: 20260221 04:03:03 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1957                                                       :  1.205      at: 2026022100 04:03:04
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1957                                                              : 20.081      at: 2026022100 04:03:04
+CCC: i-sbt-tctrk-tcdiag.py -S h.1958 -R -N   ---> CurDT: 20260221 04:03:04 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1958                                                       :  6.742      at: 2026022100 04:03:11
+CCC: i-sbt-tctrk-tcdiag.py -S w.1958 -R -N   ---> CurDT: 20260221 04:03:11 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1958                                                       :  5.744      at: 2026022100 04:03:16
+CCC: i-sbt-tctrk-tcdiag.py -S e.1958 -R -N   ---> CurDT: 20260221 04:03:16 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1958                                                       :  1.760      at: 2026022100 04:03:18
+CCC: i-sbt-tctrk-tcdiag.py -S l.1958 -R -N   ---> CurDT: 20260221 04:03:18 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1958                                                       :  3.155      at: 2026022100 04:03:21
+CCC: i-sbt-tctrk-tcdiag.py -S c.1958 -R -N   ---> CurDT: 20260221 04:03:21 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1958                                                       :  0.440      at: 2026022100 04:03:22
+CCC: i-sbt-tctrk-tcdiag.py -S i.1958 -R -N   ---> CurDT: 20260221 04:03:22 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1958                                                       :  0.378      at: 2026022100 04:03:22
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1958                                                              : 18.320      at: 2026022100 04:03:22
+CCC: i-sbt-tctrk-tcdiag.py -S h.1959 -R -N   ---> CurDT: 20260221 04:03:22 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-h-1959                                                       :  6.832      at: 2026022100 04:03:29
+CCC: i-sbt-tctrk-tcdiag.py -S w.1959 -R -N   ---> CurDT: 20260221 04:03:29 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-w-1959                                                       :  6.141      at: 2026022100 04:03:35
+CCC: i-sbt-tctrk-tcdiag.py -S e.1959 -R -N   ---> CurDT: 20260221 04:03:35 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-e-1959                                                       :  1.822      at: 2026022100 04:03:37
+CCC: i-sbt-tctrk-tcdiag.py -S l.1959 -R -N   ---> CurDT: 20260221 04:03:37 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-l-1959                                                       :  3.042      at: 2026022100 04:03:40
+CCC: i-sbt-tctrk-tcdiag.py -S c.1959 -R -N   ---> CurDT: 20260221 04:03:40 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-c-1959                                                       :  0.752      at: 2026022100 04:03:41
+CCC: i-sbt-tctrk-tcdiag.py -S i.1959 -R -N   ---> CurDT: 20260221 04:03:41 <--- 
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: B1ID-AD-TD-i-1959                                                       :  2.664      at: 2026022100 04:03:43
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AD-TD-1959                                                              : 21.354      at: 2026022100 04:03:44
+TTTTTTTTTTTTTTTTTTTTTTT-------------------timer: AALLLL-AD-TD-1950-1959                                                  : 185.077      at: 2026022100 04:03:44

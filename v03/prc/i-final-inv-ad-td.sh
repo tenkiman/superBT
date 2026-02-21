@@ -1,7 +1,7 @@
 #!/bin/bash -i
 
-sfile="inv-ad-td-$1-$2-stdout-log.txt"
-efile="inv-ad-td-$1-$2-stderr-log.txt"
+sfile="inv/ad-td/inv-ad-td-$1-$2-stdout-log.txt"
+efile="inv/ad-td/inv-ad-td-$1-$2-stderr-log.txt"
 
 if [ -e $sfile ]; then
     echo "$sfile  exists -- delete"
