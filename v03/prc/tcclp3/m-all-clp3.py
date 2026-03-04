@@ -36,8 +36,6 @@ if(verb): print CL.estr
 
 years=yearOptPrc(yearOpt)
 
-ropt='norun'
-ropt=''
 MF.sTimer('ALL-clp3')
 for year in years:
     MF.sTimer('clp3-%s'%(year))

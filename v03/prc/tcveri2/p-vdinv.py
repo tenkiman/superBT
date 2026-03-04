@@ -46,7 +46,7 @@ def setVd2aRun(doZip,
         lsiz=MF.getPathSiz(logpath)
         
         if(lsiz > 0 and not(override)):
-            print 'WWW logpath: %s already done...'%(logpath)
+            print 'WWW logpath: %s already done...for: %s'%(logpath,pstat)
             ovopt=None
             return(ovopt,logpath)
     

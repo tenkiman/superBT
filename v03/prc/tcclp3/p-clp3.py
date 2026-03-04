@@ -4,30 +4,36 @@ from ad2vm import *
 import jclip
 
 
-def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
+def setClp3(dtg,ataus,adkcs,bposit,stmid,doERA5=0,verb=0):
     
-    lasttau=int(ataus[-1])
-    if(lasttau > 72):
+    if(doERA5):
+        
+        lasttau=int(ataus[-1])
+        if(lasttau > 72):
+            lasttau=72
+    
+        lstau12=lasttau%12
+        lasttau=lasttau-lstau12
+        
+        if(lasttau <= 12):
+            print 'BBB bailing on stmid: %s lasttau: %2d dtg: %s'%(stmid,lasttau,dtg)
+            acards=[]
+            return(acards)
+    
+        eadeck={}
+        eataus=[]
+        eadeckin=adkcs[dtg]
+        for acard in eadeckin:
+            aa=acard.split(',')
+            tau=aa[5].strip()
+            itau=int(tau)
+            if(itau%12 == 0 and itau <= lasttau):
+                eataus.append(itau)
+                eadeck[itau]=acard
+    else:
         lasttau=72
-
-    lstau12=lasttau%12
-    lasttau=lasttau-lstau12
-    
-    if(lasttau <= 12):
-        print 'BBB bailing on stmid: %s lasttau: %2d dtg: %s'%(stmid,lasttau,dtg)
-        acards=[]
-        return(acards)
-
-    eadeck={}
-    eataus=[]
-    eadeckin=adkcs[dtg]
-    for acard in eadeckin:
-        aa=acard.split(',')
-        tau=aa[5].strip()
-        itau=int(tau)
-        if(itau%12 == 0 and itau <= lasttau):
-            eataus.append(itau)
-            eadeck[itau]=acard
+        eadeck=None
+        
             
     #for eatau in eataus:
     #    print eadeck[eatau]
@@ -41,19 +47,31 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
     tcspd=bposit[4]
     idtg=dtg[2:]
     
-    print 'setClp3 for ',stmid,' lasttau: %3d  dtg: %s'%(lasttau,dtg)
-    
+    if(tcspd > 50.0):
+        tcspd=50.0
+        
     (latm12,lonm12)=rumltlg(tcdir,tcspd,-12.0,lat0,lon0)
     (latm24,lonm24)=rumltlg(tcdir,tcspd,-24.0,lat0,lon0)
     
     if(verb):
         print "M12: %6.1f  %6.1f"%(latm12,lonm12)
         print "M24: %6.1f  %6.1f"%(latm24,lonm24)
-    
-    center='JTWC'
+
+    # -- get basin based on lat0,lon0 if no go return a noload
+    #
     basin=tcbasin(lat0,lon0)
     
-    if(basin == 'EPC' or basin == 'ATL'):
+    #print 'rrr---',stmid,dtg,lat0,lon0,tcspd,basin
+    
+    if(basin ==  'NLD'):
+        
+        print 'WWW-making NoLoaD for stmid: ',stmid,'dtg: ',dtg
+        print 'tcdir/spd: ',tcdir,tcspd,'lat/lon0:',lat0,lon0,'lat/lon12: ',latm12,lonm12,'lat/lon24:',latm24,lonm24
+        acards=[]
+        return(acards)
+        
+        
+    elif(basin == 'EPC' or basin == 'ATL'):
     
         # convert lon to deg W for input
         clipMod='nhc.clipper.x'
@@ -72,6 +90,9 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
             cmd="%s %s"%(clipMod,nclipIN)
             cards=MF.runcmdLog(cmd,quiet=1)
             acards=parseClipCards(cards,lasttau,dtg,stmid,tcvmax,eadeck,verb=verb)
+            
+        print 'setNHC-Clp3 for ',stmid,'NHC-clipper tcvmax: %3d dtg: %s basin: %s lasttau: %2d'%\
+              (tcvmax,dtg,basin,lasttau)
     
     else:
     
@@ -86,11 +107,11 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
         #
         
         nsind=-999
-        
 
         if( lat0 > 0.3 and lat0 < 60.0 ):
             if( lon0>=100.0 and lon0 <=180.0):
                 clipermodel='wpclpr'
+                nsind=2
         #  NIO
         #
             elif(lon0>  0.0 and lon0 < 100.0):
@@ -124,9 +145,12 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
                 
         else:
             print "WWWW no jtwc cliper for: ",lat0,lon0
-            sys.exit()
+            clipermodel='oclip'
+            ccards=[]
         
-        print "CCCCC ",clipermodel,nsind,tcvmax
+        print 'setClp3 for ',stmid,'%s lat/lon0: %4.1f %5.1f tcvmax: %3d dtg: %s nsind: %2d lasttau: %2d'%\
+              (clipermodel,lat0,lon0,tcvmax,dtg,nsind,lasttau)
+        #print "CCCCC ",clipermodel,nsind,tcvmax,dtg
         
         if(clipermodel == 'wpclpr'):
             jclip.wpclpr (idtg,lat0,lon0,latm12,lonm12,latm24,lonm24,tcvmax)
@@ -153,20 +177,18 @@ def setClp3(dtg,ataus,adkcs,bposit,stmid,verb=0):
             # nsind = 2 wpac (lon > 100 and lon <= 180)
             # nsind = 1 nio (lon <=100)
         
-            print "QQQ ",nsind
+            #print "QQQ ",nsind
             if(nsind < 0):
                 jclip.oclip (nsind,idtg,-lat0,lon0,-latm12,lonm12,-latm24,lonm24)
             else:
                 jclip.oclip (nsind,idtg,lat0,lon0,latm12,lonm12,latm24,lonm24)
             
             lalo=jclip.oldclpfcst.cfcst
-        
             #
             # tau 72 in tau 60 for SIO, interpolate
             #
             
             if(nsind == -1):
-                print "NNNNN"
                 lalo[8]=(lalo[6]+lalo[8])*0.5
                 lalo[9]=(lalo[7]+lalo[9])*0.5
             
@@ -234,13 +256,21 @@ def parseClipCards(cards,lasttau,dtg,stmid,tcvmax,eadeck,verb=0):
             latb=tt[4]
             lon=tt[5]
             lonb=tt[6]
+            
+            # -- bail on E lons in the atlantic
+            #
+            if(b2id == 'AL' and lonb == 'E'):
+                continue
+            
             lat=lat.replace('.','')+latb
             lon=lon.replace('.','')+lonb
             acard="%s, %03d, %4s, %5s"%(acard,tau,lat,lon)
             if(tau <= lasttau):
                 #print card
-                ecard=eadeck[tau]
-                if(verb): print ecard
+                if(eadeck != None):
+                    ecard=eadeck[tau]
+                    if(verb): print ecard
+                    
                 acard="%s, %3d,     , XX,  34, NEQ, 0000, 0000, 0000, 0000,"%(acard,tcvmax)
                 if(verb): print acard
                 acards.append(acard)
@@ -301,13 +331,43 @@ def getEra5Adeck(stmid,m3trk,verb=0):
             ccards=ccards+setClp3(dtg,ataus,adkcs,bposit,stmid,verb=verb)
     
     rc=MF.WriteList2Path(ccards, cpath, append=0, verb=verb, warnonly=1)
-            
-            #for acard in acards:
-            #    print acard
-                
-            #print 'adtg: ',dtg,'ntau: ',ntau,'adks: ',len(adkcs[dtg]),bposit
-            
+
+def runClp3(stmid,m3trk,verb=0):
+    
+    ataus=[]
+    adkcs={}
+    abdir='/sbt/superBT-V04/dat-v03/atcf-form'
+    tbdir='/w21/dat/tc/adeck/atcf-form/'
+    cmodel='clp3'
+    rc=getStmParams(stmid)
+    bnum=rc[0]
+    year=rc[2]
+    b2id=rc[3]
+    
+    # -- write to both sbt and real-time tc/adeck/atcf-form dir
+    #
+    cdir="%s/%s/%s"%(abdir,year,cmodel)
+    MF.ChkDir(cdir,'mk')
+    cpath="%s/a%s%s%s.dat"%(cdir,b2id.lower(),bnum,year)
+
+    tdir="%s/%s/%s"%(tbdir,year,cmodel)
+    MF.ChkDir(cdir,'mk')
+    tpath="%s/a%s%s%s.dat"%(tdir,b2id.lower(),bnum,year)
+    
+    if(verb):
+        print 'cpath: ',cpath
+        print 'tpath: ',tpath
         
+    dtgs=m3trk.keys()
+    dtgs.sort()
+    ccards=[]
+    for dtg in dtgs:
+        bposit=getBlatBlonBdirspd(dtg,m3trk)
+        ccards=ccards+setClp3(dtg,ataus,adkcs,bposit,stmid,verb=verb)
+    
+    rc=MF.WriteList2Path(ccards, cpath, append=0, verb=verb, warnonly=1)
+    rc=MF.WriteList2Path(ccards, tpath, append=0, verb=verb, warnonly=1)
+
     
     
     
@@ -326,7 +386,8 @@ class TmtrkCmdLine(CmdLine):
         self.options={
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
-            'ropt':             ['N','norun',1,'ropt'],
+            'ropt':             ['N','','norun','ropt'],
+            'doERA5':           ['5',0,1,'do clp3 only for era5 tracks'],
             'dtgopt':           ['d:',None,'a',' dtgopt'],
             'stmopt':           ['S:',None,'a',' stmid target'],
         }
@@ -400,28 +461,32 @@ if(stmopt != None):
             dobt=1
             dofilt9x=0
             doNNand9X=0
-    # -- dobt for stmid, but dobtTrk=0 for track positis
+    # -- dobt for stmid, but dobtTrk=0 for track posits
     #
-    dobtTrk=0
+    dobtTrk=dobt
     
     stmids=[]
     stmopts=getStmopts(stmopt)
     for stmopt in stmopts:
-        stmids=stmids+md3.getMd3Stmids(stmopt,dobt=dobt,dofilt9x=dofilt9x,verb=verb)
+        stmids=stmids+md3.getMd3Stmids(stmopt,dobt=dobt,dofilt9x=dofilt9x)
+
 
     for stmid in stmids:
-        #print 'sss',stmid,dobt,dofilt9x
-        #continue
         
         # -- get track
         #
         (rc,m3trk)=md3.getMd3track(stmid,dobt=dobtTrk,verb=verb,domiss=domiss)
-        if(rc == 1):
+        
+        if(ropt == 'norun'):
+            print 'sss',stmid,'rc: ',rc
+            continue
+
+        # -- do either ERA5 or just BT
+        #
+        if(rc == 1 and doERA5):
             rc=getEra5Adeck(stmid,m3trk,verb=verb)
         else:
-            print 'EEE no m3trk for this stmid: ',stmid
-            sys.exit()
-
+            rc=runClp3(stmid,m3trk,verb=verb)
 
 if(verb): MF.dTimer('ALL')
 

@@ -4,12 +4,12 @@ from sBT import *
 
 abdirAtcfW21='/w21/dat/tc/adeck/atcf-form'
 
-def getAdecksStmid(tstmid,redoTrk=0,dryRun=0,
+def getAdecksStmid(tstmid,redoTrk=0,dryRun=0,dobt=0,
                    ropt='',qropt='quiet',verb=0,override=0):
 
     # -- get track
     #
-    rc=md3.getMd3track(tstmid,dobt=0,verb=verb)
+    rc=md3.getMd3track(tstmid,dobt=dobt,verb=verb)
     astmids=[]
 
     if(rc[0]):
@@ -67,6 +67,14 @@ def getAdecksStmid(tstmid,redoTrk=0,dryRun=0,
             
     # -- dryrun
     #
+    curOpath=MF.ChkPath(opath)
+    if(curOpath):
+        onl=MF.getPathNlines(opath)
+        osz=MF.getPathSiz(opath)
+        print 'CURRENT opath: ',opath,' onl: %4d'%(onl),' osz: %6d'%(osz)
+    else:
+        print 'WWW opath not there: ',opath
+        
         
     if(dryRun):
         
@@ -100,9 +108,9 @@ def getAdecksStmid(tstmid,redoTrk=0,dryRun=0,
                 onl=MF.getPathNlines(opath)
                 osz=MF.getPathSiz(opath)
             
-            print 'tstmid: ',tstmid,' astmids: ',astmids,' N adtgs: ',len(adtgs),' N m3dtgs: ',len(m3dtgs),' N miss: ',\
+                print 'tstmid: ',tstmid,' astmids: ',astmids,' N adtgs: ',len(adtgs),' N m3dtgs: ',len(m3dtgs),' N miss: ',\
                   nmiss,'nlAdecks: ',nlAdecks,' nsAdecks: ',nsAdecks
-            print 'opath: ',opath,' onl: %4d'%(onl),' osz: %6d'%(osz)
+                print 'opath: ',opath,' onl: %4d'%(onl),' osz: %6d'%(osz)
             
         elif(nmiss > 0):
             print 'MMMMMMMMM for ',tstmid
@@ -252,6 +260,7 @@ dtgopt=yearOpt=None
 istmopt=stmopt
 stmopts=getStmopts(stmopt)
 
+
 if(rsyncOnly):
 
     cmd="rsync -alv %s/ %s/"%(abdirAtcf,abdirAtcfW21)
@@ -268,20 +277,29 @@ for stmopt in stmopts:
     doBT=0
     if(doBdeck2): doBT=1
     
+    # -- set dobt here ... new form of md3 has the 9X dev for year < 2007
+    #
+    iyear=int(oyearOpt)
+    if(iyear < 2007):
+        dobt=1
+    else:
+        dobt=0
+
     md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
     
     tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
     
     for tstmid in tstmids:
         
-        rc=getAdecksStmid(tstmid,redoTrk=redoTrk,dryRun=dryRun,override=override,verb=verb)
+        rc=getAdecksStmid(tstmid,redoTrk=redoTrk,dobt=dobt,\
+                          dryRun=dryRun,override=override,verb=verb)
         
         if(rc == 0):
             print 'EEE -- still missing trackers for : ',tstmid,' press...'
     
         if(rc == 2):
             print 'RRR -- reran tracker... now redo...'
-            rc=getAdecksStmid(tstmid,redoTrk=0,override=1,verb=verb)
+            rc=getAdecksStmid(tstmid,redoTrk=0,dobt=dobt,override=1,verb=verb)
             print 'RRR -- rc after rerun: ',rc
             
     MF.dTimer('atcf-stmopt-%s'%(stmopt))
@@ -290,8 +308,9 @@ MF.dTimer('atcf-ALL-%s'%(istmopt))
 
 # -- rsync from sbt to /w21/dat/tc/adeck/atcf-form/
 #
-cmd="rsync -alv %s/ %s/"%(abdirAtcf,abdirAtcfW21)
-mf.runcmd(cmd,ropt)
+if(not(dryRun)):
+    cmd="rsync -alv %s/ %s/"%(abdirAtcf,abdirAtcfW21)
+    mf.runcmd(cmd,ropt)
         
 sys.exit()
 

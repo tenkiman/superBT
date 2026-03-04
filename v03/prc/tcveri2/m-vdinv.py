@@ -32,7 +32,8 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
-            'pfilt':            ['f:',None,'a',"""filter: 'z0012' | 'z0618'..."""],
+            'pfilt':            ['f:',None,'a',""" default is None | a pfilt opt e.g., 'z0012'..."""],
+            'basinOpt':         ['B:','all','a',""" default is all | a..."""],
             'useTaids':         ['t',0,1,"""use taids vice vaids -- do alias in vd2deck v ad2deck -- Only need to do once"""],
             'yearOpt':          ['Y:',None,'a','yearOpt'],
             
@@ -61,24 +62,27 @@ if(override):  ovopt='-O'
 filtOpt=''
 if(pfilt != None): 
     filtOpt='-f %s'%(pfilt)
+    ovopt=''
     
 utaidsOpt=''
 if(useTaids):
     utaidsOpt='-t'
     
 
-MF.sTimer('Mk-Vd-All-%s'%(yearOpt))
+MF.sTimer('Mk-Vd-All-%s-%s'%(basinOpt,yearOpt))
 for year in years:
 
-    vdtimerOpt='%s'%(year)
-    if(pfilt != None): vdtimerOpt="%s-%s"%(year,pfilt)
+    vdtimerOpt='%s-%s'%(basinOpt,year)
+    if(pfilt != None): vdtimerOpt="%s-%s-%s"%(basinOpt,year,pfilt)
         
     MF.sTimer('vdinv-%s'%(vdtimerOpt))
-    cmd="%s -S all.%s %s %s %s"%(vdcmd,year,filtOpt,utaidsOpt,ovopt)
+    cmd="%s -S %s.%s %s %s %s"%(vdcmd,basinOpt,year,filtOpt,utaidsOpt,ovopt)
     mf.runcmd(cmd,ropt)
-    cmd="%s -S all.%s -p pod %s %s %s"%(vdcmd,year,filtOpt,utaidsOpt,ovopt)
+
+    ovopt='-O'
+    cmd="%s -S %s.%s -p pod %s %s %s"%(vdcmd,basinOpt,year,filtOpt,utaidsOpt,ovopt)
     mf.runcmd(cmd,ropt)
     MF.dTimer('vdinv-%s'%(vdtimerOpt))
         
     
-MF.dTimer('Mk-Vd-All-%s'%(yearOpt))
+MF.dTimer('Mk-Vd-All-%s-%s'%(basinOpt,yearOpt))

@@ -23,6 +23,7 @@ class TmtrkCmdLine(CmdLine):
             'ropt':             ['N','','norun',' norun is norun'],
             'yearOpt':          ['Y:',None,'a','yearOpt'],
             'redoClp3Ad2':      ['C',0,1,'redoClp3Ad2 only'],
+            'basinOpt':         ['B:','all','a',""" default is all | a..."""],
             'doAd2Inv':         ['I',1,0,'do NOT do ad2inv'],
             'dobt':             ['b',1,0,'only do NN is the default'],
             'redoTrk':          ['R',0,1,' run tracker for missing dtgs'],
@@ -49,15 +50,19 @@ if(verb): print CL.estr
 
 years=yearOptPrc(yearOpt)
 
-def makeStmOptByBasin(year):
-    basins=['i','h','w','c','e','l']
+def makeStmOptByBasin(year,basinOpt=None):
+    if(basinOpt != None):
+        basins=basinOpt.split(',')
+    else:
+        basins=['i','h','w','c','e','l']
+        
     stmopt=''
     for b in basins:
         if(stmopt == ''):
             stmopt="%s.%s"%(b,year)
         else:
             stmopt="%s,%s.%s"%(stmopt,b,year)
-    return(stmopt)
+    return(basins,stmopt)
 
 if(doAd2InvOnly):
     redoAd2=0
@@ -72,6 +77,7 @@ for year in years:
 
     syear=str(year)
     opath='adinv/adinv-%s.txt'%(year)
+    (basins,stmopt)=makeStmOptByBasin(year,basinOpt)
     
     if(redoAd2):
         
@@ -79,7 +85,7 @@ for year in years:
         #
         dsbdir='/w21/dat/tc/DSs'
         dsbdir='./DSs-local'
-        cmd='rm  %s/ad2-??-%s.pypdb'%(dsbdir,syear)
+        cmd='rm -i %s/ad2-??-%s.pypdb'%(dsbdir,syear)
         mf.runcmd(cmd,ropt)
 
         cmd='rm -i %s/bd2-%s.pypdb'%(dsbdir,syear)
@@ -93,35 +99,40 @@ for year in years:
     if(redoEra5Ad2):
         
         MF.sTimer('redoEra5Ad2-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py era5 -S all.%s -O1 -o -W'%(syear)
-        mf.runcmd(cmd,ropt)
+        for basin in basins:
+            cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py era5 -S %s.%s -O1 -o -W'%(basin,syear)
+            mf.runcmd(cmd,ropt)
         MF.dTimer('redoEra5Ad2-%s'%(syear))
 
 
     if(redoClp3Ad2):
         
         MF.sTimer('atcf-CLP3-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py clp3 -S all.%s -O1 -o -W'%(syear)
+        for basin in basins:
+            cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py clp3 -S %s.%s -O1 -o -W'%(basin,syear)
         mf.runcmd(cmd,ropt)
         MF.dTimer('atcf-CLP3-%s'%(syear))
 
-        MF.sTimer('adinv-%s'%(syear))
-        cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -o -L > %s'%(syear,opath)
-        mf.runcmd(cmd,ropt)
-        MF.dTimer('adinv-%s'%(syear))
-        
-        if(ropt != 'norun'):
-            MF.sTimer('adinv-pyp-%s'%(syear))
-            rc=parseAd2Inv(syear)
-            MF.dTimer('adinv-pyp-%s'%(syear))
-        
+        if(not(redoAd2) and not(redoAd2Phr0) and not(doAd2InvOnly)):
+            
+            MF.sTimer('adinv-%s'%(syear))
+            cmd='/w21/prc/tcdat/w2-tc-dss-ad2.py -S all.%s -o -L > %s'%(syear,opath)
+            mf.runcmd(cmd,ropt)
+            MF.dTimer('adinv-%s'%(syear))
+            
+            if(ropt != 'norun'):
+                MF.sTimer('adinv-pyp-%s'%(syear))
+                rc=parseAd2Inv(syear)
+                MF.dTimer('adinv-pyp-%s'%(syear))
+            
 
     # -- now do the ad2 -h 0
     #
     if(redoAd2 or redoAd2Phr0):
         
         MF.sTimer('ad2-phr0-%s'%(syear))
-        cmd='p-adinv.py -S all.%s -A -O'%(syear)
+        for basin in basins:
+            cmd='p-adinv.py -S %s.%s -A -O'%(basin,syear)
         mf.runcmd(cmd,ropt)
         MF.dTimer('ad2-phr0-%s'%(syear))
         

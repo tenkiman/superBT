@@ -703,13 +703,19 @@ def getPvarivars(ptype,pcase,toptitle1):
     do2ndval=0
     toptitle2=None
 
-    if(ptype == 'pe' or ptype == 'gainxype'):
+    if(ptype == 'pe'):
         pverikey='pe'
         pverikey1=pverikey
         do1stplot=0
         do2ndplot=1
         doErrBar=1
-        if(ptype == 'gainxype'): doErrBar=0
+
+    elif(ptype == 'gainxype'):
+        pverikey='pe'
+        pverikey1=pverikey
+        do1stplot=0
+        do2ndplot=1
+        doErrBar=0
 
     elif(ptype == 'fe' or ptype == 'gainxyfe'):
         pverikey='fe'
@@ -821,7 +827,7 @@ def getPvarivars(ptype,pcase,toptitle1):
         pverikey1='over'
 
         do1stplot=1
-        do2ndplot=1
+        do2ndplot=0
         do2ndval=-1 # have pod 1st in table cells
 
         toptitle2='Prob Of Detection [POD;%] -- bars ; Prob Of Overwarn [POO;%] -- lines'
@@ -1000,8 +1006,8 @@ def setDicts(SSMs,models,basins,times,otau,otaus,stype,doAllYears=1,iyear=None,v
                     print 'bbb222',basin,ov2
                     print 'bbbnnn',basin,nv1
             
-                print 'mmm111',ov1mean,'n: ',ov1n
-                print 'mmm222',ov2mean,'n: ',ov2n
+                #print 'mmm111',ov1mean,'n: ',ov1n
+                #print 'mmm222',ov2mean,'n: ',ov2n
 
             if(nbasin > 1 and ov1mean != undef):
                 dict1[syear]=(ov1mean,ov1n)
@@ -1283,12 +1289,12 @@ class SumStatMultiYear(MFbase):
             if(self.otau == 'MR'): self.makeNetFe(self.tausMR,tauLabel=self.otau)
             if(self.otau == 'LR'): self.makeNetFe(self.tausLR,tauLabel=self.otau)
         
-        #if(self.veriStat == 'gainxype' or self.veriStat == 'gainxyfe' or\
-            #self.models=self.baseModels
-            #self.makeGainxyFe(self.otau)
+    
+        if(self.veriStat == 'gainxype' or self.veriStat == 'gainxyfe' or self.veriStat == 'gainxyte'):
+            #self.models=self.baseModels[0:-1]
+            self.makeGainxyFe(self.otau)
             
         self.makeYearStats(self.otau)
-    
    
    
     def makeSingleYearStats(self,year):
@@ -1324,13 +1330,11 @@ class SumStatMultiYear(MFbase):
 
     def makeYearStats(self,tau):
         
-        if(self.veriStat == 'gainxype'):
-            stype=self.veriStat
-        else:
-            stype=self.veriStatRead
-
+        stype=self.veriStatRead
+        
         modelMs=self.models
-        if(self.veriStat == 'gainxyfe' or self.veriStat == 'gainxype' or self.veriStat == 'gainxyte'): modelMs=self.models[0:-1]
+        if(self.veriStat == 'gainxyfe' or self.veriStat == 'gainxype'
+           or self.veriStat == 'gainxyte'): modelMs=self.models[0:-1]
         
         for model in self.models:
             
@@ -1353,17 +1357,21 @@ class SumStatMultiYear(MFbase):
                         valM=self.allStats[year,modelM,tau,stype]
                     except:
                         valM=None
-                
+                    
+                    #print 'mmm',modelM,valM
+                    
                     gotest=(valM == None or (valM != None and valM[0] == self.undef))        
                     if(gotest): break
                 
-                if(gotest): continue
+                #print 'ssss---mmmm',year,model,tau,stype,gotest
+                #if(gotest): continue
                 
                 try:
                     val=self.allStats[year,model,tau,stype]
                 except:
                     val=(self.undef,0)
 
+                #print 'ssss---mmmm',year,model,tau,stype,val
                 if(val[0] != self.undef and len(val) == 2):
                     valR=val[0]
                     cntR=val[1]
@@ -1519,11 +1527,12 @@ class SumStatMultiYear(MFbase):
                     valF=self.allStats[year,fixmodel,tau,self.veriStatRead]
                 except:
                     valF=(self.undef,0)
-    
                 if(val[0] != self.undef and valF[0] != self.undef):
                     gainxy=((valF[0]-val[0])/valF[0])*100.0
                 else:
                     gainxy=self.undef
+                    
+                #print 'asdf---ggg',year,model,fixmodel,tauLabel,self.veriStatRead,gainxy,val[1]
                 self.allStats[year,model,tauLabel,self.veriStatRead]=(gainxy,val[1])
                 self.otauStats[year,model,tauLabel]=(gainxy,val[1])
                 
@@ -1540,10 +1549,10 @@ class SumStatMultiYear(MFbase):
         
         taus=[]
         veriread=self.veriStat
-        if(self.veriStat == 'pe-line'):
+        if(self.veriStat == 'pe-line' or self.veriStat == 'gainxype'):
             veriread=self.veriStatRead
         
-        
+
         for year in self.years:
             
             cyear=str(year)
@@ -1555,13 +1564,8 @@ class SumStatMultiYear(MFbase):
             except:
                 cards=[]
                     
-                
-            
-            #allstats[taid,tau,verikey]=(ostat,mean,amean,sigma,maxv,minv,n,ptl25,median,ptl75,ptl90)
-            #SSSSSHHHHH               hwrf   0         pe        11.0 n: 294    m,a,s,mn,p25,med,p75,p90,mx:   11.0   11.0   15.9  Dist:    0.0    0.0  MD:    6.0   13.3   26.2  132.3
-            #'SSSSSHHHHH', 'hwrf', '0', 'pe', '11.0', 'n:', '294', 'm,a,s,mn,p25,med,p75,p90,mx:', '11.0', '11.0', '15.9', 'Dist:', '0.0', '0.0', 'MD:', '6.0', '13.3', '26.2', '132.3']
-
             if(len(cards) == 0):
+                
                 ostat=(-999.,0)
                 tau=self.otau
                 for model in self.models:
@@ -1589,7 +1593,7 @@ class SumStatMultiYear(MFbase):
                         
                     # -- relabel models
                     
-                    if(self.veriStat == 'gainxype' and stype == 'pe'): stype=self.veriStat
+                    #if(self.veriStat == 'gainxype' and stype == 'pe'): stype=self.veriStat
                     #print 'sss',veriread,stype,stat,model,cyear,len(tt)
                         
                     #
@@ -1613,17 +1617,19 @@ class SumStatMultiYear(MFbase):
                         maxv=float(tt[n])    ; n=n+1
                         
                         ostat=(stat,ncounts,minv,ptl25,median,ptl75,ptl90,maxv)
-                        print 'oo--ss',year,model,tau,stype,ostat
+                        if(model in self.baseModels and tau == self.otau):
+                            print 'oo--ss',year,model,tau,stype,ostat
                         self.allStats[year,model,tau,stype]=ostat
                         
                     else:
                         if(tau == self.otau and stype == self.veriStatRead):
-                            print 'ss-oo-pod',year,model,tau,stype,stat,ncounts,nfc
+                            print 'ss-oo-pod',year,self.basin,model,tau,stype,stat,ncounts,nfc
                         ostat=(stat,ncounts)
                         self.allStats[year,model,tau,stype]=ostat
         
         taus=mf.uniq(taus)
         self.taus=taus
+
         
 
 
@@ -2470,11 +2476,10 @@ class SumStatsPlot(MFbase):
         # -- use natsort module to handle strings
         #
         taus=natsorted(taus)
-        
 
         nrows=len(dicts)
 
-        if(mf.find(self.ptype,'gainxy') and self.ptype != 'gainxyfe0'):
+        if(mf.find(self.ptype,'gainxy') and self.ptype != 'gainxyfe0' and nrows > 1):
             if(useroverride):
                 nrows=nrows/2
             else:
@@ -2572,6 +2577,12 @@ class SumStatsPlot(MFbase):
 
                 val1=dict1[tau][0]
                 val2=dict2[tau][0]
+                
+                if(self.isundef(val1)):
+                    val1=None
+                if(self.isundef(val2)):
+                    val2=None
+                    
                 if(verb): print 'nnn',nt,tau,val1,val2
 
                 if(len(dict1[tau]) > 2):
@@ -2635,8 +2646,9 @@ class SumStatsPlot(MFbase):
                 nc=cnt[tau]
                 
                 if(self.isundef(val1) or nc == 0):
-                    val1=''
+                    val1=None
                     cval1=''
+                    row1.append(val1)
                 else:
                     row1.append(val1)
                     xval1=0.5+(nt-1)
@@ -2644,7 +2656,8 @@ class SumStatsPlot(MFbase):
                     xaxisT.append(int(tau))
 
                 if(self.isundef(val2) or nc == 0):
-                    val2=''
+                    val2=None
+                    row2.append(val2)
                     cval2=''
                 else:
                     row2.append(val2)
@@ -2812,6 +2825,7 @@ class SumStatsPlot(MFbase):
                 print 'xxxx',n,xaxisT
                 print 'yyyy',n,ys
                  
+            ys=self.makeMaskYs(ys)
             nxy=n
             rc=ax.plot(xaxisT,ys,
                        color=rowc[nxy],
@@ -2837,6 +2851,7 @@ class SumStatsPlot(MFbase):
                 print 'xxxx',n,xaxisT
                 print 'yyyy',n,ys
                  
+            ys=self.makeMaskYs(ys)
             
             if(dosmooth):
                 ys=array(ys)
@@ -3231,6 +3246,30 @@ class SumStatsPlot(MFbase):
         if(ialphaline != None): alphaline=ialphaline
         if(ialphabar != None): alphabar=ialphabar
 
+    def makeMaskYs(self,ys):
+        from numpy import empty,ma
+        
+        nys=empty([len(ys)])
+        maskys=[]
+        for i in range(0,len(ys)):
+            y=ys[i]
+            if(y == None):
+                maskys.append(1)
+            else:
+                maskys.append(0)
+                nys[i]=y
+            
+        # -- make the masked array
+        #
+        nys=ma.array(nys,mask=maskys)
+        
+        # -- set undef points to None
+        #
+        for i in range(0,len(nys)):
+            my=maskys[i]
+            if(my == 1):
+               nys[i]=None            
+        return(nys)
     
 
     def simpleplot(self,
@@ -3273,10 +3312,11 @@ class SumStatsPlot(MFbase):
         from WxMAP2 import W2
         w2=W2()
         
-        from numpy import array
+        from numpy import array,ma,empty
         import matplotlib.lines as mlines
 
         self.do2ndval=do2ndval
+
         
         def ispvar1eqpvar2(taus,dict1,dict2):
 
@@ -3380,7 +3420,7 @@ class SumStatsPlot(MFbase):
 
         nrows=len(dicts)
 
-        if(mf.find(self.ptype,'gainxy') and self.ptype != 'gainxyfe0'):
+        if(mf.find(self.ptype,'gainxy') and self.ptype != 'gainxyfe0' and nrows != 1):
             if(useroverride):
                 nrows=nrows/2
             else:
@@ -3422,10 +3462,14 @@ class SumStatsPlot(MFbase):
         if(ialphabar == None): alphabar=[]
 
         olabels=[]
-
+        
+        #print 'nnnnnnnnnnnnnnnnnnnn',nrows
         for n in range(0,nrows):
 
             (dict1,dict2)=dicts[n]
+            
+            #print 'ddd111',dict1
+            #print 'ddd222',dict2
             
             cnt=cnts[n]
             
@@ -3548,7 +3592,7 @@ class SumStatsPlot(MFbase):
                 xaxis.append(xval1)
 
                 if(self.isundef(val2) or nc == 0):
-                    val2=-999.
+                    val2=None
                     cval2=''
                     
                 row2.append(val2)
@@ -3707,6 +3751,8 @@ class SumStatsPlot(MFbase):
         for n in range(0,np):
 
             ys=vals1[n]
+            ys=self.makeMaskYs(ys)
+
             ymedian=v1medians[n]
                 
             xaxisl=copy.copy(xaxiss[n])
@@ -3716,6 +3762,8 @@ class SumStatsPlot(MFbase):
             leghand = mlines.Line2D([], [], color=rowc[n], marker='', ls=lstyle[n], label=olabels[n])
             leghandles.append(leghand)
 
+            # ---------------11111111111111111111111111111111111111111111111111111111111
+            #
             if(do1stplot):
                 #adjustxaxis(n,xaxisl,barwidth,dxofffraction,center=1)
                 rc=FP.plot(xaxisl,ys,
@@ -3778,13 +3826,16 @@ class SumStatsPlot(MFbase):
                         FP.legend(loc=lgndloc,handles=leghandles)
                         
 
-            do2ndplot=0
+            # ---------------2222222222222222222222222222222222222222222222222222222222222222
+            #
             if(do2ndplot > 0):
 
                 if(do2ndplot == 2):
                     doline=1
 
                 ys=vals2[n]
+                ys=self.makeMaskYs(ys)
+                
                 for j in range(0,len(ymedian)):
                     ymedian[j]=v1medians[n][j]
 
@@ -3934,6 +3985,8 @@ class SumStatsPlot(MFbase):
                         if(n == np-1):
                             FP.legend(lgndc, rowl, loc=lgndloc, shadow=True, markerscale=0.2)
 
+                    #----------------2222222 bbbbbb aaaaaaa rrrrrrrrrrrrrr
+                    #
                     else:
 
                         rc=FP.bar(xaxisb,ys,
@@ -4057,8 +4110,6 @@ class SumStatsPlot(MFbase):
             tdir='/Users/fiorino/Dropbox/PLOTS'
             cmd="cp -p %s %s"%(pngpath,tdir)
             mf.runcmd(cmd,ropt)
-
-    #
 
 
 
@@ -4202,7 +4253,7 @@ def getFstmids4Tstmids(tstmids,aidStms,verb=0):
         #print 'mmmm222',gotmd2,'mmmm333',gotmd3
     
         if(len(aids) == 0):
-            print 'no aids for tstmid: ',tstmid,'tstmid2: ',tstmid2
+            print 'no aids for tstmid--00000: ',tstmid,'tstmid2: ',tstmid2
             fstmid=tstmid
         else:
             aidstr=makeAidStr(aids)
@@ -4239,7 +4290,7 @@ def getDsbdir(dssDir):
         
 def tcbasin(lat,lon):
 
-    basin='00'
+    basin='NLD'
 
     if(lat > 0.0 and lon >= 40.0 and lon < 75.0 ):
         basin='NIA'
@@ -4274,14 +4325,17 @@ def tcbasin(lat,lon):
         basin='ATL'
 
 
-    if( lat > 0 and lon >= 285):
+    if( lat > 0 and lon >= 285 and lon <= 350.0):
         basin='ATL'
 
+    if( lat > 0 and lon >= 0.0 and lon < 40.0):
+        basin='NLD'
+    
 
     if( lat < 0 and lon >= 135):
         basin='SEP'
 
-    if( lat < 0 and ( lon > 40 and lon < 135) ):
+    if( lat < 0 and ( lon > 20 and lon < 135) ):
         basin='SIO'
         
     return(basin)

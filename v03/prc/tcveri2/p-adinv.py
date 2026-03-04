@@ -93,7 +93,7 @@ for stmopt in stmopts:
 
         if(nstms == 0):
             print
-            print 'NNN no stms for stmopt: ',stmopt,'press...'
+            print 'NNN no stms for stmopt - adeck: ',stmopt,'press...'
             print
             continue
         else:
@@ -115,7 +115,7 @@ for stmopt in stmopts:
     if(ptype == 'vdeck' or ptype == 'both'):
 
         if(nstms == 0):
-            print 'NNN no stms for stmopt: ',stmopt,'press...'
+            print 'NNN no stms for stmopt-vdeck: ',stmopt,'press...'
             continue
         else:
             print 'VVV Nstms %2d for stmopt: %s doing: %s'%(nstms,stmopt,ptype)

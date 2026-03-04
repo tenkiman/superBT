@@ -27,7 +27,7 @@ class MyearVd2aCmdLine(CmdLine):
             'veriOptHomo':         ['H',0,1,"""" 1 for homogeneous; [0] for heterogeneous """],
             'doxv':                ['X',0,1,"""" 1 -> xv plot """],
             'veriStat':            ['p:','pe-line','a',"""['pe'] for position error | 'pod' | gainxype """],
-            'yearOpt':             ['y:','2007.2018','a',"""byear.eyear for a range of years"""],
+            'yearOpt':             ['Y:','2007.2018','a',"""byear.eyear for a range of years"""],
             'toptitle1':           ['1:',None,'a','toplabel1'],
             'toptitle2':           ['2:','','a','toplabel2'],
             'veriLabel':           ['l:',None,'a','veriLabel for zip file'],
@@ -258,7 +258,7 @@ if(veriStat == 'gainxyfe' or veriStat == 'gainxype'):
         plotcontrolVar=([-40.0,100.0,10],2) # gainxyfe for hfip
     else:
         plotcontrolVar=([-40.0,80.0,10],2) # gainxyfe for hfip
-        plotcontrolVar=([-20.0,40.0,5],2) # gainxyfe for era5
+        plotcontrolVar=([-30.0,50.0,10],2) # gainxyfe for era5
 
 if(veriStat == 'fe' and otau == 'SR'):
     plotcontrolVar=([0.0,150.0,25],2) # gainxyfe for hfip
@@ -312,7 +312,10 @@ sAlldicts={}
 nAlldicts={}
 MF.sTimer('makesDicts')
 stype=veriStatRead
-if(veriStat == 'gainxype'): stype=veriStat
+if(veriStat == 'gainxype'): 
+    stype=veriStatRead
+    models=models[0:-1]
+
 for otau in otaus:
     (sdicts,ndicts)=setDicts(SSMs, models, basins, times, otau, otaus, stype, doAllYears,verb=verb)
     sAlldicts[otau]=sdicts
@@ -335,7 +338,11 @@ MF.dTimer('makesDicts')
 
 MF.sTimer('makePlot')
 
-taids=SSM.models
+if(veriStat == 'gainxype'):
+    taids=SSM.models[0:-1]
+else:
+    taids=SSM.models
+    
 tstmids=[]
 
 ostats={}
@@ -347,9 +354,7 @@ verivars=getVerivars(veriStat)                                # from vdVM.py
 ss=SumStats(taids,tstmids,                                    # a class() from vdCL.py
             verivars,ostats,
             cases,casedtgs)
-
 rc=getPvarivars(ptype,pcase,toptitle1)                        # vdVM.py
-
 
 (pverikey,pverikey1,do1stplot,do2ndplot,do2ndval,doErrBar,toptitle1,toptitle2)=rc
 

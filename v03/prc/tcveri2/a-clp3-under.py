@@ -20,7 +20,10 @@ class TmtrkCmdLine(CmdLine):
             'ropt':             ['N','','norun',' norun is norun'],
             'doit':             ['X',0,1,'run with default pmodmin'],
             'podmin':           ['P:',98.5,'f',' set the minimum pod for find unders...'],
+            'targetTau':        ['t:',None,'i',' set the target taus'],
             'doRedo':           ['R',0,1,'run m-redo-clp3-under.py'],
+            'byStm':            ['Y',0,1,'redo m-redo-clp3-under.py to dectect problem stmid'],
+            
         }
 
         self.purpose="""
@@ -47,22 +50,62 @@ for card in cards:
     if(mf.find(card,'Nfc')):
         tt=card.split()
         basin=tt[0]
-        tau=tt[1]
+        tau=int(tt[1])
         pod=float(tt[2])
-        opod="%4.1f %2s"%(pod,tau)
         if(pod < podmin):
-            MF.appendDictList(pminbasins,basin,opod)
+            opod="%4.1f %2s"%(pod,tau)
+            if(targetTau != None and tau == targetTau):
+                opod="%4.1f %2s"%(pod,tau)
+                MF.appendDictList(pminbasins,basin,opod)
+            #else:
+            #    MF.appendDictList(pminbasins,basin,opod)
 
-
+pStmoptsOk=[
+#'l.1961',
+#'l.1964',
+#'l.2004',
+#'l.2006',
+]
 pp=pminbasins.keys()
 pp.sort()
 
+podmin=podmin
+
+opodmin=str(podmin)
+MF.sTimer('AALLLL-clp3-under-%s'%(opodmin))
+
+tauopt=''
+if(targetTau != None):
+    tauopt='-t %d'%(targetTau)
+
 for p in pp:
-    print 'pmin ',p,pminbasins[p]
+   
+    if(p in pStmoptsOk):
+        print 'p: ',p,'okay'
+        continue
+    else:
+        print 'pmin ',p,pminbasins[p],'tau: ',tauopt
+    
     if(doRedo):
-        roptRedo='-N'
-        if(doit):
-            roptRedo=''
-            ropt=''
-        cmd='m-redo-clp3-under.py -S %s %s'%(p,roptRedo)
+        
+        MF.sTimer('clp3-under-%s'%(pminbasins[p]))
+        if(byStm):
+
+            roptRedo='-N'
+            if(doit):
+                roptRedo=''
+                ropt=''
+            cmd='m-redo-clp3-under.py -S %s -Y %s -P %3.1f %s'%(p,roptRedo,podmin,tauopt)
+            
+        else:
+
+            roptRedo='-N'
+            if(doit):
+                roptRedo=''
+                ropt=''
+            cmd='m-redo-clp3-under.py -S %s %s -P %3.1f %s'%(p,roptRedo,podmin,tauopt)
         mf.runcmd(cmd,ropt)
+        MF.dTimer('clp3-under-%s'%(pminbasins[p]))
+        
+MF.dTimer('AALLLL-clp3-under-%s'%(opodmin))
+        

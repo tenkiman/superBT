@@ -722,7 +722,19 @@ for Mdeck3 need to turn off
                 rc=0
         
         else:
-            if(allDoneGen):
+
+            if(not(self.haveTcs) and allDoneGen):
+                print 'NNNoooTTTcccs'
+                print 'NNNoooTTTcccs for dtg: ',self.dtg,' BUT allDoneGen okay'
+                print 'NNNoooTTTcccs'
+                rc=0
+                return(rc)
+
+            if(allDoneGen and not(allDoneDet)):
+
+                print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                      ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' BUT...need to run tracker!!!!'            
+            else:
                 print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
                       ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
                 rc=0

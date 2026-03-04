@@ -79,7 +79,12 @@ def makeBdeck2s(fstmids,md3,domiss=0,
         # -- get stmcards
         #
         (rc,m3cards)=md3.getMd3Cards(tstmid)
-        #print 'stmcards',len(m3cards)
+        
+        print 'stmcards',len(m3cards)
+        for m3 in m3cards:
+            print m3
+        sys.exit()
+        
         (smeta,smetacard)=md3.getMd3StmMeta(tstmid)
         ss9=smeta[-2]
         stmDev=None
@@ -91,6 +96,9 @@ def makeBdeck2s(fstmids,md3,domiss=0,
         m3trk=MD3trk(m3cards,stm1id,stm9xid,dom3=1,isBD2=1,sname=sname,basin=basin,stmDev=stmDev,
                      useVmax4TcCode=useVmax4TcCode,
                      verb=verb)        
+        
+        #m3trk.ls()
+        #sys.exit()
     
         utstmid=tstmid.upper()
         MF.sTimer('bds-%s'%(utstmid))
@@ -101,10 +109,10 @@ def makeBdeck2s(fstmids,md3,domiss=0,
         #
         m3stmid=m3stmids[tstmid].upper()
         if(m3stmid != utstmid):
-            MF.sTimer('bds-%s'%(m3stmid))
+            MF.sTimer('bds-md3-%s'%(m3stmid))
             print 'WWW add md2 stmid ',m3stmid,' bd2 -- the same bd2 as md3 stmid ',utstmid
             bd2s[m3stmid]=Bdeck2(m3trk,tstmid,verb=0)
-            MF.dTimer('bds-%s'%(m3stmid))
+            MF.dTimer('bds-md3-%s'%(m3stmid))
                     
         continue
         
