@@ -271,8 +271,11 @@ if(rsyncOnly):
 MF.sTimer('atcf-ALL-%s'%(istmopt))
 for stmopt in stmopts:
     
+    # -- force use of MD3 by setting yearOpt
+    #
+    ss=stmopt.split('.')
+    yearOpt=ss[-1]
     MF.sTimer('atcf-stmopt-%s'%(stmopt))
-    
     (oyearOpt,doBdeck2)=getYears4Opts(stmopt,dtgopt,yearOpt)
     doBT=0
     if(doBdeck2): doBT=1
@@ -286,8 +289,8 @@ for stmopt in stmopts:
         dobt=0
 
     md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
-    
     tstmids=md3.getMd3Stmids(stmopt,dobt=dobt)
+    
     
     for tstmid in tstmids:
         
