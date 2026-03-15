@@ -942,8 +942,13 @@ def setDicts(SSMs,models,basins,times,otau,otaus,stype,doAllYears=1,iyear=None,v
                     
                     #dict2[syear]=val
                     oval2s[basin]=val
+                    
+                    # -- 20260306 -- use 'pod' vice 'poo' in second dict
+                    #
+                    stype2='poo'
+                    stype2='pod'
                     try:        
-                        val=SSM.allStats[itime,model,itau,'poo']
+                        val=SSM.allStats[itime,model,itau,stype2]
                     except:
                         val=(-999,0)
                     
@@ -1378,6 +1383,15 @@ class SumStatMultiYear(MFbase):
                     valSR=valSR+valR*cntR
                     cntSR=cntSR+cntR
 
+                elif(len(val) == 3):
+                    valR=val[0]
+                    cntR=val[1]
+                    cntR2=val[2]
+                    
+                    valSR=valSR+valR*cntR
+                    cntSR=cntSR+cntR
+
+
                 elif(len(val) == 8):
                     valR=val[0]
                     cntR=val[1]
@@ -1409,6 +1423,10 @@ class SumStatMultiYear(MFbase):
                 oval=(valSR,cntSR,val2,val3,val4,val5,val6,val7)
                 
             elif(len(val) == 2):
+                valSR=valSR/float(cntSR)
+                oval=(valSR,cntSR)
+
+            elif(len(val) == 3):
                 valSR=valSR/float(cntSR)
                 oval=(valSR,cntSR)
 
@@ -1579,7 +1597,7 @@ class SumStatMultiYear(MFbase):
                     if(not(mf.find(card,'SSHH'))): continue
                         
                     tt=card.split()
-                    if(self.verb): print 'card:',tt
+                    #if(self.verb): print 'card:',tt
                     n=1
                     model=tt[n]        ; n=n+1
                     tau=int(tt[n])     ; n=n+1  ; taus.append(tau)
@@ -1622,9 +1640,10 @@ class SumStatMultiYear(MFbase):
                         self.allStats[year,model,tau,stype]=ostat
                         
                     else:
-                        if(tau == self.otau and stype == self.veriStatRead):
-                            print 'ss-oo-pod',year,self.basin,model,tau,stype,stat,ncounts,nfc
                         ostat=(stat,ncounts)
+                        ostat=(stat,nfc,ncounts)
+                        if(model in self.baseModels and tau == self.otau and stype == self.veriStatRead):
+                            print 'ss-oo-pod',year,model,tau,stype,ostat,'nnn',ncounts,nfc
                         self.allStats[year,model,tau,stype]=ostat
         
         taus=mf.uniq(taus)
@@ -2469,7 +2488,12 @@ class SumStatsPlot(MFbase):
             t1="%s\n%s"%(tt1[0],tt1[1])
 
         cnts0=cnts[0]
-        cnts1=cnts[1]
+        #print 'cc00',cnts0
+        try:
+            cnts1=cnts[1]
+            #print 'cc11',cnts1
+        except:
+            None
 
         taus=cnts0.keys()
         
@@ -2585,7 +2609,7 @@ class SumStatsPlot(MFbase):
                     
                 if(verb): print 'nnn',nt,tau,val1,val2
 
-                if(len(dict1[tau]) > 2):
+                if(len(dict1[tau]) > 2 and len(dict1[tau]) != 3):
 
                     #doErrBar=0
                     v1min=dict1[tau][2]
@@ -2658,7 +2682,6 @@ class SumStatsPlot(MFbase):
                 if(self.isundef(val2) or nc == 0):
                     val2=None
                     row2.append(val2)
-                    cval2=''
                 else:
                     row2.append(val2)
 
@@ -2686,10 +2709,12 @@ class SumStatsPlot(MFbase):
 
             if(n == 0):
                 vals1.append(row1)
-                print '1111----',n,vals1
+                #print '0000-111',n,row1
+                #print '0000-222',n,row2
             elif(n == 1):
+                #print '1111-111',n,row1
+                #print '1111-222',n,row2
                 vals2.append(row2)
-                print '2222----',n,vals2
             
             v1mins.append(row1minv)
             v2mins.append(row2minv)
@@ -2796,11 +2821,12 @@ class SumStatsPlot(MFbase):
             else:                    
                 itau=int(tau)
                 ycnt0=cnts0[tau]
-                ycnt1=cnts1[tau]
                 ycnts0.append(ycnt0)
-                ycnts1.append(ycnt1)
                 xtaus0.append(itau)
-                xtaus1.append(itau)
+                if(nrows > 1):
+                    ycnt1=cnts1[tau]
+                    ycnts1.append(ycnt1)
+                    xtaus1.append(itau)
 
         if(verb):
             print 'XXXTTT--0000',n,xtaus0
@@ -2811,13 +2837,28 @@ class SumStatsPlot(MFbase):
         # -- !!!!!! force two plots !!!!!!!!!!!!!!!!!!!
         #
         np=2
+        if(nrows == 1): np=1
+            
 
         # -- first plot the two time series
         #
         for n in range(0,np):
 
+            
+            # -- key to doing multiple plots
             if(n == 0): ys=vals1[n]
             elif(n == 1): ys=vals2[0]
+            
+            #try:
+                #print 'vvvvvyyyyyy---0000',n,vals1[0],vals2[0]
+            #except:
+                #None
+            #try:
+                #print 'vvvvvyyyyyy---nnnn',n,vals2[n]
+            #except:
+
+            #print '---yyyysssss',n,ys
+            
             xaxisT=copy.copy(xaxisTs[0])
             xaxisT=copy.copy(xtaus0)
             
@@ -2835,7 +2876,8 @@ class SumStatsPlot(MFbase):
                        alpha=alphaline[nxy]
                        )
 
-        if(self.ptype == 'pe-line' or self.ptype == 'fe-line' or self.ptype == 'pod-line'):
+        if(self.ptype == 'pe-line' or self.ptype == 'fe-line' or
+           self.ptype == 'pod' or self.ptype == 'pod-line'):
             ax.legend(olabels, loc=lgndloc, shadow=True, markerscale=0.2)
             
 
@@ -2874,12 +2916,14 @@ class SumStatsPlot(MFbase):
                    #color='grey',
                    )
         
-        rc=ax2.bar(xtaus0,ycnts1,
-                   width=0.5,
-                   color=rowc[1],
-                   alpha=0.9,
-                   #color='black',
-                   )
+        if(nrows > 1):
+            
+            rc=ax2.bar(xtaus0,ycnts1,
+                       width=0.5,
+                       color=rowc[1],
+                       alpha=0.9,
+                       #color='black',
+                       )
         
         ax2.set_ylabel('N',fontsize=15)
         ax2.set_ylim(0,maxcounts)
@@ -3523,7 +3567,7 @@ class SumStatsPlot(MFbase):
                 val1=dict1[tau][0]
                 val2=dict2[tau][0]
 
-                if(len(dict1[tau]) > 2):
+                if(len(dict1[tau]) > 2 and len(dict1[tau]) != 3):
 
                     #doErrBar=0
                     v1min=dict1[tau][2]

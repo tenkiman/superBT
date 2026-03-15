@@ -379,7 +379,7 @@ if(len(otaus) == 2): do2ndplot=1
 
 if(do2axis):
     
-    #do2ndplot=1
+    do2ndplot=1
     pss.simpleplot2axis(ss.models,sdicts,ndicts,ss.labaids,ss.colaids,  # a class() from vdCL.py
                         ilmarker=ss.markaids,
                         do1stplot=do1stplot,

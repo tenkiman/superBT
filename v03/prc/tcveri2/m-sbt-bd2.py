@@ -80,11 +80,6 @@ def makeBdeck2s(fstmids,md3,domiss=0,
         #
         (rc,m3cards)=md3.getMd3Cards(tstmid)
         
-        print 'stmcards',len(m3cards)
-        for m3 in m3cards:
-            print m3
-        sys.exit()
-        
         (smeta,smetacard)=md3.getMd3StmMeta(tstmid)
         ss9=smeta[-2]
         stmDev=None

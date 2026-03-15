@@ -1,0 +1,1000 @@
+   97  0311 00:28:40 psma cur-6
+   98  0311 00:28:51 psma cur-12
+   99  0311 00:29:15 psee
+  100  0311 01:57:32 psmac
+  101  0311 01:57:43 psee
+  102  0309 19:21:49 cd ../../../era5/1997/
+  103  0309 19:21:50 la
+  104  0309 19:21:59 cd 1997081612/
+  105  0309 19:22:00 la
+  106  0309 19:22:12 cd ../1997081600/
+  107  0309 19:22:13 la
+  108  0309 19:22:33 gg era5-w2flds-1997081600-ua.ctl 
+  109  0309 19:22:53 gribmap -v -i era5-w2flds-1997081600-ua.ctl 
+  110  0309 19:23:01 gg era5-w2flds-1997081600-ua.ctl 
+  111  0310 12:55:10 cd ../../2024/
+  112  0310 12:55:16 cd 2024090700/
+  113  0310 12:55:16 la
+  114  0310 12:55:25 g 500 era5-w2flds-2024090700-ua.wgrib2.txt 
+  115  0310 12:56:12 g 500 era5-w2flds-2024090700-ua.wgrib2.txt  | g ':RH:'
+  116  0310 13:01:11 g 500 era5-w2flds-2024090700-ua.wgrib2.txt  | g ':RH:' | wgrib2 -i era5-w2flds-2024090700-ua.grb2 -grib dump
+  117  0310 13:01:19 wgrib2 -V dump
+  118  0310 13:01:40 wgrib2
+  119  0310 13:01:45 wgrib2 | g append
+  120  0310 13:02:08 g 500 era5-w2flds-2024090700-ua.wgrib2.txt  | g ':UGRD:' | wgrib2 -append -i era5-w2flds-2024090700-ua.grb2 -grib dump
+  121  0310 13:02:23 wgrib2 -V dump
+  122  0310 13:04:59 wgrib2 dup
+  123  0310 13:05:01 wgrib2 dump
+  124  0310 14:30:53 h
+  125  0310 14:31:36 cd ../../1953/1953090700
+  126  0310 14:31:37 la
+  127  0310 14:38:44 cat /tmp/era5-w2flds-1953090700-ua.240.txt  > wgrib2 -i era5-w2flds-1953090700-ua.grb2 -grib era5-w2flds-1953090700-ua-f240.grb2
+  128  0310 14:39:45 la
+  129  0310 14:39:49 del wgrib2 
+  130  0310 14:39:58 cat /tmp/era5-w2flds-1953090700-ua.240.txt | wgrib2 -i era5-w2flds-1953090700-ua.grb2 -grib era5-w2flds-1953090700-ua-f240.grb2
+  131  0310 14:40:01 la
+  132  0310 14:43:41 del *f240*
+  133  0310 14:43:43 la
+  134  0310 15:36:07 c.sb.
+  135  0310 15:36:09 c.sb.p
+  136  0310 15:36:12 cd fldveri/
+  137  0310 15:36:13 psep
+  138  0310 15:36:35 m-era5-wmo-veri-flds.py 195001.195212.12
+  139  0310 20:32:28 m-era5-wmo-veri-flds.py 195301.195912.12
+  140  0311 14:12:08 m-era5-wmo-veri-flds.py 198601.198912.12
+  141  0311 21:10:12 h
+  142  0311 21:16:15 m-era5-wmo-veri-flds.py 1945010100 -N
+  143  0311 21:18:19 la /raid05/era5-wmo/1945/1945010100/era5-w2flds-1945010100-ua*
+  144  0311 21:18:56 ud /raid05/era5-wmo/1945/1945010100/
+  145  0311 21:21:07 m-era5-wmo-veri-flds.py 1945010100 
+  146  0311 21:21:11 m-era5-wmo-veri-flds.py 1945010112
+  147  0311 21:21:35 m-era5-wmo-veri-flds.py 194501.194512.12
+  148  0311 22:03:37 m-era5-wmo-veri-flds.py 194601.195012.12
+  149  0312 01:33:26 m-era5-wmo-veri-flds.py 195101.202412.12
+  150  0310 17:39:00 c.sb
+  151  0310 17:39:03 git s-u
+  152  0310 17:39:17 git commit -a
+  153  0310 17:39:39 git push
+  154  0310 15:41:11 psep
+  155  0310 15:41:26 m-era5-wmo-veri-flds.py 196001.196912.12
+  156  0310 16:59:11 m-era5-wmo-veri-flds.py 1961010100
+  157  0310 16:59:19 m-era5-wmo-veri-flds.py 1961010100 -V
+  158  0310 17:10:34 m-era5-wmo-veri-flds.py 1961010100
+  159  0310 17:10:54 m-era5-wmo-veri-flds.py 1961010100 -V
+  160  0310 17:11:18 h
+  161  0310 17:11:31 m-era5-wmo-veri-flds.py 196101.196912.12
+  162  0310 17:11:39 u
+  163  0310 17:11:42 h
+  164  0310 17:11:53 m-era5-wmo-veri-flds.py 196101.196912.12
+  165  0310 17:13:30 h
+  166  0310 17:13:38 m-era5-wmo-veri-flds.py 1961010112 -V
+  167  0310 17:14:33 m-era5-wmo-veri-flds.py 1961010112 -V -O
+  168  0310 17:15:14 h
+  169  0310 17:17:39 m-era5-wmo-veri-flds.py 1961010100 -V -O
+  170  0310 17:18:56 m-era5-wmo-veri-flds.py 1961010112 -V -O
+  171  0310 17:19:04 m-era5-wmo-veri-flds.py 1961010200 -V -O
+  172  0310 17:29:49 m-era5-wmo-veri-flds.py 1961010112 -V -O
+  173  0310 17:31:41 m-era5-wmo-veri-flds.py 1961010100 -V -O
+  174  0310 17:32:04 m-era5-wmo-veri-flds.py 196101.196912.12 
+  175  0303 15:40:14 c.w2.d
+  176  0303 15:40:23 cd tc/adeck/atcf-form/2021
+  177  0303 15:40:23 la
+  178  0303 15:40:26 cd era5/
+  179  0303 15:40:27 la
+  180  0303 15:40:32 la awp162021.dat 
+  181  0303 15:40:34 pg awp162021.dat 
+  182  0304 13:36:04 c.sb.s3
+  183  0304 13:36:23 cd 2021/
+  184  0304 13:36:27 cd wpac/
+  185  0304 13:36:29 la 16W-2021-OMAIS-A1C/
+  186  0304 13:36:43 la 16W-2021-OMAIS-A1C/16W-2021-md3-MRG.txt 
+  187  0304 13:36:45 pg 16W-2021-OMAIS-A1C/16W-2021-md3-MRG.txt 
+  188  0304 13:36:55 pg 16W-2021-OMAIS-A1C/16W-2021-md3-BT.txt
+  189  0304 14:11:30 h
+  190  0304 14:11:33 la 23W-2021-NAMTHEUN-E5W/
+  191  0304 14:12:13 cd 23W-2021-NAMTHEUN-E5W/
+  192  0304 14:12:23 pg 23W-2021-md3-MRG.txt 
+  193  0304 14:15:48 cd ../../../2016/
+  194  0304 14:15:53 cd wpac/23W-2016-SONGDA-A4C/
+  195  0304 14:15:54 la
+  196  0304 14:16:08 pg 23W-2016-md3-MRG.txt 
+  197  0304 14:16:27 md3a -S 23w.16 -b
+  198  0304 14:16:55 md3a -S 23w.16
+  199  0306 21:27:17 h
+  200  0306 13:56:19 c.sb
+  201  0306 13:56:21 c.sb.p
+  202  0306 13:56:26 git s-u
+  203  0306 14:02:36 psep
+  204  0306 14:02:39 psmac
+  205  0306 14:02:58 pse
+  206  0306 14:03:04 pse | g wgrib
+  207  0306 14:03:50 pse | g wgrib | g -v grep | cut -c 40-100
+  208  0306 14:04:08 pse | g wgrib | g -v grep | g -v 'sh -c'
+  209  0306 14:04:18 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c40-100
+  210  0306 14:04:27 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c80-120
+  211  0306 14:04:33 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-120
+  212  0306 14:04:39 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-100
+  213  0306 14:04:42 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-110
+  214  0306 14:04:59 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-115
+  215  0306 14:05:02 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-118
+  216  0306 14:05:22 alias pseg='pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-118'
+  217  0306 14:05:35 alias pseg="pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-118"
+  218  0306 14:05:37 pseg
+  219  0306 14:15:45 psep
+  220  0306 14:15:46 pseg
+  221  0306 14:15:48 psmac
+  222  0306 14:47:40 h
+  223  0306 14:47:48 cd ../tcveri2/
+  224  0306 14:47:54 pg clp3-under.txt
+  225  0306 14:48:06 h
+  226  0306 14:48:19 clp3-under.sh
+  227  0306 14:48:44 lt *py
+  228  0306 14:49:10 pg m-redo-clp3-under.py 
+  229  0306 14:50:48 la underinv/
+  230  0306 14:51:48 la underinv/bad-h-1961-98p0-v00.txt 
+  231  0306 14:51:50 pg underinv/bad-h-1961-98p0-v00.txt 
+  232  0306 14:52:16 h
+  233  0306 14:52:20 m-redo-clp3-under.py 
+  234  0306 14:52:45 a-clp3-under.py
+  235  0306 14:53:39 a-clp3-under.py -Y 1961 -t 0 -V -N
+  236  0306 14:53:44 pg /tmp/clp3.txt 
+  237  0306 14:54:00 m-redo-clp3-under.py 
+  238  0306 14:54:31 m-redo-clp3-under.py -S l.1961 -t 0 -Y -N
+  239  0306 14:55:04 m-redo-clp3-under.py -S l.1961 -t 0 -Y 
+  240  0306 14:59:01 a-clp3-under.py
+  241  0306 15:05:38 a-clp3-under.py -t 0 -N
+  242  0306 15:05:52 a-clp3-under.py -t 0 -R -N
+  243  0306 15:06:29 a-clp3-under.py -t 0 -R -Y
+  244  0306 15:07:01 a-clp3-under.py -t 0 -R
+  245  0306 15:07:11 a-clp3-under.py -t 0 -R -X
+  246  0306 15:09:18 f
+  247  0306 15:19:21 h
+  248  0306 21:26:51 h | g 'm-all-ad2'
+  249  0306 21:29:38 h | g clp3
+  250  0306 15:14:18 h
+  251  0306 15:14:23 h | g vdpl
+  252  0306 15:14:31 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b h -p pod -o 0 
+  253  0306 15:14:46 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b l -p pod -o 0 
+  254  0306 15:15:01 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b w -p pod -o 0 
+  255  0306 15:17:06 pse
+  256  0306 15:17:07 psep
+  257  0306 15:17:22 a-clp3-under.py -t 0 -R
+  258  0306 15:17:31 a-clp3-under.py -t 0 -N
+  259  0306 15:17:57 a-clp3-under.py
+  260  0306 15:18:07 a-clp3-under.py -t 0 -P 99.0 -N
+  261  0306 15:18:24 a-clp3-under.py -t 0 -P 99.5 -N
+  262  0306 15:18:41 a-clp3-under.py -t 0 -P 98.5 -N
+  263  0306 15:19:31 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b w -p pod -o 0 
+  264  0306 15:19:53 p-vdplot.py -Y 1945.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 
+  265  0306 15:20:19 p-vdplot.py -Y 1945.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A
+  266  0306 15:53:04 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A -V
+  267  0306 15:55:19 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A 
+  268  0306 15:55:58 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A 
+  269  0306 15:57:11 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A 
+  270  0306 15:59:22 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -V
+  271  0306 16:00:50 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A -V
+  272  0306 16:00:58 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A -V
+  273  0306 16:01:18 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -V
+  274  0306 16:01:38 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -V
+  275  0306 16:04:24 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A -V
+  276  0306 16:04:34 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A -V -X
+  277  0306 16:06:22 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  278  0306 16:06:34 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  279  0306 16:08:10 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  280  0306 16:17:29 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  281  0306 16:18:01 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 72 -A
+  282  0306 16:18:12 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 72 -A
+  283  0306 16:18:24 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 72 -A -X
+  284  0306 16:18:52 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A 
+  285  0306 16:19:21 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  286  0306 16:19:40 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  287  0306 16:20:44 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A 
+  288  0306 16:21:17 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A 
+  289  0306 16:21:33 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  290  0306 16:21:58 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 24 -A 
+  291  0306 16:22:09 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  292  0306 16:22:20 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  293  0306 16:30:51 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  294  0306 16:31:01 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  295  0306 16:31:50 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A  -X
+  296  0306 16:33:10 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  297  0306 16:33:21 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A  -X
+  298  0306 16:35:49 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  299  0306 16:37:16 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A -X
+  300  0306 16:39:20 p-vdplot.py -Y 2000.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A -X
+  301  0306 16:39:40 p-vdplot.py -Y 2000.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  302  0306 16:40:58 p-vdplot.py -Y 2000.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  303  0306 16:41:05 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  304  0306 16:41:28 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  305  0306 16:42:12 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A
+  306  0306 16:42:41 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A
+  307  0306 16:45:11 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  308  0306 16:45:47 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A
+  309  0306 16:46:32 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  310  0306 17:02:07 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  311  0306 17:02:37 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  312  0306 17:02:58 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  313  0306 17:03:40 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A 
+  314  0306 17:30:52 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  315  0306 17:32:05 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod-line -o 0 -A -X
+  316  0306 17:32:30 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  317  0306 17:33:11 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -A -X
+  318  0306 17:33:26 p-vdplot.py -Y 2000.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  319  0306 17:34:05 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -A -X
+  320  0306 17:34:16 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -X
+  321  0306 17:35:16 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -X -A
+  322  0306 17:43:30 p-vdplot.py -Y 2000.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  323  0306 17:46:52 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  324  0306 17:47:51 p-vdplot.py -Y 2000.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  325  0306 17:48:45 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  326  0306 17:49:47 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b h -p pod -o 0 -X -A
+  327  0306 17:50:41 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  328  0306 17:51:21 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  329  0306 17:53:54 m-all-ad2-vd2.py 
+  330  0306 17:54:23 la
+  331  0306 17:54:35 m-redo-clp3-under.py 
+  332  0306 17:54:56 m-redo-clp3-under.py -S l.1956 -N
+  333  0306 17:55:15 m-redo-clp3-under.py -S l.1956 
+  334  0306 17:55:53 f
+  335  0306 17:57:17 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  336  0306 17:57:26 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  337  0306 17:58:13 m-redo-clp3-under.py -S l.1963
+  338  0306 17:59:43 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  339  0306 18:00:14 m-redo-clp3-under.py -S l.1966
+  340  0306 18:00:45 f
+  341  0306 18:01:53 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  342  0306 18:03:30 h
+  343  0306 18:03:57 vd2a -S l.66 -T tera5,clp3 -f z0012 -t 0
+  344  0306 18:04:03 vd2a -S l.66 -T tera5,clp3 -f z0012 -t 0 | g nnnnn
+  345  0306 18:04:12 vd2a -S l.66 -T tera5,clp3 -f z0012 -t 0 | l
+  346  0306 18:04:38 vd2a -S l.66 -T tera5,clp3 -f z0012 -p pod
+  347  0306 18:04:41 vd2a -S l.66 -T tera5,clp3 -f z0012 -p pod -X
+  348  0306 18:05:10 vd2a -S l.66 -T tera5,clp3 -f z0012 -p pod -X -O
+  349  0306 21:15:52 h
+  350  0306 21:15:56 la *py
+  351  0306 21:16:01 m-sbt-bd2.py 
+  352  0306 21:16:07 m-sbt-bd2.py -S l.63
+  353  0306 21:16:12 m-sbt-bd2.py -S l.63 -O
+  354  0306 21:16:32 m-sbt-bd2.py 
+  355  0306 21:16:38 m-sbt-bd2.py -Y 1963
+  356  0306 21:16:46 m-sbt-bd2.py -Y 1963 -S all.1963
+  357  0306 21:17:07 m-all-sbt-bd2.py 
+  358  0306 21:17:12 kill %1
+  359  0306 21:17:16 h
+  360  0306 21:17:24 m-sbt-bd2.py -S all.1963 -N
+  361  0306 21:18:45 m-sbt-bd2.py -S l.63
+  362  0306 21:18:49 m-sbt-bd2.py -S l.63 -V
+  363  0306 21:18:56 m-sbt-bd2.py -S 02l.63 -V
+  364  0306 21:19:15 md3a -S 02l.63
+  365  0306 21:19:37 h
+  366  0306 21:19:54 m-sbt-bd2.py -S all.1963
+  367  0306 21:20:14 h
+  368  0306 21:20:47 vd2a -S 02l.63 -T clp3 -f z0012 -p pod
+  369  0306 21:20:50 vd2a -S 02l.63 -T clp3 -f z0012 -p pod -O
+  370  0306 21:21:19 vd2a -S 02l.63 -T tera5,clp3 -f z0012 -p pod -O
+  371  0306 21:22:21 vd2a -S l.63 -T tera5,clp3 -f z0012 -p pod -O
+  372  0306 21:23:12 vd2a -S l.63 -T tera5,clp3 -p pe -t 0
+  373  0306 21:23:17 vd2a -S l.63 -T tera5,clp3 -p pe -t 0 | g nnnnn
+  374  0306 21:24:34 la *clp3*
+  375  0306 21:24:47 p-redo-clp3.py 
+  376  0306 21:24:50 kill %1
+  377  0306 21:24:54 la
+  378  0306 21:25:20 m-all-ad2-vd2.py 
+  379  0306 21:25:52 m-all-ad2-vd2.py -Y 1956 -B l -A -N
+  380  0306 21:26:28 h | g 'm-all-ad2'
+  381  0306 21:27:45 h
+  382  0306 21:28:03 m-all-ad2-vd2.py -Y 1963 -B l -A -N
+  383  0306 21:28:13 m-ad2inv.py -C -E -0 -Y 1963 -N
+  384  0306 21:28:39 g ad2 *.py
+  385  0306 21:28:54 g ad2-bd2 *.py
+  386  0306 21:29:00 g bd2 *.py
+  387  0306 21:29:08 g tcclp3 *.py
+  388  0306 21:29:21 h | g 'p-redo-clp3'
+  389  0306 21:30:09 p-redo-clp3.py 
+  390  0306 21:30:13 kill %1
+  391  0306 21:30:21 la *clp3*
+  392  0306 21:30:25 la *clp3*py
+  393  0306 21:30:37 pg p-redo-clp3.py 
+  394  0306 21:30:46 git mv p-redo-clp3.py SAV/
+  395  0306 21:30:56 la *clp3*
+  396  0306 21:31:00 la *clp3*py
+  397  0306 21:31:16 a-clp3-under.py
+  398  0306 21:31:51 m-redo-clp3-under.py 
+  399  0306 21:32:09 g tcclp3 *.py
+  400  0306 21:32:15 m-redo-clp3-under.py 
+  401  0306 21:32:33 m-redo-clp3-under.py -S l.1963 -N
+  402  0306 21:33:11 m-redo-clp3-under.py -S l.1963
+  403  0306 21:34:22 m-redo-clp3-under.py -S l.1961
+  404  0306 21:35:28 m-redo-clp3-under.py -S l.1956
+  405  0306 21:37:08 h
+  406  0306 21:37:19 m-redo-clp3-under.py -S l.1966
+  407  0306 21:38:47 h | g vdpl
+  408  0306 21:38:55 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  409  0306 21:40:04 m-redo-clp3-under.py -S l.1966 -N
+  410  0306 21:40:48 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod
+  411  0306 21:40:58 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod -t 0
+  412  0306 21:41:10 vd2a -S l.66 -T tera500,clp3  -p pod -t 0
+  413  0306 21:41:18 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod 
+  414  0306 21:41:28 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod -L
+  415  0306 21:41:51 vd2a -S 01-10l.66 -T tera500,clp3 -f z0012 -p pod -L
+  416  0306 21:41:59 vd2a -S 01-05l.66 -T tera500,clp3 -f z0012 -p pod -L
+  417  0306 21:42:10 vd2a -S 01-06l.66 -T tera500,clp3 -f z0012 -p pod -L
+  418  0306 21:42:18 vd2a -S 06l.66 -T tera500,clp3 -f z0012 -p pod -L
+  419  0306 21:42:28 md3a -S 06l.66
+  420  0306 21:42:36 md3a -S 06l.66 -b
+  421  0306 21:42:57 md2a -S 06l.66
+  422  0306 21:43:00 md2a -S 06l.66 -2
+  423  0306 21:43:16 h | g md3
+  424  0306 21:45:28 md2a -S 06l.66 
+  425  0306 21:45:30 md2a -S 06l.66 -b
+  426  0306 21:46:12 ad2 -S 06l.66 -T clp3 -F
+  427  0306 21:47:10 ad2 -S 06l.66 -T clp300 -F
+  428  0306 21:47:12 ad2 -S 06l.66 -T clp300 -F | l
+  429  0306 22:04:36 md3a -S 06l.66
+  430  0306 22:05:08 vd2a -S 06l.66 -T tera500,clp3 -f z0012 -p pod -O -V
+  431  0306 22:06:29 h
+  432  0306 22:06:55 m-redo-clp3-under.py -S l.1966 -N
+  433  0306 22:07:32 m-vdinv.py -Y 1966 -B l -O -N
+  434  0306 22:07:54 m-all-ad2-vd2.py 
+  435  0306 22:08:06 m-all-ad2-vd2.py -Y 1966 -B l -N
+  436  0306 22:08:15 m-all-ad2-vd2.py -Y 1966 -B l
+  437  0306 22:09:13 h | g vdp
+  438  0306 22:09:18 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  439  0306 22:09:41 m-all-ad2-vd2.py -Y 1956.1965 -B l -N
+  440  0306 22:09:46 m-all-ad2-vd2.py -Y 1956.1965 -B l 
+  441  0306 22:16:16 m-all-ad2-vd2.py -Y 1963 -B l -N
+  442  0306 22:16:33 m-all-ad2-vd2.py -Y 1963 -B l 
+  443  0306 22:18:17 m-all-ad2-vd2.py -Y 1956.1966 -B l 
+  444  0306 22:33:35 h
+  445  0306 22:33:39 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  446  0306 22:34:21 h
+  447  0306 22:34:28 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  448  0306 22:34:50 vd2a -S l.64 -T clp3 -f z0012 -p pod
+  449  0306 22:37:47 vd2a -S l.64 -T clp3 -f z0012 -p pod -O
+  450  0306 22:38:15 md3a -S l.64 -s
+  451  0306 22:38:34 vd2a -S 02l.64 -T clp3 -f z0012 -p pod 
+  452  0306 22:39:30 vd2a -S 02l.64 -T clp3  -p pod 
+  453  0306 22:39:33 vd2a -S 02l.64 -T clp3  -p pod  -O
+  454  0306 22:41:03 m-sbt-bd2.py 
+  455  0306 22:41:17 m-sbt-bd2.py -S l.64
+  456  0306 22:41:35 ad2 clp3 -S 02l.64 -O1
+  457  0306 22:41:47 ad2 clp3 -S 02l.64 -T clp3 -L
+  458  0306 22:42:19 vd2a -S 02l.64 -T clp3  -p pod  -O
+  459  0306 22:42:32 vd2a -S 02l.64 -T clp3 -f z0012 -p pod  -O
+  460  0306 22:43:02 vd2a -S 02l.64 -T clp3 -f z0012 -p pod  -O -V | l
+  461  0306 22:44:48 vd2a -S 03-11l.64 -T clp3 -f z0012 -p pod
+  462  0306 22:45:03 vd2a -S 01l.64 -T clp3 -f z0012 -p pod
+  463  0306 22:45:18 vd2a -S l.64 -T clp3 -f z0012 -p pod
+  464  0306 22:45:43 vd2a -S 02l.64 -T clp3 -f z0012 -p pod
+  465  0306 22:46:13 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  466  0306 22:46:52 md3a -S 02l.64
+  467  0306 22:47:18 md2a -S 02l.64
+  468  0306 22:47:20 md2a -S 02l.64 -X
+  469  0306 22:47:53 md3a -S 02l.64
+  470  0306 22:47:57 md3a -S 02l.64 -b
+  471  0306 22:56:51 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  472  0306 23:03:40 vd2a -S 02w.64 -T clp3 -f z0012 -p pod -O
+  473  0306 23:04:09 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  474  0306 23:07:42 vd2a -S 02e.64 -T clp3 -f z0012 -p pod -O
+  475  0306 23:08:23 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  476  0306 23:24:13 vd2a -S l.64 -T clp3 -f z0012 -p pod -O
+  477  0306 23:24:40 h
+  478  0306 23:24:50 m-all-ad2-vd2.py -Y 1956.1966 -B l 
+  479  0306 23:31:05 h
+  480  0306 23:31:11 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  481  0306 23:31:25 h
+  482  0306 23:31:36 m-all-ad2-vd2.py -Y 1955 -B l 
+  483  0306 23:33:39 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  484  0306 23:33:58 p-vdplot.py -Y 1995.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  485  0306 23:34:21 m-all-ad2-vd2.py -Y 1995.2024 -B l 
+  486  0307 00:46:29 p-vdplot.py -Y 1995.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  487  0307 00:47:34 vd2a -S l.23 -T clp3 -f z0012 -p pod
+  488  0307 00:47:43 vd2a -S l.22 -T clp3 -f z0012 -p pod
+  489  0307 00:48:05 vd2a -S l.21 -T clp3 -f z0012 -p pod
+  490  0307 00:52:40 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  491  0307 00:56:07 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -A | g clp3
+  492  0307 00:56:30 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -A | g clp3 | g -v 100.0
+  493  0307 00:56:36 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -A | g clp3 | g -v 100.0
+  494  0307 00:56:52 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b h -p pod -o 0 -A | g clp3 | g -v 100.0
+  495  0307 00:57:06 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b e -p pod -o 0 -A | g clp3 | g -v 100.0
+  496  0307 00:57:47 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b i -p pod -o 0 -A | g clp3 | g -v 100.0
+  497  0307 00:58:03 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b i -p pod -o 0 -A -X
+  498  0307 00:58:56 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b e -p pod -o 0 -A -X
+  499  0312 18:19:33 psep
+  500  0312 18:19:39 j
+  501  0312 18:19:52 psep
+  502  0312 18:19:53 psmac
+  503  0312 18:20:15 m-ln-fXXX-era5-wmo-veri-flds.py 195101.196012.12
+  504  0312 18:20:25 (py2) MIKE5-linux 18:19 fiorino@mike5 /data/sbt/superBT/v03/prc/fldveri 499 > 
+  505  0312 18:20:25 f
+  506  0312 18:52:32 h
+  507  0312 18:52:48 m-ln-fXXX-era5-wmo-veri-flds.py 1951010100
+  508  0312 18:52:53 m-ln-fXXX-era5-wmo-veri-flds.py 1961010100
+  509  0312 18:53:08 m-ln-fXXX-era5-wmo-veri-flds.py 1961123112
+  510  0312 18:53:35 m-ln-fXXX-era5-wmo-veri-flds.py 196101.197012.12
+  511  0312 23:42:36 m-ln-fXXX-era5-wmo-veri-flds.py 1971010100
+  512  0312 23:45:04 m-ln-fXXX-era5-wmo-veri-flds.py 
+  513  0312 23:45:06 m-ln-fXXX-era5-wmo-veri-flds.py 1971010100
+  514  0312 23:49:48 m-ln-fXXX-era5-wmo-veri-flds.py 197101.12
+  515  0312 23:50:43 m-ln-fXXX-era5-wmo-veri-flds.py 197101.12 -N
+  516  0312 23:50:45 m-ln-fXXX-era5-wmo-veri-flds.py 197101.12 
+  517  0312 23:50:59 m-ln-fXXX-era5-wmo-veri-flds.py 197101.197112.12 
+  518  0312 23:51:15 f
+  519  0312 23:54:20 m-ln-fXXX-era5-wmo-veri-flds.py 197201.197212.12 
+  520  0313 00:52:03 m-ln-fXXX-era5-wmo-veri-flds.py 197301.199012.12 
+  521  0313 11:25:36 m-fld-veri-wmo.py 
+  522  0313 11:26:21 m-fld-veri-wmo.py  1945010100
+  523  0313 11:28:15 la /raid05/era5-wmo/1945/ensFC/era5w/era5-w2flds-1945-ua.grb2.ctl
+  524  0313 11:28:17 pg /raid05/era5-wmo/1945/ensFC/era5w/era5-w2flds-1945-ua.grb2.ctl
+  525  0313 11:29:10 m-fld-veri-wmo.py  1945010100
+  526  0313 11:30:28 f
+  527  0313 11:31:01 m-fld-veri-wmo.py  1945010100
+  528  0313 11:33:13 m-fld-veri-wmo.py  1945010800
+  529  0313 11:35:25 m-fld-veri-wmo.py  194502.12
+  530  0313 11:36:37 m-fld-veri-wmo.py  1945020100.1945020600.12
+  531  0313 11:37:23 m-fld-veri-wmo.py  1945020100.1945020600.12 | g 'nhem 120'
+  532  0313 11:41:13 m-fld-veri-wmo.py  1945020100.1945020600.12 -O
+  533  0313 11:41:23 m-fld-veri-wmo.py  1945020100.1945020600.12 
+  534  0313 11:41:41 m-fld-veri-wmo.py  1945020100.1945020600.12  | g 'nhem 120'
+  535  0313 11:46:26 m-fld-veri-wmo.py
+  536  0313 11:49:31 m-fld-veri-wmo.py  1945020100.1945020600.12 -O
+  537  0313 11:49:51 m-fld-veri-wmo.py  1945020100.1945020600.12 | g 'nhem 120'
+  538  0313 11:51:13 m-fld-veri-wmo.py  1945020100.1945020600.12 
+  539  0313 11:53:01 override/raid05/era5-anl/climo/da/era5-climo-da.ctl
+  540  0313 11:53:01 /raid05/era5-anl/climo/da/era5-climo-da.ctl
+  541  0313 11:55:52 h
+  542  0313 12:00:06 m-fld-veri-wmo.py  1945020100 -O
+  543  0313 12:25:26 gg era5-w2flds-1997081600-ua.ctl 
+  544  0313 12:25:33 h
+  545  0313 12:25:44 gg /raid05/era5-anl/climo/da/era5-climo-da.ctl
+  546  0313 12:31:48 gg era5-w2flds-1997081600-ua.ctl 
+  547  0313 12:31:52 h
+  548  0313 12:31:57 m-fld-veri-wmo.py  1945020100 -O
+  549  0313 12:54:10 f
+  550* 0313 12:54:18 m-fld-veri-wmo.py  1945020100 
+  551  0313 12:56:23 m-fld-veri-wmo.py  1945020100 -O
+  552  0313 12:56:57 h
+  553  0313 12:57:08 m-fld-veri-wmo.py  1945020100.1945020600.12 -O
+  554  0313 12:57:36 m-fld-veri-wmo.py  1945020100.1945020600.12 | g 'nhem 120'
+  555  0313 13:02:45 m-fld-veri-wmo.py  1945020100.1945020600.12 -O
+  556  0313 13:02:52 m-fld-veri-wmo.py  1945020100.1945020600.12 | g 'nhem 120'
+  557* 0313 13:05:56 m-fld-veri-wmo.py  1945020100.1945020200.12 -O | l
+  558  0313 13:40:02 m-fld-veri-wmo.py  1945020100.1945020200.12 -O
+  559  0313 13:40:27 m-fld-veri-wmo.py  1945020100.1945020212.12 -O
+  560  0313 13:41:12 m-fld-veri-wmo.py  1945020100.1945020200.12 -O
+  561  0313 13:43:21 m-fld-veri-wmo.py  1945020100.1945020212.12 -O
+  562  0313 13:44:11 m-fld-veri-wmo.py  1945020100.1945020312.12 -O
+  563  0313 13:52:41 m-fld-veri-wmo.py  1945020100.1945020200.12 -O
+  564  0313 13:52:46 m-fld-veri-wmo.py  1945020100.1945020200.12 -O | l
+  565  0313 14:10:50 m-fld-veri-wmo.py  1945020100.1945020200.12 -O | g time
+  566  0313 14:13:52 m-fld-veri-wmo.py  1945020100.1945020200.12 -O 
+  567  0313 14:15:44 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | l
+  568  0313 14:31:57 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | g acwmo
+  569  0313 14:34:26 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | l
+  570  0313 14:39:33 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  > /tmp/ttt
+  571  0313 14:39:41 ws.nw /tmp/ttt
+  572  0313 14:48:28 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | l
+  573  0313 14:49:12 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | g 'mf ma'
+  574  0313 15:06:08 f
+  575  0314 20:23:21 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | g 'mf ma'
+  576* 0314 20:23:28 
+  577  0314 20:30:48 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | g 'mf ma'
+  578  0314 20:30:53 m-fld-veri-wmo.py  1945020100.1945020200.12 -O 
+  579  0314 20:48:31 m-fld-veri-wmo.py  1945020100.1945020200.12 -O  | g 'mf ma'
+  580  0314 20:48:36 m-fld-veri-wmo.py  1945020100.1945020200.12 -O 
+  581  0314 22:01:06 m-fld-veri-wmo.py  1945020100.1945020300.12 -O 
+  582  0314 22:16:49 m-fld-veri-wmo.py
+  583  0314 22:20:28 m-fld-veri-wmo.py  1945020100.1945020300.12 -O 
+  584  0314 22:20:42 m-fld-veri-wmo.py  1945020100.1945020300.12 -O -s 2
+  585  0314 22:20:49 m-fld-veri-wmo.py  1945020100.1945020300.12 -O -s 10
+  586  0314 22:20:52 m-fld-veri-wmo.py  1945020100.1945020300.12 -O -s 5
+  587  0314 22:22:56 m-fld-veri-wmo.py  1945020100.1945020300.12 -O -s 10
+  588  0314 22:23:22 m-fld-veri-wmo.py  1945020100.1945020300.12 -O -s 10 | g 'nhem 120'
+  589  0314 22:24:19 m-fld-veri-wmo.py  1945020100.1945020300.12 -O
+  590  0314 22:24:50 m-fld-veri-wmo.py  1945020100.1945020300.12 | g 'nhem 120'
+  591  0314 22:25:15 m-fld-veri-wmo.py  1945020100.1945020300.12 
+  592  0314 22:27:38 m-fld-veri-wmo.py  1945020100.1945020300.12 -O
+  593  0315 12:37:37 m-fld-veri-wmo.py  2024020100.2024020300.12
+  594  0315 12:38:31 m-fld-veri-wmo.py  2024020100.2024020300.12 | g 'nhem 120'
+  595  0315 12:39:06 h | g fld
+  596  0315 12:39:21 h > cmds-20260315.txt
+  115  0310 12:56:12 g 500 era5-w2flds-2024090700-ua.wgrib2.txt  | g ':RH:'
+  116  0310 13:01:11 g 500 era5-w2flds-2024090700-ua.wgrib2.txt  | g ':RH:' | wgrib2 -i era5-w2flds-2024090700-ua.grb2 -grib dump
+  117  0310 13:01:19 wgrib2 -V dump
+  118  0310 13:01:40 wgrib2
+  119  0310 13:01:45 wgrib2 | g append
+  120  0310 13:02:08 g 500 era5-w2flds-2024090700-ua.wgrib2.txt  | g ':UGRD:' | wgrib2 -append -i era5-w2flds-2024090700-ua.grb2 -grib dump
+  121  0310 13:02:23 wgrib2 -V dump
+  122  0310 13:04:59 wgrib2 dup
+  123  0310 13:05:01 wgrib2 dump
+  124  0310 14:30:53 h
+  125  0310 14:31:36 cd ../../1953/1953090700
+  126  0310 14:31:37 la
+  127  0310 14:38:44 cat /tmp/era5-w2flds-1953090700-ua.240.txt  > wgrib2 -i era5-w2flds-1953090700-ua.grb2 -grib era5-w2flds-1953090700-ua-f240.grb2
+  128  0310 14:39:45 la
+  129  0310 14:39:49 del wgrib2 
+  130  0310 14:39:58 cat /tmp/era5-w2flds-1953090700-ua.240.txt | wgrib2 -i era5-w2flds-1953090700-ua.grb2 -grib era5-w2flds-1953090700-ua-f240.grb2
+  131  0310 14:40:01 la
+  132  0310 14:43:41 del *f240*
+  133  0310 14:43:43 la
+  134  0310 15:36:07 c.sb.
+  135  0310 15:36:09 c.sb.p
+  136  0310 15:36:12 cd fldveri/
+  137  0310 15:36:13 psep
+  138  0310 15:36:35 m-era5-wmo-veri-flds.py 195001.195212.12
+  139  0310 20:32:28 m-era5-wmo-veri-flds.py 195301.195912.12
+  140  0311 14:12:08 m-era5-wmo-veri-flds.py 198601.198912.12
+  141  0311 21:10:12 h
+  142  0311 21:16:15 m-era5-wmo-veri-flds.py 1945010100 -N
+  143  0311 21:18:19 la /raid05/era5-wmo/1945/1945010100/era5-w2flds-1945010100-ua*
+  144  0311 21:18:56 ud /raid05/era5-wmo/1945/1945010100/
+  145  0311 21:21:07 m-era5-wmo-veri-flds.py 1945010100 
+  146  0311 21:21:11 m-era5-wmo-veri-flds.py 1945010112
+  147  0311 21:21:35 m-era5-wmo-veri-flds.py 194501.194512.12
+  148  0311 22:03:37 m-era5-wmo-veri-flds.py 194601.195012.12
+  149  0312 01:33:26 m-era5-wmo-veri-flds.py 195101.202412.12
+  150  0310 17:39:00 c.sb
+  151  0310 17:39:03 git s-u
+  152  0310 17:39:17 git commit -a
+  153  0310 17:39:39 git push
+  154  0310 15:41:11 psep
+  155  0310 15:41:26 m-era5-wmo-veri-flds.py 196001.196912.12
+  156  0310 16:59:11 m-era5-wmo-veri-flds.py 1961010100
+  157  0310 16:59:19 m-era5-wmo-veri-flds.py 1961010100 -V
+  158  0310 17:10:34 m-era5-wmo-veri-flds.py 1961010100
+  159  0310 17:10:54 m-era5-wmo-veri-flds.py 1961010100 -V
+  160  0310 17:11:18 h
+  161  0310 17:11:31 m-era5-wmo-veri-flds.py 196101.196912.12
+  162  0310 17:11:39 u
+  163  0310 17:11:42 h
+  164  0310 17:11:53 m-era5-wmo-veri-flds.py 196101.196912.12
+  165  0310 17:13:30 h
+  166  0310 17:13:38 m-era5-wmo-veri-flds.py 1961010112 -V
+  167  0310 17:14:33 m-era5-wmo-veri-flds.py 1961010112 -V -O
+  168  0310 17:15:14 h
+  169  0310 17:17:39 m-era5-wmo-veri-flds.py 1961010100 -V -O
+  170  0310 17:18:56 m-era5-wmo-veri-flds.py 1961010112 -V -O
+  171  0310 17:19:04 m-era5-wmo-veri-flds.py 1961010200 -V -O
+  172  0310 17:29:49 m-era5-wmo-veri-flds.py 1961010112 -V -O
+  173  0310 17:31:41 m-era5-wmo-veri-flds.py 1961010100 -V -O
+  174  0310 17:32:04 m-era5-wmo-veri-flds.py 196101.196912.12 
+  175  0303 15:40:14 c.w2.d
+  176  0303 15:40:23 cd tc/adeck/atcf-form/2021
+  177  0303 15:40:23 la
+  178  0303 15:40:26 cd era5/
+  179  0303 15:40:27 la
+  180  0303 15:40:32 la awp162021.dat 
+  181  0303 15:40:34 pg awp162021.dat 
+  182  0304 13:36:04 c.sb.s3
+  183  0304 13:36:23 cd 2021/
+  184  0304 13:36:27 cd wpac/
+  185  0304 13:36:29 la 16W-2021-OMAIS-A1C/
+  186  0304 13:36:43 la 16W-2021-OMAIS-A1C/16W-2021-md3-MRG.txt 
+  187  0304 13:36:45 pg 16W-2021-OMAIS-A1C/16W-2021-md3-MRG.txt 
+  188  0304 13:36:55 pg 16W-2021-OMAIS-A1C/16W-2021-md3-BT.txt
+  189  0304 14:11:30 h
+  190  0304 14:11:33 la 23W-2021-NAMTHEUN-E5W/
+  191  0304 14:12:13 cd 23W-2021-NAMTHEUN-E5W/
+  192  0304 14:12:23 pg 23W-2021-md3-MRG.txt 
+  193  0304 14:15:48 cd ../../../2016/
+  194  0304 14:15:53 cd wpac/23W-2016-SONGDA-A4C/
+  195  0304 14:15:54 la
+  196  0304 14:16:08 pg 23W-2016-md3-MRG.txt 
+  197  0304 14:16:27 md3a -S 23w.16 -b
+  198  0304 14:16:55 md3a -S 23w.16
+  199  0306 21:27:17 h
+  200  0306 13:56:19 c.sb
+  201  0306 13:56:21 c.sb.p
+  202  0306 13:56:26 git s-u
+  203  0306 14:02:36 psep
+  204  0306 14:02:39 psmac
+  205  0306 14:02:58 pse
+  206  0306 14:03:04 pse | g wgrib
+  207  0306 14:03:50 pse | g wgrib | g -v grep | cut -c 40-100
+  208  0306 14:04:08 pse | g wgrib | g -v grep | g -v 'sh -c'
+  209  0306 14:04:18 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c40-100
+  210  0306 14:04:27 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c80-120
+  211  0306 14:04:33 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-120
+  212  0306 14:04:39 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-100
+  213  0306 14:04:42 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-110
+  214  0306 14:04:59 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-115
+  215  0306 14:05:02 pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-118
+  216  0306 14:05:22 alias pseg='pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-118'
+  217  0306 14:05:35 alias pseg="pse | g wgrib | g -v grep | g -v 'sh -c' | cut -c88-118"
+  218  0306 14:05:37 pseg
+  219  0306 14:15:45 psep
+  220  0306 14:15:46 pseg
+  221  0306 14:15:48 psmac
+  222  0306 14:47:40 h
+  223  0306 14:47:48 cd ../tcveri2/
+  224  0306 14:47:54 pg clp3-under.txt
+  225  0306 14:48:06 h
+  226  0306 14:48:19 clp3-under.sh
+  227  0306 14:48:44 lt *py
+  228  0306 14:49:10 pg m-redo-clp3-under.py 
+  229  0306 14:50:48 la underinv/
+  230  0306 14:51:48 la underinv/bad-h-1961-98p0-v00.txt 
+  231  0306 14:51:50 pg underinv/bad-h-1961-98p0-v00.txt 
+  232  0306 14:52:16 h
+  233  0306 14:52:20 m-redo-clp3-under.py 
+  234  0306 14:52:45 a-clp3-under.py
+  235  0306 14:53:39 a-clp3-under.py -Y 1961 -t 0 -V -N
+  236  0306 14:53:44 pg /tmp/clp3.txt 
+  237  0306 14:54:00 m-redo-clp3-under.py 
+  238  0306 14:54:31 m-redo-clp3-under.py -S l.1961 -t 0 -Y -N
+  239  0306 14:55:04 m-redo-clp3-under.py -S l.1961 -t 0 -Y 
+  240  0306 14:59:01 a-clp3-under.py
+  241  0306 15:05:38 a-clp3-under.py -t 0 -N
+  242  0306 15:05:52 a-clp3-under.py -t 0 -R -N
+  243  0306 15:06:29 a-clp3-under.py -t 0 -R -Y
+  244  0306 15:07:01 a-clp3-under.py -t 0 -R
+  245  0306 15:07:11 a-clp3-under.py -t 0 -R -X
+  246  0306 15:09:18 f
+  247  0306 15:19:21 h
+  248  0306 21:26:51 h | g 'm-all-ad2'
+  249  0306 21:29:38 h | g clp3
+  250  0306 15:14:18 h
+  251  0306 15:14:23 h | g vdpl
+  252  0306 15:14:31 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b h -p pod -o 0 
+  253  0306 15:14:46 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b l -p pod -o 0 
+  254  0306 15:15:01 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b w -p pod -o 0 
+  255  0306 15:17:06 pse
+  256  0306 15:17:07 psep
+  257  0306 15:17:22 a-clp3-under.py -t 0 -R
+  258  0306 15:17:31 a-clp3-under.py -t 0 -N
+  259  0306 15:17:57 a-clp3-under.py
+  260  0306 15:18:07 a-clp3-under.py -t 0 -P 99.0 -N
+  261  0306 15:18:24 a-clp3-under.py -t 0 -P 99.5 -N
+  262  0306 15:18:41 a-clp3-under.py -t 0 -P 98.5 -N
+  263  0306 15:19:31 p-vdplot.py -Y 1945.2024 -T clp3 -X -f z0012 -b w -p pod -o 0 
+  264  0306 15:19:53 p-vdplot.py -Y 1945.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 
+  265  0306 15:20:19 p-vdplot.py -Y 1945.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A
+  266  0306 15:53:04 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A -V
+  267  0306 15:55:19 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A 
+  268  0306 15:55:58 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A 
+  269  0306 15:57:11 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -X -f z0012 -b w -p pod -o 0 -A 
+  270  0306 15:59:22 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -V
+  271  0306 16:00:50 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A -V
+  272  0306 16:00:58 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A -V
+  273  0306 16:01:18 p-vdplot.py -Y 2014.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -V
+  274  0306 16:01:38 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -V
+  275  0306 16:04:24 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A -V
+  276  0306 16:04:34 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 0 -A -V -X
+  277  0306 16:06:22 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  278  0306 16:06:34 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  279  0306 16:08:10 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  280  0306 16:17:29 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  281  0306 16:18:01 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 72 -A
+  282  0306 16:18:12 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 72 -A
+  283  0306 16:18:24 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 72 -A -X
+  284  0306 16:18:52 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A 
+  285  0306 16:19:21 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  286  0306 16:19:40 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  287  0306 16:20:44 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A 
+  288  0306 16:21:17 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A 
+  289  0306 16:21:33 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  290  0306 16:21:58 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe-line -o 24 -A 
+  291  0306 16:22:09 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  292  0306 16:22:20 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  293  0306 16:30:51 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  294  0306 16:31:01 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  295  0306 16:31:50 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A  -X
+  296  0306 16:33:10 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  297  0306 16:33:21 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A  -X
+  298  0306 16:35:49 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  299  0306 16:37:16 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A -X
+  300  0306 16:39:20 p-vdplot.py -Y 2000.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A -X
+  301  0306 16:39:40 p-vdplot.py -Y 2000.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  302  0306 16:40:58 p-vdplot.py -Y 2000.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  303  0306 16:41:05 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  304  0306 16:41:28 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  305  0306 16:42:12 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A
+  306  0306 16:42:41 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A
+  307  0306 16:45:11 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  308  0306 16:45:47 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A
+  309  0306 16:46:32 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A
+  310  0306 17:02:07 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 0 -A
+  311  0306 17:02:37 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pe -o 24 -A 
+  312  0306 17:02:58 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 24 -A 
+  313  0306 17:03:40 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A 
+  314  0306 17:30:52 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  315  0306 17:32:05 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod-line -o 0 -A -X
+  316  0306 17:32:30 p-vdplot.py -Y 2022.2024 -T tera500,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  317  0306 17:33:11 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -A -X
+  318  0306 17:33:26 p-vdplot.py -Y 2000.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -A -X
+  319  0306 17:34:05 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -A -X
+  320  0306 17:34:16 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -X
+  321  0306 17:35:16 p-vdplot.py -Y 2000.2024 -T clp3 -f z0012 -b w -p pod -o 0 -X -A
+  322  0306 17:43:30 p-vdplot.py -Y 2000.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  323  0306 17:46:52 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  324  0306 17:47:51 p-vdplot.py -Y 2000.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  325  0306 17:48:45 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  326  0306 17:49:47 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b h -p pod -o 0 -X -A
+  327  0306 17:50:41 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  328  0306 17:51:21 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  329  0306 17:53:54 m-all-ad2-vd2.py 
+  330  0306 17:54:23 la
+  331  0306 17:54:35 m-redo-clp3-under.py 
+  332  0306 17:54:56 m-redo-clp3-under.py -S l.1956 -N
+  333  0306 17:55:15 m-redo-clp3-under.py -S l.1956 
+  334  0306 17:55:53 f
+  335  0306 17:57:17 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -X -A
+  336  0306 17:57:26 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  337  0306 17:58:13 m-redo-clp3-under.py -S l.1963
+  338  0306 17:59:43 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  339  0306 18:00:14 m-redo-clp3-under.py -S l.1966
+  340  0306 18:00:45 f
+  341  0306 18:01:53 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  342  0306 18:03:30 h
+  343  0306 18:03:57 vd2a -S l.66 -T tera5,clp3 -f z0012 -t 0
+  344  0306 18:04:03 vd2a -S l.66 -T tera5,clp3 -f z0012 -t 0 | g nnnnn
+  345  0306 18:04:12 vd2a -S l.66 -T tera5,clp3 -f z0012 -t 0 | l
+  346  0306 18:04:38 vd2a -S l.66 -T tera5,clp3 -f z0012 -p pod
+  347  0306 18:04:41 vd2a -S l.66 -T tera5,clp3 -f z0012 -p pod -X
+  348  0306 18:05:10 vd2a -S l.66 -T tera5,clp3 -f z0012 -p pod -X -O
+  349  0306 21:15:52 h
+  350  0306 21:15:56 la *py
+  351  0306 21:16:01 m-sbt-bd2.py 
+  352  0306 21:16:07 m-sbt-bd2.py -S l.63
+  353  0306 21:16:12 m-sbt-bd2.py -S l.63 -O
+  354  0306 21:16:32 m-sbt-bd2.py 
+  355  0306 21:16:38 m-sbt-bd2.py -Y 1963
+  356  0306 21:16:46 m-sbt-bd2.py -Y 1963 -S all.1963
+  357  0306 21:17:07 m-all-sbt-bd2.py 
+  358  0306 21:17:12 kill %1
+  359  0306 21:17:16 h
+  360  0306 21:17:24 m-sbt-bd2.py -S all.1963 -N
+  361  0306 21:18:45 m-sbt-bd2.py -S l.63
+  362  0306 21:18:49 m-sbt-bd2.py -S l.63 -V
+  363  0306 21:18:56 m-sbt-bd2.py -S 02l.63 -V
+  364  0306 21:19:15 md3a -S 02l.63
+  365  0306 21:19:37 h
+  366  0306 21:19:54 m-sbt-bd2.py -S all.1963
+  367  0306 21:20:14 h
+  368  0306 21:20:47 vd2a -S 02l.63 -T clp3 -f z0012 -p pod
+  369  0306 21:20:50 vd2a -S 02l.63 -T clp3 -f z0012 -p pod -O
+  370  0306 21:21:19 vd2a -S 02l.63 -T tera5,clp3 -f z0012 -p pod -O
+  371  0306 21:22:21 vd2a -S l.63 -T tera5,clp3 -f z0012 -p pod -O
+  372  0306 21:23:12 vd2a -S l.63 -T tera5,clp3 -p pe -t 0
+  373  0306 21:23:17 vd2a -S l.63 -T tera5,clp3 -p pe -t 0 | g nnnnn
+  374  0306 21:24:34 la *clp3*
+  375  0306 21:24:47 p-redo-clp3.py 
+  376  0306 21:24:50 kill %1
+  377  0306 21:24:54 la
+  378  0306 21:25:20 m-all-ad2-vd2.py 
+  379  0306 21:25:52 m-all-ad2-vd2.py -Y 1956 -B l -A -N
+  380  0306 21:26:28 h | g 'm-all-ad2'
+  381  0306 21:27:45 h
+  382  0306 21:28:03 m-all-ad2-vd2.py -Y 1963 -B l -A -N
+  383  0306 21:28:13 m-ad2inv.py -C -E -0 -Y 1963 -N
+  384  0306 21:28:39 g ad2 *.py
+  385  0306 21:28:54 g ad2-bd2 *.py
+  386  0306 21:29:00 g bd2 *.py
+  387  0306 21:29:08 g tcclp3 *.py
+  388  0306 21:29:21 h | g 'p-redo-clp3'
+  389  0306 21:30:09 p-redo-clp3.py 
+  390  0306 21:30:13 kill %1
+  391  0306 21:30:21 la *clp3*
+  392  0306 21:30:25 la *clp3*py
+  393  0306 21:30:37 pg p-redo-clp3.py 
+  394  0306 21:30:46 git mv p-redo-clp3.py SAV/
+  395  0306 21:30:56 la *clp3*
+  396  0306 21:31:00 la *clp3*py
+  397  0306 21:31:16 a-clp3-under.py
+  398  0306 21:31:51 m-redo-clp3-under.py 
+  399  0306 21:32:09 g tcclp3 *.py
+  400  0306 21:32:15 m-redo-clp3-under.py 
+  401  0306 21:32:33 m-redo-clp3-under.py -S l.1963 -N
+  402  0306 21:33:11 m-redo-clp3-under.py -S l.1963
+  403  0306 21:34:22 m-redo-clp3-under.py -S l.1961
+  404  0306 21:35:28 m-redo-clp3-under.py -S l.1956
+  405  0306 21:37:08 h
+  406  0306 21:37:19 m-redo-clp3-under.py -S l.1966
+  407  0306 21:38:47 h | g vdpl
+  408  0306 21:38:55 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  409  0306 21:40:04 m-redo-clp3-under.py -S l.1966 -N
+  410  0306 21:40:48 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod
+  411  0306 21:40:58 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod -t 0
+  412  0306 21:41:10 vd2a -S l.66 -T tera500,clp3  -p pod -t 0
+  413  0306 21:41:18 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod 
+  414  0306 21:41:28 vd2a -S l.66 -T tera500,clp3 -f z0012 -p pod -L
+  415  0306 21:41:51 vd2a -S 01-10l.66 -T tera500,clp3 -f z0012 -p pod -L
+  416  0306 21:41:59 vd2a -S 01-05l.66 -T tera500,clp3 -f z0012 -p pod -L
+  417  0306 21:42:10 vd2a -S 01-06l.66 -T tera500,clp3 -f z0012 -p pod -L
+  418  0306 21:42:18 vd2a -S 06l.66 -T tera500,clp3 -f z0012 -p pod -L
+  419  0306 21:42:28 md3a -S 06l.66
+  420  0306 21:42:36 md3a -S 06l.66 -b
+  421  0306 21:42:57 md2a -S 06l.66
+  422  0306 21:43:00 md2a -S 06l.66 -2
+  423  0306 21:43:16 h | g md3
+  424  0306 21:45:28 md2a -S 06l.66 
+  425  0306 21:45:30 md2a -S 06l.66 -b
+  426  0306 21:46:12 ad2 -S 06l.66 -T clp3 -F
+  427  0306 21:47:10 ad2 -S 06l.66 -T clp300 -F
+  428  0306 21:47:12 ad2 -S 06l.66 -T clp300 -F | l
+  429  0306 22:04:36 md3a -S 06l.66
+  430  0306 22:05:08 vd2a -S 06l.66 -T tera500,clp3 -f z0012 -p pod -O -V
+  431  0306 22:06:29 h
+  432  0306 22:06:55 m-redo-clp3-under.py -S l.1966 -N
+  433  0306 22:07:32 m-vdinv.py -Y 1966 -B l -O -N
+  434  0306 22:07:54 m-all-ad2-vd2.py 
+  435  0306 22:08:06 m-all-ad2-vd2.py -Y 1966 -B l -N
+  436  0306 22:08:15 m-all-ad2-vd2.py -Y 1966 -B l
+  437  0306 22:09:13 h | g vdp
+  438  0306 22:09:18 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  439  0306 22:09:41 m-all-ad2-vd2.py -Y 1956.1965 -B l -N
+  440  0306 22:09:46 m-all-ad2-vd2.py -Y 1956.1965 -B l 
+  441  0306 22:16:16 m-all-ad2-vd2.py -Y 1963 -B l -N
+  442  0306 22:16:33 m-all-ad2-vd2.py -Y 1963 -B l 
+  443  0306 22:18:17 m-all-ad2-vd2.py -Y 1956.1966 -B l 
+  444  0306 22:33:35 h
+  445  0306 22:33:39 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  446  0306 22:34:21 h
+  447  0306 22:34:28 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  448  0306 22:34:50 vd2a -S l.64 -T clp3 -f z0012 -p pod
+  449  0306 22:37:47 vd2a -S l.64 -T clp3 -f z0012 -p pod -O
+  450  0306 22:38:15 md3a -S l.64 -s
+  451  0306 22:38:34 vd2a -S 02l.64 -T clp3 -f z0012 -p pod 
+  452  0306 22:39:30 vd2a -S 02l.64 -T clp3  -p pod 
+  453  0306 22:39:33 vd2a -S 02l.64 -T clp3  -p pod  -O
+  454  0306 22:41:03 m-sbt-bd2.py 
+  455  0306 22:41:17 m-sbt-bd2.py -S l.64
+  456  0306 22:41:35 ad2 clp3 -S 02l.64 -O1
+  457  0306 22:41:47 ad2 clp3 -S 02l.64 -T clp3 -L
+  458  0306 22:42:19 vd2a -S 02l.64 -T clp3  -p pod  -O
+  459  0306 22:42:32 vd2a -S 02l.64 -T clp3 -f z0012 -p pod  -O
+  460  0306 22:43:02 vd2a -S 02l.64 -T clp3 -f z0012 -p pod  -O -V | l
+  461  0306 22:44:48 vd2a -S 03-11l.64 -T clp3 -f z0012 -p pod
+  462  0306 22:45:03 vd2a -S 01l.64 -T clp3 -f z0012 -p pod
+  463  0306 22:45:18 vd2a -S l.64 -T clp3 -f z0012 -p pod
+  464  0306 22:45:43 vd2a -S 02l.64 -T clp3 -f z0012 -p pod
+  465  0306 22:46:13 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  466  0306 22:46:52 md3a -S 02l.64
+  467  0306 22:47:18 md2a -S 02l.64
+  468  0306 22:47:20 md2a -S 02l.64 -X
+  469  0306 22:47:53 md3a -S 02l.64
+  470  0306 22:47:57 md3a -S 02l.64 -b
+  471  0306 22:56:51 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  472  0306 23:03:40 vd2a -S 02w.64 -T clp3 -f z0012 -p pod -O
+  473  0306 23:04:09 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  474  0306 23:07:42 vd2a -S 02e.64 -T clp3 -f z0012 -p pod -O
+  475  0306 23:08:23 vd2a -S 02l.64 -T clp3 -f z0012 -p pod -O
+  476  0306 23:24:13 vd2a -S l.64 -T clp3 -f z0012 -p pod -O
+  477  0306 23:24:40 h
+  478  0306 23:24:50 m-all-ad2-vd2.py -Y 1956.1966 -B l 
+  479  0306 23:31:05 h
+  480  0306 23:31:11 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  481  0306 23:31:25 h
+  482  0306 23:31:36 m-all-ad2-vd2.py -Y 1955 -B l 
+  483  0306 23:33:39 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  484  0306 23:33:58 p-vdplot.py -Y 1995.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  485  0306 23:34:21 m-all-ad2-vd2.py -Y 1995.2024 -B l 
+  486  0307 00:46:29 p-vdplot.py -Y 1995.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  487  0307 00:47:34 vd2a -S l.23 -T clp3 -f z0012 -p pod
+  488  0307 00:47:43 vd2a -S l.22 -T clp3 -f z0012 -p pod
+  489  0307 00:48:05 vd2a -S l.21 -T clp3 -f z0012 -p pod
+  490  0307 00:52:40 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -X -A
+  491  0307 00:56:07 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -A | g clp3
+  492  0307 00:56:30 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b l -p pod -o 0 -A | g clp3 | g -v 100.0
+  493  0307 00:56:36 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b w -p pod -o 0 -A | g clp3 | g -v 100.0
+  494  0307 00:56:52 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b h -p pod -o 0 -A | g clp3 | g -v 100.0
+  495  0307 00:57:06 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b e -p pod -o 0 -A | g clp3 | g -v 100.0
+  496  0307 00:57:47 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b i -p pod -o 0 -A | g clp3 | g -v 100.0
+  497  0307 00:58:03 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b i -p pod -o 0 -A -X
+  498  0307 00:58:56 p-vdplot.py -Y 1945.2024 -T tera5,clp3 -f z0012 -b e -p pod -o 0 -A -X
+  499  0313 00:53:48 c.sb
+  500  0313 00:53:50 git s-u
+  501  0313 00:53:53 git commit -a
+  502  0313 00:54:03 git push
+  503  0313 11:41:02 vi /tmp/zg.txt
+  504  0313 15:06:31 c.sb.p[
+  505  0313 15:06:33 c.sb.p
+  506  0313 15:06:36 po
+  507  0313 15:06:41 c.sb.p
+  508  0313 15:06:44 cd fldveri/
+  509  0313 15:06:45 la
+  510  0313 15:07:51 h
+  511  0313 15:07:58 m-fld-ensFC.py 
+  512  0313 15:08:22 m-fld-ensFC.py 194501.12
+  513  0313 15:08:26 m-fld-ensFC.py 194501.12 -O
+  514  0313 15:08:36 m-fld-ensFC.py 194501.12 era5w -O
+  515  0313 15:08:55 pd /raid05/era5-wmo/1945/ensFC/era5w 
+  516  0313 15:08:56 la
+  517  0313 15:09:02 vi era5-w2flds-194501-ua.grb2.ctl 
+  518  0313 15:09:15 gribmap -v -i era5-w2flds-194501-ua.grb2.ctl 
+  519  0313 15:10:00 po
+  520  0313 15:10:08 m-fld-ensFC.py 194501.12 era5w -O
+  521  0313 15:17:52 pd /raid05/era5-wmo/1945/ensFC/era5w 
+  522  0313 15:17:58 pg era5-w2flds-194501-ua.grb2.ctl 
+  523  0313 15:21:23 po
+  524  0313 15:21:25 m-fld-ensFC.py 194501.12 era5w -O
+  525  0313 15:23:52 m-fld-ensFC.py 194512.12 era5w -O
+  526  0313 15:24:42 m-fld-ensFC.py 1945120100.1946010800.12 era5w -O
+  527  0313 15:26:31 f
+  528  0313 15:27:45 la /raid05/era5-wmo/1945/ensFC/era5w/f024/1946/
+  529  0313 15:39:49 m-ln-fXXX-era5-wmo-veri-flds.py 
+  530  0313 15:40:35 m-ln-fXXX-era5-wmo-veri-flds.py 1945123100.1946010800.12
+  531  0313 15:41:20 m-ln-fXXX-era5-wmo-veri-flds.py 194512.123100.1946010800.12
+  532  0313 15:41:23 m-ln-fXXX-era5-wmo-veri-flds.py 194512.12
+  533  0313 15:42:10 la
+  534  0313 15:42:12 h
+  535  0313 15:42:31 m-fld-ensFC.py 1945120100.1946010800.12 era5w -O
+  536  0313 15:42:55 m-fld-ensFC.py 194512.12 -O
+  537  0313 15:43:23 m-fld-ensFC.py 194512.12 
+  538  0313 15:43:27 m-fld-ensFC.py 194512.12  -O
+  539  0313 15:44:39 m-fld-ensFC.py 1945123000.1946080100.12  -O
+  540  0313 15:44:53 j
+  541  0313 15:44:58 kill %2
+  542  0313 15:45:00 kill %1
+  543  0313 15:45:07 m-fld-ensFC.py 1945123000.1946010100.12  -O
+  544  0313 15:46:02 pd /raid05/era5-wmo/1945/ensFC/era5w 
+  545  0313 15:46:13 pg era5-w2flds-1945123000-1946010100-ua.grb2.ctl 
+  546  0313 15:48:44 po
+  547  0313 15:48:47 m-fld-ensFC.py 1945123000.1946010100.12  -O
+  548  0313 15:52:11 m-fld-ensFC.py 1945123000.1946010900.12  -O
+  549  0313 16:02:38 pd /raid05/era5-wmo/1945/ensFC/era5w 
+  550  0313 16:02:39 la
+  551  0313 16:02:53 la era5-w2flds-1945*ctl
+  552  0313 16:03:03 rm era5-w2flds-1945*ctl
+  553  0313 16:03:10 rm *.gmp
+  554  0313 16:03:11 la
+  555  0313 16:03:39 po
+  556  0313 16:03:51 m-fld-ensFC.py 1945123000.1946010900.12  -O
+  557  0313 16:04:37 m-fld-veri-wmo.py 
+  558  0313 16:04:46 m-fld-veri-wmo.py 1945123000
+  559  0313 16:07:56 m-fld-ensFC.py 1945122500.1946010900.12  -O
+  560  0313 16:08:14 la /raid05/era5-wmo/1945/ensFC/era5w 
+  561  0313 16:08:19 h
+  562  0313 16:08:24 m-fld-veri-wmo.py 1945123000
+  563  0313 16:08:34 m-fld-veri-wmo.py 1945123000 | g 'nhem 120'
+  564  0313 16:08:45 m-fld-veri-wmo.py 1945123000.1945123112.12
+  565  0313 16:08:59 m-fld-veri-wmo.py 1945123000.1945123112.12 | g 'nhem 120'
+  566  0313 16:10:45 m-fld-veri-wmo.py 1945123000.1945123112.12 
+  567  0313 16:11:01 m-fld-veri-wmo.py 1945123000.1945123112.12  | g 'nhem 120'
+  568  0313 16:13:49 m-fld-veri-wmo.py 1945123000.1945123112.12 -O
+  569  0313 16:15:58 la m-all-era5-anl.py 
+  570  0313 16:16:02 pg m-all-era5-anl.py 
+  571  0313 16:16:13 la m-fld-*
+  572  0313 16:16:28 g yearopt *.py
+  573  0313 16:16:35 g yearopt m*.py
+  574  0313 16:17:09 cp m-all-era5-anl.py m-all-fld-ensFC.py
+  575  0313 16:17:12 la *ens*py
+  576  0313 16:19:45 m-all-fld-ensFC.py 
+  577  0313 16:19:49 m-all-fld-ensFC.py -Y 1945
+  578  0313 16:21:08 h
+  579  0313 16:21:36 m-ln-fXXX-era5-wmo-veri-flds.py 194512.12
+  580  0313 16:21:46 m-ln-fXXX-era5-wmo-veri-flds.py 194612.12
+  581  0313 16:22:13 m-ln-fXXX-era5-wmo-veri-flds.py 19471230.12
+  582  0313 16:22:27 m-ln-fXXX-era5-wmo-veri-flds.py 1947123112
+  583  0313 16:22:32 m-ln-fXXX-era5-wmo-veri-flds.py 1947123100
+  584  0313 16:22:39 m-ln-fXXX-era5-wmo-veri-flds.py 1947122500
+  585  0313 16:22:43 m-ln-fXXX-era5-wmo-veri-flds.py 1947122000
+  586  0313 16:22:58 m-ln-fXXX-era5-wmo-veri-flds.py 1947122000.1948010100.12
+  587  0313 16:23:17 m-ln-fXXX-era5-wmo-veri-flds.py 1948122000.1949010100.12
+  588  0313 16:23:45 la *all*
+  589  0313 16:23:55 h
+  590  0313 16:24:31 cp m-ln-fXXX-era5-wmo-veri-flds.py m-ln-fXXX-endofyear.py
+  591  0313 16:24:39 pg m-ln-fXXX-endofyear.py 
+  592  0313 16:24:59 la
+  593  0313 16:25:21 mv m-ln-fXXX-endofyear.py m-ln-fXXX-yearend.py 
+  594  0313 16:25:24 m-ln-fXXX-yearend.py 
+  595  0313 16:26:54 m-ln-fXXX-yearend.py -Y 1945
+  596* 0313 16:28:50 m-ln-fXXX-era5-wmo-veri-flds.py -
+  597  0313 16:29:32 m-ln-fXXX-yearend.py -Y 1945 -N
+  598  0313 16:29:37 m-ln-fXXX-yearend.py -Y 1945 
+  599  0313 16:29:48 m-ln-fXXX-yearend.py -Y 1946.1950 -N
+  600  0313 16:29:56 m-ln-fXXX-yearend.py -Y 1946.1950 
+  601  0313 16:30:25 m-ln-fXXX-yearend.py -Y 1950.2000
+  602  0313 16:43:19 m-ln-fXXX-yearend.py -Y 2001.2024
+  603  0313 16:45:36 h
+  604  0313 16:45:50 m-all-fld-ensFC.py -Y 1945 -N
+  605  0313 16:46:30 m-all-fld-ensFC.py -Y 1945 
+  606  0313 16:48:55 kill %1
+  607  0313 16:48:57 f
+  608  0313 16:52:04 m-all-fld-ensFC.py -Y 1945 -N
+  609  0313 16:52:22 m-all-fld-ensFC.py -Y 1945 
+  610  0314 20:04:06 h
+  611  0314 20:20:50 m-fld-veri-wmo.py 
+  612  0314 20:21:11 m-fld-veri-wmo.py 1945010100.1945010200.12 -O
+  613  0315 12:39:41 h
+  614  0315 12:39:53 h >> cmds-20260315.txt 
