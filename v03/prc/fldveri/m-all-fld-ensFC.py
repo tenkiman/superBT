@@ -30,34 +30,6 @@ redo atcf-form for era5"""
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
 
-def makeEra5Anl(year):
-    
-    sbdir=era5DatDir
-    tbdir=era5AnlDatDir
-    
-    sdir="%s/%s"%(sbdir,year)
-    tdir="%s/%s"%(tbdir,year)
-    MF.ChkDir(tdir,'mk')
-    
-    epaths=glob.glob("%s/%s??????/*grb2"%(sdir,year))
-    epaths.sort()
-    for epath in epaths:
-        (edir,efile)=os.path.split(epath)
-        dtg=efile.split('-')[2]
-        afile="era5-anl-%s-ua.grb2"%(dtg)
-        adir="%s/%s"%(tdir,dtg)
-        MF.ChkDir(adir,'mk')
-        apath="%s/%s"%(adir,afile)
-        asiz=MF.getPathSiz(apath)
-        if (asiz <= 0 or override):
-            MF.sTimer('AAA-%s'%(dtg))
-            cmd='''wgrib2 %s -match ":anl:" -grib %s'''%(epath,apath)
-            mf.runcmd(cmd,ropt)
-            MF.dTimer('AAA-%s'%(dtg))
-        else:
-            print 'WWW already done apath: ',apath
-        
-    
 argv=sys.argv
 CL=TmtrkCmdLine(argv=argv)
 CL.CmdLine()
@@ -81,9 +53,9 @@ years=mf.yyyyrange(byear,eyear)
 MF.sTimer('ALL-EFF')
 for year in years:
 
-    byear=year
+    byearm1=mf.yyyyinc(year,-1)
     eyear=mf.yyyyinc(year,1)
-    dtgopt="%s010100.%s011000.12"%(byear,eyear)
+    dtgopt="%s122000.%s011000.12"%(byearm1,eyear)
     MF.sTimer('ALL-eff-%s'%(year))
     cmd='m-fld-ensFC.py %s -O'%(dtgopt)
     mf.runcmd(cmd,ropt)

@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
-from WxMAP2 import *
-w2=W2()                               # w2 obj with vars/methods
+from sBT import *
 
-from cm2 import ClimoFld
-from ga2 import setGA                 # grads class
-from m2 import EnsModel               # class for ens of model runs
+#from WxMAP2 import *
+#w2=W2()                               # w2 obj with vars/methods
+
+#from cm2 import ClimoFld
+#from ga2 import setGA                 # grads class
+#from m2 import EnsModel               # class for ens of model runs
 
 
 class WmoStats(MFbase):
@@ -92,6 +94,9 @@ class WmoStats(MFbase):
 
         mseT=mseP+mseE
         
+        if(mseT < 0.0):  mseT=0.0
+        if(mseE < 0.0):  mseE=0.0
+        if(mseP < 0.0):  mseP=0.0
         self.rmseT=sqrt(mseT)
         self.rmseE=sqrt(mseE)
         self.rmseP=sqrt(mseP)
