@@ -1,0 +1,11 @@
+ss-oo-pod 1951 w clp300 72 pod 84.4 147 124
+ss-oo-pod 1960 w clp300 72 pod 99.5 191 190
+ss-oo-pod 1962 w clp300 72 pod 98.6 146 144
+ss-oo-pod 1967 w clp300 72 pod 88.1 193 170
+ss-oo-pod 1972 w clp300 72 pod 99.7 313 312
+ss-oo-pod 1997 w clp300 72 pod 98.6 278 274
+ss-oo-pod 2000 w clp300 72 pod 98.3 172 169
+ss-oo-pod 2002 w clp300 72 pod 97.3 150 146
+ss-oo-pod 2007 w clp300 72 pod 99.0 100 99
+ss-oo-pod 2018 w clp300 72 pod 97.2 177 172
+ss-oo-pod 2019 w clp300 72 pod 96.9 160 155

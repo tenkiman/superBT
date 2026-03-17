@@ -1,0 +1,27 @@
+  652  0225 19:39:18 h
+  653  0225 19:39:49 vd2a -S 18w.91 -T clp3 -p pod -V
+  654  0225 19:42:55 h
+  655  0225 19:42:59 m-sbt-bd2.py -S 18w.91 -P -V
+  656  0225 19:44:33 sbt/superBT-V04/dat/all-md3-1991-BT.csv
+  657  0225 19:44:42 g 18w /sbt/superBT-V04/dat/all-md3-1991-BT.csv
+  658  0225 19:47:40 m-sbt-bd2.py -S 18w.91 -P -V
+  659  0225 19:55:14 m-sbt-bd2.py -S 18w.91 -P 
+  660  0225 19:55:16 m-sbt-bd2.py -S 18w.91 -P -V
+  661* 0225 19:55:49 m-sbt-bd2.py -S 18w.91 
+  662  0225 19:57:00 vd2a -S 18w.91 -T clp3 -p pod 
+  663  0225 19:58:33 vd2a -S 18w.91 -T clp3 -p pod  -O
+  664  0225 19:59:01 m-sbt-bd2.py 
+  665  0225 19:59:08 m-sbt-bd2.py -S w.91
+  666  0225 19:59:17 m-vdinv.py 
+  667  0225 19:59:32 m-vdinv.py -Y 1991 -B w -N
+  668  0225 19:59:44 p-vdinv.py -S w.1991 -N
+  669  0225 19:59:57 p-vdinv.py -S w.1991 -O -N
+  670  0225 20:00:03 p-vdinv.py -S w.1991 -O 
+  671  0225 20:11:32 vd2a -S 18w.91 -T clp3 -p pod  
+  672  0225 20:11:39 vd2a -S w.91 -T clp3 -p pod  
+  673  0225 20:11:52 vd2a -S w.92 -T clp3 -p pod  
+  674  0225 20:13:07 vd2a -S w.07 -T clp3 -p pod  
+  675  0225 20:13:22 vd2a -S w.18 -T clp3 -p pod  
+  676  0225 20:13:44 m-sbt-bd2.py -S w.18
+  677  0225 20:14:05 p-vdinv.py -S w.2018 -O 
+  721  0226 14:06:15 h | g ' 0225 ' > cmds-20260225.txt
