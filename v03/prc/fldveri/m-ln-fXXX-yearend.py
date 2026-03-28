@@ -15,6 +15,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.options={
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
+            'model':            ['m:','era5','a','model '],
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
@@ -53,6 +54,6 @@ for year in years:
     bdtg="%s122000"%(year)
     edtg="%s010100"%(yearp1)
     print 'bb',bdtg,'ee',edtg
-    cmd="m-ln-fXXX-era5-wmo-veri-flds.py %s.%s.12"%(bdtg,edtg)
+    cmd="m-ln-fXXX-era5-wmo-veri-flds.py %s.%s.12 -m %s"%(bdtg,edtg,model)
     mf.runcmd(cmd,ropt)
     

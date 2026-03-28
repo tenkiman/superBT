@@ -17,6 +17,7 @@ class TmtrkCmdLine(CmdLine):
         self.options={
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'override':         ['O',0,1,'override'],
+            'model':            ['m:','era5','a','model '],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
         }

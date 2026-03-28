@@ -16,6 +16,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.options={
             'override':         ['O',0,1,'override'],
+            'model':            ['m:','era5','a','model '],
             'doCatAll':         ['C',0,1,'cat f??? to single file'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
@@ -48,15 +49,6 @@ etau=240
 dtau=12
 otaus=range(btau,etau+1,dtau)
 
-ovars={
-    'GP':(500,),
-    'PRES':(1013,),
-    'UGRD':(850,200),
-    'VGRD':(850,200),
-    'RH':(700,),
-    'TMP':(700,)
-  }
-
 ofilts={}
 
 #print otaus
@@ -64,8 +56,10 @@ MF.sTimer('ALL-xxx-%s'%(dtgopt))
 for dtg in dtgs:
     
     year=dtg[0:4]
-    sbdir=era5DatDir
-    tbdir=era5WmoDatDir
+    if(model == 'era5'):
+        tbdir=era5WmoDatDir
+    elif(model == 'ecop'):
+        tbdir=ecopWmoDatDir
     
     sdir="%s/%s/%s"%(tbdir,year,dtg)
     

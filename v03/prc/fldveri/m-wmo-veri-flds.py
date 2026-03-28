@@ -20,6 +20,7 @@ class TmtrkCmdLine(CmdLine):
             'model':            ['m:','era5','a','model '],
             'doCatAll':         ['C',0,1,'cat f??? to single file'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
+            'diag':             ['D',0,1,'turn on diag'],
             'ropt':             ['N','','norun',' norun is norun'],
         }
 
@@ -38,6 +39,7 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
         for wcard in wgrbcards:
     
             ww=wcard.split(":")
+
             if(len(ww) >= 7):
                 var=ww[3].strip()
                 lev=ww[4]
@@ -49,7 +51,7 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
             if(tau == 'anl'):
                 itau=0
                 
-            elif(mf.find(tau,' acc')):
+            elif(mf.find(tau,' acc') or mf.find(tau,' max') or mf.find(tau,' min')):
                 tt=tau.split()
                 tauunit=tt[1].split()[0]
                 tau=tt[0].split('-')[0]
@@ -64,17 +66,20 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
                 
             if(mf.find(lev,'mean sea')):
                 ilev=1013
+            elif(mf.find(lev,'surface')):
+                ilev=-999
             elif(mf.find(lev,'mb')):
                 #lev=lev.strip()
                 ilev=lev.split()[0].strip()
                 ilev=int(ilev)
-    
             elif(mf.find(lev,'10 m')):
                 ilev='10'
+                
             if(var in ovars.keys()):
-                #print 'vvv',var,'ii',ilev,'kk','oo',ovars[var]
+                #print 'iii---vvv',var,ilev,ovars[var],itau,ww[0:-1]
+                #nonmsl=(var == 'PRES' and lev != 1013)
                 if( (ilev in ovars[var])  and (itau in otaus) ):
-                    if(verb): print 'oooo---vvvv',var,lev,'ii',itau,ilev,'cccc',wcard[0:-1]
+                    #print 'oooo---vvvv',var,lev,'ii',itau,ilev,'cccc',wcard[0:-1]
                     MF.appendDictList(ofilts,itau,wcard)
         return
 
@@ -107,7 +112,6 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
         #
         if(lssiz < lsMinsiz):
             print 'WWW-need to redo %s ...'%(wlstpath)
-            sys.exit()
             cmd='wgrib2 %s > %s'%(grb2path,wlstpath)
             mf.runcmd(cmd)
             lssiz=MF.getPathSiz(wlstpath)
@@ -403,7 +407,7 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
                 print 'ooo',oftau,ofilts[oftau]
 
     
-    # --  wwwwwwwwggggggggggggrrrrrrrrrrrrrrriiiiiiiiiiibbbbbbbbbbbbbbbb222222222222
+    # -- wwwwwwwwggggggggggggrrrrrrrrrrrrrrriiiiiiiiiiibbbbbbbbbbbbbbbb222222222222
     #
     # -- now do wgrib2 filt of fields for fldveri and regrid for ecm5 and ecm6
     #
@@ -420,13 +424,18 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
             gpath="%s/%s-f%03d.grb2"%(tdir,ogrbbase,oftau)
             grb2path="%s/%s-%03d.grb2"%(sdir,grbbase,oftau)
       
-        tgpath="/tmp/tt.grb2"
+        tgpath="/tmp/tt-%s.grb2"%(dtg)
         wpath="/tmp/%s.%03d.txt"%(grbbase,oftau)
         gsiz=MF.getPathSiz(gpath)
-        igsiz=MF.getPathNlines(grb2path)
+        igsiz=MF.getPathSiz(grb2path)
         if(gsiz > 0 and not(override)):
             print 'WWW already done: ',gpath
-            continue
+            break
+        elif(igsiz <= 0):
+            print 'gpath missing...press...for dtg: ',dtg,'model: ',model
+            didgrb=0
+            override=0
+            break
         
         # -- 20260326 -- sort fields to filter so u;v are together
         #
@@ -468,9 +477,9 @@ CL.CmdLine()
 exec(CL.estr)
 if(verb): print CL.estr
 
-MF.sTimer('ALL-wmo-%s'%(dtgopt))
+if(diag): MF.sTimer('ALL-wmo-%s'%(dtgopt))
 dtgs=dtg_dtgopt_prc(dtgopt)
 for dtg in dtgs:
     rc=makeWmoFldList(dtg,model=model,override=override)
-MF.dTimer('ALL-wmo-%s'%(dtgopt))
+if(diag): MF.dTimer('ALL-wmo-%s'%(dtgopt))
     

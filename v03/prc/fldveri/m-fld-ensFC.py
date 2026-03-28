@@ -24,6 +24,7 @@ class MFCmdLine(CmdLine):
             }
 
         self.options={
+            'model':                   ['m:','era5','a','model '],
             'verb':                    ['V',0,1,'verb=1 is verbose'],
             'ropt':                    ['N','','norun',' norun is norun'],
             'override':                ['O',0,1,'override'],
@@ -63,7 +64,10 @@ if(override):
     overrideLN=overrideGM=1
     
 dtgs=mf.dtg_dtgopt_prc(dtgopt)
-modelopt='era5w'
+if(model == 'era5'):
+    modelopt='era5w'
+elif(model == 'ecop'):
+    modelopt='ecop'
 models=modelopt.split(',')
 
 (dtau,ddtg)=dtauopt.split('.')
