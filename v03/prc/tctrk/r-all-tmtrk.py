@@ -23,6 +23,7 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'doLog':            ['L',0,1,'send output from s-sbt-tmttrN to a logfile'],
             'ropt':             ['N','','norun',' norun is norun'],
+            'modelOpt':         ['m:','era5','a','set model for era5 or ecop'],
             'stmopt':           ['S:',None,'a','stmopt'],
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'doBdeck2':         ['2',0,1,'using bdeck at command line vice in getYears4Opts'],
@@ -107,7 +108,8 @@ for dtg in dtgs:
     if(IsBadEra5Dtg(tdtg) == 0):
         print 'EEE---BBB era5 dtg...press...'
         continue
-    
+
+    mopt='-m %s'%(modelOpt)
     topt='-T'
     sopt=''
     vopt=''
@@ -120,7 +122,7 @@ for dtg in dtgs:
     
     
     MF.sTimer('sbt-TCTRK-%s'%(dtg))
-    cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s %s"%(dtg,topt,sopt,oopt,vopt,lopt, logOpt)
+    cmd="s-sbt-tmtrkN.py %s %s %s %s %s %s %s %s"%(dtg,mopt,topt,sopt,oopt,vopt,lopt,logOpt)
     mf.runcmd(cmd,ropt)
     MF.dTimer('sbt-TCTRK-%s'%(dtg))
     

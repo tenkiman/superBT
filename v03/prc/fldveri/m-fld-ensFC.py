@@ -24,7 +24,8 @@ class MFCmdLine(CmdLine):
             }
 
         self.options={
-            'model':                   ['m:','era5','a','model '],
+            #'model':                   ['m:','era5','a','model '],
+            'model':                   ['m:','ecop','a','model '],
             'verb':                    ['V',0,1,'verb=1 is verbose'],
             'ropt':                    ['N','','norun',' norun is norun'],
             'override':                ['O',0,1,'override'],
@@ -46,7 +47,7 @@ class MFCmdLine(CmdLine):
 make ensemble FC objects for using grads ensemble dimension
 """        
         self.examples='''
-%s cur12-d30.cur12-12 gfs2 -d 12.12'''
+%s 200901.12 -m ecop2'''
 
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -67,13 +68,13 @@ dtgs=mf.dtg_dtgopt_prc(dtgopt)
 if(model == 'era5'):
     modelopt='era5w'
 elif(model == 'ecop'):
-    modelopt='ecop'
+    modelopt='ecopw'
 models=modelopt.split(',')
 
 (dtau,ddtg)=dtauopt.split('.')
-
 for model in models:
 
+    print 'mmm',model
     MF.sTimer('EnsModel: %s'%(model))
     mFc=EnsModel(model,dtgs,dtau=dtau,ddtg=ddtg,maxtau=maxtau,
                  overrideLN=overrideLN,overrideGM=overrideGM,
@@ -82,11 +83,9 @@ for model in models:
                  do12hr=0,
                  tdirbase=tdirbase,
                  verb=verb)
-    
     if(dolsctl):
         print mFc.ensFcCtlpath
         cmd="cat %s"%(mFc.ensFcCtlpath)
         mf.runcmd(cmd,ropt)
     MF.dTimer('EnsModel: %s'%(model))
     
-

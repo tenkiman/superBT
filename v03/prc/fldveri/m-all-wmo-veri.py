@@ -16,6 +16,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.options={
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
+            'model':            ['m:','ecop','a','model '],
             'dtgopt':           ['d:',None,'a','dtgopt for setting paths of md3'],
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
@@ -65,12 +66,12 @@ if(dtgopt != None):
 MF.sTimer('ALL-VERI')
 for year in years:
 
-    logpath='./inv/veri-wmo-inv-%s.txt'%(year)
+    logpath='./inv/veri-%s-wmo-inv-%s.txt'%(model,year)
 
     if(not(gotdtg)): 
         dtgopt="%s010100.%s123112.12"%(year,year)
     MF.sTimer('ALL-eff-%s'%(year))
-    cmd='m-fld-veri-wmo.py %s %s | tee %s'%(dtgopt,oopt,logpath)
+    cmd='m-wmo-veri.py %s %s | tee %s'%(dtgopt,oopt,logpath)
     mf.runcmd(cmd,ropt)
     MF.dTimer('ALL-eff-%s'%(year))
     

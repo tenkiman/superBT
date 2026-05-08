@@ -71,6 +71,7 @@ class TmtrkCmdLine(CmdLine):
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
             'stmopt':           ['S:',None,'a','stmopt'],
+            'modelOpt':         ['m:','era5','a','set model for era5 or ecop'],
             'doTrackerOnly':    ['T',0,1,'run trackeronly'],
             'doClean':          ['K',1,0,'1 do NOT clean'],            
             'doBail':           ['B',0,1,'1 bail if no era5 fields'],            
@@ -130,8 +131,14 @@ ptable=None
 
 dtgs=mf.dtg_dtgopt_prc(dtgopt)
 
-model='era5'
-atcfname='tera5'
+if(modelOpt == 'era5'):
+    model='era5'
+    atcfname='tera5'
+elif(modelOpt == 'ecop'):
+    model='ecop'
+    atcfname='tecop'
+    
+    
 
 regridTracker=0.50
 regridGen=0.5
@@ -163,10 +170,8 @@ for dtg in dtgs:
         print 'EEE---BBB era5 dtg...press...'
         continue
 
-    ayear=dtg[0:4]
+    ayear=dtg[0:4]	
     mmdd=dtg[4:8]
-    
-    (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,verb=verb,doSfc=0,doBail=doBail)
 
     # -- special case of no 022900 for 1952 1956
     #
@@ -180,17 +185,42 @@ for dtg in dtgs:
             tauOffset=36
         elif(hh == '18'):
             tauOffset=42
-            
+        
+        dtg=mf.dtginc(dtg,-tauOffset)
         print 'SSS--special case: for dtg: ',dtg,' tauOffset: ',tauOffset
-    # -- model dtg whe tauOffset=6
-    #
-    if(tauOffset != None):
-        mdtg=mf.dtginc(dtg,-tauOffset)
-    else:
-        mdtg=dtg
 
+    # -- 20260507 -- details handled in getCtlpathTaus() and dtg of valid .ctl found here!!
+    #
+    (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,dtg,maxtau=maxtau,verb=verb,
+                                                    doSfc=0,doBail=doBail)
+    
+
+    # -- 20260507 -- make a dictionary between model taus and tracker taus
+    #
+    mdtg=dtg
     if(tauOffset > 0):
-        (ctlpath,taus,nfields,tauOffset)=getCtlpathTaus(model,mdtg,maxtau=maxtau,verb=verb,doSfc=0,doBail=doBail)
+        mdtg=mf.dtginc(dtg,-tauOffset)
+
+    tauOff=mf.dtgdiff(mdtg,dtg)
+    mtauOff=int(tauOff)
+    mtaus={}
+
+    for tau in taus:
+        mtau=tau+mtauOff
+        if(mtau in taus):
+            mtaus[tau]=mtau
+        else:
+            mtaus[tau]=tau
+        
+    if(verb):
+        mm=mtaus.values()
+        mm.sort()
+        print 'mmtaukeys',mm
+        print 'tttaaauuu',taus
+        
+    if(tauOffset > 6):
+        print 'EEooppss tauOffset: ',tauOffset,' for dtg: ',dtg,' too big???'
+        sys.exit()
 
     # -- get era5 fields and tmtrkN output to local -- llllllllllllllllllllllllllllllllllllllllllll
     # -- IIFF there are storms
@@ -221,6 +251,7 @@ for dtg in dtgs:
                    atcfname,
                    tdir,
                    ctlpath,
+                   mtaus,
                    taus,
                    md3=md3,
                    prcdir=prcdir,

@@ -17,7 +17,9 @@ class TmtrkCmdLine(CmdLine):
 
         self.options={
             'override':         ['O',0,1,'override'],
+            'WGBoverride':      ['o',0,1,'wgrib2 list override'],
             'model':            ['m:','era5','a','model '],
+            'doWmoCtlOnly':     ['T',0,1,'only do the .ctl '],
             'doCatAll':         ['C',0,1,'cat f??? to single file'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'diag':             ['D',0,1,'turn on diag'],
@@ -32,14 +34,98 @@ filter era5 fields for wmo verification"""
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
+
+def wmoCtl(model,dtg,omodel):
+    
+    ntimes=21
+    
+    gtime=mf.dtg2gtime(dtg)
+    
+    if(model == 'era5' or model == 'ecm5'):
+            
+            ctl="""dset  ^%s-w2flds-%s-ua-f%%f3.grb2
+index ^%s-w2flds-%s-ua.gmp2
+undef 9.999E+20
+title t-era5-12-si.grb
+*  produced by grib2ctl v0.9.12.5p16
+dtype grib2
+ydef 361 linear -90.0 0.5
+xdef 720 linear   0.0 0.5
+tdef  %d linear %s 12hr
+* PROFILE hPa
+zdef   9 levels 100000 92500 85000 70000 50000 40000 30000 25000 20000
+options pascals template
+vars 6
+psl    0,101      0,  3,  0   ** mean sea level Pressure [Pa]
+ua     9,100      0,  2,  2   ** mponent of Wind [m/s]
+va     9,100      0,  2,  3   ** V-Component of Wind [m/s]
+ta     9,100      0,  0,  0   ** Temperature [K]
+hura   9,100      0,  1,  1   ** Relative Humidity [%%]
+zg     9,100      0,  3,  4   ** Geopotential [m^2/s^2]
+ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
+            
+            
+    elif(model == 'ecmt'):
+            """
+after running m-ecmt-ecm6-hgt-2-gp.py...            
+"""
+            ctl="""dset  ^%s-w2flds-%s-ua-f%%f3.grb2
+index ^%s-w2flds-%s-ua.gmp2
+undef 9.999E+20
+title t-era5-12-si.grb
+*  produced by grib2ctl v0.9.12.5p16
+dtype grib2
+ydef 361 linear -90.0 0.5
+xdef 720 linear   0.0 0.5
+tdef  %d linear %s 12hr
+* PROFILE hPa
+zdef   9 levels 100000 92500 85000 70000 50000 40000 30000 25000 20000
+options pascals template
+vars 6
+psl    0,101      0,  3,  0   ** mean sea level Pressure [Pa]
+ua     9,100      0,  2,  2   ** mponent of Wind [m/s]
+va     9,100      0,  2,  3   ** V-Component of Wind [m/s]
+ta     9,100      0,  0,  0   ** Temperature [K]
+hus    9,100      0,  1,  0   ** Relative Humidity [%%]
+zg     9,100      0,  3,  4   ** Geopotential height [m]
+ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
+
+    elif(model == 'ecm6'):
+            
+            ctl="""dset  ^%s-w2flds-%s-ua-f%%f3.grb2
+index ^%s-w2flds-%s-ua.gmp2
+undef 9.999E+20
+title t-era5-12-si.grb
+*  produced by grib2ctl v0.9.12.5p16
+dtype grib2
+ydef 361 linear -90.0 0.5
+xdef 720 linear   0.0 0.5
+tdef  %d linear %s 12hr
+* PROFILE hPa
+zdef   9 levels 100000 92500 85000 70000 50000 40000 30000 25000 20000
+options pascals template
+vars 6
+psl    0,101      0,  3,  0   ** mean sea level Pressure [Pa]
+ua     9,100      0,  2,  2   ** mponent of Wind [m/s]
+va     9,100      0,  2,  3   ** V-Component of Wind [m/s]
+ta     9,100      0,  0,  0   ** Temperature [K]
+hura   9,100      0,  1,  1   ** Relative Humidity [%%]
+zg     9,100      0,  3,  4   ** Geopotential height [m]
+ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
+            
+    return(ctl)
+
+
 def makeWmoFldList(dtg,model='era5',override=0,verb=0):
 
-    def parseWgrbcards(ofilts,wgrbcards):
+    
+    def parseWgrbcards(wgrbcards):
     
         for wcard in wgrbcards:
     
             ww=wcard.split(":")
-
+            
+            #print 'www',len(ww),ww
             if(len(ww) >= 7):
                 var=ww[3].strip()
                 lev=ww[4]
@@ -79,13 +165,11 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
                 #print 'iii---vvv',var,ilev,ovars[var],itau,ww[0:-1]
                 #nonmsl=(var == 'PRES' and lev != 1013)
                 if( (ilev in ovars[var])  and (itau in otaus) ):
-                    #print 'oooo---vvvv',var,lev,'ii',itau,ilev,'cccc',wcard[0:-1]
+                    if(verb): print 'oooo---vvvv',var,lev,'ii',itau,ilev,'cccc',wcard[0:-1]
                     MF.appendDictList(ofilts,itau,wcard)
         return
 
-    def getEcmtWgribList(tau,model,verb=0):
-
-        ofilts={}
+    def getEcmtWgribList(tau,model,override=0,verb=0):
 
         if(model == 'ecmt'):
             
@@ -102,16 +186,19 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
         if(verb):
             print 'ggggg',grb2path,g2siz
             print 'lllll',wlstpath,lssiz
+        
+        if(override):
+            lssiz=0
 
-        return(wlstpath,lssiz)
+        return(wlstpath,lssiz,grb2path,g2siz)
         
 
-    def getOfilts(ofilts,wlstpath,lssiz,lsMinsiz,verb=0):
+    def getOfilts(wlstpath,lssiz,lsMinsiz,grb2path,verb=0):
         
         # check if wgrib2.txt path ok...if not redo
         #
         if(lssiz < lsMinsiz):
-            print 'WWW-need to redo %s ...'%(wlstpath)
+            print 'WWW-need-getOfilts to redo %s ... grb2: %s'%(wlstpath,grb2path)
             cmd='wgrib2 %s > %s'%(grb2path,wlstpath)
             mf.runcmd(cmd)
             lssiz=MF.getPathSiz(wlstpath)
@@ -128,96 +215,9 @@ def makeWmoFldList(dtg,model='era5',override=0,verb=0):
         else:
             wgrbcards=open(wlstpath).readlines()
             
-    
-        rc=parseWgrbcards(ofilts, wgrbcards)
-        
+        rc=parseWgrbcards(wgrbcards)
     
     
-                    
-        #oftaus=ofilts.keys()
-        #oftaus.sort()
-    
-        
-    
-    def wmoCtl(model,dtg,omodel):
-        
-        ntimes=21
-        
-        gtime=mf.dtg2gtime(dtg)
-        
-        if(model == 'era5' or model == 'ecm5'):
-            
-            ctl="""dset  ^%s-w2flds-%s-ua-f%%f3.grb2
-index ^%s-w2flds-%s-ua.gmp2
-undef 9.999E+20
-title t-era5-12-si.grb
-*  produced by grib2ctl v0.9.12.5p16
-dtype grib2
-ydef 361 linear -90.0 0.5
-xdef 720 linear   0.0 0.5
-tdef  %d linear %s 12hr
-* PROFILE hPa
-zdef   9 levels 100000 92500 85000 70000 50000 40000 30000 25000 20000
-options pascals template
-vars 6
-psl    0,101      0,  3,  0   ** mean sea level Pressure [Pa]
-ua     9,100      0,  2,  2   ** mponent of Wind [m/s]
-va     9,100      0,  2,  3   ** V-Component of Wind [m/s]
-ta     9,100      0,  0,  0   ** Temperature [K]
-hura   9,100      0,  1,  1   ** Relative Humidity [%%]
-zg     9,100      0,  3,  4   ** Geopotential [m^2/s^2]
-ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
-            
-            
-        elif(model == 'ecmt'):
-            
-            ctl="""dset  ^%s-w2flds-%s-ua-f%%f3.grb2
-index ^%s-w2flds-%s-ua.gmp2
-undef 9.999E+20
-title t-era5-12-si.grb
-*  produced by grib2ctl v0.9.12.5p16
-dtype grib2
-ydef 361 linear -90.0 0.5
-xdef 720 linear   0.0 0.5
-tdef  %d linear %s 12hr
-* PROFILE hPa
-zdef   9 levels 100000 92500 85000 70000 50000 40000 30000 25000 20000
-options pascals template
-vars 6
-psl    0,101      0,  3,  0   ** mean sea level Pressure [Pa]
-ua     9,100      0,  2,  2   ** mponent of Wind [m/s]
-va     9,100      0,  2,  3   ** V-Component of Wind [m/s]
-ta     9,100      0,  0,  0   ** Temperature [K]
-hus    9,100      0,  1,  0   ** Relative Humidity [%%]
-z      9,100      0,  3,  5   ** Geopotential height [m]
-ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
-
-        elif(model == 'ecm6'):
-            
-            ctl="""dset  ^%s-w2flds-%s-ua-f%%f3.grb2
-index ^%s-w2flds-%s-ua.gmp2
-undef 9.999E+20
-title t-era5-12-si.grb
-*  produced by grib2ctl v0.9.12.5p16
-dtype grib2
-ydef 361 linear -90.0 0.5
-xdef 720 linear   0.0 0.5
-tdef  %d linear %s 12hr
-* PROFILE hPa
-zdef   9 levels 100000 92500 85000 70000 50000 40000 30000 25000 20000
-options pascals template
-vars 6
-psl    0,101      0,  3,  0   ** mean sea level Pressure [Pa]
-ua     9,100      0,  2,  2   ** mponent of Wind [m/s]
-va     9,100      0,  2,  3   ** V-Component of Wind [m/s]
-ta     9,100      0,  0,  0   ** Temperature [K]
-hura   9,100      0,  1,  1   ** Relative Humidity [%%]
-z      9,100      0,  3,  5   ** Geopotential height [m]
-ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
-            
-            
-        
-        return(ctl)
         
     def sortUVOfilts(owfilts,verb=0):
         
@@ -250,8 +250,9 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
                 print ocard
             
         return(outcards)
-            
-        
+       
+    # -- mmmmmmmmmmmmmmmmmmaaaaaaaaaaaaaaaaaaaaaaiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnllllllllllllooooooooopppppppppp
+    #
     btau=0
     etau=240
     dtau=12
@@ -265,6 +266,8 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
         'RH':(700,),
         'TMP':(700,)
       }
+
+    global ofilts
     
     ofilts={}
     
@@ -310,7 +313,7 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
         grb2path="%s/%s.grb2"%(sdir,grbbase)
         wlstpath="%s/%s.wgrib2.txt"%(sdir,grbbase)
         regridopt='-set_grib_type c1 -new_grid_interpolation bilinear -new_grid latlon 0:720:0.5 -90:361:0.5 '
-        lsMinsiz=83000
+        lsMinsiz=70000
 
     elif(model == 'ecmt'):
 
@@ -353,6 +356,34 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
         print 'invalid model....',model,'press...'
         sys.exit()
         
+
+    # -- redo wmoctl and kill .SAV
+    #
+    if(doWmoCtlOnly):
+        
+        if(model == 'ecmt' or model == 'ecm6'):
+            
+            #nSAV=len(glob.glob("%s/*.SAV"%(tdir)))
+            #if(nSAV == 0):
+            #    print 'III -- wmoctl ALLready for: ',model,' dtg: ',dtg,'...press...'
+            #    return
+            ctl=wmoCtl(model,dtg,omodel)
+            octlpath="%s/%s.ctl"%(tdir,ogrbbase)
+            rc=MF.WriteCtl(ctl,octlpath)
+            
+            cmd='gribmap -i %s'%(octlpath)
+            mf.runcmd(cmd,ropt)
+            
+            cmd="rm %s/*.SAV"%(tdir)
+            mf.runcmd(cmd,ropt)
+        else:
+            print 'III - NNNOOO redo of wmo ctl for model: ',model,' dtg: ',dtg,'needed ... press...'
+            
+        return
+        
+        
+        
+        
     
     # -- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa all taus in single file 
     # -- era5 & ecm5
@@ -371,7 +402,7 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
             mf.runcmd(cmd)
             lssiz=MF.getPathSiz(wlstpath)
             if(lssiz < lsMinsiz):
-                card='NNooJJooYY %s FU...'%(grb2path)
+                card='NNooJJooYY--era5/ecm5 %s FU? -- lssiz: %6i lsMinsiz: %6i'%(grb2path,lssiz,lsMinsiz)
                 print card
                 fu2path="%s/grb2-FU-%s"%(tdir,dtg)
                 cmd='touch %s'%(fu2path)
@@ -384,7 +415,7 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
             wgrbcards=open(wlstpath).readlines()
 
 
-        rc=parseWgrbcards(ofilts, wgrbcards)
+        rc=parseWgrbcards(wgrbcards)
         
         oftaus=ofilts.keys()
         oftaus.sort()
@@ -394,26 +425,26 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
     # -- ecmt & ecm6
     #
     else:
-        
+
         for tau in otaus:
-            (wlstpath,lssiz)=getEcmtWgribList(tau,model)
-            rc=getOfilts(ofilts,wlstpath,lssiz,lsMinsiz)
+            (wlstpath,lssiz,grb2path,g2siz)=getEcmtWgribList(tau,model,override=WGBoverride,verb=verb)
+            if(g2siz <= 0):
+                print 'WWW -- %s grb2path: ',grb2path,' not there | incomplete l.. press ...'
+                continue
+            rc=getOfilts(wlstpath,lssiz,lsMinsiz,grb2path,verb=verb)
 
         oftaus=ofilts.keys()
         oftaus.sort()
         if(verb):
-            
             for oftau in oftaus:
                 print 'ooo',oftau,ofilts[oftau]
 
-    
     # -- wwwwwwwwggggggggggggrrrrrrrrrrrrrrriiiiiiiiiiibbbbbbbbbbbbbbbb222222222222
     #
     # -- now do wgrib2 filt of fields for fldveri and regrid for ecm5 and ecm6
     #
     didgrb=0
     for oftau in oftaus:
-        #print 'ooff',oftau,len(ofilts[oftau])
       
         gpath="%s/%s-f%03d.grb2"%(tdir,ogrbbase,oftau)
       
@@ -430,12 +461,20 @@ ENDVARS"""%(omodel,dtg,omodel,dtg,ntimes,gtime)
         igsiz=MF.getPathSiz(grb2path)
         if(gsiz > 0 and not(override)):
             print 'WWW already done: ',gpath
-            break
+            if(model != 'ecm6' and model != 'ecmt'):
+                break
+            else:
+                didgrb=0
+                override=0
+                continue
         elif(igsiz <= 0):
             print 'gpath missing...press...for dtg: ',dtg,'model: ',model
-            didgrb=0
-            override=0
-            break
+            if(model != 'ecm6' and model != 'ecmt'): 
+                didgrb=0
+                override=0
+                break
+            else: 
+                continue
         
         # -- 20260326 -- sort fields to filter so u;v are together
         #
@@ -480,6 +519,6 @@ if(verb): print CL.estr
 if(diag): MF.sTimer('ALL-wmo-%s'%(dtgopt))
 dtgs=dtg_dtgopt_prc(dtgopt)
 for dtg in dtgs:
-    rc=makeWmoFldList(dtg,model=model,override=override)
+    rc=makeWmoFldList(dtg,model=model,override=override,verb=verb)
 if(diag): MF.dTimer('ALL-wmo-%s'%(dtgopt))
     

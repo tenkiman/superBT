@@ -279,6 +279,7 @@ class TmTrkSimple(MFbase):
                  atcfname,
                  tdir,
                  ctlpath,
+                 mtaus,
                  taus,
                  tdirAdeck=None,
                  tbdirAdeckStm=None,
@@ -317,6 +318,7 @@ class TmTrkSimple(MFbase):
         if(tbdirAdeckStm == None):  self.tbdirAdeckStm=self.tdirAdeck
         else:                       self.tbdirAdeckStm=tbdirAdeckStm
             
+        self.mtaus=mtaus
         self.taus=taus
         self.ptable=ptable
         self.maxtauModel=maxtauModel
@@ -716,7 +718,8 @@ for Mdeck3 need to turn off
                 rc=0
                 return(rc)
                 
-            if(allDoneDet):
+            print 'asdfasdf',allDoneDet,self.override
+            if(allDoneDet or not(self.override)):
                 print 'AAAAAAAAAA---DDDDDDDDDDDDD - DET -- tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
                       ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
                 rc=0
@@ -730,8 +733,10 @@ for Mdeck3 need to turn off
                 rc=0
                 return(rc)
 
-            if(allDoneGen and not(allDoneDet)):
-
+            if(not(allDoneGen) and not(allDoneDet)):
+                rc=1
+                
+            elif(allDoneGen and not(allDoneDet)):
                 print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
                       ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' BUT...need to run tracker!!!!'            
             else:
@@ -898,7 +903,8 @@ for Mdeck3 need to turn off
             ge=ga.ge
 
             self.gribArea='areaGen'
-            rc=self.gribInput2TmTrk(ga,ge,self.mdtg,self.model,self.taus,self.grb10path,regrid=self.regridGen,smth2d=0)
+            rc=self.gribInput2TmTrk(ga,ge,self.dtg,self.mdtg,self.model,self.taus,self.mtaus,
+                                    self.grb10path,regrid=self.regridGen,smth2d=0)
             MF.dTimer('latstcgen')
             didGenGrib=1
             
@@ -920,7 +926,8 @@ for Mdeck3 need to turn off
                 ge2=ga2.ge
 
                 self.gribArea='area'
-                rc=self.gribInput2TmTrk(ga2,ge2,self.mdtg,self.model,self.taus,self.grbpath,regrid=self.regridTracker,dotrkonly=dotrkonly)
+                rc=self.gribInput2TmTrk(ga2,ge2,self.dtg,self.mdtg,self.model,self.taus,self.mtaus,
+                                        self.grbpath,regrid=self.regridTracker,dotrkonly=dotrkonly)
                 MF.dTimer('latstctrk')
                 
             dotracker=1
@@ -1454,12 +1461,13 @@ for Mdeck3 need to turn off
     def makeFcst_minutes(self):
 
         for n in range(0,len(self.taus)):
+            otau=self.taus[n]
             nn=n+1
             if(n == 0):
-                fcmin='''%2d %7d'''%(nn,self.taus[n]*60)
+                fcmin='''%2d %7d'''%(nn,otau*60)
             else:
                 fcmin='''%s
-%2d %7d'''%(fcmin,nn,self.taus[n]*60)
+%2d %7d'''%(fcmin,nn,otau*60)
 
         return(fcmin)
 
@@ -1488,7 +1496,7 @@ for Mdeck3 need to turn off
         
         
 
-    def gribInput2TmTrk(self,ga,ge,dtg,model,taus,grbpath,
+    def gribInput2TmTrk(self,ga,ge,dtg,mdtg,model,taus,mtaus,grbpath,
                         regrid=0,dotrkonly=0,smth2d=0):
 
 
@@ -1520,7 +1528,11 @@ for Mdeck3 need to turn off
         # -- make galats object
         #
         gl=GaLatsQ(ga,ge,
-                   dtg=dtg,model=model,taus=taus,
+                   dtg=dtg,
+                   mdtg=mdtg,
+                   model=model,
+                   taus=taus,
+                   mtaus=mtaus,
                    regrid=regrid,
                    reargs=reargs,
                    smth2d=smth2d,

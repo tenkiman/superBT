@@ -17,6 +17,7 @@ class TmtrkCmdLine(CmdLine):
 
         self.options={
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
+            'model':            ['m:','ecop','a','model '],
             'tarea':            ['a:','nhem','a',"""tarea, e.g., 'nhem'"""],
             'tvar':             ['v:','zg','a',"""tvar = 'zg' | 'uva' | 'ua' | 'va'"""],
             'tstat':            ['s:','acc','a',"""tstat = 'acc'..."""],
@@ -67,21 +68,25 @@ sStat={
     
 kstat=sStat[tstat]
 
-modelFc=modelAn='era5w'
+if(model == 'ecop'):
+    modelFc=modelAn='ecopw'
+elif(model == 'era5'):
+    modelFc=modelAn='era5w'
+
 
 MF.sTimer('ALL-%s-%s-%s'%(tstat,tvar,yearOpt))
 for year in years:
     
     MF.sTimer('%s-%s'%(year,tstat))
-    bddir='/raid05/era5-wmo/%s'%(year)
+    bddir='/raid05/%s-wmo/%s'%(model,year)
     pypdir="%s/veriWMO"%(bddir)
 
     dtgopt="%s01.%s12.12"%(year,year)
     vdtgs=dtg_dtgopt_prc(dtgopt)
     MF.sTimer('mo-wmo-veri-%s'%(year))
 
-    omopath="./stats/mo/mo-%s-%s-%s-%s-%03d-%03d.txt"%\
-        (tstat,year,tvar,tarea,tlev,ttau)
+    omopath="./stats/mo/%s/mo-%s-%s-%s-%s-%03d-%03d.txt"%\
+        (model,tstat,year,tvar,tarea,tlev,ttau)
 
 
     mostats={}
@@ -98,7 +103,8 @@ for year in years:
     
         vmo=vdtg[4:6]
         if(Stats != None):
-            tkey=('era5w','era5w',vdtg,tarea,ttau,tvar,tlev)
+            k1='%sw'%(model)
+            tkey=(k1,k1,vdtg,tarea,ttau,tvar,tlev)
             try:
                 ss=Stats[tkey]
             except:

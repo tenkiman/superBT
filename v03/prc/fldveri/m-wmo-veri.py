@@ -514,13 +514,14 @@ class MFCmdLine(CmdLine):
         self.options={
             'verb':        ['V',0,1,'verb=1 is verbose'],
             'ropt':        ['N','','norun',' norun is norun'],
+            'model':       ['m:','ecop','a','model either era5 | ecop '],
             'overridefld': ['o',0,1,'override flds...'],
             'override':    ['O',0,1,'override stats'],
             'doStats':     ['S',1,0,'do NOT redo of the stats objs'],
             #'wmoClim':    ['W',0,1,'use WMO clim from ECMWF'],
             'dtgopt':      ['D:',None,'a',"""set dtgopt for making the ensFC .ctl"""],
             'modelAn':     ['A:',None,'a',"""set model verification analysis"""],
-            'modelFc':     ['F:','era5w','a',"""set model verification forecast"""],
+            'modelFc':     ['F:','ecopw','a',""" era5w or ecopw -- set model verification forecast"""],
             'dtau':        ['d:',24,'i',"""set dtau for making the ensemble in tau"""],
             'smthinc':     ['s:',5,'i',"""set dtau for making the ensemble in tau"""],
             'tauopt':      ['t:',None,'a',"""set dtau for making the ensemble in tau"""],
@@ -536,7 +537,8 @@ make wmo verification stats
 """
 
         self.examples='''
-%s 1953090700.1953090900.12 # era5 model
+%s 1953090700.1953090900.12 -m era5 # era5 model
+%s 200901.12 -m ecop                # ecop or operational model
 '''
 
 
@@ -553,10 +555,14 @@ exec(CL.estr)
 if(verb): print CL.estr
 
 year=vdtgopt[0:4]
-bddir='/raid05/era5-wmo/%s'%(year)
-bdirClimo='/raid05/era5-anl/climo'
+if(model == 'era5'):
+    bddir=era5WmoDatDir
+elif(model == 'ecop'):
+    bddir=ecopWmoDatDir
 
-pypdir="%s/veriWMO"%(bddir)
+bdirClimo=wmoClimoDatDir
+
+pypdir="%s/%s/veriWMO"%(bddir,year)
 MF.ChkDir(pypdir,'mk')
 
 # -- verify against own analysis    print 'rcc',rcc
