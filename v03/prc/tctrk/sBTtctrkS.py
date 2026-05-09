@@ -305,6 +305,7 @@ class TmTrkSimple(MFbase):
                  xgrads='grads',
                  doInv=0,
                  doBdeck2=0,
+                 doLocal=0,
                  ):
 
         self.dtg=dtg
@@ -363,6 +364,7 @@ class TmTrkSimple(MFbase):
         self.tcD=tcD
         
         self.doBdeck2=doBdeck2
+        self.doLocal=0
 
         if(md3 == None):
             print 'EEE -- cannot use w2 in TmTrkSimple'
@@ -688,7 +690,7 @@ for Mdeck3 need to turn off
         self.detGribTest=(MF.getPathSiz(self.grbpath) > 0)
         
 
-    def setStatus(self):
+    def setStatus(self,quiet=0):
 
         
         allDoneDet=0
@@ -696,18 +698,20 @@ for Mdeck3 need to turn off
         allDoneGen=0
         if(self.genTest and not(self.override)): allDoneGen=1
 
-        print
-        print 'SSSSSSSSSSSSSSSSSSSSSS - tracking status for ',self.omodel,' dtg: ',self.dtg
-        print 'TCs  haveTcs: ',self.haveTcs,' #TCs: ',len(self.ostmids)
-        print 'GRIB         -- gen: ',self.genGribTest
-        print 'GRIB         -- trk: ',self.detGribTest
-        print 'TTTT    statusTCtrk: ',self.statusTCtrk
-        print 'TTTT  doTrackerOnly: ',self.doTrackerOnly
-        print 'DDDD        detTest: ',self.detTest
-        print 'GGGG        genTest: ',self.genTest
-        print 'OOOO       override: ',self.override
-        print 'AADD     allDoneDet: ',allDoneDet
-        print 'AAGG     allDoneGen: ',allDoneGen
+        if(not(quiet)):
+            
+            print
+            print 'SSSSSSSSSSSSSSSSSSSSSS - tracking status for ',self.omodel,' dtg: ',self.dtg,'tdir: ',self.tdir
+            print 'TCs  haveTcs: ',self.haveTcs,' #TCs: ',len(self.ostmids)
+            print 'GRIB         -- gen: ',self.genGribTest
+            print 'GRIB         -- trk: ',self.detGribTest
+            print 'TTTT    statusTCtrk: ',self.statusTCtrk
+            print 'TTTT  doTrackerOnly: ',self.doTrackerOnly
+            print 'DDDD        detTest: ',self.detTest
+            print 'GGGG        genTest: ',self.genTest
+            print 'OOOO       override: ',self.override
+            print 'AADD     allDoneDet: ',allDoneDet
+            print 'AAGG     allDoneGen: ',allDoneGen
 
         rc=1
         if(self.doTrackerOnly):
@@ -718,9 +722,13 @@ for Mdeck3 need to turn off
                 rc=0
                 return(rc)
                 
-            print 'asdfasdf',allDoneDet,self.override
-            if(allDoneDet or not(self.override)):
-                print 'AAAAAAAAAA---DDDDDDDDDDDDD - DET -- tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+            if(allDoneDet and not(self.override)):
+                if(self.doLocal):
+                    prefix='AAALLLLLLL---DDDLLLLLLLLLL - DET '
+                else:
+                    prefix='AAAAAAAAAA---DDDDDDDDDDDDD - DET '
+                    
+                print '%s -- tracking alldone for '%(prefix),self.omodel,' dtg: ',self.dtg,\
                       ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
                 rc=0
         
@@ -737,16 +745,28 @@ for Mdeck3 need to turn off
                 rc=1
                 
             elif(allDoneGen and not(allDoneDet)):
-                print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                if(self.doLocal):
+                    prefix='AAALLLLLLL---GGGLLLLLLLLLL - GEN'
+                else:
+                    prefix='AAAAAAAAAA---GGGGGGGGGGGGG - GEN'
+                print '%s --tracking alldone for '%(prefix),self.omodel,' dtg: ',self.dtg,\
                       ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' BUT...need to run tracker!!!!'            
             else:
-                print 'AAAAAAAAAA---GGGGGGGGGGGGG - GEN --tracking alldone for ',self.omodel,' dtg: ',self.dtg,\
+                if(self.doLocal):
+                    prefix='AAALLLLLLL---GGGLLLLLLLLLL - GEN'
+                else:
+                    prefix='AAAAAAAAAA---GGGGGGGGGGGGG - GEN'
+                print '%s --tracking alldone for '%(prefix),self.omodel,' dtg: ',self.dtg,\
                       ' detTest: %1d'%(int(self.detTest)),' genTest: %1d '%(int(self.genTest)),' press---------------'
                 rc=0
                 
         if(rc):
-            print 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD - doit.....'
-            print
+            if(self.doLocal):
+                print 'DDDLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL - doit.....',\
+                      'dtg: ',self.dtg,'model: ',self.model
+            else:
+                print 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD - doit.....',\
+                      'dtg: ',self.dtg,'model: ',self.model
 
         return(rc)
     
