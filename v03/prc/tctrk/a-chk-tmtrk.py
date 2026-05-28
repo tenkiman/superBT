@@ -22,6 +22,7 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
+            'modelOpt':         ['m:','era5','a','set model for era5 or ecop'],
             'printAll':         ['p',0,1,'print all dtgs...'],
             'redoIt':           ['R',0,1,'check tctrk and tcdiag...'],
         }

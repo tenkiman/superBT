@@ -22,6 +22,7 @@ class TmtrkCmdLine(CmdLine):
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'dtgopt':           ['d:',None,'a',' dtgopt'],
+            'modelOpt':         ['m:','era5','a','set model for era5 or ecop'],
             'yearOpt':          ['Y:',None,'a','yearOpt -- to select byear-eyear range default is 2007-2022 in sBTvars.py'],
             'doInvPath':        ['P',0,1,'do inv path default is NOT'],
             'ropt':             ['N','','norun',' norun is norun'],
@@ -36,9 +37,9 @@ reconstruct stm-sum cards using mdeck3.trk data in src directories in dat/tc/sbt
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #
 
-def makeTmtrkNInv(dtgopt,doInvPath,ropt,override=0):
+def makeTmtrkNInv(dtgopt,doInvPath,model,ropt,override=0):
     
-    invpath=getInvPath4Dtgopt(dtgopt,invdir='./inv',override=override)
+    invpath=getInvPath4Dtgopt(dtgopt,model,invdir='./inv',override=override)
     if(doInvPath):
         MF.sTimer("inv: %s"%(dtgopt))
         
@@ -47,12 +48,12 @@ def makeTmtrkNInv(dtgopt,doInvPath,ropt,override=0):
             
             if(dtg in badEra5Dtgs): continue
                 
-            cmd="s-sbt-tmtrkN.py %s -i >> %s"%(dtg,invpath)
+            cmd="s-sbt-tmtrkN.py %s -m %s -i >> %s"%(dtg,model,invpath)
             mf.runcmd(cmd,ropt)
             
         MF.dTimer("inv: %s"%(dtgopt))
     else:
-        cmd="time s-sbt-tmtrkN.py %s -i"%(dtgopt)
+        cmd="time s-sbt-tmtrkN.py %s -m %s -i"%(dtgopt,model)
         mf.runcmd(cmd,ropt)
     
     return
@@ -92,19 +93,25 @@ else:
     
 MF.sTimer('III-TMTRK-%s'%(dtgopt))
 
+model=modelOpt
+dtginc=6
+if(model == 'ecop'):
+    dtginc=12
+    
+
 if(len(years) == 0):
     
     MF.sTimer('III-TMTRK-%s'%(dtgopt))
-    rc=makeTmtrkNInv(dtgopt,doInvPath,ropt)
+    rc=makeTmtrkNInv(dtgopt,doInvPath,model,ropt)
     MF.dTimer('III-TMTRK-%s'%(dtgopt))
     
 else:
     
     for year in years:
         iyear=str(year)
-        dtgopt="%s01.%s12.6"%(iyear,iyear)
+        dtgopt="%s01.%s12.%i"%(iyear,iyear,dtginc)
         MF.sTimer('III-TMTRK-%s-YYY'%(iyear))
-        rc=makeTmtrkNInv(dtgopt,doInvPath,ropt,override=override)
+        rc=makeTmtrkNInv(dtgopt,doInvPath,model,ropt,override=override)
         MF.dTimer('III-TMTRK-%s-YYY'%(iyear))
 
 sys.exit()

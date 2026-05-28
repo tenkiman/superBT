@@ -335,7 +335,7 @@ for dtg in dtgs:
     if( (doItSbt and ropt =='') or override):
         trkRopt=''
 
-    if(trkRopt != ''):
+    if(trkRopt != '' and not(doInv)):
         print 'DONE:doIt: ',doItSbt,'ropt: ',ropt,'override: ',override
         sys.exit()
 
@@ -361,10 +361,11 @@ for dtg in dtgs:
         MF.dTimer('tmtrkN-inv-%s-%s'%(model,dtg))
         
     elif(doCpTctrk):
-            MF.sTimer('tmtrkN-inv-%s-%s'%(model,dtg))
-            TT.getStatPaths(dolsonly=1)
-            TT.doCP()
-            MF.dTimer('tmtrkN-inv-%s-%s'%(model,dtg))
+        
+        MF.sTimer('tmtrkN-inv-%s-%s'%(model,dtg))
+        TT.getStatPaths(dolsonly=1)
+        TT.doCP()
+        MF.dTimer('tmtrkN-inv-%s-%s'%(model,dtg))
             
     # -- DO the tttrrrkkk 
     else:

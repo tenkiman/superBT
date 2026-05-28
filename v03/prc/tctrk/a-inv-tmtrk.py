@@ -9,7 +9,7 @@ from sBT import *
 def parseInvPath(invpath):
     
     print
-    print 'iii',invpath
+    print 'invpath: ',invpath
     cards=open(invpath).readlines()
     for card in cards:
 
@@ -61,7 +61,7 @@ def parseInvPath(invpath):
 
 
 
-def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
+def anlInvByBasin(rall,r1latmax,r1vmin,d0012Only=1,verb=0):
     
     kk=rall.keys()
     
@@ -76,6 +76,7 @@ def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
     for k in kk:
         bid=k[0]
         bdtg=k[1]
+        #print 'kk--',k,'bid',bid,'bdtg',bdtg,'rall',rall[k]
         abids.append(bid)
         MF.appendDictList(adtgs, bid, bdtg)
         
@@ -93,18 +94,26 @@ def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
 
         dtgs=adtgs[abid]
         dtgs=mf.uniq(dtgs)
+        rfail[abid]=[]
+        t9all[abid]=[]
         
         for dtg in dtgs:
+            if(d0012Only and not(is0012Z(dtg))):
+                continue
+                
             acs=rall[abid,dtg]
             for ac in acs:
+                #(2, '08B.2018', 20, 19.4, 84.3, 20.0, -999.0, False, False)
                 (nl,stmid,tvmax,mlat,mlon,mvmax,mpmin,isTC,isWN)=ac
                 # -- bypass 9X
                 #
                 if(not(IsNN(stmid))):
-                   continue
+                    continue
 
+                #print 'aa--',abid,'dtg',dtg,'nl',nl,'ac',ac
                 if(nl == -999):
                     nfail=nfail+1
+                    #print '999fff',abid,dtg
                     MF.appendDictList(rfail, abid, dtg)
 
                 elif(nl == 999 or nl == -1):
@@ -115,6 +124,7 @@ def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
     
                     chkvmax=-999
                     if(tvmax != -999): chkvmax=tvmax
+                    #print '9999ttt',nl,abid,stmid,dtg,chkvmax,mlat
                     MF.appendDictList(t9all, abid, (stmid,dtg,chkvmax,mlat) )
 
                     if(amlat < r1latmax):
@@ -141,6 +151,11 @@ def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
                 
         n999sum=n999badLat+n999badVmax+n999badBoth
         nsum=ngood+n999+nfail
+        if(nfail == 0):
+            rfail[abid]=[]
+        #print 'nn99',abid,n999sum,n999badLat,n999badVmax,n999badBoth,nfail,ngood,nsum
+        #print 'tt99',abid,t9all.keys(),rfail
+
         
         ptrk=(float(ngood)/float(nsum))*100.0
         pnotrk=100.0-ptrk
@@ -154,7 +169,7 @@ def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
             print 'basin: ',abid,'Nsum: ',nsum,'ngood: ',ngood,'n999',n999,'nfail: ',nfail
             print 'n999badLat: ',n999badLat,' n999badVmax: ',n999badVmax,'n999badBoth',n999badBoth,\
                   'n999sum:',n999sum
-            
+
         nall[abid]=(nsum,nfail,n999,ptrk,pnotrk,psignotrk,poknotrk)
         
     kk=t9all.keys()
@@ -201,11 +216,14 @@ def anlInvByBasin(rall,r1latmax,r1vmin,verb=0):
             pn9all=nall[k][4]
             
             #print 'PP: %s notrk: %5.1f  td: %5.1f  ts: %5.1f ty: %5.1f  unk: %5.1f '%(k.upper(),pn9all,pn9td,pn9ts,pn9ty,pn9unk)
-                
+        else:
+            pn9td=pn9ts=pn9ty=pn9unk=0.0
+            pn9all=nall[k][4]
+
         n9all[k]=(pn9td,pn9ts,pn9ty,pn9unk,n9tot)
             
                 
-        #print 'NN99 basin: %s -- ntd: %4d  nts: %4d  nty: %4d nunk: %4d ntot: %4d %d'%(k.upper(),ntd,nts,nty,nunk,ntot,n9tot)
+        print 'NN99 basin: %s -- ntd: %4d  nts: %4d  nty: %4d nunk: %4d ntot: %4d %d'%(k.upper(),ntd,nts,nty,nunk,ntot,n9tot)
                 
         
         
@@ -229,6 +247,7 @@ class TmtrkCmdLine(CmdLine):
             'yearOpt':          ['Y:',None,'a','yearOpt for setting paths of md3'],
             'dtgopt':           ['d:',None,'a','dtgopt'],
             'stmopt':           ['S:',None,'a','stmopt'],
+            'modelOpt':         ['m:','era5','a','set model for era5 or ecop'],
             'override':         ['O',0,1,'override'],
             'verb':             ['V',0,1,'verb=1 is verbose'],
             'ropt':             ['N','','norun',' norun is norun'],
@@ -238,6 +257,7 @@ class TmtrkCmdLine(CmdLine):
             'doSig':            ['G',0,1,'ls only Sig'],
             'do9Xonly':         ['X',0,1,'ls only Sig'],
             'doReRun':          ['R',0,1,'rerun failed trkers'],
+            'd0012Only':        ['Z',0,1,'analyze 00/12Z only'],
         }
 
         self.purpose="""
@@ -268,6 +288,13 @@ if(mf.find(yearOpt,'-')):
 else:
     byear=int(yearOpt)
     eyear=int(yearOpt)
+    
+model=modelOpt
+if(model == 'ecop'):
+    dtginc=12
+elif(model == 'era5'):
+    dtginc=6
+        
 
 
 for iyear in range(byear,eyear+1):
@@ -275,7 +302,7 @@ for iyear in range(byear,eyear+1):
     rall={}
 
     year=str(iyear)
-    dtgopt="%s01.%s12.6"%(iyear,iyear)
+    dtgopt="%s01.%s12.%i"%(iyear,iyear,dtginc)
     
     doInvPath=1
     yearOpt=None
@@ -286,11 +313,13 @@ for iyear in range(byear,eyear+1):
 
     md3=Mdeck3(oyearOpt=oyearOpt,doBT=doBT,verb=verb)
     
-    invpath=getInvPath4Dtgopt(dtgopt,invdir='./inv',getonly=1)
+    invpath=getInvPath4Dtgopt(dtgopt,model,invdir='./inv',getonly=1)
     
     rall=parseInvPath(invpath)
     
-    (nall,n9all,rfail)=anlInvByBasin(rall,r1latmax,r1vmin,verb=verb)
+    (nall,n9all,rfail)=anlInvByBasin(rall,r1latmax,r1vmin,
+                                     d0012Only=d0012Only,
+                                     verb=verb)
     
     abids=nall.keys()
     abids.sort()
@@ -298,7 +327,6 @@ for iyear in range(byear,eyear+1):
     rfailDtgs=[]
 
     if(len(rfail) != 0):
-        print 'adf',rfail
         for abid in abids:
             try:
                 fdtgs=rfail[abid]
@@ -317,11 +345,11 @@ for iyear in range(byear,eyear+1):
         
         for fdtg in rfailDtgs:
             if(doReRun):
-                cmd='r-all-tmtrk.py %s -T'%(fdtg)  # tctrk
+                cmd='r-all-tmtrk.py %s -m %s -T'%(fdtg,model)  # tctrk
                 #cmd='r-all-tcdiag.py %s -C -L'%(fdtg)  # tcdiag
                 mf.runcmd(cmd,ropt)
             else:
-                cmd='s-sbt-tmtrkN.py %s -i'%(fdtg)
+                cmd='s-sbt-tmtrkN.py %s -m %s -i'%(fdtg,model)
                 mf.runcmd(cmd,ropt)
         
                 
@@ -333,7 +361,7 @@ for iyear in range(byear,eyear+1):
         (nsum,nfail,n999,ptrk,pnotrk,psignotrk,poknotrk)=nall[abid]
         (pn9td,pn9ts,pn9ty,pn9unk,n9tot)=n9all[abid]
         
-        pcard=' ptrk: %4.1f pNOtrk: %4.1f pNOsig: %4.1f  pNOok: %4.1f'%(ptrk,pnotrk,psignotrk,poknotrk)
+        pcard=' ptrk: %5.1f pNOtrk: %5.1f pNOsig: %5.1f  pNOok: %5.1f'%(ptrk,pnotrk,psignotrk,poknotrk)
         opn9unk=''
         if(pn9unk != 0.0):
             opn9unk="UNK: %5.1f"%(pn9unk)
