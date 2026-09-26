@@ -1,0 +1,3 @@
+20260922_13_36_00  /data/w22/prc/tcdat/w2-tc-dss-vd2-anl.py -S 13l.75 -T tera506,ofcl00,clip00 -a 0-72 -X -1 "ELOISE 13L 1975 ERA5 v OFCL v CLIP" -2 "TERA506 is the I trk; bias correct OFCL CLIP" -O
+20260922_13_37_13  /data/w22/prc/tcdat/w2-tc-dss-vd2-anl.py -S 13l.75 -T tera506,ofcl00,clip00 -a 0-72 -X -1 "ELOISE 13L 1975 ERA5 v OFCL v CLIP" -2 "TERA506 is the I trk; bias correct OFCL CLIP"
+20260922_15_54_30  /data/w22/prc/tcdat/w2-tc-dss-vd2-anl.py -S 13l.75 -T tera506,ofcl00,clip00 -a 0-72 -X -1 "ELOISE 13L 1975 ERA5 v OFCL v CLIP" -2 "TERA506 is the I trk; bias correct OFCL CLIP"

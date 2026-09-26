@@ -1,0 +1,36 @@
+#!/bin/bash
+
+s-sbt-tmtrkN.py 1977110100 -T
+s-sbt-tmtrkN.py 1977110200 -T
+s-sbt-tmtrkN.py 1977110300 -T
+s-sbt-tmtrkN.py 1977110700 -T
+s-sbt-tmtrkN.py 1977110800 -T
+s-sbt-tmtrkN.py 1977110900 -T
+s-sbt-tmtrkN.py 1977111000 -T
+s-sbt-tmtrkN.py 1977111100 -T
+s-sbt-tmtrkN.py 1977111200 -T
+s-sbt-tmtrkN.py 1977111300 -T
+s-sbt-tmtrkN.py 1977111400 -T
+s-sbt-tmtrkN.py 1977111500 -T
+s-sbt-tmtrkN.py 1977111600 -T
+s-sbt-tmtrkN.py 1977111700 -T
+s-sbt-tmtrkN.py 1977112900 -T
+s-sbt-tmtrkN.py 1977113000 -T
+s-sbt-tmtrkN.py 1977120100 -T
+s-sbt-tmtrkN.py 1977120200 -T
+s-sbt-tmtrkN.py 1977120300 -T
+s-sbt-tmtrkN.py 1977120400 -T
+s-sbt-tmtrkN.py 1977120500 -T
+s-sbt-tmtrkN.py 1977120600 -T
+s-sbt-tmtrkN.py 1977120700 -T
+s-sbt-tmtrkN.py 1977122100 -T
+s-sbt-tmtrkN.py 1977122200 -T
+s-sbt-tmtrkN.py 1977122300 -T
+s-sbt-tmtrkN.py 1977122400 -T
+s-sbt-tmtrkN.py 1977122500 -T
+s-sbt-tmtrkN.py 1977122600 -T
+s-sbt-tmtrkN.py 1977122700 -T
+s-sbt-tmtrkN.py 1977122800 -T
+s-sbt-tmtrkN.py 1977122900 -T
+s-sbt-tmtrkN.py 1977123000 -T
+s-sbt-tmtrkN.py 1977123100 -T

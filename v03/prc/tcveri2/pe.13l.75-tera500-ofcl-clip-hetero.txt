@@ -1,0 +1,1 @@
+20260922_12_15_42  /data/w22/prc/tcdat/w2-tc-dss-vd2-anl.py -S 13l.75 -T tera500,ofcl,clip -H -a 0-72 -X

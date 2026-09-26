@@ -1,0 +1,501 @@
+  133  0328 17:28:42 m-all-wmo-veri-flds.py 202501.202504.12 -T  -X 
+  134  0328 17:29:17 kill %3
+  135  0328 17:29:17 j
+  136  0328 17:29:19 kill %1
+  137  0328 17:29:22 kill %2
+  138  0328 17:29:34 m-all-wmo-veri-flds.py 202501.202504.12  -X  -N
+  139  0328 19:38:50 la inv/fu/fu-2012.txt 
+  140  0328 19:38:55 wc -l inv/fu/fu-2012.txt 
+  141  0328 19:39:08 pg inv/fu/fu-2012.txt 
+  142  0328 19:40:41 p-redo-fu.py
+  143  0328 19:40:48 p-redo-fu.py 2009 -N
+  144  0328 19:40:53 p-redo-fu.py 2010 -N
+  145  0328 19:40:58 p-redo-fu.py 2011 -N
+  146  0328 19:41:05 la inv/fu/
+  147  0328 19:41:23 p-redo-fu.py 2014 -N
+  148  0328 19:41:43 p-redo-fu.py 2025 -N
+  149  0328 19:42:07 p-redo-fu.py 2025 
+  150  0328 19:42:41 kill %1
+  151  0328 19:43:03 p-redo-fu.py 2025 -O -N
+  152  0328 19:43:27 p-redo-fu.py 2025 -N
+  153  0328 19:47:49 p-redo-fu.py 2025 -N -O
+  154  0328 19:49:08 la /raid02/dat/nwp2/w2flds/dat/ecm5/2025/2025041200/ecm5-w2flds-2025041200-ua.grb2
+  155  0328 19:49:17 la /raid02/dat/nwp2/w2flds/dat/ecm5/2025/2025041200/ecm5-w2flds-2025041200-ua.wgrib2.txt 
+  156  0328 19:49:24 pg /raid02/dat/nwp2/w2flds/dat/ecm5/2025/2025041200/ecm5-w2flds-2025041200-ua.wgrib2.txt 
+  157  0328 19:51:59 h
+  158  0328 19:52:11 p-redo-fu.py 2025 -N -O | head
+  159  0328 19:53:07 p-redo-fu.py 2025 -N -O
+  160  0328 19:53:34 m-all-wmo-veri-flds.py 2025041200 -O  -X
+  161  0328 19:54:29 m-all-wmo-veri-flds.py 2025041200 -X
+  162  0328 19:55:02 p-redo-fu.py 2025 -N -O
+  163  0328 19:55:18 -all-wmo-veri-flds.py 2025062100 -X 
+  164  0328 19:55:23 m-all-wmo-veri-flds.py 2025062100 -X 
+  165  0328 19:56:14 p-redo-fu.py 2025 -N -O
+  166  0328 19:57:29 p-fu.py 
+  167  0328 19:57:35 p-redo-fu.py 2025 -N -O
+  168  0328 20:03:32 p-fu.py 
+  169  0328 20:03:42 p-fu.py 2012
+  170  0328 20:03:50 p-fu.py 2024.2025
+  171  0328 20:15:14 la inv/fu/
+  172  0328 20:15:26 lt inv/fu/
+  173  0328 20:15:55 p-redo-fu.py 2014 -O -o -N
+  174  0328 20:16:17 p-redo-fu.py 2014 -O -o 
+  175  0328 20:16:32 la *miss*
+  176  0328 20:16:33 la
+  177  0328 20:16:42 la fu-202*
+  178  0328 20:16:44 rm fu-202*
+  179  0328 20:17:02 la inv/fu/
+  180  0328 20:17:11 la inv/fu/fu-2014.txt 
+  181  0328 20:17:13 la inv/fu/g
+  182  0328 20:17:17 pg inv/fu/fu-2014.txt 
+  183  0328 20:17:41 ws.nw inv/missing-dtgs.txt
+  184  0328 20:17:51 f
+  185  0328 20:18:19 p-fu.py 
+  186  0328 20:18:23 p-fu.py 2014
+  187  0328 22:04:09 psmac
+  188  0328 22:04:20 psep
+  189  0328 23:33:37 psmac
+  190  0328 23:34:02 psep | m-wmo
+  191  0328 23:34:05 psep | g m-wmo
+  192  0328 23:52:15 psmac
+  193  0329 00:43:15 psep
+  194  0329 00:43:43 m-all-veri-wmo.py 202311.202401.12 -X
+  195  0329 00:44:08 m-all-wmo-veri-flds.py 202311.202401.12 -X
+  196  0329 01:27:50 h
+  197  0329 01:28:00 h | g m-all
+  198  0329 01:28:05 h | g m-all | g ecm
+  199  0331 18:05:50 psep
+  200  0331 18:05:51 psmac
+  201  0331 18:06:54 psep
+  202  0331 18:07:12 m-fld-ensFC.py 2011.2012 -N
+  203  0331 18:07:24 m-fld-ensFC.py -Y 2011.2012 -N
+  204  0331 18:07:41 m-all-fld-ensFC.py -Y 2011.2012 -N
+  205  0331 18:07:44 m-all-fld-ensFC.py -Y 2011.2012 
+  206  0331 18:08:00 f
+  207  0331 21:40:51 m-all-wmo-veri.py -Y 2017.2018
+  208  0401 01:49:06 h
+  209  0401 01:50:33 m-all-wmo-veri.py -Y 2022.2025
+  210  0401 01:50:45 f
+  211  0401 14:39:10 m-all-wmo-veri.py -Y 2025
+  212  0401 14:55:52 h
+  213  0401 14:56:11 m-fld-ensFC.py -Y 2025
+  214  0401 14:56:18 m-all-fld-ensFC.py -Y 2025
+  215  0401 14:56:22 f
+  216  0401 15:06:01 m-all-fld-ensFC.py -Y 2026
+  217  0401 15:06:42 /raid05/ecop-wmo/2015/
+  218  0401 15:06:56 m-all-ln-fXXX-year.py 
+  219  0401 15:07:00 m-all-ln-fXXX-year.py -Y 2026
+  220  0401 15:07:47 h
+  221  0401 15:08:16 m-all-ecmt-ecm6-hgt-2-gp.py 
+  222  0401 15:08:34 m-all-ecmt-ecm6-hgt-2-gp.py 202601.202603.12
+  223  0401 15:09:33 kill %2
+  224  0401 15:09:34 j
+  225  0401 15:09:37 kill %1
+  226  0401 15:21:47 h
+  227  0401 15:22:07 m-all-wmo-veri.py -Y 2025
+  228  0401 15:24:11 h
+  229  0401 15:33:34 m-all-wmo-veri.py -Y 2025
+  230  0401 15:34:11 f
+  231  0401 15:34:33 j
+  232  0401 15:34:35 kill %1
+  233  0401 15:34:37 kill %2
+  234  0401 15:34:41 m-wmo-veri.py 
+  235  0401 15:34:52 m-wmo-veri.py 2025010700 
+  236  0401 15:36:47 m-wmo-veri.py 2015010700 
+  237  0401 15:37:17 m-wmo-veri.py 2025010700 
+  238  0401 15:37:38 /raid05/ecop-wmo/2025/ensFC/ecopw/ecop-w2flds-2025-ua.grb2.ctl
+  239  0401 15:37:41 la /raid05/ecop-wmo/2025/ensFC/ecopw/ecop-w2flds-2025-ua.grb2.ctl
+  240  0401 15:37:45 la /raid05/ecop-wmo/2025/ensFC/ecopw/ecop-w2flds-2025-ua.grb2.*
+  241  0401 15:39:43 j
+  242  0401 15:40:06 /raid05/era5-anl/climo/da/era5-climo-da.ctl
+  243  0401 15:40:12 pd /raid05/era5-anl/climo/da/
+  244  0401 15:40:13 la
+  245  0401 15:40:39 ws.nw p-ln-climo.py
+  246  0401 15:41:22 p-ln-climo.py
+  247  0401 15:41:35 la
+  248  0401 15:41:40 ws.nw era5-climo-da.ctl
+  249  0401 15:42:32 gg era5-climo-da.ctl
+  250  0401 15:43:07 po
+  251  0401 15:43:19 m-wmo-veri.py 2025010700 
+  252  0401 15:45:11 g
+  253  0401 15:45:12 h
+  254  0401 15:45:17 m-all-wmo-veri.py -Y 2025
+  255  0401 16:41:57 p-anl-veri-wmo.py 
+  256  0401 16:42:05 p-anl-veri-wmo.py -Y 2025
+  257  0401 16:42:25 lt stats/mo/ecop/
+  258  0401 16:42:32 lt stats/mo/ecop/mo-acc-2025-zg-nhem-500-120.txt 
+  259  0401 16:42:34 pg stats/mo/ecop/mo-acc-2025-zg-nhem-500-120.txt 
+  260  0401 16:42:55 p-anl-veri-wmo.py -Y 2009.2025
+  261  0401 16:43:21 kill %3
+  262  0401 16:43:21 j
+  263  0401 16:43:25 f 2
+  264  0401 16:43:28 j
+  265  0401 16:43:32 f 1
+  266  0401 16:43:36 j
+  267  0401 16:45:01 hh
+  268  0401 16:45:01 h
+  269  0401 16:45:08 p-anl-veri-wmo.py -Y 2025
+  270  0401 18:19:48 m-all-wmo-veri.py 
+  271  0401 18:20:08 m-all-wmo-veri.py -Y 2020
+  272  0401 20:45:27 m-all-wmo-veri.py -Y 2021
+  273  0401 21:32:13 p-anl-veri-wmo.py 
+  274  0401 21:32:23 p-anl-veri-wmo.py -Y 2020.2022
+  275  0401 21:33:44 p-anl-veri-wmo.py -Y 2009.2025
+  276  0401 21:38:50 p-anl-veri-wmo.py
+  277  0401 21:38:59 p-anl-veri-wmo.py -Y 2009.2025 -a shem
+  278  0401 16:33:59 m-all-flds-wmo-veri.py 2020102100 -X
+  279  0401 16:34:43 m-all-flds-wmo-veri.py 2020102100.2020111200.12 -X
+  280  0401 18:05:09 m-all-ecmt-ecm6-hgt-2-gp.py -Y
+  281  0401 18:05:32 m-all-ecmt-ecm6-hgt-2-gp.py 2020102100.2020111200.12
+  282  0401 21:37:29 j
+  283  0423 23:42:08 c.w2.b
+  284  0423 23:42:13 pg p-restart-mike5.sh 
+  285  0423 23:42:18 p-restart-mike5.sh 
+  286  0423 23:42:23 df
+  287  0427 13:11:07 c.w2.b
+  288  0427 13:11:21 pg p-restart-mike5.sh 
+  289  0427 13:11:32 clra
+  290  0427 13:11:35 crla
+  291  0427 13:11:42 p-restart-mike5.sh 
+  292  0427 13:11:49 c.w2
+  293  0427 13:11:51 git s-u
+  294  0427 13:11:58 git commit -a
+  295  0428 14:50:11 cd prc/
+  296  0428 14:50:11 l
+  297  0428 14:50:13 la
+  298  0428 14:50:18 la ecmwf/
+  299  0428 14:52:48 git add ecmwf/*py
+  300  0428 14:52:51 git add ecmwf/*ctl
+  301  0428 14:52:54 git s-u
+  302  0428 14:52:59 c.w2
+  303  0428 14:53:07 git commit -a
+  304  0428 14:53:30 git pull
+  305  0428 14:53:37 git push
+  306  0502 15:21:07 git s-u
+  307  0502 15:21:10 git pull
+  308  0502 15:22:20 df
+  309  0507 11:35:58 h
+  310  0507 11:36:28 la /ptmp/mike5/cmds-20260423/cmds-term*
+  311  0507 11:36:43 g sbt /ptmp/mike5/cmds-20260423/cmds-term*
+  312  0507 11:36:51 g ecop /ptmp/mike5/cmds-20260423/cmds-term*
+  313  0513 18:34:22 c.w2
+  314  0513 18:34:25 git s-u
+  315  0513 18:34:27 git pull
+  316  0513 18:34:33 git push
+  317  0514 14:06:22 cd prc/py3/
+  318  0514 14:06:22 la
+  319  0514 14:06:25 py3
+  320  0514 14:06:32 w2-tc-dss-md2-anl
+  321  0514 14:06:34 w2-tc-dss-md2-anl.py 
+  322  0514 14:06:48 w2-tc-dss-md2.py
+  323  0514 14:07:07 c.w2
+  324  0514 14:10:53 cd prc/py3/
+  325  0514 14:10:55 pg cmds-20260123.txt 
+  326  0514 14:11:10 g | pyt
+  327  0514 14:11:15 env | g pyt
+  328  0514 14:11:44 export PYTHONPATH=/data/w22/prc/py3
+  329  0514 14:11:50 w2-tc-dss-md2.py
+  330  0514 14:11:59 w2-tc-dss-md2-anl.py 
+  331  0507 11:53:39 c.w2
+  332  0507 11:53:41 git s-u
+  333  0507 11:53:43 git pull
+  334  0508 11:15:20 c.sb.tt
+  335  0508 11:15:22 c.sb.ptt
+  336  0508 11:15:24 la
+  337  0508 11:15:25 psep
+  338  0509 00:08:41 h
+  339  0509 00:08:57 h | g all
+  340  0509 00:09:45 git pull
+  341  0509 00:10:07 r-all-tmtrk.py 201201.201212.12 -m ecop -C -L 
+  342  0509 00:11:55 bg
+  343  0509 00:11:56 j
+  344  0509 00:13:18 kill %1
+  345  0509 00:13:26 r-all-tmtrk.py 201201.201212.12 -m ecop  -L 
+  346  0509 21:19:35 r-all-tmtrk.py 201601.201612.12 -m ecop  -L -C
+  347  0510 15:42:31 h
+  348  0510 15:45:02 r-all-tmtrk.py 20201.202012.12 -m ecop  -L -C
+  349  0510 15:45:11 r-all-tmtrk.py 202001.202012.12 -m ecop  -L -C
+  350  0511 21:47:19 r-all-tmtrk.py 202201.202212.12 -m ecop  -L
+  351  0511 21:53:46 f
+  352  0511 21:54:32 kill %1
+  353  0511 21:54:37 r-all-tmtrk.py 202201.202212.12 -m ecop  -L -C
+  354  0512 21:14:11 r-all-tmtrk.py 200901.200912.12 -m ecop  -L -C
+  355  0507 11:38:08 h
+  356  0507 11:38:15 h
+  357  0507 11:48:28 c.w2
+  358  0507 11:48:30 git s-u
+  359  0507 11:48:36 git commit -a
+  360  0507 11:48:57 git pull
+  361  0507 11:49:15 git push
+  362  0507 11:49:59 la /raid02/
+  363  0507 11:50:44 c.w2.d
+  364  0507 11:50:45 la
+  365  0507 11:51:15 cd nwp2/w2flds/dat/
+  366  0507 11:51:16 la
+  367  0507 11:51:46 l2w 2006120100 ecmt
+  368  0507 11:51:51 l2w 2006120100 ecop
+  369  0507 11:53:32 git branch -a -v
+  370  0507 11:53:58 l2w 2006120100 ecop
+  371  0508 11:16:07 c.sb
+  372  0508 11:16:10 git s-u
+  373  0508 11:16:12 git commit -a
+  374  0508 11:16:26 git push
+  375  0508 11:16:31 c.sb.ptt
+  376  0508 11:16:33 git s-u
+  377  0508 11:16:51 git commit -a
+  378  0508 11:17:07 git push
+  379  0508 11:19:34 psep
+  380  0508 11:19:35 psmac
+  381  0508 11:20:11 r-all-tmtrk.py 2010010100 -m ecop
+  382  0508 11:20:24 kill %1
+  383  0508 11:20:26 la
+  384  0508 11:20:33 git s-u
+  385  0508 11:20:41 cd ..
+  386  0508 11:20:42 la
+  387  0508 11:20:51 git s-u
+  388  0508 11:20:54 cd ..
+  389  0508 11:20:55 git s-u
+  390  0508 11:20:59 cd ..
+  391  0508 11:21:01 git s-u
+  392  0508 11:21:11 c.sb.ptt
+  393  0508 11:23:59 c.w2
+  394  0508 11:24:00 git s-u
+  395  0508 11:24:07 git commit -a
+  396  0508 11:24:28 git push
+  397  0508 11:45:37 c.sb.ptt
+  398  0508 11:45:50 r-all-tmtrk.py 2010010100 -m ecop -O -N
+  399  0508 11:45:54 r-all-tmtrk.py 2010010100 -m ecop -O 
+  400  0509 00:08:19 git s-u
+  401  0509 00:08:21 git pull
+  402  0509 00:08:24 c.sb
+  403  0509 00:08:27 git pull
+  404  0509 00:12:10 c.sb.ptt
+  405  0509 00:12:12 psmac
+  406  0509 00:12:15 psmas
+  407  0509 00:12:17 psmas6
+  408  0511 11:21:26 mike6
+  409  0507 11:38:19 h
+  410  0507 11:38:39 la
+  411  0522 13:02:32 md3a -S l.24 -s -b
+  412  0522 13:03:19 c.w2.d
+  413  0522 13:03:19 la
+  414  0522 13:03:38 md2a -S l.24 -s -b -2
+  415  0522 13:03:48 md2a -S l.24 -s -b 
+  416  0522 13:04:16 md3a -S l.24 -s -b
+  417  0522 13:04:20 md3a -S l.24 -s -b -D
+  418  0522 13:04:41 md2a -S l.24 -s -b -2
+  419  0522 13:05:04 md2a -S l.24 -s -b -2 > /tmp/t1
+  420  0522 13:05:10 md3a -S l.24 -s -b -D > /tmp/t2
+  421  0522 13:05:17 meld /tmp/t1 /tmp/t2
+  422  0522 13:06:23 c.sb
+  423  0522 13:06:24 la
+  424  0528 11:54:46 x
+  425  0517 20:28:27 git pull
+  426  0517 20:29:42 c.w2.b
+  427  0517 20:29:46 vi p-restart-mike5.sh 
+  428  0517 20:29:51 p-restart-mike5.sh 
+  429  0517 20:29:56 crla
+  430  0517 20:30:03 tc
+  431  0517 20:30:17 md2a -d cur-72.cur-6
+  432  0517 20:30:29 md2a -d cur-d5.cur-6
+  433  0517 20:31:42 md3a
+  434  0517 20:31:47 md3a -S l.25 -s -b
+  435  0517 20:31:56 md3a -S l.25
+  436  0517 20:31:58 md3a -S l.24
+  437  0517 20:32:03 c.sb
+  438  0517 20:32:05 la
+  439  0517 20:32:08 c.sb.m
+  440  0517 20:32:13 c.sb.m3
+  441  0517 20:32:13 la
+  442  0517 20:32:23 pg HOW-TO-md3-2024.txt
+  443  0517 20:32:31 md2a -S l.25 -s -b
+  444  0517 20:32:39 md2a -S l.25 -s
+  445  0517 20:32:50 md2a -S w.25 -s
+  446  0517 20:32:57 md2a -S c.25 -s
+  447  0517 20:33:01 md2a -S e.25 -s
+  448  0517 20:33:07 md2a -S h.25 -s
+  449  0517 20:33:21 pg HOW-TO-md3-2024.txt
+  450  0517 20:34:12 la *bd2*
+  451  0517 20:34:23 a
+  452  0517 20:34:26 la HOW-TO-*txt
+  453  0517 20:34:58 pg HOW-TO-fix-bd2-mrg.txt
+  454  0522 12:04:07 h
+  455  0601 14:28:14 df
+  456  0601 14:28:25 mike7
+  457  0601 21:06:15 uname -a
+  458  0601 21:06:19 x
+  459  0607 20:22:43 la
+  460  0607 20:22:49 a | g mike7
+  461  0607 20:31:48 x
+  462  0607 20:52:42 df
+  463  0607 20:52:46 w2-mount-mike7-fs.sh 
+  464  0607 20:53:10 sudo sshfs -o allow_other,default_permissions,debug,sshfs_debug,loglevel=debug3 fiorino@mike7:/mnt/ /mnt/mike7-mnt/
+  465  0607 20:53:23 sudo ssh-keygen -f '/root/.ssh/known_hosts' -R 'mike7'
+  466  0607 20:53:30 w2-mount-mike7-fs.sh 
+  467  0607 20:53:44 c.w2.2
+  468  0607 20:53:47 pg w2-mount-mike7-fs.sh 
+  469  0607 20:53:59 sudo sshfs -o allow_other,default_permissions fiorino@mike7:/mnt/ /mnt/mike7-mnt/ 
+  470  0607 20:54:08 w2-mount-mike7-fs.sh 
+  471  0607 20:54:10 df
+  472  0607 21:30:25 w2-mount-mike7-fs.sh 
+  473  0607 21:30:42 sudo umount /mnt/mike7-mnt 
+  474  0607 21:30:45 w2-mount-mike7-fs.sh 
+  475  0607 21:30:48 la
+  476  0607 21:30:49 df
+  477  0607 21:30:55 x
+  478  0608 11:43:54 wx2
+  479  0608 18:47:28 crontab -e
+  480  0608 18:47:50 x
+  481  0603 15:49:50 cd
+  482  0603 15:51:45 sudo apt install ./balena-etcher_2.1.6_amd64.deb 
+  483  0603 15:55:26 cp /home/fiorino/balena-etcher_2.1.6_amd64.deb /tmp/
+  484  0603 15:56:06 sudo apt install /tmp/balena-etcher_2.1.6_amd64.deb
+  485  0603 15:56:20 sudo apt autoremove
+  486  0603 15:57:00 balena-etcher 
+  487  0603 16:10:39 la
+  488  0603 16:36:44 w2-mount-mike7-fs.sh 
+  489  0607 20:06:11 la *sh
+  490  0607 20:06:22 del ubuntu-mate-24.04.4-desktop-amd64.iso 
+  491  0608 22:58:32 c.w2
+  492  0608 22:58:33 git s-u
+  493  0608 22:58:35 git pull
+  494  0609 12:57:25 mike8
+  495  0601 15:06:27 h
+  496  0601 15:06:59 c.w2.b
+  497  0601 15:07:02 vi p-restart-mike5.sh 
+  498  0603 15:58:15 df
+  499  0603 16:00:12 h
+  500  0709 17:26:24 git s-u
+  501  0709 17:26:27 git pull
+  502  0709 17:26:45 la
+  503  0709 17:27:00 c.w2.b
+  504  0709 17:27:06 vi p-restart-mike5.sh 
+  505  0709 17:27:37 p-restart-mike5.sh 
+  506  0709 17:27:53 tc
+  507  0709 17:27:58 env | g w21
+  508  0709 17:28:16 la /w21WEB
+  509  0709 17:28:29 cd
+  510  0709 17:28:40 df
+  511  0709 17:29:19 ws.nw .bashrc
+  512  0709 17:53:14 h
+  513  0709 17:53:30 c.sb.tv
+  514  0709 17:53:38 c.sb.ptv
+  515  0709 17:53:40 la
+  516  0709 17:53:42 lt *py
+  517  0709 17:54:02 la
+  518  0709 17:54:12 pg cmds-20260315.txt 
+  519  0709 17:55:07 g vdplot cmds-*
+  520  0709 17:55:14 g vdplot cmds-* | g ecop
+  521  0709 17:55:31 la SAV/
+  522  0709 17:55:40 cd ..
+  523  0709 17:55:41 la
+  524  0709 17:55:59 pg git-show 
+  525  0709 17:57:38 cd ..
+  526  0709 17:57:39 la
+  527  0709 18:08:03 c.sb.ptv
+  528  0709 18:08:05 la
+  529  0709 18:08:27 g vdplot cmds-* | g hwrf
+  530  0709 18:08:30 g vdplot cmds-* 
+  531  0709 18:09:01 p-vdplot.py -Y 2007.2014 -T hwrf -b w
+  532  0709 18:09:58 lt p*py
+  533  0709 18:10:14 lt *py
+  534  0709 18:10:28 la
+  535  0709 18:10:44 p-adinv.py 
+  536  0709 18:10:59 m-vdinv.py 
+  537  0709 18:11:02 la
+  538  0709 18:11:04 lt 
+  539  0709 18:11:13 pg m-plots.py
+  540  0709 18:12:07 la vd2out/
+  541  0709 18:12:34 g vd2 cmds-*
+  542  0709 18:12:41 m-all-ad2-vd2.py 
+  543  0709 18:12:55 la DSs-local/
+  544  0709 18:12:58 la DSs-local/ad2-*
+  545  0709 18:13:20 ad2 -S 01w.07 -L
+  546  0709 18:13:37 ad2 -S 01w.07 -L -T hwrf
+  547  0709 18:14:01 ad2 -S 01l.07 -L -T hwrf
+  548  0709 18:14:06 ad2 -S l.07 -L -T hwrf
+  549  0709 18:14:12 ad2 -S w.07 -L -T hwrf
+  550  0709 18:14:17 ad2 -S w.08 -L -T hwrf
+  551  0709 18:14:21 ad2 -S w.09 -L -T hwrf
+  552  0709 18:14:26 ad2 -S w.10 -L -T hwrf
+  553  0709 18:14:31 ad2 -S w.11 -L -T hwrf
+  554  0709 18:14:36 ad2 -S w.12 -L -T hwrf
+  555  0709 18:15:03 ad2 -S w.24 -L -T hwrf
+  556  0709 18:15:29 la vd2out/
+  557  0709 18:15:51 g hwrf vd2out/vd2out-w.*
+  558  0709 18:16:32 g hwrf vd2out/vd2out-w.*-pe-all*
+  559  0709 18:16:38 g hwrf vd2out/vd2out-w.*-pe-all* | g sshh
+  560  0709 18:16:51 g hwrf vd2out/vd2out-w.*-pe-all* | g sshh | g hwrf00
+  561  0709 18:17:00 g hwrf vd2out/vd2out-w.*-pe-all* | g sshh | g 'hwrf00  0'
+  562  0709 18:17:02 g hwrf vd2out/vd2out-w.*-pe-all* | g sshh | g 'hwrf00   
+
+  563  0709 18:17:12 g hwrf vd2out/vd2out-w.*-pe-all* | g sshh | g 'hwrf00  0'
+  564  0709 18:17:14 g hwrf vd2out/vd2out-w.*-pe-all* | g sshh | g 'hwrf00   0'
+  565  0709 18:17:34 p-vdplot.py 
+  566  0709 18:18:23 p-vdplot.py  -y 2012.2024 -t hwrf,tera5 -b w -o 72
+  567  0709 18:18:33 p-vdplot.py -Y 2012.2024 -t hwrf,tera5 -b w -o 72
+  568  0709 18:18:57 p-vdplot.py -Y 2012.2024 -t hwrf -b w -o 72
+  569  0709 18:19:46 p-vdplot.py -Y 2007.2024 -t hwrf -b l -o 72
+  570  0709 18:19:50 p-vdplot.py -Y 2007.2024 -t hwrf -b l 
+  571  0709 20:30:42 p-2dplot.py 
+  572  0709 20:33:33 p-2dplot.py -y 2012.2021 -t sr
+  573  0709 20:33:45 p-2dplot.py -y 2012.2021 -o sr
+  574  0709 20:40:29 p-2dplot.py -y 2012.2021 -o sr -b all
+  575  0709 20:44:08 la ../..
+  576  0709 20:44:13 la ../../gslib/
+  577  0709 20:44:18 la ../../gslib/dum.ctl 
+  578  0709 20:44:23 la
+  579  0709 20:44:28 la ..
+  580  0709 20:44:29 la
+  581  0709 20:44:39 h
+  582  0709 20:44:42 la ..
+  583  0709 20:44:47 la ../../gslib/
+  584  0709 20:45:46 h
+  585  0709 20:45:50 p-2dplot.py -y 2012.2021 -o sr -b all
+  586  0709 20:47:35 p-2dplot.py -y 2012.2013 -b all
+  587  0709 20:48:03 p-2dplot.py -y 2012.2020 -b all
+  588  0709 20:48:29 p-2dplot.py -y 2012.2020 -b all -T hwrf,ecop,avno
+  589  0709 20:50:37 p-2dplot.py -y 2012.2020 -T hwrf,ecop,avno
+  590  0709 20:50:56 p-2dplot.py -y 2007.2020 -T hwrf,ecop,avno
+  591  0709 20:51:16 p-2dplot.py -y 2007.2020 -T hwrf,era5,avno
+  592  0709 20:51:22 p-2dplot.py -y 2007.2020 -T hwrf,tera5,avno
+  593  0709 20:52:15 p-2dplot.py -y 2007.2020 -T hwrf,tera500,avno00
+  594  0709 20:52:33 p-2dplot.py -y 2007.2020 -T hwrf00,tera500,avno00
+  595  0709 20:52:56 p-2dplot.py -y 2007.2024 -T hwrf00,tera500,avno00
+  596  0709 20:56:47 p-2dplot.py -y 2007.2024 -T hwrf00,tera500,avno00 -b all
+  597  0709 20:57:27 p-2dplot.py -y 2007.2024 -T hwrf00,ecop00,avno00 -b all
+  598  0709 20:57:47 p-2dplot.py -y 2007.2024 -T hwrf00,tera500,avno00 -b all
+  599  0709 20:59:40 p-2dplot.py -y 2007.2019 -T hwrf00,tera500,avno00 -b all
+  600  0709 21:00:34 p-2dplot.py -y 2007.2024 -T hwrf00,tera500,avno00 -b all
+  601  0709 21:03:09 p-2dplot.py -y 2007.2024 -T hwrf00,ecop00,avno00 -b all
+  602  0709 21:15:04 p-2dplot.py -y 2007.2024 -T hwrf00,tera500,avno00 -b all
+  603  0709 21:17:21 j
+  604  0709 21:17:23 kill %1
+  605  0709 21:18:28 vd2a -S w.18 -T hwrf,tera5,avno -f z0012 -H
+  606  0709 21:19:46 vd2a -S w.18 -T hwrf,tera5,avno -f z0012 -H -p gainxype
+  607  0709 21:19:59 vd2a -S w.18 -T hwrf,tera5,avno -f z0012 -H -p gainxype -X
+  608  0709 21:20:55 p-2dplot.py -y 2007.2024 -T hwrf00,tera500,avno00 -b all -f z0012
+  609  0709 21:21:20 p-2dplot.py -y 2007.2024 -T hwrf,tera5,avno -b all -f z0012
+  610  0709 21:29:47 p-2dplot.py -y 2007.2024 -T hwrf,ecop,avno -b all -f z0012
+  611  0715 11:45:19 p-2dplot.py -y 2007.2024 -T tera5,ecop,avno -b all -f z0012
+  612  0715 11:45:27 p-2dplot.py -y 2007.2024 -T era5,ecop,avno -b all -f z0012
+  613  0715 11:47:50 p-2dplot.py -y 2007.2024 -T tera5,ecop,avno -b all -f z0012
+  614  0715 11:49:12 p-2dplot.py -y 2007.2024 -T ecop,tera5,avno -b all -f z0012
+  615  0715 11:51:06 p-2dplot.py -y 2007.2024 -T hwrf,tera5,avno -b all -f z0012
+  616  0715 11:52:08 p-2dplot.py -y 2007.2024 -T hwrf,ecop,avno -b all -f z0012
+  617  0715 11:53:22 p-2dplot.py 
+  618  0715 11:53:41 p-2dplot.py -y 2007.2024 -T hwrf,ecop,avno -b all -f z0012 -o sr
+  619  0715 11:54:46 p-2dplot.py -y 2007.2024 -T hwrf,tera5,avno -b all -f z0012 -o sr
+  620  0715 11:56:32 lt plt/
+  621  0715 11:56:35 lt plt/ | head
+  622  0715 14:29:55 p-2dplot.py -y 2007.2024 -T hwrf,tera5,avno -b all -f z0012 
+  623  0715 14:31:23 p-2dplot.py -y 2007.2024 -T hwrf,tera5,avno -b all -f z0012  -o net
+  624  0715 14:32:14 p-2dplot.py -y 2007.2024 -T ecop,tera5,avno -b all -f z0012 
+  625  0715 14:37:52 p-2dplot.py 
+  626  0715 14:38:03 p-2dplot.py -y 2007.2016 -T ecop,tera5,avno -b all -f z0012 
+  627  0715 14:38:24 p-2dplot.py -y 2016.2024 -T ecop,tera5,avno -b all -f z0012 
+  628  0715 14:40:13 p-2dplot.py -y 2007.2016 -T ecop,tera5,avno -b all -f z0012 
+  629  0715 14:43:58 p-2dplot.py -y 2007.2024 -T hwrf,ecop,avno -b all -f z0012 
+  630  0722 12:16:35 la plt/
+  631  0722 12:17:12 la
+  632  0722 12:17:27 h > cmds-20260722.txt

@@ -1207,6 +1207,1728 @@ def getVerivars(ptype):
 
 
 
+class AdeckSources(MFbase):
+    
+    sources2009=['nhc','jtwc',
+                 'rtfim','rtfimx','rtfimy',
+                 'tacc','gfsenkf',
+                 'ncep','ecmwf','ukmo',
+                 'ncep_eps','cmc_eps',
+                 'local','wxmap2','w2flds',
+                 ]
+    
+    sources=['best','nhc','jtwc','ncep','ecmwf','ukmo','ncep_eps','cmc_eps',
+             'local','wxmap2','w2flds',
+             ]
+
+    sourcesAll=sources+['tmtrkN','mftrkN']
+    
+    # -- sources where the file uses current dtg irrespective of storm.year
+    #
+    sourcesDtg=['tmtrkN','mftrkN','ncep','ecmwf','ecbufr']
+    
+    def __init__(self,sources=None,year=None,skipcarq=1,verb=0,dojettrack=0):
+        """ add skipcarq to the AdeckSources object for use in Adeck()"""
+        if(sources == None):
+            self.sources=self.sources
+        else:
+            self.sources=sources
+
+        self.verb=verb
+        self.skipcarq=1
+        self.dojettrack=dojettrack
+        
+    def getSourcesbyYear(self,year=None):
+        
+        if(year != None and year == '2009'):
+            self.sources=self.sources2009
+            return(self.sources2009)
+        else:
+            return(self.sources)
+
+    def setAdeckSource(self,source,year,dojettrack=0,dtgopt=None,dochk=0,
+                       useAdeckDir=0,
+                       ZIPoverride=0,
+                       usePtmpDir=0,
+                       useZipArchive=1,
+                       yearMasks=None,
+                       verb=0):
+
+        from tcbase import TcDataBdir
+
+        self.dochk=dochk
+
+        ad=None
+        aliases=None
+
+        self.skipcarq=1
+        self.dojettrack=dojettrack
+        
+        if(source == 'gfsenkf' or source == 'gfsenkf_irwd' or source == 'gfsenkf_irwdx'
+           ):
+
+            
+            bdir="%s/adeck/esrl/%s/%s"%(TcDataBdir,year,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+
+            if(int(year) == 2009):
+                smask="%s/track.%s*.txt"%(ad.bdir,ad.year)
+
+            # -- new form where organized by dtg
+            #
+            elif(int(year) == 2011):
+                smask="%s/??????????/track*%s*"%(ad.bdir,ad.year)
+            else:
+                smask="%s/??????????/tctrk.atcf.%s*.txt"%(ad.bdir,ad.year)
+                
+            print 'SSSSSS setAdeckSources.smask: ',smask
+            ad.admasks=[smask]
+
+        elif(mf.find(source,'jet_')):
+            osource=source
+            source=source.replace('jet_','')
+            
+            bdir="%s/adeck/esrl/%s/%s"%(TcDataBdir,year,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+
+            smask="%s/track*%s*"%(ad.bdir,ad.year)
+            source=osource
+                
+            print 'SSSSSS setAdeckSources.smask(jet_): ',smask
+            ad.admasks=[smask]
+
+        # -- latest MF tracker
+        #
+        elif(source == 'mftrkN' or source == 'mftrk'):
+            
+            dozip=1
+            if(not(useZipArchive)): dozip=0
+            
+            mfVersion='v010'
+            mfVersion='v011'
+            # -- force using adeckdir
+            #
+            useAdeckDir=1
+            
+            osource=source
+            bdir="%s/tmtrkN"%(TcDataBdir)
+            sdir=bdir
+            if(useAdeckDir):
+                bdir="%s/adeck/mftrkN"%(TcDataBdir)
+
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=sdir,
+                           stype=source,
+                           dozip=dozip,
+                           ZIPoverride=ZIPoverride,
+                           )
+
+            if(usePtmpDir):
+                ad.bdir=ad.tdirZIP
+                ad.sdir=ad.bdir
+
+
+            ad.admasks=[]
+            ad.filemasks=[]
+
+            if(dtgopt != None):
+                dtgs=mf.dtg_dtgopt_prc(dtgopt)
+                for dtg in dtgs:
+
+                    admaskm1=None
+                    curyear=dtg[0:4]
+
+                    filemask="wxmap2.%s.*%s.*.%s"%(mfVersion,dtg,year)
+                    if(useAdeckDir):
+                        # -- 20140929 - since we're setting the admask here by dtg, check for shemover
+                        #
+                        if(int(curyear)-int(year) == -1):
+                            admaskm1="%s/%s/%s/%s"%(ad.bdir,curyear,dtg,filemask)
+                        admask="%s/%s/%s/%s"%(ad.bdir,year,dtg,filemask)
+                    elif(usePtmpDir):
+                        admask="%s/%s"%(ad.bdir,filemask)
+                    else:
+                        admask="%s/%s/*/%s"%(ad.bdir,dtg,filemask)
+                        
+                    if(admaskm1 != None):
+                        ad.admasks.append(admaskm1)
+                        ad.filemasks.append(filemask)
+                        
+                    ad.admasks.append(admask)
+                    ad.filemasks.append(filemask)
+
+            elif(yearMasks != None):
+                ad.year=yearMasks[0]
+                ad.yearp1=yearMasks[1]
+
+                for year in yearMasks:
+                    
+                    filemask="wxmap2.%s.*.%s??????.*"%(mfVersion,year)
+                    if(useAdeckDir):
+                        admask="%s/%s/??????????/%s"%(ad.bdir,year,filemask)
+                    elif(usePtmpDir):
+                        admask="%s/%s"%(ad.bdir,filemask)
+                        ad.dozip=0  # turn off zip
+                    else:
+                        admask="%s/%s??????/*/%s"%(ad.bdir,year,filemask)
+                        
+                    ad.filemasks.append(filemask)
+                    ad.admasks.append(admask)
+
+                print 'III adCL.setAdeckSource.yearMasks: ',yearMasks
+
+            else:
+                # -- use full stmid label in filename to get just the storms for a year
+                #    only works with mftrack...20140107 -- changed tmtrkN to do the same
+                # -- trackers org by NNB.YYYY as with mftrkN
+                #    go back one year for SHEM storms
+                #
+                yearsAD=[mf.yyyyinc(year,-1),year]
+                
+                for yearAD in yearsAD:
+                
+                    filemask="wxmap2.%s.*.??????????.*.%s"%(mfVersion,year)
+                    
+                    if(useAdeckDir):
+                        admask="%s/%s/??????????/%s"%(ad.bdir,yearAD,filemask)
+                    elif(usePtmpDir):
+                        filemask="wxmap2.%s.*.*.%s"%(mfVersion,year)
+                        admask="%s/%s"%(ad.bdir,filemask)
+                        ad.dozip=0   # turn off zip here...
+                    else:
+                        admask="%s/%s??????/*/%s"%(ad.bdir,yearAD,filemask)
+                
+                    ad.filemasks.append(filemask)
+                    ad.admasks.append(admask)
+
+            source=osource
+            print 'SSS(smask) setAdeckSources.smask(mftrkN): ',ad.admasks
+
+        # -- latest TM tracker
+        #
+        elif(source == 'tmtrkN'):
+
+            dozip=1
+            if(not(useZipArchive)): dozip=0
+            
+            osource=source
+            
+            # -- force using adeckdir
+            #
+            useAdeckDir=1
+            
+            bdir="%s/tmtrkN"%(TcDataBdir)
+            # -- use adeck dir vice prc dir
+            sdir=bdir
+            if(useAdeckDir):
+                bdir="%s/adeck/tmtrkN"%(TcDataBdir)
+            
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=sdir,
+                           stype=source,
+                           dozip=dozip,
+                           ZIPoverride=ZIPoverride,
+                           )
+            if(usePtmpDir):
+                ad.bdir=ad.tdirZIP
+                ad.sdir=ad.bdir
+
+            ad.admasks=[]
+            ad.filemasks=[]
+
+            if(dtgopt != None):
+                dtgs=mf.dtg_dtgopt_prc(dtgopt)
+                for dtg in dtgs:
+                    admaskm1=None
+                    curyear=dtg[0:4]
+                    filemask="tctrk.atcf.%s.*.*.txt"%(dtg)
+                    filemask="tctrk.atcf.??????????.*.*.%s"%(year)
+                    # -- 20140929 - since we're setting the admask here by dtg, check for shemover
+                    #
+                    if(useAdeckDir):
+                        if(int(curyear)-int(year) == -1):
+                            admaskm1="%s/%s/%s/%s"%(ad.bdir,curyear,dtg,filemask)
+                        admask="%s/%s/%s/%s"%(ad.bdir,year,dtg,filemask)
+                    elif(usePtmpDir):
+                        admask="%s/%s"%(ad.bdir,filemask)
+                    else:
+                        admask="%s/%s/*/%s"%(ad.bdir,dtg,filemask)
+
+                    if(admaskm1 != None):
+                        ad.admasks.append(admaskm1)
+                        ad.filemasks.append(filemask)
+                        
+                    ad.admasks.append(admask)
+                    ad.filemasks.append(filemask)
+                
+                print 'III adCL.setAdeckSource.dtgopt: ',year,ad.admasks
+
+            elif(yearMasks != None):
+                ad.year=yearMasks[0]
+                ad.yearp1=yearMasks[1]
+
+                for year in yearMasks:
+                    
+                    filemask="tctrk.atcf.%s??????.*.*.txt"%(year)
+                    if(useAdeckDir):
+                        admask="%s/%s/??????????/%s"%(ad.bdir,year,filemask)
+                    elif(usePtmpDir):
+                        admask="%s/%s"%(ad.bdir,filemask)
+                        ad.dozip=0 # turn off zip...
+                    else:
+                        admask="%s/%s??????/*/%s"%(ad.bdir,year,filemask)
+                                    
+                    ad.filemasks.append(filemask)
+                    ad.admasks.append(admask)
+
+                print 'III adCL.setAdeckSource.yearMasks: ',yearMasks
+
+            else:
+
+                # -- trackers org by NNB.YYYY as with mftrkN
+                #    go back one year for SHEM storms
+                #
+                yearsAD=[mf.yyyyinc(year,-1),year]
+                
+                for yearAD in yearsAD:
+                    
+                    filemask="tctrk.atcf.??????????.*.*.%s"%(year)
+                    if(useAdeckDir):
+                        admask="%s/%s/??????????/%s"%(ad.bdir,yearAD,filemask)
+                    elif(usePtmpDir):
+                        admask="%s/%s"%(ad.bdir,filemask)
+                        ad.dozip=0 # turn off zip...
+                    else:
+                        admask="%s/%s??????/*/%s"%(ad.bdir,yearAD,filemask)
+            
+                    ad.admasks.append(admask)
+                    ad.filemasks.append(filemask)
+                    print "III(adCL.setAdeckSource.yearsAD): ",year,admask,filemask
+
+            source=osource
+                
+            if(verb): print 'SSSSSS setAdeckSources.smask(tmtrkN): ',ad.admasks
+
+        elif(source == 'local'):
+            osource=source
+            
+            bdir="%s/adeck/local/%s"%(TcDataBdir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            ad.bdir=bdir
+            smask="%s/wxmap.*%s*"%(ad.bdir,ad.year)
+            source=osource
+                
+            print 'SSSSSS setAdeckSources.smask(local): ',smask
+            ad.admasks=[smask]
+
+        elif(source == 'cfsrr'):
+
+            bdir="%s/adeck/esrl/%s"%(TcDataBdir,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            
+            smask="%s/track.%s*"%(ad.bdir,ad.year)
+                
+            print 'SSSSSS setAdeckSources.smask: ',smask
+            ad.admasks=[smask]
+
+            aliases={}
+            aliases['cont']='cfsrrctrl'
+
+        elif(source == 'rap'):
+
+            bdir="%s/adeck/esrl/%s"%(TcDataBdir,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            
+            smask="%s/tctrk.atcf.%s*.*.*.txt"%(ad.bdir,ad.year)
+
+            print 'SSSSSS setAdeckSources.smask: ',smask
+            ad.admasks=[smask]
+
+            aliases={}
+            #aliases['cont']='cfsrrctrl'
+
+        elif(source == '3emn'):
+
+            bdir='/w21/prj/tc/ncep_3emn_20110412'
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            
+            smask="%s/adeck*%s*.txt"%(ad.bdir,ad.year)
+                
+            print 'SSSSSS setAdeckSources.smask: ',smask
+            ad.admasks=[smask]
+
+            aliases={}
+            aliases['3emn']='3emn'
+
+        elif(source == 'carq'
+             ):
+
+            sourcedir='.'
+            bdir="%s/adeck/%s"%(TcDataBdir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=sourcedir,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/adeck.local.jtwc.*txt"%(ad.bdir)
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+            self.skipcarq=0
+
+        elif(source == 'rtfim'
+             or source == 'rtfimx'
+             or source == 'rtfimy'
+             or source == 'rtfimz'
+             or source == 'rtfim7'
+             or source == 'rtfim9'
+             or source == 'rtfimz9'
+             or source == 'rtfimz_retro'
+             or source == 'rtfimz_r1094'
+             or source == 'rtfimR925w2flds'
+             or source == 'rtfimz_r1163'
+             or source == 'rtfim_r1174'
+             or source == 'rtfim_r1094b'
+             or source == 'rtfim_r1231'
+             or source == 'rtfim_r1273'
+             or source == 'rtfim_r1273enkf'
+             or source == 'rtfim_r1273a'
+             or source == 'rtfim_r1291g7'
+             or source == 'rtfim_r1359enkf'
+             or source == 'rtfim_r1411enkf'
+             or source == 'rtfim_r1422enkf'
+             or source == 'rtfim_r1422gfs'
+             or source == 'rtfim_r1422gfsG7'
+             or source == 'rtfim_r1422gfsG7L38'
+             
+             or source == 'rtfim_r1607gfsG7'
+             or source == 'rtfim_r1607gfsG7cugd'
+             or source == 'rtfim_r1607gfsG7cutneg'
+             
+             or source == 'rtfim_r1831plm1'
+             or source == 'rtfim_r1831gfsg8'
+             or source == 'rtfim_r1831plm1vdif05'
+             or source == 'rtfim_r1831plm1vdif10'
+
+             or source == 'rtfim_r1926'
+             or source == 'rtfim_r1926phys1d'
+             or source == 'rtfim_r2159intfc500'
+             or source == 'rtfim_r2176sigma'
+             or source == 'rtfim_r2093phys1dsig'
+             or source == 'rtfim_r2220intfc150g9'
+             or source == 'rtfim_r2220intfc150'
+             or source == 'rtfim_r2371hyb'
+             or source == 'rtfim_r2371vdiff'
+             or source == 'rtfim_r2647jpgf'
+             or source == 'rtfim9_esrlDAhyb'
+             or source == 'rtfim_r2972_j0'
+             or source == 'rtfim_r2972_j1'
+             or source == 'rtfim_r2972_j2'
+             or source == 'rtfim_r2972_j0rd3'
+             or source == 'rtfim_r2972_j1rd3'
+             or source == 'rtfim_r2972_j2rd3'
+             or source == 'rtfim_r2972_j0ifs50'
+             or source == 'rtfim_r3162_g9ops'
+             or source == 'rtfim_r3162_g9'
+             or source == 'rtfim_r3162_g9hyb'
+             or source == 'rtfim_r3585_v3'
+             or source == 'rtfim_r3585_v4'
+             or source == 'rtfim_r4109ops'
+             or source == 'rtfim_r4109'   # hfip 2014 model
+             or source == 'rtfim_r4314'   # FIM9 new interp run on zeus
+             ):
+
+            sourcedir=source
+            if(source == 'rtfimR925w2flds'): sourcedir='rtfimR925'
+            bdir="%s/adeck/esrl/%s/w2flds"%(TcDataBdir,year)
+            
+            
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=sourcedir,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/tctrk.atcf.%s*.%s.txt"%(ad.bdir,ad.year,sourcedir)
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+            if(dojettrack):
+                
+                # -- need to do import here to not crash with earlier TDw2.py
+                #
+                from FM import rtfimRuns,lrootLocal
+                dortfim=1
+                rt=rtfimRuns()
+                rt.getRmodel(source)
+                bdir="%s/dat/%s"%(lrootLocal,rt.fimrun)
+                if(not(dortfim)): bdir="%s/adeck/esrl/%s/%s"%(TcDataBdir,year,source)
+                
+                if(
+                    source == 'rtfim9' or
+                    source == 'rtfim7' or
+                    source == 'rtfimx' or
+                    source == 'rtfim'
+                   ): bdir="%s/adeck/esrl/%s/%s"%(TcDataBdir,year,source)
+
+                if(source == 'rtfim_r2220intfc150g9'):   bdir="%s/adeck/esrl/tmp/fim_9_64_800_%s*/tracker_C/168/"%(TcDataBdir,year)
+                if(source == 'rtfim_r2371hyb'):          bdir="%s/adeck/esrl/retro/FIMRETRO2371_HYB/fim_8_64_240_%s*/tracker_C/120/"%(TcDataBdir,year)
+                if(source == 'rtfim_r2371vdiff'):        bdir="%s/adeck/esrl/retro/FIMRETRO2371_VDIFF/fim_8_64_240_%s*/tracker_C/120/"%(TcDataBdir,year)
+                if(source == 'rtfim_r2647jpgf'):         bdir="%s/adeck/esrl/retro/FIMRETRO_janjic_pgf"%(TcDataBdir)
+                if(source == 'rtfim9_esrlDAhyb'):        bdir="%s/adeck/esrl/retro/FIM9_ESRL_DA_HYB"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j0'):          bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan0"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j1'):          bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan1"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j2'):          bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan2"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j0rd3'):       bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan0_RED_DIFF3"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j1rd3'):       bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan1_RED_DIFF3"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j2rd3'):       bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan2_RED_DIFF3"%(TcDataBdir)
+                if(source == 'rtfim_r2972_j0ifs50'):     bdir="%s/adeck/esrl/retro/FIMRETRO_r2972_jan0_intsm50"%(TcDataBdir)
+                if(source == 'rtfim_r3162_g9ops'):       bdir="%s/adeck/esrl/retro/FIMRETRO_r3162_g9_ops"%(TcDataBdir)  # using operational gfs 
+                if(source == 'rtfim_r3162_g9'):          bdir="%s/adeck/esrl/retro/FIMRETRO_r3162_g9_new"%(TcDataBdir)  # using hybrid DA 2012; ersl-enkf enkf/hybrid 2010-11
+                if(source == 'rtfim_r3162_g9hyb'):       bdir="%s/adeck/esrl/retro/FIMRETRO_r3162_g9_V_hyb"%(TcDataBdir) # using ncep hybrid DA 2010-12 - same as used by hrwf retros for hfip 2013
+                # control for comp against 201205 gfs phys
+                if(source == 'rtfim_r3585_v3'):          bdir="%s/adeck/esrl/retro/FIMRETRO_r3585_v3"%(TcDataBdir)  
+                # control for comp against 201205 gfs phys
+                if(source == 'rtfim_r3585_v4'):          bdir="%s/adeck/esrl/retro/FIMRETRO_r3585_v4"%(TcDataBdir)  
+                if(source == 'rtfim_r4109ops'):          bdir="%s/adeck/esrl/retro/FIM9RETRO_HFIP"%(TcDataBdir)  
+                if(source == 'rtfim_r4109'):             bdir="%s/adeck/esrl/retro/FIM9RETRO_HFIP_2014"%(TcDataBdir)  
+                if(source == 'rtfim_r4314'):             bdir="%s/adeck/esrl/retro/FIM9RETRO_new_interp"%(TcDataBdir)  
+
+
+
+                ad=AdeckSource(source=source,
+                               year=year,
+                               dirname=sourcedir,
+                               bdir=bdir,
+                               sdir=bdir,
+                               stype=source,
+                           )
+
+                smask="%s/%s??????/track*"%(ad.bdir,ad.year)
+                smask="%s/track.%s*"%(ad.bdir,ad.year)
+
+                if(source == 'rtfim_r2220intfc150g9'
+                   or source == 'rtfim_r2371hyb'
+                   or source == 'rtfim_r2371vdiff'
+                   or source == 'rtfim_r2647jpgf'
+                   or source == 'rtfim9_esrlDAhyb'
+                   ): smask="%s/track*%s*"%(ad.bdir,ad.year)
+
+                if(source == 'rtfim_r3585_v3'):   smask="%s/track*%s*v3"%(ad.bdir,ad.year)
+                if(source == 'rtfim_r3585_v4'):   smask="%s/track*%s*v4"%(ad.bdir,ad.year)
+                if(mf.find(source,'r4109')):      smask="%s/track.*%s*"%(ad.bdir,ad.year)
+                if(mf.find(source,'r4314')):      smask="%s/track.*%s*"%(ad.bdir,ad.year)
+
+                if(not(dortfim)): smask="%s/track*"%(ad.bdir)
+                if(self.verb): print 'dojettrack.AdeckSources.setAdeckSource.smask: ',smask
+                ad.admasks=[smask]
+                print ad.admasks
+
+        elif(source == 'lgem'
+             ):
+
+            sourcedir=source
+            if(source == 'rtfimR925w2flds'): sourcedir='rtfimR925'
+            
+            bdir="%s/adeck/esrl/%s/w2flds"%(TcDataBdir,year)
+            bdir="/dat3/tc/tcanal"
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=sourcedir,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/%s??????/*/ships.adk.*.txt"%(ad.bdir,ad.year)
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+        elif(source == 'rtfimR925'):
+        
+            # -- data archived to fw drive
+            #
+            bdir='/FWV2/dat2/nwp2/rtfim'
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           dirname='FIM_retro_r925',
+                           stype='rtfim',
+                           )
+
+        elif(source == 'gfs_para_2010'):
+            bdir='/w21/dat/tc/adeck/ncep/gfs_para_2010'
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           dirname='.',
+                           )
+            smask="%s/atcfunix.gfs.%s*"%(ad.bdir,ad.year)
+            ad.admasks=[smask]
+
+        elif(source == 'gfs_t574_2010'):
+            bdir='/w21/dat/tc/adeck/ncep/gfs_t574_2010'
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           dirname='.',
+                           )
+            smask="%s/atcfunix.gfs.%s??????"%(ad.bdir,ad.year)
+            ad.admasks=[smask]
+
+            aliases={}
+            aliases['pre1']='gfs2010'
+            
+        elif(source == 'nrl_cotc'):
+            bdir='/w21/dat/tc/adeck/nrl'
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           dirname='.',
+                           )
+            smask="%s/%s/a????%s.dat"%(ad.bdir,ad.year,ad.year)
+            ad.admasks=[smask]
+
+            aliases={}
+            aliases['cotc']='cotn'
+
+        # -- trackers from ecmwf bufr
+        #
+        elif(source == 'ecbufr'
+             ):
+
+            dozip=1
+            if(not(useZipArchive)): dozip=0
+            bdir="%s/adeck/ecmwf/%s/%s"%(TcDataBdir,year,source)
+
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           dozip=dozip,
+                           ZIPoverride=ZIPoverride,
+                           )
+            smask="%s/msl_*%s*"%(ad.bdir,ad.year)
+            smask="%s/adeck.*%s*"%(ad.bdir,ad.year)
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+
+            ad.admasks=[]
+            ad.filemasks=[]
+
+            if(dtgopt != None):
+                dtgs=mf.dtg_dtgopt_prc(dtgopt)
+                for dtg in dtgs:
+                    filemask="adeck.*%s*"%(dtg)
+                    ad.admasks.append("%s/%s"%(ad.bdir,filemask))
+                    ad.filemasks.append(filemask)
+                    print 'SSSSSSSSSSSSS(ectrkN): ',filemask
+                
+
+            else:
+                filemask="adeck.*%s*"%(ad.year)
+                ad.admasks.append("%s/%s"%(ad.bdir,filemask))
+                ad.filemasks.append(filemask)
+                print 'SSSSSSSSSSSSS(ectrkN): ',filemask
+
+
+
+
+        # -- new ecmwf trackers from fernando
+        #
+        elif(source == 'ectrkN'
+             ):
+
+            bdir="%s/adeck/ecmwf/%s/%s"%(TcDataBdir,year,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/adeck.ecmwf.tcbufr.%s*txt"%(ad.bdir,ad.year)
+            print 'SSSSSSSSSSSSS(ectrkN): ',smask
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+        # -- trackers from hfip stream 1.5
+        #
+        elif(source == 'hfip'
+             ):
+
+            bdir="%s/adeck/hfip/%s"%(TcDataBdir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/a*%s*.dat"%(ad.bdir,ad.year)
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+        # -- chips trackers from mit
+        #
+        elif(source == 'mit'
+             ):
+
+            bdir="%s/%s"%(TcAdecksMitDir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/*%s*.xfer"%(ad.bdir,ad.year)
+            print 'SSSSSSSSSSSSS ',source,smask
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+
+        # -- 2012 ncep gfs || runs of enkf-gsi hybrid
+        #    prd12q3h -- no relocation
+        #
+        #
+        elif(source == 'prd12q3h' or source == 'prd12q3i' 
+             ):
+
+            bdir="%s/adeck/ncep/%s_atcf"%(TcDataBdir,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/atcfunix.gfs.%s*"%(ad.bdir,ad.year)
+            print 'SSSSSSSSSSSSS ',source,smask
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+
+        # -- 2013 hfip retro 2010-12 of avn using 2012 hybrid-DA
+        #
+        elif(source == 'prd1h2013'
+             ):
+
+            bdir="%s/adeck/esrl/retro/ncep_hfip2013"%(TcDataBdir)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/avn.%s*.trackatcfunix"%(ad.bdir,ad.year)
+            print 'SSSSSSSSSSSSS-hfip2013 ',source,smask
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+
+        # -- fim + gfs enkf ensemble (fimens) 2011
+        #
+        elif(source == 'fimens' or source == 'fimens2' or source == 'fimens3'  
+             ):
+
+            def fixFimensAidName(fimadeck,verb=0):
+
+                newadeck=[]
+
+                member=int(fimadeck[-2:])
+                cards=open(fimadeck).readlines()
+                oaid='FIM0'
+                if(member <= 9):
+                    oaid='FIM0'
+                elif(member >= 10):
+                    oaid='FIM1'
+
+                naid='FE%02d'%(member)
+
+                # -- don't do if already done
+                if(not(mf.find(cards[0],oaid))):
+                    if(verb): print 'III already updated: ',fimadeck,cards[0][0:50]
+                    return
+
+                for ocard in cards:
+                    ncard=ocard.replace(oaid,naid)
+                    newadeck.append(ncard)
+
+                MF.WriteList2File(newadeck,fimadeck)
+
+            
+            bdir="%s/adeck/esrl/%s/gfsenkf"%(TcDataBdir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+
+            smask1="%s/%s??????/track.*%s*.FIM??"%(ad.bdir,ad.year,ad.year)
+            smask2="%s/%s??????/track.*%s*.GE0[1-9]"%(ad.bdir,ad.year,ad.year)
+            smask3="%s/%s??????//track.*%s*.GE1[0-1]"%(ad.bdir,ad.year,ad.year)
+            smask4=None
+            
+            if(source == 'fimens2'):
+                smask2="%s/%s??????//track.*%s*.GE1[1-9]"%(ad.bdir,ad.year,ad.year)
+                smask3="%s/%s??????//track.*%s*.GE2[0-1]"%(ad.bdir,ad.year,ad.year)
+
+            if(source == 'fimens3'):
+                smask2="%s/%s??????//track.*%s*.GE0[1-9]"%(ad.bdir,ad.year,ad.year)
+                smask3="%s/%s??????//track.*%s*.GE1[0-9]"%(ad.bdir,ad.year,ad.year)
+                smask4="%s/%s??????//track.*%s*.GE2[0-1]"%(ad.bdir,ad.year,ad.year)
+                
+
+            # -- first fix aid name in fimens adecks
+            #
+            
+            fimensAdecks=glob.glob(smask1)
+            
+            for fimadeck in fimensAdecks:
+                fixFimensAidName(fimadeck)
+
+
+            print 'SSSSSSSSSSSSS ',source,smask1,smask2,smask3
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask1,smask2,smask3]
+            if(smask4 != None):
+                ad.admasks.append(smask4)
+
+        # -- 2012 hfip gfsenkf
+        #
+        elif(source == 'gfsenkf2012' or source == 'gfsenkf2013'):
+
+            dozip=1
+            bdir="%s/adeck/esrl/%s/gfsenkf"%(TcDataBdir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           dozip=dozip,
+                           ZIPoverride=ZIPoverride,
+                           )
+            ad.admasks=[]
+            ad.filemasks=[]
+
+            filemask="track.*%s*.GE??"%(ad.year)
+            admask="%s/%s??????/%s"%(ad.bdir,ad.year,filemask)
+
+            ad.admasks.append(admask)
+            ad.filemasks.append(filemask)
+
+            if(self.verb): print 'AdeckSources.setAdeckSource.admask(%s): %s'%(source,admask)
+
+        # -- fim9 hfip 2013 
+        #
+        elif(source == 'fim9hfip2013' or source == 'fim9hfip2014'):
+
+            dozip=0
+            if(source == 'fim9hfip2013'): bdir="/ptmp/hfip2013"
+            if(source == 'fim9hfip2014'): bdir="/ptmp/hfip2014"
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           dozip=dozip,
+                           ZIPoverride=ZIPoverride,
+                           )
+            ad.admasks=[]
+            ad.filemasks=[]
+
+            filemask="a????%s_*"%(ad.year)
+            admask="%s/%s"%(ad.bdir,filemask)
+
+            ad.admasks.append(admask)
+            ad.filemasks.append(filemask)
+
+            if(self.verb): print 'AdeckSources.setAdeckSource.admask(%s): %s'%(source,admask)
+
+
+        # -- 2012 hfip gfsenkf
+        #
+        elif(source == 'fimensg7'):
+
+            dozip=1
+            bdir="%s/adeck/esrl/%s/fimens/"%(TcDataBdir,year)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           dozip=dozip,
+                           ZIPoverride=ZIPoverride,
+                           )
+            ad.admasks=[]
+            ad.filemasks=[]
+
+            filemask="track.*%s*.FE??"%(ad.year)
+            admask="%s/%s??????/%s"%(ad.bdir,ad.year,filemask)
+
+            ad.admasks.append(admask)
+            ad.filemasks.append(filemask)
+
+            if(self.verb): print 'AdeckSources.setAdeckSource.admask(%s): %s'%(source,admask)
+
+        elif(source == 'fimens2012'):
+
+            tdtgs=None
+            if(dtgopt != None):
+                tdtgs=mf.dtg_dtgopt_prc(dtgopt)
+
+            tbdir='/mnt/lfs2/projects/fim/fiorino/w21/dat/tc/adeck/esrl/2012/fimens/'
+            MF.ChkDir(tbdir,'mk')
+            
+            def fixFimensAidName(fimadeck,dtg,verb=0,chk=self.dochk):
+
+                newadeck=[]
+
+                (sdir,file)=os.path.split(fimadeck)
+                tdir='%s/%s'%(tbdir,dtg)
+                MF.ChkDir(tdir,'mk')
+
+                member=int(fimadeck[-2:])
+                oaids=['F800','F801']
+                naid='FE%02d'%(member)
+
+                (base,ext)=os.path.splitext(file)
+                ofimadeck="%s/%s.%s"%(tdir,base[0:-2],naid)
+                
+                cards=open(fimadeck).readlines()
+                if(len(cards) == 0): return
+
+                # -- don't do if already done
+                done=0
+                for oaid in oaids:
+                    if(not(mf.find(cards[0],oaid)) and chk):
+                        if(verb): print 'III already updated: ',fimadeck,cards[0][0:50]
+                        done=1
+
+                for ocard in cards:
+                    ncard=ocard
+                    for oaid in oaids:
+                        ncard=ncard.replace(oaid,naid)
+                    newadeck.append(ncard)
+
+                if(done  == 0):  newadeck=cards
+                
+                if(verb): print 'WWW ',fimadeck,ofimadeck
+                MF.WriteList2File(newadeck,ofimadeck,verb=0)
+
+            
+            # get  latest tau
+            #
+            bdirs=[]
+            bdir="/pan2/projects/fim-njet/FIMENS/FIMrun/fim_8_64_240_%s*/tracker_*/??"%(year)
+            bdir="/pan2/projects/fim-njet/FIMENS/FIMrun/fim_7_64_190_%s*/tracker_*/??"%(year)
+            #bdirs=glob.glob(bdir)
+            bdir="/pan2/projects/fim-njet/FIMENS/FIMrun/fim_8_64_240_%s*/tracker_*/???"%(year)
+            bdir="/pan2/projects/fim-njet/FIMENS/FIMrun/fim_7_64_190_%s*/tracker_*/???"%(year)
+            bdir="/pan2/projects/fim-njet/FIMENS_sjet/FIMrun/fim_7_64_144_%s*/tracker_*/???"%(year)
+            
+            # -- only one active
+            #
+            bdir="/pan2/projects/fim-njet/FIMENS_sjet/FIMrun/fim_8_64_144_%s*/tracker_*/???"%(year)
+            bdirs=bdirs+glob.glob(bdir)
+            
+            members=[]
+            dtgs={}
+            latestbdirs={}
+            for bdir in bdirs:
+                tt=bdir.split('/')
+                dtg=tt[-3][-12:-2]
+                member=tt[-2][-2:]
+                members.append(member)
+                tau=tt[-1]
+                MF.appendDictList(dtgs,member,dtg)
+                key="%s_%s"%(dtg,member)
+                latestbdirs[key]=bdir
+
+
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+
+
+            ad.admasks=[]
+
+            members=mf.uniq(members)
+
+            for member in members:
+                mdtgs=dtgs[member]
+                mdtgs=mf.uniq(mdtgs)
+
+                for mdtg in mdtgs:
+
+                    if(tdtgs != None and not(mdtg in tdtgs)): continue
+
+                    try:
+                        bdir=latestbdirs["%s_%s"%(mdtg,member)]
+                    except:
+                        bdir=None
+
+                    if(bdir != None):
+
+                        smask="%s/track.*%s*.F*"%(bdir,ad.year)
+                        fimensAdecks=glob.glob(smask)
+
+                        for fimadeck in fimensAdecks:
+                            fixFimensAidName(fimadeck,mdtg,chk=self.dochk,verb=0)
+            
+            smask1="%s/%s??????/track.*%s*.FE*"%(tbdir,ad.year,ad.year)
+
+            print 'SSS(fimens2012) ',source,smask1
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask1]
+
+
+        # for jet processing
+        #
+        elif(source == 'fim9hfip'):
+
+            tdtgs=None
+            if(dtgopt != None):
+                tdtgs=mf.dtg_dtgopt_prc(dtgopt)
+
+            tbdir='/mnt/lfs2/projects/fim/fiorino/w21/dat/tc/adeck/esrl/2012/fim9hfip'
+            MF.ChkDir(tbdir,'mk')
+            
+            def fixFimensAidName(fimadeck,dtg,verb=0,chk=self.dochk):
+
+                newadeck=[]
+
+                (sdir,file)=os.path.split(fimadeck)
+                tdir='%s/%s'%(tbdir,dtg)
+                MF.ChkDir(tdir,'mk')
+
+                oaids=['F9C']
+                naid='FIM9'
+
+                (base,ext)=os.path.splitext(file)
+                ofimadeck="%s/%s.%s"%(tdir,base[0:-2],naid)
+                
+                cards=open(fimadeck).readlines()
+
+                # -- don't do if already done
+                done=0
+                for oaid in oaids:
+                    if(not(mf.find(cards[0],oaid)) and chk):
+                        if(verb): print 'III already updated: ',fimadeck,cards[0][0:50]
+                        done=1
+
+                for ocard in cards:
+                    ncard=ocard
+                    for oaid in oaids:
+                        ncard=ncard.replace(oaid,naid)
+                    newadeck.append(ncard)
+
+                if(done): newadeck=cards
+                
+                if(verb): print 'WWW ',fimadeck,ofimadeck
+                MF.WriteList2File(newadeck,ofimadeck,verb=0)
+
+            
+            # get  latest tau
+            #
+            bdir="/pan2/projects/fim-njet/FIM9/FIMrun/fim_9_64_1200_%s*/tracker_C/??"%(year)
+            bdirs=glob.glob(bdir)
+            bdir="/pan2/projects/fim-njet/FIM9/FIMrun/fim_9_64_1200_%s*/tracker_C/???"%(year)
+            bdirs=bdirs+glob.glob(bdir)
+            dtgs={}
+            latestbdirs={}
+            for bdir in bdirs:
+                tt=bdir.split('/')
+                dtg=tt[-3][-12:-2]
+                tau=tt[-1]
+                key="%s"%(dtg)
+                latestbdirs[key]=bdir
+
+
+            ad=AdeckSource(source=source,
+                           year=year,
+                           dirname=source,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+
+
+            ad.admasks=[]
+            mdtgs=latestbdirs.keys()
+            mdtgs.sort()
+
+            for mdtg in mdtgs:
+
+                if(tdtgs != None and not(mdtg in tdtgs)): continue
+                    
+                try:
+                    bdir=latestbdirs["%s"%(mdtg)]
+                except:
+                    bdir=None
+
+                if(bdir != None):
+
+                    smask="%s/track.*%s*.F*"%(bdir,ad.year)
+                    fimensAdecks=glob.glob(smask)
+            
+                    for fimadeck in fimensAdecks:
+                        fixFimensAidName(fimadeck,mdtg,chk=self.dochk,verb=0)
+            
+            smask1="%s/%s??????/track.*%s*.F*"%(tbdir,ad.year,ad.year)
+
+            print 'SSS(fim9hfip) ',source,smask1
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask1]
+
+
+        # -- 2013 hfip retro 2010-12 of avn using 2012 hybrid-DA
+        #
+        elif(source == 'tcvcip'
+             ):
+
+            bdir="%s/%s"%(TcDataBdir,source)
+            ad=AdeckSource(source=source,
+                           year=year,
+                           bdir=bdir,
+                           sdir=bdir,
+                           stype=source,
+                           )
+            smask="%s/a??%s.dat"%(ad.bdir,ad.year)
+            print 'SSSSSSSSSSSSS-TCVCIP ',source,smask
+            if(self.verb): print 'AdeckSources.setAdeckSource.smask: ',smask
+            ad.admasks=[smask]
+
+        # -- alaises
+        #
+        if(ad == None):
+            print '!!!!'
+            print 'EEEE adCL.AdeckSources.setAdeckSource: invalid source: ',source
+            print '!!!!'
+            sys.exit()
+
+
+            
+        aliases={}
+        if(source == 'rtfim'):
+            aliases['rt8c']='fim8'
+            aliases['f8c']='fim8'
+            aliases['rtfi']='fim8'
+
+        elif(source == 'rtfimx'):
+            aliases['rtfi']='f8cx'
+            aliases['f8c']='fimx'
+            aliases['f7c']='fimx'
+
+        elif(source == 'rtfimy'):
+            aliases['rtfi']='f8cy'
+
+        elif(source == 'jet_rtfim'):
+            aliases['f8c']='jf8c'
+
+        elif(source == 'jet_rtfimx'):
+            aliases['f7c']='jf7cx'
+
+        elif(source == 'jet_rtfimz'):
+            aliases['f8c']='jf8cz'
+
+        elif(source == 'jet_rtfimy'):
+            aliases['f8c']='jf8cy'
+
+        elif(source == 'local'):
+            aliases['ncm2']='lcmc2'
+            aliases['nec2']='lecm2'
+            aliases['fim8']='lfim8'
+            aliases['f8cy']='lfimy'
+            aliases['ngf2']='lgfs2'
+            aliases['nngc']='lngpc'
+            aliases['nng2']='lngp2'
+            aliases['nuk2']='lukm2'
+
+        # -- coordinate with atcf.py
+        elif(source == 'mftrkN' or source == 'mftrk'):
+            aliases['fimx']='mfimx'
+            aliases['fim7']='mfim7'
+            aliases['fim8']='mfim8'
+            aliases['fim9']='mfim9'
+            aliases['f8c'] ='mf8c'
+            aliases['f8cy']='mf8cy'
+            aliases['ncm2']='mcmc2'
+            aliases['ecm4']='mecm4'
+            aliases['nec2']='mecm2'
+            aliases['ngf2']='mgfs2'
+            aliases['nng2']='mngp2'
+            aliases['nnnn']='mngpj'
+            aliases['emx'] ='mecmn'
+            aliases['nngc']='mngpc'
+            aliases['navg']='mnavg'
+            aliases['nuk2']='mukm2'
+            aliases['nukc']='mukmc'
+            aliases['necn']='mecmn'
+            aliases['ecmt']='mecmt'
+            aliases['cgd6']='mcgd6'
+
+        elif(source == 'tmtrkN'):
+            aliases['fim7']='tfim7'
+            aliases['tfim']='tfim8'
+            aliases['fimx']='tfimx'
+            aliases['fim8']='tfim8'
+            aliases['fim9']='tfim9'
+            aliases['f8c'] ='tf8c'
+            aliases['rtfi']='tfim9'
+            aliases['cmc2']='tcmc2'
+            aliases['ecm4']='tecm4'
+            aliases['ecm2']='tecm2'
+            aliases['gfs2']='tgfs2'
+            aliases['gfsc']='tgfsc'
+            aliases['ngp2']='tngp2'
+            aliases['ngpc']='tngpc'
+            aliases['navg']='tnavg'
+            aliases['ngpj']='tngpj'
+            aliases['ukm2']='tukm2'
+            aliases['ecmn']='tecmn'
+            aliases['ecmt']='tecmt'
+            aliases['cgd6']='tcgd6'
+
+        elif(source == 'prd12q3h'):
+            aliases['prd1']='prdh'
+
+        elif(source == 'prd12q3i'):
+            aliases['prd1']='prdi'
+
+        elif(source == 'jet_rtfim7'):
+            aliases['f7c']='jf7c'
+
+        elif(source == 'rtfimz'):
+            aliases['rtfi']='f8cz'
+
+        elif(source == 'rtfim7'):
+            aliases['rtfi']='fim7'
+            aliases['f7c']='fim7'
+
+        elif(source == 'rtfim9'):
+            aliases['rtfi']='fim9'
+
+        elif(source == 'rtfimz9'):
+            aliases['rtfi']='f9cz'
+
+        elif(source == 'rtfimR925'):
+            aliases['f8c']='fr925'
+
+        elif(source == 'rtfimz_retro' or source == 'rtfimz_r1094'):
+            aliases['rtfi']='fzr1094'
+
+        elif(source == 'rtfimz_r1163'):
+            aliases['rtfi']='fzr1163'
+
+        elif(source == 'rtfim_r1174'):
+            aliases['rtfi']='fr1174'
+
+        elif(source == 'rtfimR925w2flds'):
+            aliases['rtfi']='fr925w2'
+
+        elif(source == 'gfs_para_2010'):
+            aliases['pru1']='gfs2010'
+
+        elif(source == 'rtfim_r1094b'):
+            aliases['rtfi']='fr1094b'
+
+        elif(source == 'rtfim_r1231'):
+            aliases['rtfi']='fr1231'
+
+        elif(source == 'rtfim_r1273'):
+            aliases['rtfi']='fr1273'
+
+        elif(source == 'rtfim_r1273enkf'):
+            aliases['rtfi']='fr1273enkf'
+
+        elif(source == 'rtfim_r1273a'):
+            aliases['rtfi']='fr1273a'
+
+        elif(source == 'rtfim_r1291g7'):
+            aliases['rtfi']='fr1291g7'
+
+        elif(source == 'rtfim_r1359enkf'):
+            aliases['rtfi']='fr1359enkf'
+
+        elif(source == 'rtfim_r1422enkf'):
+            aliases['rtfi']='fr1422enkf'
+
+        elif(source == 'rtfim_r1422gfs'):
+            aliases['rtfi']='fr1422gfs'
+
+        elif(source == 'rtfim_r1422gfsG7L38'):
+            aliases['rtfi']='fr1422gfsg7L38'
+
+        elif(source == 'rtfim_r1422gfsG7'):
+            if(dojettrack):
+                aliases['f7c']='fr1422g7'
+            else:
+                aliases['rtfi']='fr1422g7'
+
+        elif(source == 'rtfim_r1607gfsG7'):
+            if(dojettrack):
+                aliases['f7c']='fr1607g7'
+            else:
+                aliases['rtfi']='fr1607g7'
+
+        elif(source == 'rtfim_r1607gfsG7cugd'):
+            if(dojettrack):
+                aliases['f7c']='fr1607g7cugd'
+            else:
+                aliases['rtfi']='fr1607g7cugd'
+                
+        elif(source == 'rtfim_r1607gfsG7cutneg'):
+            aliases['rtfi']='fr1607g7cutneg'
+
+        elif(source == 'rtfim_r1831plm1'):
+            if(dojettrack):
+                aliases['f8c']='fr1831plm1'
+            else:
+                aliases['rtfi']='fr1831plm1'
+
+        elif(source == 'rtfim_r1831plm1vdif05'):
+            if(dojettrack):
+                aliases['f8c']='fr1831plm1vd05'
+            else:
+                aliases['rtfi']='fr1831plm1vd05'
+
+        elif(source == 'rtfim_r1831plm1vdif10'):
+            if(dojettrack):
+                aliases['f8c']='fr1831plm1vd10'
+            else:
+                aliases['rtfi']='fr1831plm1vd10'
+
+        elif(source == 'rtfim_r1831gfsg8'):
+            if(dojettrack):
+                aliases['f8c']='fr1831gfsg8'
+            else:
+                aliases['rtfi']='fr1831gfsg8'
+
+        elif(source == 'rtfim_r1926'):
+            if(dojettrack):
+                aliases['f8c']='fr1926'
+            else:
+                aliases['rtfi']='fr1926'
+
+        elif(source == 'rtfim_r1926phys1d'):
+            if(dojettrack):
+                aliases['f8c']='fr19261d'
+            else:
+                aliases['rtfi']='fr19261d'
+
+        elif(source == 'rtfim_r2159intfc500'):
+            if(dojettrack):
+                aliases['f8c']='fr2159int'
+            else:
+                aliases['rtfi']='fr2159int'
+
+        elif(source == 'rtfim_r2176sigma'):
+            if(dojettrack):
+                aliases['f8c']='fr2176sig'
+            else:
+                aliases['rtfi']='fr2176sig'
+
+        elif(source == 'rtfim_r2093phys1dsig'):
+            if(dojettrack):
+                aliases['f8c']='fr2093sig'
+            else:
+                aliases['rtfi']='fr2093sig'
+
+        elif(source == 'rtfim_r2220intfc150g9'):
+            if(dojettrack):
+                aliases['f9c']='fr2220g9'
+            else:
+                aliases['rtfi']='fr2220g9'
+
+        elif(source == 'rtfim_r2220intfc150'):
+            if(dojettrack):
+                aliases['f8c']='fr2220g8'
+            else:
+                aliases['rtfi']='fr2220g8'
+
+        elif(source == 'rtfim_r2371hyb'):
+            if(dojettrack):
+                aliases['f8c']='fr2371hyb'
+            else:
+                aliases['rtfi']='fr2371hyb'
+
+        elif(source == 'rtfim_r2371vdiff'):
+            if(dojettrack):
+                aliases['f8c']='fr2371vdiff'
+            else:
+                aliases['rtfi']='fr2371vdiff'
+
+        elif(source == 'rtfim_r2647jpgf'):
+            if(dojettrack):
+                aliases['f8c']='fr2647jpgf'
+            else:
+                aliases['rtfi']='fr2647jpgf'
+
+        elif(source == 'rtfim9_esrlDAhyb'):
+            if(dojettrack):
+                aliases['f9c']='fim9eda'
+            else:
+                aliases['rtfi']='fim9eda'
+
+        elif(source == 'rtfim_r2972_j0'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j0'
+
+        elif(source == 'rtfim_r2972_j1'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j1'
+
+        elif(source == 'rtfim_r2972_j2'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j2'
+
+        elif(source == 'rtfim_r2972_j0rd3'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j0rd3'
+
+        elif(source == 'rtfim_r2972_j1rd3'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j1rd3'
+
+        elif(source == 'rtfim_r2972_j2rd3'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j2rd3'
+
+        elif(source == 'rtfim_r2972_j0ifs50'):
+            if(dojettrack):
+                aliases['f8c']='fr2972j0ifs50'
+
+        elif(source == 'rtfim_r3162_g9ops'):
+            if(dojettrack):
+                aliases['f9c']='fr3162g9ops'
+
+        elif(source == 'rtfim_r3162_g9'):
+            if(dojettrack):
+                aliases['f9c']='fr3162g9'
+
+        elif(source == 'rtfim_r3162_g9hyb'):
+            if(dojettrack):
+                aliases['f9c']='fr3162g9hyb'
+
+        elif(source == 'rtfim_r3585_v3'):
+            if(dojettrack):
+                aliases['fimr']='fr3585v3'
+
+        elif(source == 'rtfim_r3585_v4'):
+            if(dojettrack):
+                aliases['fimr']='fr3585v4'
+
+        elif(source == 'prd1h2013'):
+            aliases['prd1']='avnh13'
+            aliases['avno']='avnh13'
+
+
+        return(ad,aliases)
+
+    
+            
+
+
+#cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc -- AdeckSource -- methods for get/put adecks including zip
+#
+
+class AdeckSource(MFbase):
+    
+    def __init__(self,
+                 source='rtfimR925',
+                 dirname='FIM_retro_R925',
+                 stype='rtfim',
+                 year='2009',
+                 bdir=None,
+                 sdir=None,
+                 dozip=0,
+                 verb=0,
+                 ZIPoverride=0,
+                 ropt=''
+                 ):
+
+        from tcbase import TcDataBdir
+
+        self.source=source
+        self.stype=stype
+        if(bdir == None):  self.bdir="%s/nwp2/%s"%(W2BaseDirDat,self.stype)
+        else:              self.bdir=bdir
+        self.dirname=dirname
+        if(sdir == None):  self.sdir="%s/dat/%s"%(self.bdir,self.dirname)
+        else:              self.sdir=sdir
+        self.year=year
+        self.verb=verb
+        self.dozip=dozip
+
+        self.zdir="%s/archive"%(sdir)
+        MF.ChkDir(self.zdir,'mk')
+
+        tdirZIP='%s/ptmp/%s'%(TcDataBdir,self.source)
+        MF.ChkDir(tdirZIP,'mk')
+        self.tdirZIP=tdirZIP
+
+        if(dozip):
+            
+            MF.sTimer('ad2.zipfile-zipinv')
+
+            self.zippath="%s/%s.%s.zip"%(self.zdir,self.source,self.year)
+            # -- new feature to kill zipfile
+            if(ZIPoverride):
+                try:
+                    os.unlink(self.zippath)
+                    print 'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW(AdeckSource.dozip=1) killing: ',self.zippath
+                except:
+                    print 'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW(AdeckSource.dozip=1) ',self.zippath,' not there....'
+                
+                # -- kill files in tdirZIP
+                #
+                cmd="rm -r %s"%(self.tdirZIP)
+                mf.runcmd(cmd,ropt)
+                MF.ChkDir(self.tdirZIP,'mk')
+            
+            try:
+                self.AZ=zipfile.ZipFile(self.zippath,'a')
+            except:
+                self.AZ=zipfile.ZipFile(self.zippath,'w')
+
+            self.zipinv={}
+
+            for info in self.AZ.infolist():
+                file=info.filename
+                siz=info.file_size
+                zdtg=info.date_time
+                self.zipinv[file]=(siz,zdtg)
+
+            MF.dTimer('ad2.zipfile-zipinv')
+
+
+    def setAdmask(self,year=None,dtgopt=None):
+
+        if(year == None): year=self.year
+        curyear=mf.dtg()[0:4]
+        smask='%s/%s??????/track.*'%(self.sdir,year)
+        
+        self.admasks=[
+            smask,
+            ]
+
+    def getAdecks(self,source=None,year=None,tstmids=None,dtgopt=None,override=0):
+
+        MF.sTimer('ad2-getAdecks-open')
+        if(self.dozip):
+            adecks=self.getAdecksZip(override=override,dtgopt=dtgopt)
+            MF.dTimer('ad2-getAdecks-open')
+            return(adecks)
+
+        if(year == None): year=self.year
+        if(not(hasattr(self,'admasks'))):  self.setAdmask(year)
+        if(self.verb): print 'ad2.getAdecks.admasks: ',self.admasks,self.filemasks
+        
+        
+        adecks=[]
+        for admask in self.admasks:
+            adecks=adecks+glob.glob(admask)
+
+        oadecks=[]
+        for adeck in adecks:
+            try:
+                siz=os.path.getsize(adeck)
+                if(siz > 0):
+                    oadecks.append(adeck)
+                    if(self.verb): print 'ad2.AdeckSource.getAdecks(): ',adeck
+            except:
+                continue
+            
+        MF.dTimer('ad2-getAdecks-open')
+
+        return(oadecks)
+
+    def getAdecksZip(self,source=None,year=None,tstmids=None,dtgopt=None,override=0,
+                     selectLatest=1,selectBiggest=0):
+
+        if(year == None): year=self.year
+        if(not(hasattr(self,'admasks'))):  self.setAdmask(year)
+        
+        self.verb=1
+        if(self.verb): print 'ad2.getAdecks.admasks: ',self.admasks,self.filemasks
+
+        MF.sTimer('ad2.getAdecksZip-adecks')
+        adecks=[]
+
+        self.verb=1
+        import fnmatch
+        files=self.zipinv.keys()
+        files.sort()
+        fdtgs=[]
+        ffiles={}
+
+        # -- first get the dtgs and the files for that dtg
+        #
+        for filemask in self.filemasks:
+            for file in files:
+                try:
+                    fdtg=file.split('.')[3].split('_')[0]
+                    (zsiz,zdtg)=self.zipinv[file]
+                    zdtg="%04d%02d%02d%02d%02d"%(zdtg[0],zdtg[1],zdtg[2],zdtg[3],zdtg[4])
+                except:
+                    print 'AdeckSource.getAdecksZip bad file: ',file,' press...'
+                    continue
+                
+                #print 'fffffffff',file,filemask,fdtg,fnmatch.fnmatch(file,filemask),zdtg,zsiz,self.zipinv[file],self.tdirZIP
+                if(fnmatch.fnmatch(file,filemask)):
+                    tpath="%s/%s"%(self.tdirZIP,file)
+                    tsiz=MF.GetPathSiz(tpath)
+                    if(tsiz == None or override):
+                        fdtgs.append(fdtg)
+                        MF.appendDictList(ffiles, fdtg, (file,tpath,zsiz,zdtg))
+                    
+        fdtgs=MF.uniq(fdtgs)
+        
+        # -- cycle through dtgs and find latest and biggest file
+        #
+        self.verb=0
+        for fdtg in fdtgs:
+            biggest=-999
+            latest=-999
+            for n in range(0,len(ffiles[fdtg])):
+                fsiz=ffiles[fdtg][n][2]
+                ftime=int(ffiles[fdtg][n][3]) - int(ffiles[fdtg][0][3])
+                if(ftime > latest): 
+                    latest=ftime
+                    nlatest=n
+                if(fsiz > biggest):
+                    biggest=fsiz
+                    nbiggest=n
+                
+                if(self.verb): print 'fff',fsiz,ftime,n,'tttt',latest,nlatest,'sss',biggest,nbiggest,'ffff: ',ffiles[fdtg][n]
+            
+            # -- select adecks based on time or siz
+            #
+            if(selectLatest):
+                (ffile,tpath,fsiz,fdtg12)=ffiles[fdtg][nlatest]
+            elif(selectBiggest):
+                (ffile,tpath,fsiz,fdtg12)=ffiles[fdtg][nbiggest].w
+                
+            tsiz=MF.GetPathSiz(tpath)
+            if(tsiz == None or override):
+                try:
+                    self.AZ.extract(ffile,self.tdirZIP)
+                    tpath="%s/%s"%(self.tdirZIP,ffile)
+                    if(self.verb): print 'gotit: ',ffile,self.zipinv[ffile],tsiz,tpath
+                except:
+                    print 'WWW AdeckSource.AZ.extract failed for: ',file
+                    continue
+                
+                adecks.append(tpath)
+                
+
+        MF.dTimer('ad2.getAdecksZip-adecks')
+        
+        return(adecks)
+
+
+    def putAdecks(self,adecks,override=0,zdtgdiffMin=0.1):
+
+        MF.sTimer('ad2.putAdecks')
+        for adeck in adecks:
+            (dir,file)=os.path.split(adeck)
+            siz=MF.GetPathSiz(adeck)
+
+            (dtimei,ldtg,gdtg)=MF.PathModifyTime(adeck)
+
+            # -- get the dtg of the file in the archive and replace if adeck newer
+            #
+            try:
+                (zsiz,zdtg)=self.zipinv[file]
+                zdtg="%04d%02d%02d%02d"%(zdtg[0],zdtg[1],zdtg[2],zdtg[3])
+                zdtgdiff=MF.PathModifyTimeDtgdiff(zdtg,adeck)
+            except:
+                zsiz=-999
+                zdtg=-999
+                zdtgdiff=-999
+
+            if(self.verb): print 'ad2.putAdecks() candidate file: ',file,'siz: ',siz,' zsiz: ',zsiz,' zdtg: ',zdtg,' zdtgdiff: ',zdtgdiff
+
+            if(siz != zsiz or zsiz == -999 or override or zdtgdiff > zdtgdiffMin):
+                print 'III ad2.putAdecks() file: ',file,'siz: ',siz,' zsiz: ',zsiz,' zdtg: ',zdtg,' zdtgdiff: ',zdtgdiff
+                print 'III put adeck:',dir,file,'to ',self.zippath
+                self.AZ.write(adeck,file,zipfile.ZIP_DEFLATED)
+                #self.AZ.write(adeck,file)
+
+        MF.dTimer('ad2.putAdecks')
+
+        # -- do zipinv after putadecks
+        #
+        MF.sTimer('ad2.putAdecks-zipinv')
+        self.zipinv={}
+
+        for info in self.AZ.infolist():
+            file=info.filename
+            siz=info.file_size
+            zdtg=info.date_time
+            self.zipinv[file]=(siz,zdtg)
+            
+        MF.dTimer('ad2.putAdecks-zipinv')
+
+
+
+
+
+#cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc -- ADutils
+#
 class SumStatMultiYear(MFbase):
     
     tausSR=[12,24]

@@ -1,0 +1,1 @@
+20260709_21_20_01  /data/w22/prc/tcdat/w2-tc-dss-vd2-anl.py -S w.18 -T hwrf,tera5,avno -f z0012 -H -p gainxype -X

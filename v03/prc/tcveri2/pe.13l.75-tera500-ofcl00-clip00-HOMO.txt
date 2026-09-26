@@ -1,0 +1,1 @@
+20260922_13_36_51  /data/w22/prc/tcdat/w2-tc-dss-vd2-anl.py -S 13l.75 -T tera500,ofcl00,clip00 -a 0-72 -X -1 "ELOISE 13L 1975 ERA5 v OFCL v CLIP" -2 "bias correct ERA5  OFCL CLIP" -O
